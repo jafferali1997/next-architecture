@@ -1,3 +1,43 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@next/next/recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "@react-native-community"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    // "project": "jsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "comma-dangle": "off",
+    "linebreak-style": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-param-reassign": "off",
+    "react/prop-types": "error",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "import/extensions": "off",
+    "@next/next/no-img-element": "off",
+    "object-shorthand": "warn",
+    "import/no-unresolved": "off",
+    "import/no-relative-parent-imports": "error",
+    "@next/next/no-html-link-for-pages": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "printWidth": 90,
+        "singleQuote": true,
+        "trailingComma": "none"
+      }
+    ]
+  }
 }

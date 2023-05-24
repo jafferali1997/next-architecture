@@ -1,22 +1,22 @@
-"use client";
+'use client';
+
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unescaped-entities */
-import Link from "next/link";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper";
-import LandingPageHook from "./landing-page.hook";
-// import {
-//   getAccessToken,
-//   removeAccessToken,
-// } from "@/common/utils/storage-token";
-// import Button from "@/common/components/button/button";
+import Link from 'next/link';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination } from 'swiper';
+import useLandingPage from './use-landing-page.hook';
 
-const LandingPage = () => {
-  const { open, setOpen, auth, setAuth, router } = LandingPageHook();
-  console.log(open);
+/**
+ * create landing page componet
+ * @returns component
+ */
+function LandingPage() {
+  const { open, setOpen, auth, setAuth, router } = useLandingPage();
+
   return (
     <div className="home-wrapper" data-auto-select="true">
       <div className="home-container">
@@ -30,7 +30,7 @@ const LandingPage = () => {
                 <img alt="img" src="/assets/images/menu-i.svg" />
               )}
             </button>
-            <nav className={`header-menu-nav ${open ? "minus-200 " : ""}`}>
+            <nav className={`header-menu-nav ${open ? 'minus-200 ' : ''}`}>
               {open ? (
                 <div className="mobilelogo">
                   <img alt="img" src="/assets/images/logo.png" />
@@ -44,20 +44,20 @@ const LandingPage = () => {
                   <img alt="img" src="/assets/images/menu-i.svg" />
                 )}
               </button>
-              <ul className={`${open ? "minus-200-column" : ""}`}>
-                <li className={router.pathname === "/" ? "active" : ""}>
+              <ul className={`${open ? 'minus-200-column' : ''}`}>
+                <li className={router.pathname === '/' ? 'active' : ''}>
                   <Link href="/">Home</Link>
                 </li>
-                <li className={router.pathname === "/about" ? "active" : ""}>
+                <li className={router.pathname === '/about' ? 'active' : ''}>
                   <Link href="/">Features</Link>
                 </li>
-                <li className={router.pathname === "/contact" ? "active" : ""}>
+                <li className={router.pathname === '/contact' ? 'active' : ''}>
                   <Link href="/">Pricing</Link>
                 </li>
-                <li className={router.pathname === "/contact" ? "active" : ""}>
+                <li className={router.pathname === '/contact' ? 'active' : ''}>
                   <Link href="/">FAQ</Link>
                 </li>
-                <li className={router.pathname === "/contact" ? "active" : ""}>
+                <li className={router.pathname === '/contact' ? 'active' : ''}>
                   <Link href="/">Help Center</Link>
                 </li>
               </ul>
@@ -91,24 +91,24 @@ const LandingPage = () => {
               </div>
             ) : <div className="log-sign-btn">
                 <Link className="login-btn-outline" href="/login">
-                  {" "}
+                  {' '}
                   Login
                 </Link>
 
                 <Link className="login-btn" href="/sign-up">
-                  {" "}
+                  {' '}
                   Signup
                 </Link>
               </div> ? (
               <>
                 <div className="elselog-sign-btn">
                   <Link className="login-btn-outline" href="/login">
-                    {" "}
+                    {' '}
                     Login
                   </Link>
 
                   <Link className="login-btn" href="/sign-up">
-                    {" "}
+                    {' '}
                     Signup
                   </Link>
                 </div>
@@ -124,9 +124,7 @@ const LandingPage = () => {
                     <div className="pop-head">What Quicksteps</div>
                     <div className="pop-btns">
                       {auth ? (
-                        <Link onClick={logoutHandle} href="/logout">
-                          Logout
-                        </Link>
+                        <Link href="/logout">Logout</Link>
                       ) : (
                         <>
                           <Link href="/login">Login</Link>
@@ -146,14 +144,13 @@ const LandingPage = () => {
           <div className="hero-content tw-grid tw-grid-cols-12">
             <div className="innerColumn tw-col-span-6">
               <h1>
-                <span>One app </span> to{" "}
-                <span className="hero_rep_color">replace </span> them{" "}
-                <span>all</span>
+                <span>One app </span> to <span className="hero_rep_color">replace </span>{' '}
+                them <span>all</span>
               </h1>
               <div className="hero_max_width">
                 <p className="hero-description">
-                  All of your work in one place: Build Invoices, Manage Customer
-                  and Products, Manage Employee, Chat, Goals, & more.
+                  All of your work in one place: Build Invoices, Manage Customer and
+                  Products, Manage Employee, Chat, Goals, & more.
                 </p>
               </div>
               <div className="hero_desc_btn">
@@ -208,14 +205,14 @@ const LandingPage = () => {
               <div className="inner_content">
                 <h2>Documents Processing</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  est purus, ultrices in porttitor in, accumsan. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est
+                  purus, ultrices in porttitor in, accumsan. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit.
                 </p>
                 <p>
-                  Nulla est purus, ultrices in porttitor in, accumsan. Lorem
-                  ipsum dolor sit amet, consectetur adipiscing elit. Nulla est
-                  purus, ultrices in porttitorm.
+                  Nulla est purus, ultrices in porttitor in, accumsan. Lorem ipsum dolor
+                  sit amet, consectetur adipiscing elit. Nulla est purus, ultrices in
+                  porttitorm.
                 </p>
                 <div className="lernmor">
                   <a href="/">Learn more about features</a>
@@ -230,12 +227,11 @@ const LandingPage = () => {
               <div className="inner_content">
                 <h2>Cancelation of Documents</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  est purus, ultrices in porttitor in, accumsan. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit. Nulla est purus,
-                  ultrices in porttitor in, accumsan. Lorem ipsum dolor sit
-                  amet, consectetur adipiscing elit. Nulla est purus, ultrices
-                  in porttitorm.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est
+                  purus, ultrices in porttitor in, accumsan. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit. Nulla est purus, ultrices in porttitor in,
+                  accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  est purus, ultrices in porttitorm.
                 </p>
                 <div className="lernmor">
                   <a href="/">Learn more about features</a>
@@ -259,12 +255,11 @@ const LandingPage = () => {
               <div className="inner_content">
                 <h2>Send Reminder</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  est purus, ultrices in porttitor in, accumsan. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit. Nulla est purus,
-                  ultrices in porttitor in, accumsan. Lorem ipsum dolor sit
-                  amet, consectetur adipiscing elit. Nulla est purus, ultrices
-                  in porttitorm.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est
+                  purus, ultrices in porttitor in, accumsan. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit. Nulla est purus, ultrices in porttitor in,
+                  accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  est purus, ultrices in porttitorm.
                 </p>
                 <div className="lernmor">
                   <a href="/">Learn more about features</a>
@@ -274,8 +269,7 @@ const LandingPage = () => {
             </div>
 
             <button className="solution_btn">
-              Explore More Features{" "}
-              <img alt="img" src="/assets/images/white-arrow.png" />
+              Explore More Features <img alt="img" src="/assets/images/white-arrow.png" />
             </button>
           </div>
         </div>
@@ -287,10 +281,9 @@ const LandingPage = () => {
               Why <span> Quick step</span>
             </h2>
             <p>
-              We facilitate the process to create win-win strategies, aligning
-              world-class marketing functions with consumer’s interests in mind
-              and bringing forth the best possible growth solutions for
-              businesses.
+              We facilitate the process to create win-win strategies, aligning world-class
+              marketing functions with consumer’s interests in mind and bringing forth the
+              best possible growth solutions for businesses.
             </p>
           </div>
           <div className="why-content">
@@ -298,24 +291,23 @@ const LandingPage = () => {
               <img alt="img" src="/assets/images/reserch.png" />
               <h4>Insight network</h4>
               <p>
-                Gain the expertise you need to make smarter marketing decisions
-                for business growth
+                Gain the expertise you need to make smarter marketing decisions for
+                business growth
               </p>
             </div>
             <div className="whycard tw-col-span-6">
               <img alt="img" src="/assets/images/cycle.png" />
               <h4>Agile talent</h4>
               <p>
-                Go ahead with efficient execution to achieve marketing KPIs &
-                strategic results
+                Go ahead with efficient execution to achieve marketing KPIs & strategic
+                results
               </p>
             </div>
             <div className="whycard tw-col-span-6">
               <img alt="img" src="/assets/images/ready.png" />
               <h4>Ready-to-use</h4>
               <p>
-                Save 80% of your time & money with the most tech savvy marketing
-                solutions
+                Save 80% of your time & money with the most tech savvy marketing solutions
               </p>
             </div>
           </div>
@@ -336,8 +328,8 @@ const LandingPage = () => {
                 <span className="subtitle">STEP 01</span>
                 <h4>Create Your Account</h4>
                 <p>
-                  Simply click on "Let's Get Started" below, enter your details,
-                  and create your account.
+                  Simply click on "Let's Get Started" below, enter your details, and
+                  create your account.
                 </p>
               </div>
               <div className="workcard tw-col-span-6">
@@ -347,8 +339,8 @@ const LandingPage = () => {
                 <span className="subtitle">STEP 02</span>
                 <h4>Get Verified</h4>
                 <p>
-                  One of the Education Elephant team will review your details
-                  and verify your account.
+                  One of the Education Elephant team will review your details and verify
+                  your account.
                 </p>
               </div>
               <div className="workcard tw-col-span-6">
@@ -358,16 +350,16 @@ const LandingPage = () => {
                 <span className="subtitle">STEP 03</span>
                 <h4>Sell Products & Services</h4>
                 <p>
-                  Once you receive your account confirmation, you are all set to
-                  purchase the tests online.
+                  Once you receive your account confirmation, you are all set to purchase
+                  the tests online.
                 </p>
               </div>
             </div>
             <div className="workfoot">
               <button className="workfoot_btn">Get Started</button>
               <p>
-                *Please note that some tests have restrictions and can only be
-                purchased by those that have suitable testing qualifications.
+                *Please note that some tests have restrictions and can only be purchased
+                by those that have suitable testing qualifications.
               </p>
             </div>
           </div>
@@ -391,7 +383,7 @@ const LandingPage = () => {
                 stretch: 0,
                 depth: 100,
                 modifier: 8,
-                slideShadows: true,
+                slideShadows: true
               }}
               pagination={true}
               loop={true}
@@ -401,11 +393,10 @@ const LandingPage = () => {
               <SwiperSlide>
                 <div className="slide-card">
                   <div className="card-text">
-                    The CCET course was structured in a way that made it very
-                    informative and manageable. The short videos were really
-                    useful and allowed for great flexibility in completion of
-                    the course. Thank you to Kate and Rebecca for all of your
-                    support and feedback.
+                    The CCET course was structured in a way that made it very informative
+                    and manageable. The short videos were really useful and allowed for
+                    great flexibility in completion of the course. Thank you to Kate and
+                    Rebecca for all of your support and feedback.
                   </div>
                   <div className="card-stars">
                     <img alt="img" src="/assets/images/star.png" />
@@ -426,11 +417,10 @@ const LandingPage = () => {
               <SwiperSlide>
                 <div className="slide-card">
                   <div className="card-text">
-                    The CCET course was structured in a way that made it very
-                    informative and manageable. The short videos were really
-                    useful and allowed for great flexibility in completion of
-                    the course. Thank you to Kate and Rebecca for all of your
-                    support and feedback.
+                    The CCET course was structured in a way that made it very informative
+                    and manageable. The short videos were really useful and allowed for
+                    great flexibility in completion of the course. Thank you to Kate and
+                    Rebecca for all of your support and feedback.
                   </div>
                   <div className="card-stars">
                     <img alt="img" src="/assets/images/star.png" />
@@ -451,11 +441,10 @@ const LandingPage = () => {
               <SwiperSlide>
                 <div className="slide-card">
                   <div className="card-text">
-                    The CCET course was structured in a way that made it very
-                    informative and manageable. The short videos were really
-                    useful and allowed for great flexibility in completion of
-                    the course. Thank you to Kate and Rebecca for all of your
-                    support and feedback.
+                    The CCET course was structured in a way that made it very informative
+                    and manageable. The short videos were really useful and allowed for
+                    great flexibility in completion of the course. Thank you to Kate and
+                    Rebecca for all of your support and feedback.
                   </div>
                   <div className="card-stars">
                     <img alt="img" src="/assets/images/star.png" />
@@ -476,11 +465,10 @@ const LandingPage = () => {
               <SwiperSlide>
                 <div className="slide-card">
                   <div className="card-text">
-                    The CCET course was structured in a way that made it very
-                    informative and manageable. The short videos were really
-                    useful and allowed for great flexibility in completion of
-                    the course. Thank you to Kate and Rebecca for all of your
-                    support and feedback.
+                    The CCET course was structured in a way that made it very informative
+                    and manageable. The short videos were really useful and allowed for
+                    great flexibility in completion of the course. Thank you to Kate and
+                    Rebecca for all of your support and feedback.
                   </div>
                   <div className="card-stars">
                     <img alt="img" src="/assets/images/star.png" />
@@ -507,8 +495,8 @@ const LandingPage = () => {
           <div className="newscontent">
             <h2>Want to avail the best services?</h2>
             <p>
-              All of your work in one place: Build Invoices, Manage Customer and
-              Products, Manage Employee, Chat, Goals, & more.
+              All of your work in one place: Build Invoices, Manage Customer and Products,
+              Manage Employee, Chat, Goals, & more.
             </p>
             <button className="newscontent_btn">Try Free For 14 Days</button>
           </div>
@@ -521,10 +509,9 @@ const LandingPage = () => {
               <img alt="img" src="/assets/images/footer_logo.png" />
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Egestas cursus commodo
-              consequat id. Consectetur sed eget dolor egestas eu ullamcorper
-              nunc. Morbi elit at montes in ridiculus morbi sed vitae purus.
-              Eget congue malesuada
+              Lorem ipsum dolor sit amet consectetur. Egestas cursus commodo consequat id.
+              Consectetur sed eget dolor egestas eu ullamcorper nunc. Morbi elit at montes
+              in ridiculus morbi sed vitae purus. Eget congue malesuada
             </p>
           </div>
           <div className="footermenu">
@@ -572,6 +559,6 @@ const LandingPage = () => {
       </section>
     </div>
   );
-};
+}
 
 export default LandingPage;
