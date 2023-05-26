@@ -15,25 +15,29 @@ module.exports = {
       lg: '992px',
       xl: '1440px'
     },
-    colors: {
-      primary: '#1D4ED8',
-      secondaryBlue: '#1E40AF',
-      secondaryGreen: '#047857',
-      secondaryBlack: '#2C2E3E',
-      secondaryWhite: '#FEFEFE',
-      secondaryGray: '#FBFBFB',
-      textBlack: '#2C2E3E',
-      textDarkGray: '#46474F',
-      textMediumGray: '#585858',
-      textLightGray: '#7E7D7D',
-      textUltraLightGray: '#BBBBBB',
-      danger: '#EF2020',
-      success: '#10FF61'
-    },
+
     fontFamily: {
       dm: ['DM', 'sans']
     },
     extend: {
+      colors: {
+        primary: {
+          main: '#1D4ED8'
+        },
+        secondaryBlue: '#1E40AF',
+        secondaryDarkBlue: '#1E3A8A',
+        secondaryGreen: '#047857',
+        secondaryBlack: '#2C2E3E',
+        secondaryWhite: '#FEFEFE',
+        secondaryGray: '#FBFBFB',
+        textBlack: '#2C2E3E',
+        textDarkGray: '#46474F',
+        textMediumGray: '#585858',
+        textLightGray: '#7E7D7D',
+        textUltraLightGray: '#BBBBBB',
+        danger: '#EF2020',
+        success: '#10FF61'
+      },
       spacing: {
         px: '1px',
         0: '0',

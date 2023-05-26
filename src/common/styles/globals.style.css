@@ -16,8 +16,8 @@
 
 @tailwind utilities;
 @layer components {
-  .custom-button {
-    @apply tw-rounded-md tw-bg-primary tw-px-4 tw-py-2;
+  .btn {
+    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-bg-primary-main tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-white hover:tw-bg-secondaryBlue focus:tw-bg-secondaryDarkBlue disabled:tw-cursor-not-allowed disabled:tw-bg-textUltraLightGray disabled:tw-text-white;
   }
 }
 /* 
