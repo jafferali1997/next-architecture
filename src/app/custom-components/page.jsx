@@ -9,7 +9,10 @@ export default function Page() {
   };
   return (
     <div>
-      <CustomButton text="Submit" onClick={clickHandler} />
+      {/* <CustomButton text="Submit" onClick={clickHandler} /> */}
+      <button type="submit" class="custom-button tw-bg-textLightGray tw-font-dm">
+        Click me
+      </button>
     </div>
   );
 }
