@@ -21,12 +21,13 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: {
-          main: '#1D4ED8'
-        },
+        primary: '#1D4ED8',
         secondaryBlue: '#1E40AF',
+        secondaryLightBlue: '#EBF0FF',
         secondaryDarkBlue: '#1E3A8A',
         secondaryGreen: '#047857',
+        secondaryMediumGreen: '#075F46',
+        secondaryDarkGreen: '#054D38',
         secondaryBlack: '#2C2E3E',
         secondaryWhite: '#FEFEFE',
         secondaryGray: '#FBFBFB',

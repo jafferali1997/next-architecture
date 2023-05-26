@@ -1,11 +1,11 @@
 'use client';
 
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
 import useMultiSelect from './use-multi-select.hook';
+import ArrowDownIcon from '@/common/icons/arrow-down.icon';
+import ArrowUpIcon from '@/common/icons/arrow-up.icon';
 
 export default function MultiSelect({
   options,
@@ -31,6 +31,7 @@ export default function MultiSelect({
     handleInputChangeHandler
   } = useMultiSelect(options, handleChange, defaultOptions, search);
 
+  console.log(filteredOptions);
   const renderOptions = (options) => {
     return options.map((option, index) => (
       <div
@@ -111,10 +112,10 @@ export default function MultiSelect({
                     }}
                   >
                     {open && (
-                      <ExpandLessIcon className="noCloseOptions tw-text-gray-400 -tw-mr-3 tw-h-5 tw-w-5" />
+                      <ArrowUpIcon className="noCloseOptions tw-text-gray-400 -tw-mr-3 tw-h-5 tw-w-5" />
                     )}
                     {!open && (
-                      <ExpandMoreIcon className="noCloseOptions tw-text-gray-400 -tw-mr-3 tw-h-5 tw-w-5" />
+                      <ArrowDownIcon className="noCloseOptions tw-text-gray-400 -tw-mr-3 tw-h-5 tw-w-5" />
                     )}
                   </button>
                 </div>

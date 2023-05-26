@@ -17,7 +17,16 @@
 @tailwind utilities;
 @layer components {
   .btn {
-    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-bg-primary-main tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-white hover:tw-bg-secondaryBlue focus:tw-bg-secondaryDarkBlue disabled:tw-cursor-not-allowed disabled:tw-bg-textUltraLightGray disabled:tw-text-white;
+    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md  tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-white;
+  }
+  .btn-outline {
+    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-border-[1.5px] tw-border-solid tw-border-primary  tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-primary hover:tw-bg-secondaryLightBlue disabled:tw-cursor-not-allowed disabled:tw-border-textUltraLightGray  disabled:tw-text-textLightGray;
+  }
+  .btn-primary {
+    @apply tw-bg-primary hover:tw-bg-secondaryBlue focus:tw-bg-secondaryDarkBlue disabled:tw-cursor-not-allowed disabled:tw-bg-textUltraLightGray disabled:tw-text-white;
+  }
+  .btn-secondary {
+    @apply tw-bg-secondaryGreen hover:tw-bg-secondaryMediumGreen focus:tw-bg-secondaryDarkGreen disabled:tw-cursor-not-allowed disabled:tw-bg-textUltraLightGray disabled:tw-text-white;
   }
 }
 /* 
