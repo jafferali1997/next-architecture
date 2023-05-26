@@ -12,7 +12,7 @@ import { EffectCoverflow, Pagination } from 'swiper';
 import useLandingPage from './use-landing-page.hook';
 
 /**
- * create landing page componet
+ * create landing page component
  * @returns component
  */
 function LandingPage() {

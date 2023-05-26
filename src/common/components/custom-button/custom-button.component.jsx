@@ -4,9 +4,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 
+/**
+ * Create custom button using mui button
+ * @param {text, onClick, className, type, variant, disabled, href} props
+ * @param text to be displayed on button
+ * @param onClick function to be called on click
+ * @param className class name to be applied on button
+ * @param type type of button
+ * @param variant variant of button (primary, outline, etc)
+ * @param disabled to button disabled
+ * @param href to be used as link
+ * @param endIcon icon to be displayed at end of button
+ * @param startIcon icon to be displayed at start of button
+ * @returns component
+ */
+
 export default function CustomButton({
   text,
-  onClick,
+  onClick = null,
   className = '',
   type = 'button',
   variant = 'contained',
@@ -26,19 +41,9 @@ export default function CustomButton({
   );
 }
 
-// CustomButton.defaultProps = {
-//   className: '',
-//   type: 'button',
-//   variant: 'contained',
-//   disabled: false,
-//   href: '#'
-//   //   endIcon: null,
-//   //   startIcon: null,
-// };
-
 CustomButton.propTypes = {
   text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   className: PropTypes.string,
   type: PropTypes.string,
   variant: PropTypes.string,
