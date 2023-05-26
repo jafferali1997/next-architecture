@@ -28,6 +28,12 @@
   .btn-secondary {
     @apply tw-bg-secondaryGreen hover:tw-bg-secondaryMediumGreen focus:tw-bg-secondaryDarkGreen disabled:tw-cursor-not-allowed disabled:tw-bg-textUltraLightGray disabled:tw-text-white;
   }
+  .alert-error {
+    @apply tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-bg-dangerLight tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-danger;
+  }
+  .alert-success {
+    @apply tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-bg-secondaryLightGreen tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-secondaryGreen;
+  }
 }
 /* 
 :root {

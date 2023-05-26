@@ -17,7 +17,7 @@ module.exports = {
     },
 
     fontFamily: {
-      dm: ['DM', 'sans']
+      dm: ['DM Sans', 'sans-serif']
     },
     extend: {
       colors: {
@@ -26,6 +26,7 @@ module.exports = {
         secondaryLightBlue: '#EBF0FF',
         secondaryDarkBlue: '#1E3A8A',
         secondaryGreen: '#047857',
+        secondaryLightGreen: '#DEFFE4',
         secondaryMediumGreen: '#075F46',
         secondaryDarkGreen: '#054D38',
         secondaryBlack: '#2C2E3E',
@@ -37,6 +38,7 @@ module.exports = {
         textLightGray: '#7E7D7D',
         textUltraLightGray: '#BBBBBB',
         danger: '#EF2020',
+        dangerLight: '#FFDEDE',
         success: '#10FF61'
       },
       spacing: {
