@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function useMultiSelect(options, handleChange, defaultOptions, search) {
   const [open, setOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [filteredOptions, setFilteredOptions] = useState([]);
   const ref = useRef(null);
@@ -44,7 +45,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
 
   const isSelectedClass = (option) => {
     if (selectedOptions.find((o) => o.value === option.value)) {
-      return 'border-l-[3px] border-l-teal-600 bg-teal-100';
+      return 'tw-border-l-[3px] tw-border-l-teal-600 tw-bg-teal-100';
     }
     return '';
   };
@@ -68,6 +69,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
 
   const handleInputChangeHandler = (e) => {
     if (search) {
+      setIsSearching(e.target.value.trim().length > 0);
       if (!open) setOpen(true);
       let newFilteredOptions = [];
       if (e.target.value.trim() !== '') {
@@ -90,6 +92,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
     optionClickHandler,
     removeOptionHandler,
     clearAllClickHandler,
-    handleInputChangeHandler
+    handleInputChangeHandler,
+    isSearching
   };
 }

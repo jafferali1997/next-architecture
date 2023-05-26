@@ -7,6 +7,11 @@ import useMultiSelect from './use-multi-select.hook';
 import ArrowDownIcon from '@/common/icons/arrow-down.icon';
 import ArrowUpIcon from '@/common/icons/arrow-up.icon';
 
+/**
+ * @param options will take array of objects that will be listed
+ * @returns
+ */
+
 export default function MultiSelect({
   options,
   handleChange,
@@ -28,12 +33,13 @@ export default function MultiSelect({
     optionClickHandler,
     removeOptionHandler,
     clearAllClickHandler,
-    handleInputChangeHandler
+    handleInputChangeHandler,
+    isSearching
   } = useMultiSelect(options, handleChange, defaultOptions, search);
 
   console.log(filteredOptions);
   const renderOptions = (options) => {
-    return options.map((option, index) => (
+    return options?.map((option, index) => (
       <div
         key={option.id}
         className={`noCloseOptions tw-border-gray-100 hover:tw-bg-teal-100 tw-w-full tw-cursor-pointer ${isSelectedClass(
@@ -57,7 +63,7 @@ export default function MultiSelect({
           <div className="tw-w-full">
             <div className="tw-border-gray-200 tw-bg-white tw-my-2 tw-flex tw-rounded tw-border tw-p-1">
               <div className="tw-flex tw-flex-auto tw-flex-wrap">
-                {selectedOptions.map((option, index) => {
+                {selectedOptions?.map((option, index) => {
                   if (index < maxDisplayOptions) {
                     return (
                       <div
@@ -78,7 +84,7 @@ export default function MultiSelect({
                   }
                   return '';
                 })}
-                {selectedOptions.length > maxDisplayOptions && (
+                {selectedOptions?.length > maxDisplayOptions && (
                   <div className="flex tw-border-teal-300 tw-bg-teal-100 tw-text-teal-700 tw-m-1 tw-items-center tw-justify-center tw-rounded-full tw-border tw-px-2 tw-py-1 tw-font-medium">
                     <div className="tw-flex tw-max-w-full tw-items-center tw-justify-center tw-text-xs tw-font-normal tw-leading-none">
                       <AddIcon className="tw-h-3 tw-w-3" />
@@ -97,7 +103,7 @@ export default function MultiSelect({
                 </div>
               </div>
               <div className="tw-text-gray-300 tw-flex tw-items-center tw-pl-2">
-                {isClearable && (
+                {isClearable && selectedOptions?.length > 1 && (
                   <div onClick={clearAllClickHandler}>
                     <ClearIcon className="tw-text-gray-400 hover:tw-text-gray-700 tw-mr-1 tw-h-5 tw-w-5 hover:tw-cursor-pointer" />
                   </div>
@@ -125,7 +131,7 @@ export default function MultiSelect({
           {open && (
             <div className="tw-lef-0 tw-bg-white tw-text-black tw-absolute tw-top-[100%]  tw-z-[999] tw-w-full tw-rounded  tw-shadow">
               <div className="tw-flex tw-max-h-[200px] tw-w-full tw-flex-col tw-overflow-y-auto">
-                {filteredOptions && filteredOptions.length > 0
+                {filteredOptions && isSearching
                   ? renderOptions(filteredOptions)
                   : renderOptions(options)}
               </div>
@@ -152,13 +158,3 @@ MultiSelect.propTypes = {
   maxDisplayOptions: PropTypes.number,
   defaultOptions: PropTypes.arrayOf(optionShape)
 };
-
-// interface IProps {
-//     options: IMultiSelectOption[]
-//     handleChange: any
-//     placeholder?: string
-//     selectedOptions?: IMultiSelectOption[]
-//     search?: boolean
-//     isClearable?: boolean
-//     maxDisplayOptions?: number
-// }

@@ -14,7 +14,7 @@ export default function Page() {
         <CustomButton text="Submit" />
         <p>Hello World</p>
       </div>
-      <MultiSelect options={[{ id: 1, label: 'test' }]} />
+      <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} />
     </Suspense>
   );
 }
