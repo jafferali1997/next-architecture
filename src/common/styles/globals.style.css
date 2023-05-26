@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
 :root {
   --color-primary: #00a3e0;
   --color-secondary: #470a68;
@@ -11,7 +13,13 @@
 
 @tailwind base;
 @tailwind components;
+
 @tailwind utilities;
+@layer components {
+  .custom-button {
+    @apply tw-rounded-md tw-bg-primary tw-px-4 tw-py-2;
+  }
+}
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;
