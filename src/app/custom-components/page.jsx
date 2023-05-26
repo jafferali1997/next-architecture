@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 
 export default function Page() {
@@ -8,8 +8,11 @@ export default function Page() {
     console.log('clicked');
   };
   return (
-    <div>
-      <CustomButton text="Submit" onClick={clickHandler} />
-    </div>
+    <Suspense fallback={<p>Loading page...</p>}>
+      <div>
+        <CustomButton text="Submit" />
+        <p>Hello World</p>
+      </div>
+    </Suspense>
   );
 }

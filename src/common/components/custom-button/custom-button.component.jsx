@@ -6,7 +6,6 @@ import { Button } from '@mui/material';
 
 /**
  * Create custom button using mui button
- * @param {text, onClick, className, type, variant, disabled, href} props
  * @param text to be displayed on button
  * @param onClick function to be called on click
  * @param className class name to be applied on button
@@ -26,7 +25,9 @@ export default function CustomButton({
   type = 'button',
   variant = 'contained',
   disabled = false,
-  href = null
+  href = null,
+  endIcon = null,
+  startIcon = null
 }) {
   return (
     <Button
@@ -35,6 +36,9 @@ export default function CustomButton({
       variant={variant}
       className={`${className}`}
       href={href}
+      disabled={disabled}
+      endIcon={endIcon}
+      startIcon={startIcon}
     >
       {text}
     </Button>
@@ -48,7 +52,7 @@ CustomButton.propTypes = {
   type: PropTypes.string,
   variant: PropTypes.string,
   disabled: PropTypes.bool,
-  href: PropTypes.string
-  //   endIcon: PropTypes.element,
-  //   startIcon: PropTypes.element
+  href: PropTypes.string,
+  endIcon: PropTypes.element,
+  startIcon: PropTypes.element
 };
