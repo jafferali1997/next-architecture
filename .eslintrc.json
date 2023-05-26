@@ -20,6 +20,7 @@
     "react/react-in-jsx-scope": "off",
     "no-param-reassign": "off",
     "react/prop-types": "error",
+    "react/require-default-props": "off",
     "react/jsx-one-expression-per-line": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/click-events-have-key-events": "off",
@@ -30,6 +31,7 @@
     "import/no-unresolved": "off",
     "import/no-relative-parent-imports": "error",
     "@next/next/no-html-link-for-pages": "off",
+    "import/no-extraneous-dependencies": "off",
     "prettier/prettier": [
       "error",
       {
