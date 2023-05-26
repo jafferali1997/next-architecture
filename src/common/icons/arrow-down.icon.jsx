@@ -1,5 +1,10 @@
 import PropTypes from 'prop-types';
 
+/**
+ * @param className will accept the css classes
+ * @returns functional component of SVG icon
+ */
+
 export default function ArrowDownIcon({ className }) {
   return (
     <svg
