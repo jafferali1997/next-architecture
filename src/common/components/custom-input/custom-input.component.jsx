@@ -38,10 +38,15 @@ export default function CustomInput({
       type={type}
       placeholder={placeholder}
       className={`!tw-border-1 tw-flex-grow-1 tw-rounded tw-border-primary ${className}`}
-      onChange={onChange}
+      onChange={customInputChangeHandler}
       defaultValue={value}
-      endAdornment={endIcon}
-      startAdornment={<AccountCircle />}
+      disabled={disabled}
+      startAdornment={
+        <InputAdornment position="start" className="tw-pl-5">
+          <AccountCircle />
+        </InputAdornment>
+      }
+      // endAdornment={<AccountCircle />}
     />
   );
 }
