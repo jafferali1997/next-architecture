@@ -7,11 +7,12 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Button } from '@mui/material';
 import { EffectCoverflow, Pagination } from 'swiper';
 import useLandingPage from './use-landing-page.hook';
 
 /**
- * create landing page componet
+ * create landing page component
  * @returns component
  */
 function LandingPage() {
@@ -60,6 +61,10 @@ function LandingPage() {
                 <li className={router.pathname === '/contact' ? 'active' : ''}>
                   <Link href="/">Help Center</Link>
                 </li>
+                <Button className="login-btn" href="/sign-up">
+                  {' '}
+                  Signup{' '}
+                </Button>
               </ul>
             </nav>
           </div>
@@ -82,6 +87,10 @@ function LandingPage() {
                       <Link href="/">Logout</Link>
                     ) : (
                       <>
+                        <Button className="login-btn" href="/sign-up">
+                          {' '}
+                          Signup{' '}
+                        </Button>
                         <Link href="/login">Login</Link>
                         <Link href="/sign-up">Sign Up</Link>
                       </>
@@ -94,7 +103,10 @@ function LandingPage() {
                   {' '}
                   Login
                 </Link>
-
+                <Button className="login-btn" href="/sign-up">
+                  {' '}
+                  Signup{' '}
+                </Button>
                 <Link className="login-btn" href="/sign-up">
                   {' '}
                   Signup
