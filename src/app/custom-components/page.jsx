@@ -12,12 +12,10 @@ export default function Page() {
   };
   return (
     <Suspense fallback={<p>Loading page...</p>}>
-      <div>
-        <CustomButton text="Submit" />
-        <p>Hello World</p>
-        {/* <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} /> */}
-        <CustomInput type="text" placeholder="Enter name" value="Hello" />
-      </div>
+      <CustomButton text="Submit" />
+      <p>Hello World</p>
+      {/* <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} /> */}
+      <CustomInput type="text" placeholder="Enter name" value="Hello" />
     </Suspense>
   );
 }

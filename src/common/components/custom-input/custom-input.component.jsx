@@ -37,7 +37,7 @@ export default function CustomInput({
     <Input
       type={type}
       placeholder={placeholder}
-      className={`!tw-border-1 tw-flex-grow-1 tw-rounded tw-border-primary ${className}`}
+      className={`tw-flex-grow-1 tw-rounded !tw-border tw-border-secondaryBlue ${className}`}
       onChange={customInputChangeHandler}
       defaultValue={value}
       disabled={disabled}
