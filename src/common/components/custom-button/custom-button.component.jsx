@@ -18,6 +18,12 @@ import { Button } from '@mui/material';
  * @returns component
  */
 
+/**
+ * btn-primary: display the primary button
+ * btn-secondary: display the secondary button
+ * btn-secondary: display the secondary button
+ * btn-outline: display the outline button
+ */
 export default function CustomButton({
   text,
   onClick = null,
@@ -34,7 +40,7 @@ export default function CustomButton({
       type={type}
       onClick={onClick}
       variant={variant}
-      className={`${className}`}
+      className={`btn ${className}`}
       href={href}
       disabled={disabled}
       endIcon={endIcon}

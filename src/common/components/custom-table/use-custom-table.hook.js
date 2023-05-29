@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 export default function UseCustomTableHook() {
   const [selectedRows, setSelectedRows] = useState([]);
-  console.log(selectedRows);
   const data = [
     { id: 1, name: 'Alice', age: 25, country: 'USA' },
     { id: 2, name: 'Bob', age: 30, country: 'Canada' },
