@@ -13,13 +13,41 @@
 
 @tailwind base;
 @tailwind components;
-
 @tailwind utilities;
+
 @layer components {
-  .custom-button {
-    @apply tw-rounded-md tw-bg-primary tw-px-4 tw-py-2;
+  .btn {
+    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-white;
+  }
+  .btn-outline {
+    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-border-[1.5px] tw-border-solid tw-border-primary  tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-primary hover:tw-bg-secondary-light-blue disabled:tw-cursor-not-allowed disabled:tw-border-text-ultra-light-gray  disabled:tw-text-text-light-gray;
+  }
+  .btn-primary {
+    @apply tw-bg-primary hover:tw-bg-secondary-blue focus:tw-bg-secondary-dark-blue disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
+  }
+  .btn-secondary {
+    @apply focus:tw-bg-secondary-dark-green tw-bg-secondary-green hover:tw-bg-secondary-medium-green disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
+  }
+  .alert-error {
+    @apply tw-bg-danger-light tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-danger;
+  }
+  .alert-success {
+    @apply tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-bg-secondary-light-green tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-secondary-green;
+  }
+  .table-heading {
+    @apply tw-h-[59.33px] tw-border-solid tw-border-b-[#E7EAEE] tw-bg-secondary-light-blue tw-p-2 tw-text-left tw-font-dm  tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-secondary-black;
+  }
+  .table-data {
+    @apply tw-h-[72px] tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-white tw-px-2 tw-py-4 tw-font-dm tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-medium-gray;
+  }
+  .pagination-number {
+    @apply tw-h-8 tw-w-[27px] tw-rounded-[3px] tw-bg-text-ultra-light-gray tw-px-2.5 tw-py-1 hover:tw-bg-primary hover:tw-text-white;
+  }
+  .pagination-handle {
+    @apply tw-flex tw-h-8 tw-w-[44px] tw-items-center tw-justify-center tw-rounded-[3px] tw-bg-text-ultra-light-gray tw-px-2.5 tw-py-1 hover:tw-bg-primary hover:tw-text-white;
   }
 }
+
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;
