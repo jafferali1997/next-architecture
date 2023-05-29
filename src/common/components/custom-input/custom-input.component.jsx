@@ -1,14 +1,18 @@
 'use client';
 
+/* eslint-disable react/jsx-props-no-spreading */
 import { Input, InputAdornment } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import PropTypes from 'prop-types';
-import useCustonInput from './use-custon-input.hook';
+import useCustomInput from './use-custom-input.hook';
+import { RGX_ALL_CHARACTERS } from '@/common/constants/regex.constant';
+import FieldError from '@/common/components/field-error/field-error.component';
 
 /**
  * @param type - The type of input
  * @param placeholder - The placeholder text
  * @param onChange - The function to call when the input changes
+ * @param defaultValue - The value that will be displayed on input field on first time
  * @param value - The value of the input
  * @param className - The class name to apply to the input
  * @param endIcon - The icon to display at the end of the input
@@ -16,6 +20,7 @@ import useCustonInput from './use-custon-input.hook';
  * @param disabled - Whether the input is disabled
  * @param regex - The regex to match the input against
  * @param matchRegex - Whether the input should match the regex and only allow matching input, or not match the regex and only allow non-matching input
+ * @param error - The error text message to be shown below input field
  * @returns A custom input component
  */
 
@@ -23,31 +28,46 @@ export default function CustomInput({
   type,
   placeholder,
   onChange = null,
-  value = '',
+  defaultValue = null,
+  value = undefined,
   className = '',
   endIcon = null,
   startIcon = null,
   disabled = false,
-  regex = null,
-  matchRegex = true
+  regex = RGX_ALL_CHARACTERS,
+  matchRegex = true,
+  error = null
 }) {
-  const { customInputChangeHandler } = useCustonInput(onChange, regex, matchRegex);
+  const { inputChangeHandler, inputKeyDownHandler } = useCustomInput(
+    onChange,
+    regex,
+    matchRegex
+  );
 
   return (
-    <Input
-      type={type}
-      placeholder={placeholder}
-      className={`tw-flex-grow-1 tw-rounded !tw-border tw-border-secondary-blue tw-py-[9px] ${className}`}
-      onChange={customInputChangeHandler}
-      defaultValue={value}
-      disabled={disabled}
-      // startAdornment={
-      //   <InputAdornment position="start" className="tw-py-[11.88px] tw-pl-[18.19px]">
-      //     <AccountCircle />
-      //   </InputAdornment>
-      // }
-      endAdornment={<AccountCircle className="tw-pr-[16px]" />}
-    />
+    <>
+      <Input
+        type={type}
+        placeholder={placeholder}
+        className={`tw-flex-grow-1 tw-rounded !tw-border tw-border-secondary-blue tw-py-[9px] ${className}`}
+        onChange={inputChangeHandler}
+        onKeyDown={inputKeyDownHandler}
+        {...(defaultValue && { defaultValue })}
+        {...(value && { value })}
+        disabled={disabled}
+        startAdornment={
+          <InputAdornment position="start" className="tw-py-[11.88px] tw-pl-[18.19px]">
+            <AccountCircle />
+          </InputAdornment>
+        }
+        endAdornment={
+          <InputAdornment position="end" className="tw-py-[11.88px] tw-pl-[18.19px]">
+            <AccountCircle />
+          </InputAdornment>
+        }
+      />
+      {error && error?.length > 0 && <FieldError className="tw-mt-1" error={error} />}
+    </>
   );
 }
 
@@ -61,5 +81,7 @@ CustomInput.propTypes = {
   startIcon: PropTypes.element,
   disabled: PropTypes.bool,
   regex: PropTypes.instanceOf(RegExp),
-  matchRegex: PropTypes.bool
+  matchRegex: PropTypes.bool,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  error: PropTypes.string
 };
