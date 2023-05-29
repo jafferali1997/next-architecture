@@ -37,16 +37,16 @@ export default function CustomInput({
     <Input
       type={type}
       placeholder={placeholder}
-      className={`tw-flex-grow-1 tw-rounded !tw-border tw-border-secondary-blue ${className}`}
+      className={`tw-flex-grow-1 tw-rounded !tw-border tw-border-secondary-blue tw-py-[9px] ${className}`}
       onChange={customInputChangeHandler}
       defaultValue={value}
       disabled={disabled}
-      startAdornment={
-        <InputAdornment position="start" className="tw-pl-5">
-          <AccountCircle />
-        </InputAdornment>
-      }
-      // endAdornment={<AccountCircle />}
+      // startAdornment={
+      //   <InputAdornment position="start" className="tw-py-[11.88px] tw-pl-[18.19px]">
+      //     <AccountCircle />
+      //   </InputAdornment>
+      // }
+      endAdornment={<AccountCircle className="tw-pr-[16px]" />}
     />
   );
 }

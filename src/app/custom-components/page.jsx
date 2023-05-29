@@ -16,22 +16,10 @@ export default function Page() {
   };
   return (
     <Suspense fallback={<p>Loading page...</p>}>
-      <CustomButton text="Submit" />
-      <p>Hello World</p>
       {/* <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} /> */}
-      <CustomInput type="text" placeholder="Enter name" value="Hello" />
-      <div>
-        <CustomButton text="Submit" className="btn btn-secondary" />
-        <Alert icon={<ErrorIcon />} className="alert-error" onClose={() => {}}>
-          This is a success alert — check it out!
-        </Alert>
-        <Alert icon={<SuccessIcon />} className="alert-success" onClose={() => {}}>
-          This is a success alert — check it out!
-        </Alert>
-
-        <p>Hello World</p>
+      <div className="tw-m-5">
+        <CustomInput type="text" placeholder="Enter name" value="Hello" />
       </div>
-      <CustomTable />
     </Suspense>
   );
 }
