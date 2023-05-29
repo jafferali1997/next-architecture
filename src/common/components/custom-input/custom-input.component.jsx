@@ -49,7 +49,7 @@ export default function CustomInput({
       <Input
         type={type}
         placeholder={placeholder}
-        className={`input-field default-input target:tw-bg-black ${className} ${
+        className={`input-field default-input tw-min ${className} ${
           !disabled || 'disabled-input'
         } `}
         onChange={inputChangeHandler}
@@ -59,12 +59,12 @@ export default function CustomInput({
         disabled={disabled}
         startAdornment={
           <InputAdornment position="start" className="">
-            <AccountCircle />
+            {startIcon}
           </InputAdornment>
         }
         endAdornment={
           <InputAdornment position="end" className="">
-            <AccountCircle />
+            {endIcon}
           </InputAdornment>
         }
       />

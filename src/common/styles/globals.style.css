@@ -64,6 +64,10 @@
 .input-field.Mui-focused {
   border-color: #7e7d7d;
 }
+.btn:disabled {
+  pointer-events: all;
+  cursor: not-allowed;
+}
 
 /*
 :root {

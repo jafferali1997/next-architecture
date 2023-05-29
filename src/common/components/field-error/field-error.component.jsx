@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import FieldErrorIcon from '@/common/icons/field-error-icon';
+import FieldErrorIcon from '@/common/icons/field-error.icon';
 
 export default function FieldError({ className = '', error = '' }) {
   return (

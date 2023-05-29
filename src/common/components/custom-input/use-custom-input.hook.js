@@ -1,24 +1,26 @@
+import {
+  ALL_CHARACTER_ARRAY,
+  ALL_CONTROLS
+} from '@/common/constants/characters-array.constant';
+
 export default function useCustomInput(onChange, regex, matchRegex) {
   const inputChangeHandler = (e) => {
     if (onChange) {
       onChange();
     }
-    // e.preventDefault();
-    // if (e.target.value.match(regex)) {
-
-    // } else {
-    //   let value = e.target.value.slice(0, -1);
-    //   console.log(value, 'yes');
-    //   e.target.value = value;
-    // }
+    if (!e.target.value.match(regex)) {
+    }
+    console.log(regex.test(e.target.value));
+    if (!regex.test(e.target.value)) {
+      console.log(e.target.value);
+      e.target.value = e.target.value.slice(0, -1);
+    }
   };
 
   const inputKeyDownHandler = (e) => {
-    // console.log(regex, e.target.value, e.target.value.match(regex), 'yes');
-    // if (!e.target.value.match(regex)) {
+    // if (![...ALL_CONTROLS, ...ALL_CHARACTER_ARRAY].includes(e.key)) {
     //   e.preventDefault();
     // }
-    // write the code to match regex with e.target.value
   };
 
   return {
