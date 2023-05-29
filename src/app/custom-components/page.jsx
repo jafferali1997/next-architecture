@@ -7,6 +7,7 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import ErrorIcon from '@/common/icons/error-icon';
 import SuccessIcon from '@/common/icons/success-icon';
+import CustomTable from '@/common/components/custom-table/custom-table.component';
 
 export default function Page() {
   const clickHandler = () => {
@@ -15,7 +16,7 @@ export default function Page() {
   return (
     <Suspense fallback={<p>Loading page...</p>}>
       <div>
-        <CustomButton text="Submit" disabled={true} className="btn-outline" />
+        <CustomButton text="Submit" className="btn btn-secondary" />
         <Alert icon={<ErrorIcon />} className="alert-error" onClose={() => {}}>
           This is a success alert — check it out!
         </Alert>
@@ -26,6 +27,7 @@ export default function Page() {
         <p>Hello World</p>
       </div>
       <MultiSelect options={[{ id: 1, label: 'test' }]} />
+      <CustomTable />
     </Suspense>
   );
 }

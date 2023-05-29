@@ -22,7 +22,7 @@ module.exports = {
     extend: {
       colors: {
         primary: '#1D4ED8',
-        secondaryBlue: '#1E40AF',
+        'secondary-blue': '#1E40AF',
         secondaryLightBlue: '#EBF0FF',
         secondaryDarkBlue: '#1E3A8A',
         secondaryGreen: '#047857',
