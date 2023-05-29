@@ -17,7 +17,68 @@ export default function Page() {
   };
   return (
     <Suspense fallback={<p>Loading page...</p>}>
-      {/* <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} /> */}
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Buttons</h3>
+        <hr />
+        <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
+          <CustomButton text="Primary Button" className="tw-m-5" />
+          <CustomButton text="Secondary Button" className="tw-m-5" variant="outlined" />
+          <CustomButton text="Disabled Button" className="tw-m-5" disabled />
+          <CustomButton text="Link Button" className="tw-m-5" href="#" />
+          <CustomButton
+            text="Link Button"
+            className="tw-m-5"
+            href="#"
+            startIcon={<ErrorIcon />}
+          />
+          <CustomButton
+            text="Link Button"
+            className="tw-m-5"
+            href="#"
+            endIcon={<SuccessIcon />}
+          />
+          <CustomButton
+            text="Link Button"
+            className="tw-m-5"
+            href="#"
+            startIcon={<ErrorIcon />}
+            endIcon={<SuccessIcon />}
+          />
+          <CustomButton
+            text="Link Button"
+            className="tw-m-5"
+            href="#"
+            startIcon={<ErrorIcon />}
+            endIcon={<SuccessIcon />}
+            disabled
+          />
+          <CustomButton
+            text="Link Button"
+            className="tw-m-5"
+            href="#"
+            startIcon={<ErrorIcon />}
+            endIcon={<SuccessIcon />}
+            disabled
+            variant="outlined"
+          />
+          <CustomButton
+            text="Link Button"
+            className="tw-m-5"
+            href="#"
+            startIcon={<ErrorIcon />}
+            endIcon={<SuccessIcon />}
+            disabled
+            variant="outlined"
+          />
+        </div>
+      </div>
+      <MultiSelect
+        options={[
+          { id: '1', label: 'test1', value: 'test1' },
+          { id: '2', label: 'test2', value: 'test2' },
+          { id: '3', label: 'test3', value: 'test3' }
+        ]}
+      />
       <div className="tw-m-5">
         <CustomInput
           type="text"
