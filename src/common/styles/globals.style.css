@@ -26,10 +26,10 @@
     @apply tw-bg-primary hover:tw-bg-secondary-blue focus:tw-bg-secondary-dark-blue disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
   }
   .btn-secondary {
-    @apply focus:tw-bg-secondary-dark-green tw-bg-secondary-green hover:tw-bg-secondary-medium-green disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
+    @apply tw-bg-secondary-green hover:tw-bg-secondary-medium-green focus:tw-bg-secondary-dark-green disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
   }
   .alert-error {
-    @apply tw-bg-danger-light tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-danger;
+    @apply tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-bg-danger-light tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-danger;
   }
   .alert-success {
     @apply tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-bg-secondary-light-green tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-secondary-green;
@@ -46,9 +46,26 @@
   .pagination-handle {
     @apply tw-flex tw-h-8 tw-w-[44px] tw-items-center tw-justify-center tw-rounded-[3px] tw-bg-text-ultra-light-gray tw-px-2.5 tw-py-1 hover:tw-bg-primary hover:tw-text-white;
   }
+  .default-input {
+    @apply tw-rounded-[5px] !tw-border tw-border-text-ultra-light-gray tw-px-[18px] tw-py-[9px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray before:tw-content-none after:tw-content-none;
+  }
+  .disabled-input {
+    @apply tw-cursor-not-allowed tw-border-disabled-input tw-bg-disabled-input;
+  }
 }
 
-/* 
+* {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  color: #46474f;
+}
+
+.input-field.Mui-focused {
+  background-color: #e4e4e4;
+}
+
+/*
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

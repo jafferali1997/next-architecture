@@ -49,19 +49,21 @@ export default function CustomInput({
       <Input
         type={type}
         placeholder={placeholder}
-        className={`tw-flex-grow-1 tw-rounded !tw-border tw-border-secondary-blue tw-py-[9px] ${className}`}
+        className={`input-field default-input target:tw-bg-black ${className} ${
+          !disabled || 'disabled-input'
+        } `}
         onChange={inputChangeHandler}
         onKeyDown={inputKeyDownHandler}
         {...(defaultValue && { defaultValue })}
         {...(value && { value })}
         disabled={disabled}
         startAdornment={
-          <InputAdornment position="start" className="tw-py-[11.88px] tw-pl-[18.19px]">
+          <InputAdornment position="start" className="">
             <AccountCircle />
           </InputAdornment>
         }
         endAdornment={
-          <InputAdornment position="end" className="tw-py-[11.88px] tw-pl-[18.19px]">
+          <InputAdornment position="end" className="">
             <AccountCircle />
           </InputAdornment>
         }

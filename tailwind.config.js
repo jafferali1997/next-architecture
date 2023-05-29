@@ -52,6 +52,7 @@ module.exports = {
         'text-light-gray': '#7E7D7D',
         'text-ultra-light-gray': '#BBBBBB',
         'danger-light': '#FFDEDE',
+        'disabled-input': '#E4E4E4',
         danger: '#EF2020',
         success: '#10FF61'
       },
