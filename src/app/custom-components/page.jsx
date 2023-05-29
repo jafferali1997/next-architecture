@@ -9,6 +9,7 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import ErrorIcon from '@/common/icons/error-icon';
 import SuccessIcon from '@/common/icons/success-icon';
 import CustomTable from '@/common/components/custom-table/custom-table.component';
+import { RGX_DIGITS } from '@/common/constants/regex.constant';
 
 export default function Page() {
   const clickHandler = () => {
@@ -18,7 +19,13 @@ export default function Page() {
     <Suspense fallback={<p>Loading page...</p>}>
       {/* <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} /> */}
       <div className="tw-m-5">
-        <CustomInput type="text" placeholder="Enter name" value="Hello" />
+        <CustomInput
+          type="text"
+          placeholder="Enter name"
+          // defaultValue="Hello"
+          regex={RGX_DIGITS}
+          // onChange={() => {}}
+        />
       </div>
     </Suspense>
   );
