@@ -15,25 +15,46 @@ module.exports = {
       lg: '992px',
       xl: '1440px'
     },
-    colors: {
-      primary: '#1D4ED8',
-      'secondary-blue': '#1E40AF',
-      'secondary-green': '#047857',
-      'secondary-black': '#2C2E3E',
-      'secondary-white': '#FEFEFE',
-      'secondary-gray': '#FBFBFB',
-      'text-black': '#2C2E3E',
-      'text-dark-gray': '#46474F',
-      'text-medium-gray': '#585858',
-      'text-light-gray': '#7E7D7D',
-      'text-ultra-light-gray': '#BBBBBB',
-      danger: '#EF2020',
-      success: '#10FF61'
-    },
+    // colors: {
+    //   primary: '#1D4ED8',
+    //   'secondary-blue': '#1E40AF',
+    //   'secondary-green': '#047857',
+    //   'secondary-black': '#2C2E3E',
+    //   'secondary-white': '#FEFEFE',
+    //   'secondary-gray': '#FBFBFB',
+    //   'text-black': '#2C2E3E',
+    //   'text-dark-gray': '#46474F',
+    //   'text-medium-gray': '#585858',
+    //   'text-light-gray': '#7E7D7D',
+    //   'text-ultra-light-gray': '#BBBBBB',
+    //   danger: '#EF2020',
+    //   success: '#10FF61'
+    // },
     fontFamily: {
-      dm: ['DM', 'sans']
+      dm: ['DM Sans', 'sans-serif']
     },
     extend: {
+      colors: {
+        primary: '#1D4ED8',
+        'secondary-blue': '#1E40AF',
+        'secondary-light-blue': '#EBF0FF',
+        'secondary-dark-blue': '#1E3A8A',
+        'secondary-green': '#047857',
+        'secondary-light-green': '#DEFFE4',
+        'secondary-medium-green': '#075F46',
+        'secondary-dark-green': '#054D38',
+        'secondary-black': '#2C2E3E',
+        'secondary-white': '#FEFEFE',
+        'secondary-gray': '#FBFBFB',
+        'text-black': '#2C2E3E',
+        'text-dark-gray': '#46474F',
+        'text-medium-gray': '#585858',
+        'text-light-gray': '#7E7D7D',
+        'text-ultra-light-gray': '#BBBBBB',
+        'danger-light': '#FFDEDE',
+        danger: '#EF2020',
+        success: '#10FF61'
+      },
       spacing: {
         px: '1px',
         0: '0',

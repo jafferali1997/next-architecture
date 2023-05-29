@@ -23,7 +23,7 @@ export default function CustomButton({
   onClick = null,
   className = '',
   type = 'button',
-  variant = 'contained',
+  variant = '',
   disabled = false,
   href = null,
   endIcon = null,
