@@ -31,7 +31,6 @@ export default function Page() {
 
         <p>Hello World</p>
       </div>
-      <MultiSelect options={[{ id: 1, label: 'test' }]} />
       <CustomTable />
     </Suspense>
   );
