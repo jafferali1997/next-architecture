@@ -19,6 +19,7 @@ import FormStepper from '@/common/components/form-stepper/form-stapper.component
 import AddressList from '@/common/components/tests/multiAdres';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import Toaster from '@/common/components/toaster/toaster.component';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function Page() {
   const [showSuccessToaster, setShowSuccessToaster] = useState(false);
@@ -94,28 +95,28 @@ export default function Page() {
         <h3 className="tw-text-2xl tw-font-bold">Toasters</h3>
         <hr />
         <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
-        <CustomButton
-          text="Show Success Toaster"
-          onClick={() => setShowSuccessToaster(true)}
-          className="btn-primary tw-m-5"
-        />
-        <Toaster
-          show={showSuccessToaster}
-          onClose={() => setShowSuccessToaster(false)}
-          type="success"
-          text="This is a success toaster — check it out!"
-        />
-        <CustomButton
-          text="Show Error Toaster"
-          onClick={() => setShowErrorToaster(true)}
-          className="btn-outline tw-border-danger tw-text-danger hover:tw-bg-danger hover:tw-opacity-25 hover:tw-text-white tw-m-5"
-        />
-        <Toaster
-          show={showErrorToaster}
-          onClose={() => setShowErrorToaster(false)}
-          type="error"
-          text="This is a error toaster — check it out!"
-        />
+          <CustomButton
+            text="Show Success Toaster"
+            onClick={() => setShowSuccessToaster(true)}
+            className="btn-primary tw-m-5"
+          />
+          <Toaster
+            show={showSuccessToaster}
+            onClose={() => setShowSuccessToaster(false)}
+            type="success"
+            text="This is a success toaster — check it out!"
+          />
+          <CustomButton
+            text="Show Error Toaster"
+            onClick={() => setShowErrorToaster(true)}
+            className="btn-outline tw-m-5 tw-border-danger tw-text-danger hover:tw-bg-danger hover:tw-text-white hover:tw-opacity-25"
+          />
+          <Toaster
+            show={showErrorToaster}
+            onClose={() => setShowErrorToaster(false)}
+            type="error"
+            text="This is a error toaster — check it out!"
+          />
         </div>
       </div>
       <div className="tw-m-5">
@@ -133,6 +134,15 @@ export default function Page() {
       <div className="tw-m-5">
         <h3 className="tw-text-2xl tw-font-bold">Input Fields</h3>
         <hr />
+        <div className="tw-m-5">
+          <CustomSelect
+            options={[
+              { id: '1', label: 'test1', value: 'test1' },
+              { id: '2', label: 'test2', value: 'test2' },
+              { id: '3', label: 'test3', value: 'test3' }
+            ]}
+          />
+        </div>
         <div className="tw-m-5">
           <CustomInput
             type="text"
