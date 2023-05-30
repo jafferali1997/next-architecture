@@ -10,7 +10,9 @@
   --color-dark-primary: rgba(31, 41, 55, 1);
   --dark-text: rgba(187, 193, 198, 1);
 }
-
+/* .MuiDataGrid-columnHeaders {
+  background: #f9fbfe !important;
+} */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,10 +37,10 @@
     @apply tw-ml-auto tw-flex tw-h-[50px] tw-w-full tw-max-w-[437px] tw-items-center tw-justify-between tw-bg-secondary-light-green tw-p-[16px] tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-4 tw-text-secondary-green;
   }
   .table-heading {
-    @apply tw-h-[59.33px] tw-border-solid tw-border-b-[#E7EAEE] tw-bg-secondary-light-blue tw-p-2 tw-text-left tw-font-dm  tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-secondary-black;
+    @apply tw-h-[59.33px] tw-border-solid tw-border-b-[#E7EAEE] tw-bg-secondary-ultra-light-blue tw-p-2 tw-text-left tw-font-dm  tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-secondary-black;
   }
   .table-data {
-    @apply tw-h-[72px] tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-white tw-px-2 tw-py-4 tw-font-dm tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-medium-gray;
+    @apply tw-h-[72px] tw-border-b tw-border-solid tw-border-b-[#E7EAEE]  tw-px-2 tw-py-4 tw-font-dm tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-medium-gray;
   }
   .pagination-number {
     @apply tw-h-8 tw-w-[27px] tw-rounded-[3px] tw-bg-text-ultra-light-gray tw-px-2.5 tw-py-1 hover:tw-bg-primary hover:tw-text-white;
@@ -53,7 +55,16 @@
     @apply tw-cursor-not-allowed tw-border-disabled-input tw-bg-disabled-input;
   }
 }
-
+.MuiPaginationItem-textPrimary {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 4px 10px !important;
+  gap: 10px !important;
+  width: 24px !important;
+  height: 32px !important;
+}
 * {
   font-family: 'DM Sans';
   font-style: normal;
@@ -70,6 +81,13 @@
 }
 
 /*
+  background: #e4e4e4;
+  border-radius: 3px !important;
+}
+.MuiPaginationItem-textPrimary > .Mui-selected {
+  background: #1d4ed8 !important;
+}
+/* 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -89,3 +107,40 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 } */
+
+.form-stepper-body {
+  background: #f9fbfe;
+
+  padding: 13px 26px;
+}
+.form-stepper-form {
+  padding: 20px;
+  margin-top: 12px;
+  min-height: 529px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 20px;
+}
+
+
+.tab {
+  padding: 9px;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  text-align: center;
+  cursor: pointer;
+  color: #46474f;
+  white-space: nowrap;
+
+  transform: translateY(2px);
+}
+.tab.active {
+  border-bottom: 2px solid #047857;
+  color: #2c2e3e;
+}
+.tab-content {
+  margin-top: 16px;
+}

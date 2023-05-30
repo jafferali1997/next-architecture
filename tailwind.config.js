@@ -38,6 +38,7 @@ module.exports = {
         primary: '#1D4ED8',
         'secondary-blue': '#1E40AF',
         'secondary-light-blue': '#EBF0FF',
+        'secondary-ultra-light-blue': '#F9FBFE',
         'secondary-dark-blue': '#1E3A8A',
         'secondary-green': '#047857',
         'secondary-light-green': '#DEFFE4',
