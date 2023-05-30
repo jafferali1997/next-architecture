@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import ErrorIcon from '@/common/icons/error.icon';
@@ -24,6 +25,26 @@ import CustomSelect from '@/common/components/custom-select/custom-select.compon
 export default function Page() {
   const [showSuccessToaster, setShowSuccessToaster] = useState(false);
   const [showErrorToaster, setShowErrorToaster] = useState(false);
+  useEffect(() => {
+    // axios
+    //   .get('https://ipapi.co/json/')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    axios
+      .get('http://ip-api.com/json')
+      .then(function (response) {
+        response.json().then((jsonData) => {
+          console.log(jsonData);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -144,13 +165,7 @@ export default function Page() {
           />
         </div>
         <div className="tw-m-5">
-          <CustomInput
-            type="text"
-            placeholder="Enter name"
-            // defaultValue="Hello"
-            regex={RGX_DECIMAL}
-            // onChange={() => {}}
-          />
+          <CustomInput type="text" placeholder="Enter name" name="firstName" />
         </div>
       </div>
     </>
