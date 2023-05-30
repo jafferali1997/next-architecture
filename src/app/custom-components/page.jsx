@@ -22,9 +22,10 @@ import CustomPagination from '@/common/components/paginations/pagination.compone
 import FormStepper from '@/common/components/form-stepper/form-stapper.component';
 import AddressList from '@/common/components/tests/multiAdres';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
+import Toaster from '@/common/components/toaster/toaster.component';
 
 export default function Page() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
 
@@ -163,98 +164,7 @@ export default function Page() {
   // };
   return (
     <Suspense fallback={<p>Loading page...</p>}>
-      <div className="tw-m-5">
-        <h3 className="tw-text-2xl tw-font-bold">Buttons</h3>
-        <hr />
-        <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
-          <CustomButton text="Primary Button" className="btn-primary tw-m-5" />
-          <CustomButton
-            text="Secondary Button"
-            className="btn-secondary tw-m-5"
-            onClick={() => {
-              console.log('clicked');
-            }}
-          />
-          <CustomButton
-            text="Disabled Button"
-            className="btn-primary tw-m-5"
-            onClick={() => {
-              console.log('clicked');
-            }}
-            disabled
-          />
-          <CustomButton text="Outline Button" className="btn-outline tw-m-5" />
-          <CustomButton
-            text="Disabled Outline Button"
-            className="btn-outline tw-m-5"
-            disabled
-          />
-        </div>
-        <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
-          <CustomButton
-            text="Link Primary Button"
-            className="btn-primary tw-m-5"
-            href="#"
-          />
-          <CustomButton
-            text="Link Secondary Button"
-            className="btn-secondary tw-m-5"
-            href="#"
-          />
-          <CustomButton
-            text="Link Outline Button"
-            className="btn-outline tw-m-5"
-            href="#"
-          />
-        </div>
-        <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
-          <CustomButton
-            text="Left Icon Button"
-            className="btn-primary tw-m-5"
-            startIcon={<SuccessIcon />}
-          />
-          <CustomButton
-            text="Right Icon Button"
-            className="btn-secondary tw-m-5"
-            endIcon={<ArrowLeftIcon className="tw-text-white" />}
-          />
-          <CustomButton
-            text="Both Icon Button"
-            className="btn-outline tw-m-5"
-            href="#"
-            startIcon={<ErrorIcon />}
-            endIcon={<SuccessIcon />}
-          />
-        </div>
-      </div>
-      <div className="tw-m-5">
-        <h3 className="tw-text-2xl tw-font-bold">Multi Select</h3>
-        <hr />
-        <MultiSelect
-          options={[
-            { id: '1', label: 'test1', value: 'test1' },
-            { id: '2', label: 'test2', value: 'test2' },
-            { id: '3', label: 'test3', value: 'test3' }
-          ]}
-          handleChange={() => {}}
-        />
-      </div>
-      <div className="tw-m-5">
-        <h3 className="tw-text-2xl tw-font-bold">Input Fields</h3>
-        <hr />
-        <div className="tw-m-5">
-          <CustomInput
-            type="text"
-            placeholder="Enter name"
-            // defaultValue="Hello"
-            regex={RGX_DECIMAL}
-            // onChange={() => {}}
-          />
-        </div>
-      </div>
       <p>Hello World</p>
-      {/* <MultiSelect options={[{ id: '1', label: 'test', value: 'test' }]} /> */}
-      <CustomInput type="text" placeholder="Enter name" value="Hello" />
       <button onClick={handleManageColumns}>Manage Columns</button>
       {open && (
         <div>
@@ -277,15 +187,7 @@ export default function Page() {
         <CustomButton text="Submit" className="btn-outline" />
         <CustomButton text="Submit" className="btn-primary" />
         <CustomButton text="Submit" className="btn-secondary" />
-        <Snackbar
-          open={open}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          onClose={handleClose}
-        >
-          <Alert icon={<ErrorIcon />} className="alert-error" onClose={() => {}}>
-            This is a success alert — check it out!
-          </Alert>
-        </Snackbar>
+
         <Snackbar
           open={open}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
