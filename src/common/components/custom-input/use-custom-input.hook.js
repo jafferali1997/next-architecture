@@ -8,13 +8,13 @@ export default function useCustomInput(onChange, regex, matchRegex) {
     if (onChange) {
       onChange();
     }
-    if (!e.target.value.match(regex)) {
-    }
-    console.log(regex.test(e.target.value));
-    if (!regex.test(e.target.value)) {
-      console.log(e.target.value);
-      e.target.value = e.target.value.slice(0, -1);
-    }
+    // if (!e.target.value.match(regex)) {
+    // }
+    // console.log(regex.test(e.target.value));
+    // if (!regex.test(e.target.value)) {
+    //   console.log(e.target.value);
+    //   e.target.value = e.target.value.slice(0, -1);
+    // }
   };
 
   const inputKeyDownHandler = (e) => {

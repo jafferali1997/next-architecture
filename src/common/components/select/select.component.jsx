@@ -24,15 +24,16 @@ export default function Select({
         </li>
       )}
       name={name}
-      className={`${className} ${disabled ? 'disabled-input' : ''} `}
+      className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
       disabled={disabled}
       onChange={onChange}
       defaultValue={defaultValue}
+      {...(value && { value })}
       isOptionEqualToValue={(option, value) => option.label === value.label}
       renderInput={(params) => (
         <TextField
           {...params}
-          className="default-input tw-p-0"
+          className="default-input input-field tw-p-0"
           placeholder={placeholder}
         />
       )}
