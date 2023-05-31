@@ -8,7 +8,7 @@ import Private from './private.component';
  * @param {component, type} props commponet and type of the component
  * @returns component
  */
-export default function Auth({ component, type = AUTH.PUBLIC }) {
+export default function Auth({ component, type }) {
   switch (type) {
     case AUTH.PUBLIC:
       return component;
