@@ -49,7 +49,7 @@
     @apply tw-flex tw-h-8 tw-w-[44px] tw-items-center tw-justify-center tw-rounded-[3px] tw-bg-text-ultra-light-gray tw-px-2.5 tw-py-1 hover:tw-bg-primary hover:tw-text-white;
   }
   .default-input {
-    @apply tw-rounded-[5px] !tw-border tw-border-text-ultra-light-gray tw-px-[18px] tw-py-[9px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray before:tw-content-none after:tw-content-none;
+    @apply tw-rounded-[5px] !tw-border tw-border-text-ultra-light-gray tw-px-[18px] tw-py-[9px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray before:tw-content-none after:tw-content-none tw-w-full;
   }
   .disabled-input {
     @apply tw-cursor-not-allowed tw-border-disabled-input tw-bg-disabled-input;
