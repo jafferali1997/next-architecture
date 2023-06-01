@@ -50,9 +50,9 @@ export default function CustomInput({
       <Input
         type={type}
         placeholder={placeholder}
-        className={`input-field default-input tw-min ${className} ${
-          !disabled || 'disabled-input'
-        } `}
+        className={`input-field default-input tw-min hover:tw-border-text-dark-gray ${
+          error && 'error-field'
+        } ${className} ${!disabled || 'disabled-input'} `}
         name={name}
         {...(defaultValue && { defaultValue })}
         {...(value && { value })}

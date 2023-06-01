@@ -4,6 +4,7 @@
 import { TextareaAutosize } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
+import FieldError from '../field-error/field-error.component';
 
 export default function TextArea({
   placeholder,
@@ -14,22 +15,26 @@ export default function TextArea({
   value = null,
   disabled = false,
   defaultValue = null,
-  onChange = null
+  onChange = null,
+  error = null
 }) {
   return (
-    <TextareaAutosize
-      minRows={minRows}
-      maxRows={maxRows}
-      placeholder={placeholder}
-      className={`input-field default-input ${className} ${
-        disabled ? 'disabled-input' : ''
-      } `}
-      name={name}
-      {...(defaultValue && { defaultValue })}
-      {...(value && { value })}
-      onChange={onChange}
-      disabled={disabled}
-    />
+    <>
+      <TextareaAutosize
+        minRows={minRows}
+        maxRows={maxRows}
+        placeholder={placeholder}
+        className={`input-field default-input tw-min hover:tw-border-text-dark-gray focus:tw-border-text-dark-gray focus:tw-border-[1px] ${
+          error && 'error-field'
+        } ${className} ${!disabled || 'disabled-input'} `}
+        name={name}
+        {...(defaultValue && { defaultValue })}
+        {...(value && { value })}
+        onChange={onChange}
+        disabled={disabled}
+      />
+      {error && error?.length > 0 && <FieldError className="tw-mt-1" error={error} />}
+    </>
   );
 }
 
@@ -42,5 +47,6 @@ TextArea.propTypes = {
   value: PropTypes.string,
   disabled: PropTypes.bool,
   defaultValue: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  error: PropTypes.string
 };

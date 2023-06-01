@@ -164,7 +164,7 @@ export default function Page() {
               { label: 'Test 2', value: 'test2' },
               { label: 'Test 3', value: 'test3' }
             ]}
-            defaultValue={{ label: 'Test 3', value: 'test3' }}
+            // defaultValue={{ label: 'Test 3', value: 'test3' }}
             placeholder="Single Select with Search Option"
           />
         </div>
@@ -178,7 +178,16 @@ export default function Page() {
           /> */}
         </div>
         <div className="tw-m-5">
-          <CustomInput type="text" placeholder="Enter name" name="firstName" />
+          <label>Simple Input Field:</label>
+          <CustomInput type="text" placeholder="Simple Input Field" name="firstName" />
+        </div>
+        <div className="tw-m-5">
+          <label>Input Field With Error:</label>
+          <CustomInput
+            type="text"
+            placeholder="Input Field With Error:"
+            error="Wrong Input"
+          />
         </div>
         <div className="tw-m-5">
           <TextArea placeholder="Text Area" />
