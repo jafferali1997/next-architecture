@@ -36,6 +36,7 @@ module.exports = {
     extend: {
       colors: {
         primary: '#1D4ED8',
+        'primary-blue': '#2563EB',
         'secondary-blue': '#1E40AF',
         'secondary-light-blue': '#EBF0FF',
         'secondary-ultra-light-blue': '#F9FBFE',
@@ -88,7 +89,8 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'hero-pattern': "url('/assets/images/sidebar/sidebarellipses.png')"
       }
     }
   },

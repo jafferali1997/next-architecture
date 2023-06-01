@@ -1,5 +1,6 @@
 import '@/common/styles/globals.style.css';
 import '@/common/styles/home.style.scss';
+import '@/common/styles/dashboard/dashboard.style.css';
 import { Inter } from 'next/font/google';
 import PropTypes from 'prop-types';
 
