@@ -8,9 +8,9 @@ export default function useToaster(show, onClose) {
   }, [show]);
 
   const toasterCloseHanlder = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    // if (reason === 'clickaway') {
+    //   return;
+    // }
     setOpenToaster(false);
     if (onClose) {
       onClose();

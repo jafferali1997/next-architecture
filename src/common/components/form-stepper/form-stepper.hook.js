@@ -1,5 +1,5 @@
-/* eslint-disable import/no-import-module-exports */
-// eslint-disable-next-line import/no-import-module-exports
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 

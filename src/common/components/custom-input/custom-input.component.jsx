@@ -1,7 +1,6 @@
 'use client';
 
 import { Input, InputAdornment } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import useCustomInput from './use-custom-input.hook';
 import { RGX_ALL_CHARACTERS } from '@/common/constants/regex.constant';
@@ -11,6 +10,7 @@ import FieldError from '@/common/components/field-error/field-error.component';
  * @param type - The type of input
  * @param placeholder - The placeholder text
  * @param onChange - The function to call when the input changes
+ * @param name - The name of input to get value in onSubmit
  * @param defaultValue - The value that will be displayed on input field on first time
  * @param value - The value of the input
  * @param className - The class name to apply to the input
@@ -26,9 +26,10 @@ import FieldError from '@/common/components/field-error/field-error.component';
 export default function CustomInput({
   type,
   placeholder,
+  name,
   onChange = null,
   defaultValue = null,
-  value = undefined,
+  value = null,
   className = '',
   endIcon = null,
   startIcon = null,
@@ -37,33 +38,33 @@ export default function CustomInput({
   matchRegex = true,
   errors = null,
   register = null,
-  name,
   label = null,
   isRequired = false
 }) {
-  // const { inputChangeHandler, inputKeyDownHandler } = useCustomInput(
-  //   onChange,
-  //   regex,
-  //   matchRegex
-  // );
+  const { inputChangeHandler, inputKeyDownHandler } = useCustomInput(
+    onChange,
+    regex,
+    matchRegex
+  );
 
   return (
-    <div>
+    <>
       {label && (
         <label>
           {label} {isRequired && <span>*</span>}
         </label>
       )}
 
-      <input
+      <Input
         type={type}
         placeholder={placeholder}
-        className={`input-field default-input tw-min ${className} ${
-          !disabled || 'disabled-input'
-        } `}
-        // onKeyDown={onChange}
+        className={`input-field default-input tw-min hover:tw-border-text-dark-gray ${
+          errors && 'error-field'
+        } ${className} ${!disabled || 'disabled-input'} `}
+        name={name}
         {...(defaultValue && { defaultValue })}
         {...(value && { value })}
+        onKeyDown={inputKeyDownHandler}
         disabled={disabled}
         startAdornment={
           <InputAdornment position="start" className="">
@@ -76,18 +77,19 @@ export default function CustomInput({
           </InputAdornment>
         }
         {...(register && register(`${name}`))}
-        onChange={onChange}
+        onChange={inputChangeHandler}
       />
       {errors && errors[name] && (
         <FieldError className="tw-mt-1" error={errors[name].message} />
       )}
-    </div>
+    </>
   );
 }
 
 CustomInput.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   value: PropTypes.string,
   className: PropTypes.string,
@@ -99,7 +101,6 @@ CustomInput.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object,
-  name: PropTypes.string.isRequired,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   register: PropTypes.func

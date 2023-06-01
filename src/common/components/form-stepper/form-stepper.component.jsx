@@ -12,7 +12,7 @@ export default function FormStepper({ title, module, tabs, children, ...props })
         <div className="form-stepper-form-header">
           <h2>{title}</h2>
           <p>
-            {module} #: <span>{id}</span>
+            {module} {module ? '#:' : ''} <span>{id}</span>
           </p>
         </div>
         <div className="form-stepper-form-body">

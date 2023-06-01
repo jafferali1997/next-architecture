@@ -74,7 +74,7 @@ export default function CustomPagination() {
             </span>
           </p>
         </div>
-        <div className="tw-flex tw-w-[30%] tw-gap-[12px]">
+        <div className="tw-flex tw-w-[40%] tw-justify-end tw-gap-[12px]">
           <Pagination
             color="primary"
             count={pageCount}
