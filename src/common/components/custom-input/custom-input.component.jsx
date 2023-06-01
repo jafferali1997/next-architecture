@@ -48,7 +48,7 @@ export default function CustomInput({
   );
 
   return (
-    <>
+    <div>
       {label && (
         <label>
           {label} {isRequired && <span>*</span>}
@@ -82,7 +82,7 @@ export default function CustomInput({
       {errors && errors[name] && (
         <FieldError className="tw-mt-1" error={errors[name].message} />
       )}
-    </>
+    </div>
   );
 }
 
