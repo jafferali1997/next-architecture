@@ -15,7 +15,7 @@ export default function CustomerIcon({ className }) {
       xmlns="http://www.w3.org/2000/svg"
       className={`${className}`}
     >
-      <g clip-path="url(#clip0_5438_8406)">
+      <g clipPath="url(#clip0_5438_8406)">
         <path
           d="M8 6.95703C9.50152 6.95703 10.7188 5.73981 10.7188 4.23828C10.7188 2.73676 9.50152 1.51953 8 1.51953C6.49848 1.51953 5.28125 2.73676 5.28125 4.23828C5.28125 5.73981 6.49848 6.95703 8 6.95703Z"
           fill="white"

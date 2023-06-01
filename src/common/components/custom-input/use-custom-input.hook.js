@@ -1,9 +1,18 @@
+'use client';
+
+import { useState } from 'react';
 import {
   ALL_CHARACTER_ARRAY,
   ALL_CONTROLS
 } from '@/common/constants/characters-array.constant';
 
 export default function useCustomInput(onChange, regex, matchRegex) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const passwordMouseDownHandler = (event) => {
+    event.preventDefault();
+  };
+
   const inputChangeHandler = (e) => {
     if (onChange) {
       onChange();
@@ -25,6 +34,9 @@ export default function useCustomInput(onChange, regex, matchRegex) {
 
   return {
     inputChangeHandler,
-    inputKeyDownHandler
+    inputKeyDownHandler,
+    showPassword,
+    setShowPassword,
+    passwordMouseDownHandler
   };
 }

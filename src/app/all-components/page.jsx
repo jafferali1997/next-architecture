@@ -178,20 +178,42 @@ export default function Page() {
           /> */}
         </div>
         <div className="tw-m-5">
-          <label>Simple Input Field:</label>
-          <CustomInput type="text" placeholder="Simple Input Field" name="firstName" />
+          <CustomInput
+            type="text"
+            name="firstName"
+            label="Simple Field:"
+            placeholder="Simple Input Field with required"
+            isRequired
+          />
+        </div>
+        <div className="tw-m-5">
+          <CustomInput
+            type="text"
+            name="inlineLabelField"
+            label="Input Field With Inline Label:"
+            placeholder="Input Field With Inline Label:"
+            inlineLabel
+          />
+        </div>
+        <div className="tw-m-5">
+          <CustomInput
+            type="password"
+            name="passwordField"
+            label="Password:"
+            placeholder="password"
+          />
         </div>
         <div className="tw-m-5">
           <CustomInput
             type="text"
             name="errorField"
-            placeholder="Input Field With Error:"
             label="Input Field With Error:"
+            placeholder="Input Field With Error:"
             errors={{ errorField: { message: 'Wrong Input' } }}
           />
         </div>
         <div className="tw-m-5">
-          <TextArea placeholder="Text Area" />
+          <TextArea label="Text Area" placeholder="Text Area" />
         </div>
       </div>
     </>

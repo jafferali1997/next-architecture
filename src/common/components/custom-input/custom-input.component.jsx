@@ -1,10 +1,12 @@
 'use client';
 
-import { Input, InputAdornment } from '@mui/material';
+import { IconButton, Input, InputAdornment } from '@mui/material';
 import PropTypes from 'prop-types';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import useCustomInput from './use-custom-input.hook';
 import { RGX_ALL_CHARACTERS } from '@/common/constants/regex.constant';
 import FieldError from '@/common/components/field-error/field-error.component';
+import FieldLabel from '../field-label/field-label.component';
 
 /**
  * @param type - The type of input
@@ -39,49 +41,72 @@ export default function CustomInput({
   errors = null,
   register = null,
   label = null,
-  isRequired = false
+  isRequired = false,
+  inlineLabel = false,
+  labelClassName = ''
 }) {
-  const { inputChangeHandler, inputKeyDownHandler } = useCustomInput(
-    onChange,
-    regex,
-    matchRegex
-  );
+  const {
+    inputChangeHandler,
+    inputKeyDownHandler,
+    showPassword,
+    setShowPassword,
+    passwordMouseDownHandler
+  } = useCustomInput(onChange, regex, matchRegex);
+
+  const getInputEndAdorment = () => {
+    if (type === 'password') {
+      return (
+        <IconButton
+          aria-label="toggle password visibility"
+          onClick={() => setShowPassword(!showPassword)}
+          onMouseDown={(event) => passwordMouseDownHandler(event)}
+          onMouseUp={(event) => passwordMouseDownHandler(event)}
+          edge="end"
+        >
+          {showPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      );
+    }
+    return endIcon;
+  };
 
   return (
-    <div>
+    <div
+      className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
+    >
       {label && (
-        <label>
-          {label} {isRequired && <span>*</span>}
-        </label>
+        <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
       )}
 
-      <Input
-        type={type}
-        placeholder={placeholder}
-        className={`input-field default-input tw-min hover:tw-border-text-dark-gray ${
-          errors && 'error-field'
-        } ${className} ${!disabled || 'disabled-input'} `}
-        name={name}
-        {...(defaultValue && { defaultValue })}
-        {...(value && { value })}
-        onKeyDown={inputKeyDownHandler}
-        disabled={disabled}
-        startAdornment={
-          <InputAdornment position="start" className="">
-            {startIcon}
-          </InputAdornment>
-        }
-        endAdornment={
-          <InputAdornment position="end" className="">
-            {endIcon}
-          </InputAdornment>
-        }
-        {...(register && register(`${name}`))}
-        onChange={inputChangeHandler}
-      />
-      {errors && errors[name] && (
-        <FieldError className="tw-mt-1" error={errors[name].message} />
-      )}
+      <div className="tw-w-full">
+        <Input
+          type={showPassword ? 'text' : type}
+          placeholder={placeholder}
+          className={`input-field default-input hover:tw-border-text-dark-gray ${
+            errors && 'error-field'
+          } ${className} ${!disabled || 'disabled-input'} `}
+          name={name}
+          {...(defaultValue && { defaultValue })}
+          {...(value && { value })}
+          onKeyDown={inputKeyDownHandler}
+          disabled={disabled}
+          startAdornment={
+            <InputAdornment position="start" className="">
+              {startIcon}
+            </InputAdornment>
+          }
+          endAdornment={
+            <InputAdornment position="end" className="">
+              {getInputEndAdorment()}
+            </InputAdornment>
+          }
+          {...(register && register(`${name}`))}
+          onChange={inputChangeHandler}
+        />
+        {errors && errors[name] && (
+          <FieldError className="tw-mt-1" error={errors[name].message} />
+        )}
+      </div>
     </div>
   );
 }
@@ -99,9 +124,11 @@ CustomInput.propTypes = {
   regex: PropTypes.instanceOf(RegExp),
   matchRegex: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  register: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
-  register: PropTypes.func
+  inlineLabel: PropTypes.bool,
+  labelClassName: PropTypes.string
 };

@@ -80,14 +80,6 @@ export default function Sidebar() {
             alt="logo"
           />
         </Link>
-
-        {/* <Link
-          href="/dashboard"
-          className="tw-mt-7 tw-flex tw-items-center tw-gap-2 tw-px-6 tw-py-2"
-        >
-          <DashboardIcon className="" />
-          <span className="tw-font-dm tw-text-sm tw-text-white">Dashboard</span>
-        </Link> */}
       </div>
       <div className="multistep-wrapper tw-flex tw-flex-col tw-gap-6 tw-px-6">
         {sidebarLinks.map((navLink) => {
@@ -114,7 +106,8 @@ export default function Sidebar() {
                   <ul className="tw-mt-2 tw-flex tw-flex-col tw-gap-2">
                     {navLink.subLinks.map((subLink) => {
                       return (
-                        <Link
+                        <li
+                          key={subLink.lablel}
                           href={subLink.href}
                           className="nav-link tw-rounded-md tw-px-6 tw-py-2 active:tw-bg-white"
                         >
@@ -124,7 +117,7 @@ export default function Sidebar() {
                               {subLink.lablel}
                             </span>
                           </div>
-                        </Link>
+                        </li>
                       );
                     })}
                   </ul>

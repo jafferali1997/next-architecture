@@ -2,6 +2,8 @@
 import { Autocomplete, TextField } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
+import FieldError from '@/common/components/field-error/field-error.component';
+import FieldLabel from '../field-label/field-label.component';
 
 export default function Select({
   options,
@@ -11,40 +13,55 @@ export default function Select({
   defaultValue = null,
   value = null,
   className = '',
-  disabled = false
+  disabled = false,
+  errors = null,
+  register = null,
+  label = null,
+  isRequired = false,
+  inlineLabel = false,
+  labelClassName = ''
 }) {
   return (
-    <Autocomplete
-      disablePortal
-      disableClearable
-      options={options ?? []}
-      renderOption={(props, option) => (
-        <li {...props} key={option?.label}>
-          {option?.label}
-        </li>
+    <div
+      className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
+    >
+      {label && (
+        <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
       )}
-      name={name}
-      className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
-      disabled={disabled}
-      onChange={onChange}
-      defaultValue={defaultValue}
-      {...(value && { value })}
-      isOptionEqualToValue={(option, value) => option.label === value.label}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          className="default-input input-field tw-p-0"
-          placeholder={placeholder}
+
+      <div className="tw-w-full">
+        <Autocomplete
+          disablePortal
+          disableClearable
+          options={options ?? []}
+          renderOption={(props, option) => (
+            <li {...props} key={option?.label}>
+              {option?.label}
+            </li>
+          )}
+          name={name}
+          className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
+          disabled={disabled}
+          onChange={onChange}
+          defaultValue={defaultValue}
+          {...(value && { value })}
+          isOptionEqualToValue={(option, value) => option.label === value.label}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              className="default-input input-field tw-p-0"
+              placeholder={placeholder}
+            />
+          )}
         />
-      )}
-    />
+
+        {errors && errors[name] && (
+          <FieldError className="tw-mt-1" error={errors[name].message} />
+        )}
+      </div>
+    </div>
   );
 }
-
-// const top100Films = [
-//   { label: 'The Shawshank Redemption', year: 1994 },
-//   { label: 'The Godfather', year: 1972 }
-// ];
 
 Select.propTypes = {
   options: PropTypes.arrayOf(
@@ -63,5 +80,12 @@ Select.propTypes = {
   }),
   value: PropTypes.string,
   className: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  register: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  errors: PropTypes.object,
+  label: PropTypes.string,
+  isRequired: PropTypes.bool,
+  inlineLabel: PropTypes.bool,
+  labelClassName: PropTypes.string
 };
