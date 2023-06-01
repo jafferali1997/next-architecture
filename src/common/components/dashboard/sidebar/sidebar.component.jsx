@@ -60,33 +60,6 @@ export default function Sidebar() {
             </ul>
           </AccordionDetails>
         </Accordion>
-        <Accordion className="!tw-before:none !tw-m-0 !tw-bg-primary-blue !tw-shadow-none">
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-            className="!tw-m-0 !tw-h-fit !tw-min-h-fit tw-bg-primary-blue !tw-px-0 !tw-py-0"
-          >
-            <div className="tw-flex tw-items-center tw-gap-2">
-              <ArrowIcon className="arrow-cotrol" />
-              <span className="tw-font-dm tw-text-base tw-leading-6 tw-text-white">
-                Documents
-              </span>
-            </div>
-          </AccordionSummary>
-          <AccordionDetails className="tw-bg-primary-blue !tw-px-0 !tw-py-0">
-            <ul className="tw-mt-2 tw-flex tw-flex-col tw-gap-2">
-              <li className="nav-link active tw-rounded-md tw-px-6 tw-py-2 active:tw-bg-white">
-                <a href="/dashboard" className="tw-flex tw-items-center tw-gap-2">
-                  <CustomerIcon />
-                  <span className="tw-font-dm tw-text-base tw-leading-6 tw-text-white">
-                    Customer
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </AccordionDetails>
-        </Accordion>
       </div>
     </div>
   );
