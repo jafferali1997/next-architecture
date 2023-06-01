@@ -1,3 +1,5 @@
+'use client';
+
 import PropTypes from 'prop-types';
 import FormStepperHook from './form-stepper.hook';
 import Tab from '../tab/tab.component';

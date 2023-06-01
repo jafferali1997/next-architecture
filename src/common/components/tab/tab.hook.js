@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function TabHook({ tabs }) {
+export default function useTabHook({ tabs }) {
   const [activeTab, setActiveTab] = useState(tabs[0]?.id);
   const [completedTab, setCompletedTab] = useState([]);
 
@@ -21,8 +21,11 @@ export default function TabHook({ tabs }) {
     ...Component,
     props: { handleTabClick, handleTabCompleted, resetTabCompleted }
   };
+
+  tabs[tabs.findIndex((tab) => tab.id === activeTab)].content = Component;
+
   return {
-    tabs,
+    syntaticTabs: tabs,
     activeTab,
     setActiveTab,
     completedTab,

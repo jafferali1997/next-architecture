@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import TabHook from './tab.hook';
+import useTabHook from './tab.hook';
 
 function Tab({ tabs }) {
   const [completedTab, setCompletedTab] = useState([]);
   const {
+    syntaticTabs,
     activeTab,
     setActiveTab,
     // completedTab,
@@ -14,7 +15,7 @@ function Tab({ tabs }) {
     handleTabClick,
     resetTabCompleted,
     Component
-  } = TabHook;
+  } = useTabHook({ tabs });
   return (
     <div className="tabs">
       <div className="tab-navigation">
@@ -27,10 +28,9 @@ function Tab({ tabs }) {
             {tab.label}
           </div>
         ))} */}
-        {tabs.map((tab) => (
-          <>
+        {syntaticTabs.map((tab) => (
+          <div key={tab.id}>
             <div
-              key={tab.id}
               className={`${
                 tab.id === activeTab
                   ? 'activeTab'
@@ -47,7 +47,7 @@ function Tab({ tabs }) {
               </div>
             </div>
             <div className="seperator tw-h-[2px] tw-bg-[#BBBBBB]" />
-          </>
+          </div>
         ))}
       </div>
       <div className="tab-content">{Component}</div>

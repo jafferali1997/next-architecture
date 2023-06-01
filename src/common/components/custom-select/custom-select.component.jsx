@@ -1,27 +1,43 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { Select, MenuItem } from '@mui/material';
 import PropTypes from 'prop-types';
+import FieldError from '../field-error/field-error.component';
 
 export default function CustomSelect({
   options,
   value = null,
   onChange = null,
-  defaultValue = null
+  defaultValue = null,
+  register = null,
+  isRequired = false,
+  label = null,
+  name = null,
+  errors = null
 }) {
   return (
-    <Select
-      id="demo-simple-select"
-      onChange={onChange}
-      className="tw-w-[300px]"
-      {...(defaultValue && { defaultValue })}
-      {...(value && { value })}
-    >
-      {options?.map((option) => (
-        <MenuItem key={option.id} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </Select>
+    <div>
+      {label && (
+        <label>
+          {label} {isRequired && <span>*</span>}
+        </label>
+      )}
+      <select
+        className="tw-w-[300px]"
+        {...(register && register(`${name}`))}
+        {...(defaultValue && { defaultValue })}
+        {...(value && { value })}
+        onChange={onChange}
+      >
+        <option value="">Select</option>
+        {options?.map((option) => (
+          <option key={option.id} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {errors && errors[name] && (
+        <FieldError className="tw-mt-1" error={errors[name].message} />
+      )}
+    </div>
   );
 }
 
@@ -35,5 +51,11 @@ CustomSelect.propTypes = {
   ).isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  defaultValue: PropTypes.string
+  defaultValue: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  errors: PropTypes.object,
+  isRequired: PropTypes.bool,
+  register: PropTypes.func
 };

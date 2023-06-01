@@ -16,7 +16,7 @@ import {
 import ArrowUpIcon from '@/common/icons/arrow-up.icon';
 import ArrowLeftIcon from '@/common/icons/arrow-left.icon';
 import CustomPagination from '@/common/components/paginations/pagination.component';
-import FormStepper from '@/common/components/form-stepper/form-stapper.component';
+import FormStepper from '@/common/components/form-stepper/form-stepper.component';
 import AddressList from '@/common/components/tests/multiAdres';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import Toaster from '@/common/components/toaster/toaster.component';
@@ -182,11 +182,12 @@ export default function Page() {
           <CustomInput type="text" placeholder="Simple Input Field" name="firstName" />
         </div>
         <div className="tw-m-5">
-          <label>Input Field With Error:</label>
           <CustomInput
             type="text"
+            name="errorField"
             placeholder="Input Field With Error:"
-            error="Wrong Input"
+            label="Input Field With Error:"
+            errors={{ errorField: { message: 'Wrong Input' } }}
           />
         </div>
         <div className="tw-m-5">

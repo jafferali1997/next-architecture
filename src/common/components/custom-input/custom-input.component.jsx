@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable react/jsx-props-no-spreading */
 import { Input, InputAdornment } from '@mui/material';
 import PropTypes from 'prop-types';
 import useCustomInput from './use-custom-input.hook';
@@ -27,7 +26,7 @@ import FieldError from '@/common/components/field-error/field-error.component';
 export default function CustomInput({
   type,
   placeholder,
-  name = null,
+  name,
   onChange = null,
   defaultValue = null,
   value = null,
@@ -37,7 +36,10 @@ export default function CustomInput({
   disabled = false,
   regex = RGX_ALL_CHARACTERS,
   matchRegex = true,
-  error = null
+  errors = null,
+  register = null,
+  label = null,
+  isRequired = false
 }) {
   const { inputChangeHandler, inputKeyDownHandler } = useCustomInput(
     onChange,
@@ -47,16 +49,21 @@ export default function CustomInput({
 
   return (
     <>
+      {label && (
+        <label>
+          {label} {isRequired && <span>*</span>}
+        </label>
+      )}
+
       <Input
         type={type}
         placeholder={placeholder}
         className={`input-field default-input tw-min hover:tw-border-text-dark-gray ${
-          error && 'error-field'
+          errors && 'error-field'
         } ${className} ${!disabled || 'disabled-input'} `}
         name={name}
         {...(defaultValue && { defaultValue })}
         {...(value && { value })}
-        onChange={inputChangeHandler}
         onKeyDown={inputKeyDownHandler}
         disabled={disabled}
         startAdornment={
@@ -69,8 +76,12 @@ export default function CustomInput({
             {endIcon}
           </InputAdornment>
         }
+        {...(register && register(`${name}`))}
+        onChange={inputChangeHandler}
       />
-      {error && error?.length > 0 && <FieldError className="tw-mt-1" error={error} />}
+      {errors && errors[name] && (
+        <FieldError className="tw-mt-1" error={errors[name].message} />
+      )}
     </>
   );
 }
@@ -78,7 +89,7 @@ export default function CustomInput({
 CustomInput.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   value: PropTypes.string,
   className: PropTypes.string,
@@ -88,5 +99,9 @@ CustomInput.propTypes = {
   regex: PropTypes.instanceOf(RegExp),
   matchRegex: PropTypes.bool,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  error: PropTypes.string
+  // eslint-disable-next-line react/forbid-prop-types
+  errors: PropTypes.object,
+  label: PropTypes.string,
+  isRequired: PropTypes.bool,
+  register: PropTypes.func
 };
