@@ -1,9 +1,8 @@
 'use client';
 
 import PropTypes from 'prop-types';
-
-const { default: OfferHeader } = require('@/common/components/offer-header/offer-header');
-const { default: Sidebar } = require('@/common/components/sidebar/sidebar');
+import Navbar from '@/common/components/dashboard/navbar/navbar.component';
+import Sidebar from '@/common/components/dashboard/sidebar/sidebar.component';
 
 export default function Auth({ component, authType }) {
   if (authType === 'private') {
@@ -22,12 +21,12 @@ function Private({ component }) {
   // const { accessToken } = JSON.parse(localStorage.getItem('user')) || null;
   if (true) {
     return (
-      <div className="tw-flex tw-flex-row">
+      <div className="dashboard-main">
         <div className="sidebar tw-basis-1/6">
           <Sidebar />
         </div>
         <div className="content tw-basis-5/6">
-          <OfferHeader />
+          <Navbar />
           {component}
         </div>
       </div>
