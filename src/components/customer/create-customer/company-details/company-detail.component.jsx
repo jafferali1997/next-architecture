@@ -28,6 +28,7 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
     data,
     errors
   } = useCompanyDetails({ handleTabClick, handleTabCompleted });
+
   return (
     <div className="company-details-wrapper">
       <div className="content-header ">

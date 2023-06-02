@@ -22,7 +22,7 @@ export default function CustomSelect({
       )}
       <select
         className="tw-w-[300px]"
-        {...(register && register(`${name}`))}
+        // {...(register && register(`${name}`))}
         {...(defaultValue && { defaultValue })}
         {...(value && { value })}
         onChange={onChange}

@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import * as yup from 'yup';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import ErrorIcon from '@/common/icons/error.icon';
@@ -24,9 +27,23 @@ import CustomSelect from '@/common/components/custom-select/custom-select.compon
 import TextArea from '@/common/components/text-area/text-area.component';
 import Select from '@/common/components/select/select.component';
 
+const validationSchema = yup.object({
+  firstName: yup.string().max(5, 'company name must be at most 5 characters long')
+});
+
 export default function Page() {
   const [showSuccessToaster, setShowSuccessToaster] = useState(false);
   const [showErrorToaster, setShowErrorToaster] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+    reValidateMode: 'onChange'
+  });
   useEffect(() => {
     // axios
     //   .get('https://ipapi.co/json/')
@@ -47,6 +64,7 @@ export default function Page() {
     //     console.log(error);
     //   });
   }, []);
+  console.log(errors);
 
   return (
     <>
@@ -178,20 +196,79 @@ export default function Page() {
           /> */}
         </div>
         <div className="tw-m-5">
-          <label>Simple Input Field:</label>
-          <CustomInput type="text" placeholder="Simple Input Field" name="firstName" />
+          <CustomInput
+            type="text"
+            name="firstName"
+            label="Simple Field:"
+            placeholder="Simple Input Field with required"
+            isRequired
+          />
+        </div>
+        <div className="tw-m-5">
+          <CustomInput
+            type="text"
+            name="inlineLabelField"
+            label="Input Field With Inline Label:"
+            placeholder="Input Field With Inline Label:"
+            inlineLabel
+          />
+        </div>
+        <div className="tw-m-5">
+          <CustomInput
+            type="password"
+            name="passwordField"
+            label="Password:"
+            placeholder="password"
+          />
         </div>
         <div className="tw-m-5">
           <CustomInput
             type="text"
             name="errorField"
-            placeholder="Input Field With Error:"
             label="Input Field With Error:"
+            placeholder="Input Field With Error:"
             errors={{ errorField: { message: 'Wrong Input' } }}
           />
         </div>
         <div className="tw-m-5">
-          <TextArea placeholder="Text Area" />
+          <TextArea label="Text Area" placeholder="Text Area" />
+        </div>
+      </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">React Hook Form</h3>
+        <hr />
+        <div className="tw-m-5 tw-border-text-dark-gray">
+          <form
+            onSubmit={handleSubmit((data) => {
+              // alert(JSON.stringify(errors))
+              alert(JSON.stringify(data));
+            })}
+          >
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
+              <div className="tw-w-1/2">
+                <CustomInput
+                  type="text"
+                  name="firstName"
+                  label="First Name:"
+                  placeholder="First Name"
+                  register={register}
+                  errors={errors}
+                  isRequired
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <CustomInput
+                  type="text"
+                  name="lastName"
+                  label="Last Name:"
+                  placeholder="Last Name"
+                  register={register}
+                  isRequired
+                />
+              </div>
+              <CustomButton type="Submit" className="btn-primary" text="Submit" />
+            </div>
+          </form>
         </div>
       </div>
     </>

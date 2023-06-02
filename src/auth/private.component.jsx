@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
 import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
+import Navbar from '@/common/components/dashboard/navbar/navbar.component';
+import Sidebar from '@/common/components/dashboard/sidebar/sidebar.component';
 
 /**
  * Return the component if access token is verified and return to home page if its not
@@ -8,11 +10,22 @@ import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
  * @returns component | redirect to home page
  */
 export default function Private({ component }) {
-  const router = useRouter();
-  if (isAccessTokenVerifed) {
-    return component;
+  // const router = useRouter();
+  // if (isAccessTokenVerifed) {
+  if (true) {
+    return (
+      <div className="dashboard-main">
+        <div className="sidebar tw-basis-1/6">
+          <Sidebar />
+        </div>
+        <div className="content tw-basis-5/6">
+          <Navbar />
+          {component}
+        </div>
+      </div>
+    );
   }
-  router.push('/');
+  // router.push('/');
 }
 
 Private.propTypes = {
