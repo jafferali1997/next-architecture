@@ -19,7 +19,7 @@ export default function TextArea({
   error = null
 }) {
   return (
-    <>
+    <div>
       <TextareaAutosize
         minRows={minRows}
         maxRows={maxRows}
@@ -34,7 +34,7 @@ export default function TextArea({
         disabled={disabled}
       />
       {error && error?.length > 0 && <FieldError className="tw-mt-1" error={error} />}
-    </>
+    </div>
   );
 }
 

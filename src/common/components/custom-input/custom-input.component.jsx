@@ -48,7 +48,7 @@ export default function CustomInput({
   );
 
   return (
-    <>
+    <div>
       {label && (
         <label>
           {label} {isRequired && <span>*</span>}
@@ -76,13 +76,13 @@ export default function CustomInput({
             {endIcon}
           </InputAdornment>
         }
-        {...(register && register(`${name}`))}
+        // {...(register && register(`${name}`))}
         onChange={inputChangeHandler}
       />
       {errors && errors[name] && (
         <FieldError className="tw-mt-1" error={errors[name].message} />
       )}
-    </>
+    </div>
   );
 }
 
