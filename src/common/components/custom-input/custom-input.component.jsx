@@ -69,7 +69,7 @@ export default function CustomInput({
     }
     return endIcon;
   };
-
+  console.log(errors);
   return (
     <div
       className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
@@ -80,12 +80,13 @@ export default function CustomInput({
 
       <div className="tw-w-full">
         <Input
+          {...(register && register(`${name}`))}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
           className={`input-field default-input hover:tw-border-text-dark-gray ${
-            errors && 'error-field'
+            errors && errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
-          name={name}
+          // name={name}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}
           onKeyDown={inputKeyDownHandler}
@@ -100,7 +101,6 @@ export default function CustomInput({
               {getInputEndAdorment()}
             </InputAdornment>
           }
-          {...(register && register(`${name}`))}
           onChange={inputChangeHandler}
         />
         {errors && errors[name] && (
