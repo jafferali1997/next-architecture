@@ -7,12 +7,12 @@ import * as yup from 'yup';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
-  discount: yup
-    .number()
-    .max(9999999999, 'Discount must be at most 10 characters long')
-    .min(1, 'Discount must be minimum 1 characters')
-    .required('Discount is required'),
-  days: yup.number().required('day is required')
+  // discount: yup
+  //   .number()
+  //   .max(9999999999, 'Discount must be at most 10 characters long')
+  //   .min(1, 'Discount must be minimum 1 characters')
+  //   .required('Discount is required'),
+  // days: yup.number().required('day is required')
 });
 
 export default function useDiscount({ handleTabClick, handleTabCompleted }) {

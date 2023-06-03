@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import Select from '@/common/components/select/select.component';
 
 export default function FormForCompanyDetails({
   register,
@@ -28,7 +29,7 @@ export default function FormForCompanyDetails({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-row">
+      <div className="form-box-grid-4col">
         <CustomInput
           label="Company Name"
           placeholder="Company Name"
@@ -70,7 +71,7 @@ export default function FormForCompanyDetails({
           isRequired={true}
           errors={errors}
         />
-        <CustomSelect
+        <Select
           label="Company Size"
           register={register}
           name="companySize"
@@ -117,8 +118,7 @@ export default function FormForCompanyDetails({
           isRequired={true}
           errors={errors}
         />
-      </div>
-      <div className="form-row-two-col-slide">
+
         <CustomInput
           label="Company URL"
           register={register}
@@ -157,7 +157,7 @@ export default function FormForCompanyDetails({
           isRequired={false}
         />
       </div>
-      <div className="form-additonals">
+      <div className="form-additonals tw-flex tw-gap-[16px]">
         <h3>Additional contact person</h3>
         {isAdditional ? (
           <img
@@ -176,7 +176,7 @@ export default function FormForCompanyDetails({
         )}
       </div>
       {isAdditional ? (
-        <div className="form-row">
+        <div className="form-box-grid-4col">
           <CustomInput
             label="Gender"
             register={register}
@@ -227,7 +227,7 @@ export default function FormForCompanyDetails({
             errors={errors}
           />
 
-          <CustomSelect
+          <Select
             label="Country"
             register={register}
             name="country"
@@ -241,7 +241,7 @@ export default function FormForCompanyDetails({
               return { label: item.name, value: item.isoCode, id: item.isoCode };
             })}
           />
-          <CustomSelect
+          <Select
             label="City"
             register={register}
             name="city"

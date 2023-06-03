@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import FormInput from '@/common/components/form-input-old/form-input.component';
 
 export default function FormForPaymentDetails({
   handleSubmit,
@@ -17,13 +18,13 @@ export default function FormForPaymentDetails({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="payment-details-radios">
-        <label>
-          <b>Payment By </b>
-          <span>*</span>
+      <div className="tw-mb-6 tw-flex tw-flex-col tw-gap-[18px]">
+        <label className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-secondary-black">
+          Payment By
+          <span className="tw-text-[red]">*</span>
         </label>
         <div className="payment-details-bank">
-          <CustomInput
+          <FormInput
             label="Bank Details"
             name="bankDetail"
             checked={bankDetail}
@@ -36,7 +37,7 @@ export default function FormForPaymentDetails({
           />
         </div>
         <div className="payment-details-card">
-          <CustomInput
+          <FormInput
             label="Credit Card Details"
             name="creditDetail"
             checked={creditCard}
@@ -52,7 +53,7 @@ export default function FormForPaymentDetails({
 
       {bankDetail && (
         <>
-          <div className="form-row-two-col">
+          <div className="tw-w-full">
             <CustomInput
               label="IBAN Number"
               name="iban"
@@ -64,7 +65,7 @@ export default function FormForPaymentDetails({
               isRequired={true}
             />
           </div>
-          <div className="form-row">
+          <div className="form-box-grid-4col">
             <CustomInput
               label="Account owner name"
               name="onwerName"
@@ -110,7 +111,7 @@ export default function FormForPaymentDetails({
         </>
       )}
       {!bankDetail && (
-        <div className="form-row">
+        <div className="form-box-grid-4col">
           <CustomInput
             label="Credit Card Name"
             name="creditCardName"

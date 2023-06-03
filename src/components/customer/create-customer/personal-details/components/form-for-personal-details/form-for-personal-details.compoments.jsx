@@ -5,6 +5,7 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
+import Select from '@/common/components/select/select.component';
 
 export default function FormForPersonalDetails({
   register,
@@ -32,20 +33,15 @@ export default function FormForPersonalDetails({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-row">
-        <CustomSelect
+      <div className="form-box-grid-4col">
+        <Select
           label="Gender"
-          register={register}
-          placeholder="John"
-          type="select"
           isRequired={true}
-          errors={errors}
-          name="gender"
-          defaultValue={data.gender}
           options={[
             { id: 'male', value: 'male', label: 'Male' },
             { id: 'female', value: 'female', label: 'Female' }
           ]}
+          placeholder="John"
         />
         <CustomInput
           label="Designation"
@@ -88,7 +84,7 @@ export default function FormForPersonalDetails({
           isRequired={true}
         />
 
-        <CustomSelect
+        <Select
           label="Country"
           name="country"
           register={register}
@@ -102,7 +98,7 @@ export default function FormForPersonalDetails({
             return { label: item.name, value: item.isoCode, id: item.isoCode };
           })}
         />
-        <CustomSelect
+        <Select
           label="City"
           name="city"
           register={register}
@@ -127,43 +123,28 @@ export default function FormForPersonalDetails({
         />
       </div>
 
-      <div className="form-row-two-col">
+      <div className="form-box-grid-2col">
         <div>
           <label className="group-label">Price Group</label>
-          {/* <MultiSelect
-            options={priceGroup}
-            handleChange={(value) => {
-              setPriceOptions(value);
-            }}
-            placeholder="Select Price Group(s)"
-            valueOfModel={addPrice}
-            handleValueOfModel={(e) => {
-              setAddPrice(e.target.value);
-            }}
-            handleModalOnSubmit={addPriceGroup}
-            defaultValue={data?.priceGroups?.map((item) => {
-              return priceGroup.find((price) => price.value === item);
-            })}
-          /> */}
+          <MultiSelect
+            options={[
+              { id: '1', label: 'Test 1', value: 'test1' },
+              { id: '2', label: 'Test 2', value: 'test2' },
+              { id: '3', label: 'Test 3', value: 'test3' }
+            ]}
+            handleChange={() => {}}
+          />
         </div>
         <div>
           <label className="group-label">Discount Group</label>
-          {/* <MultiSelect
-            options={discountGroup}
-            handleChange={(value) => {
-              setDiscountOptions(value);
-            }}
-            placeholder="Select Discount Group(s)"
-            valueOfModel={addDiscount}
-            handleValueOfModel={(e) => {
-              console.log(e);
-              setAddDiscount(e.target.value);
-            }}
-            handleModalOnSubmit={addDiscountGroup}
-            defaultValue={data?.discountGroups?.map((item) => {
-              return discountGroup.find((price) => price.value === item);
-            })}
-          /> */}
+          <MultiSelect
+            options={[
+              { id: '1', label: 'Test 1', value: 'test1' },
+              { id: '2', label: 'Test 2', value: 'test2' },
+              { id: '3', label: 'Test 3', value: 'test3' }
+            ]}
+            handleChange={() => {}}
+          />
         </div>
       </div>
       <StepperFooter setIsSubmit={setIsSubmit} />

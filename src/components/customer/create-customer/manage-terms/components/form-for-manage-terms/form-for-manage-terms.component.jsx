@@ -16,7 +16,7 @@ export default function FormForManageTerms({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="payment-details-radios tw-mb-5">
+      <div className="tw-mb-5 tw-flex tw-flex-col tw-gap-[18px]">
         <div className="payment-details-bank">
           <CustomInput
             label="payment terms as date"
