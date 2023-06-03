@@ -21,7 +21,7 @@ const updateFinancialDetail = async (id, data) => {
 };
 
 const deleteFinancialDetail = async (id) => {
-  const response = await api().delete(`/financial-detail${id}`);
+  const response = await api().delete(`/financial-detail/${id}`);
   return response.data;
 };
 

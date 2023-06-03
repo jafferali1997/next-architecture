@@ -58,10 +58,16 @@ const signUp = async (userData) => {
   return response.data;
 };
 
+const loginAndSignUpWithGoogle = async (userData) => {
+  const response = await api().post('/auth/login-and-sign-up-with-google', userData);
+  return response.data;
+};
+
 const authService = {
   logout,
   login,
-  signUp
+  signUp,
+  loginAndSignUpWithGoogle
 };
 
 export default authService;
