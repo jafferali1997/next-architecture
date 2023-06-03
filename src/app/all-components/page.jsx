@@ -179,7 +179,19 @@ export default function Page() {
       <div className="tw-m-5">
         <h3 className="tw-text-2xl tw-font-bold">Input Fields</h3>
         <hr />
-        <div className="tw-m-5">
+        <div className="tw-m-5 tw-flex tw-flex-row tw-gap-2">
+        <div className="tw-w-1/2">
+          <CustomSelect
+            label="Simple Select"
+            placeholder="Select Gender"
+            options={[
+              {label: 'Male', value: 'male' },
+              {label: 'Female', value: 'female' },
+              {label: 'Other', value: 'other' }
+            ]}
+          />
+        </div>
+          <div className="tw-w-1/2">
           <Select
             options={[
               { label: 'Test 1', value: 'test1' },
@@ -190,14 +202,7 @@ export default function Page() {
             placeholder="Single Select with Search Option"
           />
         </div>
-        <div className="tw-m-5">
-          {/* <CustomSelect
-            options={[
-              { id: '1', label: 'test1', value: 'test1' },
-              { id: '2', label: 'test2', value: 'test2' },
-              { id: '3', label: 'test3', value: 'test3' }
-            ]}
-          /> */}
+        
         </div>
         <div className="tw-m-5">
           <CustomInput
@@ -217,7 +222,7 @@ export default function Page() {
             inlineLabel
           />
         </div>
-        <div className="tw-m-5 tw-flex tw-flex-row">
+        <div className="tw-m-5 tw-flex tw-flex-row tw-gap-2">
           <div className="tw-w-1/2">
             <CustomInput
               type="text"
@@ -374,12 +379,13 @@ export default function Page() {
                 <CustomRadioGroup
                   register={register}
                   name="radio"
-                  label="Select One"
+                  label="Select Gender"
                   radioOptions={[
                     { label: 'Male', value: 'male' },
                     { label: 'Female', value: 'female' },
                     { label: 'Other', value: 'other' }
                   ]}
+                  defaultValue="other"
                 />
               </div>
               <CustomButton type="Submit" className="btn-primary" text="Submit" />
