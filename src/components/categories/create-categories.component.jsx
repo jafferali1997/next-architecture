@@ -1,18 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import PlusIcon from '@/common/icons/plus.icon';
 import SearchIcon from '@/common/icons/search-icon';
-import CreateCtegoriesHooks from './create-categories.hooks';
+import useCreateCtegories from './use-create-categories.hooks';
 
 export default function CreateCategories() {
-  const [showInput, setShowInput] = useState(false);
-
-  const handleButtonClick = () => {
-    setShowInput(true);
-  };
+  const { showInput, setShowInput, handleButtonClick } = useCreateCtegories();
   return (
     <>
       <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
@@ -32,7 +28,17 @@ export default function CreateCategories() {
               className="btn-secondary tw-w-[72px]"
             />
           </div>
-          {showInput && <CustomInput type="text" placeholder="Enter Category" />}
+          {showInput && (
+            <>
+              <CustomInput type="text" placeholder="Enter Category" />
+              <CustomButton
+                text="Add"
+                startIcon={<PlusIcon />}
+                onClick={handleButtonClick}
+                className="btn-primary"
+              />
+            </>
+          )}
           <div>
             <CustomInput
               startIcon={<SearchIcon />}

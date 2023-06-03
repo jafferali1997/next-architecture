@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function CreateCtegoriesHooks() {
+export default function useCreateCtegories() {
   const [showInput, setShowInput] = useState(false);
 
   const handleButtonClick = () => {
