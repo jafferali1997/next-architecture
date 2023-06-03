@@ -2,9 +2,9 @@ import api from '@/common/utils/api';
 
 // Login user
 const login = async (userData) => {
-  const response = await api().post('/Accounts/signin', userData);
+  const response = await api().post('/auth/login', userData);
 
-  if (response.data) {
+  if (response.data.Succeeded) {
     localStorage.setItem('user', JSON.stringify(response.data.data));
   }
   return response.data;
@@ -46,11 +46,22 @@ const login = async (userData) => {
 // };
 
 // Logout user
-const logout = () => localStorage.removeItem('user');
+const logout = async () => {
+  const response = await api().get('/users/logout');
+  if (response.data.Succeeded) {
+    localStorage.removeItem('user');
+  }
+};
+
+const signUp = async (userData) => {
+  const response = await api().post('/users/register', userData);
+  return response.data;
+};
 
 const authService = {
   logout,
-  login
+  login,
+  signUp
 };
 
 export default authService;
