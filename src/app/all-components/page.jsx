@@ -217,6 +217,43 @@ export default function Page() {
             inlineLabel
           />
         </div>
+        <div className="tw-m-5 tw-flex tw-flex-row">
+          <div className="tw-w-1/2">
+            <CustomInput
+              type="text"
+              name="firstName"
+              label="Input Field with Start Icon:"
+              placeholder="First Name"
+              className="tw-mr-2"
+              isRequired
+              startIcon={<SuccessIcon />}
+            />
+          </div>
+          <div className="tw-w-1/2">
+            <CustomInput
+              type="text"
+              name="firstName"
+              label="Input Field with End Icon:"
+              placeholder="First Name"
+              isRequired
+              startIcon={<SuccessIcon />}
+            />
+          </div>
+        </div>
+        <div className="tw-m-5 tw-flex tw-flex-row">
+          <div className="tw-w-1/2">
+            <CustomInput
+              type="text"
+              name="firstName"
+              label="Input Field with Start Icon:"
+              placeholder="First Name"
+              isRequired
+              inlineLabel
+              startIcon={<SuccessIcon />}
+              endIcon={<ErrorIcon />}
+            />
+          </div>
+        </div>
         <div className="tw-m-5">
           <CustomInput
             type="password"
@@ -335,6 +372,7 @@ export default function Page() {
               </div>
               <div className="tw-w-1/2">
                 <CustomRadioGroup
+                  register={register}
                   name="radio"
                   label="Select One"
                   radioOptions={[
