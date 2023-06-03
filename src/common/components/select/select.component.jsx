@@ -31,6 +31,8 @@ export default function Select({
 
       <div className="tw-w-full">
         <Autocomplete
+          {...(register && register(`${name}`))}
+          name={name}
           disablePortal
           disableClearable
           options={options ?? []}
@@ -39,10 +41,9 @@ export default function Select({
               {option?.label}
             </li>
           )}
-          name={name}
           className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
           disabled={disabled}
-          onChange={onChange}
+          {...(onChange && { onChange })}
           defaultValue={defaultValue}
           {...(value && { value })}
           isOptionEqualToValue={(option, value) => option.label === value.label}

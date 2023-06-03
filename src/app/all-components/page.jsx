@@ -26,6 +26,10 @@ import Toaster from '@/common/components/toaster/toaster.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import Select from '@/common/components/select/select.component';
+import CustomCheckbox from '@/common/components/custom-checkbox/custom-checkbox.component';
+import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
+import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
+import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
 
 const validationSchema = yup.object({
   firstName: yup.string().max(5, 'company name must be at most 5 characters long')
@@ -235,6 +239,61 @@ export default function Page() {
         </div>
       </div>
       <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Checkbox</h3>
+        <hr />
+        <div className="tw-m-5">
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomCheckbox label="Small Checkbox" size="small" />
+            <CustomCheckbox label="Default Checkbox" />
+            <CustomCheckbox label="Large Checkbox" size="large" />
+            <CustomCheckbox label="Checked Checkbox" defaultChecked />
+            <CustomCheckbox label="Disabled Checkbox" disabled />
+            <CustomCheckbox label="Disabled Checked Checkbox" defaultChecked disabled />
+          </div>
+        </div>
+      </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Switch</h3>
+        <hr />
+        <div className="tw-m-5">
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomSwitch label="Small Switch" size="sm" />
+            <CustomSwitch label="Default Switch" defaultChecked />
+            <CustomSwitch label="Disabled Switch" disabled />
+            <CustomSwitch label="Disabled Checked Switch" defaultChecked disabled />
+          </div>
+        </div>
+      </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Radio</h3>
+        <hr />
+        <div className="tw-m-5">
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomRadio value="v1" name="radio" label="Small Radio" size="sm" />
+            <CustomRadio value="v2" name="radio" label="Default Radio" defaultChecked />
+            <CustomRadio value="v3" name="radio" label="Disabled Radio" disabled />
+            <CustomRadio
+              value="v4"
+              name="radio4"
+              label="Disabled Checked Switch"
+              defaultChecked
+              disabled
+            />
+          </div>
+          <hr />
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomRadioGroup
+              radioOptions={[
+                { label: 'Radio 1', value: 'radio1', defaultChecked: true },
+                { label: 'Radio 2', value: 'radio2' },
+                { label: 'Radio 3', value: 'radio3' }
+              ]}
+              label="Radio Group (Select One):"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="tw-m-5">
         <h3 className="tw-text-2xl tw-font-bold">React Hook Form</h3>
         <hr />
         <div className="tw-m-5 tw-border-text-dark-gray">
@@ -264,6 +323,25 @@ export default function Page() {
                   placeholder="Last Name"
                   register={register}
                   isRequired
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <CustomCheckbox
+                  name="checkbox"
+                  label="Checkbox"
+                  register={register}
+                  isRequired
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <CustomRadioGroup
+                  name="radio"
+                  label="Select One"
+                  radioOptions={[
+                    { label: 'Male', value: 'male' },
+                    { label: 'Female', value: 'female' },
+                    { label: 'Other', value: 'other' }
+                  ]}
                 />
               </div>
               <CustomButton type="Submit" className="btn-primary" text="Submit" />

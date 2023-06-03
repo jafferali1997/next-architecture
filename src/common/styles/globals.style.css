@@ -117,8 +117,12 @@
   font-family: 'DM Sans';
   font-style: normal;
   font-weight: 400;
-  color: #46474f;
+  /* color: #46474f; */
 }
+
+/* input:not([type='checkbox']):not([type='radio']) {
+  color: #46474f;
+} */
 
 .MuiAutocomplete-root.MuiFormControl-root.MuiInputBase-root:focus {
   border-color: #7e7d7d !important;
