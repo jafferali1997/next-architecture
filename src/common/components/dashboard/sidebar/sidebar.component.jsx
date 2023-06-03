@@ -76,7 +76,7 @@ export default function Sidebar() {
         <Link className="tw-block" href="/">
           <img
             className="tw-mx-auto tw-block"
-            src="assets/images/sidebar/quickStepLogo.svg"
+            src="/assets/images/sidebar/quickStepLogo.svg"
             alt="logo"
           />
         </Link>

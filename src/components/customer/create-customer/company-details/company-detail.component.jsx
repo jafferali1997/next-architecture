@@ -31,7 +31,7 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
   return (
     <div className="company-details-wrapper">
       <div className="content-header ">
-        <h3>Company Details</h3>
+        <h3 className="form-inner-heading">Company Details</h3>
       </div>
       <div className="content-body">
         {router?.query?.id && data && (

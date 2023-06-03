@@ -34,7 +34,7 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
   return (
     <div className="personal-details-wrapper">
       <div className="content-header ">
-        <h3>Personal Details</h3>
+        <h3 className="form-inner-heading">Personal Details</h3>
       </div>
       <div className="content-body">
         {router?.query?.id && data && priceGroup && discountGroup && (

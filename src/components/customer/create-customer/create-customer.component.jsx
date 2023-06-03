@@ -42,14 +42,22 @@ export default function CreateCustomer() {
     }
   ];
   return (
-    <div className="create-offer-wrapper">
-      <div className="sidebar">{/* <Sidebar /> */}</div>
-      <div className="content">
-        <div className="header">{/* <OfferHeader /> */}</div>
-        <div className="body">
-          <FormStepper title="Create Customer" module="Customer" tabs={tabs} />
+    <>
+      <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
+        <img src="/assets/images/back-btn.svg" alt="back" />
+        <h2 className="admin-top-heading">Create Customer</h2>
+        <p className="admin-top-p">Customer #</p>{' '}
+        <span className="header-span">10075</span>
+      </div>
+      <div className="create-offer-wrapper">
+        <div className="sidebar">{/* <Sidebar /> */}</div>
+        <div className="content">
+          <div className="header">{/* <OfferHeader /> */}</div>
+          <div className="body">
+            <FormStepper title="Create Customer" module="Customer" tabs={tabs} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

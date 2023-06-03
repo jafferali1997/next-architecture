@@ -4,17 +4,23 @@ import PropTypes from 'prop-types';
 import FormStepperHook from './form-stepper.hook';
 import Tab from '../tab/tab.component';
 
-export default function FormStepper({ title, module, tabs, children, ...props }) {
+export default function FormStepper({
+  title = '',
+  module = '',
+  tabs,
+  children,
+  ...props
+}) {
   const { id, setId } = FormStepperHook;
   return (
     <div className="form-stepper-body">
       <div className="form-stepper-form">
-        <div className="form-stepper-form-header">
+        {/* <div className="form-stepper-form-header tw-items-center">
           <h2>{title}</h2>
           <p>
             {module} {module ? '#:' : ''} <span>{id}</span>
           </p>
-        </div>
+        </div> */}
         <div className="form-stepper-form-body">
           {tabs ? <Tab tabs={tabs} /> : children}
         </div>
@@ -24,8 +30,8 @@ export default function FormStepper({ title, module, tabs, children, ...props })
 }
 
 FormStepper.propTypes = {
-  title: PropTypes.string.isRequired,
-  module: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  module: PropTypes.string,
   tabs: PropTypes.arrayOf,
   children: PropTypes.node
 };

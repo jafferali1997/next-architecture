@@ -21,7 +21,7 @@ export default function PaymentDetails({ handleTabClick, handleTabCompleted }) {
   return (
     <div className="payment-details-wrapper">
       <div className="content-header ">
-        <h3>Payment Details</h3>
+        <h3 className="form-inner-heading">Payment Details</h3>
       </div>
       <div className="content-body">
         {router?.query?.id && data && (

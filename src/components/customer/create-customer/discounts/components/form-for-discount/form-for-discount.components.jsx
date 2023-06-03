@@ -13,7 +13,7 @@ export default function FormForDiscount({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-row-two-col">
+      <div className="form-box-grid-2col">
         <CustomInput
           label="Discount Amount "
           errors={errors}
@@ -24,27 +24,30 @@ export default function FormForDiscount({
           type="text"
           isRequired={true}
         />
-      </div>
-      <div className="form-row-one-col">
-        <CustomInput
-          label="Cash Discount"
-          defaultValue={data.days}
-          errors={errors}
-          register={register}
-          name="days"
-          placeholder="Cash Discount"
-          type="text"
-          isRequired={true}
-        />
-        <div className="discount-days-suggestions">
-          <h4>Suggestions</h4>
-          <div className="days-boxes">
-            <div className="singe-day">2 days</div>
-            <div className="singe-day">7 days</div>
-            <div className="singe-day">10 days</div>
+        <div>
+          <CustomInput
+            label="Cash Discount"
+            defaultValue={data.days}
+            errors={errors}
+            register={register}
+            name="days"
+            placeholder="Cash Discount"
+            type="text"
+            isRequired={true}
+          />
+          <div className="tw-flex tw-items-center tw-gap-2 tw-pt-5">
+            <h4 className="tw-font-dm tw-text-[14px] tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-ultra-light-gray">
+              Suggestions
+            </h4>
+            <div className="tw-flex tw-gap-2">
+              <div className="singe-day">2 days</div>
+              <div className="singe-day">7 days</div>
+              <div className="singe-day">10 days</div>
+            </div>
           </div>
         </div>
       </div>
+
       <StepperFooter
         handleTabClick={handleTabClick}
         back="payment_details"

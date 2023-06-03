@@ -13,7 +13,7 @@ export default function StepperFooter({
       <div className="back-button">
         {back && (
           <CustomButton
-            className="back-btn"
+            className="btn-cancel"
             text="Back"
             onClick={() => handleTabClick(back)}
           />
@@ -22,7 +22,7 @@ export default function StepperFooter({
       <div className="next-button">
         <CustomButton
           type="submit"
-          className="submit-btn"
+          className="btn-primary"
           onClick={() => {
             if (setIsSubmit) {
               setIsSubmit(true);
