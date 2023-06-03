@@ -40,7 +40,7 @@ const verifyEmail = async (data) => {
   return response.data;
 };
 
-const userServices = {
+const userService = {
   addPhoneAndGenerateOtp,
   generateOtp,
   verifyOtp,
@@ -51,4 +51,4 @@ const userServices = {
   verifyEmail
 };
 
-export default userServices;
+export default userService;

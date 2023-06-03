@@ -11,10 +11,12 @@ import tagReducer from './features/tag/tag.slice';
 import productReducer from './features/product/product.slice';
 import customerReducer from './features/customer/customer.slice';
 import productCategoryReducer from './features/product-category/product-category.slice';
+import userReducer from './features/user/user.slice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    user: userReducer,
     businessDetail: businessDetailReducer,
     financialDetail: financialDetailReducer,
     profileFinancialBusiness: profileFinancialBusinessReducer,
