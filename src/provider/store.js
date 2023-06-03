@@ -9,6 +9,7 @@ import discountGroupReducer from './features/discount-group/discount-group.slice
 import faqReducer from './features/faq/faq.slice';
 import tagReducer from './features/tag/tag.slice';
 import productReducer from './features/product/product.slice';
+import customerReducer from './features/customer/customer.slice';
 import productCategoryReducer from './features/product-category/product-category.slice';
 
 const store = configureStore({
@@ -22,6 +23,7 @@ const store = configureStore({
     discountGroup: discountGroupReducer,
     faq: faqReducer,
     product: productReducer,
+    customer: customerReducer,
     productCategory: productCategoryReducer,
     tag: tagReducer
   }
