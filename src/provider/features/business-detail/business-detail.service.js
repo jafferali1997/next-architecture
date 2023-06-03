@@ -21,7 +21,7 @@ const updateBusinessDetail = async (id, data) => {
 };
 
 const deleteBusinessDetail = async (id) => {
-  const response = await api().post(`/business-detail${id}`);
+  const response = await api().delete(`/business-detail${id}`);
   return response.data;
 };
 
