@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import * as yup from 'yup';
+import { enqueueSnackbar } from 'notistack';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import ErrorIcon from '@/common/icons/error.icon';
@@ -30,6 +31,7 @@ import CustomCheckbox from '@/common/components/custom-checkbox/custom-checkbox.
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
+import { Truculenta } from 'next/font/google';
 
 const validationSchema = yup.object({
   firstName: yup.string().max(5, 'company name must be at most 5 characters long')
@@ -48,6 +50,7 @@ export default function Page() {
     resolver: yupResolver(validationSchema),
     reValidateMode: 'onChange'
   });
+
   useEffect(() => {
     // axios
     //   .get('https://ipapi.co/json/')
@@ -142,7 +145,11 @@ export default function Page() {
         <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
           <CustomButton
             text="Show Success Toaster"
-            onClick={() => setShowSuccessToaster(true)}
+            onClick={() =>
+              enqueueSnackbar('message', {
+                variant: 'success'
+              })
+            }
             className="btn-primary tw-m-5"
           />
           <Toaster
