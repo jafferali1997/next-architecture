@@ -21,7 +21,7 @@ function LandingPage() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="home-wrapper" data-auto-select="true">
         <div className="home-container">
           <div className="home-header">

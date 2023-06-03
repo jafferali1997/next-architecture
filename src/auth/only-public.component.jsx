@@ -9,10 +9,10 @@ import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
  */
 export default function OnlyPublic({ component }) {
   const router = useRouter();
-  if (!isAccessTokenVerifed) {
-    return component;
-  }
-  router.push('/');
+  // if (!isAccessTokenVerifed) {
+  return component;
+  // }
+  // router.push('/');
 }
 
 OnlyPublic.propTypes = {

@@ -4,11 +4,34 @@ import authService from './auth.service';
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = {
-  user: user || null,
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: ''
+  login: {
+    data: user || null,
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: ''
+  },
+  signUp: {
+    data: null,
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: ''
+  },
+  logout: {
+    data: null,
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: ''
+  },
+  loginAndSignUpWithGoogle: {
+    data: null,
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: ''
+  }
 };
 
 // Login user
@@ -17,7 +40,23 @@ export const login = createAsyncThunk(
   async ({ payload, callBackMessage }, thunkAPI) => {
     try {
       const response = await authService.login(payload);
-      if (response.succeeded) {
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+// signUp user
+export const signUp = createAsyncThunk(
+  'auth/register',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await authService.signUp(payload);
+      if (response.Succeeded) {
         return response.data;
       }
       throw new Error(response.message);
@@ -28,22 +67,21 @@ export const login = createAsyncThunk(
   }
 );
 
-// Sign up user
-// export const signUp = createAsyncThunk(
-//   "auth/signup",
-//   async ({ payload, callBackMessage }, thunkAPI) => {
-//     try {
-//       const response = await authService.signUp(payload);
-//       if (response.succeeded) {
-//         return response.data;
-//       }
-//       throw new Error(response.message);
-//     } catch (error) {
-//       callBackMessage("error", error.message);
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
+export const loginAndSignUpWithGoogle = createAsyncThunk(
+  'auth/loginAndSignUpWithGoogle',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await authService.loginAndSignUpWithGoogle(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
@@ -58,31 +96,97 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.isLoading = false;
-      state.isSuccess = false;
-      state.isError = false;
-      state.message = '';
+      state.login = {
+        data: user || null,
+        isError: false,
+        isSuccess: false,
+        isLoading: false,
+        message: ''
+      };
+      state.logout = {
+        data: null,
+        isError: false,
+        isSuccess: false,
+        isLoading: false,
+        message: ''
+      };
+      state.register = {
+        data: null,
+        isError: false,
+        isSuccess: false,
+        isLoading: false,
+        message: ''
+      };
+      state.loginAndSignUpWithGoogle = {
+        data: null,
+        isError: false,
+        isSuccess: false,
+        isLoading: false,
+        message: ''
+      };
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.isLoading = true;
-        state.message = '';
+        state.login.isLoading = true;
+        state.login.message = '';
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.user = action.payload;
+        state.login.isLoading = false;
+        state.login.isSuccess = true;
+        state.login.data = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
-        state.message = action.payload.message;
-        state.isLoading = false;
-        state.isError = true;
-        state.user = null;
+        state.login.message = action.payload.message;
+        state.login.isLoading = false;
+        state.login.isError = true;
+        state.login.data = null;
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
+      .addCase(signUp.fulfilled, (state, action) => {
+        state.signUp.isLoading = false;
+        state.signUp.isSuccess = true;
+        state.signUp.data = action.payload;
+      })
+      .addCase(signUp.rejected, (state, action) => {
+        state.signUp.message = action.payload.message;
+        state.signUp.isLoading = false;
+        state.signUp.isError = true;
+        state.signUp.data = null;
+      })
+      .addCase(signUp.pending, (state) => {
+        state.signUp.isLoading = true;
+        state.signUp.message = '';
+      })
+      .addCase(logout.pending, (state) => {
+        state.logout.isLoading = true;
+        state.logout.message = '';
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.logout.isLoading = false;
+        state.logout.isSuccess = true;
+        state.logout.data = action.payload;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.logout.message = action.payload.message;
+        state.logout.isLoading = false;
+        state.logout.isError = true;
+        state.logout.data = null;
+      })
+      .addCase(loginAndSignUpWithGoogle.pending, (state) => {
+        state.loginAndSignUpWithGoogle.isLoading = true;
+        state.loginAndSignUpWithGoogle.message = '';
+      })
+      .addCase(loginAndSignUpWithGoogle.fulfilled, (state, action) => {
+        state.loginAndSignUpWithGoogle.isLoading = false;
+        state.loginAndSignUpWithGoogle.isSuccess = true;
+        state.loginAndSignUpWithGoogle.data = action.payload;
+      })
+      .addCase(loginAndSignUpWithGoogle.rejected, (state, action) => {
+        state.loginAndSignUpWithGoogle.message = action.payload.message;
+        state.loginAndSignUpWithGoogle.isLoading = false;
+        state.loginAndSignUpWithGoogle.isError = true;
+        state.loginAndSignUpWithGoogle.data = null;
       });
   }
 });
