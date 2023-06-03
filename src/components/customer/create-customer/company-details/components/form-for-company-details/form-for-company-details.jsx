@@ -1,8 +1,11 @@
+/* eslint-disable react/button-has-type */
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
+import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
+import useCompanyDetails from '../../use-company-details.hook';
 
 export default function FormForCompanyDetails({
   register,
@@ -25,6 +28,9 @@ export default function FormForCompanyDetails({
   setIsSubmit,
   additionalHandles,
   errors,
+  handleAddInput,
+  handleInputChange,
+  inputValues = [''],
   data = {}
 }) {
   return (
@@ -129,7 +135,7 @@ export default function FormForCompanyDetails({
           isRequired={false}
           errors={errors}
         />
-        <CustomInput
+        <CustomSwitch
           label="Current Status"
           register={register}
           name="status"
@@ -138,7 +144,7 @@ export default function FormForCompanyDetails({
           onChange={(e) => setStatus(e.target.checked)}
           isRequired={false}
         />
-        <CustomInput
+        <CustomSwitch
           label="Do not show customer on PDF"
           register={register}
           name="isShowInPdf"
@@ -147,7 +153,7 @@ export default function FormForCompanyDetails({
           onChange={(e) => setIsShowInPdf(e.target.checked)}
           isRequired={false}
         />
-        <CustomInput
+        <CustomSwitch
           label="VAT exempt"
           register={register}
           name="isVatEnabled"
@@ -156,6 +162,43 @@ export default function FormForCompanyDetails({
           onChange={(e) => setIsVatEnabled(e.target.checked)}
           isRequired={false}
         />
+      </div>
+      <div className="tw-flex tw-justify-between">
+        <label className="tw-font-dm tw-text-sm tw-font-medium tw-not-italic tw-leading-6 tw-text-secondary-black">
+          Company addresses
+        </label>
+
+        <span
+          className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline"
+          onClick={handleAddInput}
+        >
+          Add more address
+        </span>
+      </div>
+      <div>
+        {inputValues.map((value, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div
+            className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
+            key={index}
+          >
+            <CustomInput
+              placeholder="Enter label name"
+              type="text"
+              errors={errors}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+            />
+            <CustomInput
+              placeholder="Enter company address"
+              type="text"
+              errors={errors}
+            />
+            {/* <button onClick={() => handleRemoveInput(index)}>Remove Input</button> */}
+          </div>
+        ))}
+
+        {/* <CustomInput placeholder="Enter label name" type="text" errors={errors} />
+        <CustomInput placeholder="Enter company address" type="text" errors={errors} /> */}
       </div>
       <div className="form-additonals tw-flex tw-gap-[16px]">
         <h3>Additional contact person</h3>
@@ -333,5 +376,8 @@ FormForCompanyDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  handleAddInput: PropTypes.func,
+  handleInputChange: PropTypes.func,
+  inputValues: PropTypes.arrayOf
 };

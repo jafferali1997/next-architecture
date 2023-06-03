@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
+import TextArea from '@/common/components/text-area/text-area.component';
 
 export default function FormForManageTerms({
   handleSubmit,
@@ -18,9 +20,9 @@ export default function FormForManageTerms({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="tw-mb-5 tw-flex tw-flex-col tw-gap-[18px]">
         <div className="payment-details-bank">
-          <CustomInput
+          <CustomRadio
             label="payment terms as date"
-            name="paymentDateSelect"
+            name="radio"
             type="radio"
             checked={selectedValue === 'paymentDateSelect'}
             onClick={() => {
@@ -44,9 +46,9 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-card">
-          <CustomInput
+          <CustomRadio
             label="Payment terms in days"
-            name="paymentDaysSelect"
+            name="radio"
             type="radio"
             onClick={() => {
               if (selectedValue !== 'paymentDateSelect') handleReset();
@@ -70,9 +72,9 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-bank">
-          <CustomInput
+          <CustomRadio
             label="Cash discount target as a date"
-            name="cashDiscountSelect"
+            name="radio"
             type="radio"
             onClick={() => {
               if (selectedValue !== 'paymentDateSelect') handleReset();
@@ -96,9 +98,9 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-card">
-          <CustomInput
+          <CustomRadio
             label="Discount and %"
-            name="discountSelect"
+            name="radio"
             type="radio"
             onClick={() => {
               if (selectedValue !== 'paymentDateSelect') handleReset();
@@ -122,9 +124,9 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-bank">
-          <CustomInput
+          <CustomRadio
             label="Discount amount"
-            name="discountAmountSelect"
+            name="radio"
             type="radio"
             onClick={() => {
               if (selectedValue !== 'paymentDateSelect') handleReset();
@@ -148,9 +150,9 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-card">
-          <CustomInput
+          <CustomRadio
             label="Total amount minus discount"
-            name="minusDiscountSelect"
+            name="radio"
             type="radio"
             onClick={() => {
               if (selectedValue !== 'paymentDateSelect') handleReset();
@@ -176,7 +178,7 @@ export default function FormForManageTerms({
       </div>
       <h3>Terms of delivery</h3>
       <div className="form-row-two-col">
-        <CustomInput
+        <TextArea
           name="deliveryTerm"
           defaultValue={data.deliveryTerm}
           placeholder="Delivery Terms"

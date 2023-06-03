@@ -20,7 +20,7 @@ export default function ManageTerms({ handleTabClick, resetTabCompleted }) {
   return (
     <div className="mange-terms-details-wrapper ">
       <div className="content-header ">
-        <h3>Terms of payments</h3>
+        <h3 className="form-inner-heading">Terms of payments</h3>
       </div>
       <div className="content-body">
         {router?.query?.id && data && (

@@ -103,7 +103,7 @@
     @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(257.75px,1fr))] tw-gap-[15px] tw-py-[16px];
   }
   .form-box-grid-2col {
-    @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(532px,1fr))] tw-gap-[15px] tw-py-[16px];
+    @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(528px,1fr))] tw-gap-[15px] tw-py-[16px];
   }
   .category-box-grid-4col {
     @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(279.75px,1fr))] tw-py-[16px];
