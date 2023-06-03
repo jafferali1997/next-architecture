@@ -24,6 +24,13 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: ''
+  },
+  loginAndSignUpWithGoogle: {
+    data: null,
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: ''
   }
 };
 
@@ -45,7 +52,7 @@ export const login = createAsyncThunk(
 );
 // signUp user
 export const signUp = createAsyncThunk(
-  'user/register',
+  'auth/register',
   async ({ payload, callBackMessage }, thunkAPI) => {
     try {
       const response = await authService.signUp(payload);
@@ -60,24 +67,23 @@ export const signUp = createAsyncThunk(
   }
 );
 
-// Sign up user
-// export const signUp = createAsyncThunk(
-//   "auth/signup",
-//   async ({ payload, callBackMessage }, thunkAPI) => {
-//     try {
-//       const response = await authService.signUp(payload);
-//       if (response.succeeded) {
-//         return response.data;
-//       }
-//       throw new Error(response.message);
-//     } catch (error) {
-//       callBackMessage("error", error.message);
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
+export const loginAndSignUpWithGoogle = createAsyncThunk(
+  'auth/loginAndSignUpWithGoogle',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await authService.loginAndSignUpWithGoogle(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
-export const logout = createAsyncThunk('user/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     return authService.logout();
   } catch (error) {
@@ -105,6 +111,13 @@ export const authSlice = createSlice({
         message: ''
       };
       state.register = {
+        data: null,
+        isError: false,
+        isSuccess: false,
+        isLoading: false,
+        message: ''
+      };
+      state.loginAndSignUpWithGoogle = {
         data: null,
         isError: false,
         isSuccess: false,
@@ -145,6 +158,10 @@ export const authSlice = createSlice({
         state.signUp.isLoading = true;
         state.signUp.message = '';
       })
+      .addCase(logout.pending, (state) => {
+        state.logout.isLoading = true;
+        state.logout.message = '';
+      })
       .addCase(logout.fulfilled, (state, action) => {
         state.logout.isLoading = false;
         state.logout.isSuccess = true;
@@ -155,6 +172,21 @@ export const authSlice = createSlice({
         state.logout.isLoading = false;
         state.logout.isError = true;
         state.logout.data = null;
+      })
+      .addCase(loginAndSignUpWithGoogle.pending, (state) => {
+        state.loginAndSignUpWithGoogle.isLoading = true;
+        state.loginAndSignUpWithGoogle.message = '';
+      })
+      .addCase(loginAndSignUpWithGoogle.fulfilled, (state, action) => {
+        state.loginAndSignUpWithGoogle.isLoading = false;
+        state.loginAndSignUpWithGoogle.isSuccess = true;
+        state.loginAndSignUpWithGoogle.data = action.payload;
+      })
+      .addCase(loginAndSignUpWithGoogle.rejected, (state, action) => {
+        state.loginAndSignUpWithGoogle.message = action.payload.message;
+        state.loginAndSignUpWithGoogle.isLoading = false;
+        state.loginAndSignUpWithGoogle.isError = true;
+        state.loginAndSignUpWithGoogle.data = null;
       });
   }
 });

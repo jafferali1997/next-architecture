@@ -21,7 +21,7 @@ const updateProfile = async (id, data) => {
 };
 
 const deleteProfile = async (id) => {
-  const response = await api().delete(`/profile${id}`);
+  const response = await api().delete(`/profile/${id}`);
   return response.data;
 };
 
