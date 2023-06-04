@@ -3,6 +3,8 @@
 /* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types';
 import useOtpInput from './use-otp-input.hook';
+import FieldLabel from '../field-label/field-label.component';
+import FieldError from '../field-error/field-error.component';
 
 export default function OtpInput({
   maxInput = 4,
@@ -13,7 +15,8 @@ export default function OtpInput({
   label = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  error = null
 }) {
   const { valueItems, inputChangeHandler, inputKeyDownHandler } = useOtpInput(
     maxInput,
@@ -32,23 +35,34 @@ export default function OtpInput({
   };
 
   return (
-    <div className="tw-flex tw-flex-row">
-      {valueItems.map((val, index) => (
-        <input
-          key={`${val} - ${index}`}
-          id={index}
-          type="number"
-          className={`input-field default-input tw-flex tw-max-w-[51px] tw-items-center tw-justify-center tw-px-3 tw-text-center hover:tw-border-text-dark-gray
+    <div
+      className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
+    >
+      {label && (
+        <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
+      )}
+
+      <div className="tw-w-full">
+        <div className="tw-flex tw-flex-row">
+          {valueItems.map((val, index) => (
+            <input
+              key={`${val} - ${index}`}
+              id={index}
+              type="number"
+              className={`input-field default-input tw-flex tw-max-w-[51px] tw-items-center tw-justify-center tw-px-3 tw-text-center hover:tw-border-text-dark-gray
           ${getInputBorderClass(index)}`}
-          placeholder={placeholder}
-          defaultValue={val}
-          maxLength={1}
-          max={1}
-          disabled={disabled}
-          onChange={inputChangeHandler}
-          onKeyDown={inputKeyDownHandler}
-        />
-      ))}
+              placeholder={placeholder}
+              defaultValue={val}
+              maxLength={1}
+              max={1}
+              disabled={disabled}
+              onChange={inputChangeHandler}
+              onKeyDown={inputKeyDownHandler}
+            />
+          ))}
+        </div>
+        {error && <FieldError className="tw-mt-1" error={error} />}
+      </div>
     </div>
   );
 }
@@ -62,5 +76,6 @@ OtpInput.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  error: PropTypes.string
 };

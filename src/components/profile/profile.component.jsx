@@ -21,7 +21,7 @@ export default function Profile() {
     phone,
     setPhone,
     sendOtp,
-    verifyOtp,
+    verifyOtpHandler,
     sendOtpButtonText,
     isOtpVerified,
     setIsOtpVerified
@@ -138,11 +138,16 @@ export default function Profile() {
             <div className="input-phone">
               <label>OTP Number</label>
               <div className="input-inner">
-                <OtpInput value={otp} onChange={setOtp} disabled={isOtpVerified} />
+                <OtpInput
+                  value={otp}
+                  onChange={setOtp}
+                  disabled={isOtpVerified}
+                  label="OTP"
+                />
               </div>
               <div>
                 <CustomButton
-                  onClick={verifyOtp}
+                  onClick={verifyOtpHandler}
                   text="Verify OTP"
                   className="btn-primary"
                   disabled={isOtpVerified || !otp || otp?.length < 4}
