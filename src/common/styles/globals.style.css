@@ -154,6 +154,9 @@
   .singe-day {
     @apply tw-flex tw-h-[29px] tw-w-[63px] tw-flex-row tw-items-center tw-justify-center tw-gap-2.5 tw-whitespace-nowrap tw-rounded-[5px] tw-bg-[#e3ecf4] tw-px-2.5 tw-py-1 tw-font-dm tw-text-[14px] tw-font-normal tw-not-italic tw-leading-[21px] tw-text-[#7e7d7d];
   }
+  .inner-link {
+    @apply tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline hover:tw-cursor-pointer;
+  }
 }
 .payment-details-radios label {
   @apply tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-[#2c2e3e];
