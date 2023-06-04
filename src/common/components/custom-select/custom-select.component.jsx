@@ -1,4 +1,7 @@
-import { Select, MenuItem } from '@mui/material';
+import { Option } from '@mui/joy';
+import Select, { selectClasses } from '@mui/joy/Select';
+import { MenuItem } from '@mui/material';
+import { KeyboardArrowDown } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import FieldError from '../field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';
@@ -6,7 +9,7 @@ import FieldLabel from '../field-label/field-label.component';
 export default function CustomSelect({
   options,
   placeholder = '',
-  className= '',
+  className = '',
   value = null,
   onChange = null,
   defaultValue = null,
@@ -28,17 +31,29 @@ export default function CustomSelect({
 
       <div className="tw-w-full">
         <Select
+          name={name}
           {...(register && register(`${name}`))}
-          {...(defaultValue && { defaultValue })}
+          // {...(defaultValue && { defaultValue })}
           {...(value && { value })}
           {...(onChange && { onChange })}
+          defaultValue={defaultValue}
           className={`tw-w-full ${className}`}
           placeholder={placeholder}
+          indicator={<KeyboardArrowDown />}
+          sx={{
+            width: 240,
+            [`& .${selectClasses.indicator}`]: {
+              transition: '0.2s',
+              [`&.${selectClasses.expanded}`]: {
+                transform: 'rotate(-180deg)'
+              }
+            }
+          }}
         >
           {options?.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <Option key={option.value} value={option.value}>
               {option.label}
-            </MenuItem>
+            </Option>
           ))}
         </Select>
         {errors && errors[name] && (
@@ -61,7 +76,7 @@ CustomSelect.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
   defaultValue: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   label: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object,

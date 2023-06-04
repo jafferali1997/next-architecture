@@ -41,7 +41,7 @@ export default function FormForPaymentDetails({
           <CustomRadio
             label="Credit Card Details"
             name="same"
-            checked={creditCard}
+            value={creditCard}
             onChange={(e) => {
               setCreditCard(e.target.checked);
               setBankDetail(!e.target.checked);

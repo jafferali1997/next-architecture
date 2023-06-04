@@ -34,7 +34,7 @@ export default function Select({
           {...(register && register(`${name}`))}
           name={name}
           disablePortal
-          disableClearable
+          // disableClearable
           options={options ?? []}
           renderOption={(props, option) => (
             <li {...props} key={option?.label}>
@@ -43,13 +43,14 @@ export default function Select({
           )}
           className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
           disabled={disabled}
+          {...(value && { value })}
           {...(onChange && { onChange })}
           defaultValue={defaultValue}
-          {...(value && { value })}
           isOptionEqualToValue={(option, value) => option.label === value.label}
           renderInput={(params) => (
             <TextField
               {...params}
+              {...(register && register(`${name}`))}
               className="default-input input-field tw-p-0"
               placeholder={placeholder}
             />

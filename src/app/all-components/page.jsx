@@ -180,29 +180,28 @@ export default function Page() {
         <h3 className="tw-text-2xl tw-font-bold">Input Fields</h3>
         <hr />
         <div className="tw-m-5 tw-flex tw-flex-row tw-gap-2">
-        <div className="tw-w-1/2">
-          <CustomSelect
-            label="Simple Select"
-            placeholder="Select Gender"
-            options={[
-              {label: 'Male', value: 'male' },
-              {label: 'Female', value: 'female' },
-              {label: 'Other', value: 'other' }
-            ]}
-          />
-        </div>
           <div className="tw-w-1/2">
-          <Select
-            options={[
-              { label: 'Test 1', value: 'test1' },
-              { label: 'Test 2', value: 'test2' },
-              { label: 'Test 3', value: 'test3' }
-            ]}
-            // defaultValue={{ label: 'Test 3', value: 'test3' }}
-            placeholder="Single Select with Search Option"
-          />
-        </div>
-        
+            <CustomSelect
+              label="Simple Select"
+              placeholder="Select Gender"
+              options={[
+                { label: 'Male', value: 'male' },
+                { label: 'Female', value: 'female' },
+                { label: 'Other', value: 'other' }
+              ]}
+            />
+          </div>
+          <div className="tw-w-1/2">
+            <Select
+              options={[
+                { label: 'Test 1', value: 'test1' },
+                { label: 'Test 2', value: 'test2' },
+                { label: 'Test 3', value: 'test3' }
+              ]}
+              // defaultValue={{ label: 'Test 3', value: 'test3' }}
+              placeholder="Single Select with Search Option"
+            />
+          </div>
         </div>
         <div className="tw-m-5">
           <CustomInput
@@ -345,7 +344,7 @@ export default function Page() {
               alert(JSON.stringify(data));
             })}
           >
-            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
               <div className="tw-w-1/2">
                 <CustomInput
                   type="text"
@@ -367,10 +366,49 @@ export default function Page() {
                   isRequired
                 />
               </div>
+            </div>
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
+              <div className="tw-w-1/2">
+                <CustomSelect
+                  label="Select Education"
+                  placeholder="Select Education"
+                  name="education"
+                  options={[
+                    { label: 'Matric', value: 'matric' },
+                    { label: 'Intermediate', value: 'intermediate' },
+                    { label: 'Graduation', value: 'graduation' },
+                    { label: 'Masters', value: 'masters' }
+                  ]}
+                  register={register}
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <Select
+                  label="Select User"
+                  placeholder="Select User"
+                  name="user"
+                  options={[
+                    { label: 'Hamza', value: 'hamza' },
+                    { label: 'Areeb', value: 'areeb' },
+                    { label: 'Jaffer', value: 'jaffer' }
+                  ]}
+                  register={register}
+                />
+              </div>
+            </div>
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
               <div className="tw-w-1/2">
                 <CustomCheckbox
                   name="checkbox"
                   label="Checkbox"
+                  register={register}
+                  isRequired
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <CustomSwitch
+                  name="switch"
+                  label="Switch"
                   register={register}
                   isRequired
                 />
