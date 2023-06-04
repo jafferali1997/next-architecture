@@ -6,6 +6,8 @@ import '@/common/styles/home.style.scss';
 import styled from '@emotion/styled';
 import { MaterialDesignContent, SnackbarProvider } from 'notistack';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import store from '@/provider/store';
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -51,7 +53,7 @@ export default function RootLayout({ children }) {
             error: StyledMaterialDesignContent
           }}
         >
-          {children}
+          <Provider store={store}>{children}</Provider>
         </SnackbarProvider>
       </body>
     </html>

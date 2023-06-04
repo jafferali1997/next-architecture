@@ -49,15 +49,15 @@ function SignUp() {
                   Username <span>*</span>
                 </label>
                 <input
-                  {...register('username')}
+                  {...register('userName')}
                   type="text"
-                  name="username"
+                  name="userName"
                   className="form-control-c"
                   placeholder="Username"
-                  style={errors.username ? borderStyle : borderSuc}
+                  style={errors.userName ? borderStyle : borderSuc}
                 />
                 <div className="signup-validation ">
-                  {errors.username ? (
+                  {errors.userName ? (
                     <>
                       <img
                         alt="img"
@@ -65,7 +65,7 @@ function SignUp() {
                         width="10px"
                         src="/assets/images/s_error.svg"
                       />
-                      {errors.username.message}
+                      {errors.userName.message}
                     </>
                   ) : null}
                 </div>

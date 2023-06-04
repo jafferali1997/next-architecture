@@ -2,10 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { signUp } from '@/provider/features/auth/auth.slice';
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string()
+  userName: Yup.string()
     .max(30, 'Username must be at most 30 characters long')
     .min(5, 'Username must be minimum 5 characters')
     .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
@@ -28,6 +30,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function useSignUp() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -70,46 +73,52 @@ export default function useSignUp() {
   const borderSuc = {
     border: '1px solid #10FF61'
   };
+  const moveRouter = (data) => {
+    router.push(`/verify-email?type=email-verification&email=${data.email}`);
+  };
   const onSubmit = async (values) => {
     setLoader(true);
-    try {
-      await fetch(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify(values)
-      })
-        .then(async (response) => {
-          setLoader(false);
-          if (!response.ok) {
-            const errors = await response.json();
-            // CustomAlert(errors.error[0].msg, 'error');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // console.log('data', data.result.data.user);
-          // CustomAlert('You have been registered successfully', 'success');
-          // setAccessToken(data.result.data.accessToken);
+    dispatch(
+      signUp({ payload: { ...values, role: 'SUPER_ADMIN' }, successCallBack: moveRouter })
+    );
+    // try {
+    //   await fetch(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/register`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Accept: 'application/json'
+    //     },
+    //     body: JSON.stringify(values)
+    //   })
+    //     .then(async (response) => {
+    //       setLoader(false);
+    //       if (!response.ok) {
+    //         const errors = await response.json();
+    //         // CustomAlert(errors.error[0].msg, 'error');
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       // console.log('data', data.result.data.user);
+    //       // CustomAlert('You have been registered successfully', 'success');
+    //       // setAccessToken(data.result.data.accessToken);
 
-          router.push({
-            pathname: '/verify-email',
-            query: {
-              type: 'email-verification',
-              email: data.result.data.user.email
-            }
-          });
-        })
-        .catch((err) => {
-          if (err.message === 'Failed to fetch') {
-            // CustomAlert(err.message, 'error');
-          }
-        });
-    } catch (err) {
-      console.error(err);
-    }
+    //       router.push({
+    //         pathname: '/verify-email',
+    //         query: {
+    //           type: 'email-verification',
+    //           email: data.result.data.user.email
+    //         }
+    //       });
+    //     })
+    //     .catch((err) => {
+    //       if (err.message === 'Failed to fetch') {
+    //         // CustomAlert(err.message, 'error');
+    //       }
+    //     });
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   const signUpWithOAuth = (type, email) => {
