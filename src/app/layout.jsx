@@ -1,6 +1,7 @@
 import '@/common/styles/globals.style.css';
 import '@/common/styles/home.style.scss';
 import '@/common/styles/dashboard/dashboard.style.css';
+import 'react-phone-input-2/lib/style.css';
 import { Inter } from 'next/font/google';
 import PropTypes from 'prop-types';
 

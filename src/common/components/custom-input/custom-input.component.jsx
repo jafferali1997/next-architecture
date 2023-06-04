@@ -27,7 +27,7 @@ import FieldLabel from '../field-label/field-label.component';
 
 export default function CustomInput({
   type,
-  placeholder,
+  placeholder = '',
   name,
   onChange = null,
   defaultValue = null,
@@ -113,7 +113,7 @@ export default function CustomInput({
 
 CustomInput.propTypes = {
   type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   value: PropTypes.string,

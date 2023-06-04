@@ -30,7 +30,7 @@ export default function CustomRadio({
           name={name}
           className={`${className}`}
           disabled={disabled}
-          {...(checked && checked)}
+          {...(checked && { checked })}
           {...(onChange && { onChange })}
           defaultChecked={defaultChecked}
         />

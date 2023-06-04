@@ -17,6 +17,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 @layer components {
   .btn {
     @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-white;

@@ -30,6 +30,7 @@ import CustomCheckbox from '@/common/components/custom-checkbox/custom-checkbox.
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
+import OtpInput from '@/common/components/otp-input/otp-input.component';
 
 const validationSchema = yup.object({
   firstName: yup.string().max(5, 'company name must be at most 5 characters long')
@@ -334,6 +335,14 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Otp Input</h3>
+        <hr />
+        <div className="tw-m-5">
+          <OtpInput value="1234" onChange={(e) => console.log(e)} maxInput={4} />
+        </div>
+      </div>
+
       <div className="tw-m-5">
         <h3 className="tw-text-2xl tw-font-bold">React Hook Form</h3>
         <hr />
