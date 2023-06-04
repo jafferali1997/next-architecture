@@ -26,7 +26,10 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
     additionalHandles,
     router,
     data,
-    errors
+    errors,
+    handleAddInput,
+    handleInputChange,
+    inputValues
   } = useCompanyDetails({ handleTabClick, handleTabCompleted });
 
   return (
@@ -58,6 +61,9 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
             additionalHandles={additionalHandles}
             errors={errors}
             data={data}
+            handleAddInput={handleAddInput}
+            handleInputChange={handleInputChange}
+            inputValues={inputValues}
           />
         )}
         {!router?.query?.id && (

@@ -69,7 +69,7 @@ export default function CustomInput({
     }
     return endIcon;
   };
-  console.log(errors);
+
   return (
     <div
       className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}

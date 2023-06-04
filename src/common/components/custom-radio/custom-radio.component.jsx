@@ -6,7 +6,6 @@ import FieldLabel from '../field-label/field-label.component';
 export default function CustomRadio({
   label = null,
   defaultChecked = false,
-  value,
   checked = null,
   onChange = null,
   className = '',
@@ -29,7 +28,6 @@ export default function CustomRadio({
         <Radio
           {...(register && register(`${name}`))}
           name={name}
-          value={value}
           className={`${className}`}
           disabled={disabled}
           {...(checked && checked)}
@@ -50,7 +48,6 @@ export default function CustomRadio({
 CustomRadio.propTypes = {
   label: PropTypes.string,
   defaultChecked: PropTypes.bool,
-  value: PropTypes.string.isRequired,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
   className: PropTypes.string,

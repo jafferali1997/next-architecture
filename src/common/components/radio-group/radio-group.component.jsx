@@ -15,19 +15,22 @@ export default function CustomRadioGroup({
   name,
   register = null,
   label = null,
-  defaultValue = null
+  defaultValue = null,
+  inlineRadioButtons = false
 }) {
   return (
     <FormControl>
-      <label>{label}</label>
+      <FormLabel id="radio-buttons-group">{label}</FormLabel>
       <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
+        aria-labelledby="radio-buttons-group"
         {...(register && register(`${name}`))}
-        defaultValue={defaultValue}
         name={name}
+        {...(defaultValue && { defaultValue })}
+        row={inlineRadioButtons}
       >
         {radioOptions?.map((option) => (
           <FormControlLabel
+            {...(register && register(`${name}`))}
             key={option.value}
             value={option.value}
             control={<Radio />}
@@ -54,6 +57,7 @@ CustomRadioGroup.propTypes = {
   defaultValue: PropTypes.string,
   name: PropTypes.string,
   register: PropTypes.func,
+  inlineRadioButtons: PropTypes.bool
   //   className: PropTypes.string,
   //   // eslint-disable-next-line react/forbid-prop-types
   //   errors: PropTypes.object,

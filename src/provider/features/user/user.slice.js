@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import userService from './user.service';
 
 const generalState = {
   isLoading: false,
@@ -25,13 +26,261 @@ const initialState = {
   verifyEmail: { ...generalState }
 };
 
-export const addPhoneAndGenerateOtp = createAsyncThunk('user/addPhoneAndGenerateOtp');
+export const addPhoneAndGenerateOtp = createAsyncThunk(
+  'user/addPhoneAndGenerateOtp',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.addPhoneAndGenerateOtp(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const generateOtp = createAsyncThunk(
+  'user/generateOtp',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.generateOtp();
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const verifyOtp = createAsyncThunk(
+  'user/verifyOtp',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.verifyOtp(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const generateForgetPasswordLink = createAsyncThunk(
+  'user/generateForgetPasswordLink',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.generateForgetPasswordLink(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const regenerateEmailLink = createAsyncThunk(
+  'user/regenerateEmailLink',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.regenerateEmailLink(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const changePasswordFromLink = createAsyncThunk(
+  'user/changePasswordFromLink',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.changePasswordFromLink(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.changePassword(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const verifyEmail = createAsyncThunk(
+  'user/verifyEmail',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.verifyEmail(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      throw new Error(response.message);
+    } catch (error) {
+      callBackMessage('error', error.message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {}
+  extraReducers: (builder) => {
+    builder
+      .addCase(addPhoneAndGenerateOtp.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(addPhoneAndGenerateOtp.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(addPhoneAndGenerateOtp.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(generateOtp.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(generateOtp.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(generateOtp.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(verifyOtp.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(verifyOtp.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(verifyOtp.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(generateForgetPasswordLink.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(generateForgetPasswordLink.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(generateForgetPasswordLink.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(regenerateEmailLink.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(regenerateEmailLink.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(regenerateEmailLink.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(changePasswordFromLink.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(changePasswordFromLink.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(changePasswordFromLink.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      })
+      .addCase(verifyEmail.pending, (state) => {
+        state.create.isLoading = true;
+        state.create.message = '';
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.create.isLoading = false;
+        state.create.isSuccess = true;
+        state.create.data = action.payload;
+      })
+      .addCase(verifyEmail.rejected, (state, action) => {
+        state.create.message = action.payload.message;
+        state.create.isLoading = false;
+        state.create.isError = true;
+        state.create.data = null;
+      });
+  }
 });
 
 export default userSlice.reducers;
