@@ -301,7 +301,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
 
   const handleAddInput = () => {
     setInputValues([...inputValues, '']);
-    console.log({ handleAddInput });
   };
 
   const handleRemoveInput = (index) => {

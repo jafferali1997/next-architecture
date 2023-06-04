@@ -168,10 +168,7 @@ export default function FormForCompanyDetails({
           Company addresses
         </label>
 
-        <span
-          className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline"
-          onClick={handleAddInput}
-        >
+        <span className="inner-link" onClick={handleAddInput}>
           Add more address
         </span>
       </div>
