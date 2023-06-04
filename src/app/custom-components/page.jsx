@@ -28,6 +28,24 @@ export default function Page() {
   const [open, setOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  /// multi input
+  const [inputValues, setInputValues] = useState(['']);
+
+  const handleAddInput = () => {
+    setInputValues([...inputValues, '']);
+  };
+
+  const handleRemoveInput = (index) => {
+    const newInputValues = [...inputValues];
+    newInputValues.splice(index, 1);
+    setInputValues(newInputValues);
+  };
+
+  const handleInputChange = (index, value) => {
+    const newInputValues = [...inputValues];
+    newInputValues[index] = value;
+    setInputValues(newInputValues);
+  };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
 
@@ -220,6 +238,18 @@ export default function Page() {
       </DataGrid>
       <div className="tw-w-full">
         <AddressList />
+      </div>
+      <div>
+        {inputValues.map((value, index) => (
+          <div key={index}>
+            <input
+              value={value}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+            />
+            <button onClick={() => handleRemoveInput(index)}>Remove Input</button>
+          </div>
+        ))}
+        <button onClick={handleAddInput}>Add Input</button>
       </div>
     </Suspense>
   );

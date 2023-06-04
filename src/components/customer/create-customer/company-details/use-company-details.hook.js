@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -47,6 +49,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   const [isSubmit, setIsSubmit] = useState(false);
   const countries = Country.getAllCountries();
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
+  const [inputValues, setInputValues] = useState(['']);
 
   const {
     register,
@@ -296,6 +299,23 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     // }
   };
 
+  const handleAddInput = () => {
+    setInputValues([...inputValues, '']);
+    console.log({ handleAddInput });
+  };
+
+  const handleRemoveInput = (index) => {
+    const newInputValues = [...inputValues];
+    newInputValues.splice(index, 1);
+    setInputValues(newInputValues);
+  };
+
+  const handleInputChange = (index, value) => {
+    const newInputValues = [...inputValues];
+    newInputValues[index] = value;
+    setInputValues(newInputValues);
+  };
+
   return {
     register,
     handleSubmit,
@@ -317,6 +337,10 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     additionalHandles,
     router,
     data,
-    errors
+    errors,
+    handleAddInput,
+    handleInputChange,
+    inputValues,
+    setInputValues
   };
 }

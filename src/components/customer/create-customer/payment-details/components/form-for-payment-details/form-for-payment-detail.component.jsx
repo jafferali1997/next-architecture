@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
+import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 
 export default function FormForPaymentDetails({
   handleSubmit,
@@ -24,11 +25,11 @@ export default function FormForPaymentDetails({
           <span className="tw-text-[red]">*</span>
         </label>
         <div className="payment-details-bank">
-          <FormInput
+          <CustomRadio
             label="Bank Details"
-            name="bankDetail"
+            name="same"
             checked={bankDetail}
-            handleChangeRadio={(e) => {
+            onChange={(e) => {
               setBankDetail(e.target.checked);
               setCreditCard(!e.target.checked);
             }}
@@ -37,11 +38,11 @@ export default function FormForPaymentDetails({
           />
         </div>
         <div className="payment-details-card">
-          <FormInput
+          <CustomRadio
             label="Credit Card Details"
-            name="creditDetail"
+            name="same"
             checked={creditCard}
-            handleChangeRadio={(e) => {
+            onChange={(e) => {
               setCreditCard(e.target.checked);
               setBankDetail(!e.target.checked);
             }}
