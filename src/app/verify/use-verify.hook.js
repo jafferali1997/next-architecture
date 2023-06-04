@@ -20,32 +20,17 @@ export default function useVerify() {
     }
     axios
       .post(url, body)
-      .then((response) => {
+      .then((data) => {
         // console.log('API Response', response);
         // console.log(response.data.status);
-        let newRoute = {
-          pathname: '/create-new-password',
-          query: { email }
-        };
-        if (type === 'email-verification' && response.data.status) {
-          newRoute = {
-            pathname: '/profile',
-            query: {
-              email,
-              userId: response.data.result.data.user.userId,
-              username: response.data.result.data.user.username
-            }
-          };
+        let newRoute = `/create-new-password?email=&${email}`;
+        if (type === 'email-verification' && data.Succeeded) {
+          newRoute = `/profile?email=&${email}&userId=${data.id}&userName=${data.userName}`;
         }
-        if (response.data.status) {
-          // CustomAlert(response.data.message, 'success');
+        if (data.Succeeded) {
           router.push(newRoute);
         } else {
-          // CustomAlert(response.data.message, 'error');
-          router.push({
-            pathname: '/auth/verification-expire',
-            query: { email, type }
-          });
+          router.push(`/auth/verification-expire?email=${email}&type=${type}`);
         }
       })
       .catch((error) => {

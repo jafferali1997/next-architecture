@@ -65,20 +65,20 @@ export default function Login() {
                   Email/Username <span>*</span>
                 </label>
                 <input
-                  {...register('username')}
+                  {...register('email')}
                   type="text"
-                  id="username"
+                  id="email"
                   className="form-control-c"
                   placeholder="Email/Username"
                   required
-                  style={errors.username ? borderStyle : borderSuc}
+                  style={errors.email ? borderStyle : borderSuc}
                 />
                 <div className="login-validation">
                   <div className="innerValidation">
-                    {errors.username ? (
+                    {errors.email ? (
                       <>
                         <img alt="null" src="/assets/images/s_error.svg" />
-                        {errors.username.message}
+                        {errors.email.message}
                       </>
                     ) : null}
                   </div>

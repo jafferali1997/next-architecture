@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getUser } from '@/common/utils/users.util';
 import authService from './auth.service';
 
 // Get user from localStorage
-const user = JSON.parse(localStorage.getItem('user'));
+const user = getUser();
 const initialState = {
   login: {
     data: user || null,
@@ -37,14 +38,17 @@ const initialState = {
 // Login user
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
     try {
       const response = await authService.login(payload);
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
-      throw new Error(response.message);
+
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
+      console.log('yes', error);
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
     }
@@ -53,13 +57,14 @@ export const login = createAsyncThunk(
 // signUp user
 export const signUp = createAsyncThunk(
   'auth/register',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
     try {
       const response = await authService.signUp(payload);
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -69,13 +74,14 @@ export const signUp = createAsyncThunk(
 
 export const loginAndSignUpWithGoogle = createAsyncThunk(
   'auth/loginAndSignUpWithGoogle',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
     try {
       const response = await authService.loginAndSignUpWithGoogle(payload);
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -83,11 +89,15 @@ export const loginAndSignUpWithGoogle = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', async (payload, thunkAPI) => {
   try {
-    return authService.logout();
+    const response = await authService.logout();
+    if (response.Succeeded) {
+      return response.data;
+    }
+    return thunkAPI.rejectWithValue(response);
   } catch (error) {
-    return error;
+    return thunkAPI.rejectWithValue(error);
   }
 });
 
@@ -138,6 +148,7 @@ export const authSlice = createSlice({
         state.login.data = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
+        console.log(action);
         state.login.message = action.payload.message;
         state.login.isLoading = false;
         state.login.isError = true;

@@ -1,18 +1,20 @@
 /**
  * Retrive access token from local storage
- * @returns string | undefinded
+ * @returns string | undefined
  */
 export const getAccessToken = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  return user.accessToken;
+  if (window.localStorage.getItem('user')) {
+    return JSON.parse(localStorage.getItem('user')).token;
+  }
+  return undefined;
 };
 
 /**
  * Retrive access token expiry date from local storage
- * @returns date | undefinded
+ * @returns date | undefined
  */
 export const getAccessTokenExpiry = () => {
-  const accessTokenExpiry = JSON.parse(localStorage.getItem('accessTokenExpiry'));
+  const accessTokenExpiry = JSON.parse(window.localStorage.getItem('accessTokenExpiry'));
   return accessTokenExpiry;
 };
 

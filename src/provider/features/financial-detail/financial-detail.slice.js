@@ -24,7 +24,7 @@ export const createFinancialDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -40,7 +40,7 @@ export const getSingleFinancialDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -56,7 +56,7 @@ export const getAllFinancialDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -72,7 +72,7 @@ export const updateFinancialDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -88,7 +88,7 @@ export const deleteFinancialDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);

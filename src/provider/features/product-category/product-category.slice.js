@@ -23,7 +23,7 @@ export const createProductCategory = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -39,7 +39,7 @@ export const getSingleProductCategory = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -55,7 +55,7 @@ export const getAllProductCategory = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -71,7 +71,7 @@ export const updateProductCategory = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -87,7 +87,7 @@ export const deleteProductCategory = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);

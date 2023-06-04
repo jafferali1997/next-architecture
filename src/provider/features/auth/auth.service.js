@@ -3,7 +3,7 @@ import api from '@/common/utils/api';
 // Login user
 const login = async (userData) => {
   const response = await api().post('/auth/login', userData);
-
+  console.log(response);
   if (response.data.Succeeded) {
     localStorage.setItem('user', JSON.stringify(response.data.data));
   }

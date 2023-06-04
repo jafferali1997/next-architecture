@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import * as yup from 'yup';
+import { enqueueSnackbar } from 'notistack';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import ErrorIcon from '@/common/icons/error.icon';
@@ -49,6 +50,7 @@ export default function Page() {
     resolver: yupResolver(validationSchema),
     reValidateMode: 'onChange'
   });
+
   useEffect(() => {
     // axios
     //   .get('https://ipapi.co/json/')
@@ -143,7 +145,11 @@ export default function Page() {
         <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
           <CustomButton
             text="Show Success Toaster"
-            onClick={() => setShowSuccessToaster(true)}
+            onClick={() =>
+              enqueueSnackbar('message', {
+                variant: 'success'
+              })
+            }
             className="btn-primary tw-m-5"
           />
           <Toaster

@@ -23,7 +23,7 @@ export const createPriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -39,7 +39,7 @@ export const getSinglePriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -55,7 +55,7 @@ export const getAllPriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -71,7 +71,7 @@ export const updatePriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
@@ -87,7 +87,7 @@ export const deletePriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
