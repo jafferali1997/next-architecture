@@ -14,6 +14,8 @@ import {
   verifyOtp
 } from '@/provider/features/user/user.slice';
 import { createProfile } from '@/provider/features/profile/profile.slice';
+import { createFinancialDetail } from '@/provider/features/financial-detail/financial-detail.slice';
+import { createBusinessDetail } from '@/provider/features/business-detail/business-detail.slice';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -79,11 +81,11 @@ export default function useProfile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const moveRouter = (data) => {
     if (data) {
-      router.push('/dashboard');
+      // router.push('/dashboard');
     }
   };
 
@@ -91,6 +93,18 @@ export default function useProfile() {
     console.log(phone, 'phone');
     console.log(data);
     dispatch(createProfile({ payload: { ...data }, successCallBack: moveRouter }));
+    dispatch(
+      createBusinessDetail({
+        payload: {
+          businessName: data.businessName,
+          population: data.population,
+          address: data.address
+        }
+      })
+    );
+    dispatch(
+      createFinancialDetail({ payload: { ibanNumber: data.ibanNumber, vat: data.vat } })
+    );
   };
 
   const sendOtp = () => {

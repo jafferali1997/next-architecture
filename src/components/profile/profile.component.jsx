@@ -131,7 +131,7 @@ export default function Profile() {
                   text={sendOtpButtonText.current}
                   className="btn-outline"
                   onClick={sendOtp}
-                  disabled={isOtpVerified}
+                  // disabled={isOtpVerified}
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function Profile() {
                   onClick={verifyOtpHandler}
                   text="Verify OTP"
                   className="btn-primary"
-                  disabled={isOtpVerified || !otp || otp?.length < 4}
+                  // disabled={isOtpVerified || !otp || otp?.length < 4}
                 />
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function Profile() {
                   type="submit"
                   className="btn-primary"
                   text="Submit"
-                  disabled={!isOtpVerified}
+                  // disabled={!isOtpVerified}
                 />
               </div>
             </div>
