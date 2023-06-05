@@ -7,6 +7,8 @@ import EyeIcon from '@/common/icons/eye.icon';
 import CommentIcon from '@/common/icons/comment.icon';
 import UploadIcon from '@/common/icons/upload.icon';
 import DeleteIcon from '@/common/icons/delete.icon';
+import { useDispatch } from 'react-redux';
+import { deleteCustomer } from '@/provider/features/customer/customer.slice';
 
 export default function useCustomer() {
   const columns = [
@@ -172,7 +174,10 @@ export default function useCustomer() {
 
   const [columnState, setColumnState] = useState(initialColumnState(columns));
   const [open, setOpen] = useState(false);
+  const [showToaster, setShowToaster] = useState(false);
+  const [toasterMsg, setToasterMsg] = useState('');
 
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleColShow = () => {
@@ -194,7 +199,14 @@ export default function useCustomer() {
     router.push(`/customer/details?id=${row.id}`);
   };
 
-  const handleDeleteAction = (row) => {};
+  const handleDeleteAction = (row) => {
+    const data = dispatch(deleteCustomer({ payload: row.id }));
+    if (data) {
+      // show toaster
+      showToaster(true);
+      setToasterMsg('Customer deleted successfully');
+    }
+  };
 
   const handleStatusAction = (row) => {
     console.log(row);
@@ -218,6 +230,9 @@ export default function useCustomer() {
     columns,
     columnState,
     rows,
-    handleToggleColumn
+    handleToggleColumn,
+    showToaster,
+    toasterMsg,
+    setShowToaster
   };
 }
