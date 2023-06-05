@@ -21,7 +21,8 @@ export default function TextArea({
   errors = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   return (
     <div
@@ -43,6 +44,7 @@ export default function TextArea({
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}
           onChange={onChange}
+          readOnly={readOnly}
           disabled={disabled}
         />
         {errors && errors[name] && (
@@ -69,5 +71,6 @@ TextArea.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };
