@@ -109,7 +109,7 @@ export default function useProfile() {
 
   const sendOtp = () => {
     if (sendOtpButtonText.current === 'Send OTP') {
-      dispatch(addPhoneAndGenerateOtp({ payload: phone }));
+      dispatch(addPhoneAndGenerateOtp({ payload: {phone} }));
       sendOtpButtonText.current = 'Resend OTP';
     } else {
       dispatch(generateOtp());

@@ -19,6 +19,7 @@ export default function EditCustomer() {
     setIsAdress,
     adressHandles
   } = UseEditCustomer();
+  
   return (
     <div className="content">
       <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
@@ -54,6 +55,7 @@ export default function EditCustomer() {
                   name="firstName"
                   placeholder="First Name"
                   type="text"
+                  register={register}
                 />
                 <CustomInput
                   label="Last Name"

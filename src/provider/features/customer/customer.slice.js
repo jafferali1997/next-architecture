@@ -301,7 +301,7 @@ export const customerSlice = createSlice({
         state.getSingle.data = action.payload;
       })
       .addCase(getSingleCustomer.rejected, (state, action) => {
-        state.getSingle.message = action.payload.message;
+        state.getSingle.message = action.payload?.message;
         state.getSingle.isLoading = false;
         state.getSingle.isError = true;
         state.getSingle.data = null;
