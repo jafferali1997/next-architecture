@@ -7,14 +7,16 @@ import React from 'react';
 export default function Hero() {
   return (
     <div className="tw-min-h-hero-height tw-bg-landing-hero-bg tw-bg-cover tw-bg-bottom tw-bg-no-repeat">
-      <Grid container spacing={2}>
-        <Grid item lg={6}>
-          <ListItem>xs=8</ListItem>
+      <div className="tw-m-auto tw-w-full tw-max-w-7xl">
+        <Grid spacing={2}>
+          <Grid item lg={6}>
+            <ListItem>xs=8</ListItem>
+          </Grid>
+          <Grid item lg={6}>
+            <ListItem>xs=4</ListItem>
+          </Grid>
         </Grid>
-        <Grid item lg={6}>
-          <ListItem>xs=4</ListItem>
-        </Grid>
-      </Grid>
+      </div>
     </div>
   );
 }
