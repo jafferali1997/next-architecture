@@ -223,7 +223,7 @@
 .MuiPaginationItem-textPrimary > .Mui-selected {
   background: #1d4ed8 !important;
 }
-/* 
+/*
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -278,4 +278,14 @@ body {
 }
 .tab-content {
   margin-top: 16px;
+}
+
+@media screen and (max-width: 991px) {
+  .menuclose {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .menuopen {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
 }

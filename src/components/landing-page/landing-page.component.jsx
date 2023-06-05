@@ -2,6 +2,7 @@
 
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unescaped-entities */
+import React from 'react';
 import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -12,6 +13,7 @@ import { EffectCoverflow, Pagination } from 'swiper';
 import useLandingPage from './use-landing-page.hook';
 
 import Header from './components/header/header.component';
+import Hero from './components/hero/hero.component';
 /**
  * create landing page component
  * @returns component
@@ -23,7 +25,7 @@ function LandingPage() {
     <>
       {/* <Header /> */}
       <div className="home-wrapper" data-auto-select="true">
-        <div className="home-container">
+        {/* <div className="home-container">
           <div className="home-header">
             <div className="logo-menu">
               <img alt="img" className="logo" src="/assets/images/logo.png" />
@@ -153,8 +155,9 @@ function LandingPage() {
               ) : null}
             </div>
           </div>
-        </div>
-        <div className="home-hero-section">
+        </div> */}
+        <Header />
+        {/* <div className="home-hero-section">
           <div className="home-container">
             <div className="hero-content tw-grid tw-grid-cols-12">
               <div className="innerColumn tw-col-span-6">
@@ -185,7 +188,8 @@ function LandingPage() {
           <div className="circle-bg">
             <img alt="img" src="/assets/images/heor-circle.png" />
           </div>
-        </div>
+        </div> */}
+        <Hero />
         <section className="home-brand-section">
           <div className="home-container">
             <h1>Accredited Partners</h1>

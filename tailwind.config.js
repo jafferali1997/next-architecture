@@ -56,7 +56,11 @@ module.exports = {
         'danger-light': '#FFDEDE',
         'disabled-input': '#E4E4E4',
         danger: '#EF2020',
-        success: '#10FF61'
+        success: '#10FF61',
+        'primary-purple': '#6F6AF5'
+      },
+      boxShadow: {
+        custom: '0px 0px 31px rgba(29, 78, 216, 0.1)'
       },
       spacing: {
         px: '1px',
@@ -86,11 +90,18 @@ module.exports = {
         36: '9rem',
         40: '10rem'
       },
+      height: {
+        'header-calc-viewport': 'calc(100vh - 94px)'
+      },
+      minHeight: {
+        'hero-height': 'calc(100vh - 76px)'
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-pattern': "url('/assets/images/sidebar/sidebarellipses.png')"
+        'hero-pattern': "url('/assets/images/sidebar/sidebarellipses.png')",
+        'landing-hero-bg': "url('/assets/images/hero-bg.png')"
       }
     }
   },
