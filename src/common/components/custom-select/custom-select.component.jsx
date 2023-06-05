@@ -51,7 +51,12 @@ export default function CustomSelect({
           }}
         >
           {options?.map((option) => (
-            <Option key={option.value} {...(register && {register})} value={option.value} name={name} >
+            <Option
+              key={option.value}
+              {...(register && { register })}
+              value={option.value}
+              name={name}
+            >
               {option.label}
             </Option>
           ))}

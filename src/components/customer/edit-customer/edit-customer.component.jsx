@@ -17,8 +17,12 @@ export default function EditCustomer() {
     additionalhandles,
     isAdress,
     setIsAdress,
-    adressHandles
+    adressHandles,
+    register,
+    handleSubmit,
+    errors
   } = UseEditCustomer();
+
   return (
     <div className="content">
       <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
@@ -54,18 +58,24 @@ export default function EditCustomer() {
                   name="firstName"
                   placeholder="First Name"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Last Name"
                   name="lastName"
                   placeholder="Last Name"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Address"
                   name="address"
                   placeholder="Address"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
 
                 <Select
@@ -73,7 +83,8 @@ export default function EditCustomer() {
                   name="country"
                   placeholder="Country"
                   type="select"
-
+                  register={register}
+                  errors={errors}
                   //   options={countries.map((item) => {
                   //     return { label: item.name, value: item.isoCode, id: item.isoCode };
                   //   })}
@@ -83,6 +94,8 @@ export default function EditCustomer() {
                   name="city"
                   placeholder="City"
                   type="select"
+                  register={register}
+                  errors={errors}
                   //   value={selectedCity}
                   //   onChange={handleCityChange}
                   //   options={cities.map((item) => {
@@ -94,6 +107,8 @@ export default function EditCustomer() {
                   name="postal"
                   placeholder="Postal Code"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
                 <div>
                   <label className="group-label">Price Group</label>
@@ -128,6 +143,8 @@ export default function EditCustomer() {
                   placeholder="Company Name"
                   type="text"
                   name="companyName"
+                  register={register}
+                  errors={errors}
                 />
 
                 <CustomInput
@@ -135,18 +152,24 @@ export default function EditCustomer() {
                   name="email"
                   placeholder="Email Address"
                   type="email"
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Company Phone Number"
                   name="phoneNo"
                   placeholder="Phone Number"
                   type="number"
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Company Mobile Number"
                   name="mobileNo"
                   placeholder="Mobile Number"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
                 <Select
                   label="Company Size"
@@ -158,12 +181,16 @@ export default function EditCustomer() {
                     { id: '40-100', value: '40-100', label: '40-100' },
                     { id: 'above 100', value: 'above 100', label: 'above 100' }
                   ]}
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Company FAX Number"
                   name="faxNumber"
                   placeholder="FAX Number"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
 
                 <CustomInput
@@ -171,6 +198,8 @@ export default function EditCustomer() {
                   name="taxNumber"
                   placeholder="TAX Number"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
 
                 <CustomInput
@@ -178,6 +207,8 @@ export default function EditCustomer() {
                   name="vatNumber"
                   placeholder="VAT Number"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
               </div>
               <div>
@@ -187,16 +218,32 @@ export default function EditCustomer() {
                   placeholder="URL"
                   type="text"
                   isRequired={false}
+                  register={register}
+                  errors={errors}
                 />
               </div>
               <div className="tw-grid tw-grid-cols-[repeat(auto-fill,minmax(175px,1fr))] tw-gap-[15px] tw-py-[16px]">
-                <CustomSwitch label="Current Status" name="status" type="switch" />
+                <CustomSwitch
+                  label="Current Status"
+                  name="status"
+                  type="switch"
+                  register={register}
+                  errors={errors}
+                />
                 <CustomSwitch
                   label="Do not show customer on PDF"
                   name="isShowInPdf"
                   type="switch"
+                  register={register}
+                  errors={errors}
                 />
-                <CustomSwitch label="VAT exempt" name="isVatEnabled" type="switch" />
+                <CustomSwitch
+                  label="VAT exempt"
+                  name="isVatEnabled"
+                  type="switch"
+                  register={register}
+                  errors={errors}
+                />
               </div>
               <div className="tw-flex tw-items-center  tw-justify-between">
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
@@ -261,33 +308,43 @@ export default function EditCustomer() {
                     placeholder="John"
                     type="select"
                     options={[
-                      { id: 'male', value: 'male', label: 'Male' },
-                      { id: 'female', value: 'female', label: 'Female' }
+                      { id: 'male', value: 'MALE', label: 'Male' },
+                      { id: 'female', value: 'FEMALE', label: 'Female' }
                     ]}
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Designation"
                     name="designation"
                     placeholder="Designation"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="First Name"
                     name="firstName"
                     placeholder="First Name"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Last Name"
                     name="lastName"
                     placeholder="Last Name"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Address"
                     name="address"
                     placeholder="Address"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
 
                   <Select
@@ -295,6 +352,8 @@ export default function EditCustomer() {
                     name="country"
                     placeholder="Country"
                     type="select"
+                    register={register}
+                    errors={errors}
                     // onChange={handleCountryChange}
                     // value={selectedCountry}
                     // isRequired={true}
@@ -308,6 +367,8 @@ export default function EditCustomer() {
                     name="city"
                     placeholder="City"
                     type="select"
+                    register={register}
+                    errors={errors}
                     // value={selectedCity}
                     // onChange={handleCityChange}
 
@@ -320,30 +381,40 @@ export default function EditCustomer() {
                     name="postal"
                     placeholder="Postal Code"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Email Address"
                     name="additionalEmail"
                     placeholder="Email Address"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Phone Number"
                     name="phone"
                     placeholder="Phone Number"
                     type="number"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Mobile Number"
                     name="mobile"
                     placeholder="Mobile Number"
                     type="number"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Department"
                     name="department"
                     placeholder="Department"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                 </div>
               ) : null}
@@ -366,6 +437,8 @@ export default function EditCustomer() {
                     // }}
                     placeholder="Company Name"
                     type="radio"
+                    register={register}
+                    errors={errors}
                   />
                 </div>
                 <div className="payment-details-card">
@@ -379,6 +452,8 @@ export default function EditCustomer() {
                     // }}
                     placeholder="Company Name"
                     type="radio"
+                    register={register}
+                    error={errors}
                   />
                 </div>
               </div>
@@ -388,6 +463,8 @@ export default function EditCustomer() {
                   name="iban"
                   placeholder="IBAN Number"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
               </div>
               <div className="form-box-grid">
@@ -397,6 +474,8 @@ export default function EditCustomer() {
                   placeholder="Account owner name"
                   type="text"
                   isRequired={true}
+                  register={register}
+                  errors={errors}
                 />
 
                 <CustomInput
@@ -404,18 +483,24 @@ export default function EditCustomer() {
                   name="bicNumber"
                   placeholder="BIC Number"
                   type="text"
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Mandate Reference"
                   name="mandateReference"
                   placeholder="Mandate Reference"
                   type="number"
+                  register={register}
+                  errors={errors}
                 />
                 <CustomInput
                   label="Mandate Date"
                   name="mandateDate"
                   placeholder="03/13/2023"
                   type="date"
+                  register={register}
+                  errors={errors}
                 />
               </div>
             </div>
@@ -428,6 +513,8 @@ export default function EditCustomer() {
                   placeholder="Discount amount"
                   type="text"
                   isRequired={true}
+                  register={register}
+                  errors={errors}
                 />
                 <div>
                   <CustomInput
@@ -436,6 +523,8 @@ export default function EditCustomer() {
                     placeholder="Cash Discount"
                     type="text"
                     isRequired={true}
+                    register={register}
+                    errors={errors}
                   />
                 </div>
               </div>
@@ -448,12 +537,16 @@ export default function EditCustomer() {
                   name="paymentDate"
                   placeholder="03/13/2023"
                   type="date"
+                  register={register}
+                  errors={errors}
                 />
                 <h3 className="tw-mt-[16px]">Terms of delivery</h3>
                 <TextArea
                   name="deliveryTerm"
                   placeholder="Delivery Terms"
                   type="textarea"
+                  register={register}
+                  errors={errors}
                 />
               </div>
             </div>

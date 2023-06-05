@@ -91,6 +91,7 @@ export default function CustomInput({
           {...(value && { value })}
           onKeyDown={inputKeyDownHandler}
           disabled={disabled}
+          variant="outlined"
           startAdornment={
             <InputAdornment position="start" className="">
               {startIcon}
