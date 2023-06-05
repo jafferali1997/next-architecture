@@ -88,6 +88,9 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
             setIsSubmit={setIsSubmit}
             additionalHandles={additionalHandles}
             errors={errors}
+            handleAddInput={handleAddInput}
+            handleInputChange={handleInputChange}
+            inputValues={inputValues}
           />
         )}
       </div>

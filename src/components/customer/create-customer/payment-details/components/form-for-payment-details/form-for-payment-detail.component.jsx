@@ -27,27 +27,23 @@ export default function FormForPaymentDetails({
         <div className="payment-details-bank">
           <CustomRadio
             label="Bank Details"
-            name="same"
             checked={bankDetail}
+            name="paymentType"
             onChange={(e) => {
-              setBankDetail(e.target.checked);
-              setCreditCard(!e.target.checked);
+              setBankDetail(true);
+              setCreditCard(false);
             }}
-            placeholder="Company Name"
-            type="radio"
           />
         </div>
         <div className="payment-details-card">
           <CustomRadio
             label="Credit Card Details"
-            name="same"
-            value={creditCard}
+            checked={creditCard}
+            name="paymentType"
             onChange={(e) => {
-              setCreditCard(e.target.checked);
-              setBankDetail(!e.target.checked);
+              setCreditCard(true);
+              setBankDetail(false);
             }}
-            placeholder="Company Name"
-            type="radio"
           />
         </div>
       </div>
