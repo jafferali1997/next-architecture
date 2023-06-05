@@ -1,15 +1,21 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getSingleCustomer } from '@/provider/features/customer/customer.slice';
+import {
+  getSingleCustomer,
+  updateCustomer
+} from '@/provider/features/customer/customer.slice';
 
 export default function UseEditCustomer() {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  const customerId = useRef(searchParams.get('id'));
 
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
@@ -23,6 +29,7 @@ export default function UseEditCustomer() {
   useEffect(() => {
     async function fetchData() {
       if (searchParams.get('id')) {
+        // customerId.current = searchParams.get('id');
         const data = await dispatch(
           getSingleCustomer({ payload: searchParams.get('id') })
         );
@@ -42,6 +49,17 @@ export default function UseEditCustomer() {
     // resolver: yupResolver(validationSchema)
   });
 
+  const onSubmit = (data) => {
+    console.log(data);
+    const res = dispatch(
+      updateCustomer({ payload: { data: { ...data }, id: customerId.current } })
+    );
+    console.log('data', res);
+    if (res) {
+      router.push('/customer');
+    }
+  };
+
   return {
     isAdditional,
     setIsAdditional,
@@ -51,6 +69,8 @@ export default function UseEditCustomer() {
     adressHandles,
     register,
     handleSubmit,
-    errors
+    errors,
+    id: customerId.current,
+    onSubmit
   };
 }
