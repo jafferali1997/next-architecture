@@ -2,7 +2,6 @@
 
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import Select from '@/common/components/select/select.component';
