@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import { Country, City } from 'country-state-city';
 import { yupResolver } from '@hookform/resolvers/yup';
 // import CustomAlert from '@/common/components/custom-alert';
+import { useDispatch } from 'react-redux';
 
 let validationSchema = yup.object({
   // Define your validation rules here.
@@ -38,6 +39,8 @@ let validationSchema = yup.object({
 
 export default function useCompanyDetails({ handleTabClick, handleTabCompleted }) {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const [data, setData] = useState();
   const [status, setStatus] = useState();
   const [isShowInPdf, setIsShowInPdf] = useState();
@@ -261,6 +264,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     console.log(value);
     handleTabClick('payment_details');
     handleTabCompleted('company_details');
+
     // if (isAdditional) {
     //   value.additionalContactPerson = {
     //     gender: value.gender,

@@ -1,14 +1,21 @@
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function useVerifyEmail() {
-  const router = useRouter(null);
+  const router = useRouter();
+  const [email, setEmail] = useState();
+  const [type, setType] = useState();
   // const { email, signUp, forgetPassword, token } = router.query;
-  let { email } = router.query;
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    setEmail(urlSearchParams.get('email'));
+    setType(urlSearchParams.get('type'));
+  }, []);
+
   const resendLinkHandler = () => {
-    // eslint-disable-next-line prefer-const
-    let { type } = router.query;
-    if (email.includes('%2B')) email = email.replace('%2B', '+');
+    let newEmail = email;
+    if (newEmail.includes('%2B')) newEmail = newEmail.replace('%2B', '+');
     let apiType = 'resend-reset-password-link';
     if (type === 'email-verification') {
       apiType = 'resend-verification-link';
@@ -16,7 +23,7 @@ export default function useVerifyEmail() {
     console.log(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/${apiType}`);
     axios
       .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/${apiType}`, {
-        email
+        newEmail
       })
       .then((response) => {
         console.log(response.data);
