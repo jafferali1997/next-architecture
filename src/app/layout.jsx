@@ -1,14 +1,16 @@
 'use client';
 
-import '@/common/styles/dashboard/dashboard.style.css';
+// import '@/common/styles/dashboard/dashboard.style.css';
 import '@/common/styles/globals.style.css';
-import '@/common/styles/home.style.scss';
-import 'react-phone-input-2/lib/style.css';
+// import '@/common/styles/home.style.scss';
+// import 'react-phone-input-2/lib/style.css';
 import { Inter } from 'next/font/google';
-import styled from '@emotion/styled';
-import { MaterialDesignContent, SnackbarProvider } from 'notistack';
+
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
+import { StyledEngineProvider } from '@mui/material';
+import { MaterialDesignContent, SnackbarProvider } from 'notistack';
+import styled from '@emotion/styled';
 import store from '@/provider/store';
 
 // const inter = Inter({ subsets: ['latin'] });
@@ -47,16 +49,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SnackbarProvider
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          autoHideDuration={4000}
-          Components={{
-            success: StyledMaterialDesignContent,
-            error: StyledMaterialDesignContent
-          }}
-        >
-          <Provider store={store}>{children}</Provider>
-        </SnackbarProvider>
+        <StyledEngineProvider injectFirst>
+          <SnackbarProvider
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            autoHideDuration={4000}
+            Components={{
+              success: StyledMaterialDesignContent,
+              error: StyledMaterialDesignContent
+            }}
+          >
+            <Provider store={store}>{children}</Provider>
+          </SnackbarProvider>
+        </StyledEngineProvider>
       </body>
     </html>
   );

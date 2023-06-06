@@ -45,11 +45,8 @@ export const login = createAsyncThunk(
         successCallBack(response.data);
         return response.data;
       }
-
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      console.log('yes', error);
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -64,6 +61,7 @@ export const signUp = createAsyncThunk(
         successCallBack(response.data);
         return response.data;
       }
+
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
@@ -148,7 +146,6 @@ export const authSlice = createSlice({
         state.login.data = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
-        console.log(action);
         state.login.message = action.payload.message;
         state.login.isLoading = false;
         state.login.isError = true;

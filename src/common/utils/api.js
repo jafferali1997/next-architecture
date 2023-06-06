@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import { getAccessToken } from './access-token.util';
+import { delay } from './generic.util';
 
 const api = (headers = null) => {
   let header = headers;
@@ -18,8 +19,23 @@ const api = (headers = null) => {
   });
 
   apiSet.interceptors.response.use(
-    (response) => response,
+    async (response) => {
+      if (response.config.method === 'post' || response.config.method === 'patch') {
+        enqueueSnackbar(response.data.message, {
+          variant: 'success'
+        });
+        await delay(3000);
+        return response;
+      }
+      return response;
+    },
     (error) => {
+      if (error.message === 'Network Error') {
+        enqueueSnackbar(error.message, {
+          variant: 'error'
+        });
+        throw error;
+      }
       if (error.response.status === 401) {
         localStorage.removeItem('user');
         window.location.href = '/';
@@ -48,6 +64,7 @@ const api = (headers = null) => {
       return error.response;
     }
   );
+
   return apiSet;
 };
 

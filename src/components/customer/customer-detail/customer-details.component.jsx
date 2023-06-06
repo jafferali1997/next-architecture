@@ -607,7 +607,65 @@ export default function CustomerDetails() {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         </form>
+=======
+          <div className="right-side">
+            <div className="form-box tw-flex tw-h-[77px] tw-w-[336px] tw-items-center tw-justify-between ">
+              <h3 className="form-box-heading ">Status</h3>
+              <span className="status-active ">Active</span>
+            </div>
+            <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">
+              <div className="tw-flex tw-items-center tw-justify-between">
+                <h3 className="form-box-heading ">Uploaded files</h3>
+                <CustomButton text="Upload" className="btn-secondary  " />
+              </div>
+              <div className=" tw-mt-[16px] tw-flex tw-flex-col tw-gap-[12px] ">
+                <div className="tw-flex tw-items-center tw-gap-[20px]">
+                  <div className="tw-flex tw-gap-[5px]">
+                    <img src="/assets/images/file-icon.svg" alt="img" />
+                    <p className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                      Design System.PNG
+                    </p>
+                  </div>
+                  <div>
+                    <img src="/assets/images/new-tab-icon.svg" alt="img" />
+                  </div>
+                </div>
+                <div className="tw-flex tw-items-center tw-gap-[20px]">
+                  <div className="tw-flex tw-gap-[5px]">
+                    <img src="/assets/images/file-icon.svg" alt="img" />
+                    <p className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                      Design System.PNG
+                    </p>
+                  </div>
+                  <div>
+                    <img src="/assets/images/new-tab-icon.svg" alt="img" />
+                  </div>
+                </div>
+                <div className="tw-flex tw-items-center tw-gap-[20px]">
+                  <div className="tw-flex tw-gap-[5px]">
+                    <img src="/assets/images/file-icon.svg" alt="img" />
+                    <p className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                      Design System.PNG
+                    </p>
+                  </div>
+                  <div>
+                    <img src="/assets/images/new-tab-icon.svg" alt="img" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-box tw-mt-[16px] tw-flex  tw-w-[336px] tw-flex-col tw-gap-[16px]  ">
+              <h3 className="form-box-heading ">Comments</h3>
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-light-gray ">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industrys.
+              </p>
+            </div>
+          </div>
+        </div>
+>>>>>>> 8a92106d12af18f030611a6f29cab9fe900a1a95
       </div>
     </div>
   );

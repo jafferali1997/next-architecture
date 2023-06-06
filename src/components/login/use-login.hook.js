@@ -61,7 +61,7 @@ export default function useLogin() {
       router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
     } else {
       router.push(
-        `/profile?username=${data.username}&email=${data.email}&userId=${data.id}`
+        `/profile?username=${data.userName}&email=${data.email}&userId=${data.id}`
       );
     }
   };
