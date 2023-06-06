@@ -16,7 +16,8 @@ export default function CustomSwitch({
   name = null,
   isRequired = false,
   inlineLabel = true,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   return (
     <div className="">
@@ -31,6 +32,7 @@ export default function CustomSwitch({
           className={`${className}`}
           {...(checked && checked)}
           {...(onChange && { onChange })}
+          readOnly={readOnly}
           defaultChecked={defaultChecked}
           disabled={disabled}
           sx={{
@@ -65,5 +67,6 @@ CustomSwitch.propTypes = {
   name: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };

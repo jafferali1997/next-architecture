@@ -22,12 +22,12 @@ export default function Customer() {
 
   return (
     <div className="">
-      <Toaster
+      {/* <Toaster
         show={showToaster}
         text={toasterMsg}
         onClose={() => setShowToaster(false)}
         type="success"
-      />
+      /> */}
       <div className="">
         <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
