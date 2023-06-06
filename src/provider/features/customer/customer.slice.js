@@ -151,7 +151,7 @@ export const getAllCustomer = createAsyncThunk(
   'customer/getAll',
   async ({ payload, callBackMessage }, thunkAPI) => {
     try {
-      const response = await customerService.getAllCustomer();
+      const response = await customerService.getAllCustomer(payload);
       if (response.Succeeded) {
         return response.data;
       }
