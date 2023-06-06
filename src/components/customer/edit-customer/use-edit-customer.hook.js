@@ -83,8 +83,11 @@ export default function UseEditCustomer() {
       discountGroup: []
     };
     Object.keys(data).forEach((key) => setValue(key, data[key]));
+
     if (data.additionalContact?.length > 0) {
-      Object.keys(data.additionalContact).forEach((key) => setValue(key, data.additionalContact[key]));
+      Object.keys(data.additionalContact[0]).forEach((key) =>
+        setValue(`ac_${key}`, data.additionalContact[0][key])
+      );
     }
   }
 
@@ -95,20 +98,22 @@ export default function UseEditCustomer() {
   const onSubmit = (data) => {
     const payloadData = {
       ...data,
-      additionalContact: {
-        ac_gender: data.ac_gender,
-        ac_designation: data.ac_designation,
-        ac_firstName: data.ac_firstName,
-        ac_lastName: data.ac_lastName,
-        ac_postalCode: data.ac_postalCode,
-        ac_address: data.ac_address,
-        ac_country: data.ac_country,
-        ac_city: data.ac_city,
-        ac_email: data.ac_email,
-        ac_phone: data.ac_phone,
-        ac_department: data.ac_department,
-        ac_mobile: data.ac_mobile
-      }
+      additionalContact: [
+        {
+          gender: data.ac_gender,
+          designation: data.ac_designation,
+          firstName: data.ac_firstName,
+          lastName: data.ac_lastName,
+          postalCode: data.ac_postalCode,
+          address: data.ac_address,
+          country: data.ac_country,
+          city: data.ac_city,
+          email: data.ac_email,
+          phone: data.ac_phone,
+          department: data.ac_department,
+          mobile: data.ac_mobile
+        }
+      ]
     };
     console.log(data);
     const res = dispatch(

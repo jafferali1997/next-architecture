@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import * as yup from 'yup';
-import { enqueueSnackbar } from 'notistack';
+// import { enqueueSnackbar } from 'notistack';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import ErrorIcon from '@/common/icons/error.icon';
@@ -71,7 +71,7 @@ export default function Page() {
     //     console.log(error);
     //   });
   }, []);
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <>
@@ -145,10 +145,11 @@ export default function Page() {
         <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
           <CustomButton
             text="Show Success Toaster"
-            onClick={() =>
-              enqueueSnackbar('message', {
-                variant: 'success'
-              })
+            onClick={
+              () => {}
+              // enqueueSnackbar('message', {
+              //   variant: 'success'
+              // })
             }
             className="btn-primary tw-m-5"
           />

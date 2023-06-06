@@ -310,8 +310,8 @@ export default function useCustomer() {
     const data = dispatch(deleteCustomer({ payload: row.id }));
     if (data) {
       // show toaster
-      showToaster(true);
-      setToasterMsg('Customer deleted successfully');
+      // showToaster(true);
+      // setToasterMsg('Customer deleted successfully');
     }
   };
 
@@ -332,7 +332,18 @@ export default function useCustomer() {
   };
 
   useEffect(() => {
-    // const data = dispatch(getAllCustomer());
+    // need to send callback message for toaster
+    // const data = dispatch(
+    //   getAllCustomer({
+    //     payload: {
+    //       page: 1,
+    //       pageSize: 10,
+    //       sortColumn: 'id',
+    //       sortOrder: 'DESC',
+    //       condition: {}
+    //     }
+    //   })
+    // );
     const data = {
       records: [
         {
@@ -383,9 +394,9 @@ export default function useCustomer() {
     };
     if (data?.totalRecords > 0) {
       const columns = getColumns(data.records[0]);
-      setColumnState(initialColumnState(columns));
-      setTableColumns(columns);
-      setTableRows(data.records);
+      // setColumnState(initialColumnState(columns));
+      // setTableColumns(columns);
+      // setTableRows(data.records);
     }
   }, []);
 

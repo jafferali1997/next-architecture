@@ -34,11 +34,11 @@ export default function CustomButton({
       type={type}
       onClick={onClick}
       variant={variant}
-      className={`btn ${className}`}
       href={href}
       disabled={disabled}
       endIcon={endIcon}
       startIcon={startIcon}
+      className={`btn ${className}`}
     >
       {text}
     </Button>

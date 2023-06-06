@@ -27,7 +27,7 @@ const getSingleCustomer = async (id) => {
 };
 
 const getAllCustomer = async () => {
-  const response = await api().get('/customer');
+  const response = await api().post('/customer/get-all');
   return response.data;
 };
 
