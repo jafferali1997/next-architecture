@@ -1,9 +1,13 @@
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  generateForgetPasswordLink,
+  regenerateEmailLink
+} from '@/provider/features/user/user.slice';
 
 export default function useVerifyEmail() {
-  const router = useRouter();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [type, setType] = useState();
   // const { email, signUp, forgetPassword, token } = router.query;
@@ -16,27 +20,11 @@ export default function useVerifyEmail() {
   const resendLinkHandler = () => {
     let newEmail = email;
     if (newEmail.includes('%2B')) newEmail = newEmail.replace('%2B', '+');
-    let apiType = 'resend-reset-password-link';
     if (type === 'email-verification') {
-      apiType = 'resend-verification-link';
+      dispatch(regenerateEmailLink({ payload: { email: newEmail } }));
+    } else {
+      dispatch(generateForgetPasswordLink({ payload: { email: newEmail } }));
     }
-    console.log(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/${apiType}`);
-    axios
-      .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/${apiType}`, {
-        newEmail
-      })
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === true) {
-          //   CustomAlert(response.data.message, 'success');
-        } else {
-          //   CustomAlert(response.data.message, 'error');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        // CustomAlert('Network Error', 'error');
-      });
   };
 
   // const verifyAccount = async () => {

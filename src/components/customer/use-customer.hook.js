@@ -336,14 +336,15 @@ export default function useCustomer() {
     // const data = dispatch(
     //   getAllCustomer({
     //     payload: {
-    //       page: 1,
-    //       pageSize: 10,
-    //       sortColumn: 'id',
-    //       sortOrder: 'DESC',
-    //       condition: {}
+    //       "page": 1,
+    //       "pageSize": 10,
+    //       "sortColumn": "id",
+    //       "sortOrder": "DESC",
+    //       "condition": {}
     //     }
     //   })
     // );
+    // console.log(data);
     const data = {
       records: [
         {
@@ -394,9 +395,9 @@ export default function useCustomer() {
     };
     if (data?.totalRecords > 0) {
       const columns = getColumns(data.records[0]);
-      // setColumnState(initialColumnState(columns));
-      // setTableColumns(columns);
-      // setTableRows(data.records);
+      setColumnState(initialColumnState(columns));
+      setTableColumns(columns);
+      setTableRows(data.records);
     }
   }, []);
 

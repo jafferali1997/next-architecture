@@ -28,21 +28,25 @@ export default function Profile() {
   } = useProfile();
 
   return (
-    <div className="profile-wrapper ">
-      <div className="profile-container">
-        <div className="header">
+    <div className=" tw-min-h-[1090px]">
+      <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
+        <div className="tw-mx-0 tw-mb-0 tw-mt-6">
           <Link href="/">
             <img alt="img" src="/assets/images/logo.png" />
           </Link>
         </div>
-        <h1 className="page-title">Profile Details</h1>
-        <div className="profile-form-section tw-mb-5">
-          <div className="profile-form-heading">
-            <div className="color-width" />
-            <h3>Personal Details</h3>
+        <h1 className="tw-pt-10 tw-font-dm tw-text-[24px] tw-font-bold tw-not-italic tw-leading-[52px] tw-text-[#494949]">
+          Profile Details
+        </h1>
+        <div className="profile-form-section tw-mb-5 tw-mt-[34px]">
+          <div className="profile-form-heading tw-flex tw-gap-3 tw-pt-[34px]">
+            <div className="color-width tw-min-h-[28px] tw-min-w-[6px] tw-rounded tw-bg-primary" />
+            <h3 className="tw-font-dm tw-text-[18px] tw-font-medium tw-not-italic tw-leading-[24px] tw-text-[#050707]">
+              Personal Details
+            </h3>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} method="post">
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
                   label="First Name"
@@ -66,7 +70,7 @@ export default function Profile() {
                 />
               </div>
             </div>
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
                   label="UserName"
@@ -92,7 +96,7 @@ export default function Profile() {
                 />
               </div>
             </div>
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <Select
                   label="Country"
@@ -116,7 +120,7 @@ export default function Profile() {
                 />
               </div>
             </div>
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-phone">
                 <CountryPhoneInput
                   label="Phone Number"
@@ -158,7 +162,7 @@ export default function Profile() {
               <div className="color-width" />
               <h3>Financial Details</h3>
             </div>
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
                   type="text"
@@ -183,7 +187,7 @@ export default function Profile() {
               <div className="color-width" />
               <h3>Business Details</h3>
             </div>
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
                   type="text"
@@ -207,8 +211,8 @@ export default function Profile() {
                 />
               </div>
             </div>
-            <div className="profile-form-content">
-              <div className="input-group onebythree">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
+              <div className="input-group onebythree tw-col-[0.3333333333]">
                 <CustomInput
                   type="text"
                   label="Address"
@@ -218,7 +222,7 @@ export default function Profile() {
                 />
               </div>
             </div>
-            <div className="profile-form-content">
+            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="submit-button">
                 <CustomButton
                   type="submit"
