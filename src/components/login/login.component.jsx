@@ -45,21 +45,21 @@ export default function Login() {
     errors
   } = useLogin();
   return (
-    <div className="login-wrapper">
-      <div className="login-container ">
-        <div className="header">
+    <div className="form-wrapper">
+      <div className="form-container ">
+        <div className="form-container-header">
           <Link href="/">
             <img alt="null" src="/assets/images/logo.png" />
           </Link>
         </div>
 
-        <div className="login-form-card ">
+        <div className="form-card  ">
           <div className="form-header">
-            <h1>Login</h1>
-            <p>Welcome back! Please enter your details</p>
+            <h1 className="form-header-h1">Login</h1>
+            <p className="form-header-p">Welcome back! Please enter your details</p>
           </div>
           <div className="form-body">
-            <form onSubmit={handleSubmit(onSubmit)} method="post">
+            <form className="tw-w-full" onSubmit={handleSubmit(onSubmit)} method="post">
               <div className="form-group-c">
                 <label>
                   Email/Username <span>*</span>
@@ -68,12 +68,12 @@ export default function Login() {
                   {...register('email')}
                   type="text"
                   id="email"
-                  className="form-control-c"
+                  className="form-group-c-input"
                   placeholder="Email/Username"
                   required
                   style={errors.email ? borderStyle : borderSuc}
                 />
-                <div className="login-validation">
+                <div className="form-validation">
                   <div className="innerValidation">
                     {errors.email ? (
                       <>
@@ -90,12 +90,12 @@ export default function Login() {
                   Password <span>*</span>
                 </label>
                 <div className="pass_input_div">
-                  <div className="password_wrapper">
+                  <div className="form-password_wrapper">
                     <input
                       {...register('password')}
                       type={showPassword ? 'text' : 'password'}
                       id="password"
-                      className="form-control-c"
+                      className="form-group-c-input"
                       placeholder="*******"
                       style={errors.password ? borderStyle : borderSuc}
                     />
@@ -113,7 +113,7 @@ export default function Login() {
                       }
                     />
                   </div>
-                  <div className="login-validation">
+                  <div className="form-validation">
                     <div className="innerValidation">
                       {errors.password ? (
                         <>
@@ -125,14 +125,22 @@ export default function Login() {
                   </div>
                 </div>
               </div>
-              <div className="form-checkbox">
-                <div className="check-content">
-                  <input id="check" type="checkbox" />
-                  <label htmlFor="check" className="remember">
+              <div className="tw-flex tw-justify-between tw-pb-6">
+                <div className="tw-flex tw-items-center tw-gap-2 tw-pb-6">
+                  <input
+                    id="check"
+                    type="checkbox"
+                    className=" tw-h-[13px] tw-w-[13px] tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[#8d99ae] tw-p-1 checked:tw-h-[13px] checked:tw-w-[13px] checked:tw-border-[none] checked:tw-bg-transparent checked:tw-bg-center checked:tw-shadow-none"
+                  />
+                  <label
+                    htmlFor="check"
+                    className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-dark-gray"
+                  >
                     Remember Me
                   </label>
                 </div>
-                <span
+                <Link
+                  href="/forget-password"
                   onClick={() =>
                     router.push({
                       pathname: '/forget-password',
@@ -142,21 +150,19 @@ export default function Login() {
                   className="forgotText"
                 >
                   Forgot Password?
-                </span>
+                </Link>
               </div>
               <div className="form-btn-c">
                 <CustomButton
                   type="submit"
-                  className="submit-btn"
-                  loading={loader}
-                  disabled={loader}
+                  className="btn-primary tw-w-full"
                   text="Login"
                 />
               </div>
               <div className="form-or-content">
-                <div className="line" />
-                <span>Or</span>
-                <div className="line" />
+                <div className="form-or-content-line" />
+                <span className="form-or-content-span">Or</span>
+                <div className="form-or-content-line" />
               </div>
               <div className="login-with-provider">
                 <button
@@ -186,12 +192,12 @@ export default function Login() {
                 <LoginWithLinkedIn />
               </div>
               <div>
-                <span className="login">
+                <p className="login tw-mt-[16px] tw-text-center">
                   Create an account?
-                  <span className="login2" onClick={() => router.push('/sign-up')}>
+                  <Link href="/sign-up" className="span-link">
                     Signup
-                  </span>
-                </span>
+                  </Link>
+                </p>
               </div>
             </form>
           </div>
