@@ -13,7 +13,8 @@ module.exports = {
       sm: '480px',
       md: '768px',
       lg: '992px',
-      xl: '1440px'
+      xl: '1440px',
+      custom1138: '1138px'
     },
     // colors: {
     //   primary: '#1D4ED8',
@@ -31,7 +32,8 @@ module.exports = {
     //   success: '#10FF61'
     // },
     fontFamily: {
-      dm: ['DM Sans', 'sans-serif']
+      dm: ['DM Sans', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif']
     },
     extend: {
       colors: {
@@ -49,6 +51,10 @@ module.exports = {
         'secondary-white': '#FEFEFE',
         'secondary-gray': '#FBFBFB',
         'text-black': '#2C2E3E',
+        'text-light-black': '#161618',
+        'text-light-black2': '#292D34',
+        'text-gray': '#51605C',
+        'text-gray2': '#666666',
         'text-dark-gray': '#46474F',
         'text-medium-gray': '#585858',
         'text-light-gray': '#7E7D7D',
@@ -101,7 +107,9 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'hero-pattern': "url('/assets/images/sidebar/sidebarellipses.png')",
-        'landing-hero-bg': "url('/assets/images/hero-bg.png')"
+        'landing-hero-bg': "url('/assets/images/landing/hero-bg.png')",
+        'landing-hero-circle': "url('/assets/images/landing/hero-circle.png')",
+        'howitworks-bg': "url('/assets/images/landing/howitworks/howitwork-bg.png')"
       }
     }
   },

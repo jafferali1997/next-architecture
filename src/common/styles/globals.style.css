@@ -35,6 +35,9 @@
   .btn-primary {
     @apply tw-bg-primary hover:tw-bg-secondary-blue focus:tw-bg-secondary-dark-blue disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
   }
+  .btn-primary-blue {
+    @apply tw-inline-block tw-w-fit tw-rounded-[10px] tw-border-2 tw-border-primary-purple tw-bg-primary-blue tw-py-4 tw-font-dm tw-text-lg tw-font-semibold tw-leading-6 tw-text-white xs:tw-px-5 lg:tw-px-12;
+  }
   .btn-cancel {
     @apply tw-bg-[#DBE1E7] tw-text-text-dark-gray;
   }
@@ -164,6 +167,9 @@
   }
   .inner-link {
     @apply tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline hover:tw-cursor-pointer;
+  }
+  .text-normal {
+    @apply tw-font-dm tw-text-xl tw-font-normal tw-leading-8 tw-text-text-light-black2;
   }
 }
 .payment-details-radios label {

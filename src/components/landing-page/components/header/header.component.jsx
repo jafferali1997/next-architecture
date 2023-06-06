@@ -10,7 +10,7 @@ const menus = [
 
 export default function Header() {
   return (
-    <div className="tw-sticky tw-top-0 tw-z-[99] tw-bg-white tw-px-2 tw-py-5 tw-shadow-custom">
+    <div className="tw-sticky tw-top-0 tw-z-[99] tw-bg-white tw-px-2 tw-px-4 tw-py-5 tw-shadow-custom">
       <div className="tw-m-auto tw-flex tw-w-full tw-max-w-7xl tw-items-center tw-justify-between">
         <div className="tw-flex tw-items-center sm:tw-gap-3 lg:tw-gap-[80px]">
           <div className="tw-flex tw-items-center tw-gap-3">
