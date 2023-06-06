@@ -13,12 +13,14 @@ export default function useVerify() {
   });
 
   const moveRouterEmail = (data) => {
-    router.push(
-      `/profile?email=&${data.email}&userId=${data.id}&userName=${data.userName}`
-    );
+    console.log(data);
+    // router.push(
+    //   `/profile?email=&${data.email}&userId=${data.id}&userName=${data.userName}`
+    // );
   };
 
   const moveRouterPassword = (data) => {
+    console.log(data);
     router.push(`/create-new-password?email=&${data.email}`);
   };
 

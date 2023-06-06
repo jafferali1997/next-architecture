@@ -8,12 +8,10 @@ export default function useVerifyEmail() {
   const [type, setType] = useState();
   // const { email, signUp, forgetPassword, token } = router.query;
   useEffect(() => {
-    console.log(router.query);
-    if (router.query) {
-      setEmail(router.query.email);
-      setType(router.query.type);
-    }
-  }, [router.query]);
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    setEmail(urlSearchParams.get('email'));
+    setType(urlSearchParams.get('type'));
+  }, []);
 
   const resendLinkHandler = () => {
     let newEmail = email;
