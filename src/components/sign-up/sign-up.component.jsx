@@ -56,7 +56,7 @@ function SignUp() {
                   placeholder="Username"
                   style={errors.userName ? borderStyle : borderSuc}
                 />
-                <div className="signup-validation ">
+                <div className="form-validation ">
                   {errors.userName ? (
                     <>
                       <img
@@ -82,7 +82,7 @@ function SignUp() {
                   placeholder="example@example.com"
                   style={errors.email ? borderStyle : borderSuc}
                 />
-                <div className="signup-validation ">
+                <div className="form-validation ">
                   {errors.email ? (
                     <>
                       <img
@@ -126,7 +126,7 @@ function SignUp() {
                     />
                   </div>
 
-                  <div className="signup-validation ">
+                  <div className="form-validation ">
                     {errors.password ? (
                       <>
                         <img
@@ -163,7 +163,7 @@ function SignUp() {
                 </label>
               </div>
 
-              <div className="signup-validation tw-mt-3">
+              <div className="form-validation tw-mt-3">
                 <div className="marignDiv">{isChecked === false ? errors.terms : ''}</div>
               </div>
 
@@ -206,11 +206,11 @@ function SignUp() {
                 </button>
                 <LoginWithLinkedIn />
               </div>
-              <div className="form_links tw-mt-[32px]">
+              <div className="form_links tw-mt-[32px] tw-text-center">
                 <label className="login">Already have an account?</label>
-                <label className="login2" onClick={() => router.push('/login')}>
+                <Link href="/login" className="span-link">
                   Login
-                </label>
+                </Link>
               </div>
             </form>
           </div>

@@ -81,6 +81,9 @@
   .h4 {
     @apply tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-dark-gray;
   }
+  .span-link {
+    @apply tw-cursor-pointer tw-pl-[3px] tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-blue-800 tw-underline;
+  }
   .h5 {
     @apply tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-secondary-black;
   }
@@ -160,6 +163,9 @@
   .form-wrapper {
     @apply tw-min-h-screen tw-bg-form-wrapper tw-bg-contain;
   }
+  .form-header {
+    @apply tw-flex tw-flex-col tw-items-center tw-gap-2 tw-px-6 tw-py-0;
+  }
 
   .form-container {
     @apply tw-m-auto tw-max-w-[1292px] tw-pb-[73.9px];
@@ -230,7 +236,7 @@
 
   /* temporary */
 
-  .signup-validation {
+  .form-validation {
     @apply tw-flex tw-gap-1 tw-pt-[4px] tw-text-[10px]  tw-font-normal tw-not-italic tw-leading-[15px] tw-text-[red];
     font-family: 'DM Sans';
   }
