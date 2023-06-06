@@ -140,10 +140,11 @@ export const changePassword = createAsyncThunk(
 
 export const verifyEmail = createAsyncThunk(
   'user/verifyEmail',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
     try {
       const response = await userService.verifyEmail(payload);
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
