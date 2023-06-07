@@ -104,6 +104,9 @@ export const productSlice = createSlice({
       .addCase(createProduct.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(createProduct.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -119,6 +122,9 @@ export const productSlice = createSlice({
       .addCase(updateProduct.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -134,6 +140,9 @@ export const productSlice = createSlice({
       .addCase(getSingleProduct.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSingleProduct.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -149,6 +158,9 @@ export const productSlice = createSlice({
       .addCase(getAllProduct.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllProduct.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -164,6 +176,9 @@ export const productSlice = createSlice({
       .addCase(deleteProduct.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.delete.isLoading = false;

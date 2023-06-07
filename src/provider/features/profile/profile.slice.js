@@ -27,7 +27,7 @@ export const createProfile = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -43,7 +43,7 @@ export const getSingleProfile = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -59,7 +59,7 @@ export const getAllProfile = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -75,7 +75,7 @@ export const updateProfile = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -91,7 +91,7 @@ export const deleteProfile = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -105,6 +105,9 @@ export const profileSlice = createSlice({
       .addCase(createProfile.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(createProfile.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -120,6 +123,9 @@ export const profileSlice = createSlice({
       .addCase(updateProfile.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -135,6 +141,9 @@ export const profileSlice = createSlice({
       .addCase(getSingleProfile.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSingleProfile.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -150,6 +159,9 @@ export const profileSlice = createSlice({
       .addCase(getAllProfile.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllProfile.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -165,6 +177,9 @@ export const profileSlice = createSlice({
       .addCase(deleteProfile.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deleteProfile.fulfilled, (state, action) => {
         state.delete.isLoading = false;
