@@ -4,22 +4,24 @@ import React from 'react';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
-import useAddCustomer from './use-add-customer.hook';
+import useLineItem from './use-line-item.hook';
 
-export default function AddCustomer() {
-  const { isSubmit, setIsSubmit } = useAddCustomer();
+export default function LineItem() {
+  const { isSubmit, setIsSubmit } = useLineItem();
   return (
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
         <h3 className="form-inner-heading">Add Customer</h3>
-        <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
-          <Select
-            options={[
-              { id: 'male', value: 'male', label: 'Male' },
-              { id: 'female', value: 'female', label: 'Female' }
-            ]}
-            placeholder="John"
-          />
+        <div className="">
+          <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
+            <Select
+              options={[
+                { id: 'male', value: 'male', label: 'Male' },
+                { id: 'female', value: 'female', label: 'Female' }
+              ]}
+              placeholder="John"
+            />
+          </div>
         </div>
       </div>
       <div className="content-body">

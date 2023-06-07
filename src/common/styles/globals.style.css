@@ -377,3 +377,11 @@ body {
 .tab-content {
   margin-top: 16px;
 }
+
+/* // textarea */
+.tox-statusbar {
+  display: none !important;
+}
+.tox-notifications-container {
+  display: none !important;
+}
