@@ -26,7 +26,7 @@ export const createBusinessDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -42,7 +42,7 @@ export const getSingleBusinessDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -58,7 +58,7 @@ export const getAllBusinessDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -74,7 +74,7 @@ export const updateBusinessDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -90,7 +90,7 @@ export const deleteBusinessDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -104,6 +104,9 @@ export const businessDetailSlice = createSlice({
       .addCase(createBusinessDetail.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(createBusinessDetail.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -119,6 +122,9 @@ export const businessDetailSlice = createSlice({
       .addCase(updateBusinessDetail.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updateBusinessDetail.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -134,6 +140,9 @@ export const businessDetailSlice = createSlice({
       .addCase(getSingleBusinessDetail.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSingleBusinessDetail.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -149,6 +158,9 @@ export const businessDetailSlice = createSlice({
       .addCase(getAllBusinessDetail.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllBusinessDetail.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -164,6 +176,9 @@ export const businessDetailSlice = createSlice({
       .addCase(deleteBusinessDetail.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deleteBusinessDetail.fulfilled, (state, action) => {
         state.delete.isLoading = false;

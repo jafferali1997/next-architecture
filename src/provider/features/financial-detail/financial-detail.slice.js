@@ -27,7 +27,7 @@ export const createFinancialDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -43,7 +43,7 @@ export const getSingleFinancialDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -59,7 +59,7 @@ export const getAllFinancialDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -75,7 +75,7 @@ export const updateFinancialDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -91,7 +91,7 @@ export const deleteFinancialDetail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -105,6 +105,9 @@ export const financialDetailSlice = createSlice({
       .addCase(createFinancialDetail.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(createFinancialDetail.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -120,6 +123,9 @@ export const financialDetailSlice = createSlice({
       .addCase(updateFinancialDetail.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updateFinancialDetail.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -135,6 +141,9 @@ export const financialDetailSlice = createSlice({
       .addCase(getSingleFinancialDetail.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSingleFinancialDetail.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -150,6 +159,9 @@ export const financialDetailSlice = createSlice({
       .addCase(getAllFinancialDetail.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllFinancialDetail.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -165,6 +177,9 @@ export const financialDetailSlice = createSlice({
       .addCase(deleteFinancialDetail.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deleteFinancialDetail.fulfilled, (state, action) => {
         state.delete.isLoading = false;

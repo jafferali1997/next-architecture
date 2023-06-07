@@ -37,7 +37,7 @@ export const addPhoneAndGenerateOtp = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -53,7 +53,7 @@ export const generateOtp = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -69,7 +69,7 @@ export const verifyOtp = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -85,7 +85,7 @@ export const generateForgetPasswordLink = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -101,7 +101,7 @@ export const regenerateEmailLink = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -117,7 +117,7 @@ export const changePasswordFromLink = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -133,7 +133,7 @@ export const changePassword = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -151,7 +151,7 @@ export const verifyEmail = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -165,6 +165,9 @@ const userSlice = createSlice({
       .addCase(addPhoneAndGenerateOtp.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(addPhoneAndGenerateOtp.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -180,6 +183,9 @@ const userSlice = createSlice({
       .addCase(generateOtp.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(generateOtp.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -195,6 +201,9 @@ const userSlice = createSlice({
       .addCase(verifyOtp.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(verifyOtp.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -210,6 +219,9 @@ const userSlice = createSlice({
       .addCase(generateForgetPasswordLink.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(generateForgetPasswordLink.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -225,6 +237,9 @@ const userSlice = createSlice({
       .addCase(regenerateEmailLink.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(regenerateEmailLink.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -240,6 +255,9 @@ const userSlice = createSlice({
       .addCase(changePasswordFromLink.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(changePasswordFromLink.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -255,6 +273,9 @@ const userSlice = createSlice({
       .addCase(changePassword.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(changePassword.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -270,6 +291,9 @@ const userSlice = createSlice({
       .addCase(verifyEmail.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(verifyEmail.fulfilled, (state, action) => {
         state.create.isLoading = false;

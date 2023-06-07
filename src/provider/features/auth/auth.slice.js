@@ -47,7 +47,7 @@ export const login = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -65,7 +65,7 @@ export const signUp = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -82,7 +82,7 @@ export const loginAndSignUpWithGoogle = createAsyncThunk(
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -95,7 +95,7 @@ export const logout = createAsyncThunk('auth/logout', async (payload, thunkAPI) 
     }
     return thunkAPI.rejectWithValue(response);
   } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+    return thunkAPI.rejectWithValue({ payload: error });
   }
 });
 
@@ -139,6 +139,9 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.login.isLoading = true;
         state.login.message = '';
+        state.login.isError = false;
+        state.login.isSuccess = false;
+        state.login.data = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.login.isLoading = false;
@@ -165,10 +168,16 @@ export const authSlice = createSlice({
       .addCase(signUp.pending, (state) => {
         state.signUp.isLoading = true;
         state.signUp.message = '';
+        state.signUp.isError = false;
+        state.signUp.isSuccess = false;
+        state.signUp.data = null;
       })
       .addCase(logout.pending, (state) => {
         state.logout.isLoading = true;
         state.logout.message = '';
+        state.logout.isError = false;
+        state.logout.isSuccess = false;
+        state.logout.data = null;
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.logout.isLoading = false;
@@ -184,6 +193,9 @@ export const authSlice = createSlice({
       .addCase(loginAndSignUpWithGoogle.pending, (state) => {
         state.loginAndSignUpWithGoogle.isLoading = true;
         state.loginAndSignUpWithGoogle.message = '';
+        state.loginAndSignUpWithGoogle.isError = false;
+        state.loginAndSignUpWithGoogle.isSuccess = false;
+        state.loginAndSignUpWithGoogle.data = null;
       })
       .addCase(loginAndSignUpWithGoogle.fulfilled, (state, action) => {
         state.loginAndSignUpWithGoogle.isLoading = false;
