@@ -20,7 +20,7 @@ export default function useVerify() {
 
   const moveRouterPassword = (data) => {
     console.log(data);
-    router.push(`/create-new-password?email=&${data.email}`);
+    router.push(`/create-new-password?email=${data.email}&token=${data.token}`);
   };
 
   const moveRouterError = (email, type) => {
@@ -43,13 +43,7 @@ export default function useVerify() {
         })
       );
     } else {
-      dispatch(
-        changePasswordFromLink({
-          payload: body,
-          successCallBack: moveRouterPassword,
-          errorCallBack: moveRouterError(email, type)
-        })
-      );
+      moveRouterPassword({email,token})
     }
   };
 

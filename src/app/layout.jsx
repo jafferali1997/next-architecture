@@ -15,10 +15,10 @@ import store from '@/provider/store';
 
 // const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'Quick Steps',
-  description: 'Custom invoices generating app'
-};
+// export const metadata = {
+//   title: 'Quick Steps',
+//   description: 'Custom invoices generating app'
+// };
 
 const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
   '&.notistack-MuiContent-success': {
