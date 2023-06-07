@@ -20,10 +20,16 @@ export default function useCreateCategories() {
       categories: []
     }
   ]);
+  const [categoryLevelToGet, setCategoryLevelToGet] = useState();
+  const [categoryToRender, setCategoryToRender] = useState(0);
   const allProductCategoryRes = useSelector((state) => state.productCategory.getAll);
   const createProductCategoryRes = useSelector((state) => state.productCategory.create);
   const updateProductCategoryRes = useSelector((state) => state.productCategory.update);
   const deleteProductCategoryRes = useSelector((state) => state.productCategory.delete);
+
+  const handleCategories = (array) => {
+    setCategories(array);
+  };
 
   const getAllCategoryApi = (data) => {
     const { categoryLevelToGet, parentCategoryId, categoryLevel } = data;
@@ -47,19 +53,18 @@ export default function useCreateCategories() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(allProductCategoryRes);
     if (allProductCategoryRes.isSuccess) {
       if (
         categories.find(
           (item) => item.categoryLevel === allProductCategoryRes.data[0].categoryLevel
         )
       ) {
-        setCategories([
+        handleCategories([
           ...categories.map((item) => {
             if (item.categoryLevel === allProductCategoryRes.data[0].categoryLevel) {
               return {
                 ...item,
-                categoryToRender: allProductCategoryRes.data[0].parentCategoryId,
+                categoryToRender: allProductCategoryRes.data[0].parentCategoryId ?? 0,
                 categories: allProductCategoryRes.data
               };
             }
@@ -67,7 +72,7 @@ export default function useCreateCategories() {
           })
         ]);
       } else {
-        setCategories([
+        handleCategories([
           ...categories,
           {
             categoryToRender: allProductCategoryRes.data[0].parentCategoryId,
@@ -76,12 +81,27 @@ export default function useCreateCategories() {
           }
         ]);
       }
-      if (allProductCategoryRes.message === 'Record Not Found') {
-        setCategories([
+    }
+    if (allProductCategoryRes.message === 'Record Not Found') {
+      if (categories.find((item) => item.categoryLevel === categoryLevelToGet)) {
+        handleCategories([
+          ...categories.map((item) => {
+            if (item.categoryLevel === categoryLevelToGet) {
+              return {
+                ...item,
+                categoryToRender,
+                categories: []
+              };
+            }
+            return item;
+          })
+        ]);
+      } else {
+        handleCategories([
           ...categories,
           {
-            categoryToRender: 0,
-            categoryLevel: categories[0].categories.length ? categories.length + 1 : 0,
+            categoryToRender,
+            categoryLevel: categoryLevelToGet,
             categories: []
           }
         ]);
@@ -93,7 +113,7 @@ export default function useCreateCategories() {
     dispatch(
       createProductCategory({
         payload: { parentCategoryId, categoryName },
-        successCallback: getAllCategoryApi
+        successCallBack: getAllCategoryApi
       })
     );
   };
@@ -102,7 +122,7 @@ export default function useCreateCategories() {
     dispatch(
       deleteProductCategory({
         payload: id,
-        successCallback: getAllCategoryApi
+        successCallBack: getAllCategoryApi
       })
     );
   };
@@ -111,7 +131,7 @@ export default function useCreateCategories() {
     dispatch(
       updateProductCategory({
         payload: { id, data },
-        successCallback: getAllCategoryApi
+        successCallBack: getAllCategoryApi
       })
     );
   };
@@ -123,8 +143,13 @@ export default function useCreateCategories() {
           category.categoryLevel === categoryLevel && category.categoryToRender === id
       )
     ) {
+      setCategoryLevelToGet(categoryLevel);
+      setCategoryToRender(id);
       getAllCategoryApi({ categoryLevelToGet: categoryLevel, parentCategoryId: id });
     }
+    handleCategories([
+      ...categories.filter((item) => item.categoryLevel <= categoryLevel)
+    ]);
   };
 
   return {

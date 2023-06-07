@@ -10,7 +10,6 @@ import useCreateCategories from './use-create-categories.hooks';
 
 export default function CreateCategories() {
   const { handleAddCategory, categories, handleClickCategory } = useCreateCategories();
-  
   return (
     <>
       <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
@@ -87,18 +86,23 @@ function CategoryColumn({
   categoryToRender,
   handleAddCategory
 }) {
+  const [search, setSearch] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState();
   const handleButtonClick = () => {
     setShowInput(true);
   };
 
-  const onChange = (e) => {
+  const handleAddButtonChange = (e) => {
     setValue(e.target.value);
   };
 
   const handleSubmit = () => {
     handleAddCategory(categoryToRender, value);
+  };
+
+  const handleSearchButton = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -116,7 +120,7 @@ function CategoryColumn({
         <>
           <CustomInput
             value={value}
-            onChange={onChange}
+            onChange={handleAddButtonChange}
             type="text"
             placeholder="Enter Category"
           />
@@ -133,23 +137,26 @@ function CategoryColumn({
           startIcon={<SearchIcon />}
           className="tw-bg-secondary-light-blue"
           placeholder="Search"
+          onChange={handleSearchButton}
           type="text"
         />
       </div>
       <div>
         <h4 className="h4">All Categories</h4>
       </div>
-      {columnData.length &&
-        columnData.map((item, index) => (
-          <div
-            key={item.id}
-            onClick={() => handleClickCategory(item.id, item.categoryLevel + 1)}
-            className="tw-flex tw-h-[34px] tw-w-full tw-items-center tw-justify-between tw-rounded-md tw-border tw-border-solid tw-border-disabled-input tw-bg-secondary-white tw-px-[12px] tw-py-[8px]"
-          >
-            <h5 className="h5">{item.categoryName}</h5>
-            <img src="/assets/images/arwo-icon.svg" alt="arwo-icon" />
-          </div>
-        ))}
+      {columnData.length !== 0 &&
+        columnData
+          .filter((item) => item.categoryName.includes(search))
+          .map((item, index) => (
+            <div
+              key={item.id}
+              onClick={() => handleClickCategory(item.id, item.categoryLevel + 1)}
+              className="tw-flex tw-h-[34px] tw-w-full tw-items-center tw-justify-between tw-rounded-md tw-border tw-border-solid tw-border-disabled-input tw-bg-secondary-white tw-px-[12px] tw-py-[8px]"
+            >
+              <h5 className="h5">{item.categoryName}</h5>
+              <img src="/assets/images/arwo-icon.svg" alt="arwo-icon" />
+            </div>
+          ))}
     </div>
   );
 }
