@@ -2,8 +2,12 @@ import { useState } from 'react';
 
 export default function useCategoryColumn({ handleAddCategory, categoryToRender }) {
   const [search, setSearch] = useState('');
+  const [idToUpdateCategory, setIdToUpdateCategory] = useState();
+  const [updateValue, setUpdateValue] = useState();
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState();
+  const [openPopup, setOpenPopup] = useState(false);
+
   const handleButtonClick = () => {
     setShowInput(true);
   };
@@ -20,6 +24,11 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
     setSearch(e.target.value);
   };
 
+  const handleButtonClickedit = (id) => {
+    setIdToUpdateCategory(id);
+    setOpenPopup(!openPopup);
+  };
+
   return {
     handleButtonClick,
     showInput,
@@ -27,6 +36,12 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
     handleAddButtonChange,
     search,
     handleSubmit,
-    handleSearchButton
+    handleSearchButton,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit,
+    idToUpdateCategory,
+    setUpdateValue,
+    updateValue
   };
 }

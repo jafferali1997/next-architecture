@@ -25,6 +25,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   const router = useRouter();
 
   const handleChangeRadio = (event) => {
+    console.log(event.target.value);
     setSelectedValue(event.target.value);
   };
 

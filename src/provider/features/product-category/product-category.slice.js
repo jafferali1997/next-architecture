@@ -56,7 +56,6 @@ export const getAllProductCategory = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      console.log(response);
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
@@ -67,11 +66,12 @@ export const getAllProductCategory = createAsyncThunk(
 
 export const updateProductCategory = createAsyncThunk(
   'productCategory/update',
-  async ({ payload: { id, data }, successCallback, callBackMessage }, thunkAPI) => {
+  async ({ payload: { id, data }, successCallBack, callBackMessage }, thunkAPI) => {
     try {
+      console.log(id, data);
       const response = await productCategoryService.updateProductCategory(id, data);
       if (response.Succeeded) {
-        successCallback(response.data);
+        successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
@@ -84,11 +84,11 @@ export const updateProductCategory = createAsyncThunk(
 
 export const deleteProductCategory = createAsyncThunk(
   'productCategory/delete',
-  async ({ payload, successCallback, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
     try {
       const response = await productCategoryService.deleteProductCategory(payload);
       if (response.Succeeded) {
-        successCallback(response.data);
+        successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);

@@ -1,11 +1,23 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { City, Country } from 'country-state-city';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
-// import CustomAlert from '@/common/components/custom-alert';
+import { yupResolver } from '@hookform/resolvers/yup';
+import {
+  createCustomerPersonalDetail,
+  getSingleCustomer
+} from '@/provider/features/customer/customer.slice';
+import {
+  createDiscountGroup,
+  getAllDiscountGroup
+} from '@/provider/features/discount-group/discount-group.slice';
+import {
+  createPriceGroup,
+  getAllPriceGroup
+} from '@/provider/features/price-group/price-group.slice';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -35,15 +47,15 @@ const validationSchema = yup.object({
   //   .number()
   //   .max(9999999999, 'postal code must be at most 10 characters long')
   //   .min(1, 'postal code must be minimum 1 characters')
-  //   // .matches(/^[^.]*$/, {
-  //   //   message: 'No period'
-  //   // })
-  //   // .matches(/^[^.]*$/, {
-  //   //   message: 'Invalid postal'
-  //   // })
-  //   // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
-  //   //   message: 'Invalid postal'
-  //   // })
+    // .matches(/^[^.]*$/, {
+    //   message: 'No period'
+    // })
+    // .matches(/^[^.]*$/, {
+    //   message: 'Invalid postal'
+    // })
+    // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
+    //   message: 'Invalid postal'
+    // })
   //   .required('postal code is required'),
   // address: yup
   //   .string()
@@ -75,25 +87,25 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const [isSubmit, setIsSubmit] = useState(false);
   const countries = Country.getAllCountries();
 
+  const dispatch = useDispatch();
+
   const fetchData = useCallback(
     async (id) => {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/${id}`
-      );
-      setData(res.data.result?.data.customer);
+      const data = dispatch(getSingleCustomer({ payload: id }));
+      setData(data);
       const event = {
         target: {
-          value: res.data.result?.data.customer.country
+          value: data?.country
         }
       };
       handleCountryChange(event);
       setPriceOptions(
-        res.data.result?.data.customer.priceGroups.map((item) => {
+        data.priceGroup.map((item) => {
           return priceGroup.find((price) => price.value === item);
         })
       );
       setDiscountOptions(
-        res.data.result?.data.customer.discountGroups.map((item) => {
+        data.discountGroup.map((item) => {
           return discountGroup.find((price) => price.value === item);
         })
       );
@@ -102,40 +114,43 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   );
 
   const fetchPriceGroup = async () => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/price-group/get-all`
-    );
+    const groups = await dispatch(getAllPriceGroup());
+    console.log(groups, 'Price Groups');
     setPriceGroup(
-      res.data.result.data.priceGroup.map((item) => {
-        return { value: item._id, label: item.name };
+      groups.map((item) => {
+        return { id: item.id, value: item.id, label: item.priceGroupName };
       })
     );
   };
 
   const fetchDiscountGroup = async () => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/discount-group/get-all`
-    );
+    const groups = await dispatch(getAllDiscountGroup());
+    console.log(groups, 'Discount Groups');
     setDiscountGroup(
-      res.data.result.data.discountGroup.map((item) => {
-        return { value: item._id, label: item.name };
+      groups.map((item) => {
+        return { id: item.id, value: item.id, label: item.discountGroupName };
       })
     );
   };
 
   const addPriceGroup = async (data) => {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/price-group/create`,
-      data
-    );
+    // NOTE: I need this data to be sent to the backend
+    // data = {
+    //   "priceGroupName": "string",
+    //   "price": 0
+    // }
+    dispatch(createPriceGroup({ payload: data }));
     fetchPriceGroup();
   };
 
   const addDiscountGroup = async (data) => {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/discount-group/create`,
-      data
-    );
+    // NOTE: I need this data to be sent to the backend
+    // data = {
+    //   "discountGroupName": "Group 2",
+    //   "discount": 500
+    // }
+
+    dispatch(createDiscountGroup({ payload: data }));
     fetchDiscountGroup();
   };
 
@@ -167,37 +182,27 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const onSubmit = async (value) => {
     console.log(value);
-    handleTabClick('company_details');
-    handleTabCompleted('customer_details');
-    // try {
-    //   const res = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/personal-detail`,
-    //     {
-    //       ...value,
-    //       ...(router.query.id && { customerId: router.query.id }),
-    //       priceGroups: [
-    //         ...priceOptions.map((item) => {
-    //           return item.value;
-    //         })
-    //       ],
-    //       discountGroups: [
-    //         ...discountOptions.map((item) => {
-    //           return item.value;
-    //         })
-    //       ]
-    //     }
-    //   );
-    //   if (res.data.status) {
-    //     router.query.id = res.data.result.data._id;
-    //     router.push(router);
-    //     handleTabClick('company_details');
-    //     handleTabCompleted('customer_details');
-    //   } else {
-    //     // CustomAlert(res.data.message, 'Error');
-    //   }
-    // } catch (e) {
-    //   //   CustomAlert(e.response.data.error[0].msg, 'Error');
-    // }
+    const data = {
+      ...value,
+      ...(router.query.id && { customerId: router.query.id }),
+      priceGroups: [
+        ...priceOptions.map((item) => {
+          return item.value;
+        })
+      ],
+      discountGroups: [
+        ...discountOptions.map((item) => {
+          return item.value;
+        })
+      ]
+    };
+    const res = dispatch(createCustomerPersonalDetail({ payload: data }));
+    if (res) {
+      router.query.id = res.data.result.data._id;
+      router.push(router);
+      handleTabClick('company_details');
+      handleTabCompleted('customer_details');
+    }
   };
 
   return {

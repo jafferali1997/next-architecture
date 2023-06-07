@@ -16,7 +16,8 @@ export default function CustomRadio({
   name = null,
   isRequired = false,
   inlineLabel = true,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   return (
     <div className="">
@@ -30,6 +31,7 @@ export default function CustomRadio({
           name={name}
           className={`${className}`}
           disabled={disabled}
+          readOnly={readOnly}
           {...(checked && { checked })}
           {...(onChange && { onChange })}
           defaultChecked={defaultChecked}
@@ -59,5 +61,6 @@ CustomRadio.propTypes = {
   name: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };

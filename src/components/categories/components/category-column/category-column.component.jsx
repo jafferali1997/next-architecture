@@ -1,11 +1,12 @@
 'use client';
 
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { PropTypes } from 'prop-types';
-import { useState } from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import PlusIcon from '@/common/icons/plus.icon';
 import SearchIcon from '@/common/icons/search-icon';
+import MenuDropDown from '../menu-drop-down/menu-drop-down.component';
 import useCategoryColumn from './use-category-column.hook';
 
 export default function CategoryColumn({
@@ -13,7 +14,9 @@ export default function CategoryColumn({
   categoryLevel,
   handleClickCategory,
   categoryToRender,
-  handleAddCategory
+  handleAddCategory,
+  handleUpdateCategory,
+  handleDeleteCategory
 }) {
   const {
     handleButtonClick,
@@ -22,7 +25,13 @@ export default function CategoryColumn({
     handleAddButtonChange,
     search,
     handleSubmit,
-    handleSearchButton
+    handleSearchButton,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit,
+    idToUpdateCategory,
+    setUpdateValue,
+    updateValue
   } = useCategoryColumn({ handleAddCategory, categoryToRender });
 
   return (
@@ -71,12 +80,47 @@ export default function CategoryColumn({
             <div
               key={item.id}
               onClick={() => handleClickCategory(item.id, item.categoryLevel + 1)}
-              className="tw-flex tw-h-[34px] tw-w-full tw-items-center tw-justify-between tw-rounded-md tw-border tw-border-solid tw-border-disabled-input tw-bg-secondary-white tw-px-[12px] tw-py-[8px]"
+              className="cate-btn tw-flex tw-h-[34px] tw-w-full tw-items-center tw-justify-between tw-rounded-md tw-border tw-border-solid tw-border-disabled-input tw-bg-secondary-white tw-px-[12px] tw-py-[8px]"
             >
               <h5 className="h5">{item.categoryName}</h5>
-              <img src="/assets/images/arwo-icon.svg" alt="arwo-icon" />
+              <MenuDropDown
+                handleButtonClickedit={handleButtonClickedit}
+                id={item.id}
+                handleDeleteCategory={handleDeleteCategory}
+              />
             </div>
           ))}
+      <Dialog open={openPopup}>
+        <div className="tw-w-[389px]">
+          <div>
+            <DialogTitle>Category</DialogTitle>
+          </div>
+          <DialogContent>
+            <CustomInput
+              placeholder="Category"
+              label="Category Name"
+              type="text"
+              onChange={(e) => setUpdateValue(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <CustomButton
+              onClick={() => setOpenPopup(false)}
+              className=" btn-cancel"
+              text="Cancel"
+            />
+            <CustomButton
+              className="btn btn-primary "
+              text="Update"
+              onClick={() => {
+                setOpenPopup(false);
+                handleUpdateCategory(idToUpdateCategory, updateValue);
+                setUpdateValue('');
+              }}
+            />
+          </DialogActions>
+        </div>
+      </Dialog>
     </div>
   );
 }
@@ -87,5 +131,7 @@ CategoryColumn.propTypes = {
   categoryLevel: PropTypes.number.isRequired,
   handleClickCategory: PropTypes.func.isRequired,
   categoryToRender: PropTypes.number.isRequired,
-  handleAddCategory: PropTypes.func.isRequired
+  handleAddCategory: PropTypes.func.isRequired,
+  handleDeleteCategory: PropTypes.func.isRequired,
+  handleUpdateCategory: PropTypes.func.isRequired
 };

@@ -20,7 +20,7 @@ export default function useVerify() {
 
   const moveRouterPassword = (data) => {
     console.log(data);
-    router.push(`/create-new-password?email=&${data.email}`);
+    router.push(`/create-new-password?email=${data.email}`);
   };
 
   const moveRouterError = (email, type) => {

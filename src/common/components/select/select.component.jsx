@@ -19,7 +19,8 @@ export default function Select({
   label = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   return (
     <div
@@ -43,6 +44,7 @@ export default function Select({
           )}
           className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
           disabled={disabled}
+          readOnly={readOnly}
           {...(value && { value })}
           {...(onChange && { onChange })}
           defaultValue={defaultValue}
@@ -89,5 +91,6 @@ Select.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };

@@ -4,7 +4,13 @@ import CategoryColumn from './components/category-column/category-column.compone
 import useCreateCategories from './use-create-categories.hooks';
 
 export default function CreateCategories() {
-  const { handleAddCategory, categories, handleClickCategory } = useCreateCategories();
+  const {
+    handleAddCategory,
+    categories,
+    handleClickCategory,
+    handleDeleteCategory,
+    handleUpdateCategory
+  } = useCreateCategories();
   return (
     <>
       <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
@@ -21,6 +27,8 @@ export default function CreateCategories() {
             categoryLevel={item.categoryLevel}
             handleClickCategory={handleClickCategory}
             handleAddCategory={handleAddCategory}
+            handleDeleteCategory={handleDeleteCategory}
+            handleUpdateCategory={handleUpdateCategory}
           />
         ))}
       </div>
