@@ -385,3 +385,15 @@ body {
 .tox-notifications-container {
   display: none !important;
 }
+
+/* end textarea */
+.cate-btn:hover {
+  cursor: pointer;
+}
+
+.cate-btn .threedot {
+  display: none;
+}
+.cate-btn:hover .threedot {
+  display: block;
+}
