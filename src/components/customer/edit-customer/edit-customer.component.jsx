@@ -22,7 +22,10 @@ export default function EditCustomer() {
     handleSubmit,
     errors,
     id,
-    onSubmit
+    onSubmit,
+    handleInputChange,
+    inputValues,
+    handleAddInput
   } = UseEditCustomer();
 
   return (
@@ -261,27 +264,45 @@ export default function EditCustomer() {
                       />
                     )}
                   </div>
-                  <span className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline">
+                  <span className="inner-link" onClick={handleAddInput}>
                     Add more address
                   </span>
                 </div>
                 {isAdress ? (
-                  <div className="form-box-grid">
-                    <CustomInput
-                      label="Company address 1"
-                      name=""
-                      placeholder="Company address 1"
-                      type="text"
-                      isRequired={false}
-                    />
-                    <CustomInput
-                      label="Company address 1"
-                      name=""
-                      placeholder="Company address 1"
-                      type="text"
-                      isRequired={false}
-                    />
-                  </div>
+                  <>
+                    <div className="form-box-grid">
+                      <CustomInput
+                        label="Company address 1"
+                        name=""
+                        placeholder="Company address 1"
+                        type="text"
+                        isRequired={false}
+                      />
+                      <CustomInput
+                        label="Company address 1"
+                        name=""
+                        placeholder="Company address 1"
+                        type="text"
+                        isRequired={false}
+                      />
+                    </div>
+                    {inputValues.map((value, index) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <div className="form-box-grid " key={index}>
+                        <CustomInput
+                          placeholder="Enter label name"
+                          type="text"
+                          errors={errors}
+                          onChange={(e) => handleInputChange(index, e.target.value)}
+                        />
+                        <CustomInput
+                          placeholder="Enter company address"
+                          type="text"
+                          errors={errors}
+                        />
+                      </div>
+                    ))}
+                  </>
                 ) : null}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>

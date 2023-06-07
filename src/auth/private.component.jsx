@@ -18,7 +18,7 @@ export default function Private({ component }) {
         <div className="sidebar tw-basis-1/6">
           <Sidebar />
         </div>
-        <div className="content tw-basis-5/6">
+        <div className="content tw-basis-5/6 tw-bg-secondary-gray">
           <Navbar />
           {component}
         </div>

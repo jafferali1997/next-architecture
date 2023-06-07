@@ -191,12 +191,8 @@ export default function FormForCompanyDetails({
               type="text"
               errors={errors}
             />
-            {/* <button onClick={() => handleRemoveInput(index)}>Remove Input</button> */}
           </div>
         ))}
-
-        {/* <CustomInput placeholder="Enter label name" type="text" errors={errors} />
-        <CustomInput placeholder="Enter company address" type="text" errors={errors} /> */}
       </div>
       <div className="form-additonals tw-flex tw-gap-[16px]">
         <h3>Additional contact person</h3>

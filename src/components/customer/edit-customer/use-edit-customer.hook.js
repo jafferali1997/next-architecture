@@ -11,6 +11,7 @@ import {
 } from '@/provider/features/customer/customer.slice';
 
 export default function UseEditCustomer() {
+  const [inputValues, setInputValues] = useState([]);
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -125,6 +126,22 @@ export default function UseEditCustomer() {
     }
   };
 
+  const handleAddInput = () => {
+    setInputValues([...inputValues, '']);
+  };
+
+  const handleRemoveInput = (index) => {
+    const newInputValues = [...inputValues];
+    newInputValues.splice(index, 1);
+    setInputValues(newInputValues);
+  };
+
+  const handleInputChange = (index, value) => {
+    const newInputValues = [...inputValues];
+    newInputValues[index] = value;
+    setInputValues(newInputValues);
+  };
+
   return {
     isAdditional,
     setIsAdditional,
@@ -136,6 +153,10 @@ export default function UseEditCustomer() {
     handleSubmit,
     errors,
     id: customerId.current,
-    onSubmit
+    onSubmit,
+    handleAddInput,
+    handleInputChange,
+    inputValues,
+    setInputValues
   };
 }
