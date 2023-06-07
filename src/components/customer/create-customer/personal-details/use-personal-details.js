@@ -47,15 +47,15 @@ const validationSchema = yup.object({
   //   .number()
   //   .max(9999999999, 'postal code must be at most 10 characters long')
   //   .min(1, 'postal code must be minimum 1 characters')
-    // .matches(/^[^.]*$/, {
-    //   message: 'No period'
-    // })
-    // .matches(/^[^.]*$/, {
-    //   message: 'Invalid postal'
-    // })
-    // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
-    //   message: 'Invalid postal'
-    // })
+  // .matches(/^[^.]*$/, {
+  //   message: 'No period'
+  // })
+  // .matches(/^[^.]*$/, {
+  //   message: 'Invalid postal'
+  // })
+  // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
+  //   message: 'Invalid postal'
+  // })
   //   .required('postal code is required'),
   // address: yup
   //   .string()
@@ -86,6 +86,12 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const [discountOptions, setDiscountOptions] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
   const countries = Country.getAllCountries();
+
+  const [openPopup, setOpenPopup] = useState(false);
+
+  const handleButtonClickedit = () => {
+    setOpenPopup(!openPopup);
+  };
 
   const dispatch = useDispatch();
 
@@ -228,6 +234,9 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     addDiscountGroup,
     setIsSubmit,
     router,
-    errors
+    errors,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit
   };
 }
