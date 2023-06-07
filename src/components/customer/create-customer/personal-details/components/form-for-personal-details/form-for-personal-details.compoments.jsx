@@ -38,8 +38,8 @@ export default function FormForPersonalDetails({
           label="Gender"
           isRequired={true}
           options={[
-            { id: 'male', value: 'male', label: 'Male' },
-            { id: 'female', value: 'female', label: 'Female' }
+            { id: 'male', value: 'MALE', label: 'Male' },
+            { id: 'female', value: 'FEMALE', label: 'Female' }
           ]}
           placeholder="John"
         />
@@ -163,13 +163,13 @@ FormForPersonalDetails.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   priceGroup: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({ id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
   ).isRequired,
   addPrice: PropTypes.string.isRequired,
   setAddPrice: PropTypes.func.isRequired,
   setPriceOptions: PropTypes.func.isRequired,
   addPriceGroup: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({  id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
   ).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,

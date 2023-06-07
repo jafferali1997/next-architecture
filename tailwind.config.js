@@ -109,7 +109,8 @@ module.exports = {
         'hero-pattern': "url('/assets/images/sidebar/sidebarellipses.png')",
         'landing-hero-bg': "url('/assets/images/landing/hero-bg.png')",
         'landing-hero-circle': "url('/assets/images/landing/hero-circle.png')",
-        'howitworks-bg': "url('/assets/images/landing/howitworks/howitwork-bg.png')"
+        'howitworks-bg': "url('/assets/images/landing/howitworks/howitwork-bg.png')",
+        'form-wrapper': "url('/assets/images/bg.png')"
       }
     }
   },

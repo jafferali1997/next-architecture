@@ -84,6 +84,9 @@
   .h4 {
     @apply tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-dark-gray;
   }
+  .span-link {
+    @apply tw-cursor-pointer tw-pl-[3px] tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-blue-800 tw-underline;
+  }
   .h5 {
     @apply tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-secondary-black;
   }
@@ -160,7 +163,99 @@
   .form-inner-heading {
     @apply tw-text-lg tw-font-medium tw-not-italic tw-leading-[27px] tw-text-secondary-black;
   }
+  .form-wrapper {
+    @apply tw-min-h-screen tw-bg-form-wrapper tw-bg-contain;
+  }
+  .form-header {
+    @apply tw-flex tw-flex-col tw-items-center tw-gap-2 tw-px-6 tw-py-0;
+  }
 
+  .form-container {
+    @apply tw-m-auto tw-max-w-[1292px] tw-pb-[73.9px];
+  }
+  .form-container-header {
+    @apply tw-px-5 tw-py-[45px];
+  }
+  .form-header-h1 {
+    @apply tw-font-dm tw-text-[24px] tw-font-bold tw-capitalize tw-not-italic tw-leading-[5.2rem] tw-text-[#131516];
+  }
+  .form-header-p {
+    @apply tw-font-dm  tw-text-[20px] tw-font-medium tw-not-italic tw-leading-[2.4rem] tw-text-[#494949];
+  }
+  .form-card {
+    @apply tw-m-auto  tw-max-w-[437px] tw-rounded-[20px] tw-bg-white tw-px-0 tw-py-10 tw-shadow-[0px_0px_31px_rgba(29,78,216,0.1)];
+  }
+  .form-body {
+    @apply tw-flex tw-flex-col tw-items-center tw-px-6 tw-pb-0 tw-pt-8;
+  }
+  .form-group-c {
+    @apply tw-flex tw-flex-col tw-pb-6;
+  }
+  .form-group-c-label {
+    @apply tw-pb-1.5 tw-font-dm tw-text-[14px] tw-font-normal tw-not-italic tw-leading-[21px] tw-text-[#161618];
+  }
+  .form-group-c-label-span {
+    @apply tw-text-[red];
+  }
+  .form-group-c-input {
+    @apply tw-flex tw-w-full tw-items-center tw-rounded-md tw-border tw-border-solid tw-border-solid tw-border-[#8d99ae] tw-border-[skyblue] tw-px-4 tw-py-[11px] tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-[#46474f] tw-outline-none focus:tw-border;
+  }
+  .form-group-c-input ::placeholder {
+    @apply tw-text-[14px] tw-font-normal tw-not-italic tw-leading-[21px] tw-text-[#bbb];
+  }
+  .form-password_wrapper {
+    @apply tw-relative;
+  }
+  .eye_iocn {
+    @apply tw-absolute tw-right-4 tw-top-2/4 tw--translate-y-2/4;
+  }
+  .form-checkbox {
+    @apply tw-flex tw-items-center tw-gap-2;
+  }
+  .form-or-content {
+    @apply tw-grid tw-w-full tw-grid-cols-[1fr_auto_1fr] tw-items-center tw-gap-[47px];
+  }
+  .form-or-content-line {
+    @apply tw-h-px tw-bg-[#a4a6b8];
+  }
+  .form-or-content-span {
+    @apply tw-flex tw-items-center tw-gap-[47px] tw-font-dm tw-text-[12px] tw-font-normal tw-not-italic tw-leading-[18px] tw-text-[#494949];
+  }
+  .form-or-content-span ::before {
+    @apply tw-w-[138px] tw-border-[0.5px] tw-border-solid tw-border-[#494949] tw-opacity-[30%] tw-content-[''];
+  }
+  .form-or-content-span ::after {
+    @apply tw-w-[138px] tw-border-[0.5px] tw-border-solid tw-border-[#494949] tw-opacity-[30%] tw-content-[''];
+  }
+  .login-with-provider {
+    @apply tw-mt-[33px] tw-flex tw-items-center tw-justify-center tw-gap-2.5;
+  }
+  .login-provider-btn {
+    @apply tw-box-border tw-flex tw-h-[39px] tw-w-[39px] tw-cursor-pointer tw-items-center tw-justify-center tw-rounded-[29px] tw-border-transparent tw-bg-[#f1f6f7];
+  }
+  .is-have-account {
+    @apply tw-mt-8 tw-flex tw-items-center tw-justify-center tw-text-center;
+  }
+
+  /* temporary */
+
+  .form-validation {
+    @apply tw-flex tw-gap-1 tw-pt-[4px] tw-text-[10px]  tw-font-normal tw-not-italic tw-leading-[15px] tw-text-[red];
+    font-family: 'DM Sans';
+  }
+  .innerValidation {
+    @apply tw-flex tw-gap-1;
+  }
+  .marignDiv {
+    @apply tw--mt-3 tw-mb-2.5;
+  }
+  .color_bbb {
+    @apply tw-text-[#bbb];
+  }
+  .passText {
+    @apply tw-text-[8px] tw-font-medium tw-not-italic tw-leading-6 tw-text-[#bbb];
+    font-family: 'DM Sans';
+  }
   /* others */
   .singe-day {
     @apply tw-flex tw-h-[29px] tw-w-[63px] tw-flex-row tw-items-center tw-justify-center tw-gap-2.5 tw-whitespace-nowrap tw-rounded-[5px] tw-bg-[#e3ecf4] tw-px-2.5 tw-py-1 tw-font-dm tw-text-[14px] tw-font-normal tw-not-italic tw-leading-[21px] tw-text-[#7e7d7d];

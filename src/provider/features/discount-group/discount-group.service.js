@@ -1,36 +1,36 @@
 import api from '@/common/utils/api';
 
-const createPriceGroup = async (userData) => {
-  const response = await api().post('/price-group', userData);
+const createDiscountGroup = async (userData) => {
+  const response = await api().post('/discount-group', userData);
   return response.data;
 };
 
-const getSinglePriceGroup = async (id) => {
-  const response = await api().get(`/price-group/${id}`);
+const getSingleDiscountGroup = async (id) => {
+  const response = await api().get(`/discount-group/${id}`);
   return response.data;
 };
 
-const getAllPriceGroup = async () => {
-  const response = await api().get('/price-group');
+const getAllDiscountGroup = async () => {
+  const response = await api().get('/discount-group');
   return response.data;
 };
 
-const updatePriceGroup = async (id, data) => {
-  const response = await api().patch(`/price-group/${id}`, data);
+const updateDiscountGroup = async (id, data) => {
+  const response = await api().patch(`/discount-group/${id}`, data);
   return response.data;
 };
 
-const deletePriceGroup = async (id) => {
-  const response = await api().delete(`/price-group/${id}`);
+const deleteDiscountGroup = async (id) => {
+  const response = await api().delete(`/discount-group/${id}`);
   return response.data;
 };
 
-const priceGroupService = {
-  createPriceGroup,
-  deletePriceGroup,
-  updatePriceGroup,
-  getAllPriceGroup,
-  getSinglePriceGroup
+const discountGroupService = {
+  createDiscountGroup,
+  deleteDiscountGroup,
+  updateDiscountGroup,
+  getAllDiscountGroup,
+  getSingleDiscountGroup
 };
 
-export default priceGroupService;
+export default discountGroupService;

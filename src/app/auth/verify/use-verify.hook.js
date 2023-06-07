@@ -19,6 +19,7 @@ export default function useVerify() {
   };
 
   const moveRouterPassword = (data) => {
+    console.log(data);
     router.push(`/create-new-password?email=&${data.email}`);
   };
 

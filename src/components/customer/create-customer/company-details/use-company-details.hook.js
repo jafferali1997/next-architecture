@@ -317,6 +317,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     const newInputValues = [...inputValues];
     newInputValues[index] = value;
     setInputValues(newInputValues);
+    console.log(newInputValues);
   };
 
   return {

@@ -182,6 +182,7 @@ export default function FormForCompanyDetails({
             <CustomInput
               placeholder="Enter label name"
               type="text"
+              name={`companyAddressLabel${index+1}`}
               errors={errors}
               onChange={(e) => handleInputChange(index, e.target.value)}
             />

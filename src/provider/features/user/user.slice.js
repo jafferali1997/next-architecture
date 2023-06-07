@@ -144,6 +144,7 @@ export const verifyEmail = createAsyncThunk(
     try {
       const response = await userService.verifyEmail(payload);
       if (response.Succeeded) {
+        localStorage.setItem('user', JSON.stringify(response.data));
         successCallBack(response.data);
         return response.data;
       }
