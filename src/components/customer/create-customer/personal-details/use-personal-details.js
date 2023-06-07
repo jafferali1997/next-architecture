@@ -199,11 +199,9 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     };
     const res = dispatch(createCustomerPersonalDetail({ payload: data }));
     if (res) {
-      console.log(res,"response")
       const response = res.data.result.data._id;
       router.push(router);
 
-      // router.push(router);
       handleTabClick('company_details');
       handleTabCompleted('customer_details');
     }

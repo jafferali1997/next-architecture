@@ -77,12 +77,13 @@ const cities = [
               <div className="input-group">
                 <CustomInput
                   label="UserName"
-                  name="username"
-                  placeholder="John Doe"
+                  name="userName"
+                  // placeholder="John Doe"
                   type="text"
                   register={register}
                   isRequired={true}
-                  errors={errors}
+                  disabled={true}
+                  // errors={errors}
                 />
               </div>
               <div className="input-group">

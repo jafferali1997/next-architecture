@@ -14,7 +14,7 @@ export default function FormForPersonalDetails({
   selectedCity,
   selectedCountry,
   handleCityChange,
-  countries,
+  // countries,
   cities,
   priceGroup,
   addPrice,
@@ -30,17 +30,24 @@ export default function FormForPersonalDetails({
   setIsSubmit,
   errors = {}
 }) {
+  const countries = [
+    {id: 1, name: "Pakistan", label: "Pakistan"},
+    {id: 2, name: "India", label: "India"},
+  ]
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
         <Select
+          register={register}
           label="Gender"
+          name="gender"
           isRequired={true}
           options={[
             { id: 'male', value: 'MALE', label: 'Male' },
             { id: 'female', value: 'FEMALE', label: 'Female' }
           ]}
-          placeholder="John"
+          placeholder="Gender"
+          errors={errors}
         />
         <CustomInput
           label="Designation"
@@ -94,7 +101,7 @@ export default function FormForPersonalDetails({
           value={selectedCountry}
           isRequired={true}
           options={countries.map((item) => {
-            return { label: item.name, value: item.isoCode, id: item.isoCode };
+            return { label: item.label, value: item.name, id: item.id };
           })}
         />
         <Select
@@ -105,8 +112,8 @@ export default function FormForPersonalDetails({
           type="select"
           value={selectedCity}
           onChange={handleCityChange}
-          options={cities.map((item) => {
-            return { label: item.name, value: item.isoCode, id: item.isoCode };
+          options={countries.map((item) => {
+            return { label: item.label, value: item.name, id: item.id };
           })}
           errors={errors}
         />

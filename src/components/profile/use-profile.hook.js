@@ -21,10 +21,10 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
 
-  username: Yup.string()
-    .max(30, 'Username must be at most 30 characters long')
-    .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
-    .required('User name is required'),
+  // userName: Yup.string()
+  //   .max(30, 'Username must be at most 30 characters long')
+  //   .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
+  //   .required('User name is required'),
 
   country: Yup.string().required('Country name is required'),
   city: Yup.string().required('City name is required'),
@@ -55,7 +55,6 @@ export default function useProfile() {
   
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
-  const otpVerified = localStorage.getItem('isOtpVerified');
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const sendOtpButtonText = useRef('Send OTP');
 
@@ -78,9 +77,9 @@ export default function useProfile() {
 
   useEffect(() => {
     // const { email, userId, username } = searchParams.get(email);
-    console.log(searchParams.get('email'));
+    // console.log(searchParams.get('email'));
     setValue('email', searchParams.get('email'));
-    setValue('username', searchParams.get('username'));
+    setValue('userName', searchParams.get('userName'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
@@ -101,9 +100,9 @@ export default function useProfile() {
 
   const sendOtp = () => {
     if (sendOtpButtonText.current === 'Send OTP' || sendOtpButtonText.current === 'Resend OTP') {
-      sendOtpButtonText.current = 'Resend OTP';
       // console.log(phone, "Phone Number")
       if(phone){
+        sendOtpButtonText.current = 'Resend OTP';
         dispatch(addPhoneAndGenerateOtp({ payload: {phone} }));
       }else{
         // console.log("Please Enter Phone Number");
