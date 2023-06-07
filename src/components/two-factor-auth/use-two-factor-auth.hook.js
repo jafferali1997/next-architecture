@@ -1,11 +1,17 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { setAccessToken } from '@/common/utils/storage-token';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAccessToken } from '@/common/utils/access-token.util';
+import { generateOtp, verifyOtp } from '@/provider/features/user/user.slice';
 
 export default function useTwoFactorAuth() {
-  const router = useRouter(null);
+  const searchParams = useSearchParams();
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [isTimerStop, setIsTimerStop] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
   // const otpNumber = useRef(initialOtpNumber);
   const otpNumber1 = useRef();
   const otpNumber2 = useRef();
@@ -15,13 +21,13 @@ export default function useTwoFactorAuth() {
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('userId', router.query.userId);
-    localStorage.setItem('phone', router.query.phone);
-    setUserId(router.query.userId);
-    setPhone(router.query.phone);
+    localStorage.setItem('userId', searchParams.get('userId'));
+    localStorage.setItem('phone', searchParams.get('phone'));
+    setUserId(searchParams.get('userId'));
+    setPhone(searchParams.get('phone'));
     // userId.current = router.query.userId;
     // phone.current = router.query.phone;
-  }, [router.query]);
+  }, [searchParams]);
 
   // useEffect(() => {
   //   const id = localStorage.getItem('userId');
@@ -33,32 +39,38 @@ export default function useTwoFactorAuth() {
   // }, []);
   // auth/resend-2fa
   // auth/verify-2fa
+
   const resendOtpHandler = () => {
     if (isTimerStop) {
       console.log('resend otp');
-      console.log(userId);
-      axios
-        .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/resend-2fa`, {
-          userId
-        })
-        .then((response) => {
-          console.log(response.data);
-          if (response.data.status) {
-            // CustomAlert(response.data.message, 'success');
-            setIsTimerStop(false);
-            otpNumber1.current.value = '';
-            otpNumber2.current.value = '';
-            otpNumber3.current.value = '';
-            otpNumber4.current.value = '';
-          } else {
-            // CustomAlert(response.data.message, 'error');
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          //   CustomAlert('Network Error', 'error');
-        });
+      // console.log(userId);
+      // axios
+      //   .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/resend-2fa`, {
+      //     userId
+      //   })
+      //   .then((response) => {
+      //     console.log(response.data);
+      //     if (response.data.status) {
+      //       // CustomAlert(response.data.message, 'success');
+      //       setIsTimerStop(false);
+      //       otpNumber1.current.value = '';
+      //       otpNumber2.current.value = '';
+      //       otpNumber3.current.value = '';
+      //       otpNumber4.current.value = '';
+      //     } else {
+      //       // CustomAlert(response.data.message, 'error');
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     //   CustomAlert('Network Error', 'error');
+      //   });
     }
+  };
+  const moveRouter = (data) => {
+      console.log(data,"otp verify");
+      setIsOtpVerified(true)
+      router.push(`/customer`);
   };
 
   const verifyOtpHandler = () => {
@@ -66,28 +78,31 @@ export default function useTwoFactorAuth() {
       `${otpNumber1.current.value}${otpNumber2.current.value}${otpNumber3.current.value}${otpNumber4.current.value}`
     );
     if (otp > 0) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/verify-2fa`, {
-          userId,
-          totp: otp
-        })
-        .then((response) => {
-          console.log(response.data);
-          if (response.data.status) {
-            const { data } = response.data.result;
-            // CustomAlert(response.data.message, 'success');
-            setAccessToken(data.accessToken);
-            localStorage.setItem('userId', data.user.userId);
-            localStorage.setItem('businessId', data.user.businessId);
-            router.push('/customer');
-          } else {
-            // CustomAlert(response.data.message, 'error');
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          //   CustomAlert('Network Error', 'error');
-        });
+      dispatch(
+        verifyOtp({ payload: {otp}, callBackMessage: moveRouter })
+      );
+      // axios
+      //   .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/verify-2fa`, {
+      //     userId,
+      //     totp: otp
+      //   })
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       if (response.data.status) {
+    //         const { data } = response.data.result;
+    //         // CustomAlert(response.data.message, 'success');
+    //         setAccessToken(data.accessToken);
+    //         localStorage.setItem('userId', data.user.userId);
+    //         localStorage.setItem('businessId', data.user.businessId);
+    //         router.push('/customer');
+    //       } else {
+    //         // CustomAlert(response.data.message, 'error');
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       //   CustomAlert('Network Error', 'error');
+    //     });
     } else {
       //   CustomAlert('Please enter otp.', 'error');
     }
@@ -116,6 +131,6 @@ export default function useTwoFactorAuth() {
     setIsTimerStop,
     verifyOtpHandler,
     resendOtpHandler,
-    isTimerStop
+    isTimerStop,
   };
 }

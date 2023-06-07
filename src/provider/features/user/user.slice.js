@@ -44,10 +44,11 @@ export const addPhoneAndGenerateOtp = createAsyncThunk(
 
 export const generateOtp = createAsyncThunk(
   'user/generateOtp',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, callBackMessage, successCallBack }, thunkAPI) => {
     try {
       const response = await userService.generateOtp();
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
@@ -60,10 +61,11 @@ export const generateOtp = createAsyncThunk(
 
 export const verifyOtp = createAsyncThunk(
   'user/verifyOtp',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
     try {
       const response = await userService.verifyOtp(payload);
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
