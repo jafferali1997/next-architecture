@@ -13,7 +13,7 @@ export default function useVerify() {
 
   const moveRouterEmail = (data) => {
     router.push(
-      `/profile?email=&${data.email}&userId=${data.id}&userName=${data.userName}`
+      `/profile?email=${data.email}&userId=${data.id}&userName=${data.userName}`
     );
   };
 

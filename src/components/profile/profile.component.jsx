@@ -26,7 +26,10 @@ export default function Profile() {
     isOtpVerified,
     setIsOtpVerified
   } = useProfile();
-
+const cities = [
+  {id:1, label: "Lahore", value:"Lahore"},
+  {id:2, label: "Rawalpindi", value:"Rawalpindi"}
+]
   return (
     <div className=" tw-min-h-[1090px]">
       <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
@@ -45,7 +48,7 @@ export default function Profile() {
               Personal Details
             </h3>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} method="post">
+          <form onSubmit={handleSubmit(onSubmit)} >
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
@@ -74,12 +77,13 @@ export default function Profile() {
               <div className="input-group">
                 <CustomInput
                   label="UserName"
-                  name="username"
-                  placeholder="John Doe"
+                  name="userName"
+                  // placeholder="John Doe"
                   type="text"
                   register={register}
                   isRequired={true}
-                  errors={errors}
+                  disabled={true}
+                  // errors={errors}
                 />
               </div>
               <div className="input-group">
@@ -102,7 +106,9 @@ export default function Profile() {
                   label="Country"
                   name="country"
                   type="select"
-                  options={[]}
+                  options={cities.map((item) => {
+                      return { label: item.label, value: item.value, id: item.id };
+                    })}
                   register={register}
                   isRequired={true}
                   errors={errors}
@@ -113,7 +119,9 @@ export default function Profile() {
                   label="City"
                   name="city"
                   type="select"
-                  options={[]}
+                  options={cities.map((item) => {
+                      return { label: item.label, value: item.value, id: item.id };
+                    })}
                   register={register}
                   isRequired={true}
                   errors={errors}
@@ -130,12 +138,13 @@ export default function Profile() {
                   onChange={setPhone}
                   isRequired={true}
                   register={register}
+                  errors={errors}
                 />
                 <CustomButton
                   text={sendOtpButtonText.current}
                   className="btn-outline"
                   onClick={sendOtp}
-                  // disabled={isOtpVerified}
+                  disabled={isOtpVerified}
                 />
               </div>
             </div>
@@ -154,7 +163,7 @@ export default function Profile() {
                   onClick={verifyOtpHandler}
                   text="Verify OTP"
                   className="btn-primary"
-                  // disabled={isOtpVerified || !otp || otp?.length < 4}
+                  disabled={isOtpVerified || !otp || otp?.length < 4}
                 />
               </div>
             </div>
@@ -170,6 +179,7 @@ export default function Profile() {
                   name="ibanNumber"
                   placeholder="125837-48274872-47374"
                   register={register}
+                  errors={errors}
                 />
               </div>
               <div className="input-group">
@@ -179,6 +189,7 @@ export default function Profile() {
                   name="vatNumber"
                   placeholder="12"
                   register={register}
+                  errors={errors}
                 />
                 {/* <div className='profile-form-section'>Max: 15 digit</div> */}
               </div>
@@ -195,6 +206,7 @@ export default function Profile() {
                   name="companyName"
                   placeholder="Zapta Technology"
                   register={register}
+                  errors={errors}
                 />
               </div>
               <div className="input-group">
@@ -208,6 +220,7 @@ export default function Profile() {
                     { value: '5-100', label: '50 - 100' }
                   ]}
                   register={register}
+                  errors={errors}
                 />
               </div>
             </div>
@@ -219,16 +232,17 @@ export default function Profile() {
                   name="address"
                   placeholder="1234 Johr Town Berlin, Germany"
                   register={register}
+                  errors={errors}
                 />
               </div>
             </div>
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="submit-button">
                 <CustomButton
-                  type="submit"
+                  type="Submit"
                   className="btn-primary"
                   text="Submit"
-                  // disabled={!isOtpVerified}
+                  disabled={!isOtpVerified}
                 />
               </div>
             </div>

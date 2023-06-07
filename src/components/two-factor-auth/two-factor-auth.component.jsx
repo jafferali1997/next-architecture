@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import CustomButton from '@/common/components/custom-button';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CountDown from './components/countdown/count-down.component';
 import useTwoFactorAuth from './use-two-factor-auth.hook';
 

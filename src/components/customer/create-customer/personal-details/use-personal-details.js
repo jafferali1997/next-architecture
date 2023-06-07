@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { City, Country } from 'country-state-city';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -74,6 +74,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     resolver: yupResolver(validationSchema)
   });
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [cities, setCities] = useState([]);
@@ -160,8 +161,8 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   }, []);
 
   useEffect(() => {
-    if (priceGroup?.length && discountGroup?.length && router.query) {
-      const { id } = router.query;
+    if (priceGroup?.length && discountGroup?.length && searchParams) {
+      const id = searchParams.get('id');
       if (id) {
         fetchData(id);
       }
@@ -184,7 +185,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     console.log(value);
     const data = {
       ...value,
-      ...(router.query.id && { customerId: router.query.id }),
+      ...(searchParams.get('id') && { customerId: searchParams.get('id') }),
       priceGroups: [
         ...priceOptions.map((item) => {
           return item.value;
@@ -198,11 +199,14 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     };
     const res = dispatch(createCustomerPersonalDetail({ payload: data }));
     if (res) {
-      router.query.id = res.data.result.data._id;
+      const response = res.data.result.data._id;
       router.push(router);
+
       handleTabClick('company_details');
       handleTabCompleted('customer_details');
     }
+    handleTabClick('company_details');
+      handleTabCompleted('customer_details');
   };
 
   return {
