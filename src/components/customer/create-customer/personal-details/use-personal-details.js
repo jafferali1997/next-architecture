@@ -196,13 +196,15 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
         })
       ]
     };
-    const res = dispatch(createCustomerPersonalDetail({ payload: data }));
-    if (res) {
-      router.query.id = res.data.result.data._id;
-      router.push(router);
-      handleTabClick('company_details');
+    // const res = dispatch(createCustomerPersonalDetail({ payload: data }));
+    // if (res) {
+    //   router.query.id = res.data.result.data._id;
+    //   router.push(router);
+    //   handleTabClick('company_details');
+    //   handleTabCompleted('customer_details');
+    // }
+    handleTabClick('company_details');
       handleTabCompleted('customer_details');
-    }
   };
 
   return {
