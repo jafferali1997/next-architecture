@@ -22,7 +22,10 @@ export default function EditCustomer() {
     handleSubmit,
     errors,
     id,
-    onSubmit
+    onSubmit,
+    handleInputChange,
+    inputValues,
+    handleAddInput
   } = UseEditCustomer();
 
   return (
@@ -39,22 +42,27 @@ export default function EditCustomer() {
           </div>
           <div className="2bars tw-flex tw-gap-[24px]">
             <div className="main-content">
-              <div className="form-box  tw-w-[759px] ">
+              <div className="form-box tw-w-[759px] ">
                 <h3 className="form-box-heading ">Personal Details</h3>
                 <div className="form-box-grid">
                   <Select
                     label="Gender"
                     options={[
-                      { id: 'male', value: 'male', label: 'Male' },
-                      { id: 'female', value: 'female', label: 'Female' }
+                      { id: 'male', value: 'MALE', label: 'Male' },
+                      { id: 'female', value: 'FEMALE', label: 'Female' }
                     ]}
-                    placeholder="John"
+                    placeholder="Select Gender"
+                    name="gender"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="Designation"
                     name="designation"
                     placeholder="Designation"
                     type="text"
+                    register={register}
+                    errors={errors}
                   />
                   <CustomInput
                     label="First Name"
@@ -80,7 +88,6 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-
                   <Select
                     label="Country"
                     name="country"
@@ -88,10 +95,7 @@ export default function EditCustomer() {
                     type="select"
                     register={register}
                     errors={errors}
-                    //   options={countries.map((item) => {
-                    //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-                    //   })}
-                  />
+                    />
                   <Select
                     label="City"
                     name="city"
@@ -99,15 +103,10 @@ export default function EditCustomer() {
                     type="select"
                     register={register}
                     errors={errors}
-                    //   value={selectedCity}
-                    //   onChange={handleCityChange}
-                    //   options={cities.map((item) => {
-                    //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-                    //   })}
                   />
                   <CustomInput
                     label="Postal Code"
-                    name="postal"
+                    name="postalCode"
                     placeholder="Postal Code"
                     type="text"
                     register={register}
@@ -152,7 +151,7 @@ export default function EditCustomer() {
 
                   <CustomInput
                     label="Company Email Address"
-                    name="email"
+                    name="companyEmail"
                     placeholder="Email Address"
                     type="email"
                     register={register}
@@ -160,7 +159,7 @@ export default function EditCustomer() {
                   />
                   <CustomInput
                     label="Company Phone Number"
-                    name="phoneNo"
+                    name="companyPhone"
                     placeholder="Phone Number"
                     type="number"
                     register={register}
@@ -168,7 +167,7 @@ export default function EditCustomer() {
                   />
                   <CustomInput
                     label="Company Mobile Number"
-                    name="mobileNo"
+                    name="companyMobile"
                     placeholder="Mobile Number"
                     type="text"
                     register={register}
@@ -189,7 +188,7 @@ export default function EditCustomer() {
                   />
                   <CustomInput
                     label="Company FAX Number"
-                    name="faxNumber"
+                    name="companyFax"
                     placeholder="FAX Number"
                     type="text"
                     register={register}
@@ -198,7 +197,7 @@ export default function EditCustomer() {
 
                   <CustomInput
                     label="TIN"
-                    name="taxNumber"
+                    name="tin"
                     placeholder="TAX Number"
                     type="text"
                     register={register}
@@ -207,7 +206,7 @@ export default function EditCustomer() {
 
                   <CustomInput
                     label="VAT Number"
-                    name="vatNumber"
+                    name="vat"
                     placeholder="VAT Number"
                     type="text"
                     register={register}
@@ -217,7 +216,7 @@ export default function EditCustomer() {
                 <div>
                   <CustomInput
                     label="Company URL"
-                    name="website"
+                    name="conpanyUrl"
                     placeholder="URL"
                     type="text"
                     isRequired={false}
@@ -242,7 +241,7 @@ export default function EditCustomer() {
                   />
                   <CustomSwitch
                     label="VAT exempt"
-                    name="isVatEnabled"
+                    name="vatStatus"
                     type="switch"
                     register={register}
                     errors={errors}
@@ -265,27 +264,45 @@ export default function EditCustomer() {
                       />
                     )}
                   </div>
-                  <span className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline">
+                  <span className="inner-link" onClick={handleAddInput}>
                     Add more address
                   </span>
                 </div>
                 {isAdress ? (
-                  <div className="form-box-grid">
-                    <CustomInput
-                      label="Company address 1"
-                      name=""
-                      placeholder="Company address 1"
-                      type="text"
-                      isRequired={false}
-                    />
-                    <CustomInput
-                      label="Company address 1"
-                      name=""
-                      placeholder="Company address 1"
-                      type="text"
-                      isRequired={false}
-                    />
-                  </div>
+                  <>
+                    <div className="form-box-grid">
+                      <CustomInput
+                        label="Company address 1"
+                        name=""
+                        placeholder="Company address 1"
+                        type="text"
+                        isRequired={false}
+                      />
+                      <CustomInput
+                        label="Company address 1"
+                        name=""
+                        placeholder="Company address 1"
+                        type="text"
+                        isRequired={false}
+                      />
+                    </div>
+                    {inputValues.map((value, index) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <div className="form-box-grid " key={index}>
+                        <CustomInput
+                          placeholder="Enter label name"
+                          type="text"
+                          errors={errors}
+                          onChange={(e) => handleInputChange(index, e.target.value)}
+                        />
+                        <CustomInput
+                          placeholder="Enter company address"
+                          type="text"
+                          errors={errors}
+                        />
+                      </div>
+                    ))}
+                  </>
                 ) : null}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>
@@ -307,7 +324,7 @@ export default function EditCustomer() {
                   <div className="form-box-grid">
                     <CustomInput
                       label="Gender"
-                      name="gender"
+                      name="ac_gender"
                       placeholder="John"
                       type="select"
                       options={[
@@ -319,7 +336,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Designation"
-                      name="designation"
+                      name="ac_designation"
                       placeholder="Designation"
                       type="text"
                       register={register}
@@ -327,7 +344,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="First Name"
-                      name="firstName"
+                      name="ac_firstName"
                       placeholder="First Name"
                       type="text"
                       register={register}
@@ -335,7 +352,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Last Name"
-                      name="lastName"
+                      name="ac_lastName"
                       placeholder="Last Name"
                       type="text"
                       register={register}
@@ -343,7 +360,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Address"
-                      name="address"
+                      name="ac_address"
                       placeholder="Address"
                       type="text"
                       register={register}
@@ -352,7 +369,7 @@ export default function EditCustomer() {
 
                     <Select
                       label="Country"
-                      name="country"
+                      name="ac_country"
                       placeholder="Country"
                       type="select"
                       register={register}
@@ -367,7 +384,7 @@ export default function EditCustomer() {
                     />
                     <Select
                       label="City"
-                      name="city"
+                      name="ac_city"
                       placeholder="City"
                       type="select"
                       register={register}
@@ -381,7 +398,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Postal Code"
-                      name="postal"
+                      name="ac_postalCode"
                       placeholder="Postal Code"
                       type="text"
                       register={register}
@@ -389,7 +406,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Email Address"
-                      name="additionalEmail"
+                      name="ac_email"
                       placeholder="Email Address"
                       type="text"
                       register={register}
@@ -397,7 +414,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Phone Number"
-                      name="phone"
+                      name="ac_phone"
                       placeholder="Phone Number"
                       type="number"
                       register={register}
@@ -405,7 +422,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Mobile Number"
-                      name="mobile"
+                      name="ac_mobile"
                       placeholder="Mobile Number"
                       type="number"
                       register={register}
@@ -413,7 +430,7 @@ export default function EditCustomer() {
                     />
                     <CustomInput
                       label="Department"
-                      name="department"
+                      name="ac_department"
                       placeholder="Department"
                       type="text"
                       register={register}
@@ -473,7 +490,7 @@ export default function EditCustomer() {
                 <div className="form-box-grid">
                   <CustomInput
                     label="Account owner name"
-                    name="onwerName"
+                    name="accountOwnerName"
                     placeholder="Account owner name"
                     type="text"
                     isRequired={true}
@@ -483,7 +500,7 @@ export default function EditCustomer() {
 
                   <CustomInput
                     label="BIC Number"
-                    name="bicNumber"
+                    name="bic"
                     placeholder="BIC Number"
                     type="text"
                     register={register}
@@ -491,7 +508,7 @@ export default function EditCustomer() {
                   />
                   <CustomInput
                     label="Mandate Reference"
-                    name="mandateReference"
+                    name="mendateReferance"
                     placeholder="Mandate Reference"
                     type="number"
                     register={register}
@@ -499,7 +516,7 @@ export default function EditCustomer() {
                   />
                   <CustomInput
                     label="Mandate Date"
-                    name="mandateDate"
+                    name="mandateGenerateDate"
                     placeholder="03/13/2023"
                     type="date"
                     register={register}
@@ -512,7 +529,7 @@ export default function EditCustomer() {
                 <div className="form-box-grid">
                   <CustomInput
                     label="Discount Amount "
-                    name="discount"
+                    name="discountAmount"
                     placeholder="Discount amount"
                     type="text"
                     isRequired={true}
@@ -604,7 +621,7 @@ export default function EditCustomer() {
                 <h3 className="form-box-heading ">Comments</h3>
                 <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-light-gray ">
                   Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industry's.
+                  industry. Lorem Ipsum has been the industry.
                 </p>
               </div>
             </div>

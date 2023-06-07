@@ -43,7 +43,8 @@ export default function CustomInput({
   label = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   const {
     inputChangeHandler,
@@ -103,6 +104,7 @@ export default function CustomInput({
             </InputAdornment>
           }
           {...(onChange && { onChange: inputChangeHandler })}
+          readOnly={readOnly}
         />
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />
@@ -131,5 +133,6 @@ CustomInput.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };
