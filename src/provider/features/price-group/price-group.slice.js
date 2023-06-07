@@ -23,10 +23,10 @@ export const createPriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -39,10 +39,10 @@ export const getSinglePriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -55,10 +55,10 @@ export const getAllPriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -71,10 +71,10 @@ export const updatePriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -87,10 +87,10 @@ export const deletePriceGroup = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -104,6 +104,9 @@ export const priceGroupSlice = createSlice({
       .addCase(createPriceGroup.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(createPriceGroup.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -119,6 +122,9 @@ export const priceGroupSlice = createSlice({
       .addCase(updatePriceGroup.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updatePriceGroup.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -134,6 +140,9 @@ export const priceGroupSlice = createSlice({
       .addCase(getSinglePriceGroup.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSinglePriceGroup.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -149,6 +158,9 @@ export const priceGroupSlice = createSlice({
       .addCase(getAllPriceGroup.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllPriceGroup.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -164,6 +176,9 @@ export const priceGroupSlice = createSlice({
       .addCase(deletePriceGroup.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deletePriceGroup.fulfilled, (state, action) => {
         state.delete.isLoading = false;

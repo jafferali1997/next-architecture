@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import useCreateNewPassword from './use-create-new-password.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import CustomInput from '@/common/components/custom-input/custom-input.component';
 
 export default function CreateNewPassword() {
   const {
@@ -38,11 +39,14 @@ export default function CreateNewPassword() {
                   New Password <span>*</span>
                 </label>
                 <div className="pass_input_div">
-                  <input
-                    {...register('pass')}
-                    type={showPassword ? 'text' : 'password'}
-                    className="form-control-c"
+                  <CustomInput
+                    name="password"
                     placeholder="Enter New password"
+                    type={showPassword ? 'text' : 'password'}
+                    register={register}
+                    className="form-control-c"
+                    errors={errors}
+                    isRequired={true}
                     style={errors.pass ? borderStyle : borderSuc}
                   />
 
@@ -79,12 +83,15 @@ export default function CreateNewPassword() {
                   Confirm Password <span>*</span>
                 </label>
                 <div className="pass_input_div">
-                  <input
-                    {...register('confirm')}
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    className="form-control-c"
+                  <CustomInput
                     placeholder="Enter confirm password"
-                    style={errors.confirm ? borderStyle : borderSuc}
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    register={register}
+                    errors={errors}
+                    className="form-control-c"
+                    isRequired={true}
+                    style={errors.pass ? borderStyle : borderSuc}
                   />
 
                   <div className="create-new-pass-validation">

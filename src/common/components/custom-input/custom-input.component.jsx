@@ -27,7 +27,7 @@ import FieldLabel from '../field-label/field-label.component';
 
 export default function CustomInput({
   type,
-  placeholder,
+  placeholder = '',
   name,
   onChange = null,
   defaultValue = null,
@@ -43,7 +43,8 @@ export default function CustomInput({
   label = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   const {
     inputChangeHandler,
@@ -69,7 +70,7 @@ export default function CustomInput({
     }
     return endIcon;
   };
-  console.log(errors);
+
   return (
     <div
       className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
@@ -81,16 +82,17 @@ export default function CustomInput({
       <div className="tw-w-full">
         <Input
           {...(register && register(`${name}`))}
+          name={name}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
           className={`input-field default-input hover:tw-border-text-dark-gray ${
             errors && errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
-          // name={name}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}
           onKeyDown={inputKeyDownHandler}
           disabled={disabled}
+          variant="outlined"
           startAdornment={
             <InputAdornment position="start" className="">
               {startIcon}
@@ -101,7 +103,8 @@ export default function CustomInput({
               {getInputEndAdorment()}
             </InputAdornment>
           }
-          onChange={inputChangeHandler}
+          {...(onChange && { onChange: inputChangeHandler })}
+          readOnly={readOnly}
         />
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />
@@ -113,7 +116,7 @@ export default function CustomInput({
 
 CustomInput.propTypes = {
   type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   value: PropTypes.string,
@@ -130,5 +133,6 @@ CustomInput.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };

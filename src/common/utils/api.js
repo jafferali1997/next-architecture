@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { enqueueSnackbar } from 'notistack';
+import { getAccessToken } from './access-token.util';
+import { delay } from './generic.util';
 
 const api = (headers = null) => {
   let header = headers;
-  const user = JSON.parse(localStorage.getItem('user'));
+  const accessToken = getAccessToken();
 
   if (!header) {
     header = { Accept: 'application/json', 'Content-Type': 'application/json' };
@@ -12,13 +14,33 @@ const api = (headers = null) => {
   // if (user) headers.Authorization = `Bearer ${user.token}`;
 
   const apiSet = axios.create({
-    // baseURL: 'https://.com/api/',
-    headers: user ? { ...header, Authorization: `Bearer ${user.token}` } : header
+    baseURL: process.env.NEXT_PUBLIC_MAIN_URL,
+    headers: accessToken ? { ...header, Authorization: `Bearer ${accessToken}` } : header
   });
 
   apiSet.interceptors.response.use(
-    (response) => response,
+    async (response) => {
+      if (response.config.method === 'post' || response.config.method === 'patch') {
+        if (
+          response.config.url.split('/')[response.config.url.split('/').length - 1] !==
+          'get-all'
+        ) {
+          enqueueSnackbar(response.data.message, {
+            variant: 'success'
+          });
+          await delay(700);
+          return response;
+        }
+      }
+      return response;
+    },
     (error) => {
+      if (error.message === 'Network Error') {
+        enqueueSnackbar(error.message, {
+          variant: 'error'
+        });
+        throw error;
+      }
       if (error.response.status === 401) {
         localStorage.removeItem('user');
         window.location.href = '/';
@@ -33,16 +55,21 @@ const api = (headers = null) => {
           error.toString();
       }
 
-      const errors = {
-        errors: error.response.data.errors,
-        message
-      };
-
-      toast.error(message);
-
-      throw errors;
+      if (Array.isArray(message)) {
+        message.forEach((element) => {
+          enqueueSnackbar(element, {
+            variant: 'error'
+          });
+        });
+      } else {
+        enqueueSnackbar(message, {
+          variant: 'error'
+        });
+      }
+      return error.response;
     }
   );
+
   return apiSet;
 };
 

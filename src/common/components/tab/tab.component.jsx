@@ -28,9 +28,10 @@ function Tab({ tabs }) {
             {tab.label}
           </div>
         ))} */}
-        {syntaticTabs.map((tab) => (
-          <div key={tab.id}>
+        {tabs.map((tab) => (
+          <>
             <div
+              key={tab.id}
               className={`${
                 tab.id === activeTab
                   ? 'activeTab'
@@ -47,7 +48,7 @@ function Tab({ tabs }) {
               </div>
             </div>
             <div className="seperator tw-h-[2px] tw-bg-[#BBBBBB]" />
-          </div>
+          </>
         ))}
       </div>
       <div className="tab-content">{Component}</div>

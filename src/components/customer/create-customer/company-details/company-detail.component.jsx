@@ -26,13 +26,16 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
     additionalHandles,
     router,
     data,
-    errors
+    errors,
+    handleAddInput,
+    handleInputChange,
+    inputValues
   } = useCompanyDetails({ handleTabClick, handleTabCompleted });
 
   return (
     <div className="company-details-wrapper">
       <div className="content-header ">
-        <h3>Company Details</h3>
+        <h3 className="form-inner-heading">Company Details</h3>
       </div>
       <div className="content-body">
         {router?.query?.id && data && (
@@ -58,6 +61,9 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
             additionalHandles={additionalHandles}
             errors={errors}
             data={data}
+            handleAddInput={handleAddInput}
+            handleInputChange={handleInputChange}
+            inputValues={inputValues}
           />
         )}
         {!router?.query?.id && (
@@ -82,6 +88,9 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
             setIsSubmit={setIsSubmit}
             additionalHandles={additionalHandles}
             errors={errors}
+            handleAddInput={handleAddInput}
+            handleInputChange={handleInputChange}
+            inputValues={inputValues}
           />
         )}
       </div>

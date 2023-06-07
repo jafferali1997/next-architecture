@@ -20,10 +20,10 @@ export const profileFinancialBusiness = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -47,6 +47,9 @@ export const profileFinancialBusinessSlice = createSlice({
       .addCase(profileFinancialBusiness.pending, (state) => {
         state.isLoading = true;
         state.message = '';
+        state.isError = false;
+        state.isSuccess = false;
+        state.data = null;
       })
       .addCase(profileFinancialBusiness.fulfilled, (state, action) => {
         state.isLoading = false;

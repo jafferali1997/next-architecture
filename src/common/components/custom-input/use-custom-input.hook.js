@@ -15,7 +15,7 @@ export default function useCustomInput(onChange, regex, matchRegex) {
 
   const inputChangeHandler = (e) => {
     if (onChange) {
-      onChange();
+      onChange(e);
     }
     // if (!e.target.value.match(regex)) {
     // }

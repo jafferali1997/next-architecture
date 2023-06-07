@@ -2,9 +2,9 @@
 
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
+import Select from '@/common/components/select/select.component';
 
 export default function FormForPersonalDetails({
   register,
@@ -14,7 +14,7 @@ export default function FormForPersonalDetails({
   selectedCity,
   selectedCountry,
   handleCityChange,
-  countries,
+  // countries,
   cities,
   priceGroup,
   addPrice,
@@ -30,22 +30,24 @@ export default function FormForPersonalDetails({
   setIsSubmit,
   errors = {}
 }) {
+  const countries = [
+    {id: 1, name: "Pakistan", label: "Pakistan"},
+    {id: 2, name: "India", label: "India"},
+  ]
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-row">
-        <CustomSelect
-          label="Gender"
+      <div className="form-box-grid-4col">
+        <Select
           register={register}
-          placeholder="John"
-          type="select"
-          isRequired={true}
-          errors={errors}
+          label="Gender"
           name="gender"
-          defaultValue={data.gender}
+          isRequired={true}
           options={[
-            { id: 'male', value: 'male', label: 'Male' },
-            { id: 'female', value: 'female', label: 'Female' }
+            { id: 'male', value: 'MALE', label: 'Male' },
+            { id: 'female', value: 'FEMALE', label: 'Female' }
           ]}
+          placeholder="Gender"
+          errors={errors}
         />
         <CustomInput
           label="Designation"
@@ -88,7 +90,7 @@ export default function FormForPersonalDetails({
           isRequired={true}
         />
 
-        <CustomSelect
+        <Select
           label="Country"
           name="country"
           register={register}
@@ -99,10 +101,10 @@ export default function FormForPersonalDetails({
           value={selectedCountry}
           isRequired={true}
           options={countries.map((item) => {
-            return { label: item.name, value: item.isoCode, id: item.isoCode };
+            return { label: item.label, value: item.name, id: item.id };
           })}
         />
-        <CustomSelect
+        <Select
           label="City"
           name="city"
           register={register}
@@ -110,8 +112,8 @@ export default function FormForPersonalDetails({
           type="select"
           value={selectedCity}
           onChange={handleCityChange}
-          options={cities.map((item) => {
-            return { label: item.name, value: item.isoCode, id: item.isoCode };
+          options={countries.map((item) => {
+            return { label: item.label, value: item.name, id: item.id };
           })}
           errors={errors}
         />
@@ -127,43 +129,28 @@ export default function FormForPersonalDetails({
         />
       </div>
 
-      <div className="form-row-two-col">
+      <div className="form-box-grid-2col">
         <div>
           <label className="group-label">Price Group</label>
-          {/* <MultiSelect
-            options={priceGroup}
-            handleChange={(value) => {
-              setPriceOptions(value);
-            }}
-            placeholder="Select Price Group(s)"
-            valueOfModel={addPrice}
-            handleValueOfModel={(e) => {
-              setAddPrice(e.target.value);
-            }}
-            handleModalOnSubmit={addPriceGroup}
-            defaultValue={data?.priceGroups?.map((item) => {
-              return priceGroup.find((price) => price.value === item);
-            })}
-          /> */}
+          <MultiSelect
+            options={[
+              { id: '1', label: 'Test 1', value: 'test1' },
+              { id: '2', label: 'Test 2', value: 'test2' },
+              { id: '3', label: 'Test 3', value: 'test3' }
+            ]}
+            handleChange={() => {}}
+          />
         </div>
         <div>
           <label className="group-label">Discount Group</label>
-          {/* <MultiSelect
-            options={discountGroup}
-            handleChange={(value) => {
-              setDiscountOptions(value);
-            }}
-            placeholder="Select Discount Group(s)"
-            valueOfModel={addDiscount}
-            handleValueOfModel={(e) => {
-              console.log(e);
-              setAddDiscount(e.target.value);
-            }}
-            handleModalOnSubmit={addDiscountGroup}
-            defaultValue={data?.discountGroups?.map((item) => {
-              return discountGroup.find((price) => price.value === item);
-            })}
-          /> */}
+          <MultiSelect
+            options={[
+              { id: '1', label: 'Test 1', value: 'test1' },
+              { id: '2', label: 'Test 2', value: 'test2' },
+              { id: '3', label: 'Test 3', value: 'test3' }
+            ]}
+            handleChange={() => {}}
+          />
         </div>
       </div>
       <StepperFooter setIsSubmit={setIsSubmit} />
@@ -182,13 +169,13 @@ FormForPersonalDetails.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   priceGroup: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({ id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
   ).isRequired,
   addPrice: PropTypes.string.isRequired,
   setAddPrice: PropTypes.func.isRequired,
   setPriceOptions: PropTypes.func.isRequired,
   addPriceGroup: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({  id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
   ).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,

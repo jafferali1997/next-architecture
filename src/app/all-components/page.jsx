@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import * as yup from 'yup';
+// import { enqueueSnackbar } from 'notistack';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import ErrorIcon from '@/common/icons/error.icon';
@@ -26,6 +27,11 @@ import Toaster from '@/common/components/toaster/toaster.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import Select from '@/common/components/select/select.component';
+import CustomCheckbox from '@/common/components/custom-checkbox/custom-checkbox.component';
+import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
+import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
+import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
+import OtpInput from '@/common/components/otp-input/otp-input.component';
 
 const validationSchema = yup.object({
   firstName: yup.string().max(5, 'company name must be at most 5 characters long')
@@ -44,6 +50,7 @@ export default function Page() {
     resolver: yupResolver(validationSchema),
     reValidateMode: 'onChange'
   });
+
   useEffect(() => {
     // axios
     //   .get('https://ipapi.co/json/')
@@ -64,7 +71,7 @@ export default function Page() {
     //     console.log(error);
     //   });
   }, []);
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <>
@@ -138,7 +145,12 @@ export default function Page() {
         <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
           <CustomButton
             text="Show Success Toaster"
-            onClick={() => setShowSuccessToaster(true)}
+            onClick={
+              () => {}
+              // enqueueSnackbar('message', {
+              //   variant: 'success'
+              // })
+            }
             className="btn-primary tw-m-5"
           />
           <Toaster
@@ -175,25 +187,29 @@ export default function Page() {
       <div className="tw-m-5">
         <h3 className="tw-text-2xl tw-font-bold">Input Fields</h3>
         <hr />
-        <div className="tw-m-5">
-          <Select
-            options={[
-              { label: 'Test 1', value: 'test1' },
-              { label: 'Test 2', value: 'test2' },
-              { label: 'Test 3', value: 'test3' }
-            ]}
-            // defaultValue={{ label: 'Test 3', value: 'test3' }}
-            placeholder="Single Select with Search Option"
-          />
-        </div>
-        <div className="tw-m-5">
-          {/* <CustomSelect
-            options={[
-              { id: '1', label: 'test1', value: 'test1' },
-              { id: '2', label: 'test2', value: 'test2' },
-              { id: '3', label: 'test3', value: 'test3' }
-            ]}
-          /> */}
+        <div className="tw-m-5 tw-flex tw-flex-row tw-gap-2">
+          <div className="tw-w-1/2">
+            <CustomSelect
+              label="Simple Select"
+              placeholder="Select Gender"
+              options={[
+                { label: 'Male', value: 'male' },
+                { label: 'Female', value: 'female' },
+                { label: 'Other', value: 'other' }
+              ]}
+            />
+          </div>
+          <div className="tw-w-1/2">
+            <Select
+              options={[
+                { label: 'Test 1', value: 'test1' },
+                { label: 'Test 2', value: 'test2' },
+                { label: 'Test 3', value: 'test3' }
+              ]}
+              // defaultValue={{ label: 'Test 3', value: 'test3' }}
+              placeholder="Single Select with Search Option"
+            />
+          </div>
         </div>
         <div className="tw-m-5">
           <CustomInput
@@ -212,6 +228,43 @@ export default function Page() {
             placeholder="Input Field With Inline Label:"
             inlineLabel
           />
+        </div>
+        <div className="tw-m-5 tw-flex tw-flex-row tw-gap-2">
+          <div className="tw-w-1/2">
+            <CustomInput
+              type="text"
+              name="firstName"
+              label="Input Field with Start Icon:"
+              placeholder="First Name"
+              className="tw-mr-2"
+              isRequired
+              startIcon={<SuccessIcon />}
+            />
+          </div>
+          <div className="tw-w-1/2">
+            <CustomInput
+              type="text"
+              name="firstName"
+              label="Input Field with End Icon:"
+              placeholder="First Name"
+              isRequired
+              startIcon={<SuccessIcon />}
+            />
+          </div>
+        </div>
+        <div className="tw-m-5 tw-flex tw-flex-row">
+          <div className="tw-w-1/2">
+            <CustomInput
+              type="text"
+              name="firstName"
+              label="Input Field with Start Icon:"
+              placeholder="First Name"
+              isRequired
+              inlineLabel
+              startIcon={<SuccessIcon />}
+              endIcon={<ErrorIcon />}
+            />
+          </div>
         </div>
         <div className="tw-m-5">
           <CustomInput
@@ -235,6 +288,69 @@ export default function Page() {
         </div>
       </div>
       <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Checkbox</h3>
+        <hr />
+        <div className="tw-m-5">
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomCheckbox label="Small Checkbox" size="small" />
+            <CustomCheckbox label="Default Checkbox" />
+            <CustomCheckbox label="Large Checkbox" size="large" />
+            <CustomCheckbox label="Checked Checkbox" defaultChecked />
+            <CustomCheckbox label="Disabled Checkbox" disabled />
+            <CustomCheckbox label="Disabled Checked Checkbox" defaultChecked disabled />
+          </div>
+        </div>
+      </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Switch</h3>
+        <hr />
+        <div className="tw-m-5">
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomSwitch label="Small Switch" size="sm" />
+            <CustomSwitch label="Default Switch" defaultChecked />
+            <CustomSwitch label="Disabled Switch" disabled />
+            <CustomSwitch label="Disabled Checked Switch" defaultChecked disabled />
+          </div>
+        </div>
+      </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Radio</h3>
+        <hr />
+        <div className="tw-m-5">
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomRadio value="v1" name="radio" label="Small Radio" size="sm" />
+            <CustomRadio value="v2" name="radio" label="Default Radio" defaultChecked />
+            <CustomRadio value="v3" name="radio" label="Disabled Radio" disabled />
+            <CustomRadio
+              value="v4"
+              name="radio4"
+              label="Disabled Checked Switch"
+              defaultChecked
+              disabled
+            />
+          </div>
+          <hr />
+          <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-2">
+            <CustomRadioGroup
+              radioOptions={[
+                { label: 'Radio 1', value: 'radio1', defaultChecked: true },
+                { label: 'Radio 2', value: 'radio2' },
+                { label: 'Radio 3', value: 'radio3' }
+              ]}
+              label="Radio Group (Select One):"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="tw-m-5">
+        <h3 className="tw-text-2xl tw-font-bold">Otp Input</h3>
+        <hr />
+        <div className="tw-m-5">
+          <OtpInput value="1234" onChange={(e) => console.log(e)} maxInput={4} />
+        </div>
+      </div>
+
+      <div className="tw-m-5">
         <h3 className="tw-text-2xl tw-font-bold">React Hook Form</h3>
         <hr />
         <div className="tw-m-5 tw-border-text-dark-gray">
@@ -244,7 +360,7 @@ export default function Page() {
               alert(JSON.stringify(data));
             })}
           >
-            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-5">
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
               <div className="tw-w-1/2">
                 <CustomInput
                   type="text"
@@ -264,6 +380,66 @@ export default function Page() {
                   placeholder="Last Name"
                   register={register}
                   isRequired
+                />
+              </div>
+            </div>
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
+              <div className="tw-w-1/2">
+                <CustomSelect
+                  label="Select Education"
+                  placeholder="Select Education"
+                  name="education"
+                  options={[
+                    { label: 'Matric', value: 'matric' },
+                    { label: 'Intermediate', value: 'intermediate' },
+                    { label: 'Graduation', value: 'graduation' },
+                    { label: 'Masters', value: 'masters' }
+                  ]}
+                  register={register}
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <Select
+                  label="Select User"
+                  placeholder="Select User"
+                  name="user"
+                  options={[
+                    { label: 'Hamza', value: 'hamza' },
+                    { label: 'Areeb', value: 'areeb' },
+                    { label: 'Jaffer', value: 'jaffer' }
+                  ]}
+                  register={register}
+                />
+              </div>
+            </div>
+            <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
+              <div className="tw-w-1/2">
+                <CustomCheckbox
+                  name="checkbox"
+                  label="Checkbox"
+                  register={register}
+                  isRequired
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <CustomSwitch
+                  name="switch"
+                  label="Switch"
+                  register={register}
+                  isRequired
+                />
+              </div>
+              <div className="tw-w-1/2">
+                <CustomRadioGroup
+                  register={register}
+                  name="radio"
+                  label="Select Gender"
+                  radioOptions={[
+                    { label: 'Male', value: 'male' },
+                    { label: 'Female', value: 'female' },
+                    { label: 'Other', value: 'other' }
+                  ]}
+                  defaultValue="other"
                 />
               </div>
               <CustomButton type="Submit" className="btn-primary" text="Submit" />

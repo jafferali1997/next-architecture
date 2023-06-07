@@ -19,7 +19,8 @@ export default function Select({
   label = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  readOnly = false
 }) {
   return (
     <div
@@ -31,24 +32,27 @@ export default function Select({
 
       <div className="tw-w-full">
         <Autocomplete
+          {...(register && register(`${name}`))}
+          name={name}
           disablePortal
-          disableClearable
+          // disableClearable
           options={options ?? []}
           renderOption={(props, option) => (
             <li {...props} key={option?.label}>
               {option?.label}
             </li>
           )}
-          name={name}
           className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
           disabled={disabled}
-          onChange={onChange}
-          defaultValue={defaultValue}
+          readOnly={readOnly}
           {...(value && { value })}
+          {...(onChange && { onChange })}
+          defaultValue={defaultValue}
           isOptionEqualToValue={(option, value) => option.label === value.label}
           renderInput={(params) => (
             <TextField
               {...params}
+              {...(register && register(`${name}`))}
               className="default-input input-field tw-p-0"
               placeholder={placeholder}
             />
@@ -87,5 +91,6 @@ Select.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  readOnly: PropTypes.bool
 };

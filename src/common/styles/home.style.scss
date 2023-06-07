@@ -37,69 +37,6 @@
   }
 }
 /* form tabs */
-.tab-navigation {
-  display: grid;
-  grid-template-columns: auto 1fr auto 1fr auto 1fr auto 1fr auto;
-  gap: 12px;
-  align-items: center;
-  max-width: 853px;
-  margin: auto;
-  margin-bottom: 24px !important;
-  padding-bottom: 50px;
-
-  .tab-item.activeTab {
-    .icon {
-      background-color: #1d4ed8;
-      border-color: #0a2572;
-
-      svg path {
-        fill: white;
-      }
-    }
-    .title {
-      font-weight: 500;
-      color: #2c2e3e;
-    }
-
-    & + .seperator {
-      background-color: #1d4ed8;
-    }
-  }
-
-  .tab-item.done {
-    .icon {
-      position: relative;
-      &::before {
-        content: '';
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        background-color: #047857;
-        border-radius: 50%;
-        outline: 2px solid #01513a;
-
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzU0MDlfMTAyMjYyKSI+CjxwYXRoIGQ9Ik0xOS41MzUzIDMuMjY5MjZDMTguOTE2NSAyLjY0OTYzIDE3LjkxMTYgMi42NTAwMiAxNy4yOTIgMy4yNjkyNkw3LjE5NTc0IDEzLjM2NTlMMi43MDgzOCA4Ljg3ODYxQzIuMDg4NzUgOC4yNTg5OCAxLjA4NDM1IDguMjU4OTggMC40NjQ3MjEgOC44Nzg2MUMtMC4xNTQ5MDcgOS40OTgyMyAtMC4xNTQ5MDcgMTAuNTAyNiAwLjQ2NDcyMSAxMS4xMjIzTDYuMDczNjcgMTYuNzMxMkM2LjM4MzI5IDE3LjA0MDggNi43ODkyOCAxNy4xOTYgNy4xOTUzMSAxNy4xOTZDNy42MDEzNCAxNy4xOTYgOC4wMDc3MiAxNy4wNDEyIDguMzE3MzMgMTYuNzMxMkwxOS41MzUzIDUuNTEyODhDMjAuMTU0OSA0Ljg5MzY4IDIwLjE1NDkgMy44ODg4NSAxOS41MzUzIDMuMjY5MjZaIiBmaWxsPSJ3aGl0ZSIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzU0MDlfMTAyMjYyIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 20px;
-
-        font-size: 20px;
-        color: #ffffff;
-      }
-    }
-
-    & + .seperator {
-      background-color: #047857;
-    }
-  }
-
-  .seperator:last-child {
-    display: none !important;
-  }
-}
 
 // form input
 .form-input-file-group {

@@ -25,6 +25,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   const router = useRouter();
 
   const handleChangeRadio = (event) => {
+    console.log(event.target.value);
     setSelectedValue(event.target.value);
   };
 
@@ -69,13 +70,13 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   useEffect(() => {
     if (selectedValue) {
       validationSchema = yup.object({
-        [selectedValue.substring(0, selectedValue.length - 6)]: yup
-          .string()
-          .required(
-            `${transformValue(
-              selectedValue.substring(0, selectedValue.length - 6)
-            )} is required`
-          )
+        // [selectedValue.substring(0, selectedValue.length - 6)]: yup
+        //   .string()
+        //   .required(
+        //     `${transformValue(
+        //       selectedValue.substring(0, selectedValue.length - 6)
+        //     )} is required`
+        //   )
       });
       console.log(validationSchema);
       setValidationSchemaState(validationSchema);

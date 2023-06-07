@@ -23,10 +23,10 @@ export const createFaq = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -39,10 +39,10 @@ export const getSingleFaq = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -55,10 +55,10 @@ export const getAllFaq = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -71,10 +71,10 @@ export const updateFaq = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -87,10 +87,10 @@ export const deleteFaq = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -104,6 +104,9 @@ export const faqSlice = createSlice({
       .addCase(createFaq.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';
+        state.create.isError = false;
+        state.create.isSuccess = false;
+        state.create.data = null;
       })
       .addCase(createFaq.fulfilled, (state, action) => {
         state.create.isLoading = false;
@@ -119,6 +122,9 @@ export const faqSlice = createSlice({
       .addCase(updateFaq.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updateFaq.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -134,6 +140,9 @@ export const faqSlice = createSlice({
       .addCase(getSingleFaq.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSingleFaq.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -149,6 +158,9 @@ export const faqSlice = createSlice({
       .addCase(getAllFaq.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllFaq.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -164,6 +176,9 @@ export const faqSlice = createSlice({
       .addCase(deleteFaq.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deleteFaq.fulfilled, (state, action) => {
         state.delete.isLoading = false;

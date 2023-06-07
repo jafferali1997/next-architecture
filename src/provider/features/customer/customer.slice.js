@@ -57,10 +57,10 @@ export const createCustomerPersonalDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -73,10 +73,10 @@ export const createCustomerAccountDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -89,10 +89,10 @@ export const createCustomerDiscount = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -105,10 +105,10 @@ export const createCustomerCompanyDetail = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -123,10 +123,10 @@ export const createCustomerTermOfPaymentAndDelivey = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -139,10 +139,10 @@ export const getSingleCustomer = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -151,14 +151,14 @@ export const getAllCustomer = createAsyncThunk(
   'customer/getAll',
   async ({ payload, callBackMessage }, thunkAPI) => {
     try {
-      const response = await customerService.getAllCustomer();
+      const response = await customerService.getAllCustomer(payload);
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -171,10 +171,10 @@ export const updateCustomer = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -187,10 +187,10 @@ export const deleteCustomer = createAsyncThunk(
       if (response.Succeeded) {
         return response.data;
       }
-      throw new Error(response.message);
+      return thunkAPI.rejectWithValue(response);
     } catch (error) {
       callBackMessage('error', error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue({ payload: error });
     }
   }
 );
@@ -204,6 +204,9 @@ export const customerSlice = createSlice({
       .addCase(createCustomerPersonalDetail.pending, (state) => {
         state.createPersonalDetail.isLoading = true;
         state.createPersonalDetail.message = '';
+        state.createPersonalDetail.isError = false;
+        state.createPersonalDetail.isSuccess = false;
+        state.createPersonalDetail.data = null;
       })
       .addCase(createCustomerPersonalDetail.fulfilled, (state, action) => {
         state.createPersonalDetail.isLoading = false;
@@ -219,6 +222,9 @@ export const customerSlice = createSlice({
       .addCase(createCustomerAccountDetail.pending, (state) => {
         state.createAccountDetail.isLoading = true;
         state.createAccountDetail.message = '';
+        state.createAccountDetail.isError = false;
+        state.createAccountDetail.isSuccess = false;
+        state.createAccountDetail.data = null;
       })
       .addCase(createCustomerAccountDetail.fulfilled, (state, action) => {
         state.createAccountDetail.isLoading = false;
@@ -234,6 +240,9 @@ export const customerSlice = createSlice({
       .addCase(createCustomerCompanyDetail.pending, (state) => {
         state.createCompanyDetail.isLoading = true;
         state.createCompanyDetail.message = '';
+        state.createCompanyDetail.isError = false;
+        state.createCompanyDetail.isSuccess = false;
+        state.createCompanyDetail.data = null;
       })
       .addCase(createCustomerCompanyDetail.fulfilled, (state, action) => {
         state.createCompanyDetail.isLoading = false;
@@ -249,6 +258,9 @@ export const customerSlice = createSlice({
       .addCase(createCustomerDiscount.pending, (state) => {
         state.createDiscount.isLoading = true;
         state.createDiscount.message = '';
+        state.createDiscount.isError = false;
+        state.createDiscount.isSuccess = false;
+        state.createDiscount.data = null;
       })
       .addCase(createCustomerDiscount.fulfilled, (state, action) => {
         state.createDiscount.isLoading = false;
@@ -264,6 +276,9 @@ export const customerSlice = createSlice({
       .addCase(createCustomerTermOfPaymentAndDelivey.pending, (state) => {
         state.createTermOfPaymentAndDelivey.isLoading = true;
         state.createTermOfPaymentAndDelivey.message = '';
+        state.createTermOfPaymentAndDelivey.isError = false;
+        state.createTermOfPaymentAndDelivey.isSuccess = false;
+        state.createTermOfPaymentAndDelivey.data = null;
       })
       .addCase(createCustomerTermOfPaymentAndDelivey.fulfilled, (state, action) => {
         state.createTermOfPaymentAndDelivey.isLoading = false;
@@ -279,6 +294,9 @@ export const customerSlice = createSlice({
       .addCase(updateCustomer.pending, (state) => {
         state.update.isLoading = true;
         state.update.message = '';
+        state.update.isError = false;
+        state.update.isSuccess = false;
+        state.update.data = null;
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
         state.update.isLoading = false;
@@ -294,6 +312,9 @@ export const customerSlice = createSlice({
       .addCase(getSingleCustomer.pending, (state) => {
         state.getSingle.isLoading = true;
         state.getSingle.message = '';
+        state.getSingle.isError = false;
+        state.getSingle.isSuccess = false;
+        state.getSingle.data = null;
       })
       .addCase(getSingleCustomer.fulfilled, (state, action) => {
         state.getSingle.isLoading = false;
@@ -301,7 +322,7 @@ export const customerSlice = createSlice({
         state.getSingle.data = action.payload;
       })
       .addCase(getSingleCustomer.rejected, (state, action) => {
-        state.getSingle.message = action.payload.message;
+        state.getSingle.message = action.payload?.message;
         state.getSingle.isLoading = false;
         state.getSingle.isError = true;
         state.getSingle.data = null;
@@ -309,6 +330,9 @@ export const customerSlice = createSlice({
       .addCase(getAllCustomer.pending, (state) => {
         state.getAll.isLoading = true;
         state.getAll.message = '';
+        state.getAll.isError = false;
+        state.getAll.isSuccess = false;
+        state.getAll.data = null;
       })
       .addCase(getAllCustomer.fulfilled, (state, action) => {
         state.getAll.isLoading = false;
@@ -324,6 +348,9 @@ export const customerSlice = createSlice({
       .addCase(deleteCustomer.pending, (state) => {
         state.delete.isLoading = true;
         state.delete.message = '';
+        state.delete.isError = false;
+        state.delete.isSuccess = false;
+        state.delete.data = null;
       })
       .addCase(deleteCustomer.fulfilled, (state, action) => {
         state.delete.isLoading = false;

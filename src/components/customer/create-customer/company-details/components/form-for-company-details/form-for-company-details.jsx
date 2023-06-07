@@ -1,7 +1,11 @@
+/* eslint-disable react/button-has-type */
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import Select from '@/common/components/select/select.component';
+import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
+import useCompanyDetails from '../../use-company-details.hook';
 
 export default function FormForCompanyDetails({
   register,
@@ -24,11 +28,14 @@ export default function FormForCompanyDetails({
   setIsSubmit,
   additionalHandles,
   errors,
+  handleAddInput,
+  handleInputChange,
+  inputValues = [''],
   data = {}
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-row">
+      <div className="form-box-grid-4col">
         <CustomInput
           label="Company Name"
           placeholder="Company Name"
@@ -70,7 +77,7 @@ export default function FormForCompanyDetails({
           isRequired={true}
           errors={errors}
         />
-        <CustomSelect
+        <Select
           label="Company Size"
           register={register}
           name="companySize"
@@ -117,8 +124,7 @@ export default function FormForCompanyDetails({
           isRequired={true}
           errors={errors}
         />
-      </div>
-      <div className="form-row-two-col-slide">
+
         <CustomInput
           label="Company URL"
           register={register}
@@ -129,7 +135,7 @@ export default function FormForCompanyDetails({
           isRequired={false}
           errors={errors}
         />
-        <CustomInput
+        <CustomSwitch
           label="Current Status"
           register={register}
           name="status"
@@ -138,7 +144,7 @@ export default function FormForCompanyDetails({
           onChange={(e) => setStatus(e.target.checked)}
           isRequired={false}
         />
-        <CustomInput
+        <CustomSwitch
           label="Do not show customer on PDF"
           register={register}
           name="isShowInPdf"
@@ -147,7 +153,7 @@ export default function FormForCompanyDetails({
           onChange={(e) => setIsShowInPdf(e.target.checked)}
           isRequired={false}
         />
-        <CustomInput
+        <CustomSwitch
           label="VAT exempt"
           register={register}
           name="isVatEnabled"
@@ -157,7 +163,38 @@ export default function FormForCompanyDetails({
           isRequired={false}
         />
       </div>
-      <div className="form-additonals">
+      <div className="tw-flex tw-justify-between">
+        <label className="tw-font-dm tw-text-sm tw-font-medium tw-not-italic tw-leading-6 tw-text-secondary-black">
+          Company addresses
+        </label>
+
+        <span className="inner-link" onClick={handleAddInput}>
+          Add more address
+        </span>
+      </div>
+      <div>
+        {inputValues.map((value, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div
+            className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
+            key={index}
+          >
+            <CustomInput
+              placeholder="Enter label name"
+              type="text"
+              name={`companyAddressLabel${index+1}`}
+              errors={errors}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+            />
+            <CustomInput
+              placeholder="Enter company address"
+              type="text"
+              errors={errors}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="form-additonals tw-flex tw-gap-[16px]">
         <h3>Additional contact person</h3>
         {isAdditional ? (
           <img
@@ -176,7 +213,7 @@ export default function FormForCompanyDetails({
         )}
       </div>
       {isAdditional ? (
-        <div className="form-row">
+        <div className="form-box-grid-4col">
           <CustomInput
             label="Gender"
             register={register}
@@ -227,7 +264,7 @@ export default function FormForCompanyDetails({
             errors={errors}
           />
 
-          <CustomSelect
+          <Select
             label="Country"
             register={register}
             name="country"
@@ -241,7 +278,7 @@ export default function FormForCompanyDetails({
               return { label: item.name, value: item.isoCode, id: item.isoCode };
             })}
           />
-          <CustomSelect
+          <Select
             label="City"
             register={register}
             name="city"
@@ -333,5 +370,8 @@ FormForCompanyDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  handleAddInput: PropTypes.func,
+  handleInputChange: PropTypes.func,
+  inputValues: PropTypes.arrayOf
 };

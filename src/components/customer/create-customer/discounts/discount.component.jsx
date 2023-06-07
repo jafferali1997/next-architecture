@@ -13,7 +13,7 @@ export default function Discount({ handleTabClick, handleTabCompleted }) {
   return (
     <div className="discount-details-wrapper">
       <div className="content-header ">
-        <h3>Discount</h3>
+        <h3 className="form-inner-heading">Discount</h3>
       </div>
       <div className="content-body">
         {router?.query?.id && data && (
