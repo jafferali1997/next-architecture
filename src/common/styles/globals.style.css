@@ -271,6 +271,10 @@
   @apply tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-[#2c2e3e];
   font-family: 'DM Sans';
 }
+
+.container {
+  @apply tw-m-auto tw-w-full tw-max-w-7xl;
+}
 /* .payment-details-radios label span {
   @apply tw-text-red;
 } */
@@ -379,6 +383,15 @@ body {
 }
 .tab-content {
   margin-top: 16px;
+}
+
+.testimonial-slider .swiper-slide-shadow-left,
+.testimonial-slider .swiper-slide-shadow-right {
+  background-image: none !important;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 0 10px rgba(245, 245, 245, 0.8);
 }
 
 @media screen and (max-width: 991px) {
