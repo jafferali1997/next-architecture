@@ -37,13 +37,19 @@ export default function UseEditCustomer() {
   });
 
   async function fetchAndSetData() {
-    // if (searchParams.get('id')) {
-    //   // customerId.current = searchParams.get('id');
-    //   const data = await dispatch(
-    //     getSingleCustomer({ payload: searchParams.get('id') })
-    //   );
-    //   console.log('data', data);
-    // }
+    if (searchParams.get('id')) {
+      // customerId.current = searchParams.get('id');
+      let data = await dispatch(getSingleCustomer({ payload: searchParams.get('id') }));
+      console.log('data', data);
+      data = data.payload;
+      Object.keys(data).forEach((key) => setValue(key, data[key]));
+
+      if (data.additionalContact?.length > 0) {
+        Object.keys(data.additionalContact[0]).forEach((key) =>
+          setValue(`ac_${key}`, data.additionalContact[0][key])
+        );
+      }
+    }
     const data = {
       id: 6,
       accountOwnerName: null,
@@ -83,13 +89,6 @@ export default function UseEditCustomer() {
       priceGroup: [],
       discountGroup: []
     };
-    Object.keys(data).forEach((key) => setValue(key, data[key]));
-
-    if (data.additionalContact?.length > 0) {
-      Object.keys(data.additionalContact[0]).forEach((key) =>
-        setValue(`ac_${key}`, data.additionalContact[0][key])
-      );
-    }
   }
 
   useEffect(() => {

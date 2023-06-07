@@ -1,14 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
+import {
+  getSingleCustomer,
+  createCustomerTermOfPaymentAndDelivey
+} from '@/provider/features/customer/customer.slice';
 
 let validationSchema = yup.object({});
 
 export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
-  const [selectedValue, setSelectedValue] = useState('paymentDateSelect');
+  const [selectedValue, setSelectedValue] = useState('PAYMENT_TERMS_AS_DATE');
   const [data, setData] = useState();
   const [isSubmit, setIsSubmit] = useState(false);
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
@@ -16,6 +21,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     handleReset
   } = useForm({
@@ -23,6 +29,8 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   });
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const dispatch = useDispatch();
 
   const handleChangeRadio = (event) => {
     console.log(event.target.value);
@@ -40,24 +48,16 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   };
 
   useEffect(() => {
-    if (router.query) {
-      const { id } = router.query;
+    if (searchParams.get('id')) {
+      const id = searchParams.get('id');
 
       async function fetchMyAPI() {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/${id}`
-        );
-        if (res.data.result.data.customer) {
-          setData({
-            [res.data.result.data.customer.paymentTermsName]:
-              res.data.result.data.customer.paymentTerms,
-            deliveryTerm: res.data.result.data.customer.deliveryTerms
-          });
-          setSelectedValue(
-            res.data.result.data.customer.paymentTermsName ?? 'paymentDateSelect'
-          );
-        } else {
-          setData({});
+        let data = await dispatch(getSingleCustomer({ payload: id }));
+        if (data.payload) {
+          data = data.payload;
+          Object.keys(data).forEach((key) => setValue(key, data[key]));
+          setValue('termOfDelivery', data.termOfDeliveries[0].termOfDelivery);
+          setSelectedValue(data.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
         }
       }
 
@@ -65,7 +65,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
         fetchMyAPI();
       }
     }
-  }, [router]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (selectedValue) {
@@ -84,9 +84,22 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   }, [selectedValue]);
 
   const onSubmit = async (value) => {
-    resetTabCompleted();
-    router.push('/customer');
-    handleTabClick('customer_details');
+    const payload = {
+      customerId: searchParams.get('id'),
+      termOfPayment: selectedValue,
+      termOfPaymentData: value.termOfPaymentData,
+      termOfDeliveries: [
+        {
+          termOfDelivery: value.termOfDelivery
+        }
+      ]
+    };
+    const res = await dispatch(createCustomerTermOfPaymentAndDelivey({ payload }));
+    if (res.payload) {
+      resetTabCompleted();
+      router.push('/customer');
+      handleTabClick('customer_details');
+    }
     // try {
     //   await axios.post(
     //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/payment-terms`,

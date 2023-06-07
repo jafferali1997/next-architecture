@@ -49,10 +49,9 @@ export default function FormForCompanyDetails({
 
         <CustomInput
           label="Company Email Address"
-          name="email"
+          name="companyEmail"
           placeholder="Email Address"
           type="email"
-          defaultValue={data.email}
           isRequired={true}
           register={register}
           errors={errors}
@@ -60,8 +59,7 @@ export default function FormForCompanyDetails({
         <CustomInput
           label="Company Phone Number"
           register={register}
-          name="phoneNo"
-          defaultValue={data.phoneNo}
+          name="companyPhone"
           placeholder="Phone Number"
           type="number"
           isRequired={true}
@@ -70,8 +68,7 @@ export default function FormForCompanyDetails({
         <CustomInput
           label="Company Mobile Number"
           register={register}
-          name="mobileNo"
-          defaultValue={data.mobileNo}
+          name="companyMobile"
           placeholder="Mobile Number"
           type="text"
           isRequired={true}
@@ -81,7 +78,6 @@ export default function FormForCompanyDetails({
           label="Company Size"
           register={register}
           name="companySize"
-          defaultValue={data.companySize}
           placeholder="Select Company Size"
           type="select"
           isRequired={true}
@@ -95,8 +91,7 @@ export default function FormForCompanyDetails({
         <CustomInput
           label="Company FAX Number"
           register={register}
-          name="faxNumber"
-          defaultValue={data.faxNumber}
+          name="companyFax"
           placeholder="FAX Number"
           type="text"
           isRequired={true}
@@ -106,8 +101,7 @@ export default function FormForCompanyDetails({
         <CustomInput
           label="TIN"
           register={register}
-          name="taxNumber"
-          defaultValue={data.taxNumber}
+          name="tin"
           placeholder="TAX Number"
           type="text"
           isRequired={true}
@@ -117,8 +111,7 @@ export default function FormForCompanyDetails({
         <CustomInput
           label="VAT Number"
           register={register}
-          name="vatNumber"
-          defaultValue={data.vatNumber}
+          name="vat"
           placeholder="VAT Number"
           type="text"
           isRequired={true}
@@ -128,8 +121,7 @@ export default function FormForCompanyDetails({
         <CustomInput
           label="Company URL"
           register={register}
-          name="website"
-          defaultValue={data.website}
+          name="companyUrl"
           placeholder="URL"
           type="text"
           isRequired={false}
@@ -138,7 +130,7 @@ export default function FormForCompanyDetails({
         <CustomSwitch
           label="Current Status"
           register={register}
-          name="status"
+          name="isStatus"
           type="switch"
           checked={status}
           onChange={(e) => setStatus(e.target.checked)}
@@ -147,7 +139,7 @@ export default function FormForCompanyDetails({
         <CustomSwitch
           label="Do not show customer on PDF"
           register={register}
-          name="isShowInPdf"
+          name="isPDF"
           type="switch"
           checked={isShowInPdf}
           onChange={(e) => setIsShowInPdf(e.target.checked)}
@@ -156,7 +148,7 @@ export default function FormForCompanyDetails({
         <CustomSwitch
           label="VAT exempt"
           register={register}
-          name="isVatEnabled"
+          name="vatStatus"
           type="switch"
           checked={isVatEnabled}
           onChange={(e) => setIsVatEnabled(e.target.checked)}
@@ -182,13 +174,15 @@ export default function FormForCompanyDetails({
             <CustomInput
               placeholder="Enter label name"
               type="text"
-              name={`companyAddressLabel${index+1}`}
+              name={`ca_addressLabel_${index + 1}`}
+              register={register}
               errors={errors}
-              onChange={(e) => handleInputChange(index, e.target.value)}
             />
             <CustomInput
               placeholder="Enter company address"
               type="text"
+              name={`ca_address_${index + 1}`}
+              register={register}
               errors={errors}
             />
           </div>
@@ -217,21 +211,19 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Gender"
             register={register}
-            name="gender"
-            defaultValue={data.gender}
+            name="ac_gender"
             placeholder="John"
             type="select"
             errors={errors}
             options={[
-              { id: 'male', value: 'male', label: 'Male' },
-              { id: 'female', value: 'female', label: 'Female' }
+              { id: 'MALE', value: 'MALE', label: 'MALE' },
+              { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
             ]}
           />
           <CustomInput
             label="Designation"
             register={register}
-            name="designation"
-            defaultValue={data.designation}
+            name="ac_designation"
             placeholder="Designation"
             type="text"
             errors={errors}
@@ -239,8 +231,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="First Name"
             register={register}
-            name="firstName"
-            defaultValue={data.firstName}
+            name="ac_firstName"
             placeholder="First Name"
             type="text"
             errors={errors}
@@ -248,8 +239,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Last Name"
             register={register}
-            name="lastName"
-            defaultValue={data.lastName}
+            name="ac_lastName"
             placeholder="Last Name"
             type="text"
             errors={errors}
@@ -257,8 +247,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Address"
             register={register}
-            name="address"
-            defaultValue={data.address}
+            name="ac_address"
             placeholder="Address"
             type="text"
             errors={errors}
@@ -267,35 +256,30 @@ export default function FormForCompanyDetails({
           <Select
             label="Country"
             register={register}
-            name="country"
+            name="ac_country"
             placeholder="Country"
             type="select"
             onChange={handleCountryChange}
             value={selectedCountry}
             isRequired={true}
             errors={errors}
-            options={countries.map((item) => {
-              return { label: item.name, value: item.isoCode, id: item.isoCode };
-            })}
+            options={countries}
           />
           <Select
             label="City"
             register={register}
-            name="city"
+            name="ac_city"
             placeholder="City"
             type="select"
             value={selectedCity}
             onChange={handleCityChange}
             errors={errors}
-            options={cities.map((item) => {
-              return { label: item.name, value: item.isoCode, id: item.isoCode };
-            })}
+            options={cities}
           />
           <CustomInput
             label="Postal Code"
             register={register}
-            name="postal"
-            defaultValue={data.postal}
+            name="ac_postalCode"
             placeholder="Postal Code"
             type="text"
             errors={errors}
@@ -303,8 +287,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Email Address"
             register={register}
-            name="additionalEmail"
-            defaultValue={data.additionalEmail}
+            name="ac_email"
             placeholder="Email Address"
             type="text"
             errors={errors}
@@ -312,8 +295,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Phone Number"
             register={register}
-            name="phone"
-            defaultValue={data.phone}
+            name="ac_phone"
             placeholder="Phone Number"
             type="number"
             errors={errors}
@@ -321,17 +303,15 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Mobile Number"
             register={register}
-            defaultValue={data.mobile}
-            name="mobile"
+            name="ac_mobile"
             placeholder="Mobile Number"
             type="number"
             errors={errors}
           />
           <CustomInput
             label="Department"
-            defaultValue={data.department}
             register={register}
-            name="department"
+            name="ac_department"
             placeholder="Department"
             type="text"
             errors={errors}

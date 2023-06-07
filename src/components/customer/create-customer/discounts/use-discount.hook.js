@@ -1,9 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { createCustomerDiscount } from '@/provider/features/customer/customer.slice';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -19,6 +21,7 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema)
@@ -26,19 +29,18 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
   const [data, setData] = useState();
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (router.query) {
-      const { id } = router.query;
+    if (searchParams.get('id')) {
+      const id = searchParams.get('id');
 
       async function fetchMyAPI() {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/${id}`
-        );
-        if (res.data.result.data.customer.discount) {
-          setData(res.data.result.data.customer.discount);
-        } else {
-          setData({});
+        let data = await dispatch(getSingleCustomer({ payload: id }));
+        if (data.payload) {
+          data = data.payload;
+          Object.keys(data).forEach((key) => setValue(key, data[key]));
         }
       }
 
@@ -46,11 +48,21 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
         fetchMyAPI();
       }
     }
-  }, [router.query]);
+  }, [searchParams]);
 
   const onSubmit = async (value) => {
-    handleTabClick('manage_terms');
-    handleTabCompleted('discount');
+    const res = await dispatch(
+      createCustomerDiscount({
+        payload: {
+          ...value,
+          customerId: searchParams.get('id')
+        }
+      })
+    );
+    if (res.payload) {
+      handleTabClick('manage_terms');
+      handleTabCompleted('discount');
+    }
     // try {
     //   const res = await axios.post(
     //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/discount`,

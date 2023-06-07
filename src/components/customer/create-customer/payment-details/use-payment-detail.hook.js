@@ -3,8 +3,13 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { 
+  createCustomerAccountDetail, 
+  getSingleCustomer 
+} from '@/provider/features/customer/customer.slice';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -44,12 +49,16 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
   const [data, setData] = useState();
   const [bankDetail, setBankDetail] = useState(true);
   const [creditCard, setCreditCard] = useState(false);
+  const [paymentType, setPaymentType] = useState('bankDetails');
   const [isSubmit, setIsSubmit] = useState(false);
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
 
+  const searchParams = useSearchParams();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchemaState)
@@ -58,30 +67,22 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
   const router = useRouter();
 
   useEffect(() => {
-    if (router.query) {
-      const { id } = router.query;
+    if (searchParams.get('id')) {
+      const id = searchParams.get('id');
 
       async function fetchMyAPI() {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/${id}`
-        );
-        if (res.data.result.data.customer.paymentDetails) {
-          setData(res.data.result.data.customer.paymentDetails);
-          setBankDetail(
-            res.data.result.data.customer.paymentDetails.paymentMethod === 'bankDetail'
-          );
-          setCreditCard(
-            res.data.result.data.customer.paymentDetails.paymentMethod === 'creditCard'
-          );
-        } else {
-          setData({});
+        let data = await dispatch(getSingleCustomer({ payload: id }));
+        if (data.payload) {
+          data = data.payload;
+          Object.keys(data).forEach((key) => setValue(key, data[key]));
+          setPaymentType(data.iban === '' ? 'creditCardDetails' : 'bankDetails');
         }
       }
       if (id) {
         fetchMyAPI();
       }
     }
-  }, [router]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (!bankDetail) {
@@ -115,8 +116,32 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
 
   const onSubmit = async (value) => {
     console.log(value);
-    handleTabClick('discount');
-    handleTabCompleted('payment_details');
+    let payload = {
+      ...value,
+      iban: '',
+      accountOwnerName: '',
+      bic: '',
+      mendateReferance: '',
+      mandateGenerateDate: ''
+    };
+    if (paymentType === 'bankDetails') {
+      payload = {
+        ...value,
+        nameOfCreditCard: '',
+        creditCardNumber: '',
+        creditCardExpiry: '',
+        creditCardCVV: ''
+      };
+    }
+    const res = await dispatch(
+      createCustomerAccountDetail({
+        payload: { ...payload, customerId: searchParams.get('id') }
+      })
+    );
+    if (res.payload) {
+      handleTabClick('discount');
+      handleTabCompleted('payment_details');
+    }
     // try {
     //   const res = await axios.post(
     //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/payment-detail`,
@@ -148,6 +173,8 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
     setIsSubmit,
     router,
     data,
-    errors
+    errors,
+    paymentType,
+    setPaymentType
   };
 }

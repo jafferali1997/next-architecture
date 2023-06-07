@@ -227,14 +227,14 @@ export default function EditCustomer() {
                 <div className="tw-grid tw-grid-cols-[repeat(auto-fill,minmax(175px,1fr))] tw-gap-[15px] tw-py-[16px]">
                   <CustomSwitch
                     label="Current Status"
-                    name="status"
+                    name="isStatus"
                     type="switch"
                     register={register}
                     errors={errors}
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
-                    name="isShowInPdf"
+                    name="isPDF"
                     type="switch"
                     register={register}
                     errors={errors}

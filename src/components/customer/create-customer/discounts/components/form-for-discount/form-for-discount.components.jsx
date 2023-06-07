@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 
+
 export default function FormForDiscount({
   register,
   handleSubmit,
@@ -17,9 +18,8 @@ export default function FormForDiscount({
         <CustomInput
           label="Discount Amount "
           errors={errors}
-          defaultValue={data.discount}
           register={register}
-          name="discount"
+          name="discountAmount"
           placeholder="Discount amount"
           type="text"
           isRequired={true}
@@ -27,10 +27,9 @@ export default function FormForDiscount({
         <div>
           <CustomInput
             label="Cash Discount"
-            defaultValue={data.days}
             errors={errors}
             register={register}
-            name="days"
+            name="discountDays"
             placeholder="Cash Discount"
             type="text"
             isRequired={true}

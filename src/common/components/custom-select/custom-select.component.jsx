@@ -1,6 +1,8 @@
+'use client';
+
 import { Option } from '@mui/joy';
 import Select, { selectClasses } from '@mui/joy/Select';
-import { MenuItem } from '@mui/material';
+import { FormControl, MenuItem } from '@mui/material';
 import { KeyboardArrowDown } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import FieldError from '../field-error/field-error.component';
@@ -30,37 +32,39 @@ export default function CustomSelect({
       )}
 
       <div className="tw-w-full">
-        <Select
-          name={name}
-          {...(register && register(`${name}`))}
-          // {...(defaultValue && { defaultValue })}
-          {...(value && { value })}
-          {...(onChange && { onChange })}
-          defaultValue={defaultValue}
-          className={`tw-w-full ${className}`}
-          placeholder={placeholder}
-          indicator={<KeyboardArrowDown />}
-          sx={{
-            width: 240,
-            [`& .${selectClasses.indicator}`]: {
-              transition: '0.2s',
-              [`&.${selectClasses.expanded}`]: {
-                transform: 'rotate(-180deg)'
+        <FormControl>
+          <Select
+            {...(register && { register })}
+            name={name}
+            // {...(defaultValue && { defaultValue })}
+            // {...(value && { value })}
+            // {...(onChange && { onChange })}
+            // defaultValue={defaultValue}
+            className={`tw-w-full ${className}`}
+            placeholder={placeholder}
+            indicator={<KeyboardArrowDown />}
+            sx={{
+              width: 240,
+              [`& .${selectClasses.indicator}`]: {
+                transition: '0.2s',
+                [`&.${selectClasses.expanded}`]: {
+                  transform: 'rotate(-180deg)'
+                }
               }
-            }
-          }}
-        >
-          {options?.map((option) => (
-            <Option
-              key={option.value}
-              {...(register && { register })}
-              value={option.value}
-              name={name}
-            >
-              {option.label}
-            </Option>
-          ))}
-        </Select>
+            }}
+          >
+            {options?.map((option) => (
+              <Option
+                key={option.value}
+                value={option.value}
+                {...(register && { register })}
+                name={name}
+              >
+                {option.label}
+              </Option>
+            ))}
+          </Select>
+        </FormControl>
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />
         )}
