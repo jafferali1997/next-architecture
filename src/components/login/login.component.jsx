@@ -142,10 +142,7 @@ export default function Login() {
                 <Link
                   href="/forget-password"
                   onClick={() =>
-                    router.push({
-                      pathname: '/forget-password',
-                      query: { btnText: 'Password Recovery Link' }
-                    })
+                    router.push('/forget-password?btnText=Password%20Recovery%20Link')
                   }
                   className="forgotText"
                 >
