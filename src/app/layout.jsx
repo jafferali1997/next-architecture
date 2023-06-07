@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
         <StyledEngineProvider injectFirst>
           <SnackbarProvider
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            autoHideDuration={4000}
+            autoHideDuration={700}
             Components={{
               success: StyledMaterialDesignContent,
               error: StyledMaterialDesignContent
