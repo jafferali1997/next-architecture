@@ -98,16 +98,16 @@ export default function TwoFactorAuthComponent() {
             <div className="otp-form-footer tw-mt-[24px]">
               <p>
                 Don’t receive code?
-                <span
+                <button
                   onClick={resendOtpHandler}
-                  className={`${
-                    !isTimerStop ? '!tw-cursor-not-allowed !tw-text-gray-400' : ''
-                  } `}
-                  disabled={!isTimerStop}
+                  // className={`${
+                  //   !isTimerStop ? '!tw-cursor-not-allowed !tw-text-gray-400' : ''
+                  // } `}
+                  // disabled={!isTimerStop}
                 >
                   {' '}
                   Resend SMS{' '}
-                </span>{' '}
+                </button>{' '}
               </p>
             </div>
           </div>

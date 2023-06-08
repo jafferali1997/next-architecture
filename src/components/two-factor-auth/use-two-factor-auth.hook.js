@@ -39,32 +39,15 @@ export default function useTwoFactorAuth() {
   // }, []);
   // auth/resend-2fa
   // auth/verify-2fa
+  const moveRouterGenOtp = () => {
+    console.log( "Otp generated");
+      // router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
+  };
 
   const resendOtpHandler = () => {
+    dispatch(generateOtp({ successCallBack: moveRouterGenOtp() }));
     if (isTimerStop) {
       console.log('resend otp');
-      // console.log(userId);
-      // axios
-      //   .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/resend-2fa`, {
-      //     userId
-      //   })
-      //   .then((response) => {
-      //     console.log(response.data);
-      //     if (response.data.status) {
-      //       // CustomAlert(response.data.message, 'success');
-      //       setIsTimerStop(false);
-      //       otpNumber1.current.value = '';
-      //       otpNumber2.current.value = '';
-      //       otpNumber3.current.value = '';
-      //       otpNumber4.current.value = '';
-      //     } else {
-      //       // CustomAlert(response.data.message, 'error');
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     //   CustomAlert('Network Error', 'error');
-      //   });
     }
   };
   const moveRouter = (data) => {

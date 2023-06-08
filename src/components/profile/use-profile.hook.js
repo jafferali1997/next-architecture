@@ -21,33 +21,42 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
 
-  // userName: Yup.string()
-  //   .max(30, 'Username must be at most 30 characters long')
-  //   .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
-  //   .required('User name is required'),
+  userName: Yup.string()
+    .max(30, 'Username must be at most 30 characters long')
+    .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
+    .required('User name is required'),
 
   country: Yup.string().required('Country name is required'),
   city: Yup.string().required('City name is required'),
   // // phoneNumber: Yup.string().required("Phone number is required"),
   // // otpNumber: Yup.string().required("OTP number is required"),
-  // ibanNumber: Yup.string()
-  //   .min(15, 'IBAN number can contain minimum 15 alphanumeric')
-  //   .max(34, 'IBAN number can contain maximum 34 alphanumeric')
-  //   // .matches(/^[a-zA-Z0-9]+$/, 'IBAN can only contain alphanumeric'),
+  ibanNumber: Yup.string()
+  .nullable()
+  .transform((value) => (value === '' ? null : value))
+    .matches(/^[a-zA-Z0-9]+$/, 'IBAN can only contain alphanumeric')
+    .min(15, 'IBAN number can contain minimum 15 alphanumeric')
+    .max(34, 'IBAN number can contain maximum 34 alphanumeric'),
 
   // .matches(/[0-9]/, 'IBAN number must be in digits'),
-  // vatNumber: Yup.string()
-  //   .min(5, 'VAT number can contain minimum 5 digits')
-  //   .max(15, 'VAT number can contain maximum 15 digits')
-  //   .matches(/[0-9]/, 'VAT number must be in digits'),
+  vatNumber: Yup.string()
+  .nullable()
+  .transform((value) => (value === '' ? null : value))
+    .matches(/[0-9]/, 'VAT number must be in digits')
+    .min(5, 'VAT number can contain minimum 5 digits')
+    .max(15, 'VAT number can contain maximum 15 digits'),
   
-  // companyName: Yup.string()
-  //   .max(150, 'Company name must be at most 30 characters long')
-  //   .matches(/^[a-zA-Z0-9\s]*$/, 'Company name can only contain alphanumeric characters'),
-  // population: Yup.string(),
-  // address: Yup.string()
-  //   .max(255, 'Address can contain maximum 255 characters')
-  //   .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters')
+  companyName: Yup.string()
+  .nullable()
+    .max(150, 'Company name must be 150 characters long')
+    .matches(/^[a-zA-Z0-9\s]*$/, 'Company name can only contain alphanumeric characters'),
+    // .required('Company name is required'),
+  population: Yup.string().nullable(),
+  // .required('Population is required'),
+  address: Yup.string()
+  .nullable()
+    .max(255, 'Address can contain maximum 255 characters')
+    .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters'),
+    // .required('Address is required'),
 });
 
 export default function useProfile() {
@@ -72,7 +81,8 @@ export default function useProfile() {
     setValue,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
+    mode: 'onBlur'
   });
 
   useEffect(() => {
