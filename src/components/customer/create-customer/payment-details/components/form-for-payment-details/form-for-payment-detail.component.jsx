@@ -15,7 +15,9 @@ export default function FormForPaymentDetails({
   setIsSubmit,
   handleTabClick,
   data = {},
-  errors
+  errors,
+  paymentType,
+  setPaymentType
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,34 +29,39 @@ export default function FormForPaymentDetails({
         <div className="payment-details-bank">
           <CustomRadio
             label="Bank Details"
-            checked={bankDetail}
+            checked={paymentType === 'bankDetails'}
+            value="bankDetails"
             name="paymentType"
             onChange={(e) => {
-              setBankDetail(true);
-              setCreditCard(false);
+              // setBankDetail(true);
+              // setCreditCard(false);
+              console.log(e.target.value);
+              setPaymentType(e.target.value);
             }}
           />
         </div>
         <div className="payment-details-card">
           <CustomRadio
             label="Credit Card Details"
-            checked={creditCard}
+            checked={paymentType === 'creditCardDetails'}
+            value="creditCardDetails"
             name="paymentType"
             onChange={(e) => {
-              setCreditCard(true);
-              setBankDetail(false);
+              // setCreditCard(true);
+              // setBankDetail(false);
+              console.log(e.target.value);
+              setPaymentType(e.target.value);
             }}
           />
         </div>
       </div>
 
-      {bankDetail && (
+      {paymentType === 'bankDetails' && (
         <>
           <div className="tw-w-full">
             <CustomInput
               label="IBAN Number"
               name="iban"
-              defaultValue={data.iban}
               placeholder="IBAN Number"
               type="text"
               register={register}
@@ -65,8 +72,7 @@ export default function FormForPaymentDetails({
           <div className="form-box-grid-4col">
             <CustomInput
               label="Account owner name"
-              name="onwerName"
-              defaultValue={data.onwerName}
+              name="accountOwnerName"
               placeholder="Account owner name"
               type="text"
               register={register}
@@ -76,8 +82,7 @@ export default function FormForPaymentDetails({
 
             <CustomInput
               label="BIC Number"
-              name="bicNumber"
-              defaultValue={data.bicNumber}
+              name="bic"
               placeholder="BIC Number"
               type="text"
               register={register}
@@ -86,8 +91,7 @@ export default function FormForPaymentDetails({
             />
             <CustomInput
               label="Mandate Reference"
-              name="mandateReference"
-              defaultValue={data.mandateReference}
+              name="mendateReferance"
               placeholder="Mandate Reference"
               type="number"
               register={register}
@@ -96,8 +100,7 @@ export default function FormForPaymentDetails({
             />
             <CustomInput
               label="Mandate Date"
-              name="mandateDate"
-              defaultValue={data.mandateDate}
+              name="mandateGenerateDate"
               placeholder="03/13/2023"
               type="date"
               register={register}
@@ -107,24 +110,22 @@ export default function FormForPaymentDetails({
           </div>
         </>
       )}
-      {!bankDetail && (
+      {paymentType === 'creditCardDetails' && (
         <div className="form-box-grid-4col">
           <CustomInput
             label="Credit Card Name"
-            name="creditCardName"
+            name="nameOfCreditCard"
             placeholder="Credit Card Name"
             type="text"
-            defaultValue={data.creditCardName}
             register={register}
             error={errors}
             isRequired={true}
           />
           <CustomInput
             label="Credit Card Number"
-            name="creditCardNo"
+            name="creditCardNumber"
             placeholder="Credit Card Number"
             type="number"
-            defaultValue={data.creditCardNo}
             register={register}
             error={errors}
             isRequired={true}
@@ -135,18 +136,16 @@ export default function FormForPaymentDetails({
             placeholder="03/13/2023"
             type="date"
             register={register}
-            defaultValue={data.creditCardExpiry}
             error={errors}
             isRequired={true}
           />
           <CustomInput
             label="CVV"
-            name="cvv"
+            name="creditCardCVV"
             placeholder="CVV"
             type="number"
             register={register}
             error={errors}
-            defaultValue={data.cvv}
             isRequired={true}
           />
         </div>
@@ -174,5 +173,7 @@ FormForPaymentDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  paymentType: PropTypes.string,
+  setPaymentType: PropTypes.func
 };

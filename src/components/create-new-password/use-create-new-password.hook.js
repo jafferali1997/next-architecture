@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { popupMessages } from '@/common/constants/message';
+import { useDispatch } from 'react-redux';
+import { changePasswordFromLink } from '@/provider/features/user/user.slice';
+// import { popupMessages } from '@/common/constants/message';
 
 const FormSchema = yup.object().shape({
   pass: yup
@@ -19,6 +21,7 @@ const FormSchema = yup.object().shape({
     .oneOf([yup.ref('pass'), null], 'Must match "password" field value')
 });
 export default function useCreateNewPassword() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -56,32 +59,42 @@ export default function useCreateNewPassword() {
   };
 
   const onSubmit = (values) => {
-    const { email } = router.query;
-    console.log(router.query);
+    console.log(values)
+    const params = new URLSearchParams(document.location.search);
+    const email = params.get('email'); // is the string "Jonathan
+    const token = params.get('token');
+    console.log(email);
     const data = {
-      email,
-      password: values.pass
+      payload: {
+        email,
+        password: values.password,
+        accessToken: token
+      },
+      successCallBack: router.push('/login')
     };
-    console.log(data);
-    axios
-      .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/change-password/`, data)
-      .then((response) => {
-        if (response.data.status === true) {
-          //   CustomAlert('Password Updated Successfully.', 'success');
-          router.push({
-            pathname: '/login',
-            query: { email }
-          });
-        } else {
-          //   CustomAlert(response.data.message, 'error');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.message === 'Network Error') {
-          //   CustomAlert(popupMessages.networkError, 'error');
-        }
-      });
+    dispatch(changePasswordFromLink(data));
+    
+
+    // console.log(data);
+    // axios
+    //   .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/change-password/`, data)
+    //   .then((response) => {
+    //     if (response.data.status === true) {
+    //       //   CustomAlert('Password Updated Successfully.', 'success');
+    //       router.push({
+    //         pathname: '/login',
+    //         query: { email }
+    //       });
+    //     } else {
+    //       //   CustomAlert(response.data.message, 'error');
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     if (error.message === 'Network Error') {
+    //       //   CustomAlert(popupMessages.networkError, 'error');
+    //     }
+    //   });
   };
 
   return {

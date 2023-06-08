@@ -11,7 +11,7 @@ import {
 } from '@/provider/features/customer/customer.slice';
 
 export default function UseEditCustomer() {
-  const [inputValues, setInputValues] = useState([]);
+  const [companyAddresses, setCompanyAddresses] = useState([{ id: 1 }]);
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -20,6 +20,7 @@ export default function UseEditCustomer() {
 
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
+
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
   };
@@ -37,13 +38,28 @@ export default function UseEditCustomer() {
   });
 
   async function fetchAndSetData() {
-    // if (searchParams.get('id')) {
-    //   // customerId.current = searchParams.get('id');
-    //   const data = await dispatch(
-    //     getSingleCustomer({ payload: searchParams.get('id') })
-    //   );
-    //   console.log('data', data);
-    // }
+    if (searchParams.get('id')) {
+      // customerId.current = searchParams.get('id');
+      let data = await dispatch(getSingleCustomer({ payload: searchParams.get('id') }));
+      console.log('data', data);
+      data = data.payload;
+      Object.keys(data).forEach((key) => setValue(key, data[key]));
+
+      if (data?.additionalContact?.length > 0) {
+        Object.keys(data.additionalContact[0]).forEach((key) =>
+          setValue(`ac_${key}`, data.additionalContact[0][key])
+        );
+      }
+
+      if (data?.companyAddress?.length > 0) {
+        const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
+          setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
+          setValue(`ca_address_${index + 1}`, addressObj.address);
+          return { id: index + 1 };
+        });
+        setCompanyAddresses(newcompanyAddresses);
+      }
+    }
     const data = {
       id: 6,
       accountOwnerName: null,
@@ -83,13 +99,6 @@ export default function UseEditCustomer() {
       priceGroup: [],
       discountGroup: []
     };
-    Object.keys(data).forEach((key) => setValue(key, data[key]));
-
-    if (data.additionalContact?.length > 0) {
-      Object.keys(data.additionalContact[0]).forEach((key) =>
-        setValue(`ac_${key}`, data.additionalContact[0][key])
-      );
-    }
   }
 
   useEffect(() => {
@@ -97,6 +106,19 @@ export default function UseEditCustomer() {
   }, [searchParams]);
 
   const onSubmit = (data) => {
+    const companyAddressesKeys = Object.keys(data).filter((attr) =>
+      attr.startsWith('ca')
+    );
+    const newCompanyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
+      if (index % 2 === 0) {
+        const obj = {
+          addressLabel: data[curr],
+          address: data[arr[index + 1]]
+        };
+        acc.push(obj);
+      }
+      return acc;
+    }, []);
     const payloadData = {
       ...data,
       additionalContact: [
@@ -114,8 +136,10 @@ export default function UseEditCustomer() {
           department: data.ac_department,
           mobile: data.ac_mobile
         }
-      ]
+      ],
+      companyAddress: newCompanyAddresses
     };
+
     console.log(data);
     const res = dispatch(
       updateCustomer({ payload: { data: payloadData, id: customerId.current } })
@@ -127,19 +151,19 @@ export default function UseEditCustomer() {
   };
 
   const handleAddInput = () => {
-    setInputValues([...inputValues, '']);
+    setCompanyAddresses([...companyAddresses, { id: companyAddresses[-1].id + 1 }]);
   };
 
   const handleRemoveInput = (index) => {
-    const newInputValues = [...inputValues];
-    newInputValues.splice(index, 1);
-    setInputValues(newInputValues);
+    const newcompanyAddresses = [...companyAddresses];
+    newcompanyAddresses.splice(index, 1);
+    setCompanyAddresses(newcompanyAddresses);
   };
 
   const handleInputChange = (index, value) => {
-    const newInputValues = [...inputValues];
-    newInputValues[index] = value;
-    setInputValues(newInputValues);
+    const newcompanyAddresses = [...companyAddresses];
+    newcompanyAddresses[index] = value;
+    setCompanyAddresses(newcompanyAddresses);
   };
 
   return {
@@ -156,7 +180,7 @@ export default function UseEditCustomer() {
     onSubmit,
     handleAddInput,
     handleInputChange,
-    inputValues,
-    setInputValues
+    companyAddresses,
+    setCompanyAddresses
   };
 }

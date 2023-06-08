@@ -16,7 +16,9 @@ export default function PaymentDetails({ handleTabClick, handleTabCompleted }) {
     setIsSubmit,
     router,
     data,
-    errors
+    errors,
+    paymentType,
+    setPaymentType
   } = usePaymentDetails({ handleTabClick, handleTabCompleted });
   return (
     <div className="payment-details-wrapper">
@@ -24,23 +26,25 @@ export default function PaymentDetails({ handleTabClick, handleTabCompleted }) {
         <h3 className="form-inner-heading">Payment Details</h3>
       </div>
       <div className="content-body">
-        {router?.query?.id && data && (
-          <FormForPaymentDetails
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            bankDetail={bankDetail}
-            setBankDetail={setBankDetail}
-            setCreditCard={setCreditCard}
-            creditCard={creditCard}
-            setIsSubmit={setIsSubmit}
-            handleTabClick={handleTabClick}
-            errors={errors}
-            data={data}
-          />
-        )}
+        {/* {router?.query?.id && data && ( */}
+        <FormForPaymentDetails
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          register={register}
+          bankDetail={bankDetail}
+          setBankDetail={setBankDetail}
+          setCreditCard={setCreditCard}
+          creditCard={creditCard}
+          setIsSubmit={setIsSubmit}
+          handleTabClick={handleTabClick}
+          errors={errors}
+          data={data}
+          paymentType={paymentType}
+          setPaymentType={setPaymentType}
+        />
+        {/* )} */}
 
-        {!router?.query?.id && (
+        {/* {!router?.query?.id && (
           <FormForPaymentDetails
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
@@ -52,8 +56,10 @@ export default function PaymentDetails({ handleTabClick, handleTabCompleted }) {
             setIsSubmit={setIsSubmit}
             handleTabClick={handleTabClick}
             errors={errors}
+            paymentType={paymentType}
+    setPaymentType={setPaymentType}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

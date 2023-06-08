@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { changePasswordFromLink, verifyEmail } from '@/provider/features/user/user.slice';
+import { verifyEmail } from '@/provider/features/user/user.slice';
 
 export default function useVerify() {
   const dispatch = useDispatch();
@@ -14,13 +13,13 @@ export default function useVerify() {
 
   const moveRouterEmail = (data) => {
     router.push(
-      `/profile?email=&${data.email}&userId=${data.id}&userName=${data.userName}`
+      `/profile?email=${data.email}&userId=${data.id}&userName=${data.userName}`
     );
   };
 
   const moveRouterPassword = (data) => {
     console.log(data);
-    router.push(`/create-new-password?email=&${data.email}`);
+    router.push(`/create-new-password?email=${data.email}&token=${data.token}`);
   };
 
   const moveRouterError = (email, type) => {
@@ -43,13 +42,7 @@ export default function useVerify() {
         })
       );
     } else {
-      dispatch(
-        changePasswordFromLink({
-          payload: body,
-          successCallBack: moveRouterPassword,
-          errorCallBack: moveRouterError(email, type)
-        })
-      );
+      moveRouterPassword({ email, token });
     }
   };
 

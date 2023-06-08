@@ -2,7 +2,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createProductCategory,
@@ -23,9 +23,7 @@ export default function useCreateCategories() {
   const [categoryLevelToGet, setCategoryLevelToGet] = useState();
   const [categoryToRender, setCategoryToRender] = useState(0);
   const allProductCategoryRes = useSelector((state) => state.productCategory.getAll);
-  const createProductCategoryRes = useSelector((state) => state.productCategory.create);
-  const updateProductCategoryRes = useSelector((state) => state.productCategory.update);
-  const deleteProductCategoryRes = useSelector((state) => state.productCategory.delete);
+  const prodctCategoryRef = useRef(true);
 
   const handleCategories = (array) => {
     setCategories(array);
@@ -49,7 +47,10 @@ export default function useCreateCategories() {
   };
 
   useEffect(() => {
-    getAllCategoryApi({ categoryLevelToGet: 1 });
+    if (prodctCategoryRef.current) {
+      prodctCategoryRef.current = false;
+      getAllCategoryApi({ categoryLevelToGet: 1 });
+    }
   }, [dispatch]);
 
   useEffect(() => {
@@ -128,9 +129,10 @@ export default function useCreateCategories() {
   };
 
   const handleUpdateCategory = (id, data) => {
+    // console.log(data, 'jaffer');
     dispatch(
       updateProductCategory({
-        payload: { id, data },
+        payload: { id, data: { categoryName: data } },
         successCallBack: getAllCategoryApi
       })
     );
@@ -155,6 +157,8 @@ export default function useCreateCategories() {
   return {
     categories,
     handleClickCategory,
-    handleAddCategory
+    handleAddCategory,
+    handleDeleteCategory,
+    handleUpdateCategory
   };
 }

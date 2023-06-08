@@ -10,6 +10,7 @@ import {
 } from '@/common/utils/firebase';
 import useSignUp from './use-sign-up.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import { Checkbox } from '@mui/material';
 
 function SignUp() {
   const {
@@ -25,7 +26,8 @@ function SignUp() {
     isChecked,
     loader,
     signUpWithOAuth,
-    router
+    router,
+    setIsChecked
   } = useSignUp();
 
   return (
@@ -147,12 +149,11 @@ function SignUp() {
               </div>
 
               <div className="form-checkbox">
-                <input
-                  type="checkbox"
-                  // checked={isChecked}
+                <Checkbox
                   name="terms"
                   id="terms"
-                  // onChange={() => handleCheckboxChange(errors)}
+                  checked={isChecked}
+                  onChange={()=>{setIsChecked(!isChecked)}}
                 />
                 <label
                   htmlFor="terms"
@@ -172,6 +173,7 @@ function SignUp() {
                   type="submit"
                   className="btn-primary tw-w-full"
                   text=" Sign up"
+                  disabled={!isChecked}
                 />
               </div>
               <div className="form-or-content">

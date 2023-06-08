@@ -35,6 +35,9 @@
   .btn-primary {
     @apply tw-bg-primary hover:tw-bg-secondary-blue focus:tw-bg-secondary-dark-blue disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
   }
+  .btn-primary-blue {
+    @apply tw-inline-block tw-w-fit tw-rounded-[10px] tw-border-2 tw-border-primary-purple tw-bg-primary-blue tw-py-4 tw-font-dm tw-text-lg tw-font-semibold tw-leading-6 tw-text-white xs:tw-px-5 lg:tw-px-12;
+  }
   .btn-cancel {
     @apply tw-bg-[#DBE1E7] tw-text-text-dark-gray;
   }
@@ -263,10 +266,17 @@
   .inner-link {
     @apply tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline hover:tw-cursor-pointer;
   }
+  .text-normal {
+    @apply tw-font-dm tw-text-xl tw-font-normal tw-leading-8 tw-text-text-light-black2;
+  }
 }
 .payment-details-radios label {
   @apply tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-[#2c2e3e];
   font-family: 'DM Sans';
+}
+
+.container {
+  @apply tw-m-auto tw-w-full tw-max-w-7xl;
 }
 /* .payment-details-radios label span {
   @apply tw-text-red;
@@ -321,7 +331,7 @@
 .MuiPaginationItem-textPrimary > .Mui-selected {
   background: #1d4ed8 !important;
 }
-/* 
+/*
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -395,5 +405,24 @@ body {
   display: none;
 }
 .cate-btn:hover .threedot {
-  display: block;
+  display: flex;
+}
+
+.testimonial-slider .swiper-slide-shadow-left,
+.testimonial-slider .swiper-slide-shadow-right {
+  background-image: none !important;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 0 10px rgba(245, 245, 245, 0.8);
+}
+
+@media screen and (max-width: 991px) {
+  .menuclose {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .menuopen {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
 }

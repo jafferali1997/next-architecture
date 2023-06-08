@@ -28,7 +28,7 @@ const api = (headers = null) => {
           enqueueSnackbar(response.data.message, {
             variant: 'success'
           });
-          await delay(3000);
+          await delay(700);
           return response;
         }
       }

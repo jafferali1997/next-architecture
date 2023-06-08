@@ -15,10 +15,10 @@ import store from '@/provider/store';
 
 // const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'Quick Steps',
-  description: 'Custom invoices generating app'
-};
+// export const metadata = {
+//   title: 'Quick Steps',
+//   description: 'Custom invoices generating app'
+// };
 
 const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
   '&.notistack-MuiContent-success': {
@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
         <StyledEngineProvider injectFirst>
           <SnackbarProvider
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            autoHideDuration={4000}
+            autoHideDuration={1500}
             Components={{
               success: StyledMaterialDesignContent,
               error: StyledMaterialDesignContent

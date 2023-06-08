@@ -20,7 +20,8 @@ export default function CustomerDetails() {
     register,
     handleSubmit,
     id,
-    onSubmit
+    onSubmit,
+    companyAddresses
   } = UseCustomerDetails();
 
   return (
@@ -33,10 +34,10 @@ export default function CustomerDetails() {
               <h1 className="admin-top-heading ">Customer Details</h1>
               <p className="admin-top-p">Customer # {id}</p>
             </div>
-            <CustomButton 
-              className="btn-primary" 
-              text="Edit" 
-              href={`/customer/edit?id=${id}`} 
+            <CustomButton
+              className="btn-primary"
+              text="Edit"
+              href={`/customer/edit?id=${id}`}
             />
           </div>
           <div className="2bars tw-flex tw-gap-[24px]">
@@ -267,24 +268,23 @@ export default function CustomerDetails() {
                     Add more address
                   </span>
                 </div>
-                {isAdress ? (
-                  <div className="form-box-grid">
+                {companyAddresses.map((value, index) => (
+                  <div className="form-box-grid " key={value}>
                     <CustomInput
-                      label="Company address 1"
-                      name=""
-                      placeholder="Company address 1"
+                      placeholder="Enter label name"
                       type="text"
-                      isRequired={false}
+                      name={`ca_addressLabel_${index + 1}`}
+                      register={register}
+                      // onChange={(e) => handleInputChange(index, e.target.value)}
                     />
                     <CustomInput
-                      label="Company address 1"
-                      name=""
-                      placeholder="Company address 1"
+                      placeholder="Enter company address"
                       type="text"
-                      isRequired={false}
+                      name={`ca_address_${index + 1}`}
+                      register={register}
                     />
                   </div>
-                ) : null}
+                ))}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>
                   {isAdditional ? (
