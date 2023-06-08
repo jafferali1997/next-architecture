@@ -24,7 +24,7 @@ export default function EditCustomer() {
     id,
     onSubmit,
     handleInputChange,
-    inputValues,
+    companyAddresses,
     handleAddInput
   } = UseEditCustomer();
 
@@ -95,7 +95,7 @@ export default function EditCustomer() {
                     type="select"
                     register={register}
                     errors={errors}
-                    />
+                  />
                   <Select
                     label="City"
                     name="city"
@@ -268,42 +268,25 @@ export default function EditCustomer() {
                     Add more address
                   </span>
                 </div>
-                {isAdress ? (
-                  <>
-                    <div className="form-box-grid">
-                      <CustomInput
-                        label="Company address 1"
-                        name=""
-                        placeholder="Company address 1"
-                        type="text"
-                        isRequired={false}
-                      />
-                      <CustomInput
-                        label="Company address 1"
-                        name=""
-                        placeholder="Company address 1"
-                        type="text"
-                        isRequired={false}
-                      />
-                    </div>
-                    {inputValues.map((value, index) => (
-                      // eslint-disable-next-line react/no-array-index-key
-                      <div className="form-box-grid " key={index}>
-                        <CustomInput
-                          placeholder="Enter label name"
-                          type="text"
-                          errors={errors}
-                          onChange={(e) => handleInputChange(index, e.target.value)}
-                        />
-                        <CustomInput
-                          placeholder="Enter company address"
-                          type="text"
-                          errors={errors}
-                        />
-                      </div>
-                    ))}
-                  </>
-                ) : null}
+                {companyAddresses.map((value, index) => (
+                  <div className="form-box-grid " key={value}>
+                    <CustomInput
+                      placeholder="Enter label name"
+                      type="text"
+                      errors={errors}
+                      name={`ca_addressLabel_${index + 1}`}
+                      register={register}
+                      // onChange={(e) => handleInputChange(index, e.target.value)}
+                    />
+                    <CustomInput
+                      placeholder="Enter company address"
+                      type="text"
+                      name={`ca_address_${index + 1}`}
+                      errors={errors}
+                      register={register}
+                    />
+                  </div>
+                ))}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>
                   {isAdditional ? (

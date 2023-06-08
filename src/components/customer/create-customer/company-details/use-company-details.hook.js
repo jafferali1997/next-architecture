@@ -234,9 +234,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
 
   const onSubmit = async (value) => {
     console.log(value);
-    const companyAddressesKeys = Object.keys(value).filter((attr) =>
-      attr.startsWith('ca')
-    );
     const additionalContactKeys = Object.keys(value).filter((attr) =>
       attr.startsWith('ac')
     );
@@ -244,6 +241,9 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       const key = attr.replace('ac_', '');
       return { ...accumulator, [key]: value[attr] };
     }, {});
+    const companyAddressesKeys = Object.keys(value).filter((attr) =>
+      attr.startsWith('ca')
+    );
     const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
       if (index % 2 === 0) {
         const obj = {
