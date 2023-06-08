@@ -1,10 +1,7 @@
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setAccessToken } from '@/common/utils/access-token.util';
-import { generateOtp, verifyOtp } from '@/provider/features/user/user.slice';
+import { useDispatch } from 'react-redux';
+import { verifyOtp } from '@/provider/features/user/user.slice';
 
 export default function useTwoFactorAuth() {
   const searchParams = useSearchParams();
@@ -68,9 +65,9 @@ export default function useTwoFactorAuth() {
     }
   };
   const moveRouter = (data) => {
-      console.log(data,"otp verify");
-      setIsOtpVerified(true)
-      router.push(`/customer`);
+    console.log(data, 'otp verify');
+    setIsOtpVerified(true);
+    router.push('/customer');
   };
 
   const verifyOtpHandler = () => {
@@ -78,31 +75,29 @@ export default function useTwoFactorAuth() {
       `${otpNumber1.current.value}${otpNumber2.current.value}${otpNumber3.current.value}${otpNumber4.current.value}`
     );
     if (otp > 0) {
-      dispatch(
-        verifyOtp({ payload: {otp}, callBackMessage: moveRouter })
-      );
+      dispatch(verifyOtp({ payload: { otp }, callBackMessage: moveRouter }));
       // axios
       //   .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/verify-2fa`, {
       //     userId,
       //     totp: otp
       //   })
-    //     .then((response) => {
-    //       console.log(response.data);
-    //       if (response.data.status) {
-    //         const { data } = response.data.result;
-    //         // CustomAlert(response.data.message, 'success');
-    //         setAccessToken(data.accessToken);
-    //         localStorage.setItem('userId', data.user.userId);
-    //         localStorage.setItem('businessId', data.user.businessId);
-    //         router.push('/customer');
-    //       } else {
-    //         // CustomAlert(response.data.message, 'error');
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       //   CustomAlert('Network Error', 'error');
-    //     });
+      //     .then((response) => {
+      //       console.log(response.data);
+      //       if (response.data.status) {
+      //         const { data } = response.data.result;
+      //         // CustomAlert(response.data.message, 'success');
+      //         setAccessToken(data.accessToken);
+      //         localStorage.setItem('userId', data.user.userId);
+      //         localStorage.setItem('businessId', data.user.businessId);
+      //         router.push('/customer');
+      //       } else {
+      //         // CustomAlert(response.data.message, 'error');
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //       //   CustomAlert('Network Error', 'error');
+      //     });
     } else {
       //   CustomAlert('Please enter otp.', 'error');
     }
@@ -131,6 +126,6 @@ export default function useTwoFactorAuth() {
     setIsTimerStop,
     verifyOtpHandler,
     resendOtpHandler,
-    isTimerStop,
+    isTimerStop
   };
 }

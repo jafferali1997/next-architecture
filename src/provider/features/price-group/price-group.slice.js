@@ -17,7 +17,7 @@ const initialState = {
 
 export const createPriceGroup = createAsyncThunk(
   'priceGroup/create',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await priceGroupService.createPriceGroup(payload);
       if (response.Succeeded) {
@@ -25,7 +25,6 @@ export const createPriceGroup = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -33,7 +32,7 @@ export const createPriceGroup = createAsyncThunk(
 
 export const getSinglePriceGroup = createAsyncThunk(
   'priceGroup/get',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await priceGroupService.getSinglePriceGroup(payload);
       if (response.Succeeded) {
@@ -41,7 +40,6 @@ export const getSinglePriceGroup = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -49,7 +47,7 @@ export const getSinglePriceGroup = createAsyncThunk(
 
 export const getAllPriceGroup = createAsyncThunk(
   'priceGroup/getAll',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async (param, thunkAPI) => {
     try {
       const response = await priceGroupService.getAllPriceGroup();
       if (response.Succeeded) {
@@ -57,7 +55,6 @@ export const getAllPriceGroup = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -65,7 +62,7 @@ export const getAllPriceGroup = createAsyncThunk(
 
 export const updatePriceGroup = createAsyncThunk(
   'priceGroup/update',
-  async ({ payload: { id, data }, callBackMessage }, thunkAPI) => {
+  async ({ payload: { id, data } }, thunkAPI) => {
     try {
       const response = await priceGroupService.updatePriceGroup(id, data);
       if (response.Succeeded) {
@@ -73,7 +70,6 @@ export const updatePriceGroup = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -81,7 +77,7 @@ export const updatePriceGroup = createAsyncThunk(
 
 export const deletePriceGroup = createAsyncThunk(
   'priceGroup/delete',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await priceGroupService.deletePriceGroup(payload);
       if (response.Succeeded) {
@@ -89,7 +85,6 @@ export const deletePriceGroup = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -168,6 +163,7 @@ export const priceGroupSlice = createSlice({
         state.getAll.data = action.payload;
       })
       .addCase(getAllPriceGroup.rejected, (state, action) => {
+        console.log(action);
         state.getAll.message = action.payload.message;
         state.getAll.isLoading = false;
         state.getAll.isError = true;

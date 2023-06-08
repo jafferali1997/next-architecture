@@ -59,11 +59,13 @@ export default function useLogin() {
 
   const moveRouterGenOtp = (data) => {
     // console.log(data,"moveRouterGenOtp");
-      router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
+    router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
   const moveRouter = (data) => {
-    if(data.isPhoneVerified){
-       dispatch(generateOtp({ payload: { ...data }, successCallBack: moveRouterGenOtp(data) }));
+    if (data.isPhoneVerified) {
+      dispatch(
+        generateOtp({ payload: { ...data }, successCallBack: moveRouterGenOtp(data) })
+      );
     } else {
       router.push(
         `/profile?username=${data.userName}&email=${data.email}&userId=${data.id}`
