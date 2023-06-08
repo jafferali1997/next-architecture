@@ -31,7 +31,8 @@ export default function CategoryColumn({
     handleButtonClickedit,
     idToUpdateCategory,
     setUpdateValue,
-    updateValue
+    updateValue,
+    ref
   } = useCategoryColumn({ handleAddCategory, categoryToRender });
 
   return (
@@ -73,6 +74,13 @@ export default function CategoryColumn({
       <div>
         <h4 className="h4">All Categories</h4>
       </div>
+      <div className="cate-btn tw-flex tw-h-[34px] tw-w-full tw-items-center tw-justify-between tw-rounded-md tw-border tw-border-solid tw-border-disabled-input tw-bg-secondary-white tw-px-[12px] tw-py-[8px]">
+        <h5 className="h5">gfgfg</h5>
+        <MenuDropDown
+          handleButtonClickedit={handleButtonClickedit}
+          handleDeleteCategory={handleDeleteCategory}
+        />
+      </div>
       {columnData.length !== 0 &&
         columnData
           .filter((item) => item.categoryName.includes(search))
@@ -91,7 +99,7 @@ export default function CategoryColumn({
             </div>
           ))}
       <Dialog open={openPopup}>
-        <div className="tw-w-[389px]">
+        <div ref={ref} className="tw-w-[389px]">
           <div>
             <DialogTitle>Category</DialogTitle>
           </div>

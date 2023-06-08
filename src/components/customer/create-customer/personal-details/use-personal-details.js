@@ -238,6 +238,9 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     addDiscountGroup,
     setIsSubmit,
     router,
-    errors
+    errors,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit
   };
 }

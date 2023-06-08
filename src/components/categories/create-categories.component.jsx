@@ -19,7 +19,7 @@ export default function CreateCategories() {
         <p className="admin-top-p">Category ID #</p>{' '}
         <span className="header-span">10075</span>
       </div>
-      <div className="category-box-grid-4col common-box tw-m-auto tw-h-[100vh] tw-w-[95%] tw-p-0">
+      <div className="category-box-grid-4col common-box tw-m-auto tw-min-h-[100vh] tw-w-[95%] tw-overflow-y-auto tw-p-0">
         {categories.map((item) => (
           <CategoryColumn
             columnData={item.categories}

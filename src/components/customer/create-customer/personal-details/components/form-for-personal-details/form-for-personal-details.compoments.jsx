@@ -5,6 +5,16 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import Select from '@/common/components/select/select.component';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography
+} from '@mui/material';
+import usePersonalDetails from '../../use-personal-details';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
 
 export default function FormForPersonalDetails({
   register,
@@ -27,6 +37,9 @@ export default function FormForPersonalDetails({
   addDiscount,
   setAddDiscount,
   addDiscountGroup,
+  openPopup,
+  setOpenPopup,
+  handleButtonClickedit,
   setIsSubmit,
   errors = {}
 }) {
@@ -135,6 +148,24 @@ export default function FormForPersonalDetails({
       </div>
 
       <div className="form-box-grid-2col">
+        <Dialog open={openPopup}>
+          <div className="tw-w-[389px]">
+            <div>
+              <DialogTitle>Category</DialogTitle>
+            </div>
+            <DialogContent>
+              <CustomInput placeholder="Category" label="Category Name" type="text" />
+            </DialogContent>
+            <DialogActions>
+              <CustomButton
+                onClick={() => setOpenPopup(false)}
+                className=" btn-cancel"
+                text="Cancel"
+              />
+              <CustomButton className="btn btn-primary " text="Update" />
+            </DialogActions>
+          </div>
+        </Dialog>
         <div>
           <label className="group-label">Price Group</label>
           <MultiSelect
@@ -143,6 +174,7 @@ export default function FormForPersonalDetails({
               { id: '2', label: 'Test 2', value: 'test2' },
               { id: '3', label: 'Test 3', value: 'test3' }
             ]}
+            onClick={handleButtonClickedit}
             handleChange={() => {}}
           />
         </div>
@@ -155,6 +187,7 @@ export default function FormForPersonalDetails({
               { id: '3', label: 'Test 3', value: 'test3' }
             ]}
             handleChange={() => {}}
+            onClick={handleButtonClickedit}
           />
         </div>
       </div>
@@ -203,5 +236,8 @@ FormForPersonalDetails.propTypes = {
   ).isRequired,
   setIsSubmit: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  openPopup: PropTypes.func,
+  setOpenPopup: PropTypes.func,
+  handleButtonClickedit: PropTypes.func
 };
