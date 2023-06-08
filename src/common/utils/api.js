@@ -21,11 +21,16 @@ const api = (headers = null) => {
   apiSet.interceptors.response.use(
     async (response) => {
       if (response.config.method === 'post' || response.config.method === 'patch') {
-        enqueueSnackbar(response.data.message, {
-          variant: 'success'
-        });
-        await delay(3000);
-        return response;
+        if (
+          response.config.url.split('/')[response.config.url.split('/').length - 1] !==
+          'get-all'
+        ) {
+          enqueueSnackbar(response.data.message, {
+            variant: 'success'
+          });
+          await delay(700);
+          return response;
+        }
       }
       return response;
     },

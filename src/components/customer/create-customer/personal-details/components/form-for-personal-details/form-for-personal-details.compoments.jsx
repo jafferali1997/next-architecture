@@ -14,7 +14,7 @@ export default function FormForPersonalDetails({
   selectedCity,
   selectedCountry,
   handleCityChange,
-  countries,
+  // countries,
   cities,
   priceGroup,
   addPrice,
@@ -30,11 +30,17 @@ export default function FormForPersonalDetails({
   setIsSubmit,
   errors = {}
 }) {
+  const countries = [
+    { id: 1, name: 'Pakistan', label: 'Pakistan' },
+    { id: 2, name: 'India', label: 'India' }
+  ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
         <Select
+          register={register}
           label="Gender"
+          name="gender"
           isRequired={true}
           name="gender"
           register={register}
@@ -43,7 +49,8 @@ export default function FormForPersonalDetails({
             { id: 'MALE', value: 'MALE', label: 'MALE' },
             { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
           ]}
-          placeholder="John"
+          placeholder="Gender"
+          errors={errors}
         />
         <CustomInput
           label="Designation"

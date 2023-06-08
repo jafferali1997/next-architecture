@@ -175,6 +175,7 @@ export default function useSignUp() {
     isChecked,
     loader,
     signUpWithOAuth,
-    router
+    router,
+    setIsChecked
   };
 }

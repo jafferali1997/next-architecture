@@ -175,7 +175,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     if (id) {
       fetchData(id);
     }
-  }, [router, searchParams, priceGroup, discountGroup, fetchData]);
+  }, [searchParams, priceGroup, discountGroup, fetchData]);
 
   const handleCountryChange = (event) => {
     // const countryCode = event.target.value;

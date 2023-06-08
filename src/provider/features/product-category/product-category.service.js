@@ -10,8 +10,8 @@ const getSingleProductCategory = async (id) => {
   return response.data;
 };
 
-const getAllProductCategory = async () => {
-  const response = await api().get('/product-category');
+const getAllProductCategory = async (userData) => {
+  const response = await api().post('/product-category/get-all', userData);
   return response.data;
 };
 

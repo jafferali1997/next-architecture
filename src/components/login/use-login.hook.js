@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken } from '@/common/utils/access-token.util';
 import { login } from '@/provider/features/auth/auth.slice';
+import { generateOtp } from '@/provider/features/user/user.slice';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -56,9 +57,13 @@ export default function useLogin() {
     border: '1px solid #10FF61'
   };
 
-  const moveRouter = (data) => {
-    if (data.isProfileCompleted) {
+  const moveRouterGenOtp = (data) => {
+    // console.log(data,"moveRouterGenOtp");
       router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
+  };
+  const moveRouter = (data) => {
+    if(data.isPhoneVerified){
+       dispatch(generateOtp({ payload: { ...data }, successCallBack: moveRouterGenOtp(data) }));
     } else {
       router.push(
         `/profile?username=${data.userName}&email=${data.email}&userId=${data.id}`
@@ -69,27 +74,6 @@ export default function useLogin() {
   const onSubmit = async (values) => {
     setLoader(true);
     dispatch(login({ payload: { ...values }, successCallBack: moveRouter }));
-    // try {
-    //   axios
-    //     .post(`${process.env.NEXT_PUBLIC_MAIN_URL}/auth/login`, { ...values })
-    //     .then((response) => {
-    //       if (response.data.status) {
-    //         const { data } = response.data.result;
-    //         // CustomAlert(response.data.message, 'success');
-    //         moveRouter(data);
-    //       } else {
-    //         // CustomAlert(response.data.message, 'error');
-    //       }
-    //       setLoader(false);
-    //     })
-    //     .catch((error) => {
-    //       if (error.message === 'Failed to fetch') {
-    //         // CustomAlert(popupMessages.networkError, 'error');
-    //       }
-    //     });
-    // } catch (error) {
-    //   console.error(error);
-    // }
   };
 
   const loginWithOAuth = (type, email) => {
