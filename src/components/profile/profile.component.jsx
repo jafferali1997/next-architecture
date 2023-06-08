@@ -78,12 +78,10 @@ const cities = [
                 <CustomInput
                   label="UserName"
                   name="userName"
-                  // placeholder="John Doe"
                   type="text"
                   register={register}
                   isRequired={true}
                   disabled={true}
-                  // errors={errors}
                 />
               </div>
               <div className="input-group">
@@ -92,11 +90,8 @@ const cities = [
                   name="email"
                   type="email"
                   register={register}
-                  //   readOnly={true}
                   isRequired={true}
                   disabled={true}
-                  // values={email}
-                  // onChange={handleChange}
                 />
               </div>
             </div>

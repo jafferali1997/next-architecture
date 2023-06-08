@@ -20,61 +20,50 @@ import { createBusinessDetail } from '@/provider/features/business-detail/busine
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
-
   userName: Yup.string()
     .max(30, 'Username must be at most 30 characters long')
     .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
     .required('User name is required'),
-
   country: Yup.string().required('Country name is required'),
   city: Yup.string().required('City name is required'),
-  // // phoneNumber: Yup.string().required("Phone number is required"),
-  // // otpNumber: Yup.string().required("OTP number is required"),
   ibanNumber: Yup.string()
-  .nullable()
-  .transform((value) => (value === '' ? null : value))
+    .nullable()
+    .transform((value) => (value === '' ? null : value))
     .matches(/^[a-zA-Z0-9]+$/, 'IBAN can only contain alphanumeric')
     .min(15, 'IBAN number can contain minimum 15 alphanumeric')
     .max(34, 'IBAN number can contain maximum 34 alphanumeric'),
-
-  // .matches(/[0-9]/, 'IBAN number must be in digits'),
   vatNumber: Yup.string()
-  .nullable()
-  .transform((value) => (value === '' ? null : value))
+    .nullable()
+    .transform((value) => (value === '' ? null : value))
     .matches(/[0-9]/, 'VAT number must be in digits')
     .min(5, 'VAT number can contain minimum 5 digits')
     .max(15, 'VAT number can contain maximum 15 digits'),
-  
   companyName: Yup.string()
-  .nullable()
+    .nullable()
     .max(150, 'Company name must be 150 characters long')
     .matches(/^[a-zA-Z0-9\s]*$/, 'Company name can only contain alphanumeric characters'),
-    // .required('Company name is required'),
   population: Yup.string().nullable(),
-  // .required('Population is required'),
   address: Yup.string()
-  .nullable()
+    .nullable()
     .max(255, 'Address can contain maximum 255 characters')
     .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters'),
-    // .required('Address is required'),
 });
 
 export default function useProfile() {
   const dispatch = useDispatch();
-  
+  const searchParams = useSearchParams();
+
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const sendOtpButtonText = useRef('Send OTP');
 
-  const searchParams = useSearchParams();
-
   useEffect(() => {
-    if(localStorage.getItem('isOtpVerified')){
-      setIsOtpVerified(false);
+    if (localStorage.getItem('isOtpVerified')) {
+      setIsOtpVerified(true);
     }
   }, []);
-  
+
   const {
     register,
     handleSubmit,
@@ -86,51 +75,33 @@ export default function useProfile() {
   });
 
   useEffect(() => {
-    // const { email, userId, username } = searchParams.get(email);
-    // console.log(searchParams.get('email'));
     setValue('email', searchParams.get('email'));
     setValue('userName', searchParams.get('userName'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // const router = useRouter();
-
-  const moveRouter = (data) => {
-    if (data) {
-      // router.push('/dashboard');
-    }
-  };
-
   const onSubmit = (data) => {
-    // console.log(phone, 'phone');
-    console.log(data);
-    dispatch(createProfile({ payload: { ...data }, successCallBack: moveRouter }));
-
+    dispatch(createProfile({ payload: { ...data } }));
   };
 
   const sendOtp = () => {
     if (sendOtpButtonText.current === 'Send OTP' || sendOtpButtonText.current === 'Resend OTP') {
-      // console.log(phone, "Phone Number")
-      if(phone){
+      if (phone) {
         sendOtpButtonText.current = 'Resend OTP';
-        dispatch(addPhoneAndGenerateOtp({ payload: {phone} }));
-      }else{
-        // console.log("Please Enter Phone Number");
+        dispatch(addPhoneAndGenerateOtp({ payload: { phone } }));
       }
-    }else{
+    } else {
       dispatch(generateOtp());
     }
   };
-  const handleOtpVerif = (data)=>{
-    console.log(data);
+  const handleOtpVerif = (data) => {
     setIsOtpVerified(true);
     localStorage.setItem('isOtpVerified', true);
   }
-  // console.log(otpVerified,"otpVerified")
 
   const verifyOtpHandler = () => {
     console.log(otp)
-    if(otp>0){
+    if (otp > 0) {
       const otpData = {
         otp: Number(otp)
       }
@@ -138,7 +109,7 @@ export default function useProfile() {
         verifyOtp({ payload: otpData, successCallBack: handleOtpVerif })
       );
     }
-    
+
   };
 
   return {

@@ -38,18 +38,6 @@ export default function TwoFactorAuthComponent() {
           <div className="form-body">
             <div className="two-fac-otp-wrapper">
               <div className="two-fac-otp-wrapper-content">
-                {/* {initialOtpNumber.map((number, idx) => {
-                  return (
-                    <input
-                      key={`${number}-${idx}`}
-                      type="text"
-                      maxLength={1}
-                      placeholder="-"
-                      onChange={handleOtpNumberChange}
-                      value={number}
-                    />
-                  );
-                })} */}
                 <input
                   id="1"
                   type="text"
@@ -57,7 +45,6 @@ export default function TwoFactorAuthComponent() {
                   placeholder="-"
                   onChange={otpNumberChangeHandler}
                   ref={otpNumber1}
-                  // value={otpNumber1.current?.value || ''}
                 />
                 <input
                   id="2"
@@ -85,7 +72,6 @@ export default function TwoFactorAuthComponent() {
                 />
               </div>
               <CountDown stopTimerHandler={setIsTimerStop} isRunTimer={!isTimerStop} />
-              {/* <p>Time left: 1:34</p> */}
             </div>
             <div className="verify-form-btn-c">
               <CustomButton
