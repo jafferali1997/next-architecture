@@ -11,10 +11,10 @@ import {
 import useLogin from './use-login.hook';
 import { getAccessToken } from '@/common/utils/access-token.util';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import { Checkbox } from '@mui/material';
 
 export async function getServerSideProps(context) {
   const accessToken = getAccessToken();
-  console.log(accessToken, 'check token');
 
   if (accessToken) {
     return {
@@ -36,6 +36,8 @@ export default function Login() {
     borderStyle,
     borderSuc,
     showPassword,
+    isChecked,
+    setIsChecked,
     toggleShowPassword,
     router,
     loader,
@@ -44,6 +46,7 @@ export default function Login() {
     handleSubmit,
     errors
   } = useLogin();
+
   return (
     <div className="form-wrapper">
       <div className="form-container ">
@@ -127,9 +130,33 @@ export default function Login() {
               </div>
               <div className="tw-flex tw-justify-between tw-pb-6">
                 <div className="tw-flex tw-items-center tw-gap-2 tw-pb-6">
-                  <input
+                  <Checkbox
+                    {...register('rememberMe')}
+                    name="terms"
+                    id="terms"
+                    className="tw-fon tw-text-[12px]
+                 tw-font-normal tw-not-italic tw-leading-[18px]"
+                    checked={isChecked}
+                    // defaultChecked={isChecked}
+                    onChange={(e) => {
+                      setIsChecked(e.target.checked);
+                    }}
+                  />
+                  <label
+                    htmlFor="terms"
+                    className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-dark-gray"
+                  >
+                    Remember Me
+                  </label>
+                  {/* <input
                     id="check"
+                    name="check"
                     type="checkbox"
+                    checked={isChecked}
+                    // defaultChecked={isChecked}
+                    onChange={(e) => {
+                      setIsChecked(e.target.checked);
+                    }}
                     className=" tw-h-[13px] tw-w-[13px] tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[#8d99ae] tw-p-1 checked:tw-h-[13px] checked:tw-w-[13px] checked:tw-border-[none] checked:tw-bg-transparent checked:tw-bg-center checked:tw-shadow-none"
                   />
                   <label
@@ -137,7 +164,7 @@ export default function Login() {
                     className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-dark-gray"
                   >
                     Remember Me
-                  </label>
+                  </label> */}
                 </div>
                 <Link
                   href="/forget-password"
