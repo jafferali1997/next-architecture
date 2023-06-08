@@ -2,44 +2,49 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm, appendErrors, transformToNestObject } from 'react-hook-form';
 import * as yup from 'yup';
 import { Country, City } from 'country-state-city';
 import { yupResolver } from '@hookform/resolvers/yup';
 // import CustomAlert from '@/common/components/custom-alert';
 import { useDispatch } from 'react-redux';
+import {
+  createCustomerCompanyDetail,
+  getSingleCustomer
+} from '@/provider/features/customer/customer.slice';
 
 let validationSchema = yup.object({
   // Define your validation rules here.
-  // companyName: yup
-  //   .string()
-  //   .max(160, 'company name must be at most 160 characters long')
-  //   .min(1, 'compnay name must be minimum 1 characters')
-  //   .required('Company name is required'),
-  // email: yup
-  //   .string()
-  //   .email('The Email doesn’t seem to be correct. Please write correct email')
-  //   .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address')
-  //   .required('Email is required'),
-  // phoneNo: yup.string().required('Company phone is required'),
-  // mobileNo: yup.string().required('Company Mobile is required'),
-  // companySize: yup.string().required('Company Size is required'),
-  // faxNumber: yup.string().required('Company Fax is required'),
-  // taxNumber: yup
-  //   .number()
-  //   .max(9999999999, 'TIN must be at most 10 characters long')
-  //   .min(999999999, 'TIN must be minimum 10 characters')
-  //   .required('TIN is required'),
-  // vatNumber: yup
-  //   .string()
-  //   .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
-  //   .required('VAT is required')
+  companyName: yup
+    .string()
+    .max(160, 'company name must be at most 160 characters long')
+    .min(1, 'compnay name must be minimum 1 characters')
+    .required('Company name is required'),
+  email: yup
+    .string()
+    .email('The Email doesn’t seem to be correct. Please write correct email')
+    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address')
+    .required('Email is required'),
+  companyPhone: yup.string().required('Company phone is required'),
+  companyMobile: yup.string().required('Company Mobile is required'),
+  companySize: yup.string().required('Company Size is required'),
+  companyFax: yup.string().required('Company Fax is required'),
+  tin: yup
+    .number()
+    .max(9999999999, 'TIN must be at most 10 characters long')
+    .min(999999999, 'TIN must be minimum 10 characters')
+    .required('TIN is required'),
+  vat: yup
+    .string()
+    .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
+    .required('VAT is required')
 });
 
 export default function useCompanyDetails({ handleTabClick, handleTabCompleted }) {
   const router = useRouter();
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
 
   const [data, setData] = useState();
   const [status, setStatus] = useState();
@@ -48,93 +53,60 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   const [isAdditional, setIsAdditional] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [cities, setCities] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
-  const countries = Country.getAllCountries();
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
   const [inputValues, setInputValues] = useState(['']);
+
+  const countries = [
+    { label: 'Pakistan', value: 'pakistan' },
+    { label: 'Turkey', value: 'turkey' }
+  ];
+  const cities = [
+    { label: 'Lahore', value: 'lahore' },
+    { label: 'Gujranwala', value: 'gujranwala' }
+  ];
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchemaState)
   });
 
   useEffect(() => {
-    if (router?.query) {
-      const { id } = router.query;
+    if (searchParams.get('id')) {
+      const id = searchParams.get('id');
 
       async function fetchMyAPI() {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/${id}`
-        );
-        if (res.data.result.data.customer.companyDetails) {
-          if (res.data.result.data.customer.companyDetails.additionalContactPerson) {
-            setIsAdditional(true);
-            const event = {
-              target: {
-                value:
-                  res.data.result.data.customer.companyDetails.additionalContactPerson
-                    .country
-              }
-            };
-            handleCountryChange(event);
+        let data = await dispatch(getSingleCustomer({ payload: id }));
+        if (data.payload) {
+          data = data.payload;
+          Object.keys(data).forEach((key) => setValue(key, data[key]));
+          if (data?.additionalContact?.length > 0) {
+            Object.keys(data.additionalContact[0]).forEach((key) =>
+              setValue(`ac_${key}`, data.additionalContact[0][key])
+            );
           }
-          setData({
-            ...res.data.result.data.customer.companyDetails,
-            ...(res.data.result.data.customer.companyDetails.additionalContactPerson && {
-              additionalEmail:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .email,
-              phone:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .phoneNo,
-              mobile:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .mobileNo,
-              gender:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .gender,
-              designation:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .designation,
-              firstName:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .firstName,
-              lastName:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .lastName,
-              address:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .address,
-              country:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .country,
-              city: res.data.result.data.customer.companyDetails.additionalContactPerson
-                .city,
-              postal:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .postal,
-              department:
-                res.data.result.data.customer.companyDetails.additionalContactPerson
-                  .department
-            })
-          });
-          setIsShowInPdf(res.data.result.data.customer.companyDetails.IsShowInPdf);
-          setStatus(res.data.result.data.customer.companyDetails.status);
-          setIsVatEnabled(res.data.result.data.customer.companyDetails.isVatEnabled);
-        } else {
-          setData({});
+          if (data?.companyAddress?.length > 0) {
+            const newInputValues = data.companyAddress.map((addressObj, idx) => {
+              setValue(`ca_addressLabel_${idx + 1}`, addressObj.addressLabel);
+              setValue(`ca_address_${idx + 1}`, addressObj.address);
+              return '';
+            });
+            setInputValues(newInputValues);
+          }
+          setIsShowInPdf(data.isPDF);
+          setStatus(data.isStatus);
+          setIsVatEnabled(data.vatStatus);
         }
       }
-
       if (id) {
         fetchMyAPI();
       }
     }
-  }, [router?.query]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (isAdditional) {
@@ -249,58 +221,52 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   };
 
   const handleCountryChange = (event) => {
-    const countryCode = event.target.value;
-    setSelectedCountry(countryCode);
-    const cities = City.getCitiesOfCountry(countryCode);
-    setCities(cities);
+    // const countryCode = event.target.value;
+    // setSelectedCountry(countryCode);
+    // const cities = City.getCitiesOfCountry(countryCode);
+    // setCities(cities);
   };
 
   const handleCityChange = (event) => {
-    const cityName = event.target.value;
-    setSelectedCity(cityName);
+    // const cityName = event.target.value;
+    // setSelectedCity(cityName);
   };
 
   const onSubmit = async (value) => {
     console.log(value);
-    handleTabClick('payment_details');
-    handleTabCompleted('company_details');
-
-    // if (isAdditional) {
-    //   value.additionalContactPerson = {
-    //     gender: value.gender,
-    //     designation: value.designation,
-    //     firstName: value.firstName,
-    //     lastName: value.lastName,
-    //     address: value.address,
-    //     country: value.country,
-    //     city: value.city,
-    //     postal: value.postal,
-    //     email: value.additionalEmail,
-    //     phoneNo: value.phone,
-    //     mobileNo: value.mobile,
-    //     department: value.department
-    //   };
-    // }
-    // try {
-    //   const res = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/company-detail`,
-    //     {
-    //       ...value,
-    //       customerId: router.query.id,
-    //       status,
-    //       isShowInPdf,
-    //       isVatEnabled
-    //     }
-    //   );
-    //   if (res.data.status) {
-    //     handleTabClick('payment_details');
-    //     handleTabCompleted('company_details');
-    //   } else {
-    //     // CustomAlert(res.data.message, 'Error');
-    //   }
-    // } catch (e) {
-    //   // CustomAlert(e.response.data.error[0].msg, 'Error');
-    // }
+    const additionalContactKeys = Object.keys(value).filter((attr) =>
+      attr.startsWith('ac')
+    );
+    const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
+      const key = attr.replace('ac_', '');
+      return { ...accumulator, [key]: value[attr] };
+    }, {});
+    const companyAddressesKeys = Object.keys(value).filter((attr) =>
+      attr.startsWith('ca')
+    );
+    const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
+      if (index % 2 === 0) {
+        const obj = {
+          addressLabel: value[curr],
+          address: value[arr[index + 1]]
+        };
+        acc.push(obj);
+      }
+      return acc;
+    }, []);
+    const payload = {
+      ...value,
+      customerId: searchParams.get('id'),
+      additionalContact: [additionalContact],
+      companyAddress: companyAddresses
+    };
+    console.log(payload);
+    const res = await dispatch(createCustomerCompanyDetail({ payload }));
+    console.log(res, 'Create Customer Company Detail Response');
+    if (res.payload) {
+      handleTabClick('payment_details');
+      handleTabCompleted('company_details');
+    }
   };
 
   const handleAddInput = () => {

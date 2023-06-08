@@ -8,6 +8,7 @@ export default function CustomRadio({
   defaultChecked = false,
   checked = null,
   onChange = null,
+  value = null,
   className = '',
   size = null,
   disabled = false,
@@ -27,12 +28,13 @@ export default function CustomRadio({
         }`}
       >
         <Radio
-          {...(register && register(`${name}`))}
+          // {...(register && register(`${name}`))}
           name={name}
           className={`${className}`}
           disabled={disabled}
           readOnly={readOnly}
           {...(checked && { checked })}
+          {...(value && { value })}
           {...(onChange && { onChange })}
           defaultChecked={defaultChecked}
         />
@@ -55,6 +57,7 @@ CustomRadio.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   size: PropTypes.string,
+  value: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object,
   register: PropTypes.func,

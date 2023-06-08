@@ -153,7 +153,7 @@ export const getAllCustomer = createAsyncThunk(
     try {
       const response = await customerService.getAllCustomer(payload);
       if (response.Succeeded) {
-        return response.data;
+        return response;
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {

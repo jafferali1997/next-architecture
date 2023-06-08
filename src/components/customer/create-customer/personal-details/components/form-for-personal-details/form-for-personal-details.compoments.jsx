@@ -31,9 +31,9 @@ export default function FormForPersonalDetails({
   errors = {}
 }) {
   const countries = [
-    {id: 1, name: "Pakistan", label: "Pakistan"},
-    {id: 2, name: "India", label: "India"},
-  ]
+    { id: 1, name: 'Pakistan', label: 'Pakistan' },
+    { id: 2, name: 'India', label: 'India' }
+  ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
@@ -42,9 +42,12 @@ export default function FormForPersonalDetails({
           label="Gender"
           name="gender"
           isRequired={true}
+          name="gender"
+          register={register}
+          errors={errors}
           options={[
-            { id: 'male', value: 'MALE', label: 'Male' },
-            { id: 'female', value: 'FEMALE', label: 'Female' }
+            { id: 'MALE', value: 'MALE', label: 'MALE' },
+            { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
           ]}
           placeholder="Gender"
           errors={errors}
@@ -97,12 +100,13 @@ export default function FormForPersonalDetails({
           errors={errors}
           placeholder="Country"
           type="select"
-          onChange={handleCountryChange}
-          value={selectedCountry}
+          // onChange={handleCountryChange}
+          // value={selectedCountry}
           isRequired={true}
-          options={countries.map((item) => {
-            return { label: item.label, value: item.name, id: item.id };
-          })}
+          // options={countries.map((item) => {
+          //   return { label: item.name, value: item.isoCode, id: item.isoCode };
+          // })}
+          options={countries}
         />
         <Select
           label="City"
@@ -112,14 +116,15 @@ export default function FormForPersonalDetails({
           type="select"
           value={selectedCity}
           onChange={handleCityChange}
-          options={countries.map((item) => {
-            return { label: item.label, value: item.name, id: item.id };
-          })}
+          // options={cities.map((item) => {
+          //   return { label: item.name, value: item.isoCode, id: item.isoCode };
+          // })}
+          options={cities}
           errors={errors}
         />
         <CustomInput
           label="Postal Code"
-          name="postal"
+          name="postalCode"
           defaultValue={data.postal}
           register={register}
           placeholder="Postal Code"
@@ -169,13 +174,21 @@ FormForPersonalDetails.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   priceGroup: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({
+      id: PropTypes.number,
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
   ).isRequired,
   addPrice: PropTypes.string.isRequired,
   setAddPrice: PropTypes.func.isRequired,
   setPriceOptions: PropTypes.func.isRequired,
   addPriceGroup: PropTypes.arrayOf(
-    PropTypes.shape({  id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({
+      id: PropTypes.number,
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
   ).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,
