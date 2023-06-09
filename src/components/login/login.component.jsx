@@ -11,6 +11,7 @@ import {
 import useLogin from './use-login.hook';
 import { getAccessToken } from '@/common/utils/access-token.util';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import { Checkbox } from '@mui/material';
 
 export async function getServerSideProps(context) {
   const accessToken = getAccessToken();
@@ -127,11 +128,10 @@ export default function Login() {
               </div>
               <div className="tw-flex tw-justify-between tw-pb-6">
                 <div className="tw-flex tw-items-center tw-gap-2 tw-pb-6">
-                  <input
-                    id="check"
-                    type="checkbox"
-                    className=" tw-h-[13px] tw-w-[13px] tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[#8d99ae] tw-p-1 checked:tw-h-[13px] checked:tw-w-[13px] checked:tw-border-[none] checked:tw-bg-transparent checked:tw-bg-center checked:tw-shadow-none"
-                  />
+                <Checkbox
+                  name="remember"
+                  id="remember"
+                />
                   <label
                     htmlFor="check"
                     className="tw-font-dm tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-dark-gray"
