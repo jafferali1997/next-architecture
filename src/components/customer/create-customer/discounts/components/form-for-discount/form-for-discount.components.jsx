@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 
-
 export default function FormForDiscount({
   register,
   handleSubmit,

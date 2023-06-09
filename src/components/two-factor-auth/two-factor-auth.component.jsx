@@ -85,6 +85,7 @@ export default function TwoFactorAuthComponent() {
               <p>
                 Don’t receive code?
                 <button
+                  type="button"
                   onClick={resendOtpHandler}
                   // className={`${
                   //   !isTimerStop ? '!tw-cursor-not-allowed !tw-text-gray-400' : ''

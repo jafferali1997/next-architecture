@@ -21,48 +21,30 @@ import {
 
 const validationSchema = yup.object({
   // Define your validation rules here.
-  // gender: yup.string().required('Gender is required'),
-  // firstName: yup
-  //   .string()
-  //   .max(50, 'first name must be at most 50 characters long')
-  //   .min(1, 'first name must be minimum 1 characters')
-  //   .required('First name is required'),
-  // lastName: yup
-  //   .string()
-  //   .max(50, 'last name must be at most 50 characters long')
-  //   .min(1, 'last name must be minimum 1 characters')
-  //   .required('Last name is required'),
-  // designation: yup
-  //   .string()
-  //   .max(100, 'designation must be at most 100 characters long')
-  //   .min(1, 'designation must be minimum 1 characters')
-  //   .matches(/^[^.]*$/, {
-  //     message: 'Invalid designation'
-  //   })
-  //   .matches(/^[^!@#$%^&*+=<>:;|~(){}[\]]*$/, {
-  //     message: 'Invalid designation'
-  //   })
-  //   .required('designation is required'),
-  // postal: yup
-  //   .number()
-  //   .max(9999999999, 'postal code must be at most 10 characters long')
-  //   .min(1, 'postal code must be minimum 1 characters')
-  // .matches(/^[^.]*$/, {
-  //   message: 'No period'
-  // })
-  // .matches(/^[^.]*$/, {
-  //   message: 'Invalid postal'
-  // })
-  // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
-  //   message: 'Invalid postal'
-  // })
-  //   .required('postal code is required'),
-  // address: yup
-  //   .string()
-  //   .max(95, 'address must be at most 95 characters long')
-  //   .min(1, 'address must be minimum 1 characters')
-  //   .required('address is required'),
-  // country: yup.string().required('country is required')
+  gender: yup.string().required('Gender is required'),
+  firstName: yup
+    .string()
+    .max(50, 'first name must be at most 50 characters long')
+    .required('First name is required'),
+  lastName: yup
+    .string()
+    .max(50, 'last name must be at most 50 characters long')
+    .required('Last name is required'),
+  designation: yup
+    .string()
+    .max(100, 'designation must be at most 100 characters long')
+    .required('Designation is required'),
+  postalCode: yup
+    .string()
+    .matches(/[0-9]/, 'Postal must be in digits')
+    .max(10, 'postal code must be maximum 10 characters')
+    .required('Postal Code is required'),
+  address: yup
+    .string()
+    .max(95, 'address must be at most 95 characters long')
+    .required('Address is required'),
+  country: yup.string().required('Country is required'),
+  city: yup.string().required('City is required')
 });
 
 export default function usePersonalDetails({ handleTabClick, handleTabCompleted }) {
@@ -72,7 +54,8 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     setValue,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
+    mode: 'onBlur'
   });
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -122,12 +105,12 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
         );
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [priceGroup, discountGroup]
   );
 
   const fetchPriceGroup = async () => {
     const groups = await dispatch(getAllPriceGroup());
-    console.log(groups, 'Price Groups');
     setPriceGroup(
       groups.map((item) => {
         return { id: item.id, value: item.id, label: item.priceGroupName };
@@ -137,7 +120,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const fetchDiscountGroup = async () => {
     const groups = await dispatch(getAllDiscountGroup());
-    console.log(groups, 'Discount Groups');
     setDiscountGroup(
       groups.map((item) => {
         return { id: item.id, value: item.id, label: item.discountGroupName };
@@ -169,6 +151,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   useEffect(() => {
     fetchPriceGroup();
     fetchDiscountGroup();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

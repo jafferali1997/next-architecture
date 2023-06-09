@@ -1,7 +1,7 @@
 'use client';
 
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import Link from 'next/link';
+import { Checkbox } from '@mui/material';
 import LoginWithLinkedIn from '@/common/components/login-with-linkedIn/login-with-linkedIn.component';
 import {
   signInWithFacebook,
@@ -10,7 +10,6 @@ import {
 } from '@/common/utils/firebase';
 import useSignUp from './use-sign-up.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
-import { Checkbox } from '@mui/material';
 
 function SignUp() {
   const {
@@ -153,7 +152,9 @@ function SignUp() {
                   name="terms"
                   id="terms"
                   checked={isChecked}
-                  onChange={()=>{setIsChecked(!isChecked)}}
+                  onChange={() => {
+                    setIsChecked(!isChecked);
+                  }}
                 />
                 <label
                   htmlFor="terms"
