@@ -26,10 +26,10 @@ export default function Profile() {
     isOtpVerified,
     setIsOtpVerified
   } = useProfile();
-const cities = [
-  {id:1, label: "Lahore", value:"Lahore"},
-  {id:2, label: "Rawalpindi", value:"Rawalpindi"}
-]
+  const cities = [
+    { id: 1, label: 'Lahore', value: 'Lahore' },
+    { id: 2, label: 'Rawalpindi', value: 'Rawalpindi' }
+  ];
   return (
     <div className=" tw-min-h-[1090px]">
       <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
@@ -48,7 +48,7 @@ const cities = [
               Personal Details
             </h3>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} >
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
@@ -57,6 +57,7 @@ const cities = [
                   placeholder="John"
                   type="text"
                   register={register}
+                  inlineLabel
                   errors={errors}
                   isRequired={true}
                 />
@@ -102,8 +103,8 @@ const cities = [
                   name="country"
                   type="select"
                   options={cities.map((item) => {
-                      return { label: item.label, value: item.value, id: item.id };
-                    })}
+                    return { label: item.label, value: item.value, id: item.id };
+                  })}
                   register={register}
                   isRequired={true}
                   errors={errors}
@@ -115,8 +116,8 @@ const cities = [
                   name="city"
                   type="select"
                   options={cities.map((item) => {
-                      return { label: item.label, value: item.value, id: item.id };
-                    })}
+                    return { label: item.label, value: item.value, id: item.id };
+                  })}
                   register={register}
                   isRequired={true}
                   errors={errors}
