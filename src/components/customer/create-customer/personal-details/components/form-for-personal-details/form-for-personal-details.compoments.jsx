@@ -125,6 +125,7 @@ export default function FormForPersonalDetails({
           placeholder="City"
           type="select"
           value={selectedCity}
+          isRequired={true}
           onChange={handleCityChange}
           // options={cities.map((item) => {
           //   return { label: item.name, value: item.isoCode, id: item.isoCode };
@@ -135,10 +136,14 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Postal Code"
           name="postalCode"
+<<<<<<< HEAD
           defaultValue={data.postal}
+=======
+          defaultValue={data.postalCode}
+>>>>>>> a34289b3906cc8e910f1d48803e1a4067730043e
           register={register}
           placeholder="Postal Code"
-          type="text"
+          type="number"
           isRequired={true}
           errors={errors}
         />

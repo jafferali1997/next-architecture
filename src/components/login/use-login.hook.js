@@ -123,8 +123,6 @@ console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
         if (response.data.status) {
           console.log(response.data);
           const { data } = response.data.result;
-
-          //   CustomAlert(response.data.message, 'success');
           moveRouter(data);
         } else {
           //   CustomAlert(response.data.message, 'error');
