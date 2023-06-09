@@ -1,7 +1,5 @@
 'use client';
 
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -29,21 +27,54 @@ export default function useCreateCategories() {
     setCategories(array);
   };
 
-  const getAllCategoryApi = (data) => {
-    const { categoryLevelToGet, parentCategoryId, categoryLevel } = data;
-    dispatch(
-      getAllProductCategory({
-        payload: {
-          condition: {
-            categoryLevel:
-              categoryLevel === 1
-                ? categoryLevel
-                : categoryLevelToGet ?? categoryLevel - 1,
-            ...(parentCategoryId && { parentCategoryId })
+  const onDeleteCategory = (data) => {
+    const categoryToDelete = categories.find((item) => item.categoryToRender === data.id);
+
+    const newArray = [
+      ...categories
+        .filter((item) => item.categoryToRender !== categoryToDelete?.categoryToRender)
+        .map((item) => {
+          if (item.categoryLevel === data.categoryLevel) {
+            return {
+              ...item,
+              categories: item.categories.filter((innerItem) => innerItem.id !== data.id)
+            };
           }
-        }
-      })
-    );
+          return item;
+        })
+    ];
+    handleCategories(newArray);
+  };
+
+  const getAllCategoryApi = (data, type = null) => {
+    const { categoryLevelToGet, parentCategoryId, categoryLevel } = data;
+    if (type === 'delete') {
+      dispatch(
+        getAllProductCategory({
+          payload: {
+            condition: {
+              categoryLevel:
+                categoryLevel === 1
+                  ? categoryLevel
+                  : categoryLevelToGet ?? categoryLevel - 1,
+              ...(parentCategoryId && { parentCategoryId })
+            }
+          }
+        })
+      );
+    } else {
+      dispatch(
+        getAllProductCategory({
+          payload: {
+            condition: {
+              categoryLevel:
+                categoryLevel === 1 ? categoryLevel : categoryLevelToGet ?? categoryLevel,
+              ...(parentCategoryId && { parentCategoryId })
+            }
+          }
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -123,13 +154,12 @@ export default function useCreateCategories() {
     dispatch(
       deleteProductCategory({
         payload: id,
-        successCallBack: getAllCategoryApi
+        successCallBack: onDeleteCategory
       })
     );
   };
 
   const handleUpdateCategory = (id, data) => {
-    // console.log(data, 'jaffer');
     dispatch(
       updateProductCategory({
         payload: { id, data: { categoryName: data } },

@@ -7,7 +7,7 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState();
   const [openPopup, setOpenPopup] = useState(false);
-  const [clicked, setClicked] = useState();
+  const [clicked, setClicked] = useState({ id: null, parentCategoryId: null });
   const ref = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
@@ -21,6 +21,12 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
+
+  useEffect(() => {
+    if (clicked.parentCategoryId && categoryToRender !== clicked.parentCategoryId) {
+      setClicked({ id: null, parentCategoryId: null });
+    }
+  }, [categoryToRender]);
 
   const handleButtonClick = () => {
     setShowInput(true);
