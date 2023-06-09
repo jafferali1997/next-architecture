@@ -1,16 +1,16 @@
-"use client"
+'use client';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import { AES, enc } from 'crypto-js';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { getAccessToken } from '@/common/utils/access-token.util';
-import { login } from '@/provider/features/auth/auth.slice';
+import * as Yup from 'yup';
 import { generateOtp } from '@/provider/features/user/user.slice';
-import { AES, enc } from 'crypto-js';
-import { ContactSupportOutlined } from '@mui/icons-material';
+import { login } from '@/provider/features/auth/auth.slice';
+import { getAccessToken } from '@/common/utils/access-token.util';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -58,19 +58,23 @@ export default function useLogin() {
   const borderSuc = {
     border: '1px solid #10FF61'
   };
-console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
+
   const moveRouterGenOtp = (data) => {
     router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
+
   const moveRouter = (data) => {
     if (data.isPhoneVerified) {
       dispatch(
         generateOtp({ payload: { ...data }, successCallBack: moveRouterGenOtp(data) })
       );
-    } else {
+    }
+    if (data.isEmailVerified) {
       router.push(
         `/profile?username=${data.userName}&email=${data.email}&userId=${data.id}`
       );
+    } else {
+      router.push(`/verify-email?type=email-verification&email=${data.email}`);
     }
   };
 
@@ -86,7 +90,10 @@ console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
         const storedEncryptedPassword = localStorage.getItem('rememberedPassword');
 
         // Compare the entered password with the stored encrypted password
-        const bytes = AES.decrypt(storedEncryptedPassword, process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY);
+        const bytes = AES.decrypt(
+          storedEncryptedPassword,
+          process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY
+        );
         const decryptedPassword = bytes.toString(enc.Utf8);
         setValue('email', storedUsername);
         setValue('password', decryptedPassword);
@@ -106,7 +113,10 @@ console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
       // Check if the browser supports localStorage
       if (localStorage) {
         // Encrypt the password
-        const encryptedPassword = AES.encrypt(values.password, process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY).toString();
+        const encryptedPassword = AES.encrypt(
+          values.password,
+          process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY
+        ).toString();
         localStorage.setItem('rememberedUsername', values.email);
         localStorage.setItem('rememberedPassword', encryptedPassword);
       }
