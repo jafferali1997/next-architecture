@@ -99,62 +99,55 @@ export default function Page() {
       content: '<h1>customer_details</h1>'
     }
   ];
+
   const columns = [
-    {
-      field: 'id',
-      headerName: 'ID',
-      headerClassName: 'table-heading ',
-      cellClassName: 'table-data ',
-      width: 90
-    },
-    {
-      field: 'firstName',
-      headerName: 'First name',
-      headerClassName: 'table-heading ',
-      cellClassName: 'table-data ',
-      width: 150,
-      editable: true
-    },
-    {
-      field: 'lastName',
-      headerName: 'Last name',
-      headerClassName: 'table-heading ',
-      cellClassName: 'table-data ',
-      width: 150,
-      editable: true
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      headerClassName: 'table-heading ',
-      cellClassName: 'table-data ',
-      type: 'number',
-      width: 110,
-      editable: true
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      headerClassName: 'table-heading ',
-      cellClassName: 'table-data ',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`
-    }
+    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'firstName', headerName: 'First name', width: 150 },
+    { field: 'lastName', headerName: 'Last name', width: 150 },
+    { field: 'age', headerName: 'Age', type: 'number', width: 90 },
+    { field: 'fullName', headerName: 'Full name', width: 250 }
   ];
 
   const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
+    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, fullName: 'Jon Snow' },
+    {
+      id: 2,
+      lastName: 'Lannister',
+      firstName: 'Cersei',
+      age: 42,
+      fullName: 'Cersei Lannister'
+    },
+    {
+      id: 3,
+      lastName: 'Lannister',
+      firstName: 'Jaime',
+      age: 45,
+      fullName: 'Jaime Lannister'
+    },
+    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16, fullName: 'Arya Stark' },
+    {
+      id: 5,
+      lastName: 'Targaryen',
+      firstName: 'Daenerys',
+      age: null,
+      fullName: 'Daenerys Targaryen'
+    },
+    { id: 6, lastName: 'Melisandre', firstName: null, age: 150, fullName: 'Melisandre' },
+    {
+      id: 7,
+      lastName: 'Clifford',
+      firstName: 'Ferrara',
+      age: 44,
+      fullName: 'Ferrara Clifford'
+    },
+    {
+      id: 8,
+      lastName: 'Frances',
+      firstName: 'Rossini',
+      age: 36,
+      fullName: 'Rossini Frances'
+    },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65, fullName: 'Harvey Roxie' }
   ];
   // show or hide columns
   // const [open, setOpen] = useState(false);
@@ -180,6 +173,45 @@ export default function Page() {
   // const handleClose = () => {
   //   setOpen(false);
   // };
+
+  // table row extends
+  const [expandedRow, setExpandedRow] = useState(null);
+
+  const handleRowClick = (params) => {
+    if (params.id === expandedRow) {
+      setExpandedRow(null);
+    } else {
+      setExpandedRow(params.id);
+    }
+  };
+
+  const columnss = [
+    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'firstName', headerName: 'First name', width: 150 },
+    { field: 'lastName', headerName: 'Last name', width: 150 },
+    { field: 'age', headerName: 'Age', type: 'number', width: 90 },
+    {
+      field: 'details',
+      headerName: 'Details',
+      width: 120,
+      renderCell: (params) => (
+        <button onClick={() => handleRowClick(params)}>Expand row</button>
+      )
+    }
+  ];
+
+  const rowss = [
+    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
+  ];
+
   return (
     <Suspense fallback={<p>Loading page...</p>}>
       <p>Hello World</p>
@@ -219,23 +251,15 @@ export default function Page() {
         <p>Hello World</p>
       </div>
       {/* <CustomTable /> */}
-      <DataGrid
-        rows={rows}
-        columns={columns.filter((col) => columnState[col.field])}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 1
-            }
-          }
-        }}
-        onPageChange={handlePageChange}
-        checkboxSelection
-        disableRowSelectionOnClick
-        components={{ Footer: CustomPagination }}
-      >
-        <CustomPagination data={rows} />
-      </DataGrid>
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid rows={rowss} columns={columnss} expandedRows={[expandedRow]} />
+        {expandedRow !== null && (
+          <div className="details">
+            <h3>Details for row {expandedRow}</h3>
+            <p>Extra details go here</p>
+          </div>
+        )}
+      </div>
       <div className="tw-w-full">
         <AddressList />
       </div>
