@@ -37,7 +37,7 @@ export default function useForgetPassword() {
   const onSubmit = (email) => {
     const data = {
       payload: email
-    }
+    };
     // setLoader(true);
     dispatch(generateForgetPasswordLink(data));
 

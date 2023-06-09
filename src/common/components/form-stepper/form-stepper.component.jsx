@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import FormStepperHook from './form-stepper.hook';
+import useFormStepperHook from './use-form-stepper.hook';
 import Tab from '../tab/tab.component';
 
 export default function FormStepper({
@@ -11,7 +11,7 @@ export default function FormStepper({
   children,
   ...props
 }) {
-  const { id, setId } = FormStepperHook;
+  // const { id, setId } = useFormStepperHook();
   return (
     <div className="form-stepper-body">
       <div className="form-stepper-form">

@@ -33,6 +33,7 @@
     "@next/next/no-html-link-for-pages": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-props-no-spreading": "off",
+    "react-hooks/exhaustive-deps": "off",
     "prettier/prettier": [
       "error",
       {

@@ -65,6 +65,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
         fetchMyAPI();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {

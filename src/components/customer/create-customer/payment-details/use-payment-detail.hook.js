@@ -6,9 +6,9 @@ import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { 
-  createCustomerAccountDetail, 
-  getSingleCustomer 
+import {
+  createCustomerAccountDetail,
+  getSingleCustomer
 } from '@/provider/features/customer/customer.slice';
 
 const validationSchema = yup.object({
@@ -82,6 +82,7 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
         fetchMyAPI();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {

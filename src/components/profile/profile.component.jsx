@@ -26,10 +26,10 @@ export default function Profile() {
     isOtpVerified,
     setIsOtpVerified
   } = useProfile();
-const cities = [
-  {id:1, label: "Lahore", value:"Lahore"},
-  {id:2, label: "Rawalpindi", value:"Rawalpindi"}
-]
+  const cities = [
+    { id: 1, label: 'Lahore', value: 'Lahore' },
+    { id: 2, label: 'Rawalpindi', value: 'Rawalpindi' }
+  ];
   return (
     <div className=" tw-min-h-[1090px]">
       <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
@@ -48,7 +48,7 @@ const cities = [
               Personal Details
             </h3>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} >
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
@@ -102,8 +102,8 @@ const cities = [
                   name="country"
                   type="select"
                   options={cities.map((item) => {
-                      return { label: item.label, value: item.value, id: item.id };
-                    })}
+                    return { label: item.label, value: item.value, id: item.id };
+                  })}
                   register={register}
                   isRequired={true}
                   errors={errors}
@@ -115,8 +115,8 @@ const cities = [
                   name="city"
                   type="select"
                   options={cities.map((item) => {
-                      return { label: item.label, value: item.value, id: item.id };
-                    })}
+                    return { label: item.label, value: item.value, id: item.id };
+                  })}
                   register={register}
                   isRequired={true}
                   errors={errors}
@@ -171,7 +171,7 @@ const cities = [
                 <CustomInput
                   type="text"
                   label="IBAN Number"
-                  name="ibanNumber"
+                  name="iban"
                   placeholder="125837-48274872-47374"
                   register={register}
                   errors={errors}
@@ -181,12 +181,11 @@ const cities = [
                 <CustomInput
                   type="number"
                   label="VAT Number"
-                  name="vatNumber"
+                  name="vat"
                   placeholder="12"
                   register={register}
                   errors={errors}
                 />
-                {/* <div className='profile-form-section'>Max: 15 digit</div> */}
               </div>
             </div>
             <div className="profile-form-heading">
@@ -198,10 +197,11 @@ const cities = [
                 <CustomInput
                   type="text"
                   label="Name"
-                  name="companyName"
+                  name="businessName"
                   placeholder="Zapta Technology"
                   register={register}
                   errors={errors}
+                  isRequired={true}
                 />
               </div>
               <div className="input-group">
@@ -216,6 +216,7 @@ const cities = [
                   ]}
                   register={register}
                   errors={errors}
+                  isRequired={true}
                 />
               </div>
             </div>
@@ -228,6 +229,7 @@ const cities = [
                   placeholder="1234 Johr Town Berlin, Germany"
                   register={register}
                   errors={errors}
+                  isRequired={true}
                 />
               </div>
             </div>
