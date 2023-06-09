@@ -1,46 +1,24 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useState } from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import PropTypes from 'prop-types';
-import CustomButton from '../custom-button/custom-button.component';
+import useModal from './use-modal.hook';
 
-export default function Modal({
-  title,
-  children,
-  cancelButtonText = 'Cancel',
-  submitButtonText,
-  onSubmit
-}) {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+export default function Modal({ show = false, title, children, onClose }) {
+  const { open, register, handleSubmit, setValue, errors, handleClose } = useModal(show);
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
+    <Dialog open={show} onClose={onClose}>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
-      <DialogActions>
-        <CustomButton className="btn-secondary" onClick={handleClose}>
-          {cancelButtonText}
-        </CustomButton>
-        {}
-        <CustomButton className="btn-primary" onClick={onSubmit}>
-          {}
-        </CustomButton>
-      </DialogActions>
     </Dialog>
   );
 }
 
 Modal.propTypes = {
+  show: PropTypes.bool,
   title: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
-  cancelButtonText: PropTypes.string,
-  submitButtonText: PropTypes.string,
-  onSubmit: PropTypes.func
+  onClose: PropTypes.func.isRequired
+  // onSubmit: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  // validationSchema: PropTypes.object
 };
