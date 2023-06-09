@@ -10,7 +10,7 @@ export default function ForgetPassword() {
     useForgetPassword();
   console.log(errors)
   return (
-    <div className="forgot-password-wrapper">
+    <div className="forgot-password-wrapper form-container">
       <div className="forgot-password-container">
         <div className="header">
           <Link href="/">
@@ -18,7 +18,7 @@ export default function ForgetPassword() {
           </Link>
         </div>
 
-        <div className="forgot-password-form-card ">
+        <div className="forgot-password-form-card form-card">
           <div className="form-header">
             <img src="/assets/images/searchImg.png" alt="img" />
             <h1>Find Your Account</h1>

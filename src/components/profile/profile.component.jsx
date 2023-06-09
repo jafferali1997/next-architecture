@@ -26,12 +26,12 @@ export default function Profile() {
     isOtpVerified,
     setIsOtpVerified
   } = useProfile();
-const cities = [
-  {id:1, label: "Lahore", value:"Lahore"},
-  {id:2, label: "Rawalpindi", value:"Rawalpindi"}
-]
+  const cities = [
+    { id: 1, label: 'Lahore', value: 'Lahore' },
+    { id: 2, label: 'Rawalpindi', value: 'Rawalpindi' }
+  ];
   return (
-    <div className=" tw-min-h-[1090px]">
+    <div className=" tw-min-h-[1090px] ">
       <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
         <div className="tw-mx-0 tw-mb-0 tw-mt-6">
           <Link href="/">
@@ -48,9 +48,12 @@ const cities = [
               Personal Details
             </h3>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} >
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="tw-flex tw-flex-col tw-gap-[24px]"
+          >
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
-              <div className="input-group">
+              <div className="input-group tw-gap-5.5">
                 <CustomInput
                   label="First Name"
                   name="firstName"
@@ -59,6 +62,7 @@ const cities = [
                   register={register}
                   errors={errors}
                   isRequired={true}
+                  inlineLabel
                 />
               </div>
               <div className="input-group">
@@ -70,6 +74,7 @@ const cities = [
                   register={register}
                   isRequired={true}
                   errors={errors}
+                  inlineLabel
                 />
               </div>
             </div>
@@ -82,6 +87,7 @@ const cities = [
                   register={register}
                   isRequired={true}
                   disabled={true}
+                  inlineLabel
                 />
               </div>
               <div className="input-group">
@@ -92,6 +98,7 @@ const cities = [
                   register={register}
                   isRequired={true}
                   disabled={true}
+                  inlineLabel
                 />
               </div>
             </div>
@@ -101,9 +108,10 @@ const cities = [
                   label="Country"
                   name="country"
                   type="select"
+                  inlineLabel
                   options={cities.map((item) => {
-                      return { label: item.label, value: item.value, id: item.id };
-                    })}
+                    return { label: item.label, value: item.value, id: item.id };
+                  })}
                   register={register}
                   isRequired={true}
                   errors={errors}
@@ -114,59 +122,66 @@ const cities = [
                   label="City"
                   name="city"
                   type="select"
+                  inlineLabel
                   options={cities.map((item) => {
-                      return { label: item.label, value: item.value, id: item.id };
-                    })}
+                    return { label: item.label, value: item.value, id: item.id };
+                  })}
                   register={register}
                   isRequired={true}
                   errors={errors}
                 />
               </div>
+            </div>
+            {/* <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16"> */}
+            <div className="input-phone tw-flex tw-gap-[30px]">
+              <CountryPhoneInput
+                label="Phone Number"
+                inlineLabel={true}
+                name="phone"
+                value={phone}
+                onChange={setPhone}
+                isRequired={true}
+                register={register}
+                errors={errors}
+              />
+              <CustomButton
+                text={sendOtpButtonText.current}
+                className="btn-outline"
+                onClick={sendOtp}
+                disabled={isOtpVerified}
+              />
+              {/* </div> */}
             </div>
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
-              <div className="input-phone">
-                <CountryPhoneInput
-                  label="Phone Number"
-                  inlineLabel={true}
-                  name="phone"
-                  value={phone}
-                  onChange={setPhone}
-                  isRequired={true}
-                  register={register}
-                  errors={errors}
-                />
-                <CustomButton
-                  text={sendOtpButtonText.current}
-                  className="btn-outline"
-                  onClick={sendOtp}
-                  disabled={isOtpVerified}
-                />
-              </div>
-            </div>
-            <div className="input-phone">
-              <label>OTP Number</label>
-              <div className="input-inner">
-                <OtpInput
-                  value={otp}
-                  onChange={setOtp}
-                  disabled={isOtpVerified}
-                  label="OTP"
-                />
-              </div>
-              <div>
-                <CustomButton
-                  onClick={verifyOtpHandler}
-                  text="Verify OTP"
-                  className="btn-primary"
-                  disabled={isOtpVerified || !otp || otp?.length < 4}
-                />
+              <div className="input-phone tw-flex tw-items-center tw-justify-between">
+                <label>OTP Number</label>
+                <div className="input-inner">
+                  <OtpInput
+                    value={otp}
+                    onChange={setOtp}
+                    disabled={isOtpVerified}
+                    // label="OTP"
+                  />
+                </div>
+                <div>
+                  <CustomButton
+                    onClick={verifyOtpHandler}
+                    text="Verify OTP"
+                    className="btn-primary"
+                    disabled={isOtpVerified || !otp || otp?.length < 4}
+                  />
+                </div>
               </div>
             </div>
             <div className="profile-form-heading">
-              <div className="color-width" />
-              <h3>Financial Details</h3>
+              <div className="profile-form-heading tw-flex tw-gap-3 tw-pt-[34px]">
+                <div className="color-width tw-min-h-[28px] tw-min-w-[6px] tw-rounded tw-bg-primary" />
+                <h3 className="tw-font-dm tw-text-[18px] tw-font-medium tw-not-italic tw-leading-[24px] tw-text-[#050707]">
+                  Financial Details
+                </h3>
+              </div>
             </div>
-            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
+            <div className="tw-mt-[24.5PX] tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
                   type="text"
@@ -175,6 +190,7 @@ const cities = [
                   placeholder="125837-48274872-47374"
                   register={register}
                   errors={errors}
+                  inlineLabel
                 />
               </div>
               <div className="input-group">
@@ -185,15 +201,18 @@ const cities = [
                   placeholder="12"
                   register={register}
                   errors={errors}
+                  inlineLabel
                 />
                 {/* <div className='profile-form-section'>Max: 15 digit</div> */}
               </div>
             </div>
-            <div className="profile-form-heading">
-              <div className="color-width" />
-              <h3>Business Details</h3>
+            <div className="profile-form-heading tw-flex tw-gap-3 tw-pt-[34px]">
+              <div className="color-width tw-min-h-[28px] tw-min-w-[6px] tw-rounded tw-bg-primary" />
+              <h3 className="tw-font-dm tw-text-[18px] tw-font-medium tw-not-italic tw-leading-[24px] tw-text-[#050707]">
+                Business Details
+              </h3>
             </div>
-            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
+            <div className="tw-mt-[24.5PX] tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
                   type="text"
@@ -202,10 +221,12 @@ const cities = [
                   placeholder="Zapta Technology"
                   register={register}
                   errors={errors}
+                  inlineLabel
                 />
               </div>
               <div className="input-group">
                 <Select
+                  inlineLabel
                   label="Population"
                   name="population"
                   placeholder="Select Population"
@@ -219,7 +240,7 @@ const cities = [
                 />
               </div>
             </div>
-            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
+            <div className=" tw-w-full tw-gap-16">
               <div className="input-group onebythree tw-col-[0.3333333333]">
                 <CustomInput
                   type="text"
@@ -228,17 +249,20 @@ const cities = [
                   placeholder="1234 Johr Town Berlin, Germany"
                   register={register}
                   errors={errors}
+                  inlineLabel
                 />
               </div>
             </div>
-            <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
+            <div className="tw-mt-[65.5PX] tw-flex tw-justify-between tw-gap-16">
               <div className="submit-button">
                 <CustomButton
-                  type="Submit"
-                  className="btn-primary"
-                  text="Submit"
-                  disabled={!isOtpVerified}
+                  // type="Submit"
+                  className="btn-cancel"
+                  text="Logout"
                 />
+              </div>
+              <div className="submit-button">
+                <CustomButton type="Submit" className="btn-primary" text="Submit" />
               </div>
             </div>
           </form>

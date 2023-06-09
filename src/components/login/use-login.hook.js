@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -58,7 +58,7 @@ export default function useLogin() {
   const borderSuc = {
     border: '1px solid #10FF61'
   };
-console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
+  console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY);
   const moveRouterGenOtp = (data) => {
     router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
@@ -86,7 +86,10 @@ console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
         const storedEncryptedPassword = localStorage.getItem('rememberedPassword');
 
         // Compare the entered password with the stored encrypted password
-        const bytes = AES.decrypt(storedEncryptedPassword, process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY);
+        const bytes = AES.decrypt(
+          storedEncryptedPassword,
+          process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY
+        );
         const decryptedPassword = bytes.toString(enc.Utf8);
         setValue('email', storedUsername);
         setValue('password', decryptedPassword);
@@ -106,10 +109,17 @@ console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
       // Check if the browser supports localStorage
       if (localStorage) {
         // Encrypt the password
-        const encryptedPassword = AES.encrypt(values.password, process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY).toString();
+        const encryptedPassword = AES.encrypt(
+          values.password,
+          process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY
+        ).toString();
         localStorage.setItem('rememberedUsername', values.email);
         localStorage.setItem('rememberedPassword', encryptedPassword);
       }
+    }
+    if (isChecked === false) {
+      localStorage.removeItem('rememberedUsername');
+      localStorage.removeItem('rememberedPassword');
     }
   };
 

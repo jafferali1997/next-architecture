@@ -18,7 +18,6 @@ export default function CreateNewPassword() {
     loader
   } = useCreateNewPassword();
 
-  console.log(errors)
   return (
     <div className="create-new-pass-wrapper">
       <div className="create-new-pass-container ">
@@ -82,7 +81,7 @@ export default function CreateNewPassword() {
               </div>
               <div className="form-group-c">
                 <label>
-                  Confirm Password bc <span>*</span>
+                  Confirm Password <span>*</span>
                 </label>
                 <div className="pass_input_div">
                   <CustomInput
