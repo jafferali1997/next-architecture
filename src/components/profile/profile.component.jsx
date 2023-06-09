@@ -171,7 +171,7 @@ const cities = [
                 <CustomInput
                   type="text"
                   label="IBAN Number"
-                  name="ibanNumber"
+                  name="iban"
                   placeholder="125837-48274872-47374"
                   register={register}
                   errors={errors}
@@ -181,12 +181,11 @@ const cities = [
                 <CustomInput
                   type="number"
                   label="VAT Number"
-                  name="vatNumber"
+                  name="vat"
                   placeholder="12"
                   register={register}
                   errors={errors}
                 />
-                {/* <div className='profile-form-section'>Max: 15 digit</div> */}
               </div>
             </div>
             <div className="profile-form-heading">
@@ -198,10 +197,11 @@ const cities = [
                 <CustomInput
                   type="text"
                   label="Name"
-                  name="companyName"
+                  name="businessName"
                   placeholder="Zapta Technology"
                   register={register}
                   errors={errors}
+                  isRequired={true}
                 />
               </div>
               <div className="input-group">
@@ -216,6 +216,7 @@ const cities = [
                   ]}
                   register={register}
                   errors={errors}
+                  isRequired={true}
                 />
               </div>
             </div>
@@ -228,6 +229,7 @@ const cities = [
                   placeholder="1234 Johr Town Berlin, Germany"
                   register={register}
                   errors={errors}
+                  isRequired={true}
                 />
               </div>
             </div>

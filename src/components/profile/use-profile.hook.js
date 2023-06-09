@@ -16,35 +16,37 @@ import {
 import { createProfile } from '@/provider/features/profile/profile.slice';
 import { createFinancialDetail } from '@/provider/features/financial-detail/financial-detail.slice';
 import { createBusinessDetail } from '@/provider/features/business-detail/business-detail.slice';
+import { profileFinancialBusiness } from '@/provider/features/profile-financial-business/profile-financial-business.slice';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
+  email: Yup.string().required('Email is required'),
   userName: Yup.string()
+    .required('User name is required')
     .max(30, 'Username must be at most 30 characters long')
-    .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters')
-    .required('User name is required'),
+    .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters'),
   country: Yup.string().required('Country name is required'),
   city: Yup.string().required('City name is required'),
-  ibanNumber: Yup.string()
+  iban: Yup.string()
     .nullable()
     .transform((value) => (value === '' ? null : value))
     .matches(/^[a-zA-Z0-9]+$/, 'IBAN can only contain alphanumeric')
     .min(15, 'IBAN number can contain minimum 15 alphanumeric')
     .max(34, 'IBAN number can contain maximum 34 alphanumeric'),
-  vatNumber: Yup.string()
+  vat: Yup.string()
     .nullable()
     .transform((value) => (value === '' ? null : value))
     .matches(/[0-9]/, 'VAT number must be in digits')
     .min(5, 'VAT number can contain minimum 5 digits')
     .max(15, 'VAT number can contain maximum 15 digits'),
-  companyName: Yup.string()
-    .nullable()
+  businessName: Yup.string()
+    .required('Company Name is required')
     .max(150, 'Company name must be 150 characters long')
     .matches(/^[a-zA-Z0-9\s]*$/, 'Company name can only contain alphanumeric characters'),
-  population: Yup.string().nullable(),
+  population: Yup.string().required('Population is required'),
   address: Yup.string()
-    .nullable()
+    .required('Address is required')
     .max(255, 'Address can contain maximum 255 characters')
     .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters'),
 });
@@ -80,8 +82,12 @@ export default function useProfile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
+  const moveRouter = (data) => {
+    router.push(`/customer`);
+  };
+
   const onSubmit = (data) => {
-    dispatch(createProfile({ payload: { ...data } }));
+    dispatch(profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter }))
   };
 
   const sendOtp = () => {
