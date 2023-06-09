@@ -58,7 +58,6 @@ export default function useLogin() {
   };
 
   const moveRouterGenOtp = (data) => {
-    // console.log(data,"moveRouterGenOtp");
     router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
   const moveRouter = (data) => {
