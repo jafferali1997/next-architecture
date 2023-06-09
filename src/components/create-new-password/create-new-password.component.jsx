@@ -17,6 +17,8 @@ export default function CreateNewPassword() {
     toggleShowConfirmPassword,
     loader
   } = useCreateNewPassword();
+
+  console.log(errors)
   return (
     <div className="create-new-pass-wrapper">
       <div className="create-new-pass-container ">
@@ -47,22 +49,22 @@ export default function CreateNewPassword() {
                     className="form-control-c"
                     errors={errors}
                     isRequired={true}
-                    style={errors.pass ? borderStyle : borderSuc}
+                    style={errors.password ? borderStyle : borderSuc}
                   />
 
                   <div className="create-new-pass-validation">
                     <div className="innerValidation">
-                      {errors.pass ? (
+                      {/* {errors.password ? (
                         <>
                           <img src="/assets/images/s_error.svg" alt="img" />
-                          {errors.pass.message}
+                          {errors.password.message}
                         </>
-                      ) : (
+                      ) : ( */}
                         <p className="passText color_bbb">
                           Use 8 or more characters with a mix of letters, numbers &
                           symbols
                         </p>
-                      )}
+                      {/* )} */}
                     </div>
                   </div>
                   <img
@@ -80,21 +82,21 @@ export default function CreateNewPassword() {
               </div>
               <div className="form-group-c">
                 <label>
-                  Confirm Password <span>*</span>
+                  Confirm Password bc <span>*</span>
                 </label>
                 <div className="pass_input_div">
                   <CustomInput
                     placeholder="Enter confirm password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    name="confirm"
+                    type={showConfirmPassword ? 'text' : 'password'}
                     register={register}
                     errors={errors}
                     className="form-control-c"
                     isRequired={true}
-                    style={errors.pass ? borderStyle : borderSuc}
+                    style={errors.confirm ? borderStyle : borderSuc}
                   />
 
-                  <div className="create-new-pass-validation">
+                  {/* <div className="create-new-pass-validation">
                     <div className="innerValidation">
                       {errors.confirm ? (
                         <>
@@ -103,7 +105,7 @@ export default function CreateNewPassword() {
                         </>
                       ) : null}
                     </div>
-                  </div>
+                  </div> */}
                   <img
                     role="presentation"
                     alt="im"
