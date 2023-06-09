@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 
 import Menu from '@mui/material/Menu';
@@ -12,7 +13,6 @@ const menus = [
 ];
 
 export default function Header() {
-  
   const [openSidebar, setOpenSidebar] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ export default function Header() {
         <div className="tw-flex tw-items-center sm:tw-gap-3 lg:tw-gap-[80px]">
           <div className="tw-flex tw-items-center tw-gap-3">
             <img
-            onClick={() => setOpenSidebar(!openSidebar)}
+              onClick={() => setOpenSidebar(!openSidebar)}
               className="xs:tw-block lg:tw-hidden"
               width="22px"
               height="16px"
@@ -36,7 +36,11 @@ export default function Header() {
               />
             </a>
           </div>
-          <ul className={`${openSidebar ?'menuopen' :'menuclose'} !tw-mt-0 tw-items-center tw-transition-all tw-duration-300 tw-ease-in xs:tw-absolute xs:tw-left-0 xs:tw-top-full xs:tw-mt-2 xs:tw-flex xs:tw-h-header-calc-viewport xs:tw-w-full xs:tw-flex-col xs:tw-gap-y-7 xs:tw-bg-white lg:tw-relative lg:tw-flex lg:tw-h-fit lg:tw-w-fit lg:tw-flex-row lg:tw-items-center lg:tw-gap-8 `}>
+          <ul
+            className={`${
+              openSidebar ? 'menuopen' : 'menuclose'
+            } !tw-mt-0 tw-items-center tw-transition-all tw-duration-300 tw-ease-in xs:tw-absolute xs:tw-left-0 xs:tw-top-full xs:tw-mt-2 xs:tw-flex xs:tw-h-header-calc-viewport xs:tw-w-full xs:tw-flex-col xs:tw-gap-y-7 xs:tw-bg-white lg:tw-relative lg:tw-flex lg:tw-h-fit lg:tw-w-fit lg:tw-flex-row lg:tw-items-center lg:tw-gap-8 `}
+          >
             {menus.map((menu) => {
               return (
                 <li key={menu.id} className="tw-inline-block tw-w-fit">
