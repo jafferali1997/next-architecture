@@ -35,7 +35,6 @@ export default function useForgetPassword() {
   };
 
   const onSubmit = (email) => {
-    console.log(email);
     const data = {
       payload: email
     }

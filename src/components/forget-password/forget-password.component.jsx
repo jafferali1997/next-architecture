@@ -8,7 +8,7 @@ export default function ForgetPassword() {
   const router = useRouter();
   const { email, handleSubmit, onSubmit, register, errors, borderStyle, borderSuc } =
     useForgetPassword();
-
+  console.log(errors)
   return (
     <div className="forgot-password-wrapper">
       <div className="forgot-password-container">
