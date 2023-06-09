@@ -19,18 +19,22 @@ export default function CreateCategories() {
         <p className="admin-top-p">Category ID #</p>{' '}
         <span className="header-span">10075</span>
       </div>
-      <div className="category-box-grid-4col common-box tw-m-auto tw-h-[100vh] tw-w-[95%] tw-p-0">
-        {categories.map((item) => (
-          <CategoryColumn
-            columnData={item.categories}
-            categoryToRender={item.categoryToRender}
-            categoryLevel={item.categoryLevel}
-            handleClickCategory={handleClickCategory}
-            handleAddCategory={handleAddCategory}
-            handleDeleteCategory={handleDeleteCategory}
-            handleUpdateCategory={handleUpdateCategory}
-          />
-        ))}
+      <div className="common-box tw-m-4 tw-max-h-[650px] tw-max-w-[95%] tw-p-4">
+        <div className="tw-overflow-x-auto">
+          <div className="tw-grid-rows tw-m-auto tw-grid tw-auto-cols-min tw-grid-flow-col tw-p-0">
+            {categories.map((item) => (
+              <CategoryColumn
+                columnData={item.categories}
+                categoryToRender={item.categoryToRender}
+                categoryLevel={item.categoryLevel}
+                handleClickCategory={handleClickCategory}
+                handleAddCategory={handleAddCategory}
+                handleDeleteCategory={handleDeleteCategory}
+                handleUpdateCategory={handleUpdateCategory}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

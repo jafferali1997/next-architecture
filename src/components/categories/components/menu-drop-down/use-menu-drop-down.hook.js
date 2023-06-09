@@ -1,13 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function useMenuDropdown() {
   const [threeDot, setThreeDot] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setThreeDot(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   const handleThreeMenu = () => {
     setThreeDot(!threeDot);
   };
 
-  return { handleThreeMenu, threeDot };
+  return { handleThreeMenu, threeDot, ref };
 }

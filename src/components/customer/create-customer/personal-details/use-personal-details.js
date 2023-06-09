@@ -86,6 +86,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const [priceOptions, setPriceOptions] = useState([]);
   const [discountOptions, setDiscountOptions] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
   // const countries = Country.getAllCountries();
   const countries = [
     { label: 'Pakistan', value: 'pakistan' },
@@ -215,6 +216,10 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     }
   };
 
+  const handleButtonClickedit = () => {
+    setOpenPopup(!openPopup);
+  };
+
   return {
     register,
     handleSubmit,
@@ -238,6 +243,9 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     addDiscountGroup,
     setIsSubmit,
     router,
-    errors
+    errors,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit
   };
 }

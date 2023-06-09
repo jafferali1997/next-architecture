@@ -26,7 +26,6 @@ export const createProductCategory = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -42,7 +41,6 @@ export const getSingleProductCategory = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -58,7 +56,6 @@ export const getAllProductCategory = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -76,7 +73,6 @@ export const updateProductCategory = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -93,7 +89,6 @@ export const deleteProductCategory = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -172,6 +167,7 @@ export const productCategorySlice = createSlice({
         state.getAll.data = action.payload;
       })
       .addCase(getAllProductCategory.rejected, (state, action) => {
+        console.log(action);
         state.getAll.message = action.payload.message;
         state.getAll.isLoading = false;
         state.getAll.isError = true;

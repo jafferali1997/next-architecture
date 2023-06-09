@@ -19,7 +19,8 @@ export default function MultiSelect({
   search = true,
   isClearable = true,
   maxDisplayOptions = 8,
-  defaultOptions = null
+  defaultOptions = null,
+  onClick
 }) {
   const {
     open,
@@ -131,10 +132,7 @@ export default function MultiSelect({
           {open && (
             <div className="tw-lef-0 tw-absolute tw-top-[100%] tw-z-[999] tw-w-full  tw-rounded tw-bg-white tw-text-black  tw-shadow">
               <div className="tw-flex tw-max-h-[200px] tw-w-full tw-flex-col tw-overflow-y-auto">
-                <div
-                  className="select-option-click tw-cursor-pointer"
-                  // onClick={}
-                >
+                <div className="select-option-click tw-cursor-pointer" onClick={onClick}>
                   <img src="/assets/images/plus_s.png" alt="plus" />
                   <p>create new group</p>
                 </div>
@@ -159,6 +157,7 @@ const optionShape = PropTypes.shape({
 MultiSelect.propTypes = {
   options: PropTypes.arrayOf(optionShape).isRequired,
   handleChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   placeholder: PropTypes.string,
   search: PropTypes.bool,
   isClearable: PropTypes.bool,

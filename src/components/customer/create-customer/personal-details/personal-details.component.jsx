@@ -28,7 +28,10 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
     addDiscountGroup,
     setIsSubmit,
     router,
-    errors
+    errors,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit
   } = usePersonalDetails({ handleTabClick, handleTabCompleted });
 
   return (
@@ -61,6 +64,9 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
             addDiscountGroup={addDiscountGroup}
             setIsSubmit={setIsSubmit}
             errors={errors}
+            openPopup={openPopup}
+            setOpenPopup={setOpenPopup}
+            handleButtonClickedit={handleButtonClickedit}
           />
         )}
         {!router?.query?.id && (
@@ -87,6 +93,9 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
             addDiscountGroup={addDiscountGroup}
             setIsSubmit={setIsSubmit}
             errors={errors}
+            openPopup={openPopup}
+            setOpenPopup={setOpenPopup}
+            handleButtonClickedit={handleButtonClickedit}
           />
         )}
       </div>
