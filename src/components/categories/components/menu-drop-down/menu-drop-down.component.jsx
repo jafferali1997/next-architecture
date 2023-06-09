@@ -11,15 +11,21 @@ export default function MenuDropDown({
   id,
   handleDeleteCategory
 }) {
-  const { handleThreeMenu, threeDot } = useMenuDropdown();
+  const { handleThreeMenu, threeDot, ref } = useMenuDropdown();
   return (
-    <div className="tw-flex tw-items-center ">
+    <div id="three-dot" className="tw-flex tw-items-center">
       <div
-        className="tw-relative tw-m-auto tw-flex tw-w-8 tw-justify-center"
+        id="three-dot-1"
+        className={`${
+          threeDot ? '' : 'threedot'
+        } tw-relative tw-m-auto tw-flex tw-w-8 tw-justify-center`}
         onClick={handleThreeMenu}
       >
         {threeDot ? (
-          <div className=" tw-absolute tw-bottom-[-66px] tw-left-[-86px] tw-flex tw-h-[74px] tw-w-[92px] tw-flex-col tw-items-start tw-gap-2 tw-rounded-md tw-border tw-border-solid tw-border-[#CECECE] tw-bg-white tw-p-3 ">
+          <div
+            ref={ref}
+            className="tw-absolute tw-bottom-[-66px] tw-left-[-86px] tw-flex tw-h-[74px] tw-w-[92px] tw-flex-col tw-items-start tw-gap-2 tw-rounded-md tw-border tw-border-solid tw-border-[#CECECE] tw-bg-white tw-p-3 "
+          >
             <div
               className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0"
               onClick={() => handleButtonClickedit(id)}
@@ -41,7 +47,7 @@ export default function MenuDropDown({
           </div>
         ) : null}
 
-        <ThreedotIcon className="threedot" />
+        <ThreedotIcon />
       </div>
 
       <img src="/assets/images/arwo-icon.svg" alt="arwo-icon" />

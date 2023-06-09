@@ -25,7 +25,6 @@ export const createFaq = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -41,7 +40,6 @@ export const getSingleFaq = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -57,7 +55,6 @@ export const getAllFaq = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -73,7 +70,6 @@ export const updateFaq = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -89,7 +85,6 @@ export const deleteFaq = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }

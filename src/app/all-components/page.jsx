@@ -32,6 +32,7 @@ import CustomSwitch from '@/common/components/custom-switch/custom-switch.compon
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
 import OtpInput from '@/common/components/otp-input/otp-input.component';
+import SimpleSelect from '@/common/components/custom-select/simple-select.component';
 
 const validationSchema = yup.object({
   firstName: yup.string().max(5, 'company name must be at most 5 characters long')
@@ -385,7 +386,7 @@ export default function Page() {
             </div>
             <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
               <div className="tw-w-1/2">
-                <CustomSelect
+                <SimpleSelect
                   label="Select Education"
                   placeholder="Select Education"
                   name="education"

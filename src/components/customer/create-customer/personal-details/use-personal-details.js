@@ -47,15 +47,15 @@ const validationSchema = yup.object({
   //   .number()
   //   .max(9999999999, 'postal code must be at most 10 characters long')
   //   .min(1, 'postal code must be minimum 1 characters')
-    // .matches(/^[^.]*$/, {
-    //   message: 'No period'
-    // })
-    // .matches(/^[^.]*$/, {
-    //   message: 'Invalid postal'
-    // })
-    // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
-    //   message: 'Invalid postal'
-    // })
+  // .matches(/^[^.]*$/, {
+  //   message: 'No period'
+  // })
+  // .matches(/^[^.]*$/, {
+  //   message: 'Invalid postal'
+  // })
+  // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
+  //   message: 'Invalid postal'
+  // })
   //   .required('postal code is required'),
   // address: yup
   //   .string()
@@ -69,6 +69,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema)
@@ -77,7 +78,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const searchParams = useSearchParams();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [cities, setCities] = useState([]);
   const [data, setData] = useState();
   const [discountGroup, setDiscountGroup] = useState();
   const [priceGroup, setPriceGroup] = useState();
@@ -86,30 +86,41 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const [priceOptions, setPriceOptions] = useState([]);
   const [discountOptions, setDiscountOptions] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
-  const countries = Country.getAllCountries();
-
+  const [openPopup, setOpenPopup] = useState(false);
+  // const countries = Country.getAllCountries();
+  const countries = [
+    { label: 'Pakistan', value: 'pakistan' },
+    { label: 'Turkey', value: 'turkey' }
+  ];
+  const cities = [
+    { label: 'Lahore', value: 'lahore' },
+    { label: 'Gujranwala', value: 'gujranwala' }
+  ];
   const dispatch = useDispatch();
 
   const fetchData = useCallback(
     async (id) => {
-      const data = dispatch(getSingleCustomer({ payload: id }));
-      setData(data);
-      const event = {
-        target: {
-          value: data?.country
-        }
-      };
-      handleCountryChange(event);
-      setPriceOptions(
-        data.priceGroup.map((item) => {
-          return priceGroup.find((price) => price.value === item);
-        })
-      );
-      setDiscountOptions(
-        data.discountGroup.map((item) => {
-          return discountGroup.find((price) => price.value === item);
-        })
-      );
+      let data = await dispatch(getSingleCustomer({ payload: id }));
+      if (data.payload) {
+        data = data.payload;
+        Object.keys(data).forEach((key) => setValue(key, data[key]));
+        // const event = {
+        //   target: {
+        //     value: data?.country
+        //   }
+        // };
+        // handleCountryChange(event);
+        setPriceOptions(
+          data.priceGroup.map((item) => {
+            return priceGroup.find((price) => price.id === item.id);
+          })
+        );
+        setDiscountOptions(
+          data.discountGroup.map((item) => {
+            return discountGroup.find((price) => price.value.id === item.id);
+          })
+        );
+      }
     },
     [priceGroup, discountGroup]
   );
@@ -161,30 +172,29 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   }, []);
 
   useEffect(() => {
-    if (priceGroup?.length && discountGroup?.length && searchParams) {
-      const id = searchParams.get('id');
-      if (id) {
-        fetchData(id);
-      }
+    const id = searchParams.get('id');
+    if (id) {
+      fetchData(id);
     }
-  }, [router, priceGroup, discountGroup, fetchData]);
+  }, [searchParams, priceGroup, discountGroup, fetchData]);
 
   const handleCountryChange = (event) => {
-    const countryCode = event.target.value;
-    setSelectedCountry(countryCode);
-    const cities = City.getCitiesOfCountry(countryCode);
-    setCities(cities);
+    // const countryCode = event.target.value;
+    // setSelectedCountry(countryCode);
+    // const cities = City.getCitiesOfCountry(countryCode);
+    // setCities(cities);
   };
 
   const handleCityChange = (event) => {
-    const cityName = event.target.value;
-    setSelectedCity(cityName);
+    // const cityName = event.target.value;
+    // setSelectedCity(cityName);
   };
 
   const onSubmit = async (value) => {
     console.log(value);
     const data = {
       ...value,
+      postalCode: Number(value.postalCode),
       ...(searchParams.get('id') && { customerId: searchParams.get('id') }),
       priceGroups: [
         ...priceOptions.map((item) => {
@@ -197,16 +207,17 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
         })
       ]
     };
-    const res = dispatch(createCustomerPersonalDetail({ payload: data }));
-    if (res) {
-      const response = res.data.result.data._id;
-      router.push(router);
-
+    const res = await dispatch(createCustomerPersonalDetail({ payload: data }));
+    console.log(res, 'Create Customer Personal Detail Response');
+    if (res.payload) {
+      router.push(`/customer/create?id=${res.payload.id}`);
       handleTabClick('company_details');
       handleTabCompleted('customer_details');
     }
-    handleTabClick('company_details');
-      handleTabCompleted('customer_details');
+  };
+
+  const handleButtonClickedit = () => {
+    setOpenPopup(!openPopup);
   };
 
   return {
@@ -232,6 +243,9 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     addDiscountGroup,
     setIsSubmit,
     router,
-    errors
+    errors,
+    openPopup,
+    setOpenPopup,
+    handleButtonClickedit
   };
 }

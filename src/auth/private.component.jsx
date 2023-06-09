@@ -1,3 +1,5 @@
+'use client';
+
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
 import { isAccessTokenVerifed } from '@/common/utils/access-token.util';

@@ -5,6 +5,16 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import Select from '@/common/components/select/select.component';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography
+} from '@mui/material';
+import usePersonalDetails from '../../use-personal-details';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
 
 export default function FormForPersonalDetails({
   register,
@@ -27,13 +37,16 @@ export default function FormForPersonalDetails({
   addDiscount,
   setAddDiscount,
   addDiscountGroup,
+  openPopup,
+  setOpenPopup,
+  handleButtonClickedit,
   setIsSubmit,
   errors = {}
 }) {
   const countries = [
-    {id: 1, name: "Pakistan", label: "Pakistan"},
-    {id: 2, name: "India", label: "India"},
-  ]
+    { id: 1, name: 'Pakistan', label: 'Pakistan' },
+    { id: 2, name: 'India', label: 'India' }
+  ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
@@ -42,9 +55,12 @@ export default function FormForPersonalDetails({
           label="Gender"
           name="gender"
           isRequired={true}
+          name="gender"
+          register={register}
+          errors={errors}
           options={[
-            { id: 'male', value: 'MALE', label: 'Male' },
-            { id: 'female', value: 'FEMALE', label: 'Female' }
+            { id: 'MALE', value: 'MALE', label: 'MALE' },
+            { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
           ]}
           placeholder="Gender"
           errors={errors}
@@ -97,12 +113,13 @@ export default function FormForPersonalDetails({
           errors={errors}
           placeholder="Country"
           type="select"
-          onChange={handleCountryChange}
-          value={selectedCountry}
+          // onChange={handleCountryChange}
+          // value={selectedCountry}
           isRequired={true}
-          options={countries.map((item) => {
-            return { label: item.label, value: item.name, id: item.id };
-          })}
+          // options={countries.map((item) => {
+          //   return { label: item.name, value: item.isoCode, id: item.isoCode };
+          // })}
+          options={countries}
         />
         <Select
           label="City"
@@ -112,14 +129,15 @@ export default function FormForPersonalDetails({
           type="select"
           value={selectedCity}
           onChange={handleCityChange}
-          options={countries.map((item) => {
-            return { label: item.label, value: item.name, id: item.id };
-          })}
+          // options={cities.map((item) => {
+          //   return { label: item.name, value: item.isoCode, id: item.isoCode };
+          // })}
+          options={cities}
           errors={errors}
         />
         <CustomInput
           label="Postal Code"
-          name="postal"
+          name="postalCode"
           defaultValue={data.postal}
           register={register}
           placeholder="Postal Code"
@@ -130,6 +148,24 @@ export default function FormForPersonalDetails({
       </div>
 
       <div className="form-box-grid-2col">
+        <Dialog open={openPopup}>
+          <div className="tw-w-[389px]">
+            <div>
+              <DialogTitle>Category</DialogTitle>
+            </div>
+            <DialogContent>
+              <CustomInput placeholder="Category" label="Category Name" type="text" />
+            </DialogContent>
+            <DialogActions>
+              <CustomButton
+                onClick={() => setOpenPopup(false)}
+                className=" btn-cancel"
+                text="Cancel"
+              />
+              <CustomButton className="btn btn-primary " text="Update" />
+            </DialogActions>
+          </div>
+        </Dialog>
         <div>
           <label className="group-label">Price Group</label>
           <MultiSelect
@@ -138,6 +174,7 @@ export default function FormForPersonalDetails({
               { id: '2', label: 'Test 2', value: 'test2' },
               { id: '3', label: 'Test 3', value: 'test3' }
             ]}
+            onClick={handleButtonClickedit}
             handleChange={() => {}}
           />
         </div>
@@ -150,6 +187,7 @@ export default function FormForPersonalDetails({
               { id: '3', label: 'Test 3', value: 'test3' }
             ]}
             handleChange={() => {}}
+            onClick={handleButtonClickedit}
           />
         </div>
       </div>
@@ -169,13 +207,21 @@ FormForPersonalDetails.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   priceGroup: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({
+      id: PropTypes.number,
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
   ).isRequired,
   addPrice: PropTypes.string.isRequired,
   setAddPrice: PropTypes.func.isRequired,
   setPriceOptions: PropTypes.func.isRequired,
   addPriceGroup: PropTypes.arrayOf(
-    PropTypes.shape({  id: PropTypes.number, label: PropTypes.string, value: PropTypes.string })
+    PropTypes.shape({
+      id: PropTypes.number,
+      label: PropTypes.string,
+      value: PropTypes.string
+    })
   ).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,
@@ -190,5 +236,8 @@ FormForPersonalDetails.propTypes = {
   ).isRequired,
   setIsSubmit: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  openPopup: PropTypes.func,
+  setOpenPopup: PropTypes.func,
+  handleButtonClickedit: PropTypes.func
 };

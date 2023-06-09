@@ -24,17 +24,17 @@ export default function FormForManageTerms({
             label="payment terms as date"
             name="radio"
             type="radio"
-            checked={selectedValue === 'paymentDateSelect'}
+            checked={selectedValue === 'PAYMENT_TERMS_AS_DATE'}
             onClick={() => {
-              if (selectedValue !== 'paymentDateSelect') handleReset();
+              if (selectedValue !== 'PAYMENT_TERMS_AS_DATE') handleReset();
             }}
-            value="paymentDateSelect"
+            value="PAYMENT_TERMS_AS_DATE"
             handleChangeRadio={handleChangeRadio}
           />
-          {selectedValue === 'paymentDateSelect' && (
+          {selectedValue === 'PAYMENT_TERMS_AS_DATE' && (
             <div className="radio-expanded">
               <CustomInput
-                name="paymentDate"
+                name="termOfPaymentData"
                 defaultValue={data.paymentDate}
                 placeholder="03/13/2023"
                 type="date"
@@ -51,16 +51,16 @@ export default function FormForManageTerms({
             name="radio"
             type="radio"
             onClick={() => {
-              if (selectedValue !== 'paymentDateSelect') handleReset();
+              if (selectedValue !== 'PAYMENT_TERMS_AS_DATE') handleReset();
             }}
-            checked={selectedValue === 'paymentDaysSelect'}
-            value="paymentDaysSelect"
+            checked={selectedValue === 'PAYMENT_TERMS_IN_DAYS'}
+            value="PAYMENT_TERMS_IN_DAYS"
             handleChangeRadio={handleChangeRadio}
           />
-          {selectedValue === 'paymentDaysSelect' && (
+          {selectedValue === 'PAYMENT_TERMS_IN_DAYS' && (
             <div className="radio-expanded">
               <CustomInput
-                name="paymentDays"
+                name="termOfPaymentData"
                 defaultValue={data.paymentDays}
                 placeholder="Payment terms"
                 type="days"
@@ -77,16 +77,16 @@ export default function FormForManageTerms({
             name="radio"
             type="radio"
             onClick={() => {
-              if (selectedValue !== 'paymentDateSelect') handleReset();
+              if (selectedValue !== 'PAYMENT_TERMS_AS_DATE') handleReset();
             }}
-            checked={selectedValue === 'cashDiscountSelect'}
-            value="cashDiscountSelect"
+            checked={selectedValue === 'CASH_DISCOUNT_TARGET_AS_A_DATE'}
+            value="CASH_DISCOUNT_TARGET_AS_A_DATE"
             handleChangeRadio={handleChangeRadio}
           />
-          {selectedValue === 'cashDiscountSelect' && (
+          {selectedValue === 'CASH_DISCOUNT_TARGET_AS_A_DATE' && (
             <div className="radio-expanded">
               <CustomInput
-                name="cashDiscount"
+                name="termOfPaymentData"
                 defaultValue={data.cashDiscount}
                 placeholder="13/03/2023"
                 type="date"
@@ -103,16 +103,16 @@ export default function FormForManageTerms({
             name="radio"
             type="radio"
             onClick={() => {
-              if (selectedValue !== 'paymentDateSelect') handleReset();
+              if (selectedValue !== 'PAYMENT_TERMS_AS_DATE') handleReset();
             }}
-            checked={selectedValue === 'discountSelect'}
-            value="discountSelect"
+            checked={selectedValue === 'DISCOUNT_AND_PERCENTAGE'}
+            value="DISCOUNT_AND_PERCENTAGE"
             handleChangeRadio={handleChangeRadio}
           />
-          {selectedValue === 'discountSelect' && (
+          {selectedValue === 'DISCOUNT_AND_PERCENTAGE' && (
             <div className="radio-expanded">
               <CustomInput
-                name="discount"
+                name="termOfPaymentData"
                 defaultValue={data.discount}
                 placeholder="Discount and %"
                 type="text"
@@ -129,16 +129,16 @@ export default function FormForManageTerms({
             name="radio"
             type="radio"
             onClick={() => {
-              if (selectedValue !== 'paymentDateSelect') handleReset();
+              if (selectedValue !== 'PAYMENT_TERMS_AS_DATE') handleReset();
             }}
-            checked={selectedValue === 'discountAmountSelect'}
-            value="discountAmountSelect"
+            checked={selectedValue === 'DISCOUNT_AMOUNT'}
+            value="DISCOUNT_AMOUNT"
             handleChangeRadio={handleChangeRadio}
           />
-          {selectedValue === 'discountAmountSelect' && (
+          {selectedValue === 'DISCOUNT_AMOUNT' && (
             <div className="radio-expanded">
               <CustomInput
-                name="discountAmount"
+                name="termOfPaymentData"
                 defaultValue={data.discountAmount}
                 placeholder="Discount amount"
                 type="text"
@@ -155,16 +155,16 @@ export default function FormForManageTerms({
             name="radio"
             type="radio"
             onClick={() => {
-              if (selectedValue !== 'paymentDateSelect') handleReset();
+              if (selectedValue !== 'PAYMENT_TERMS_AS_DATE') handleReset();
             }}
-            checked={selectedValue === 'minusDiscountSelect'}
-            value="minusDiscountSelect"
+            checked={selectedValue === 'TOTAL_AMOUNT_MINUS_DISCOUNT'}
+            value="TOTAL_AMOUNT_MINUS_DISCOUNT"
             handleChangeRadio={handleChangeRadio}
           />
-          {selectedValue === 'minusDiscountSelect' && (
+          {selectedValue === 'TOTAL_AMOUNT_MINUS_DISCOUNT' && (
             <div className="radio-expanded">
               <CustomInput
-                name="minusDiscount"
+                name="termOfPaymentData"
                 defaultValue={data.minusDiscount}
                 placeholder="Total amount minus discount"
                 type="text"
@@ -179,7 +179,7 @@ export default function FormForManageTerms({
       <h3>Terms of delivery</h3>
       <div className="form-row-two-col">
         <TextArea
-          name="deliveryTerm"
+          name="termOfDelivery"
           defaultValue={data.deliveryTerm}
           placeholder="Delivery Terms"
           type="textarea"

@@ -405,7 +405,7 @@ body {
   display: none;
 }
 .cate-btn:hover .threedot {
-  display: block;
+  display: flex;
 }
 
 .testimonial-slider .swiper-slide-shadow-left,

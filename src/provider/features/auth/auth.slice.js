@@ -64,7 +64,6 @@ export const signUp = createAsyncThunk(
 
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -81,7 +80,6 @@ export const loginAndSignUpWithGoogle = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function useCategoryColumn({ handleAddCategory, categoryToRender }) {
   const [search, setSearch] = useState('');
@@ -7,6 +7,20 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState();
   const [openPopup, setOpenPopup] = useState(false);
+  const [clicked, setClicked] = useState();
+  const ref = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenPopup(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   const handleButtonClick = () => {
     setShowInput(true);
@@ -42,6 +56,9 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
     handleButtonClickedit,
     idToUpdateCategory,
     setUpdateValue,
-    updateValue
+    updateValue,
+    ref,
+    clicked,
+    setClicked
   };
 }

@@ -22,7 +22,6 @@ export const profileFinancialBusiness = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }

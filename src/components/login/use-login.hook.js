@@ -60,7 +60,6 @@ export default function useLogin() {
   };
 console.log(process.env.NEXT_PUBLIC_MAIN_URL_SECRET_KEY)
   const moveRouterGenOtp = (data) => {
-    // console.log(data,"moveRouterGenOtp");
     router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
   const moveRouter = (data) => {

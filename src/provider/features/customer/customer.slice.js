@@ -59,7 +59,6 @@ export const createCustomerPersonalDetail = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -75,7 +74,6 @@ export const createCustomerAccountDetail = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -91,7 +89,6 @@ export const createCustomerDiscount = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -107,7 +104,6 @@ export const createCustomerCompanyDetail = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -125,7 +121,6 @@ export const createCustomerTermOfPaymentAndDelivey = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -141,7 +136,6 @@ export const getSingleCustomer = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -153,11 +147,10 @@ export const getAllCustomer = createAsyncThunk(
     try {
       const response = await customerService.getAllCustomer(payload);
       if (response.Succeeded) {
-        return response.data;
+        return response;
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -173,7 +166,6 @@ export const updateCustomer = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }
@@ -189,7 +181,6 @@ export const deleteCustomer = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
-      callBackMessage('error', error.message);
       return thunkAPI.rejectWithValue({ payload: error });
     }
   }

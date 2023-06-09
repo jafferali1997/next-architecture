@@ -13,6 +13,7 @@ export default function UseCustomerDetails() {
   const router = useRouter();
 
   const customerId = useRef(searchParams.get('id'));
+  const [companyAddresses, setCompanyAddresses] = useState([]);
 
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
@@ -26,18 +27,33 @@ export default function UseCustomerDetails() {
   const { register, handleSubmit, setValue } = useForm();
 
   async function fetchAndSetData() {
-    // if (searchParams.get('id')) {
-    //   // customerId.current = searchParams.get('id');
-    //   const data = await dispatch(
-    //     getSingleCustomer({ payload: searchParams.get('id') })
-    //   );
-    //   console.log('data', data);
-    // }
+    if (searchParams.get('id')) {
+      // customerId.current = searchParams.get('id');
+      let data = await dispatch(getSingleCustomer({ payload: searchParams.get('id') }));
+      console.log('data', data);
+      data = data.payload;
+      Object.keys(data).forEach((key) => setValue(key, data[key]));
+
+      if (data?.additionalContact?.length > 0) {
+        Object.keys(data.additionalContact[0]).forEach((key) =>
+          setValue(`ac_${key}`, data.additionalContact[0][key])
+        );
+      }
+
+      if (data?.companyAddress?.length > 0) {
+        const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
+          setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
+          setValue(`ca_address_${index + 1}`, addressObj.address);
+          return { id: index + 1 };
+        });
+        setCompanyAddresses(newcompanyAddresses);
+      }
+    }
     const data = {
       id: 6,
       accountOwnerName: null,
       iban: null,
-      gender: "MALE",
+      gender: 'MALE',
       city: 'Lahore',
       country: 'Pakistan',
       address: '56yujh',
@@ -88,12 +104,6 @@ export default function UseCustomerDetails() {
       priceGroup: [],
       discountGroup: []
     };
-    Object.keys(data).forEach((key) => setValue(key, data[key]));
-    if (data.additionalContact?.length > 0) {
-      Object.keys(data.additionalContact[0]).forEach((key) =>
-        setValue(key, data.additionalContact[0][key])
-      );
-    }
   }
 
   useEffect(() => {
@@ -112,6 +122,7 @@ export default function UseCustomerDetails() {
     register,
     handleSubmit,
     id: customerId.current,
-    onSubmit
+    onSubmit,
+    companyAddresses
   };
 }
