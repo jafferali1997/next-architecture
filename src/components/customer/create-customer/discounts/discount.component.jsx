@@ -16,7 +16,6 @@ export default function Discount({ handleTabClick, handleTabCompleted }) {
         <h3 className="form-inner-heading">Discount</h3>
       </div>
       <div className="content-body">
-        {router?.query?.id && data && (
           <FormForDiscount
             register={register}
             errors={errors}
@@ -26,17 +25,6 @@ export default function Discount({ handleTabClick, handleTabCompleted }) {
             setIsSubmit={setIsSubmit}
             data={data}
           />
-        )}
-        {!router?.query?.id && (
-          <FormForDiscount
-            register={register}
-            errors={errors}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            handleTabClick={handleTabClick}
-            setIsSubmit={setIsSubmit}
-          />
-        )}
       </div>
     </div>
   );

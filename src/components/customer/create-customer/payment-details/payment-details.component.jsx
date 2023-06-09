@@ -26,7 +26,6 @@ export default function PaymentDetails({ handleTabClick, handleTabCompleted }) {
         <h3 className="form-inner-heading">Payment Details</h3>
       </div>
       <div className="content-body">
-        {/* {router?.query?.id && data && ( */}
         <FormForPaymentDetails
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
@@ -42,24 +41,6 @@ export default function PaymentDetails({ handleTabClick, handleTabCompleted }) {
           paymentType={paymentType}
           setPaymentType={setPaymentType}
         />
-        {/* )} */}
-
-        {/* {!router?.query?.id && (
-          <FormForPaymentDetails
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            bankDetail={bankDetail}
-            setBankDetail={setBankDetail}
-            setCreditCard={setCreditCard}
-            creditCard={creditCard}
-            setIsSubmit={setIsSubmit}
-            handleTabClick={handleTabClick}
-            errors={errors}
-            paymentType={paymentType}
-    setPaymentType={setPaymentType}
-          />
-        )} */}
       </div>
     </div>
   );

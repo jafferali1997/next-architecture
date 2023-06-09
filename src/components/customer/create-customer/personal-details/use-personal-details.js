@@ -83,7 +83,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const fetchData = useCallback(
     async (id) => {
-      let data = await dispatch(getSingleCustomer({ payload: id }));
+      let data = await dispatch(getSingleCustomer({ payload: Number(id) }));
       if (data.payload) {
         data = data.payload;
         Object.keys(data).forEach((key) => setValue(key, data[key]));
@@ -94,13 +94,13 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
         // };
         // handleCountryChange(event);
         setPriceOptions(
-          data.priceGroup.map((item) => {
+          data.priceGroup?.map((item) => {
             return priceGroup.find((price) => price.id === item.id);
           })
         );
         setDiscountOptions(
-          data.discountGroup.map((item) => {
-            return discountGroup.find((price) => price.value.id === item.id);
+          data.discountGroup?.map((item) => {
+            return discountGroup?.find((price) => price.value.id === item.id);
           })
         );
       }
@@ -120,7 +120,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const fetchDiscountGroup = async () => {
     const groups = await dispatch(getAllDiscountGroup());
     setDiscountGroup(
-      groups.map((item) => {
+      groups?.map((item) => {
         return { id: item.id, value: item.id, label: item.discountGroupName };
       })
     );
@@ -153,7 +153,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   }, []);
 
   useEffect(() => {
-    const id = searchParams.get('id');
+    const id = Number(searchParams.get('id'));
     if (id) {
       fetchData(id);
     }
@@ -176,7 +176,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     const data = {
       ...value,
       postalCode: Number(value.postalCode),
-      ...(searchParams.get('id') && { customerId: searchParams.get('id') }),
+      ...(searchParams.get('id') && { customerId: Number(searchParams.get('id')) }),
       priceGroups: [
         ...priceOptions.map((item) => {
           return item.value;
@@ -190,7 +190,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     };
     const res = await dispatch(createCustomerPersonalDetail({ payload: data }));
     console.log(res, 'Create Customer Personal Detail Response');
-    if (res.payload) {
+    if (res.payload && res.payload.id) {
       router.push(`/customer/create?id=${res.payload.id}`);
       handleTabClick('company_details');
       handleTabCompleted('customer_details');

@@ -3,6 +3,10 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 import TextArea from '@/common/components/text-area/text-area.component';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 export default function FormForManageTerms({
   handleSubmit,
@@ -14,13 +18,109 @@ export default function FormForManageTerms({
   handleTabClick,
   setIsSubmit,
   handleReset,
+  setSelectedValue,
   data = {}
 }) {
+  console.log(selectedValue,"selected")
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="tw-mb-5 tw-flex tw-flex-col tw-gap-[18px]">
         <div className="payment-details-bank">
-          <CustomRadio
+        <FormControl>
+          <RadioGroup
+            name="termOfPayment"
+            value={selectedValue}
+            register={register}
+            errors={errors}
+            onChange={(e)=> setSelectedValue(e.target.value)}
+          >
+            <FormControlLabel value="PAYMENT_TERMS_AS_DATE" control={<Radio />} label="Payment Terms as date" />
+            {selectedValue === 'PAYMENT_TERMS_AS_DATE' && (
+            <div className="radio-expanded">
+              <CustomInput
+                name="termOfPaymentData"
+                defaultValue={data.paymentDate}
+                placeholder="03/13/2023"
+                type="date"
+                isRequired={false}
+                register={register}
+                errors={errors}
+              />
+            </div>
+          )}
+            <FormControlLabel value="PAYMENT_TERMS_IN_DAYS" control={<Radio />} label="Payment terms in days" />
+            {selectedValue === 'PAYMENT_TERMS_IN_DAYS' && (
+            <div className="radio-expanded">
+              <CustomInput
+                name="termOfPaymentData"
+                defaultValue={data.paymentDays}
+                placeholder="Payment terms"
+                type="days"
+                isRequired={false}
+                register={register}
+                errors={errors}
+              />
+            </div>
+          )}
+            <FormControlLabel value="CASH_DISCOUNT_TARGET_AS_A_DATE" control={<Radio />} label="Cash discount target as a date" />
+            {selectedValue === 'CASH_DISCOUNT_TARGET_AS_A_DATE' && (
+            <div className="radio-expanded">
+              <CustomInput
+                name="termOfPaymentData"
+                defaultValue={data.cashDiscount}
+                placeholder="13/03/2023"
+                type="date"
+                isRequired={false}
+                register={register}
+                errors={errors}
+              />
+            </div>
+          )}
+            <FormControlLabel value="DISCOUNT_AND_PERCENTAGE" control={<Radio />} label="Discount and %" />
+            {selectedValue === 'DISCOUNT_AND_PERCENTAGE' && (
+            <div className="radio-expanded">
+              <CustomInput
+                name="termOfPaymentData"
+                defaultValue={data.discount}
+                placeholder="Discount and %"
+                type="text"
+                isRequired={false}
+                register={register}
+                errors={errors}
+              />
+            </div>
+          )}
+            <FormControlLabel value="DISCOUNT_AMOUNT" control={<Radio />} label="Discount amount" />
+            {selectedValue === 'DISCOUNT_AMOUNT' && (
+            <div className="radio-expanded">
+              <CustomInput
+                name="termOfPaymentData"
+                defaultValue={data.discountAmount}
+                placeholder="Discount amount"
+                type="text"
+                isRequired={false}
+                register={register}
+                errors={errors}
+              />
+            </div>
+          )}
+            <FormControlLabel value="TOTAL_AMOUNT_MINUS_DISCOUNT" control={<Radio />} label="Total amount minus discount" />
+            {selectedValue === 'TOTAL_AMOUNT_MINUS_DISCOUNT' && (
+            <div className="radio-expanded">
+              <CustomInput
+                name="termOfPaymentData"
+                defaultValue={data.minusDiscount}
+                placeholder="Total amount minus discount"
+                type="text"
+                isRequired={false}
+                register={register}
+                errors={errors}
+              />
+            </div>
+          )}
+          </RadioGroup>
+        </FormControl>
+          {/* <CustomRadio
             label="payment terms as date"
             name="radio"
             type="radio"
@@ -173,8 +273,8 @@ export default function FormForManageTerms({
                 errors={errors}
               />
             </div>
-          )}
-        </div>
+          )}*/}
+        </div> 
       </div>
       <h3>Terms of delivery</h3>
       <div className="form-row-two-col">

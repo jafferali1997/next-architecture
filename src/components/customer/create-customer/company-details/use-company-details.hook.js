@@ -31,20 +31,19 @@ let validationSchema = yup.object({
   companyFax: yup.string().required('Company Fax is required'),
   companyUrl: yup.string().required('Company Url is required'),
   tin: yup
-    .number()
+    .string()
     .required('TIN is required')
-    .max(11, 'TIN must be at most 10 characters long')
-    .min(10, 'TIN must be minimum 10 characters'),
+    .max(8, 'TIN must be at most 10 characters long'),
   vat: yup
     .string()
     .required('VAT is required')
     .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format'),
-  companyAddress: yup.array().of(
-      yup.object().shape({
-        address: yup.string().required('Address is required'),
-        addressLabel: yup.string().required('Address Label is required'),
-      })
-    ).required('At least one company address is required')
+  // companyAddress: yup.array().of(
+  //     yup.object().shape({
+  //       address: yup.string().required('Address is required'),
+  //       addressLabel: yup.string().required('Address Label is required'),
+  //     })
+  //   ).required('At least one company address is required')
 });
 
 export default function useCompanyDetails({ handleTabClick, handleTabCompleted }) {
@@ -83,7 +82,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
 
   useEffect(() => {
     if (searchParams.get('id')) {
-      const id = searchParams.get('id');
+      const id = Number(searchParams.get('id'));
 
       async function fetchMyAPI() {
         let data = await dispatch(getSingleCustomer({ payload: id }));
@@ -240,31 +239,32 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
 
   const onSubmit = async (value) => {
     console.log(value);
-    const additionalContactKeys = Object.keys(value).filter((attr) =>
-      attr.startsWith('ac')
-    );
-    const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
-      const key = attr.replace('ac_', '');
-      return { ...accumulator, [key]: value[attr] };
-    }, {});
-    const companyAddressesKeys = Object.keys(value).filter((attr) =>
-      attr.startsWith('ca')
-    );
-    const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
-      if (index % 2 === 0) {
-        const obj = {
-          addressLabel: value[curr],
-          address: value[arr[index + 1]]
-        };
-        acc.push(obj);
-      }
-      return acc;
-    }, []);
+    // const additionalContactKeys = Object.keys(value).filter((attr) =>
+    //   attr.startsWith('ac')
+    // );
+    // const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
+    //   const key = attr.replace('ac_', '');
+    //   return { ...accumulator, [key]: value[attr] };
+    // }, {});
+    // const companyAddressesKeys = Object.keys(value).filter((attr) =>
+    //   attr.startsWith('ca')
+    // );
+    // const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
+    //   if (index % 2 === 0) {
+    //     const obj = {
+    //       addressLabel: value[curr],
+    //       address: value[arr[index + 1]]
+    //     };
+    //     acc.push(obj);
+    //   }
+    //   return acc;
+    // }, []);
     const payload = {
       ...value,
-      customerId: searchParams.get('id'),
-      additionalContact: [additionalContact],
-      companyAddress: companyAddresses
+      customerId: Number(searchParams.get('id')),
+      // additionalContact: [additionalContact],
+      // companyAddress: companyAddresses,
+      tin: Number(value.tin)
     };
     console.log(payload);
     const res = await dispatch(createCustomerCompanyDetail({ payload }));

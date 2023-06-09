@@ -10,7 +10,10 @@ import {
   createCustomerTermOfPaymentAndDelivey
 } from '@/provider/features/customer/customer.slice';
 
-let validationSchema = yup.object({});
+let validationSchema = yup.object({
+  termOfDelivery: yup.string().required('Term Of Delivery is required'),
+  termOfPayment: yup.string().required('Term Of Payment is required'),
+});
 
 export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   const [selectedValue, setSelectedValue] = useState('PAYMENT_TERMS_AS_DATE');
@@ -49,7 +52,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
 
   useEffect(() => {
     if (searchParams.get('id')) {
-      const id = searchParams.get('id');
+      const id = Number(searchParams.get('id'));
 
       async function fetchMyAPI() {
         let data = await dispatch(getSingleCustomer({ payload: id }));
@@ -67,25 +70,26 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    if (selectedValue) {
-      validationSchema = yup.object({
-        // [selectedValue.substring(0, selectedValue.length - 6)]: yup
-        //   .string()
-        //   .required(
-        //     `${transformValue(
-        //       selectedValue.substring(0, selectedValue.length - 6)
-        //     )} is required`
-        //   )
-      });
-      console.log(validationSchema);
-      setValidationSchemaState(validationSchema);
-    }
-  }, [selectedValue]);
+  // useEffect(() => {
+  //   if (selectedValue) {
+  //     validationSchema = yup.object({
+  //       // [selectedValue.substring(0, selectedValue.length - 6)]: yup
+  //       //   .string()
+  //       //   .required(
+  //       //     `${transformValue(
+  //       //       selectedValue.substring(0, selectedValue.length - 6)
+  //       //     )} is required`
+  //       //   )
+  //     });
+  //     console.log(validationSchema);
+  //     setValidationSchemaState(validationSchema);
+  //   }
+  // }, [selectedValue]);
 
   const onSubmit = async (value) => {
+    console.log(value,"onSubmit");	
     const payload = {
-      customerId: searchParams.get('id'),
+      customerId: Number(searchParams.get('id')),
       termOfPayment: selectedValue,
       termOfPaymentData: value.termOfPaymentData,
       termOfDeliveries: [
@@ -100,33 +104,6 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
       router.push('/customer');
       handleTabClick('customer_details');
     }
-    // try {
-    //   await axios.post(
-    //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/payment-terms`,
-    //     {
-    //       paymentTerms: value[selectedValue],
-    //       paymentTermsName: selectedValue,
-    //       customerId: router.query.id
-    //     }
-    //   );
-    //   const res = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/delivery-terms`,
-    //     {
-    //       deliveryTerms: value.deliveryTerm,
-    //       customerId: router.query.id
-    //     }
-    //   );
-    //   if (res.data.status) {
-    //     CustomAlert('Customer Created Successfully', 'Success');
-    //     resetTabCompleted();
-    //     router.push('/customer');
-    //     handleTabClick('customer_details');
-    //   } else {
-    //     CustomAlert(res.data.message, 'Error');
-    //   }
-    // } catch (e) {
-    //   CustomAlert(e.response.data.error[0].msg, 'Error');
-    // }
   };
 
   return {
@@ -138,6 +115,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
     handleChangeRadio,
     handleTabClick,
     setIsSubmit,
+    setSelectedValue,
     handleReset,
     data,
     router

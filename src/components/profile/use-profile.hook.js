@@ -106,7 +106,7 @@ export default function useProfile() {
   }
 
   const verifyOtpHandler = () => {
-    console.log(otp)
+    // console.log(otp)
     if (otp > 0) {
       const otpData = {
         otp: Number(otp)
