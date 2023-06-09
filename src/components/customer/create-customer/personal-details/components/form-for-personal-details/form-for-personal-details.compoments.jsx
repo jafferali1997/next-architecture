@@ -43,8 +43,8 @@ export default function FormForPersonalDetails({
           name="gender"
           isRequired={true}
           options={[
-            { id: 'male', value: 'MALE', label: 'Male' },
-            { id: 'female', value: 'FEMALE', label: 'Female' }
+            { id: 'MALE', value: 'MALE', label: 'MALE' },
+            { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
           ]}
           placeholder="Gender"
           errors={errors}
@@ -111,6 +111,7 @@ export default function FormForPersonalDetails({
           placeholder="City"
           type="select"
           value={selectedCity}
+          isRequired={true}
           onChange={handleCityChange}
           options={countries.map((item) => {
             return { label: item.label, value: item.name, id: item.id };
@@ -119,11 +120,11 @@ export default function FormForPersonalDetails({
         />
         <CustomInput
           label="Postal Code"
-          name="postal"
-          defaultValue={data.postal}
+          name="postalCode"
+          defaultValue={data.postalCode}
           register={register}
           placeholder="Postal Code"
-          type="text"
+          type="number"
           isRequired={true}
           errors={errors}
         />

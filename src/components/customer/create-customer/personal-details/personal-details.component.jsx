@@ -37,7 +37,6 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
         <h3 className="form-inner-heading">Personal Details</h3>
       </div>
       <div className="content-body">
-        {router?.query?.id && data && priceGroup && discountGroup && (
           <FormForPersonalDetails
             register={register}
             handleSubmit={handleSubmit}
@@ -62,33 +61,6 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
             setIsSubmit={setIsSubmit}
             errors={errors}
           />
-        )}
-        {!router?.query?.id && (
-          <FormForPersonalDetails
-            register={register}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            handleCountryChange={handleCountryChange}
-            selectedCity={selectedCity}
-            selectedCountry={selectedCountry}
-            handleCityChange={handleCityChange}
-            countries={countries}
-            cities={cities}
-            priceGroup={priceGroup}
-            addPrice={addPrice}
-            setAddPrice={setAddPrice}
-            setPriceOptions={setPriceOptions}
-            addPriceGroup={addPriceGroup}
-            data={data}
-            discountGroup={discountGroup}
-            setDiscountOptions={setDiscountOptions}
-            addDiscount={addDiscount}
-            setAddDiscount={setAddDiscount}
-            addDiscountGroup={addDiscountGroup}
-            setIsSubmit={setIsSubmit}
-            errors={errors}
-          />
-        )}
       </div>
     </div>
   );

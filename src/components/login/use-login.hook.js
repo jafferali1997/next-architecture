@@ -85,8 +85,6 @@ export default function useLogin() {
         if (response.data.status) {
           console.log(response.data);
           const { data } = response.data.result;
-
-          //   CustomAlert(response.data.message, 'success');
           moveRouter(data);
         } else {
           //   CustomAlert(response.data.message, 'error');
