@@ -7,6 +7,7 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState();
   const [openPopup, setOpenPopup] = useState(false);
+  const [clicked, setClicked] = useState();
   const ref = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
@@ -56,6 +57,8 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
     idToUpdateCategory,
     setUpdateValue,
     updateValue,
-    ref
+    ref,
+    clicked,
+    setClicked
   };
 }
