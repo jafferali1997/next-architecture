@@ -1,16 +1,19 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
 import Button from './components/button/button.component';
 import Input from './components/input/input.component';
 import Checkbox from './components/checkbox/checkbox.component';
 import Switch from './components/switch/switch.component';
-import Radio from './components/radio/radio.component';
+// import Radio from './components/radio/radio.component';
 import ReactHookForm from './components/react-hook-form/react-hook-form.component';
 import AllToaster from './components/toaster/toaster.component';
 import FormModal from './components/form-modal/form-modal.component';
 
 export default function AllComponents() {
+  const { handleSubmit, control } = useForm();
   useEffect(() => {
     // axios
     //   .get('https://ipapi.co/json/')
@@ -33,6 +36,10 @@ export default function AllComponents() {
   }, []);
   // console.log(errors);
 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
       <Button />
@@ -40,7 +47,22 @@ export default function AllComponents() {
       <Input />
       <Checkbox />
       <Switch />
-      <Radio />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="radioField"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <RadioGroup {...field} aria-label="radioField">
+              <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
+              <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
+              <FormControlLabel value="option3" control={<Radio />} label="Option 3" />
+            </RadioGroup>
+          )}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {/* <Radio /> */}
       <FormModal />
       <ReactHookForm />
     </>
