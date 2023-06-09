@@ -18,10 +18,9 @@ let validationSchema = yup.object({
   // Define your validation rules here.
   companyName: yup
     .string()
-    .max(160, 'company name must be at most 160 characters long')
-    .min(1, 'compnay name must be minimum 1 characters')
-    .required('Company name is required'),
-  email: yup
+    .required('Company name is required')
+    .max(160, 'company name must be at most 160 characters long'),
+  companyEmail: yup
     .string()
     .email('The Email doesn’t seem to be correct. Please write correct email')
     .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address')
@@ -30,15 +29,22 @@ let validationSchema = yup.object({
   companyMobile: yup.string().required('Company Mobile is required'),
   companySize: yup.string().required('Company Size is required'),
   companyFax: yup.string().required('Company Fax is required'),
+  companyUrl: yup.string().required('Company Url is required'),
   tin: yup
     .number()
-    .max(9999999999, 'TIN must be at most 10 characters long')
-    .min(999999999, 'TIN must be minimum 10 characters')
-    .required('TIN is required'),
+    .required('TIN is required')
+    .max(11, 'TIN must be at most 10 characters long')
+    .min(10, 'TIN must be minimum 10 characters'),
   vat: yup
     .string()
-    .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
     .required('VAT is required')
+    .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format'),
+  companyAddress: yup.array().of(
+      yup.object().shape({
+        address: yup.string().required('Address is required'),
+        addressLabel: yup.string().required('Address Label is required'),
+      })
+    ).required('At least one company address is required')
 });
 
 export default function useCompanyDetails({ handleTabClick, handleTabCompleted }) {
@@ -108,113 +114,113 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    if (isAdditional) {
-      validationSchema = yup.object({
-        // Define your validation rules here.
-        // gender: yup.string().required('Gender is required'),
-        // companyName: yup
-        //   .string()
-        //   .max(160, 'company name must be at most 160 characters long')
-        //   .min(1, 'compnay name must be minimum 1 characters')
-        //   .required('Company name is required'),
-        // additionalEmail: yup
-        //   .string()
-        //   .email('The Email doesn’t seem to be correct. Please write correct email')
-        //   .matches(
-        //     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        //     'Invalid email address'
-        //   )
-        //   .required('Email is required'),
-        // phone: yup.string().required('Company phone is required'),
-        // mobile: yup.string().required('Company Mobile is required'),
-        // companySize: yup.string().required('Company Size is required'),
-        // faxNumber: yup.string().required('Company Fax is required'),
-        // taxNumber: yup
-        //   .number()
-        //   .max(9999999999, 'TIN must be at most 10 characters long')
-        //   .min(999999999, 'TIN must be minimum 10 characters')
-        //   .required('TIN is required'),
-        // vatNumber: yup
-        //   .string()
-        //   .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
-        //   .required('VAT is required'),
-        // firstName: yup
-        //   .string()
-        //   .max(50, 'first name must be at most 50 characters long')
-        //   .min(1, 'first name must be minimum 1 characters')
-        //   .required('First name is required'),
-        // lastName: yup
-        //   .string()
-        //   .max(50, 'last name must be at most 50 characters long')
-        //   .min(1, 'last name must be minimum 1 characters')
-        //   .required('Last name is required'),
-        // designation: yup
-        //   .string()
-        //   .max(100, 'designation must be at most 100 characters long')
-        //   .min(1, 'designation must be minimum 1 characters')
-        //   .matches(/^[^.]*$/, {
-        //     message: 'Invalid designation'
-        //   })
-        //   .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
-        //     message: 'Invalid designation'
-        //   })
-        //   .required('designation is required'),
-        // postal: yup
-        //   .string()
-        //   .max(9999999999, 'postal code must be at most 10 characters long')
-        //   .min(1, 'postal code must be minimum 1 characters')
-        //   .matches(/^[^.]*$/, {
-        //     message: 'No period'
-        //   })
-        //   .matches(/^[^.]*$/, {
-        //     message: 'Invalid postal'
-        //   })
-        //   .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
-        //     message: 'Invalid postal'
-        //   })
-        //   .required('postal code is required'),
-        // address: yup
-        //   .string()
-        //   .max(95, 'address must be at most 95 characters long')
-        //   .min(1, 'address must be minimum 1 characters')
-        //   .required('address is required'),
-        // country: yup.string().required('country is required')
-      });
-      setValidationSchemaState(validationSchema);
-    } else {
-      validationSchema = yup.object({
-        // Define your validation rules here.
-        // companyName: yup
-        //   .string()
-        //   .max(160, 'company name must be at most 160 characters long')
-        //   .min(1, 'compnay name must be minimum 1 characters')
-        //   .required('Company name is required'),
-        // email: yup
-        //   .string()
-        //   .email('The Email doesn’t seem to be correct. Please write correct email')
-        //   .matches(
-        //     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        //     'Invalid email address'
-        //   )
-        //   .required('Email is required'),
-        // phoneNo: yup.string().required('Company phone is required'),
-        // mobileNo: yup.string().required('Company Mobile is required'),
-        // companySize: yup.string().required('Company Size is required'),
-        // faxNumber: yup.string().required('Company Fax is required'),
-        // taxNumber: yup
-        //   .number()
-        //   .max(9999999999, 'TIN must be at most 10 characters long')
-        //   .min(999999999, 'TIN must be minimum 10 characters')
-        //   .required('TIN is required'),
-        // vatNumber: yup
-        //   .string()
-        //   .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
-        //   .required('VAT is required')
-      });
-      setValidationSchemaState(validationSchema);
-    }
-  }, [isAdditional]);
+  // useEffect(() => {
+  //   if (isAdditional) {
+  //     validationSchema = yup.object({
+  //       // Define your validation rules here.
+  //       // gender: yup.string().required('Gender is required'),
+  //       // companyName: yup
+  //       //   .string()
+  //       //   .max(160, 'company name must be at most 160 characters long')
+  //       //   .min(1, 'compnay name must be minimum 1 characters')
+  //       //   .required('Company name is required'),
+  //       // additionalEmail: yup
+  //       //   .string()
+  //       //   .email('The Email doesn’t seem to be correct. Please write correct email')
+  //       //   .matches(
+  //       //     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  //       //     'Invalid email address'
+  //       //   )
+  //       //   .required('Email is required'),
+  //       // phone: yup.string().required('Company phone is required'),
+  //       // mobile: yup.string().required('Company Mobile is required'),
+  //       // companySize: yup.string().required('Company Size is required'),
+  //       // faxNumber: yup.string().required('Company Fax is required'),
+  //       // taxNumber: yup
+  //       //   .number()
+  //       //   .max(9999999999, 'TIN must be at most 10 characters long')
+  //       //   .min(999999999, 'TIN must be minimum 10 characters')
+  //       //   .required('TIN is required'),
+  //       // vatNumber: yup
+  //       //   .string()
+  //       //   .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
+  //       //   .required('VAT is required'),
+  //       // firstName: yup
+  //       //   .string()
+  //       //   .max(50, 'first name must be at most 50 characters long')
+  //       //   .min(1, 'first name must be minimum 1 characters')
+  //       //   .required('First name is required'),
+  //       // lastName: yup
+  //       //   .string()
+  //       //   .max(50, 'last name must be at most 50 characters long')
+  //       //   .min(1, 'last name must be minimum 1 characters')
+  //       //   .required('Last name is required'),
+  //       // designation: yup
+  //       //   .string()
+  //       //   .max(100, 'designation must be at most 100 characters long')
+  //       //   .min(1, 'designation must be minimum 1 characters')
+  //       //   .matches(/^[^.]*$/, {
+  //       //     message: 'Invalid designation'
+  //       //   })
+  //       //   .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
+  //       //     message: 'Invalid designation'
+  //       //   })
+  //       //   .required('designation is required'),
+  //       // postal: yup
+  //       //   .string()
+  //       //   .max(9999999999, 'postal code must be at most 10 characters long')
+  //       //   .min(1, 'postal code must be minimum 1 characters')
+  //       //   .matches(/^[^.]*$/, {
+  //       //     message: 'No period'
+  //       //   })
+  //       //   .matches(/^[^.]*$/, {
+  //       //     message: 'Invalid postal'
+  //       //   })
+  //       //   .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
+  //       //     message: 'Invalid postal'
+  //       //   })
+  //       //   .required('postal code is required'),
+  //       // address: yup
+  //       //   .string()
+  //       //   .max(95, 'address must be at most 95 characters long')
+  //       //   .min(1, 'address must be minimum 1 characters')
+  //       //   .required('address is required'),
+  //       // country: yup.string().required('country is required')
+  //     });
+  //     setValidationSchemaState(validationSchema);
+  //   } else {
+  //     validationSchema = yup.object({
+  //       // Define your validation rules here.
+  //       // companyName: yup
+  //       //   .string()
+  //       //   .max(160, 'company name must be at most 160 characters long')
+  //       //   .min(1, 'compnay name must be minimum 1 characters')
+  //       //   .required('Company name is required'),
+  //       // email: yup
+  //       //   .string()
+  //       //   .email('The Email doesn’t seem to be correct. Please write correct email')
+  //       //   .matches(
+  //       //     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  //       //     'Invalid email address'
+  //       //   )
+  //       //   .required('Email is required'),
+  //       // phoneNo: yup.string().required('Company phone is required'),
+  //       // mobileNo: yup.string().required('Company Mobile is required'),
+  //       // companySize: yup.string().required('Company Size is required'),
+  //       // faxNumber: yup.string().required('Company Fax is required'),
+  //       // taxNumber: yup
+  //       //   .number()
+  //       //   .max(9999999999, 'TIN must be at most 10 characters long')
+  //       //   .min(999999999, 'TIN must be minimum 10 characters')
+  //       //   .required('TIN is required'),
+  //       // vatNumber: yup
+  //       //   .string()
+  //       //   .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
+  //       //   .required('VAT is required')
+  //     });
+  //     setValidationSchemaState(validationSchema);
+  //   }
+  // }, [isAdditional]);
 
   const additionalHandles = () => {
     setIsAdditional(!isAdditional);

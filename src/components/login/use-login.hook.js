@@ -71,7 +71,7 @@ export default function useLogin() {
     }
     if (data.isEmailVerified) {
       router.push(
-        `/profile?username=${data.userName}&email=${data.email}&userId=${data.id}`
+        `/profile?userName=${data.userName}&email=${data.email}&userId=${data.id}`
       );
     } else {
       router.push(`/verify-email?type=email-verification&email=${data.email}`);

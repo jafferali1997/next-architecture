@@ -36,9 +36,9 @@ const validationSchema = yup.object({
     .required('Designation is required'),
   postalCode: yup
     .string()
+    .required('Postal Code is required')
     .matches(/[0-9]/, 'Postal must be in digits')
-    .max(10, 'postal code must be maximum 10 characters')
-    .required('Postal Code is required'),
+    .max(10, 'postal code must be maximum 10 characters'),
   address: yup
     .string()
     .max(95, 'address must be at most 95 characters long')
@@ -111,7 +111,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   const fetchPriceGroup = async () => {
     const groups = await dispatch(getAllPriceGroup());
     setPriceGroup(
-      groups.map((item) => {
+      groups?.map((item) => {
         return { id: item.id, value: item.id, label: item.priceGroupName };
       })
     );
