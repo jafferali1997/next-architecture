@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+import { Checkbox } from '@mui/material';
 import LoginWithLinkedIn from '@/common/components/login-with-linkedIn/login-with-linkedIn.component';
 import {
   signInWithFacebook,
@@ -11,7 +12,6 @@ import {
 import useLogin from './use-login.hook';
 import { getAccessToken } from '@/common/utils/access-token.util';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
-import { Checkbox } from '@mui/material';
 
 export async function getServerSideProps(context) {
   const accessToken = getAccessToken();

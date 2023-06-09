@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 import { Snackbar } from '@mui/material';
 import Alert from '@mui/material/Alert';

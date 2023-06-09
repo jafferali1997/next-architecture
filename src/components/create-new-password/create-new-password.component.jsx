@@ -18,7 +18,7 @@ export default function CreateNewPassword() {
     loader
   } = useCreateNewPassword();
 
-  console.log(errors)
+  console.log(errors);
   return (
     <div className="create-new-pass-wrapper">
       <div className="create-new-pass-container ">
@@ -60,10 +60,9 @@ export default function CreateNewPassword() {
                           {errors.password.message}
                         </>
                       ) : ( */}
-                        <p className="passText color_bbb">
-                          Use 8 or more characters with a mix of letters, numbers &
-                          symbols
-                        </p>
+                      <p className="passText color_bbb">
+                        Use 8 or more characters with a mix of letters, numbers & symbols
+                      </p>
                       {/* )} */}
                     </div>
                   </div>

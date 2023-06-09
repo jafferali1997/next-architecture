@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -166,7 +167,6 @@ export default function FormForCompanyDetails({
       </div>
       <div>
         {inputValues.map((value, index) => (
-          // eslint-disable-next-line react/no-array-index-key
           <div
             className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
             key={index}

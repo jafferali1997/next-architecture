@@ -1,7 +1,8 @@
 'use client';
 
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
+import { TagsInput } from 'react-tag-input-component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
@@ -9,7 +10,6 @@ import MultiSelect from '@/common/components/multi-select/multi-select.component
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
 import UseCreateProduct from './use-create-product.hook';
-import { TagsInput } from 'react-tag-input-component';
 
 export default function CreateProduct() {
   const {
