@@ -1,6 +1,6 @@
-/* eslint-disable react/no-array-index-key */
 'use client';
 
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { TagsInput } from 'react-tag-input-component';

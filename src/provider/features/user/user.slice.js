@@ -106,7 +106,7 @@ export const regenerateEmailLink = createAsyncThunk(
 export const changePasswordFromLink = createAsyncThunk(
   'user/changePasswordFromLink',
   async ({ payload, successCallBack, callBackMessage }, thunkAPI) => {
-    console.log(successCallBack)
+    console.log(successCallBack);
     try {
       const response = await userService.changePasswordFromLink(payload);
       if (response.Succeeded) {

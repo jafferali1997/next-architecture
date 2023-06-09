@@ -106,6 +106,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
         fetchMyAPI();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {

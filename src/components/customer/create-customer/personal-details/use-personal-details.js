@@ -105,6 +105,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
         );
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [priceGroup, discountGroup]
   );
 
@@ -150,6 +151,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   useEffect(() => {
     fetchPriceGroup();
     fetchDiscountGroup();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

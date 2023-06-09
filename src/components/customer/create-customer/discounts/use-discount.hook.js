@@ -5,7 +5,10 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { createCustomerDiscount } from '@/provider/features/customer/customer.slice';
+import {
+  createCustomerDiscount,
+  getSingleCustomer
+} from '@/provider/features/customer/customer.slice';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -48,6 +51,7 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
         fetchMyAPI();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const onSubmit = async (value) => {

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import { useEffect, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
@@ -66,7 +67,7 @@ export default function useCustomer() {
   };
 
   const getColumns = (dataObject) => {
-    let columns = [];
+    const columns = [];
     Object.keys(dataObject).forEach((key) => {
       let columnObject = {
         field: key,

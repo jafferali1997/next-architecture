@@ -48,12 +48,13 @@ const validationSchema = Yup.object().shape({
   address: Yup.string()
     .required('Address is required')
     .max(255, 'Address can contain maximum 255 characters')
-    .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters'),
+    .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters')
 });
 
 export default function useProfile() {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
@@ -87,11 +88,16 @@ export default function useProfile() {
   };
 
   const onSubmit = (data) => {
-    dispatch(profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter }))
+    dispatch(
+      profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter })
+    );
   };
 
   const sendOtp = () => {
-    if (sendOtpButtonText.current === 'Send OTP' || sendOtpButtonText.current === 'Resend OTP') {
+    if (
+      sendOtpButtonText.current === 'Send OTP' ||
+      sendOtpButtonText.current === 'Resend OTP'
+    ) {
       if (phone) {
         sendOtpButtonText.current = 'Resend OTP';
         dispatch(addPhoneAndGenerateOtp({ payload: { phone } }));
@@ -103,19 +109,16 @@ export default function useProfile() {
   const handleOtpVerif = (data) => {
     setIsOtpVerified(true);
     localStorage.setItem('isOtpVerified', true);
-  }
+  };
 
   const verifyOtpHandler = () => {
-    console.log(otp)
+    console.log(otp);
     if (otp > 0) {
       const otpData = {
         otp: Number(otp)
-      }
-      dispatch(
-        verifyOtp({ payload: otpData, successCallBack: handleOtpVerif })
-      );
+      };
+      dispatch(verifyOtp({ payload: otpData, successCallBack: handleOtpVerif }));
     }
-
   };
 
   return {

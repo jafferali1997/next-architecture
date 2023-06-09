@@ -40,7 +40,7 @@ export default function SimpleSelect({
           // placeholder={placeholder}
           // {...(placeholder && {defaultValue: "null"})}
         >
-        {/* {placeholder && 
+          {/* {placeholder && 
         <MenuItem {...(register && { register })} disabled selected name={name} value="null">{placeholder}</MenuItem>
         } */}
           {options?.map((option) => (
