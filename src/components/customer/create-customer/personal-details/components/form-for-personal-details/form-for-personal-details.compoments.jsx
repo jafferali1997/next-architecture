@@ -1,10 +1,6 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import CustomInput from '@/common/components/custom-input/custom-input.component';
-import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
-import MultiSelect from '@/common/components/multi-select/multi-select.component';
-import Select from '@/common/components/select/select.component';
 import {
   Button,
   Dialog,
@@ -13,6 +9,10 @@ import {
   DialogTitle,
   Typography
 } from '@mui/material';
+import CustomInput from '@/common/components/custom-input/custom-input.component';
+import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import MultiSelect from '@/common/components/multi-select/multi-select.component';
+import Select from '@/common/components/select/select.component';
 import usePersonalDetails from '../../use-personal-details';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 
@@ -65,7 +65,6 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Designation"
           name="designation"
-          defaultValue={data.designation}
           register={register}
           placeholder="Designation"
           type="text"
@@ -75,7 +74,6 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="First Name"
           name="firstName"
-          defaultValue={data.firstName}
           register={register}
           placeholder="First Name"
           type="text"
@@ -85,7 +83,6 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Last Name"
           name="lastName"
-          defaultValue={data.lastName}
           register={register}
           placeholder="Last Name"
           type="text"
@@ -95,7 +92,6 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Address"
           name="address"
-          defaultValue={data.address}
           register={register}
           placeholder="Address"
           type="text"
@@ -125,7 +121,6 @@ export default function FormForPersonalDetails({
           placeholder="City"
           type="select"
           value={selectedCity}
-          isRequired={true}
           onChange={handleCityChange}
           // options={cities.map((item) => {
           //   return { label: item.name, value: item.isoCode, id: item.isoCode };
@@ -136,14 +131,9 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Postal Code"
           name="postalCode"
-<<<<<<< HEAD
-          defaultValue={data.postal}
-=======
-          defaultValue={data.postalCode}
->>>>>>> a34289b3906cc8e910f1d48803e1a4067730043e
           register={register}
           placeholder="Postal Code"
-          type="number"
+          type="text"
           isRequired={true}
           errors={errors}
         />
@@ -206,6 +196,7 @@ FormForPersonalDetails.propTypes = {
   selectedCity: PropTypes.func.isRequired,
   selectedCountry: PropTypes.func.isRequired,
   handleCityChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   priceGroup: PropTypes.arrayOf(
