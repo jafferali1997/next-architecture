@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const menus = [
   { id: 'home', menu: 'Home', link: '/home' },
@@ -9,12 +12,16 @@ const menus = [
 ];
 
 export default function Header() {
+  
+  const [openSidebar, setOpenSidebar] = useState(false);
+
   return (
     <div className="tw-sticky tw-top-0 tw-z-[99] tw-bg-white tw-px-2 tw-px-4 tw-py-5 tw-shadow-custom">
       <div className="tw-m-auto tw-flex tw-w-full tw-max-w-7xl tw-items-center tw-justify-between">
         <div className="tw-flex tw-items-center sm:tw-gap-3 lg:tw-gap-[80px]">
           <div className="tw-flex tw-items-center tw-gap-3">
             <img
+            onClick={() => setOpenSidebar(!openSidebar)}
               className="xs:tw-block lg:tw-hidden"
               width="22px"
               height="16px"
@@ -29,7 +36,7 @@ export default function Header() {
               />
             </a>
           </div>
-          <ul className="menuclose !tw-mt-0 tw-items-center tw-transition-all tw-duration-75 tw-ease-in xs:tw-absolute xs:tw-left-0 xs:tw-top-full xs:tw-mt-2 xs:tw-flex xs:tw-h-header-calc-viewport xs:tw-w-full xs:tw-flex-col xs:tw-gap-y-7 xs:tw-bg-white lg:tw-relative lg:tw-flex lg:tw-h-fit lg:tw-w-fit lg:tw-flex-row lg:tw-items-center lg:tw-gap-8 ">
+          <ul className={`${openSidebar ?'menuopen' :'menuclose'} !tw-mt-0 tw-items-center tw-transition-all tw-duration-300 tw-ease-in xs:tw-absolute xs:tw-left-0 xs:tw-top-full xs:tw-mt-2 xs:tw-flex xs:tw-h-header-calc-viewport xs:tw-w-full xs:tw-flex-col xs:tw-gap-y-7 xs:tw-bg-white lg:tw-relative lg:tw-flex lg:tw-h-fit lg:tw-w-fit lg:tw-flex-row lg:tw-items-center lg:tw-gap-8 `}>
             {menus.map((menu) => {
               return (
                 <li key={menu.id} className="tw-inline-block tw-w-fit">
