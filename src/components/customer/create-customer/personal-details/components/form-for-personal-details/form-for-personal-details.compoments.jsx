@@ -53,11 +53,8 @@ export default function FormForPersonalDetails({
         <Select
           register={register}
           label="Gender"
-          name="gender"
           isRequired={true}
           name="gender"
-          register={register}
-          errors={errors}
           options={[
             { id: 'MALE', value: 'MALE', label: 'MALE' },
             { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
