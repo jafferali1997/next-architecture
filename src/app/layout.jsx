@@ -1,3 +1,5 @@
+'use client';
+
 import '@/common/styles/dashboard/dashboard.style.css';
 import '@/common/styles/globals.style.css';
 import '@/common/styles/home.style.scss';

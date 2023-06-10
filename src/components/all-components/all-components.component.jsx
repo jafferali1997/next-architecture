@@ -1,3 +1,5 @@
+'use client';
+
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import Button from './components/button/button.component';

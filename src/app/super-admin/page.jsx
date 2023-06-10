@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
