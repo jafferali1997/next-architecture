@@ -1,6 +1,3 @@
-'use client';
-
-import React, { useState } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 import UseCustomTableHook from './use-custom-table.hook';

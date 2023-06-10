@@ -1,5 +1,3 @@
-'use client';
-
 /* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types';
 import useOtpInput from './use-otp-input.hook';
