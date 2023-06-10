@@ -99,6 +99,7 @@ export default function CategoryColumn({
               <MenuDropDown
                 handleButtonClickedit={handleButtonClickedit}
                 id={item.id}
+                value={item.categoryName}
                 handleDeleteCategory={handleDeleteCategory}
               />
             </div>
@@ -113,6 +114,7 @@ export default function CategoryColumn({
               placeholder="Category"
               label="Category Name"
               type="text"
+              value={updateValue}
               onChange={(e) => setUpdateValue(e.target.value)}
             />
           </DialogContent>

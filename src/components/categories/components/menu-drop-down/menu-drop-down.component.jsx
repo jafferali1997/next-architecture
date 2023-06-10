@@ -9,6 +9,7 @@ import useMenuDropdown from './use-menu-drop-down.hook';
 export default function MenuDropDown({
   handleButtonClickedit,
   id,
+  value,
   handleDeleteCategory
 }) {
   const { handleThreeMenu, threeDot, ref } = useMenuDropdown();
@@ -30,7 +31,7 @@ export default function MenuDropDown({
             <div
               id="three-dot-div-4"
               className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0"
-              onClick={() => handleButtonClickedit(id)}
+              onClick={() => handleButtonClickedit(id, value)}
             >
               <PencilIcon id="three-dot-pencil" />
               <p
@@ -67,5 +68,6 @@ export default function MenuDropDown({
 MenuDropDown.propTypes = {
   handleButtonClickedit: PropTypes.func.isRequired,
   handleDeleteCategory: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired
 };

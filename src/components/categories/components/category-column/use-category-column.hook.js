@@ -44,7 +44,8 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
     setSearch(e.target.value);
   };
 
-  const handleButtonClickedit = (id) => {
+  const handleButtonClickedit = (id, value) => {
+    setUpdateValue(value);
     setIdToUpdateCategory(id);
     setOpenPopup(!openPopup);
   };
