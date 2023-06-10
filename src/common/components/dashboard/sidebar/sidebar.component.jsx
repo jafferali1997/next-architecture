@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';

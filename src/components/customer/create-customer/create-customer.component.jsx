@@ -1,6 +1,3 @@
-import React from 'react';
-// import OfferHeader from '@/common/components/offer-header/offer-header';
-// import Sidebar from '@/common/components/sidebar/sidebar';
 import PersonalDetails from './personal-details/personal-details.component';
 import FormStepper from '@/common/components/form-stepper/form-stepper.component';
 import CompanyDetails from './company-details/company-detail.component';

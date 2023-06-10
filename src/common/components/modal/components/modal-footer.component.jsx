@@ -1,5 +1,4 @@
 import { DialogActions } from '@mui/material/node';
-import React from 'react';
 import PropTypes from 'prop-types';
 import CustomButton from '../../custom-button/custom-button.component';
 

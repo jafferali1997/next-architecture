@@ -1,6 +1,4 @@
 /* eslint-disable react/button-has-type */
-
-import React, { useState } from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import PlusIcon from '@/common/icons/plus.icon';
 import CustomTable from '@/common/components/custom-table/custom-table.component';

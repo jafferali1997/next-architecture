@@ -1,5 +1,4 @@
 import { Alert, Snackbar } from '@mui/material';
-import React from 'react';
 import PropTypes from 'prop-types';
 import useToaster from './use-toaster.hook';
 import ErrorIcon from '@/common/icons/error.icon';

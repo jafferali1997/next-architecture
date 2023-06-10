@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/function-component-definition */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/jsx-props-no-spreading */

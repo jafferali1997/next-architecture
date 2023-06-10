@@ -1,6 +1,3 @@
-'use client';
-
-import React, { useEffect } from 'react';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import Button from './components/button/button.component';
@@ -14,26 +11,26 @@ import FormModal from './components/form-modal/form-modal.component';
 
 export default function AllComponents() {
   const { handleSubmit, control } = useForm();
-  useEffect(() => {
-    // axios
-    //   .get('https://ipapi.co/json/')
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // axios
-    //   .get('http://ip-api.com/json')
-    //   .then(function (response) {
-    //     response.json().then((jsonData) => {
-    //       console.log(jsonData);
-    //     });
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-  }, []);
+  // useEffect(() => {
+  // axios
+  //   .get('https://ipapi.co/json/')
+  //   .then((response) => {
+  //     console.log(response);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // axios
+  //   .get('http://ip-api.com/json')
+  //   .then(function (response) {
+  //     response.json().then((jsonData) => {
+  //       console.log(jsonData);
+  //     });
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // }, []);
   // console.log(errors);
 
   const onSubmit = (data) => {

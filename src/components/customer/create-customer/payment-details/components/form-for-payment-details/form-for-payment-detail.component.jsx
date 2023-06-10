@@ -1,6 +1,3 @@
-'use client';
-
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -8,8 +5,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
-import FormInput from '@/common/components/form-input-old/form-input.component';
-import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 
 export default function FormForPaymentDetails({
   handleSubmit,

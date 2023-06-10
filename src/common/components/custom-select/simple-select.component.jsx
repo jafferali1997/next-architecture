@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { MenuItem, Select, NativeSelect } from '@mui/material';
 import FieldError from '@/common/components/field-error/field-error.component';

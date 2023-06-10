@@ -1,4 +1,3 @@
-import React from 'react';
 import FormStepper from '@/common/components/form-stepper/form-stepper.component';
 import SupportIcon from '@/common/icons/support.icon';
 import AddCustomer from './add-customer/add-customer.compnent';

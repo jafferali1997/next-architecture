@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 

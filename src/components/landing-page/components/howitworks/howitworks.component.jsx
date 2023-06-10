@@ -1,5 +1,3 @@
-import React from 'react';
-
 const howitworks = [
   {
     id: 1,

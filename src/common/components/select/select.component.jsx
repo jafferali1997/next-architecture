@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Autocomplete, TextField } from '@mui/material';
-import React from 'react';
 import PropTypes from 'prop-types';
 import FieldError from '@/common/components/field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';

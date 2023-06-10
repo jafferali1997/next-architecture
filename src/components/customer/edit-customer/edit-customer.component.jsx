@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
 import UseEditCustomer from './use-edit-customer.hook';

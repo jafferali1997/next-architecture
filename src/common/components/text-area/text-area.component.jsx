@@ -1,8 +1,4 @@
-'use client';
-
-/* eslint-disable react/jsx-props-no-spreading */
 import { TextareaAutosize } from '@mui/material';
-import React from 'react';
 import PropTypes from 'prop-types';
 import FieldError from '../field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';

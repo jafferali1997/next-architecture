@@ -31,10 +31,10 @@ export default function FormForPersonalDetails({
   selectedDiscountGroup,
   setSelectedDiscountGroup
 }) {
-  // const countries = [
-  //   { id: 1, name: 'Pakistan', label: 'Pakistan' },
-  //   { id: 2, name: 'India', label: 'India' }
-  // ];
+  const countries = [
+    { id: 1, name: 'Pakistan', label: 'Pakistan' },
+    { id: 2, name: 'India', label: 'India' }
+  ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">

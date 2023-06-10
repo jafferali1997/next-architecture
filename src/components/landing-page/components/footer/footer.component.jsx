@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Footer() {
   return (
     <div className="tw-mt-[100px] tw-bg-secondary-gray tw-px-4">

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function AvailServices() {
   return (
     <div className="tw-mx-4 tw-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-[20px] tw-bg-primary tw-px-5 tw-py-11 tw-text-center">

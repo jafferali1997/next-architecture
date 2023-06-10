@@ -1,7 +1,4 @@
-'use client';
-
 import { Grid } from '@mui/material';
-import React from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 
 export default function Hero() {
