@@ -15,7 +15,7 @@ export default function StepperFooter({
           <CustomButton
             className="btn-cancel"
             text="Back"
-            onClick={() => handleTabClick(back)}
+            onClick={() => {if (handleTabClick) handleTabClick(back)}}
           />
         )}
       </div>
@@ -36,7 +36,7 @@ export default function StepperFooter({
 }
 
 StepperFooter.propTypes = {
-  handleTabClick: PropTypes.func.isRequired,
+  handleTabClick: PropTypes.func,
   back: PropTypes.string,
   setIsSubmit: PropTypes.func,
   submitText: PropTypes.string

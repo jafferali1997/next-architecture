@@ -22,7 +22,7 @@ export default function FormStepper({
           </p>
         </div> */}
         <div className="form-stepper-form-body">
-          {tabs ? <Tab tabs={tabs} /> : children}
+          {tabs ? <Tab key="1" tabs={tabs} /> : children}
         </div>
       </div>
     </div>
@@ -32,6 +32,7 @@ export default function FormStepper({
 FormStepper.propTypes = {
   title: PropTypes.string,
   module: PropTypes.string,
-  tabs: PropTypes.arrayOf,
+  // eslint-disable-next-line react/forbid-prop-types
+  tabs: PropTypes.arrayOf(PropTypes.object),
   children: PropTypes.node
 };

@@ -31,7 +31,7 @@ export default function Private({ component }) {
         isLoginVerified: true,
         currentBusinessId: 1,
         token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtcG15bXZianR0dmRmcmNzcW5AdHB3bGIuY29tIiwiaWF0IjoxNjg2MTE4MzM3fQ.pfliXtSTA03YRzbbQRO6iLjFiRNqqeNfVT2YoxrDg9I'
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtcG15bXZianR0dmRmcmNzcW5AdHB3bGIuY29tIiwiaWF0IjoxNjg2Mzg1Nzg3fQ.SH2g-427_dam6tvxuLPPLSzqHyMW9W_lpMYiP2CNq6Q'
       })
     );
   }, []);

@@ -59,5 +59,6 @@ function Tab({ tabs }) {
 export default Tab;
 
 Tab.propTypes = {
-  tabs: PropTypes.arrayOf
+  // eslint-disable-next-line react/forbid-prop-types
+  tabs: PropTypes.arrayOf(PropTypes.object)
 };
