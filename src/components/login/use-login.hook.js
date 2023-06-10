@@ -58,7 +58,6 @@ export default function useLogin() {
   const borderSuc = {
     border: '1px solid #10FF61'
   };
-
   const moveRouterGenOtp = (data) => {
     router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
@@ -120,6 +119,10 @@ export default function useLogin() {
         localStorage.setItem('rememberedUsername', values.email);
         localStorage.setItem('rememberedPassword', encryptedPassword);
       }
+    }
+    if (isChecked === false) {
+      localStorage.removeItem('rememberedUsername');
+      localStorage.removeItem('rememberedPassword');
     }
   };
 
