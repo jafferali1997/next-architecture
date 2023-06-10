@@ -83,18 +83,16 @@ export default function CategoryColumn({
             <div
               key={item.id}
               onClick={(e) => {
-                if (
-                  e.target.id !== 'three-dot' &&
-                  e.target.id !== 'three-dot-1' &&
-                  e.target.localName !== 'svg' &&
-                  e.target.localName !== 'path'
-                ) {
+                if (!e.target.id.includes('three-dot')) {
                   handleClickCategory(item.id, item.categoryLevel + 1);
-                  setClicked(item.id);
+                  setClicked({ id: item.id, parentCategoryId: item.parentCategoryId });
                 }
               }}
               className={`${
-                clicked === item.id ? 'tw-bg-slate-200' : ''
+                clicked.id === item.id &&
+                clicked.parentCategoryId === item.parentCategoryId
+                  ? 'tw-bg-slate-200'
+                  : ''
               } cate-btn tw-flex tw-h-[34px] tw-w-full tw-items-center tw-justify-between tw-rounded-md tw-border tw-border-solid tw-border-disabled-input tw-bg-secondary-white tw-px-[12px] tw-py-[8px]`}
             >
               <h5 className="h5">{item.categoryName}</h5>

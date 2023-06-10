@@ -48,7 +48,7 @@ export const getSingleProductCategory = createAsyncThunk(
 
 export const getAllProductCategory = createAsyncThunk(
   'productCategory/getAll',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload, successCallBack = null, callBackMessage }, thunkAPI) => {
     try {
       const response = await productCategoryService.getAllProductCategory(payload);
       if (response.Succeeded) {
