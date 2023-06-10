@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useCallback, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   createPriceGroup,
   getAllPriceGroup
@@ -12,6 +12,7 @@ import {
 
 export default function usePriceGroup(setPriceGroup, validationSchema = {}) {
   const dispatch = useDispatch();
+  const priceGroup = useSelector((state) => state.priceGroup);
   const {
     register,
     handleSubmit,
@@ -30,6 +31,16 @@ export default function usePriceGroup(setPriceGroup, validationSchema = {}) {
     fetchPriceGroup();
   }, []);
 
+  useEffect(() => {
+    if (priceGroup.getAll.isSuccess) {
+      setPriceGroup(
+        priceGroup.getAll.data.map((item) => {
+          return { id: `${item.id}`, value: item.id, label: item.priceGroupName };
+        })
+      );
+    }
+  }, [priceGroup]);
+
   const modalCloseHandler = () => {
     setOpen(false);
     reset();
@@ -41,20 +52,11 @@ export default function usePriceGroup(setPriceGroup, validationSchema = {}) {
   };
 
   const fetchPriceGroup = async () => {
-    const groups = await dispatch(getAllPriceGroup());
-    console.log(groups);
-    setPriceGroup(
-      groups.payload.map((item) => {
-        return { id: `${item.id}`, value: item.id, label: item.priceGroupName };
-      })
-    );
+    dispatch(getAllPriceGroup());
   };
 
   const addPriceGroup = async (data) => {
-    const res = await dispatch(createPriceGroup({ payload: data }));
-    if (res?.payload) {
-      fetchPriceGroup();
-    }
+    dispatch(createPriceGroup({ payload: data, successCallBack: fetchPriceGroup }));
   };
 
   return {

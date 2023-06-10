@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import {
@@ -80,11 +78,10 @@ export default function useProfile() {
   useEffect(() => {
     setValue('email', searchParams.get('email'));
     setValue('userName', searchParams.get('userName'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const moveRouter = (data) => {
-    router.push(`/customer`);
+    router.push('/customer');
   };
 
   const onSubmit = (data) => {

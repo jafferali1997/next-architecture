@@ -67,13 +67,14 @@ export default function useLogin() {
       dispatch(
         generateOtp({ payload: { ...data }, successCallBack: moveRouterGenOtp(data) })
       );
-    }
-    if (data.isEmailVerified) {
-      router.push(
-        `/profile?userName=${data.userName}&email=${data.email}&userId=${data.id}`
-      );
     } else {
-      router.push(`/verify-email?type=email-verification&email=${data.email}`);
+      if (data.isEmailVerified) {
+        router.push(
+          `/profile?userName=${data.userName}&email=${data.email}&userId=${data.id}`
+        );
+      } else {
+        router.push(`/verify-email?type=email-verification&email=${data.email}`);
+      }
     }
   };
 

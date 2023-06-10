@@ -43,7 +43,7 @@ export default function useTwoFactorAuth() {
       `${otpNumber1.current.value}${otpNumber2.current.value}${otpNumber3.current.value}${otpNumber4.current.value}`
     );
     if (otp > 0) {
-      dispatch(verifyOtp({ payload: { otp }, callBackMessage: moveRouter }));
+      dispatch(verifyOtp({ payload: { otp }, successCallBack: moveRouter }));
     }
   };
 
