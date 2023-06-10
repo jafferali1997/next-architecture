@@ -1,3 +1,5 @@
+'use client';
+
 import { Suspense } from 'react';
 import Auth from '@/auth/auth.component';
 import AUTH from '@/common/constants/auth.constant';

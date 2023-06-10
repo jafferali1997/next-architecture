@@ -1,3 +1,5 @@
+'use client';
+
 import { Suspense } from 'react';
 import CreateCustomer from '@/components/customer/create-customer/create-customer.component';
 import Auth from '@/auth/auth.component';

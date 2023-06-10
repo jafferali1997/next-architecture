@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -74,7 +76,7 @@ export default function Page() {
                 </div>
               </div>
               <div className="tw-flex tw-items-center tw-justify-between">
-                <div className="tw-w-[250px] tw-border tw-border-black tw-bg-white tw-p-1"></div>
+                <div className="tw-w-[250px] tw-border tw-border-black tw-bg-white tw-p-1" />
                 <div className="tw-flex tw-items-center tw-gap-[24px]">
                   <CustomButton text="cancel" className="btn-cancel " />
                   <CustomButton text="Update" className="btn-primary" />

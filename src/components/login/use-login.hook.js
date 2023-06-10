@@ -79,7 +79,7 @@ export default function useLogin() {
   };
 
   const handleLogin = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window === 'object') {
       // Check if the browser supports localStorage
       if (
         localStorage &&
@@ -88,7 +88,6 @@ export default function useLogin() {
       ) {
         const storedUsername = localStorage.getItem('rememberedUsername');
         const storedEncryptedPassword = localStorage.getItem('rememberedPassword');
-
         // Compare the entered password with the stored encrypted password
         const bytes = AES.decrypt(
           storedEncryptedPassword,
@@ -109,7 +108,7 @@ export default function useLogin() {
     setLoader(true);
     dispatch(login({ payload: { ...values }, successCallBack: moveRouter }));
 
-    if (typeof window !== 'undefined' && isChecked) {
+    if (typeof window === 'object' && isChecked) {
       // Check if the browser supports localStorage
       if (localStorage) {
         // Encrypt the password

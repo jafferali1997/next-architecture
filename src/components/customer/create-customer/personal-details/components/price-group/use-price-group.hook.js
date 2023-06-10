@@ -52,12 +52,7 @@ export default function usePriceGroup(setPriceGroup, validationSchema = {}) {
   };
 
   const fetchPriceGroup = async () => {
-    const groups = await dispatch(getAllPriceGroup());
-    setPriceGroup(
-      groups.payload.map((item) => {
-        return { id: `${item.id}`, value: `${item.id}`, label: item.priceGroupName };
-      })
-    );
+    dispatch(getAllPriceGroup());
   };
 
   const addPriceGroup = async (data) => {
