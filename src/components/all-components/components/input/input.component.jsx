@@ -27,7 +27,7 @@ export default function Input() {
         <hr />
         <div className="tw-m-5 tw-flex tw-flex-row tw-gap-2">
           <div className="tw-w-1/2">
-            <CustomSelect
+            {/* <CustomSelect
               label="Simple Select"
               placeholder="Select Gender"
               options={[
@@ -35,7 +35,7 @@ export default function Input() {
                 { label: 'Female', value: 'female' },
                 { label: 'Other', value: 'other' }
               ]}
-            />
+            /> */}
           </div>
           <div className="tw-w-1/2">
             <Select

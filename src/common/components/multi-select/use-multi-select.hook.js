@@ -35,6 +35,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
     setSelectedOptions(options);
     handleChange(options);
   };
+
   const toggleDropDown = () => {
     setOpen(!open);
   };

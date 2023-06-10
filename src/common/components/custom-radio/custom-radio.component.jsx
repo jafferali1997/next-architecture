@@ -5,16 +5,16 @@ import FieldLabel from '../field-label/field-label.component';
 
 export default function CustomRadio({
   label = null,
-  defaultChecked = false,
-  checked = null,
-  onChange = null,
-  value = null,
+  defaultChecked = null,
+  checked,
+  onChange,
+  value,
+  name,
   className = '',
   size = null,
   disabled = false,
   errors = null,
   register = null,
-  name = null,
   isRequired = false,
   inlineLabel = true,
   labelClassName = '',
@@ -33,10 +33,13 @@ export default function CustomRadio({
           className={`${className}`}
           disabled={disabled}
           readOnly={readOnly}
-          {...(checked && { checked })}
-          {...(value && { value })}
-          {...(onChange && { onChange })}
-          defaultChecked={defaultChecked}
+          checked={checked}
+          value={value}
+          onChange={onChange}
+          // {...(checked && { checked })}
+          // {...(value && { value })}
+          // {...(onChange && { onChange })}
+          // {...(defaultChecked && {defaultChecked})}
         />
         {label && (
           <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />

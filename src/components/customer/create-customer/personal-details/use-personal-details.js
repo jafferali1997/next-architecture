@@ -10,14 +10,6 @@ import {
   createCustomerPersonalDetail,
   getSingleCustomer
 } from '@/provider/features/customer/customer.slice';
-import {
-  createDiscountGroup,
-  getAllDiscountGroup
-} from '@/provider/features/discount-group/discount-group.slice';
-import {
-  createPriceGroup,
-  getAllPriceGroup
-} from '@/provider/features/price-group/price-group.slice';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -57,17 +49,19 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     resolver: yupResolver(validationSchema),
     mode: 'onBlur'
   });
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [data, setData] = useState();
-  const [discountGroup, setDiscountGroup] = useState();
-  const [priceGroup, setPriceGroup] = useState();
-  const [addDiscount, setAddDiscount] = useState();
-  const [addPrice, setAddPrice] = useState();
-  const [priceOptions, setPriceOptions] = useState([]);
-  const [discountOptions, setDiscountOptions] = useState([]);
+
+  const [allPriceGroup, setAllPriceGroup] = useState([]);
+  const [selectedPriceGroup, setSelectedPriceGroup] = useState([]);
+
+  const [selectedDiscountGroup, setSelectedDiscountGroup] = useState([]);
+  const [allDiscountGroup, setAllDiscountGroup] = useState([]);
+
   const [isSubmit, setIsSubmit] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
   // const countries = Country.getAllCountries();
@@ -87,79 +81,28 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
       if (data.payload) {
         data = data.payload;
         Object.keys(data).forEach((key) => setValue(key, data[key]));
-        // const event = {
-        //   target: {
-        //     value: data?.country
-        //   }
-        // };
-        // handleCountryChange(event);
-        setPriceOptions(
+
+        setSelectedPriceGroup(
           data.priceGroup.map((item) => {
-            return priceGroup.find((price) => price.id === item.id);
+            return allPriceGroup.find((price) => Number(price.id) === item.id);
           })
         );
-        setDiscountOptions(
+        setSelectedDiscountGroup(
           data.discountGroup.map((item) => {
-            return discountGroup.find((price) => price.value.id === item.id);
+            return allDiscountGroup.find((price) => Number(price.id) === item.id);
           })
         );
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [priceGroup, discountGroup]
+    [allPriceGroup, selectedDiscountGroup]
   );
-
-  const fetchPriceGroup = async () => {
-    const groups = await dispatch(getAllPriceGroup());
-    setPriceGroup(
-      groups.map((item) => {
-        return { id: item.id, value: item.id, label: item.priceGroupName };
-      })
-    );
-  };
-
-  const fetchDiscountGroup = async () => {
-    const groups = await dispatch(getAllDiscountGroup());
-    setDiscountGroup(
-      groups.map((item) => {
-        return { id: item.id, value: item.id, label: item.discountGroupName };
-      })
-    );
-  };
-
-  const addPriceGroup = async (data) => {
-    // NOTE: I need this data to be sent to the backend
-    // data = {
-    //   "priceGroupName": "string",
-    //   "price": 0
-    // }
-    dispatch(createPriceGroup({ payload: data }));
-    fetchPriceGroup();
-  };
-
-  const addDiscountGroup = async (data) => {
-    // NOTE: I need this data to be sent to the backend
-    // data = {
-    //   "discountGroupName": "Group 2",
-    //   "discount": 500
-    // }
-
-    dispatch(createDiscountGroup({ payload: data }));
-    fetchDiscountGroup();
-  };
-
-  useEffect(() => {
-    fetchPriceGroup();
-    fetchDiscountGroup();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     const id = searchParams.get('id');
     if (id) {
       fetchData(id);
     }
-  }, [searchParams, priceGroup, discountGroup, fetchData]);
+  }, [searchParams, allPriceGroup, selectedDiscountGroup, fetchData]);
 
   const handleCountryChange = (event) => {
     // const countryCode = event.target.value;
@@ -180,13 +123,13 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
       postalCode: Number(value.postalCode),
       ...(searchParams.get('id') && { customerId: searchParams.get('id') }),
       priceGroups: [
-        ...priceOptions.map((item) => {
-          return item.value;
+        ...selectedPriceGroup.map((item) => {
+          return Number(item.value);
         })
       ],
       discountGroups: [
-        ...discountOptions.map((item) => {
-          return item.value;
+        ...selectedDiscountGroup.map((item) => {
+          return Number(item.value);
         })
       ]
     };
@@ -212,23 +155,19 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     selectedCountry,
     handleCityChange,
     countries,
-    cities,
-    priceGroup,
-    addPrice,
-    setAddPrice,
-    setPriceOptions,
-    addPriceGroup,
     data,
-    discountGroup,
-    setDiscountOptions,
-    addDiscount,
-    setAddDiscount,
-    addDiscountGroup,
+    cities,
+    allPriceGroup,
+    setAllPriceGroup,
+    selectedPriceGroup,
+    setSelectedPriceGroup,
+    allDiscountGroup,
+    setAllDiscountGroup,
+    selectedDiscountGroup,
+    setSelectedDiscountGroup,
     setIsSubmit,
     router,
     errors,
-    openPopup,
-    setOpenPopup,
     handleButtonClickedit
   };
 }

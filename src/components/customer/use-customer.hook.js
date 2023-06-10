@@ -337,7 +337,7 @@ export default function useCustomer() {
       getAllCustomer({
         payload: {
           page: 1,
-          pageSize: 10,
+          pageSize: 20,
           sortColumn: 'id',
           sortOrder: 'DESC',
           condition: {}

@@ -1,8 +1,13 @@
+'use client';
+
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import Radio from '@mui/material/Radio';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
+import FieldLabel from '@/common/components/field-label/field-label.component';
 
 export default function FormForPaymentDetails({
   handleSubmit,
@@ -27,32 +32,38 @@ export default function FormForPaymentDetails({
           <span className="tw-text-[red]">*</span>
         </label>
         <div className="payment-details-bank">
-          <CustomRadio
-            label="Bank Details"
-            checked={paymentType === 'bankDetails'}
-            value="bankDetails"
-            name="paymentType"
-            onChange={(e) => {
-              // setBankDetail(true);
-              // setCreditCard(false);
-              console.log(e.target.value);
-              setPaymentType(e.target.value);
-            }}
-          />
+          <div className="tw-flex tw-w-full tw-flex-row tw-items-center">
+            <Radio
+              label="Bank Details"
+              checked={paymentType === 'bankDetails'}
+              value="bankDetails"
+              name="paymentType"
+              onChange={(e) => {
+                // setBankDetail(true);
+                // setCreditCard(false);
+                console.log(e.target.value, paymentType === 'bankDetails');
+                setPaymentType(e.target.value);
+              }}
+            />
+            <FieldLabel label="Bank Details" />
+          </div>
         </div>
         <div className="payment-details-card">
-          <CustomRadio
-            label="Credit Card Details"
-            checked={paymentType === 'creditCardDetails'}
-            value="creditCardDetails"
-            name="paymentType"
-            onChange={(e) => {
-              // setCreditCard(true);
-              // setBankDetail(false);
-              console.log(e.target.value);
-              setPaymentType(e.target.value);
-            }}
-          />
+          <div className="tw-flex tw-w-full tw-flex-row tw-items-center">
+            <Radio
+              label="Credit Card Details"
+              checked={paymentType === 'creditCardDetails'}
+              value="creditCardDetails"
+              name="paymentType"
+              onChange={(e) => {
+                // setCreditCard(true);
+                // setBankDetail(false);
+                console.log(e.target.value, paymentType === 'creditCardDetails');
+                setPaymentType(e.target.value);
+              }}
+            />
+            <FieldLabel label="Credit Card Details" />
+          </div>
         </div>
       </div>
 

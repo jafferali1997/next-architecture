@@ -44,7 +44,8 @@ export default function CustomInput({
   isRequired = false,
   inlineLabel = false,
   labelClassName = '',
-  readOnly = false
+  readOnly = false,
+  ref = null
 }) {
   const {
     inputChangeHandler,
@@ -90,6 +91,7 @@ export default function CustomInput({
           } ${className} ${!disabled || 'disabled-input'} `}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}
+          {...(ref && { ref })}
           onKeyDown={inputKeyDownHandler}
           disabled={disabled}
           variant="outlined"
@@ -134,5 +136,7 @@ CustomInput.propTypes = {
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
   labelClassName: PropTypes.string,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  ref: PropTypes.object
 };

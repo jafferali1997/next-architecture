@@ -7,6 +7,7 @@ import { KeyboardArrowDown } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import FieldError from '../field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';
+import { Controller } from 'react-hook-form';
 
 export default function CustomSelect({
   options,
@@ -21,7 +22,8 @@ export default function CustomSelect({
   label = null,
   isRequired = false,
   inlineLabel = false,
-  labelClassName = ''
+  labelClassName = '',
+  control
 }) {
   return (
     <div
@@ -32,39 +34,45 @@ export default function CustomSelect({
       )}
 
       <div className="tw-w-full">
-        <FormControl>
-          <Select
-            {...(register && { register })}
-            name={name}
-            // {...(defaultValue && { defaultValue })}
-            // {...(value && { value })}
-            // {...(onChange && { onChange })}
-            // defaultValue={defaultValue}
-            className={`tw-w-full ${className}`}
-            placeholder={placeholder}
-            indicator={<KeyboardArrowDown />}
-            sx={{
-              width: 240,
-              [`& .${selectClasses.indicator}`]: {
-                transition: '0.2s',
-                [`&.${selectClasses.expanded}`]: {
-                  transform: 'rotate(-180deg)'
+        <Controller
+          // {...(register && register(`${name}`))}
+          control={control}
+          name={name}
+          defaultValue=""
+          render={({ field }) => (
+            <Select
+              {...field}
+              // {...(register && register(`${name}`))}
+              // name={name}
+              // {...(value && { value })}
+              // {...(onChange && { onChange })}
+              className={`tw-w-full ${className}`}
+              placeholder={placeholder}
+              indicator={<KeyboardArrowDown />}
+              sx={{
+                width: 240,
+                [`& .${selectClasses.indicator}`]: {
+                  transition: '0.2s',
+                  [`&.${selectClasses.expanded}`]: {
+                    transform: 'rotate(-180deg)'
+                  }
                 }
-              }
-            }}
-          >
-            {options?.map((option) => (
-              <Option
-                key={option.value}
-                value={option.value}
-                {...(register && { register })}
-                name={name}
-              >
-                {option.label}
-              </Option>
-            ))}
-          </Select>
-        </FormControl>
+              }}
+            >
+              {options?.map((option) => (
+                <Option
+                  // {...(register && { register })}
+                  name={name}
+                  key={option.value}
+                  value={option.value}
+                >
+                  {option.label}
+                </Option>
+              ))}
+            </Select>
+          )}
+        />
+
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />
         )}

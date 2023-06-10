@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MenuItem, Select } from '@mui/material';
+import { MenuItem, Select, NativeSelect } from '@mui/material';
 import FieldError from '@/common/components/field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';
 
@@ -30,30 +30,37 @@ export default function SimpleSelect({
       )}
 
       <div className="tw-w-full">
-        <Select
+        <NativeSelect
           {...(register && register(`${name}`))}
           name={name}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}
           {...(onChange && { onChange })}
-          className={`tw-w-full ${className}`}
-          // placeholder={placeholder}
+          className={`default-input input-field tw-w-full ${className}`}
+          readOnly={readOnly}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          // defaultValue={options[0]}
           // {...(placeholder && {defaultValue: "null"})}
         >
-          {/* {placeholder && 
-        <MenuItem {...(register && { register })} disabled selected name={name} value="null">{placeholder}</MenuItem>
-        } */}
+          {/* {placeholder && (
+            <MenuItem {...(register && { register })} disabled value={null}>
+              {placeholder}
+            </MenuItem>
+          )} */}
           {options?.map((option) => (
-            <MenuItem
-              {...(register && { register })}
-              name={name}
+            <option
+              // {...(register && { register })}
+              // name={name}
               key={option.value}
               value={option.value}
+              disabled={option.value === null}
+              className="tw-px-2 tw-py-3"
             >
               {option.label}
-            </MenuItem>
+            </option>
           ))}
-        </Select>
+        </NativeSelect>
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />
         )}
