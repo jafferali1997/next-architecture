@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';

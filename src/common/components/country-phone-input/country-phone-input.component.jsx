@@ -36,7 +36,9 @@ export default function CountryPhoneInput({
           country={defaultValue || 'us'}
           {...(placeholder && { placeholder })}
           {...(value && { value })}
-          className={`${error ? 'tw-border-danger' : ''} ${className} tw-bg-gray-300 tw-w-full`}
+          className={`${
+            error ? 'tw-border-danger' : ''
+          } ${className} tw-w-full tw-bg-gray-300`}
           autoFormat={true}
           autocompleteSearch={true}
           onChange={inputChangeHandler}

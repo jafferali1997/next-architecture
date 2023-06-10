@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/jsx-filename-extension */
 import { useEffect, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';

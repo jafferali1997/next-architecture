@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-
 import { Checkbox } from '@mui/material';
 import LoginWithLinkedIn from '@/common/components/login-with-linkedIn/login-with-linkedIn.component';
 import {

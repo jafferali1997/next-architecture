@@ -5,9 +5,9 @@ import Select, { selectClasses } from '@mui/joy/Select';
 import { FormControl, MenuItem } from '@mui/material';
 import { KeyboardArrowDown } from '@mui/icons-material';
 import PropTypes from 'prop-types';
+import { Controller } from 'react-hook-form';
 import FieldError from '../field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';
-import { Controller } from 'react-hook-form';
 
 export default function CustomSelect({
   options,
@@ -100,5 +100,7 @@ CustomSelect.propTypes = {
   isRequired: PropTypes.bool,
   register: PropTypes.func,
   inlineLabel: PropTypes.bool,
-  labelClassName: PropTypes.string
+  labelClassName: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.any
 };

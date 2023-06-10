@@ -1,5 +1,3 @@
-'use client';
-
 import PropTypes from 'prop-types';
 import usePaymentDetails from './use-payment-detail.hook';
 import FormForPaymentDetails from './components/form-for-payment-details/form-for-payment-detail.component';

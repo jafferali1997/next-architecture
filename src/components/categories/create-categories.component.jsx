@@ -1,5 +1,3 @@
-'use client';
-
 import CategoryColumn from './components/category-column/category-column.component';
 import useCreateCategories from './use-create-categories.hooks';
 

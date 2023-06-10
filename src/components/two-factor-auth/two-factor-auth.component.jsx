@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CountDown from './components/countdown/count-down.component';

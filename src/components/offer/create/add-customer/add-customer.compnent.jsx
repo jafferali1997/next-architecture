@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';

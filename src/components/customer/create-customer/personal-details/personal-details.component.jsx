@@ -1,5 +1,3 @@
-'use client';
-
 import PropTypes from 'prop-types';
 import FormForPersonalDetails from './components/form-for-personal-details/form-for-personal-details.compoments';
 import usePersonalDetails from './use-personal-details';

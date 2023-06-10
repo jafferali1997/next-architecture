@@ -1,3 +1,5 @@
+'use client';
+
 import axios from 'axios';
 import { City, Country } from 'country-state-city';
 import { useRouter, useSearchParams } from 'next/navigation';

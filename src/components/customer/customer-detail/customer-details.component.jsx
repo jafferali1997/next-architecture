@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';

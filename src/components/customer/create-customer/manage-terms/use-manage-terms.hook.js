@@ -1,3 +1,5 @@
+'use client';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -10,9 +12,9 @@ import {
   createCustomerTermOfPaymentAndDelivey
 } from '@/provider/features/customer/customer.slice';
 
-let validationSchema = yup.object({
+const validationSchema = yup.object({
   termOfDelivery: yup.string().required('Term Of Delivery is required'),
-  termOfPayment: yup.string().required('Term Of Payment is required'),
+  termOfPayment: yup.string().required('Term Of Payment is required')
 });
 
 export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
@@ -68,7 +70,6 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
         fetchMyAPI();
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   // useEffect(() => {
@@ -88,7 +89,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
   // }, [selectedValue]);
 
   const onSubmit = async (value) => {
-    console.log(value,"onSubmit");	
+    console.log(value, 'onSubmit');
     const payload = {
       customerId: Number(searchParams.get('id')),
       termOfPayment: selectedValue,

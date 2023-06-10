@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import * as yup from 'yup';
 import useChangePassword from './use-change-password.hook';

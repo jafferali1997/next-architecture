@@ -1,6 +1,8 @@
-import axios from 'axios';
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSearchParams } from 'next/navigation';
 import {
   generateForgetPasswordLink,
   regenerateEmailLink
@@ -10,12 +12,13 @@ export default function useVerifyEmail() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [type, setType] = useState();
+  const searchParams = useSearchParams();
   // const { email, signUp, forgetPassword, token } = router.query;
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    setEmail(urlSearchParams.get('email'));
-    setType(urlSearchParams.get('type'));
-  }, []);
+    // const urlSearchParams = new URLSearchParams(window.location.search);
+    setEmail(searchParams.get('email'));
+    setType(searchParams.get('type'));
+  }, [searchParams]);
 
   const resendLinkHandler = () => {
     let newEmail = email;

@@ -14,7 +14,7 @@ import {
   getSingleCustomer
 } from '@/provider/features/customer/customer.slice';
 
-let validationSchema = yup.object({
+const validationSchema = yup.object({
   // Define your validation rules here.
   companyName: yup
     .string()
@@ -37,7 +37,7 @@ let validationSchema = yup.object({
   vat: yup
     .string()
     .required('VAT is required')
-    .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format'),
+    .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format')
   // companyAddress: yup.array().of(
   //     yup.object().shape({
   //       address: yup.string().required('Address is required'),
@@ -111,7 +111,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
         fetchMyAPI();
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   // useEffect(() => {

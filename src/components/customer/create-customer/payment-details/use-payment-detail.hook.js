@@ -1,6 +1,7 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -157,6 +158,6 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
     data,
     errors,
     paymentType,
-    setPaymentType,
+    setPaymentType
   };
 }

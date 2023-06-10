@@ -15,7 +15,9 @@ export default function StepperFooter({
           <CustomButton
             className="btn-cancel"
             text="Back"
-            onClick={() => {if (handleTabClick) handleTabClick(back)}}
+            onClick={() => {
+              if (handleTabClick) handleTabClick(back);
+            }}
           />
         )}
       </div>

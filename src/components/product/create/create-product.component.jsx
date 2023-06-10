@@ -1,7 +1,4 @@
-'use client';
-
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';

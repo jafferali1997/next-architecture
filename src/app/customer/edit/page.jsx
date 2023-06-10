@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import AUTH from '@/common/constants/auth.constant';
 import Auth from '@/auth/auth.component';

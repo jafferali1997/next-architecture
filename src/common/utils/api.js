@@ -1,3 +1,5 @@
+'use client';
+
 import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import { getAccessToken } from './access-token.util';

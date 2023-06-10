@@ -1,5 +1,3 @@
-'use client';
-
 import PropTypes from 'prop-types';
 import FormForDiscount from './components/form-for-discount/form-for-discount.components';
 import useDiscount from './use-discount.hook';
@@ -16,15 +14,15 @@ export default function Discount({ handleTabClick, handleTabCompleted }) {
         <h3 className="form-inner-heading">Discount</h3>
       </div>
       <div className="content-body">
-          <FormForDiscount
-            register={register}
-            errors={errors}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            handleTabClick={handleTabClick}
-            setIsSubmit={setIsSubmit}
-            data={data}
-          />
+        <FormForDiscount
+          register={register}
+          errors={errors}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          handleTabClick={handleTabClick}
+          setIsSubmit={setIsSubmit}
+          data={data}
+        />
       </div>
     </div>
   );

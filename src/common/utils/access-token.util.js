@@ -1,9 +1,11 @@
+'use client';
+
 /**
  * Retrive access token from local storage
  * @returns string | undefined
  */
 export const getAccessToken = () => {
-  if (window.localStorage.getItem('user')) {
+  if (window !== undefined && window.localStorage.getItem('user')) {
     return JSON.parse(localStorage.getItem('user')).token;
   }
   return undefined;
@@ -14,8 +16,13 @@ export const getAccessToken = () => {
  * @returns date | undefined
  */
 export const getAccessTokenExpiry = () => {
-  const accessTokenExpiry = JSON.parse(window.localStorage.getItem('accessTokenExpiry'));
-  return accessTokenExpiry;
+  if (window !== undefined) {
+    const accessTokenExpiry = JSON.parse(
+      window.localStorage.getItem('accessTokenExpiry')
+    );
+    return accessTokenExpiry;
+  }
+  return null;
 };
 
 /**

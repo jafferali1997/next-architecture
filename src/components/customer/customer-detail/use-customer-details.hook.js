@@ -28,7 +28,9 @@ export default function UseCustomerDetails() {
 
   async function fetchAndSetData() {
     if (searchParams.get('id')) {
-      let data = await dispatch(getSingleCustomer({ payload: Number(searchParams.get('id')) }));
+      let data = await dispatch(
+        getSingleCustomer({ payload: Number(searchParams.get('id')) })
+      );
       console.log('data', data);
       data = data.payload;
       Object.keys(data).forEach((key) => setValue(key, data[key]));
