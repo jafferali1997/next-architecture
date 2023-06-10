@@ -17,7 +17,7 @@ const initialState = {
 
 export const createDiscountGroup = createAsyncThunk(
   'discountGroup/create',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await discountGroupService.createDiscountGroup(payload);
       if (response.Succeeded) {
@@ -32,7 +32,7 @@ export const createDiscountGroup = createAsyncThunk(
 
 export const getSingleDiscountGroup = createAsyncThunk(
   'discountGroup/get',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await discountGroupService.getSingleDiscountGroup(payload);
       if (response.Succeeded) {
@@ -47,7 +47,7 @@ export const getSingleDiscountGroup = createAsyncThunk(
 
 export const getAllDiscountGroup = createAsyncThunk(
   'discountGroup/getAll',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
       const response = await discountGroupService.getAllDiscountGroup();
       if (response.Succeeded) {
@@ -77,7 +77,7 @@ export const updateDiscountGroup = createAsyncThunk(
 
 export const deleteDiscountGroup = createAsyncThunk(
   'discountGroup/delete',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await discountGroupService.deleteDiscountGroup(payload);
       if (response.Succeeded) {

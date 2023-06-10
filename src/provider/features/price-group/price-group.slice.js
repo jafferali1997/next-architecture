@@ -17,10 +17,13 @@ const initialState = {
 
 export const createPriceGroup = createAsyncThunk(
   'priceGroup/create',
-  async ({ payload }, thunkAPI) => {
+  async ({ payload, successCallBack = null }, thunkAPI) => {
     try {
       const response = await priceGroupService.createPriceGroup(payload);
       if (response.Succeeded) {
+        if (successCallBack) {
+          successCallBack();
+        }
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
@@ -47,7 +50,7 @@ export const getSinglePriceGroup = createAsyncThunk(
 
 export const getAllPriceGroup = createAsyncThunk(
   'priceGroup/getAll',
-  async (param, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
       const response = await priceGroupService.getAllPriceGroup();
       if (response.Succeeded) {
