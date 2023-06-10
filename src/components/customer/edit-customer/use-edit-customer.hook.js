@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { set, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import {
   getSingleCustomer,
   updateCustomer
@@ -16,6 +17,33 @@ export default function UseEditCustomer() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const validationSchema = yup.object({
+    // Define your validation rules here.
+    gender: yup.string().required('Gender is required'),
+    firstName: yup
+      .string()
+      .max(50, 'first name must be at most 50 characters long')
+      .required('First name is required'),
+    lastName: yup
+      .string()
+      .max(50, 'last name must be at most 50 characters long')
+      .required('Last name is required'),
+    designation: yup
+      .string()
+      .max(100, 'designation must be at most 100 characters long')
+      .required('Designation is required'),
+    postalCode: yup
+      .string()
+      .required('Postal Code is required')
+      .matches(/[0-9]/, 'Postal must be in digits')
+      .max(10, 'postal code must be maximum 10 characters'),
+    address: yup
+      .string()
+      .max(95, 'address must be at most 95 characters long')
+      .required('Address is required'),
+    country: yup.string().required('Country is required'),
+    city: yup.string().required('City is required')
+  });
   const customerId = useRef(searchParams.get('id'));
 
   const [isAdditional, setIsAdditional] = useState(false);
@@ -34,7 +62,8 @@ export default function UseEditCustomer() {
     setValue,
     formState: { errors }
   } = useForm({
-    // resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
+    mode: 'onBlur'
   });
 
   async function fetchAndSetData() {

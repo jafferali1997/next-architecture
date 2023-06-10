@@ -145,7 +145,7 @@ export default function useSignUp() {
           router.push({
             pathname: '/profile',
             query: {
-              username: data.user.username,
+              userName: data.user.userName,
               email: data.user.email,
               userId: data.user.userId
             }

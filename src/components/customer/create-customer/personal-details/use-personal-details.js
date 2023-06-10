@@ -28,9 +28,9 @@ const validationSchema = yup.object({
     .required('Designation is required'),
   postalCode: yup
     .string()
+    .required('Postal Code is required')
     .matches(/[0-9]/, 'Postal must be in digits')
-    .max(10, 'postal code must be maximum 10 characters')
-    .required('Postal Code is required'),
+    .max(10, 'postal code must be maximum 10 characters'),
   address: yup
     .string()
     .max(95, 'address must be at most 95 characters long')
@@ -77,7 +77,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const fetchData = useCallback(
     async (id) => {
-      let data = await dispatch(getSingleCustomer({ payload: id }));
+      let data = await dispatch(getSingleCustomer({ payload: Number(id) }));
       if (data.payload) {
         data = data.payload;
         Object.keys(data).forEach((key) => setValue(key, data[key]));
@@ -94,15 +94,15 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
         );
       }
     },
-    [allPriceGroup, selectedDiscountGroup]
+    [allPriceGroup, allDiscountGroup]
   );
 
   useEffect(() => {
-    const id = searchParams.get('id');
+    const id = Number(searchParams.get('id'));
     if (id) {
       fetchData(id);
     }
-  }, [searchParams, allPriceGroup, selectedDiscountGroup, fetchData]);
+  }, [searchParams, allPriceGroup, allDiscountGroup, fetchData]);
 
   const handleCountryChange = (event) => {
     // const countryCode = event.target.value;
@@ -121,7 +121,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     const data = {
       ...value,
       postalCode: Number(value.postalCode),
-      ...(searchParams.get('id') && { customerId: searchParams.get('id') }),
+      ...(searchParams.get('id') && { customerId: Number(searchParams.get('id')) }),
       priceGroups: [
         ...selectedPriceGroup.map((item) => {
           return Number(item.value);
@@ -135,7 +135,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     };
     const res = await dispatch(createCustomerPersonalDetail({ payload: data }));
     console.log(res, 'Create Customer Personal Detail Response');
-    if (res.payload) {
+    if (res.payload && res.payload.id) {
       router.push(`/customer/create?id=${res.payload.id}`);
       handleTabClick('company_details');
       handleTabCompleted('customer_details');

@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
-import FieldLabel from '@/common/components/field-label/field-label.component';
 
 export default function FormForPaymentDetails({
   handleSubmit,
@@ -31,40 +33,24 @@ export default function FormForPaymentDetails({
           Payment By
           <span className="tw-text-[red]">*</span>
         </label>
-        <div className="payment-details-bank">
-          <div className="tw-flex tw-w-full tw-flex-row tw-items-center">
-            <Radio
-              label="Bank Details"
-              checked={paymentType === 'bankDetails'}
+        <FormControl>
+          <RadioGroup
+            name="paymentType"
+            value={paymentType}
+            onChange={(e) => setPaymentType(e.target.value)}
+          >
+            <FormControlLabel
               value="bankDetails"
-              name="paymentType"
-              onChange={(e) => {
-                // setBankDetail(true);
-                // setCreditCard(false);
-                console.log(e.target.value, paymentType === 'bankDetails');
-                setPaymentType(e.target.value);
-              }}
+              control={<Radio />}
+              label="Bank Details"
             />
-            <FieldLabel label="Bank Details" />
-          </div>
-        </div>
-        <div className="payment-details-card">
-          <div className="tw-flex tw-w-full tw-flex-row tw-items-center">
-            <Radio
-              label="Credit Card Details"
-              checked={paymentType === 'creditCardDetails'}
+            <FormControlLabel
               value="creditCardDetails"
-              name="paymentType"
-              onChange={(e) => {
-                // setCreditCard(true);
-                // setBankDetail(false);
-                console.log(e.target.value, paymentType === 'creditCardDetails');
-                setPaymentType(e.target.value);
-              }}
+              control={<Radio />}
+              label="Credit Card Details"
             />
-            <FieldLabel label="Credit Card Details" />
-          </div>
-        </div>
+          </RadioGroup>
+        </FormControl>
       </div>
 
       {paymentType === 'bankDetails' && (
@@ -76,7 +62,7 @@ export default function FormForPaymentDetails({
               placeholder="IBAN Number"
               type="text"
               register={register}
-              error={errors}
+              errors={errors}
               isRequired={true}
             />
           </div>
@@ -87,7 +73,7 @@ export default function FormForPaymentDetails({
               placeholder="Account owner name"
               type="text"
               register={register}
-              error={errors}
+              errors={errors}
               isRequired={true}
             />
 
@@ -97,7 +83,7 @@ export default function FormForPaymentDetails({
               placeholder="BIC Number"
               type="text"
               register={register}
-              error={errors}
+              errors={errors}
               isRequired={true}
             />
             <CustomInput
@@ -106,7 +92,7 @@ export default function FormForPaymentDetails({
               placeholder="Mandate Reference"
               type="number"
               register={register}
-              error={errors}
+              errors={errors}
               isRequired={true}
             />
             <CustomInput
@@ -115,7 +101,7 @@ export default function FormForPaymentDetails({
               placeholder="03/13/2023"
               type="date"
               register={register}
-              error={errors}
+              errors={errors}
               isRequired={true}
             />
           </div>
@@ -129,7 +115,7 @@ export default function FormForPaymentDetails({
             placeholder="Credit Card Name"
             type="text"
             register={register}
-            error={errors}
+            errors={errors}
             isRequired={true}
           />
           <CustomInput
@@ -138,7 +124,7 @@ export default function FormForPaymentDetails({
             placeholder="Credit Card Number"
             type="number"
             register={register}
-            error={errors}
+            errors={errors}
             isRequired={true}
           />
           <CustomInput
@@ -147,7 +133,7 @@ export default function FormForPaymentDetails({
             placeholder="03/13/2023"
             type="date"
             register={register}
-            error={errors}
+            errors={errors}
             isRequired={true}
           />
           <CustomInput
@@ -156,7 +142,7 @@ export default function FormForPaymentDetails({
             placeholder="CVV"
             type="number"
             register={register}
-            error={errors}
+            errors={errors}
             isRequired={true}
           />
         </div>

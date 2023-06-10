@@ -76,7 +76,7 @@ export default function Profile() {
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
                 <CustomInput
-                  label="UserName"
+                  label="User Name"
                   name="userName"
                   type="text"
                   register={register}

@@ -16,7 +16,7 @@ export default function FormForPersonalDetails({
   selectedCity,
   selectedCountry,
   handleCityChange,
-  // countries,
+  countries,
   cities,
   data = {},
   handleButtonClickedit,
@@ -53,6 +53,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Designation"
           name="designation"
+          defaultValue={data.designation}
           register={register}
           placeholder="Designation"
           type="text"
@@ -62,6 +63,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="First Name"
           name="firstName"
+          defaultValue={data.firstName}
           register={register}
           placeholder="First Name"
           type="text"
@@ -71,6 +73,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Last Name"
           name="lastName"
+          defaultValue={data.lastName}
           register={register}
           placeholder="Last Name"
           type="text"
@@ -80,6 +83,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Address"
           name="address"
+          defaultValue={data.address}
           register={register}
           placeholder="Address"
           type="text"
@@ -109,6 +113,7 @@ export default function FormForPersonalDetails({
           placeholder="City"
           type="select"
           value={selectedCity}
+          isRequired={true}
           onChange={handleCityChange}
           // options={cities.map((item) => {
           //   return { label: item.name, value: item.isoCode, id: item.isoCode };
@@ -119,9 +124,10 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Postal Code"
           name="postalCode"
+          defaultValue={data.postalCode}
           register={register}
           placeholder="Postal Code"
-          type="text"
+          type="number"
           isRequired={true}
           errors={errors}
         />
@@ -164,7 +170,6 @@ FormForPersonalDetails.propTypes = {
   selectedCity: PropTypes.func.isRequired,
   selectedCountry: PropTypes.func.isRequired,
   handleCityChange: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/no-unused-prop-types
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   allPriceGroup: PropTypes.arrayOf(groupShape).isRequired,
