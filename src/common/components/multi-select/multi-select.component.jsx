@@ -18,9 +18,9 @@ export default function MultiSelect({
   placeholder = 'Select Option(s)',
   search = true,
   isClearable = true,
-  maxDisplayOptions = 8,
+  maxDisplayOptions = 4,
   defaultOptions = null,
-  onClick
+  addClickHandler = null
 }) {
   const {
     open,
@@ -38,7 +38,6 @@ export default function MultiSelect({
     isSearching
   } = useMultiSelect(options, handleChange, defaultOptions, search);
 
-  console.log(filteredOptions);
   const renderOptions = (options) => {
     return options?.map((option, index) => (
       <div
@@ -132,10 +131,15 @@ export default function MultiSelect({
           {open && (
             <div className="tw-lef-0 tw-absolute tw-top-[100%] tw-z-[999] tw-w-full  tw-rounded tw-bg-white tw-text-black  tw-shadow">
               <div className="tw-flex tw-max-h-[200px] tw-w-full tw-flex-col tw-overflow-y-auto">
-                <div className="select-option-click tw-cursor-pointer" onClick={onClick}>
-                  <img src="/assets/images/plus_s.png" alt="plus" />
-                  <p>create new group</p>
-                </div>
+                {addClickHandler && (
+                  <div
+                    className="tw-flex tw-max-w-full tw-items-center"
+                    onClick={addClickHandler}
+                  >
+                    <AddIcon className="tw-h-3 tw-w-3" />
+                    <p>create new group</p>
+                  </div>
+                )}
                 {filteredOptions && isSearching
                   ? renderOptions(filteredOptions)
                   : renderOptions(options)}
@@ -157,7 +161,7 @@ const optionShape = PropTypes.shape({
 MultiSelect.propTypes = {
   options: PropTypes.arrayOf(optionShape).isRequired,
   handleChange: PropTypes.func.isRequired,
-  onClick: PropTypes.func,
+  addClickHandler: PropTypes.func,
   placeholder: PropTypes.string,
   search: PropTypes.bool,
   isClearable: PropTypes.bool,

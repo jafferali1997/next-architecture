@@ -1,6 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -10,9 +11,11 @@ import CustomCheckbox from '@/common/components/custom-checkbox/custom-checkbox.
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 const validationSchema = yup.object({
-  firstName: yup.string().max(5, 'company name must be at most 5 characters long')
+  firstName: yup.string().max(5, 'company name must be at most 5 characters long'),
+  select: yup.string().required()
 });
 
 export default function ReactHookForm() {
@@ -21,11 +24,17 @@ export default function ReactHookForm() {
     handleSubmit,
     watch,
     trigger,
+    control,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),
     reValidateMode: 'onChange'
   });
+
+  useEffect(() => {
+    setValue('select', 'OTHER');
+  }, []);
 
   return (
     <div className="tw-m-5">
@@ -63,17 +72,31 @@ export default function ReactHookForm() {
           </div>
           <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
             <div className="tw-w-1/2">
-              <SimpleSelect
-                label="Select Education"
-                placeholder="Select Education"
-                name="education"
+              <CustomSelect
+                label="Gender"
+                placeholder="Select Gender"
+                name="gender"
                 options={[
-                  { label: 'Matric', value: 'matric' },
-                  { label: 'Intermediate', value: 'intermediate' },
-                  { label: 'Graduation', value: 'graduation' },
-                  { label: 'Masters', value: 'masters' }
+                  { label: 'Male', value: 'MALE' },
+                  { label: 'Female', value: 'FEMALE' },
+                  { label: 'Other', value: 'OTHER' }
                 ]}
                 register={register}
+                control={control}
+              />
+            </div>
+            <div className="tw-w-1/2">
+              <SimpleSelect
+                label="Select Gender"
+                placeholder="Select Gender"
+                name="select"
+                options={[
+                  { label: 'Male', value: 'MALE' },
+                  { label: 'Female', value: 'FEMALE' },
+                  { label: 'Other', value: 'OTHER' }
+                ]}
+                register={register}
+                errors={errors}
               />
             </div>
             <div className="tw-w-1/2">

@@ -58,7 +58,6 @@ export default function useLogin() {
   const borderSuc = {
     border: '1px solid #10FF61'
   };
-
   const moveRouterGenOtp = (data) => {
     router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
   };
@@ -71,7 +70,7 @@ export default function useLogin() {
     }
     if (data.isEmailVerified) {
       router.push(
-        `/profile?username=${data.userName}&email=${data.email}&userId=${data.id}`
+        `/profile?userName=${data.userName}&email=${data.email}&userId=${data.id}`
       );
     } else {
       router.push(`/verify-email?type=email-verification&email=${data.email}`);
@@ -120,6 +119,10 @@ export default function useLogin() {
         localStorage.setItem('rememberedUsername', values.email);
         localStorage.setItem('rememberedPassword', encryptedPassword);
       }
+    }
+    if (isChecked === false) {
+      localStorage.removeItem('rememberedUsername');
+      localStorage.removeItem('rememberedPassword');
     }
   };
 

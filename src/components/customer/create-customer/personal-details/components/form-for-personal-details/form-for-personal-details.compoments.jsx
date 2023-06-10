@@ -1,20 +1,12 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography
-} from '@mui/material';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import Select from '@/common/components/select/select.component';
-import usePersonalDetails from '../../use-personal-details';
-import CustomButton from '@/common/components/custom-button/custom-button.component';
+import PriceGroup from '../price-group/price-group.component';
+import DiscountGroup from '../discount-group/discount-group.component';
 
 export default function FormForPersonalDetails({
   register,
@@ -24,24 +16,20 @@ export default function FormForPersonalDetails({
   selectedCity,
   selectedCountry,
   handleCityChange,
-  // countries,
+  countries,
   cities,
-  priceGroup,
-  addPrice,
-  setAddPrice,
-  setPriceOptions,
-  addPriceGroup,
   data = {},
-  discountGroup,
-  setDiscountOptions,
-  addDiscount,
-  setAddDiscount,
-  addDiscountGroup,
-  openPopup,
-  setOpenPopup,
   handleButtonClickedit,
   setIsSubmit,
-  errors = {}
+  errors = {},
+  allPriceGroup,
+  setAllPriceGroup,
+  selectedPriceGroup,
+  setSelectedPriceGroup,
+  allDiscountGroup,
+  setAllDiscountGroup,
+  selectedDiscountGroup,
+  setSelectedDiscountGroup
 }) {
   const countries = [
     { id: 1, name: 'Pakistan', label: 'Pakistan' },
@@ -65,6 +53,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Designation"
           name="designation"
+          defaultValue={data.designation}
           register={register}
           placeholder="Designation"
           type="text"
@@ -74,6 +63,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="First Name"
           name="firstName"
+          defaultValue={data.firstName}
           register={register}
           placeholder="First Name"
           type="text"
@@ -83,6 +73,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Last Name"
           name="lastName"
+          defaultValue={data.lastName}
           register={register}
           placeholder="Last Name"
           type="text"
@@ -92,6 +83,7 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Address"
           name="address"
+          defaultValue={data.address}
           register={register}
           placeholder="Address"
           type="text"
@@ -121,6 +113,7 @@ export default function FormForPersonalDetails({
           placeholder="City"
           type="select"
           value={selectedCity}
+          isRequired={true}
           onChange={handleCityChange}
           // options={cities.map((item) => {
           //   return { label: item.name, value: item.isoCode, id: item.isoCode };
@@ -131,55 +124,30 @@ export default function FormForPersonalDetails({
         <CustomInput
           label="Postal Code"
           name="postalCode"
+          defaultValue={data.postalCode}
           register={register}
           placeholder="Postal Code"
-          type="text"
+          type="number"
           isRequired={true}
           errors={errors}
         />
       </div>
 
       <div className="form-box-grid-2col">
-        <Dialog open={openPopup}>
-          <div className="tw-w-[389px]">
-            <div>
-              <DialogTitle>Category</DialogTitle>
-            </div>
-            <DialogContent>
-              <CustomInput placeholder="Category" label="Category Name" type="text" />
-            </DialogContent>
-            <DialogActions>
-              <CustomButton
-                onClick={() => setOpenPopup(false)}
-                className=" btn-cancel"
-                text="Cancel"
-              />
-              <CustomButton className="btn btn-primary " text="Update" />
-            </DialogActions>
-          </div>
-        </Dialog>
         <div>
-          <label className="group-label">Price Group</label>
-          <MultiSelect
-            options={[
-              { id: '1', label: 'Test 1', value: 'test1' },
-              { id: '2', label: 'Test 2', value: 'test2' },
-              { id: '3', label: 'Test 3', value: 'test3' }
-            ]}
-            onClick={handleButtonClickedit}
-            handleChange={() => {}}
+          <PriceGroup
+            options={allPriceGroup}
+            setOptions={setAllPriceGroup}
+            selectedOptions={selectedPriceGroup}
+            setSelectedOptions={setSelectedPriceGroup}
           />
         </div>
         <div>
-          <label className="group-label">Discount Group</label>
-          <MultiSelect
-            options={[
-              { id: '1', label: 'Test 1', value: 'test1' },
-              { id: '2', label: 'Test 2', value: 'test2' },
-              { id: '3', label: 'Test 3', value: 'test3' }
-            ]}
-            handleChange={() => {}}
-            onClick={handleButtonClickedit}
+          <DiscountGroup
+            options={allDiscountGroup}
+            setOptions={setAllDiscountGroup}
+            selectedOptions={selectedDiscountGroup}
+            setSelectedOptions={setSelectedDiscountGroup}
           />
         </div>
       </div>
@@ -187,6 +155,12 @@ export default function FormForPersonalDetails({
     </form>
   );
 }
+
+const groupShape = PropTypes.shape({
+  id: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string
+});
 
 FormForPersonalDetails.propTypes = {
   register: PropTypes.func.isRequired,
@@ -196,41 +170,20 @@ FormForPersonalDetails.propTypes = {
   selectedCity: PropTypes.func.isRequired,
   selectedCountry: PropTypes.func.isRequired,
   handleCityChange: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/no-unused-prop-types
   countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  priceGroup: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      label: PropTypes.string,
-      value: PropTypes.string
-    })
-  ).isRequired,
-  addPrice: PropTypes.string.isRequired,
-  setAddPrice: PropTypes.func.isRequired,
-  setPriceOptions: PropTypes.func.isRequired,
-  addPriceGroup: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      label: PropTypes.string,
-      value: PropTypes.string
-    })
-  ).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.object,
-  discountGroup: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-  ).isRequired,
-  setDiscountOptions: PropTypes.func.isRequired,
-  addDiscount: PropTypes.string.isRequired,
-  setAddDiscount: PropTypes.func.isRequired,
-  addDiscountGroup: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-  ).isRequired,
+  allPriceGroup: PropTypes.arrayOf(groupShape).isRequired,
+  setAllPriceGroup: PropTypes.func.isRequired,
+  selectedPriceGroup: PropTypes.arrayOf(groupShape).isRequired,
+  setSelectedPriceGroup: PropTypes.func.isRequired,
+  allDiscountGroup: PropTypes.arrayOf(groupShape).isRequired,
+  setAllDiscountGroup: PropTypes.func.isRequired,
+  selectedDiscountGroup: PropTypes.arrayOf(groupShape).isRequired,
+  setSelectedDiscountGroup: PropTypes.func.isRequired,
   setIsSubmit: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object,
-  openPopup: PropTypes.func,
-  setOpenPopup: PropTypes.func,
-  handleButtonClickedit: PropTypes.func
+  handleButtonClickedit: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.object
 };

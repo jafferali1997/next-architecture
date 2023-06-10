@@ -174,14 +174,14 @@ export default function FormForCompanyDetails({
             <CustomInput
               placeholder="Enter label name"
               type="text"
-              name={`ca_addressLabel_${index + 1}`}
+              name={`addressLabel_${index + 1}`}
               register={register}
               errors={errors}
             />
             <CustomInput
               placeholder="Enter company address"
               type="text"
-              name={`ca_address_${index + 1}`}
+              name={`address_${index + 1}`}
               register={register}
               errors={errors}
             />
@@ -211,7 +211,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Gender"
             register={register}
-            name="ac_gender"
+            name="gender"
             placeholder="John"
             type="select"
             errors={errors}
@@ -223,7 +223,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Designation"
             register={register}
-            name="ac_designation"
+            name="designation"
             placeholder="Designation"
             type="text"
             errors={errors}
@@ -231,7 +231,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="First Name"
             register={register}
-            name="ac_firstName"
+            name="firstName"
             placeholder="First Name"
             type="text"
             errors={errors}
@@ -239,7 +239,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Last Name"
             register={register}
-            name="ac_lastName"
+            name="lastName"
             placeholder="Last Name"
             type="text"
             errors={errors}
@@ -247,7 +247,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Address"
             register={register}
-            name="ac_address"
+            name="address"
             placeholder="Address"
             type="text"
             errors={errors}
@@ -256,7 +256,7 @@ export default function FormForCompanyDetails({
           <Select
             label="Country"
             register={register}
-            name="ac_country"
+            name="country"
             placeholder="Country"
             type="select"
             onChange={handleCountryChange}
@@ -268,7 +268,7 @@ export default function FormForCompanyDetails({
           <Select
             label="City"
             register={register}
-            name="ac_city"
+            name="city"
             placeholder="City"
             type="select"
             value={selectedCity}
@@ -279,7 +279,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Postal Code"
             register={register}
-            name="ac_postalCode"
+            name="postalCode"
             placeholder="Postal Code"
             type="text"
             errors={errors}
@@ -287,7 +287,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Email Address"
             register={register}
-            name="ac_email"
+            name="email"
             placeholder="Email Address"
             type="text"
             errors={errors}
@@ -295,7 +295,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Phone Number"
             register={register}
-            name="ac_phone"
+            name="phone"
             placeholder="Phone Number"
             type="number"
             errors={errors}
@@ -303,7 +303,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Mobile Number"
             register={register}
-            name="ac_mobile"
+            name="mobile"
             placeholder="Mobile Number"
             type="number"
             errors={errors}
@@ -311,7 +311,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Department"
             register={register}
-            name="ac_department"
+            name="department"
             placeholder="Department"
             type="text"
             errors={errors}

@@ -15,23 +15,18 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
     handleCityChange,
     countries,
     cities,
-    priceGroup,
-    addPrice,
-    setAddPrice,
-    setPriceOptions,
-    addPriceGroup,
     data,
-    discountGroup,
-    setDiscountOptions,
-    addDiscount,
-    setAddDiscount,
-    addDiscountGroup,
     setIsSubmit,
     router,
     errors,
-    openPopup,
-    setOpenPopup,
-    handleButtonClickedit
+    allPriceGroup,
+    setAllPriceGroup,
+    selectedPriceGroup,
+    setSelectedPriceGroup,
+    allDiscountGroup,
+    setAllDiscountGroup,
+    selectedDiscountGroup,
+    setSelectedDiscountGroup
   } = usePersonalDetails({ handleTabClick, handleTabCompleted });
 
   return (
@@ -50,22 +45,17 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
           handleCityChange={handleCityChange}
           countries={countries}
           cities={cities}
-          priceGroup={priceGroup}
-          addPrice={addPrice}
-          setAddPrice={setAddPrice}
-          setPriceOptions={setPriceOptions}
-          addPriceGroup={addPriceGroup}
           data={data}
-          discountGroup={discountGroup}
-          setDiscountOptions={setDiscountOptions}
-          addDiscount={addDiscount}
-          setAddDiscount={setAddDiscount}
-          addDiscountGroup={addDiscountGroup}
           setIsSubmit={setIsSubmit}
           errors={errors}
-          openPopup={openPopup}
-          setOpenPopup={setOpenPopup}
-          handleButtonClickedit={handleButtonClickedit}
+          allPriceGroup={allPriceGroup}
+          setAllPriceGroup={setAllPriceGroup}
+          selectedPriceGroup={selectedPriceGroup}
+          setSelectedPriceGroup={setSelectedPriceGroup}
+          allDiscountGroup={allDiscountGroup}
+          setAllDiscountGroup={setAllDiscountGroup}
+          selectedDiscountGroup={selectedDiscountGroup}
+          setSelectedDiscountGroup={setSelectedDiscountGroup}
         />
       </div>
     </div>

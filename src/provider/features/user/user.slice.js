@@ -47,7 +47,7 @@ export const generateOtp = createAsyncThunk(
     try {
       const response = await userService.generateOtp();
       if (response.Succeeded) {
-        successCallBack(response.data);
+        // successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);

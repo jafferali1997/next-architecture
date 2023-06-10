@@ -12,12 +12,11 @@ import {
 
 const validationSchema = yup.object({
   // Define your validation rules here.
-  // discount: yup
-  //   .number()
-  //   .max(9999999999, 'Discount must be at most 10 characters long')
-  //   .min(1, 'Discount must be minimum 1 characters')
-  //   .required('Discount is required'),
-  // days: yup.number().required('day is required')
+  discountAmount: yup
+    .string()
+    .max(10, 'Discount must be at most 10 characters long')
+    .required('Discount is required'),
+  discountDays: yup.string().required('day is required')
 });
 
 export default function useDiscount({ handleTabClick, handleTabCompleted }) {
@@ -27,7 +26,8 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
     setValue,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
+    mode: 'onBlur'
   });
   const [data, setData] = useState();
   const [isSubmit, setIsSubmit] = useState(false);
@@ -37,7 +37,7 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
 
   useEffect(() => {
     if (searchParams.get('id')) {
-      const id = searchParams.get('id');
+      const id = Number(searchParams.get('id'));
 
       async function fetchMyAPI() {
         let data = await dispatch(getSingleCustomer({ payload: id }));
@@ -59,7 +59,9 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
       createCustomerDiscount({
         payload: {
           ...value,
-          customerId: searchParams.get('id')
+          discountDays: Number(value.discountDays),
+          discountAmount: Number(value.discountAmount),
+          customerId: Number(searchParams.get('id'))
         }
       })
     );
@@ -67,20 +69,6 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
       handleTabClick('manage_terms');
       handleTabCompleted('discount');
     }
-    // try {
-    //   const res = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_MAIN_URL}/administration/customer/discount`,
-    //     { ...value, customerId: router.query.id }
-    //   );
-    //   if (res.data.status) {
-    //     handleTabClick('manage_terms');
-    //     handleTabCompleted('discount');
-    //   } else {
-    //     CustomAlert(res.data.message, 'Error');
-    //   }
-    // } catch (e) {
-    //   CustomAlert(e.response.data.error[0].msg, 'Error');
-    // }
   };
 
   return { errors, register, handleSubmit, onSubmit, setIsSubmit, router, data };

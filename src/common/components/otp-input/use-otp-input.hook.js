@@ -6,7 +6,6 @@ export default function useOtpInput(maxInput, value, onChange) {
   const [otp, setOtp] = useState([]);
 
   const valueItems = useMemo(() => {
-    console.log(value, 'value');
     const valueArray = value?.split('');
     const items = [];
 

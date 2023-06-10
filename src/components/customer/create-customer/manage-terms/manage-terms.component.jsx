@@ -14,8 +14,8 @@ export default function ManageTerms({ handleTabClick, resetTabCompleted }) {
     handleChangeRadio,
     setIsSubmit,
     handleReset,
+    setSelectedValue,
     data,
-    router
   } = useMangeTerm({ handleTabClick, resetTabCompleted });
   return (
     <div className="mange-terms-details-wrapper ">
@@ -23,33 +23,19 @@ export default function ManageTerms({ handleTabClick, resetTabCompleted }) {
         <h3 className="form-inner-heading">Terms of payments</h3>
       </div>
       <div className="content-body">
-        {router?.query?.id && data && (
           <FormForManageTerms
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             register={register}
             errors={errors}
             selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
             handleChangeRadio={handleChangeRadio}
             handleTabClick={handleTabClick}
             setIsSubmit={setIsSubmit}
             handleReset={handleReset}
             data={data}
           />
-        )}
-        {!router?.query?.id && (
-          <FormForManageTerms
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            errors={errors}
-            selectedValue={selectedValue}
-            handleChangeRadio={handleChangeRadio}
-            handleTabClick={handleTabClick}
-            setIsSubmit={setIsSubmit}
-            handleReset={handleReset}
-          />
-        )}
       </div>
     </div>
   );
