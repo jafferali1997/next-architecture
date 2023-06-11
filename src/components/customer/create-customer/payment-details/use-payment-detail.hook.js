@@ -144,7 +144,7 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
         payload: { ...payload, customerId: Number(searchParams.get('id')) }
       })
     );
-    if (res.payload) {
+    if (res.payload?.id) {
       handleTabClick('discount');
       handleTabCompleted('payment_details');
     }

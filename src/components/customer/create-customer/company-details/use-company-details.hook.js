@@ -272,7 +272,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     console.log(payload);
     const res = await dispatch(createCustomerCompanyDetail({ payload }));
     console.log(res, 'Create Customer Company Detail Response');
-    if (res.payload) {
+    if (res.payload?.id) {
       handleTabClick('payment_details');
       handleTabCompleted('company_details');
     }

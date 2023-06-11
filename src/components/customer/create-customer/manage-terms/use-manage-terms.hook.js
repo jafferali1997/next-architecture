@@ -104,7 +104,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
       ]
     };
     const res = await dispatch(createCustomerTermOfPaymentAndDelivey({ payload }));
-    if (res.payload) {
+    if (res.payload?.id) {
       resetTabCompleted();
       router.push('/customer');
       handleTabClick('customer_details');
