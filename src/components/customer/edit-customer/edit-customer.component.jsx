@@ -304,15 +304,14 @@ export default function EditCustomer() {
                 </div>
                 {isAdditional ? (
                   <div className="form-box-grid">
-                    <CustomInput
+                    <Select
                       label="Gender"
-                      name="ac_gender"
-                      placeholder="John"
-                      type="select"
                       options={[
                         { id: 'male', value: 'MALE', label: 'Male' },
                         { id: 'female', value: 'FEMALE', label: 'Female' }
                       ]}
+                      placeholder="Select Gender"
+                      name="ac_gender"
                       register={register}
                       errors={errors}
                     />

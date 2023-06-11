@@ -208,17 +208,16 @@ export default function FormForCompanyDetails({
       </div>
       {isAdditional ? (
         <div className="form-box-grid-4col">
-          <CustomInput
+          <Select
             label="Gender"
-            register={register}
-            name="ac_gender"
-            placeholder="John"
-            type="select"
-            errors={errors}
             options={[
-              { id: 'MALE', value: 'MALE', label: 'MALE' },
-              { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
+              { id: 'male', value: 'MALE', label: 'Male' },
+              { id: 'female', value: 'FEMALE', label: 'Female' }
             ]}
+            placeholder="Select Gender"
+            name="ac_gender"
+            register={register}
+            errors={errors}
           />
           <CustomInput
             label="Designation"
