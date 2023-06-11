@@ -2,7 +2,13 @@
 
 import { useEffect, useState, useRef } from 'react';
 
-export default function useMultiSelect(options, handleChange, defaultOptions, search, readOnly) {
+export default function useMultiSelect(
+  options,
+  handleChange,
+  defaultOptions,
+  search,
+  readOnly
+) {
   const [open, setOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -38,7 +44,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
 
   const toggleDropDown = () => {
     if (!readOnly) {
-    setOpen(!open);
+      setOpen(!open);
     }
   };
 
@@ -64,7 +70,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
 
   const removeOptionHandler = (option) => {
     if (!readOnly) {
-    selectedOptionsSetter(selectedOptions.filter((o) => o.value !== option.value));
+      selectedOptionsSetter(selectedOptions.filter((o) => o.value !== option.value));
     }
   };
 
