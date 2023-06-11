@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
-import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
+import Radio from '@/common/components/custom-radio/custom-radio.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 
 export default function FormForManageTerms({
@@ -20,7 +20,7 @@ export default function FormForManageTerms({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="tw-mb-5 tw-flex tw-flex-col tw-gap-[18px]">
         <div className="payment-details-bank">
-          <CustomRadio
+          <Radio
             label="payment terms as date"
             name="radio"
             type="radio"
@@ -46,7 +46,7 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-card">
-          <CustomRadio
+          <Radio
             label="Payment terms in days"
             name="radio"
             type="radio"
@@ -72,7 +72,7 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-bank">
-          <CustomRadio
+          <Radio
             label="Cash discount target as a date"
             name="radio"
             type="radio"
@@ -98,7 +98,7 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-card">
-          <CustomRadio
+          <Radio
             label="Discount and %"
             name="radio"
             type="radio"
@@ -124,7 +124,7 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-bank">
-          <CustomRadio
+          <Radio
             label="Discount amount"
             name="radio"
             type="radio"
@@ -150,7 +150,7 @@ export default function FormForManageTerms({
           )}
         </div>
         <div className="payment-details-card">
-          <CustomRadio
+          <Radio
             label="Total amount minus discount"
             name="radio"
             type="radio"
