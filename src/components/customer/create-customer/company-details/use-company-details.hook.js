@@ -244,6 +244,9 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     );
     const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
       const key = attr.replace('ac_', '');
+      if (key === 'gender' && !['MALE', 'FEMALE'].includes(value[attr])) {
+        return { ...accumulator };
+      }
       return { ...accumulator, [key]: value[attr] };
     }, {});
     const companyAddressesKeys = Object.keys(value).filter((attr) =>

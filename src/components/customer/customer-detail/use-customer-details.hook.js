@@ -15,7 +15,7 @@ export default function UseCustomerDetails() {
   const customerId = useRef(searchParams.get('id'));
   const [companyAddresses, setCompanyAddresses] = useState([]);
 
-  const [isAdditional, setIsAdditional] = useState(false);
+  const [isAdditional, setIsAdditional] = useState(true);
   const [isAdress, setIsAdress] = useState(true);
 
   const [allPriceGroup, setAllPriceGroup] = useState([]);
@@ -59,7 +59,7 @@ export default function UseCustomerDetails() {
       }
 
       const defaultValues = { ...data, paymentType: 'creditCard' };
-      if (data?.creditCardNumber === null || data?.creditCardNumber === '') {
+      if (data?.payemntDetailType === 'BANK') {
         defaultValues.paymentType = 'bankDetail';
       }
       setDefaultData(defaultValues);

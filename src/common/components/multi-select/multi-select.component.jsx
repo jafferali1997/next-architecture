@@ -72,12 +72,14 @@ export default function MultiSelect({
                         <div className="tw-max-w-full tw-flex-initial tw-text-xs tw-font-normal tw-leading-none">
                           {option?.label}
                         </div>
-                        <div
-                          className="tw-flex tw-flex-auto tw-flex-row-reverse"
-                          onClick={() => removeOptionHandler(option)}
-                        >
-                          <ClearIcon className="-tw-mr-1 tw-h-5 tw-w-5 tw-text-gray-400 hover:tw-cursor-pointer hover:tw-text-gray-700" />
-                        </div>
+                        {!readOnly && (
+                          <div
+                            className="tw-flex tw-flex-auto tw-flex-row-reverse"
+                            onClick={() => removeOptionHandler(option)}
+                          >
+                            <ClearIcon className="-tw-mr-1 tw-h-5 tw-w-5 tw-text-gray-400 hover:tw-cursor-pointer hover:tw-text-gray-700" />
+                          </div>
+                        )}
                       </div>
                     );
                   }
@@ -103,7 +105,7 @@ export default function MultiSelect({
                 </div>
               </div>
               <div className="tw-flex tw-items-center tw-pl-2 tw-text-gray-300">
-                {isClearable && selectedOptions?.length > 1 && (
+                {!readOnly && isClearable && selectedOptions?.length > 1 && (
                   <div onClick={clearAllClickHandler}>
                     <ClearIcon className="tw-mr-1 tw-h-5 tw-w-5 tw-text-gray-400 hover:tw-cursor-pointer hover:tw-text-gray-700" />
                   </div>

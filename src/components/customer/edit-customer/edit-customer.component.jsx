@@ -8,6 +8,8 @@ import MultiSelect from '@/common/components/multi-select/multi-select.component
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
+import PriceGroup from '../create-customer/personal-details/components/price-group/price-group.component';
+import DiscountGroup from '../create-customer/personal-details/components/discount-group/discount-group.component';
 
 export default function EditCustomer() {
   const {
@@ -24,7 +26,15 @@ export default function EditCustomer() {
     onSubmit,
     handleInputChange,
     companyAddresses,
-    handleAddInput
+    handleAddInput,
+    allPriceGroup,
+    setAllPriceGroup,
+    selectedPriceGroup,
+    setSelectedPriceGroup,
+    allDiscountGroup,
+    setAllDiscountGroup,
+    selectedDiscountGroup,
+    setSelectedDiscountGroup
   } = UseEditCustomer();
 
   return (
@@ -47,8 +57,8 @@ export default function EditCustomer() {
                   <Select
                     label="Gender"
                     options={[
-                      { id: 'male', value: 'MALE', label: 'Male' },
-                      { id: 'female', value: 'FEMALE', label: 'Female' }
+                      { id: 'MALE', value: 'MALE', label: 'MALE' },
+                      { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
                     ]}
                     placeholder="Select Gender"
                     name="gender"
@@ -112,25 +122,20 @@ export default function EditCustomer() {
                     errors={errors}
                   />
                   <div>
-                    <label className="group-label">Price Group</label>
-                    <MultiSelect
-                      options={[
-                        { id: '1', label: 'Test 1', value: 'test1' },
-                        { id: '2', label: 'Test 2', value: 'test2' },
-                        { id: '3', label: 'Test 3', value: 'test3' }
-                      ]}
-                      handleChange={() => {}}
+                    <PriceGroup
+                      options={allPriceGroup}
+                      setOptions={setAllPriceGroup}
+                      selectedOptions={selectedPriceGroup}
+                      setSelectedOptions={setSelectedPriceGroup}
                     />
                   </div>
                   <div>
                     <label className="group-label">Discount Group</label>
-                    <MultiSelect
-                      options={[
-                        { id: '1', label: 'Test 1', value: 'test1' },
-                        { id: '2', label: 'Test 2', value: 'test2' },
-                        { id: '3', label: 'Test 3', value: 'test3' }
-                      ]}
-                      handleChange={() => {}}
+                    <DiscountGroup
+                      options={allDiscountGroup}
+                      setOptions={setAllDiscountGroup}
+                      selectedOptions={selectedDiscountGroup}
+                      setSelectedOptions={setSelectedDiscountGroup}
                     />
                   </div>
                 </div>
@@ -270,6 +275,11 @@ export default function EditCustomer() {
                 {companyAddresses.map((value, index) => (
                   <div className="form-box-grid " key={value}>
                     <CustomInput
+                      name={`ca_id_${index + 1}`}
+                      type="hidden"
+                      register={register}
+                    />
+                    <CustomInput
                       placeholder="Enter label name"
                       type="text"
                       errors={errors}
@@ -307,8 +317,8 @@ export default function EditCustomer() {
                     <Select
                       label="Gender"
                       options={[
-                        { id: 'male', value: 'MALE', label: 'Male' },
-                        { id: 'female', value: 'FEMALE', label: 'Female' }
+                        { id: 'MALE', value: 'MALE', label: 'MALE' },
+                        { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
                       ]}
                       placeholder="Select Gender"
                       name="ac_gender"

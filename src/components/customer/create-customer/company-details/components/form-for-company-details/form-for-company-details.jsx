@@ -211,8 +211,8 @@ export default function FormForCompanyDetails({
           <Select
             label="Gender"
             options={[
-              { id: 'male', value: 'MALE', label: 'Male' },
-              { id: 'female', value: 'FEMALE', label: 'Female' }
+              { id: 'MALE', value: 'MALE', label: 'MALE' },
+              { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
             ]}
             placeholder="Select Gender"
             name="ac_gender"

@@ -13,8 +13,8 @@ import {
 } from '@/provider/features/customer/customer.slice';
 
 const validationSchema = yup.object({
-  termOfDelivery: yup.string().required('Term Of Delivery is required'),
-  termOfPayment: yup.string().required('Term Of Payment is required')
+  termOfDelivery: yup.string(),
+  termOfPayment: yup.string()
 });
 
 export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
@@ -60,9 +60,12 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
         let data = await dispatch(getSingleCustomer({ payload: id }));
         if (data.payload) {
           data = data.payload;
-          Object.keys(data).forEach((key) => setValue(key, data[key]));
-          setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
-          setSelectedValue(data.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
+          // Object.keys(data).forEach((key) => setValue(key, data[key]));
+          if (data?.termOfDelivery?.length > 0) {
+            setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
+          }
+          setSelectedValue(data?.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
+          setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
         }
       }
 
@@ -93,7 +96,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
     const payload = {
       customerId: Number(searchParams.get('id')),
       termOfPayment: selectedValue,
-      termOfPaymentData: value.termOfPaymentData,
+      termOfPaymentData: value[`${selectedValue}_DATA`],
       termOfDeliveries: [
         {
           termOfDelivery: value.termOfDelivery

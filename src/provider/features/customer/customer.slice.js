@@ -111,7 +111,7 @@ export const createCustomerCompanyDetail = createAsyncThunk(
 
 export const createCustomerTermOfPaymentAndDelivey = createAsyncThunk(
   'customer/createTermOfPaymentAndDelivey',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.createCustomerTermOfPaymentAndDelivey(
         payload
@@ -173,7 +173,7 @@ export const updateCustomer = createAsyncThunk(
 
 export const deleteCustomer = createAsyncThunk(
   'customer/delete',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.deleteCustomer(payload);
       if (response.Succeeded) {
