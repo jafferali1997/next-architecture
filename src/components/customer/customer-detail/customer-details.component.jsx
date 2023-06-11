@@ -23,7 +23,12 @@ export default function CustomerDetails() {
     handleSubmit,
     id,
     onSubmit,
-    companyAddresses
+    companyAddresses,
+    allPriceGroup,
+    selectedPriceGroup,
+    allDiscountGroup,
+    selectedDiscountGroup,
+    defaultData
   } = UseCustomerDetails();
 
   return (
@@ -117,23 +122,19 @@ export default function CustomerDetails() {
                   <div>
                     <label className="group-label">Price Group</label>
                     <MultiSelect
-                      options={[
-                        { id: '1', label: 'Test 1', value: 'test1' },
-                        { id: '2', label: 'Test 2', value: 'test2' },
-                        { id: '3', label: 'Test 3', value: 'test3' }
-                      ]}
+                      options={allPriceGroup}
+                      defaultOptions={selectedPriceGroup}
                       handleChange={() => {}}
+                      readOnly
                     />
                   </div>
                   <div>
                     <label className="group-label">Discount Group</label>
                     <MultiSelect
-                      options={[
-                        { id: '1', label: 'Test 1', value: 'test1' },
-                        { id: '2', label: 'Test 2', value: 'test2' },
-                        { id: '3', label: 'Test 3', value: 'test3' }
-                      ]}
+                      options={allDiscountGroup}
+                      defaultOptions={selectedDiscountGroup}
                       handleChange={() => {}}
+                      readOnly
                     />
                   </div>
                 </div>
@@ -229,15 +230,17 @@ export default function CustomerDetails() {
                 <div className="tw-grid tw-grid-cols-[repeat(auto-fill,minmax(175px,1fr))] tw-gap-[15px] tw-py-[16px]">
                   <CustomSwitch
                     label="Current Status"
-                    name="status"
+                    name="isStatus"
                     type="switch"
+                    checked={defaultData.isStatus}
                     register={register}
                     readOnly
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
-                    name="isShowInPdf"
+                    name="isPDF"
                     type="switch"
+                    checked={defaultData.isPDF}
                     register={register}
                     readOnly
                   />
@@ -245,6 +248,7 @@ export default function CustomerDetails() {
                     label="VAT exempt"
                     name="vatStatus"
                     type="switch"
+                    checked={defaultData.vatStatus}
                     register={register}
                     readOnly
                   />
@@ -433,12 +437,7 @@ export default function CustomerDetails() {
                     <CustomRadio
                       label="Bank Details"
                       name="same"
-                      // checked={bankDetail}
-                      // onChange={(e) => {
-                      //   setBankDetail(e.target.checked);
-                      //   setCreditCard(!e.target.checked);
-                      // }}
-                      placeholder="Company Name"
+                      checked={defaultData.paymentType === 'bankDetail'}
                       type="radio"
                       register={register}
                       readOnly
@@ -448,15 +447,10 @@ export default function CustomerDetails() {
                     <CustomRadio
                       label="Credit Card Details"
                       name="same"
-                      // checked={creditCard}
-                      // onChange={(e) => {
-                      //   setCreditCard(e.target.checked);
-                      //   setBankDetail(!e.target.checked);
-                      // }}
-                      placeholder="Company Name"
+                      checked={defaultData.paymentType === 'creditCard'}
                       type="radio"
                       register={register}
-                      error
+                      readOnly
                     />
                   </div>
                 </div>
@@ -545,7 +539,7 @@ export default function CustomerDetails() {
                   />
                   <h3 className="tw-mt-[16px]">Terms of delivery</h3>
                   <TextArea
-                    name="deliveryTerm"
+                    name="termOfDelivery"
                     placeholder="Delivery Terms"
                     type="textarea"
                     register={register}

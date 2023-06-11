@@ -17,6 +17,14 @@ export default function UseCustomerDetails() {
 
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
+
+  const [allPriceGroup, setAllPriceGroup] = useState([]);
+  const [selectedPriceGroup, setSelectedPriceGroup] = useState([]);
+  const [allDiscountGroup, setAllDiscountGroup] = useState([]);
+  const [selectedDiscountGroup, setSelectedDiscountGroup] = useState([]);
+
+  const [defaultData, setDefaultData] = useState({});
+
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
   };
@@ -48,6 +56,31 @@ export default function UseCustomerDetails() {
           return { id: index + 1 };
         });
         setCompanyAddresses(newcompanyAddresses);
+      }
+
+      const defaultValues = { ...data, paymentType: 'creditCard' };
+      if (data?.creditCardNumber === null || data?.creditCardNumber === '') {
+        defaultValues.paymentType = 'bankDetail';
+      }
+      setDefaultData(defaultValues);
+
+      if (data?.priceGroup?.length > 0) {
+        setSelectedPriceGroup(
+          data.priceGroup.map((item) => ({
+            id: `${item.id}`,
+            value: `${item.id}`,
+            label: item.priceGroupName
+          }))
+        );
+      }
+      if (data?.discountGroup?.length > 0) {
+        setSelectedDiscountGroup(
+          data.discountGroup.map((item) => ({
+            id: `${item.id}`,
+            value: `${item.id}`,
+            label: item.discountGroupName
+          }))
+        );
       }
     }
     const data = {
@@ -112,8 +145,6 @@ export default function UseCustomerDetails() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  const onSubmit = (data) => {};
-
   return {
     isAdditional,
     setIsAdditional,
@@ -124,7 +155,11 @@ export default function UseCustomerDetails() {
     register,
     handleSubmit,
     id: customerId.current,
-    onSubmit,
-    companyAddresses
+    companyAddresses,
+    selectedDiscountGroup,
+    selectedPriceGroup,
+    allDiscountGroup,
+    allPriceGroup,
+    defaultData
   };
 }

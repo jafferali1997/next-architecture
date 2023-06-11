@@ -18,7 +18,8 @@ export default function MultiSelect({
   isClearable = true,
   maxDisplayOptions = 4,
   defaultOptions = null,
-  addClickHandler = null
+  addClickHandler = null,
+  readOnly = false
 }) {
   const {
     open,
@@ -34,12 +35,12 @@ export default function MultiSelect({
     clearAllClickHandler,
     handleInputChangeHandler,
     isSearching
-  } = useMultiSelect(options, handleChange, defaultOptions, search);
+  } = useMultiSelect(options, handleChange, defaultOptions, search, readOnly);
 
   const renderOptions = (options) => {
     return options?.map((option, index) => (
       <div
-        key={option.id}
+        key={option?.id}
         className={`noCloseOptions tw-w-full tw-cursor-pointer tw-border-gray-100 hover:tw-bg-teal-100 ${isSelectedClass(
           option
         )} ${index !== 0 ? 'tw-border-t' : ''}`}
@@ -47,7 +48,7 @@ export default function MultiSelect({
       >
         <div className="noCloseOptions tw-relative tw-flex tw-w-full tw-items-center tw-border-l-2 tw-border-transparent tw-p-2 tw-pl-2 hover:tw-border-teal-100">
           <div className="noCloseOptions tw-flex tw-w-full tw-items-center">
-            <div className="noCloseOptions tw-mx-2 tw-leading-6">{option.label}</div>
+            <div className="noCloseOptions tw-mx-2 tw-leading-6">{option?.label}</div>
           </div>
         </div>
       </div>
@@ -65,11 +66,11 @@ export default function MultiSelect({
                   if (index < maxDisplayOptions) {
                     return (
                       <div
-                        key={option.id}
+                        key={option?.id}
                         className="tw-m-1 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-teal-300 tw-bg-teal-100 tw-px-2 tw-py-1 tw-font-medium tw-text-teal-700 "
                       >
                         <div className="tw-max-w-full tw-flex-initial tw-text-xs tw-font-normal tw-leading-none">
-                          {option.label}
+                          {option?.label}
                         </div>
                         <div
                           className="tw-flex tw-flex-auto tw-flex-row-reverse"
@@ -97,6 +98,7 @@ export default function MultiSelect({
                     className="click-text tw-h-full tw-w-full tw-appearance-none tw-bg-transparent tw-p-1 tw-px-2 tw-text-gray-800 tw-outline-none"
                     onClick={toggleDropDown}
                     onChange={handleInputChangeHandler}
+                    readOnly={readOnly}
                   />
                 </div>
               </div>
@@ -164,5 +166,6 @@ MultiSelect.propTypes = {
   search: PropTypes.bool,
   isClearable: PropTypes.bool,
   maxDisplayOptions: PropTypes.number,
-  defaultOptions: PropTypes.arrayOf(optionShape)
+  defaultOptions: PropTypes.arrayOf(optionShape),
+  readOnly: PropTypes.bool
 };

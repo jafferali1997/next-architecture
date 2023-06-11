@@ -239,31 +239,31 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
 
   const onSubmit = async (value) => {
     console.log(value);
-    // const additionalContactKeys = Object.keys(value).filter((attr) =>
-    //   attr.startsWith('ac')
-    // );
-    // const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
-    //   const key = attr.replace('ac_', '');
-    //   return { ...accumulator, [key]: value[attr] };
-    // }, {});
-    // const companyAddressesKeys = Object.keys(value).filter((attr) =>
-    //   attr.startsWith('ca')
-    // );
-    // const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
-    //   if (index % 2 === 0) {
-    //     const obj = {
-    //       addressLabel: value[curr],
-    //       address: value[arr[index + 1]]
-    //     };
-    //     acc.push(obj);
-    //   }
-    //   return acc;
-    // }, []);
+    const additionalContactKeys = Object.keys(value).filter((attr) =>
+      attr.startsWith('ac')
+    );
+    const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
+      const key = attr.replace('ac_', '');
+      return { ...accumulator, [key]: value[attr] };
+    }, {});
+    const companyAddressesKeys = Object.keys(value).filter((attr) =>
+      attr.startsWith('ca')
+    );
+    const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
+      if (index % 2 === 0) {
+        const obj = {
+          addressLabel: value[curr],
+          address: value[arr[index + 1]]
+        };
+        acc.push(obj);
+      }
+      return acc;
+    }, []);
     const payload = {
       ...value,
       customerId: Number(searchParams.get('id')),
-      // additionalContact: [additionalContact],
-      // companyAddress: companyAddresses,
+      additionalContact: [additionalContact],
+      companyAddress: companyAddresses,
       tin: Number(value.tin)
     };
     console.log(payload);

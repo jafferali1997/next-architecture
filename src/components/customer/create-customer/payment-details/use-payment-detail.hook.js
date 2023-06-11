@@ -85,35 +85,35 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   if (!bankDetail) {
-  //     const validationCreditSchema = yup.object({
-  //       // Define your validation rules here.
-  //       creditCardName: yup
-  //         .string()
-  //         .max(50, 'Credit Card Name must be at most 50 characters long')
-  //         .min(1, 'Credit Card Name must be minimum 1 characters')
-  //         .required('Credit Card Name is required'),
-  //       creditCardNo: yup
-  //         .number()
-  //         // .test(
-  //         //   'test-number',
-  //         //   'Credit Card number is invalid',
-  //         //   (value) => cardValidator.number(value).isValid
-  //         // )
-  //         .required('Credit Card Number is required'),
-  //       cvv: yup
-  //         .string()
-  //         .matches(/^[0-9]{3,4}$/, 'CVV must be at most 3 or 4 characters long')
-  //         .required('CVV is required'),
-  //       creditCardExpiry: yup.string().required('Credit Card Expiry is required')
-  //     });
-  //     setValidationSchemaState(validationCreditSchema);
-  //   }
-  //   if (bankDetail) {
-  //     setValidationSchemaState(validationSchema);
-  //   }
-  // }, [bankDetail]);
+  useEffect(() => {
+    if (paymentType !== 'bankDetails') {
+      const validationCreditSchema = yup.object({
+        // Define your validation rules here.
+        creditCardName: yup
+          .string()
+          .max(50, 'Credit Card Name must be at most 50 characters long')
+          .min(1, 'Credit Card Name must be minimum 1 characters')
+          .required('Credit Card Name is required'),
+        creditCardNo: yup
+          .number()
+          // .test(
+          //   'test-number',
+          //   'Credit Card number is invalid',
+          //   (value) => cardValidator.number(value).isValid
+          // )
+          .required('Credit Card Number is required'),
+        cvv: yup
+          .string()
+          .matches(/^[0-9]{3}$/, 'CVV must be at most 3 characters long')
+          .required('CVV is required'),
+        creditCardExpiry: yup.string().required('Credit Card Expiry is required')
+      });
+      setValidationSchemaState(validationCreditSchema);
+    }
+    if (paymentType === 'bankDetails') {
+      setValidationSchemaState(validationSchema);
+    }
+  }, [paymentType]);
 
   const onSubmit = async (value) => {
     console.log(value);

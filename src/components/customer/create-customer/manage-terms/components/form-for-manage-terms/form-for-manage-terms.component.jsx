@@ -303,7 +303,7 @@ export default function FormForManageTerms({
       <div className="form-row-two-col">
         <TextArea
           name="termOfDelivery"
-          defaultValue={data.deliveryTerm}
+          defaultValue={data.deliveryTerm[0].termOfDelivery}
           placeholder="Delivery Terms"
           type="textarea"
           isRequired={true}

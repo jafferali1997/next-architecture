@@ -211,7 +211,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Gender"
             register={register}
-            name="gender"
+            name="ac_gender"
             placeholder="John"
             type="select"
             errors={errors}
@@ -223,7 +223,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Designation"
             register={register}
-            name="designation"
+            name="ac_designation"
             placeholder="Designation"
             type="text"
             errors={errors}
@@ -231,7 +231,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="First Name"
             register={register}
-            name="firstName"
+            name="ac_firstName"
             placeholder="First Name"
             type="text"
             errors={errors}
@@ -239,7 +239,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Last Name"
             register={register}
-            name="lastName"
+            name="ac_lastName"
             placeholder="Last Name"
             type="text"
             errors={errors}
@@ -247,7 +247,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Address"
             register={register}
-            name="address"
+            name="ac_address"
             placeholder="Address"
             type="text"
             errors={errors}
@@ -256,7 +256,7 @@ export default function FormForCompanyDetails({
           <Select
             label="Country"
             register={register}
-            name="country"
+            name="ac_country"
             placeholder="Country"
             type="select"
             onChange={handleCountryChange}
@@ -268,7 +268,7 @@ export default function FormForCompanyDetails({
           <Select
             label="City"
             register={register}
-            name="city"
+            name="ac_city"
             placeholder="City"
             type="select"
             value={selectedCity}
@@ -279,7 +279,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Postal Code"
             register={register}
-            name="postalCode"
+            name="ac_postalCode"
             placeholder="Postal Code"
             type="text"
             errors={errors}
@@ -287,7 +287,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Email Address"
             register={register}
-            name="email"
+            name="ac_email"
             placeholder="Email Address"
             type="text"
             errors={errors}
@@ -295,7 +295,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Phone Number"
             register={register}
-            name="phone"
+            name="ac_phone"
             placeholder="Phone Number"
             type="number"
             errors={errors}
@@ -303,7 +303,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Mobile Number"
             register={register}
-            name="mobile"
+            name="ac_mobile"
             placeholder="Mobile Number"
             type="number"
             errors={errors}
@@ -311,7 +311,7 @@ export default function FormForCompanyDetails({
           <CustomInput
             label="Department"
             register={register}
-            name="department"
+            name="ac_department"
             placeholder="Department"
             type="text"
             errors={errors}

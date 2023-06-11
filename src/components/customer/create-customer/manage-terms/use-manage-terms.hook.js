@@ -61,7 +61,7 @@ export default function useMangeTerm({ handleTabClick, resetTabCompleted }) {
         if (data.payload) {
           data = data.payload;
           Object.keys(data).forEach((key) => setValue(key, data[key]));
-          setValue('termOfDelivery', data.termOfDeliveries[0].termOfDelivery);
+          setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
           setSelectedValue(data.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
         }
       }
