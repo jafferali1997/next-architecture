@@ -4,6 +4,8 @@ import PlusIcon from '@/common/icons/plus.icon';
 import CustomTable from '@/common/components/custom-table/custom-table.component';
 import useCustomer from './use-customer.hook';
 import Toaster from '@/common/components/toaster/toaster.component';
+import CustomInput from '@/common/components/custom-input/custom-input.component';
+import SearchIcon from '@/common/icons/search-icon';
 
 export default function Customer() {
   const {
@@ -41,9 +43,13 @@ export default function Customer() {
             <div className="tw-flex tw-h-[66px] tw-w-full tw-items-center tw-justify-between tw-bg-[#BBBBBB1A]">
               <div className="tw-flex tw-items-center tw-gap-[16px]">
                 <div className="tw-h-[42px] tw-min-w-[323px]  tw-bg-white">
-                  input here
+                  <CustomInput
+                    placeholder="Search"
+                    type="text"
+                    startIcon={<SearchIcon />}
+                  />
                 </div>
-                <img src="/assets/images/filter-icon.svg" alt="img" />
+                {/* <img src="/assets/images/filter-icon.svg" alt="img" /> */}
               </div>
               <div className="tw-relative">
                 <button

@@ -158,13 +158,12 @@ export default function useCustomer() {
     router.push(`/customer/details?id=${row.id}`);
   };
 
-  const handleDeleteAction = (row) => {
+  const handleDeleteAction = async (row) => {
     console.log(row.id, typeof row.id);
-    const data = dispatch(deleteCustomer({ payload: row.id }));
-    if (data) {
-      // show toaster
-      // showToaster(true);
-      // setToasterMsg('Customer deleted successfully');
+    const data = await dispatch(deleteCustomer({ payload: row.id }));
+    console.log(data, 'delete data');
+    if (data?.payload) {
+      fetchData();
     }
   };
 
@@ -196,7 +195,7 @@ export default function useCustomer() {
         }
       })
     );
-    // const data = {
+
     //   records: [
     //     {
     //       id: 6,

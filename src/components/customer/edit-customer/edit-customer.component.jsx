@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import Link from 'next/link';
 import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
@@ -51,7 +52,9 @@ export default function EditCustomer() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
             <div className="tw-flex tw-items-center tw-gap-[16px]">
+            <Link href="/customer">
               <img src="/assets/images/back-icon.svg" alt="img" />
+              </Link>
               <h1 className="admin-top-heading ">Customer Edit</h1>
               <p className="admin-top-p">Customer # {id}</p>
             </div>
@@ -60,7 +63,7 @@ export default function EditCustomer() {
           <div className="2bars tw-flex tw-gap-[24px]">
             <div className="main-content">
               <div className="form-box tw-w-[759px] ">
-                <h3 className="form-box-heading ">Personal Details</h3>
+                <h3 className="form-box-heading ">Personal Details</h3>s
                 <div className="form-box-grid">
                   <Select
                     label="Gender"
