@@ -429,9 +429,11 @@ body {
 
 
 
-
+/* input form control design override */
 .react-tel-input .form-control{
 
   background-color: green;
   width: 100% !important;
 }
+
+/*  */
