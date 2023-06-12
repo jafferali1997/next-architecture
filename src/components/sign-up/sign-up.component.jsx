@@ -175,7 +175,7 @@ function SignUp() {
                   disabled={!isChecked}
                 />
               </div>
-              <div className="form-or-content">
+              <div className="form-or-content tw-mt-4">
                 <div className="form-or-content-line" />
                 <span className="form-or-content-span ">Or</span>
                 <div className="form-or-content-line" />

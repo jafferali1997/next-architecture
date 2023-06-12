@@ -1,12 +1,17 @@
 /* eslint-disable react/no-array-index-key */
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material/node';
 import { TagsInput } from 'react-tag-input-component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
-import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
 import UseCreateProduct from './use-create-product.hook';
+import GroupIcon from '@/common/icons/group.icon';
+import DeleteIcon from '@/common/icons/delete.icon';
+import PencilIcon from '@/common/icons/pencil.icon';
+import HorizentalDotsIcon from '@/common/icons/horizental-dots.icon';
+import PlusIcon from '@/common/icons/plus.icon';
 
 export default function CreateProduct() {
   const {
@@ -19,11 +24,30 @@ export default function CreateProduct() {
     handleAddPriceInput,
     handlePriceInputChange,
     discountInputValues,
+    priceInputValue,
+    setPriceInputValue,
+    priceValues,
+    setPriceValues,
+    handleAddPriceClick,
     setDiscountInputValues,
     handleAddDiscountInput,
     handleDiscountInputChange,
+    handleThreeMenu,
+    threeDot,
+    ref,
+    openPopup,
+    setOpenPopup,
     selectedTag,
-    setSelectedTag
+    setSelectedTag,
+    discountValues,
+    setDiscountValues,
+    discountInputValue,
+    setDiscountInputValue,
+    handleAddDiscountClick,
+    priceMenuPopup,
+    setpriceMenuPopup,
+    discountMenuPopup,
+    setdiscountMenuPopup
   } = UseCreateProduct();
   return (
     <div className="content">
@@ -224,6 +248,94 @@ export default function CreateProduct() {
                   Add more group
                 </span>
               </div>
+              {priceValues?.map((value, index) => (
+                <div className="tw-my-5 tw-flex tw-h-[79px] tw-w-[296px] tw-flex-row tw-items-start tw-justify-between  tw-gap-3 tw-rounded-md tw-px-4 tw-py-[18px] tw-shadow-[0px_0px_10px_rgba(29,78,216,0.07)]">
+                  <div className="tw-flex tw-items-center  tw-gap-3">
+                    <div>
+                      <GroupIcon />
+                    </div>
+                    <div className="tw-flex-col tw-items-center  tw-gap-3">
+                      <h4 className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-medium-gray">
+                        Group 1
+                      </h4>
+                      <p className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                        32
+                      </p>
+                    </div>
+                  </div>
+                  <Dialog open={openPopup}>
+                    <div ref={ref} className="tw-w-[389px]">
+                      <div>
+                        <DialogTitle>Group</DialogTitle>
+                      </div>
+                      <DialogContent>
+                        <CustomInput
+                          placeholder="Group"
+                          label="Group Name"
+                          type="text"
+                          // value={updateValue}
+                          // onChange={(e) => setUpdateValue(e.target.value)}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <CustomButton
+                          onClick={() => setOpenPopup(false)}
+                          className=" btn-cancel"
+                          text="Cancel"
+                        />
+                        <CustomButton
+                          className="btn btn-primary "
+                          text="Update"
+                          onClick={() => {
+                            setOpenPopup(false);
+                            //   handleUpdateCategory(idToUpdateCategory, updateValue);
+                            //   setUpdateValue('');
+                          }}
+                        />
+                      </DialogActions>
+                    </div>
+                  </Dialog>
+                  <div className="tw-relative" onClick={handleThreeMenu}>
+                    <div className="hover:tw-cursor-pointer">
+                      <HorizentalDotsIcon />
+                    </div>
+                    {threeDot ? (
+                      <div
+                        ref={ref}
+                        className="tw-absolute tw-bottom-[-66px] tw-left-[-100px] tw-flex tw-h-[74px] tw-w-[92px] tw-flex-col tw-items-start tw-gap-2 tw-rounded-md tw-border tw-border-solid tw-border-[#CECECE] tw-bg-white tw-p-3 "
+                      >
+                        <div
+                          id="three-dot-div-4"
+                          className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0 hover:tw-cursor-pointer"
+                          // onClick={() => handleButtonClickedit(id, value)}
+                          onClick={() => setOpenPopup(true)}
+                        >
+                          <PencilIcon id="three-dot-pencil" />
+                          <p
+                            id="three-dot-p"
+                            className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-black"
+                          >
+                            Edit
+                          </p>
+                        </div>
+                        <div
+                          id="three-dot-div-5"
+                          className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0 hover:tw-cursor-pointer"
+                          // onClick={() => handleDeleteCategory(id)}
+                        >
+                          <DeleteIcon id="three-dot-delete" />
+                          <p
+                            id="three-dot-div-6"
+                            className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-black"
+                          >
+                            Delete
+                          </p>
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
               {priceInputValues.map((value, index) => (
                 <div
                   key={index}
@@ -245,6 +357,12 @@ export default function CreateProduct() {
                     placeholder="Enter Price "
                     type="text"
                   />
+                  <CustomButton
+                    text="Add"
+                    startIcon={<PlusIcon />}
+                    onClick={handleAddPriceClick}
+                    className="btn-primary"
+                  />
                 </div>
               ))}
             </div>
@@ -255,6 +373,94 @@ export default function CreateProduct() {
                   Add more group
                 </span>
               </div>
+              {discountValues?.map((value, index) => (
+                <div className="tw-my-5 tw-flex tw-h-[79px] tw-w-[296px] tw-flex-row tw-items-start tw-justify-between  tw-gap-3 tw-rounded-md tw-px-4 tw-py-[18px] tw-shadow-[0px_0px_10px_rgba(29,78,216,0.07)]">
+                  <div className="tw-flex tw-items-center  tw-gap-3">
+                    <div>
+                      <GroupIcon />
+                    </div>
+                    <div className="tw-flex-col tw-items-center  tw-gap-3">
+                      <h4 className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-medium-gray">
+                        Group 1
+                      </h4>
+                      <p className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                        32
+                      </p>
+                    </div>
+                  </div>
+                  <Dialog open={openPopup}>
+                    <div ref={ref} className="tw-w-[389px]">
+                      <div>
+                        <DialogTitle>Group</DialogTitle>
+                      </div>
+                      <DialogContent>
+                        <CustomInput
+                          placeholder="Group"
+                          label="Group Name"
+                          type="text"
+                          // value={updateValue}
+                          // onChange={(e) => setUpdateValue(e.target.value)}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <CustomButton
+                          onClick={() => setOpenPopup(false)}
+                          className=" btn-cancel"
+                          text="Cancel"
+                        />
+                        <CustomButton
+                          className="btn btn-primary "
+                          text="Update"
+                          onClick={() => {
+                            setOpenPopup(false);
+                            //   handleUpdateCategory(idToUpdateCategory, updateValue);
+                            //   setUpdateValue('');
+                          }}
+                        />
+                      </DialogActions>
+                    </div>
+                  </Dialog>
+                  <div className="tw-relative" onClick={handleThreeMenu}>
+                    <div className="hover:tw-cursor-pointer">
+                      <HorizentalDotsIcon />
+                    </div>
+                    {threeDot ? (
+                      <div
+                        ref={ref}
+                        className="tw-absolute tw-bottom-[-66px] tw-left-[-100px] tw-flex tw-h-[74px] tw-w-[92px] tw-flex-col tw-items-start tw-gap-2 tw-rounded-md tw-border tw-border-solid tw-border-[#CECECE] tw-bg-white tw-p-3 "
+                      >
+                        <div
+                          id="three-dot-div-4"
+                          className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0 hover:tw-cursor-pointer"
+                          // onClick={() => handleButtonClickedit(id, value)}
+                          onClick={() => setOpenPopup(true)}
+                        >
+                          <PencilIcon id="three-dot-pencil" />
+                          <p
+                            id="three-dot-p"
+                            className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-black"
+                          >
+                            Edit
+                          </p>
+                        </div>
+                        <div
+                          id="three-dot-div-5"
+                          className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0 hover:tw-cursor-pointer"
+                          // onClick={() => handleDeleteCategory(id)}
+                        >
+                          <DeleteIcon id="three-dot-delete" />
+                          <p
+                            id="three-dot-div-6"
+                            className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-black"
+                          >
+                            Delete
+                          </p>
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
               {discountInputValues.map((value, index) => (
                 <div
                   key={index}
@@ -275,6 +481,12 @@ export default function CreateProduct() {
                     name="Price "
                     placeholder="Enter Price "
                     type="text"
+                  />
+                  <CustomButton
+                    text="Add"
+                    startIcon={<PlusIcon />}
+                    onClick={handleAddDiscountClick}
+                    className="btn-primary"
                   />
                 </div>
               ))}
