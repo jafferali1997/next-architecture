@@ -18,7 +18,8 @@ export default function TextArea({
   isRequired = false,
   inlineLabel = false,
   labelClassName = '',
-  readOnly = false
+  readOnly = false,
+  register = null
 }) {
   return (
     <div
@@ -30,11 +31,12 @@ export default function TextArea({
 
       <div className="tw-w-full">
         <TextareaAutosize
+          {...(register && register(`${name}`))}
           minRows={minRows}
           maxRows={maxRows}
           placeholder={placeholder}
           className={`input-field default-input tw-min hover:tw-border-text-dark-gray focus:tw-border-[1px] focus:tw-border-text-dark-gray ${
-            errors && 'error-field'
+            errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
           name={name}
           {...(defaultValue && { defaultValue })}
@@ -68,5 +70,6 @@ TextArea.propTypes = {
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
   labelClassName: PropTypes.string,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  register: PropTypes.func
 };

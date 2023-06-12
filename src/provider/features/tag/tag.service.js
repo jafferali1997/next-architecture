@@ -5,6 +5,11 @@ const createTag = async (userData) => {
   return response.data;
 };
 
+const getOrCreateTag = async (userData) => {
+  const response = await api().post('/tags/get-or-create', userData);
+  return response.data;
+};
+
 const getSingleTag = async (id) => {
   const response = await api().get(`/tags/${id}`);
   return response.data;
@@ -30,7 +35,8 @@ const tagService = {
   deleteTag,
   updateTag,
   getAllTag,
-  getSingleTag
+  getSingleTag,
+  getOrCreateTag
 };
 
 export default tagService;

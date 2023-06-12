@@ -11,16 +11,36 @@ const initialState = {
     isLoading: false,
     message: ''
   },
+  getOrCreate: {
+    data: null,
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: ''
+  },
   getAll: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' },
   detlete: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' }
 };
 
-export const createTag = createAsyncThunk(
-  'tag/create',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+export const createTag = createAsyncThunk('tag/create', async ({ payload }, thunkAPI) => {
+  try {
+    const response = await tagService.createTag(payload);
+    if (response.Succeeded) {
+      return response.data;
+    }
+    return thunkAPI.rejectWithValue(response);
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ payload: error });
+  }
+});
+
+export const getOrCreateTag = createAsyncThunk(
+  'tag/getOrCreate',
+  async ({ payload, successCallback }, thunkAPI) => {
     try {
-      const response = await tagService.createTag(payload);
+      const response = await tagService.getOrCreateTag(payload);
       if (response.Succeeded) {
+        successCallback(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
@@ -30,39 +50,33 @@ export const createTag = createAsyncThunk(
   }
 );
 
-export const getSingleTag = createAsyncThunk(
-  'tag/get',
-  async ({ payload, callBackMessage }, thunkAPI) => {
-    try {
-      const response = await tagService.getSingleTag(payload);
-      if (response.Succeeded) {
-        return response.data;
-      }
-      return thunkAPI.rejectWithValue(response);
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ payload: error });
+export const getSingleTag = createAsyncThunk('tag/get', async ({ payload }, thunkAPI) => {
+  try {
+    const response = await tagService.getSingleTag(payload);
+    if (response.Succeeded) {
+      return response.data;
     }
+    return thunkAPI.rejectWithValue(response);
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ payload: error });
   }
-);
+});
 
-export const getAllTag = createAsyncThunk(
-  'tag/getAll',
-  async ({ payload, callBackMessage }, thunkAPI) => {
-    try {
-      const response = await tagService.getAllTag();
-      if (response.Succeeded) {
-        return response.data;
-      }
-      return thunkAPI.rejectWithValue(response);
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ payload: error });
+export const getAllTag = createAsyncThunk('tag/getAll', async ({ payload }, thunkAPI) => {
+  try {
+    const response = await tagService.getAllTag();
+    if (response.Succeeded) {
+      return response.data;
     }
+    return thunkAPI.rejectWithValue(response);
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ payload: error });
   }
-);
+});
 
 export const updateTag = createAsyncThunk(
   'tag/update',
-  async ({ payload: { id, data }, callBackMessage }, thunkAPI) => {
+  async ({ payload: { id, data } }, thunkAPI) => {
     try {
       const response = await tagService.updateTag(id, data);
       if (response.Succeeded) {
@@ -75,20 +89,17 @@ export const updateTag = createAsyncThunk(
   }
 );
 
-export const deleteTag = createAsyncThunk(
-  'tag/delete',
-  async ({ payload, callBackMessage }, thunkAPI) => {
-    try {
-      const response = await tagService.deleteTag(payload);
-      if (response.Succeeded) {
-        return response.data;
-      }
-      return thunkAPI.rejectWithValue(response);
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ payload: error });
+export const deleteTag = createAsyncThunk('tag/delete', async ({ payload }, thunkAPI) => {
+  try {
+    const response = await tagService.deleteTag(payload);
+    if (response.Succeeded) {
+      return response.data;
     }
+    return thunkAPI.rejectWithValue(response);
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ payload: error });
   }
-);
+});
 
 export const tagSlice = createSlice({
   name: 'tag',
@@ -96,6 +107,24 @@ export const tagSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getOrCreateTag.pending, (state) => {
+        state.getOrCreate.isLoading = true;
+        state.getOrCreate.message = '';
+        state.getOrCreate.isError = false;
+        state.getOrCreate.isSuccess = false;
+        state.getOrCreate.data = null;
+      })
+      .addCase(getOrCreateTag.fulfilled, (state, action) => {
+        state.getOrCreate.isLoading = false;
+        state.getOrCreate.isSuccess = true;
+        state.getOrCreate.data = action.payload;
+      })
+      .addCase(getOrCreateTag.rejected, (state, action) => {
+        state.getOrCreate.message = action.payload.message;
+        state.getOrCreate.isLoading = false;
+        state.getOrCreate.isError = true;
+        state.getOrCreate.data = null;
+      })
       .addCase(createTag.pending, (state) => {
         state.create.isLoading = true;
         state.create.message = '';

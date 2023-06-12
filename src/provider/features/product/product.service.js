@@ -10,8 +10,8 @@ const getSingleProduct = async (id) => {
   return response.data;
 };
 
-const getAllProduct = async () => {
-  const response = await api().get('/product');
+const getAllProduct = async (data) => {
+  const response = await api().post('/product/get-all', data);
   return response.data;
 };
 

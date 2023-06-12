@@ -1,12 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getOrCreateTag } from '@/provider/features/tag/tag.slice';
+import useCreateCategories from '@/components/categories/use-create-categories.hooks';
 
 export default function UseCreateProduct() {
+  const dispatch = useDispatch();
   const [inputValues, setInputValues] = useState(['']);
   const [priceInputValues, setPriceInputValues] = useState(['']);
   const [discountInputValues, setDiscountInputValues] = useState(['']);
-  const [selectedTag, setSelectedTag] = useState(['papaya']);
+  const [selectedTag, setSelectedTag] = useState([]);
+
+  const { categories, handleClickCategory } = useCreateCategories();
+
   const handleAddInput = () => {
     setInputValues([...inputValues, '']);
   };
@@ -32,6 +39,17 @@ export default function UseCreateProduct() {
     newInputValues[index] = value;
     setDiscountInputValues(newInputValues);
   };
+
+  const handleSelectedTags = (data) => {
+    setSelectedTag([...selectedTag, data]);
+  };
+
+  const handleTags = (data) => {
+    dispatch(
+      getOrCreateTag({ payload: { tagName: data }, successCallback: handleSelectedTags })
+    );
+  };
+
   return {
     handleAddInput,
     handleInputChange,
@@ -46,6 +64,6 @@ export default function UseCreateProduct() {
     handleAddDiscountInput,
     handleDiscountInputChange,
     selectedTag,
-    setSelectedTag
+    handleTags
   };
 }

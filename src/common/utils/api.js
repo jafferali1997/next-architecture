@@ -43,11 +43,10 @@ const api = (headers = null) => {
         });
         throw error;
       }
-      if (error.response.status === 401) {
+      if (error.response.status === 401 && window === 'object') {
         localStorage.removeItem('user');
         window.location.href = '/';
       }
-
       let { message } = error.response.data;
 
       if (!message) {
