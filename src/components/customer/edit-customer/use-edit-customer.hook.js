@@ -40,10 +40,11 @@ const validationSchema = yup.object({
 });
 
 export default function UseEditCustomer() {
-  const [companyAddresses, setCompanyAddresses] = useState([{ id: 1 }]);
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const [companyAddresses, setCompanyAddresses] = useState([{ id: 1 }]);
 
   const [allPriceGroup, setAllPriceGroup] = useState([]);
   const [selectedPriceGroup, setSelectedPriceGroup] = useState([]);
@@ -56,9 +57,19 @@ export default function UseEditCustomer() {
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
 
-  const [paymentType, setPaymentType] = useState('BANK');
+  const [paymentType, setPaymentType] = useState('bankDetails');
+  const [paymentTermValue, setPaymentTermValue] = useState('PAYMENT_TERMS_AS_DATE');
+  const [defaultData, setDefaultData] = useState({});
 
-  const [defaultValues, setDefaultValues] = useState({});
+  const countries = [
+    { value: 'India', label: 'India' },
+    { value: 'USA', label: 'USA' }
+  ];
+
+  const cities = [
+    { value: 'Delhi', label: 'Delhi' },
+    { value: 'Mumbai', label: 'Mumbai' }
+  ];
 
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
@@ -79,13 +90,23 @@ export default function UseEditCustomer() {
 
   async function fetchAndSetData() {
     if (searchParams.get('id')) {
-      // customerId.current = searchParams.get('id');
       let data = await dispatch(
         getSingleCustomer({ payload: Number(searchParams.get('id')) })
       );
       console.log('data', data);
       data = data.payload;
-      Object.keys(data).forEach((key) => setValue(key, data[key]));
+      Object.keys(data).forEach((key) => {
+        if (
+          key !== 'updatedBy' &&
+          key.toLowerCase().includes('date') &&
+          data[key] !== '' &&
+          data[key] !== null
+        ) {
+          setValue(key, data[key]?.split('T')[0]);
+        } else {
+          setValue(key, data[key]);
+        }
+      });
 
       if (data?.additionalContact?.length > 0) {
         Object.keys(data.additionalContact[0]).forEach((key) =>
@@ -97,22 +118,41 @@ export default function UseEditCustomer() {
         const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
           setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
           setValue(`ca_address_${index + 1}`, addressObj.address);
-          setValue(`ca_id_${index + 1}`, addressObj.id);
           return { id: index + 1 };
         });
         setCompanyAddresses(newcompanyAddresses);
       }
-      setPaymentType(data?.payemntDetailType || 'BANK');
-      setSelectedPriceGroup(
-        data.priceGroup.map((item) => {
-          return allPriceGroup.find((price) => Number(price.id) === item.id);
-        })
+
+      const defaultValues = { ...data };
+      setPaymentType(
+        data?.paymentDetailType === 'BANK' ? 'bankDetails' : 'creditCardDetails'
       );
-      setSelectedDiscountGroup(
-        data.discountGroup.map((item) => {
-          return allDiscountGroup.find((price) => Number(price.id) === item.id);
-        })
-      );
+      setDefaultData(defaultValues);
+      setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
+
+      if (data?.priceGroup?.length > 0) {
+        setSelectedPriceGroup(
+          data.priceGroup.map((item) => ({
+            id: `${item.id}`,
+            value: `${item.id}`,
+            label: item.priceGroupName
+          }))
+        );
+      }
+      if (data?.discountGroup?.length > 0) {
+        setSelectedDiscountGroup(
+          data.discountGroup.map((item) => ({
+            id: `${item.id}`,
+            value: `${item.id}`,
+            label: item.discountGroupName
+          }))
+        );
+      }
+      if (data?.termOfDelivery?.length > 0) {
+        setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
+      }
+      setPaymentTermValue(data?.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
+      setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
     }
   }
 
@@ -136,10 +176,11 @@ export default function UseEditCustomer() {
       attr.startsWith('ca')
     );
     const newCompanyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
-      if (index % 2 === 0) {
+      if (index % 2 === 1) {
         const obj = {
-          addressLabel: data[curr],
-          address: data[arr[index + 1]]
+          id: data[curr],
+          addressLabel: data[arr[index + 1]],
+          address: data[arr[index + 2]]
         };
         acc.push(obj);
       }
@@ -151,7 +192,7 @@ export default function UseEditCustomer() {
       companyAddress: newCompanyAddresses
     };
 
-    console.log(data);
+    console.log(payloadData);
     const res = await dispatch(
       updateCustomer({ payload: { data: payloadData, id: customerId.current } })
     );
@@ -200,6 +241,13 @@ export default function UseEditCustomer() {
     allDiscountGroup,
     setAllDiscountGroup,
     selectedDiscountGroup,
-    setSelectedDiscountGroup
+    setSelectedDiscountGroup,
+    paymentType,
+    setPaymentType,
+    paymentTermValue,
+    setPaymentTermValue,
+    defaultData,
+    countries,
+    cities
   };
 }

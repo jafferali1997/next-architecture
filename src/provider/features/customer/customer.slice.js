@@ -51,7 +51,7 @@ const initialState = {
 
 export const createCustomerPersonalDetail = createAsyncThunk(
   'customer/createPersonalDetail',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.createCustomerPersonalDetail(payload);
       if (response.Succeeded) {
@@ -66,7 +66,7 @@ export const createCustomerPersonalDetail = createAsyncThunk(
 
 export const createCustomerAccountDetail = createAsyncThunk(
   'customer/createAccountDetail',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.createCustomerAccountDetail(payload);
       if (response.Succeeded) {
@@ -81,7 +81,7 @@ export const createCustomerAccountDetail = createAsyncThunk(
 
 export const createCustomerDiscount = createAsyncThunk(
   'customer/createDiscount',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.createCustomerDiscount(payload);
       if (response.Succeeded) {
@@ -96,7 +96,7 @@ export const createCustomerDiscount = createAsyncThunk(
 
 export const createCustomerCompanyDetail = createAsyncThunk(
   'customer/createCompanyDetail',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.createCustomerCompanyDetail(payload);
       if (response.Succeeded) {
@@ -128,7 +128,7 @@ export const createCustomerTermOfPaymentAndDelivey = createAsyncThunk(
 
 export const getSingleCustomer = createAsyncThunk(
   'customer/get',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.getSingleCustomer(payload);
       if (response.Succeeded) {
@@ -143,7 +143,7 @@ export const getSingleCustomer = createAsyncThunk(
 
 export const getAllCustomer = createAsyncThunk(
   'customer/getAll',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await customerService.getAllCustomer(payload);
       if (response.Succeeded) {
@@ -158,7 +158,7 @@ export const getAllCustomer = createAsyncThunk(
 
 export const updateCustomer = createAsyncThunk(
   'customer/update',
-  async ({ payload: { id, data }, callBackMessage }, thunkAPI) => {
+  async ({ payload: { id, data } }, thunkAPI) => {
     try {
       const response = await customerService.updateCustomer(id, data);
       if (response.Succeeded) {
@@ -265,22 +265,23 @@ export const customerSlice = createSlice({
         state.createDiscount.data = null;
       })
       .addCase(createCustomerTermOfPaymentAndDelivey.pending, (state) => {
-        state.createTermOfPaymentAndDelivey.isLoading = true;
-        state.createTermOfPaymentAndDelivey.message = '';
-        state.createTermOfPaymentAndDelivey.isError = false;
-        state.createTermOfPaymentAndDelivey.isSuccess = false;
-        state.createTermOfPaymentAndDelivey.data = null;
+        state.createCustomerTermOfPaymentAndDelivey.isLoading = true;
+        state.createCustomerTermOfPaymentAndDelivey.message = '';
+        state.createCustomerTermOfPaymentAndDelivey.isError = false;
+        state.createCustomerTermOfPaymentAndDelivey.isSuccess = false;
+        state.createCustomerTermOfPaymentAndDelivey.data = null;
       })
       .addCase(createCustomerTermOfPaymentAndDelivey.fulfilled, (state, action) => {
-        state.createTermOfPaymentAndDelivey.isLoading = false;
-        state.createTermOfPaymentAndDelivey.isSuccess = true;
-        state.createTermOfPaymentAndDelivey.data = action.payload;
+        state.createCustomerTermOfPaymentAndDelivey.isLoading = false;
+        state.createCustomerTermOfPaymentAndDelivey.isSuccess = true;
+        state.createCustomerTermOfPaymentAndDelivey.data = action.payload;
       })
       .addCase(createCustomerTermOfPaymentAndDelivey.rejected, (state, action) => {
-        state.createTermOfPaymentAndDelivey.message = action.payload.message;
-        state.createTermOfPaymentAndDelivey.isLoading = false;
-        state.createTermOfPaymentAndDelivey.isError = true;
-        state.createTermOfPaymentAndDelivey.data = null;
+        console.log(action);
+        state.createCustomerTermOfPaymentAndDelivey.message = action.payload.message;
+        state.createCustomerTermOfPaymentAndDelivey.isLoading = false;
+        state.createCustomerTermOfPaymentAndDelivey.isError = true;
+        state.createCustomerTermOfPaymentAndDelivey.data = null;
       })
       .addCase(updateCustomer.pending, (state) => {
         state.update.isLoading = true;

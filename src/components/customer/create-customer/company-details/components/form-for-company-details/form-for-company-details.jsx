@@ -174,14 +174,14 @@ export default function FormForCompanyDetails({
             <CustomInput
               placeholder="Enter label name"
               type="text"
-              name={`addressLabel_${index + 1}`}
+              name={`ca_addressLabel_${index + 1}`}
               register={register}
               errors={errors}
             />
             <CustomInput
               placeholder="Enter company address"
               type="text"
-              name={`address_${index + 1}`}
+              name={`ca_address_${index + 1}`}
               register={register}
               errors={errors}
             />

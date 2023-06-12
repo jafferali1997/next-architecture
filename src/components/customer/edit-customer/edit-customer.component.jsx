@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
 import UseEditCustomer from './use-edit-customer.hook';
@@ -34,7 +35,14 @@ export default function EditCustomer() {
     allDiscountGroup,
     setAllDiscountGroup,
     selectedDiscountGroup,
-    setSelectedDiscountGroup
+    setSelectedDiscountGroup,
+    paymentType,
+    setPaymentType,
+    paymentTermValue,
+    setPaymentTermValue,
+    defaultData,
+    countries,
+    cities
   } = UseEditCustomer();
 
   return (
@@ -220,7 +228,7 @@ export default function EditCustomer() {
                 <div>
                   <CustomInput
                     label="Company URL"
-                    name="conpanyUrl"
+                    name="companyUrl"
                     placeholder="URL"
                     type="text"
                     isRequired={false}
@@ -235,6 +243,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
+                    checked={defaultData.isStatus}
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
@@ -242,6 +251,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
+                    checked={defaultData.isPDF}
                   />
                   <CustomSwitch
                     label="VAT exempt"
@@ -249,6 +259,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
+                    checked={defaultData.vatStatus}
                   />
                 </div>
                 <div className="tw-flex tw-items-center  tw-justify-between">
@@ -274,9 +285,10 @@ export default function EditCustomer() {
                 </div>
                 {companyAddresses.map((value, index) => (
                   <div className="form-box-grid " key={value}>
-                    <CustomInput
+                    <input
                       name={`ca_id_${index + 1}`}
-                      type="hidden"
+                      type="number"
+                      className="tw-hidden"
                       register={register}
                     />
                     <CustomInput
@@ -368,7 +380,7 @@ export default function EditCustomer() {
                       // onChange={handleCountryChange}
                       // value={selectedCountry}
                       // isRequired={true}
-
+                      options={countries}
                       // options={countries.map((item) => {
                       //   return { label: item.name, value: item.isoCode, id: item.isoCode };
                       // })}
@@ -382,7 +394,7 @@ export default function EditCustomer() {
                       errors={errors}
                       // value={selectedCity}
                       // onChange={handleCityChange}
-
+                      options={cities}
                       // options={cities.map((item) => {
                       //   return { label: item.name, value: item.isoCode, id: item.isoCode };
                       // })}
@@ -437,83 +449,120 @@ export default function EditCustomer() {
                     Payment By
                     <span className="tw-text-[red]">*</span>
                   </label>
-                  <div className="payment-details-bank">
-                    <CustomRadio
-                      label="Bank Details"
-                      name="same"
-                      // checked={bankDetail}
-                      // onChange={(e) => {
-                      //   setBankDetail(e.target.checked);
-                      //   setCreditCard(!e.target.checked);
-                      // }}
-                      placeholder="Company Name"
-                      type="radio"
+
+                  <FormControl>
+                    <RadioGroup
+                      name="paymentType"
+                      value={paymentType}
+                      onChange={(e) => setPaymentType(e.target.value)}
+                    >
+                      <FormControlLabel
+                        value="bankDetails"
+                        control={<Radio />}
+                        label="Bank Details"
+                      />
+                      <FormControlLabel
+                        value="creditCardDetails"
+                        control={<Radio />}
+                        label="Credit Card Details"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+                {paymentType === 'bankDetails' && (
+                  <>
+                    <div className="tw-w-full">
+                      <CustomInput
+                        label="IBAN Number"
+                        name="iban"
+                        placeholder="IBAN Number"
+                        type="text"
+                        register={register}
+                        errors={errors}
+                        isRequired={true}
+                      />
+                    </div>
+                    <div className="form-box-grid-4col">
+                      <CustomInput
+                        label="Account owner name"
+                        name="accountOwnerName"
+                        placeholder="Account owner name"
+                        type="text"
+                        register={register}
+                        errors={errors}
+                        isRequired={true}
+                      />
+
+                      <CustomInput
+                        label="BIC Number"
+                        name="bic"
+                        placeholder="BIC Number"
+                        type="text"
+                        register={register}
+                        errors={errors}
+                        isRequired={true}
+                      />
+                      <CustomInput
+                        label="Mandate Reference"
+                        name="mendateReferance"
+                        placeholder="Mandate Reference"
+                        type="number"
+                        register={register}
+                        errors={errors}
+                        isRequired={true}
+                      />
+                      <CustomInput
+                        label="Mandate Date"
+                        name="mandateGenerateDate"
+                        placeholder="03/13/2023"
+                        type="date"
+                        register={register}
+                        errors={errors}
+                        isRequired={true}
+                      />
+                    </div>
+                  </>
+                )}
+                {paymentType === 'creditCardDetails' && (
+                  <div className="form-box-grid-4col">
+                    <CustomInput
+                      label="Credit Card Name"
+                      name="nameOfCreditCard"
+                      placeholder="Credit Card Name"
+                      type="text"
                       register={register}
                       errors={errors}
+                      isRequired={true}
                     />
-                  </div>
-                  <div className="payment-details-card">
-                    <CustomRadio
-                      label="Credit Card Details"
-                      name="same"
-                      // checked={creditCard}
-                      // onChange={(e) => {
-                      //   setCreditCard(e.target.checked);
-                      //   setBankDetail(!e.target.checked);
-                      // }}
-                      placeholder="Company Name"
-                      type="radio"
+                    <CustomInput
+                      label="Credit Card Number"
+                      name="creditCardNumber"
+                      placeholder="Credit Card Number"
+                      type="number"
                       register={register}
-                      error={errors}
+                      errors={errors}
+                      isRequired={true}
+                    />
+                    <CustomInput
+                      label="Expiry Date"
+                      name="creditCardExpiry"
+                      placeholder="03/13/2023"
+                      type="month"
+                      register={register}
+                      errors={errors}
+                      isRequired={true}
+                    />
+                    <CustomInput
+                      label="CVV"
+                      name="creditCardCVV"
+                      placeholder="CVV"
+                      type="text"
+                      register={register}
+                      errors={errors}
+                      isRequired={true}
                     />
                   </div>
-                </div>
-                <div className="tw-w-full">
-                  <CustomInput
-                    label="IBAN Number"
-                    name="iban"
-                    placeholder="IBAN Number"
-                    type="text"
-                    register={register}
-                    errors={errors}
-                  />
-                </div>
-                <div className="form-box-grid">
-                  <CustomInput
-                    label="Account owner name"
-                    name="accountOwnerName"
-                    placeholder="Account owner name"
-                    type="text"
-                    isRequired={true}
-                    register={register}
-                    errors={errors}
-                  />
-
-                  <CustomInput
-                    label="BIC Number"
-                    name="bic"
-                    placeholder="BIC Number"
-                    type="text"
-                    register={register}
-                    errors={errors}
-                  />
-                  <CustomInput
-                    label="Mandate Reference"
-                    name="mendateReferance"
-                    placeholder="Mandate Reference"
-                    type="number"
-                    register={register}
-                    errors={errors}
-                  />
-                  <CustomInput
-                    label="Mandate Date"
-                    name="mandateGenerateDate"
-                    placeholder="03/13/2023"
-                    type="date"
-                    register={register}
-                    errors={errors}
-                  />
-                </div>
+                )}
               </div>
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
                 <h3 className="form-box-heading ">Discount</h3>
@@ -543,21 +592,125 @@ export default function EditCustomer() {
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
                 <h3 className="form-box-heading ">Terms Of Payments</h3>
                 <div className="tw-mt-[16px] tw-w-full">
-                  <CustomInput
-                    label="Payment terms as date"
-                    name="paymentDate"
-                    placeholder="03/13/2023"
-                    type="date"
-                    register={register}
-                    errors={errors}
-                  />
+                  <FormControl>
+                    <RadioGroup
+                      name="termOfPayment"
+                      value={paymentTermValue}
+                      register={register}
+                      errors={errors}
+                      onChange={(e) => setPaymentTermValue(e.target.value)}
+                    >
+                      <FormControlLabel
+                        value="PAYMENT_TERMS_AS_DATE"
+                        control={<Radio />}
+                        label="Payment Terms as date"
+                      />
+                      {paymentTermValue === 'PAYMENT_TERMS_AS_DATE' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="PAYMENT_TERMS_AS_DATE_DATA"
+                            placeholder="03/13/2023"
+                            type="date"
+                            isRequired={false}
+                            register={register}
+                            errors={errors}
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="PAYMENT_TERMS_IN_DAYS"
+                        control={<Radio />}
+                        label="Payment terms in days"
+                      />
+                      {paymentTermValue === 'PAYMENT_TERMS_IN_DAYS' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="PAYMENT_TERMS_IN_DAYS_DATA"
+                            placeholder="Payment terms"
+                            type="days"
+                            isRequired={false}
+                            register={register}
+                            errors={errors}
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="CASH_DISCOUNT_TARGET_AS_A_DATE"
+                        control={<Radio />}
+                        label="Cash discount target as a date"
+                      />
+                      {paymentTermValue === 'CASH_DISCOUNT_TARGET_AS_A_DATE' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="CASH_DISCOUNT_TARGET_AS_A_DATE_DATA"
+                            placeholder="13/03/2023"
+                            type="date"
+                            isRequired={false}
+                            register={register}
+                            errors={errors}
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="DISCOUNT_AND_PERCENTAGE"
+                        control={<Radio />}
+                        label="Discount and %"
+                      />
+                      {paymentTermValue === 'DISCOUNT_AND_PERCENTAGE' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="DISCOUNT_AND_PERCENTAGE_DATA"
+                            placeholder="Discount and %"
+                            type="text"
+                            isRequired={false}
+                            register={register}
+                            errors={errors}
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="DISCOUNT_AMOUNT"
+                        control={<Radio />}
+                        label="Discount amount"
+                      />
+                      {paymentTermValue === 'DISCOUNT_AMOUNT' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="DISCOUNT_AMOUNT_DATA"
+                            placeholder="Discount amount"
+                            type="text"
+                            isRequired={false}
+                            register={register}
+                            errors={errors}
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="TOTAL_AMOUNT_MINUS_DISCOUNT"
+                        control={<Radio />}
+                        label="Total amount minus discount"
+                      />
+                      {paymentTermValue === 'TOTAL_AMOUNT_MINUS_DISCOUNT' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="TOTAL_AMOUNT_MINUS_DISCOUNT_DATA"
+                            placeholder="Total amount minus discount"
+                            type="text"
+                            isRequired={false}
+                            register={register}
+                            errors={errors}
+                          />
+                        </div>
+                      )}
+                    </RadioGroup>
+                  </FormControl>
                   <h3 className="tw-mt-[16px]">Terms of delivery</h3>
                   <TextArea
-                    name="deliveryTerm"
+                    name="termOfDelivery"
                     placeholder="Delivery Terms"
                     type="textarea"
+                    isRequired={true}
                     register={register}
-                    errors={errors}
                   />
                 </div>
               </div>
