@@ -147,7 +147,6 @@ export default function Profile() {
                 onClick={sendOtp}
                 disabled={isOtpVerified}
               />
-              {/* </div> */}
             </div>
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-phone tw-flex tw-items-center tw-justify-between">

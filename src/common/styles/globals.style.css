@@ -113,6 +113,9 @@
   .form-box-grid {
     @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(351px,1fr))] tw-gap-[15px] tw-py-[16px];
   }
+  .form-box-grid-3col {
+    @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(326px,1fr))] tw-gap-[15px] tw-py-[16px];
+  }
   .form-box-grid-4col {
     @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(257.75px,1fr))] tw-gap-[15px] tw-py-[16px];
   }

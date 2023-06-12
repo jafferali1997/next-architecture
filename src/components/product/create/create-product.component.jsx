@@ -1,5 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material/node';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  MenuItem
+} from '@mui/material/node';
 import { TagsInput } from 'react-tag-input-component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -12,6 +18,9 @@ import DeleteIcon from '@/common/icons/delete.icon';
 import PencilIcon from '@/common/icons/pencil.icon';
 import HorizentalDotsIcon from '@/common/icons/horizental-dots.icon';
 import PlusIcon from '@/common/icons/plus.icon';
+import SelectInput from '@mui/material/Select/SelectInput';
+import ArrowLeftIcon from '@/common/icons/arrow-left.icon';
+import ArrowRightIcon from '@/common/icons/arrow-right.icon';
 
 export default function CreateProduct() {
   const {
@@ -216,6 +225,32 @@ export default function CreateProduct() {
           </div>
           <div className="right-side">
             <div className="form-box tw-w-[336px]  ">
+              <h3 className="form-box-heading ">Product Organization</h3>
+              <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
+                <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[100%] tw-text-text-black">
+                  Product Category
+                </label>
+                <SelectInput className="tw-flex tw-h-10 tw-w-[296px] tw-flex-row tw-items-center tw-gap-[91px] tw-rounded-md tw-border-[1.5px] tw-border-solid tw-border-text-ultra-light-gray tw-px-4 tw-py-[9.5px]">
+                  <MenuItem value="Bird Supplies">
+                    <div className="tw-flex tw-w-[250px] tw-items-center tw-justify-between">
+                      <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-black">
+                        Bird Supplies
+                      </p>
+                      <ArrowRightIcon />
+                    </div>
+                  </MenuItem>
+                  <MenuItem value="Cat Supplies">
+                    <div className="tw-flex tw-w-[250px] tw-items-center tw-justify-between">
+                      <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-black">
+                        Cat Supplies
+                      </p>
+                      <ArrowRightIcon />
+                    </div>
+                  </MenuItem>
+                </SelectInput>
+              </div>
+            </div>
+            <div className="form-box tw-mt-[16px] tw-w-[336px]  ">
               <h3 className="form-box-heading ">Tax</h3>
               <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                 <Select
