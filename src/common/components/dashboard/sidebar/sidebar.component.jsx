@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import DashboardIcon from '@/common/icons/sidebar/dashboard.icon';
@@ -82,7 +81,7 @@ export default function Sidebar({toggle, setToggle}) {
           />
         </Link>
       </div>
-      <div className="multistep-wrapper tw-flex tw-flex-col tw-gap-6 tw-px-6">
+      <div className="multistep-wrapper tw-flex tw-flex-col tw-gap-6 tw-pl-6 tw-pr-5">
         {sidebarLinks.map((navLink) => {
           if (navLink.subLinks) {
             return (
@@ -97,7 +96,7 @@ export default function Sidebar({toggle, setToggle}) {
                   className="!tw-m-0 !tw-h-fit !tw-min-h-fit tw-bg-primary-blue !tw-px-0 !tw-py-0"
                 >
                   <div className="tw-flex tw-items-center tw-gap-2">
-                    <ArrowIcon className="arrow-cotrol" />
+                    {/* <ArrowIcon className="arrow-cotrol" /> */}
                     <span className="tw-font-dm tw-text-base tw-leading-6 tw-text-white">
                       {navLink.label}
                     </span>
@@ -110,7 +109,7 @@ export default function Sidebar({toggle, setToggle}) {
                         <li
                           key={subLink.lablel}
                           href={subLink.href}
-                          className="nav-link tw-rounded-md tw-px-6 tw-py-2 active:tw-bg-white"
+                          className="nav-link tw-rounded-md tw-px-6 tw-py-2 tw-cursor-pointer"
                         >
                           <div className="tw-flex tw-items-center tw-gap-2">
                             {subLink.icon}
@@ -130,7 +129,7 @@ export default function Sidebar({toggle, setToggle}) {
               <Link
                 key={navLink.label}
                 href={navLink.href}
-                className="tw-mt-7 tw-flex tw-items-center tw-gap-2 tw-px-6 tw-py-2"
+                className="tw-mt-7 tw-flex tw-items-center tw-gap-2 tw-px-4 tw-py-2"
               >
                 {navLink.icon}
                 <span className="tw-font-dm tw-text-sm tw-text-white">

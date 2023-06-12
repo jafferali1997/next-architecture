@@ -54,16 +54,20 @@
   margin: 0px;
 }
 
-.multistep-wrapper .nav-link.active {
+.multistep-wrapper .nav-link.active,
+.multistep-wrapper .nav-link:hover {
   background-color: #ffffff;
 }
 
 .multistep-wrapper .nav-link.active a,
-.multistep-wrapper .nav-link.active span {
+.multistep-wrapper .nav-link.active span,
+.multistep-wrapper .nav-link:hover a,
+.multistep-wrapper .nav-link:hover span {
   color: #1d4ed8;
 }
 
-.multistep-wrapper .nav-link.active svg path {
+.multistep-wrapper .nav-link.active svg path,
+.multistep-wrapper .nav-link:hover svg path {
   fill: #1d4ed8;
 }
 
