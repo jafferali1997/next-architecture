@@ -65,8 +65,8 @@ export default function Header() {
             src="assets/images/navbar/globe-icon.svg"
             alt="globe icon"
           />
-          <CustomButton href="/login" className="btn-primary" text="Login" />
-          <CustomButton href="/sign-up" className="btn-outline" text="Signup" />
+          <CustomButton href="/login" className="btn-outline tw-capitalize tw-font-dm tw-font-medium tw-text-lg tw-leading-6 tw-py-2 tw-px-5 tw-h-auto tw-border-2 tw-rounded-[10px]" text="Login" />
+          <CustomButton href="/sign-up" className="btn-primary tw-capitalize tw-font-dm tw-font-medium tw-text-lg tw-leading-6 tw-py-[10px] tw-px-5 tw-h-auto tw-rounded-[10px] tw-bg-primary-blue" text="Signup" />
           {/* <div className="tw-flex tw-items-center tw-gap-6 tw-rounded-[36px] tw-border-2 tw-border-disabled-input tw-px-4 tw-py-2">
             <img
               height="15px"
