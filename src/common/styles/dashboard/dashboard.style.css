@@ -2,10 +2,28 @@
   display: grid;
   grid-template-columns: 273px calc(100% - 273px);
 }
+
 .multistep-wrapper {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 90px);
   overflow-y: auto;
+  scrollbar-color: #0A4C95 #C2D2E4;
+  scrollbar-width: thin !important;
 }
+
+.multistep-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.multistep-wrapper::-webkit-scrollbar-track-piece  {
+  background-color: #C2D2E4;
+  border-radius: 4px;
+}
+
+.multistep-wrapper::-webkit-scrollbar-thumb {
+  background-color: #0A4C95;
+  border-radius: 4px;
+}
+
 .multistep-wrapper > .MuiPaper-elevation::before {
   content: unset !important;
 }
@@ -47,4 +65,22 @@
 
 .multistep-wrapper .nav-link.active svg path {
   fill: #1d4ed8;
+}
+
+.offcanva{
+  transition: all .4s ease-in;
+}
+
+@media screen and (max-width:1200px) {
+  .dashboard-main {
+    grid-template-columns: 100%;
+  }
+
+  .offcanva{
+    left: -273px;
+  }
+
+  .offcanva.open{
+    left: 0px;
+  }
 }

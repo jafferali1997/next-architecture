@@ -22,7 +22,7 @@ import UserRolesIcon from '@/common/icons/sidebar/administrations/users-roles.ic
 import EmployeesIcon from '@/common/icons/sidebar/employee-management/employees.icon';
 import ExpendituresIcon from '@/common/icons/sidebar/expenses/expenditures.icon';
 import DatabaseIcon from '@/common/icons/sidebar/clouds/database.icon';
-
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 const sidebarLinks = [
   { label: 'Dashboard', icon: <DashboardIcon className="" />, href: '/' },
   {
@@ -66,9 +66,13 @@ const sidebarLinks = [
   }
 ];
 
-export default function Sidebar() {
+export default function Sidebar({toggle, setToggle}) {
+
   return (
-    <div className="tw-fixed tw-h-screen tw-w-[273px] tw-bg-primary-blue tw-bg-hero-pattern tw-bg-right-top tw-bg-no-repeat">
+    <div className={`${toggle ? 'open':''} offcanva tw-fixed tw-h-screen tw-w-[273px] tw-bg-primary-blue tw-bg-hero-pattern tw-bg-right-top tw-bg-no-repeat`}>
+      <div className='tw-absolute tw-top-1 tw-right-1 tw-z-[9999] tw-rounded-[4px] tw-border-[1px] tw-border-x-secondary-light-blue semixl:tw-hidden xs:tw-block'>
+        <ChevronLeftIcon className='tw-text-white' onClick={() => setToggle(!toggle)}/>
+      </div>
       <div className="tw-p-6">
         <Link className="tw-block" href="/">
           <img
