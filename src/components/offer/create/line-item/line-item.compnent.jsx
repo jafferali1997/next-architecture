@@ -3,14 +3,32 @@ import StepperFooter from '@/common/components/stepper-footer/stepper-footer.com
 import Select from '@/common/components/select/select.component';
 import useLineItem from './use-line-item.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import SearchIcon from '@/common/icons/search-icon';
+import DeleteIcon from '@/common/icons/delete.icon';
+import { useState } from 'react';
 
 export default function LineItem() {
-  const { isSubmit, setIsSubmit } = useLineItem();
+  const {
+    isSubmit,
+    setIsSubmit,
+    columns,
+    rows,
+    ids,
+    isIdAdded,
+    allCheckboxHandler,
+    checkBoxHandler
+  } = useLineItem();
   return (
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
         <h3 className="form-inner-heading">Product Table</h3>
         <div className="tw-flex tw-min-w-[900px] tw-items-center tw-justify-between">
+          {ids.length !== 0 && (
+
+          <div className='tw-gap-2.5 tw-border tw-w-[42px] tw-border-disabled-input tw-px-3.5 tw-py-3 tw-rounded-md tw-border-solid'>
+          <img src="/assets/icons/copy.svg" alt="" />
+          </div>
+          )}
           <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
             <Select
               options={[
@@ -52,99 +70,204 @@ export default function LineItem() {
           <CustomButton text="Add Product" className="btn-primary" />
         </div>
       </div>
-      <div className="content-body">
-        {' '}
-        <form onSubmit="">
-          <div className="form-box-grid-4col">
-            <Select
-              label="Gender"
-              isRequired={true}
-              options={[
-                { id: 'male', value: 'male', label: 'Male' },
-                { id: 'female', value: 'female', label: 'Female' }
-              ]}
-              placeholder="John"
-            />
-            <CustomInput
-              label="Designation"
-              name="designation"
-              placeholder="Designation"
-              type="text"
-              isRequired={true}
-            />
-            <CustomInput
-              label="First Name"
-              name="firstName"
-              placeholder="First Name"
-              type="text"
-              isRequired={true}
-            />
-            <CustomInput
-              label="Last Name"
-              name="lastName"
-              placeholder="Last Name"
-              type="text"
-              isRequired={true}
-            />
-            <CustomInput
-              label="Company Name"
-              name="Company_Name"
-              placeholder="Enter Company Name "
-              type="text"
-              isRequired={true}
-            />
+      <table class="... tw-mt-[18px] tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
+        <thead>
+          <tr>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              <input
+                id="test"
+                type="checkbox"
+                checked={rows.length === ids.length}
+                onChange={allCheckboxHandler}
+                className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
+                  rows.length === ids.length && 'tw-border-primary tw-bg-checked'
+                }`}
+              />
+              <label htmlFor="test"></label>
+            </th>
+            {columns.map((col, index) => (
+              <th
+                className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
+                key={index}
+              >
+                {col.headerName}
+              </th>
+            ))}
+            {/* <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Add PP
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Action
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Product
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Description
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Quantity
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Position No
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Unit
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Price
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Tax
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Discount
+            </th>
+            <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+              Total
+            </th> */}
+          </tr>
+        </thead>
+        <tbody>
+          {/* <tr>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              <input
+                id="test"
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+                className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
+                  isChecked && 'tw-border-primary tw-bg-checked'
+                }`}
+              />
+              <label htmlFor="test"></label>
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              <div className="tw-flex tw-justify-center">
+                {' '}
+                <img src="/assets/icons/add-pp.blue.svg" alt="" />
+              </div>
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              <div className="tw-flex tw-gap-[27px]">
+                <img src="/assets/icons/delete.red.svg" alt="" />
+                <img src="/assets/icons/copy.svg" alt="" />
+              </div>
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              21
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              Food
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              23
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              12
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              pc
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              300
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              19.00
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              10 %
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              2300
+            </td>
+          </tr> */}
 
-            <Select
-              label="Country"
-              name="country"
-              placeholder="Country"
-              type="select"
-              //   onChange={handleCountryChange}
-              //   value={selectedCountry}
-              //   isRequired={true}
-              //   options={countries.map((item) => {
-              //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-              //   })}
-            />
-            <Select
-              label="City"
-              name="city"
-              placeholder="City"
-              type="select"
-              //   value={selectedCity}
-              //   onChange={handleCityChange}
-              //   options={cities.map((item) => {
-              //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-              //   })}
-            />
-            <CustomInput
-              label="Postal Code"
-              name="postal"
-              placeholder="Postal Code"
-              type="text"
-              isRequired={true}
-            />
-          </div>
-          <div
-            className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
-            // key={index}
-          >
-            <CustomInput
-              label="Address Label"
-              placeholder="Enter label name"
-              type="text"
-            />
-            <CustomInput
-              label="Address"
-              name="Address "
-              placeholder="Enter company address"
-              type="text"
-            />
-          </div>
-
-          <StepperFooter setIsSubmit={setIsSubmit} />
-        </form>
-      </div>
+          {rows.map((rowData, ind) => {
+            const data_id = isIdAdded(ind);
+            return (
+              <tr key={ind}>
+                <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+                  <input
+                    id="test"
+                    type="checkbox"
+                    checked={data_id}
+                    value={ind}
+                    onChange={checkBoxHandler}
+                    className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
+                      ids.includes(rowData.id) && 'tw-border-primary tw-bg-checked'
+                    }`}
+                  />
+                  <label htmlFor="test"></label>
+                </td>
+                {columns.map((column) => {
+                  return (
+                    <td
+                      className="tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center"
+                      key={ind}
+                    >
+                      {rowData[column.field] === 'pp-icon' ? (
+                        <div className="tw-flex tw-justify-center">
+                          <img src="/assets/icons/add-pp.blue.svg" alt="" />
+                        </div>
+                      ) : rowData[column.field].includes('action') ? (
+                        <div className="tw-flex tw-gap-[27px]">
+                          <img src="/assets/icons/delete.red.svg" alt="" />
+                          <img src="/assets/icons/copy.svg" alt="" />
+                        </div>
+                      ) : (
+                        rowData[column.field]
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+          <tr>
+            {/* <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              <div className="tw-flex tw-justify-center">
+                {' '}
+                <img src="/assets/icons/add-pp.svg" alt="" />
+              </div>
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              <div className="tw-flex tw-gap-[27px]">
+                <img src="/assets/icons/delete.red.svg" alt="" />
+                <img src="/assets/icons/copy.svg" alt="" />
+              </div>
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              21
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              Food
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              23
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              12
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              pc
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              300
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              19.00
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              10 %
+            </td>
+            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+              2300
+            </td> */}
+          </tr>
+        </tbody>
+      </table>
+      
     </div>
   );
 }
