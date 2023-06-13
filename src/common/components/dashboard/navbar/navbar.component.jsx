@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import * as React from 'react';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
-
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -17,9 +17,11 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useDispatch } from 'react-redux';
+import { logout } from '@/provider/features/auth/auth.slice';
 
 export default function Navbar({ setToggle, value }) {
-
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -29,6 +31,10 @@ export default function Navbar({ setToggle, value }) {
     setAnchorEl(null);
   };
 
+  const handleLogout = async () => {
+    const response = await dispatch(logout());
+    console.log(response, 'response');
+  };
 
   return (
     <div className="tw-flex tw-min-h-[68px] tw-items-center tw-justify-between tw-bg-white tw-px-6 tw-py-3 tw-shadow-md">
@@ -37,12 +43,12 @@ export default function Navbar({ setToggle, value }) {
           onClick={() => setToggle(!value)}
           className="tw-mr-1 tw-text-2xl tw-font-bold tw-text-text-light-gray xs:tw-inline-block semixl:tw-hidden"
         />
-        <h1 className="tw-font-dm lg:tw-text-2xl xs:tw-text-lg tw-font-bold tw-leading-9 tw-text-text-light-gray">
+        <h1 className="tw-font-dm tw-font-bold tw-leading-9 tw-text-text-light-gray xs:tw-text-lg lg:tw-text-2xl">
           Documents
         </h1>
       </div>
 
-      <div className='tw-flex tw-items-center lg:tw-gap-6 xs:tw-gap-2'>
+      <div className="tw-flex tw-items-center xs:tw-gap-2 lg:tw-gap-6">
         <div className="tw-relative tw-w-fit">
           <NotificationsIcon color="action" />
           <div className="tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-flex tw-h-3 tw-w-3 tw-items-center tw-justify-center tw-rounded-full tw-bg-red-500 tw-font-dm tw-text-[8px] tw-text-white">
@@ -59,12 +65,18 @@ export default function Navbar({ setToggle, value }) {
               aria-controls={open ? 'account-menu' : undefined}
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
-              className='tw-m-0 tw-flex tw-items-center tw-gap-2'
+              className="tw-m-0 tw-flex tw-items-center tw-gap-2"
             >
-              <img className='tw-h-[36px] tw-w-[36px] tw-rounded-full tw-object-cover tw-object-center' src="/assets/images/profile.png" alt="profile image" />
+              <img
+                className="tw-h-[36px] tw-w-[36px] tw-rounded-full tw-object-cover tw-object-center"
+                src="/assets/images/profile.png"
+                alt="profile image"
+              />
               <div className="tw-flex tw-items-center">
-                <span className='tw-font-dm tw-text-base tw-leading-6 tw-font-normal tw-text-text-dark-gray'>John Doe</span>
-                <ExpandMoreIcon/>
+                <span className="tw-font-dm tw-text-base tw-font-normal tw-leading-6 tw-text-text-dark-gray">
+                  John Doe
+                </span>
+                <ExpandMoreIcon />
               </div>
             </IconButton>
           </Tooltip>
@@ -123,7 +135,7 @@ export default function Navbar({ setToggle, value }) {
             </ListItemIcon>
             Settings
           </MenuItem>
-          <MenuItem onClick={profileMenu}>
+          <MenuItem onClick={handleLogout}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
@@ -134,3 +146,8 @@ export default function Navbar({ setToggle, value }) {
     </div>
   );
 }
+
+Navbar.propTypes = {
+  setToggle: PropTypes.func.isRequired,
+  value: PropTypes.bool.isRequired
+};
