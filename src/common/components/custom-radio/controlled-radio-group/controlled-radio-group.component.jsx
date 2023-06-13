@@ -6,6 +6,7 @@ export default function ControlledRadioGroup({
   selectedValue,
   setSelectedValue,
   register,
+  belowWholeRadioGroup = false,
   name
   //   errors
 }) {
@@ -20,14 +21,23 @@ export default function ControlledRadioGroup({
           onChange={(e) => setSelectedValue(e.target.value)}
         >
           {radioOptions.map((option) => (
-            <FormControlLabel
-              key={option.value}
-              value={option.value}
-              control={<Radio />}
-              label={option.label}
-            />
+            <>
+              <FormControlLabel
+                key={option.value}
+                value={option.value}
+                control={<Radio />}
+                label={option.label}
+              />
+              {!belowWholeRadioGroup && (
+                <div>{selectedValue === option.value && option.element}</div>
+              )}
+            </>
           ))}
         </RadioGroup>
+        {belowWholeRadioGroup &&
+          radioOptions.map((option) => (
+            <div>{selectedValue === option.value && option.element}</div>
+          ))}
       </FormControl>
     </div>
   );
@@ -43,6 +53,7 @@ ControlledRadioGroup.propTypes = {
   selectedValue: PropTypes.string.isRequired,
   setSelectedValue: PropTypes.func.isRequired,
   register: PropTypes.func,
-  name: PropTypes.string
+  name: PropTypes.string,
+  belowWholeRadioGroup: PropTypes.bool
   //   errors: PropTypes.object.isRequired
 };

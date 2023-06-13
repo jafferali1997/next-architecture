@@ -45,24 +45,34 @@ export default function Radio() {
         <div className="tw-m-5">
           <ControlledRadioGroup
             radioOptions={[
-              { label: 'Radio 1', value: 'radio1' },
-              { label: 'Radio 2', value: 'radio2' },
-              { label: 'Radio 3', value: 'radio3' }
+              {
+                label: 'Radio 1',
+                value: 'radio1',
+                element: <h3 className="tw-text-blue-700">Radio 1 is selected</h3>
+              },
+              {
+                label: 'Radio 2',
+                value: 'radio2',
+                element: <h3 className="tw-text-blue-700">Radio 2 is selected</h3>
+              },
+              {
+                label: 'Radio 3',
+                value: 'radio3',
+                element: <h3 className="tw-text-blue-700">Radio 3 is selected</h3>
+              }
             ]}
             label="Radio Group (Select One):"
             name="radio"
             selectedValue={radio}
             setSelectedValue={setRadio}
           />
-          {radio === 'radio1' && (
+          {/* {radio === 'radio1' && (
             <h3 className="tw-text-blue-700">Radio 1 is selected</h3>
           )}
           {radio === 'radio2' && (
             <h3 className="tw-text-gray-700">Radio 2 is selected</h3>
           )}
-          {radio === 'radio3' && (
-            <h3 className="tw-text-red-700">Radio 3 is selected</h3>
-          )}
+          {radio === 'radio3' && <h3 className="tw-text-red-700">Radio 3 is selected</h3>} */}
         </div>
       </div>
     </>
