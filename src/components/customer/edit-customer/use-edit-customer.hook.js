@@ -121,7 +121,7 @@ const creditCardValidationSchema = yup.object({
   creditCardExpiry: yup.string().required('Credit Card Expiry is required')
 });
 
-export default function UseEditCustomer() {
+export default function useEditCustomer() {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();

@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import PersonalDetails from './personal-details/personal-details.component';
 import FormStepper from '@/common/components/form-stepper/form-stepper.component';

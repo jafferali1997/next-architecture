@@ -1,9 +1,10 @@
+'use client';
+
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import Link from 'next/link';
 import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
-import UseEditCustomer from './use-edit-customer.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
@@ -12,6 +13,7 @@ import TextArea from '@/common/components/text-area/text-area.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
 import PriceGroup from '../create-customer/personal-details/components/price-group/price-group.component';
 import DiscountGroup from '../create-customer/personal-details/components/discount-group/discount-group.component';
+import useEditCustomer from './use-edit-customer.hook';
 
 export default function EditCustomer() {
   const {
@@ -44,7 +46,7 @@ export default function EditCustomer() {
     defaultData,
     countries,
     cities
-  } = UseEditCustomer();
+  } = useEditCustomer();
 
   return (
     <div className="content">

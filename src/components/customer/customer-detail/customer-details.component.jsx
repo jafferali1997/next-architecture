@@ -11,7 +11,7 @@ import MultiSelect from '@/common/components/multi-select/multi-select.component
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
-import UseCustomerDetails from './use-customer-details.hook';
+import useCustomerDetails from './use-customer-details.hook';
 
 export default function CustomerDetails() {
   const {
@@ -31,7 +31,7 @@ export default function CustomerDetails() {
     allDiscountGroup,
     selectedDiscountGroup,
     defaultData
-  } = UseCustomerDetails();
+  } = useCustomerDetails();
 
   return (
     <div className="content">

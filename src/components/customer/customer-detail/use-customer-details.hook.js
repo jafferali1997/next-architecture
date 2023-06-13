@@ -7,7 +7,7 @@ import { set, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getSingleCustomer } from '@/provider/features/customer/customer.slice';
 
-export default function UseCustomerDetails() {
+export default function useCustomerDetails() {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
