@@ -3,10 +3,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import { MenuItem, Select } from '@mui/material';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import SimpleSelect from '@/common/components/custom-select/simple-select.component';
-import Select from '@/common/components/select/select.component';
+// import Select from '@/common/components/select/select.component';
 import CustomCheckbox from '@/common/components/custom-checkbox/custom-checkbox.component';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import CustomRadioGroup from '@/common/components/radio-group/radio-group.component';
@@ -15,7 +16,8 @@ import CustomSelect from '@/common/components/custom-select/custom-select.compon
 
 const validationSchema = yup.object({
   firstName: yup.string().max(5, 'company name must be at most 5 characters long'),
-  select: yup.string().required()
+  select: yup.string().required(),
+  gender: yup.string().required()
 });
 
 export default function ReactHookForm() {
@@ -34,6 +36,7 @@ export default function ReactHookForm() {
 
   useEffect(() => {
     setValue('select', 'OTHER');
+    // setValue('gender', 'FEMALE');
   }, []);
 
   return (
@@ -81,11 +84,11 @@ export default function ReactHookForm() {
                   { label: 'Female', value: 'FEMALE' },
                   { label: 'Other', value: 'OTHER' }
                 ]}
-                register={register}
                 control={control}
+                errors={errors}
               />
             </div>
-            <div className="tw-w-1/2">
+            {/* <div className="tw-w-1/2">
               <SimpleSelect
                 label="Select Gender"
                 placeholder="Select Gender"
@@ -98,9 +101,9 @@ export default function ReactHookForm() {
                 register={register}
                 errors={errors}
               />
-            </div>
+            </div> */}
             <div className="tw-w-1/2">
-              <Select
+              {/* <Select
                 label="Select User"
                 placeholder="Select User"
                 name="user"
@@ -110,7 +113,23 @@ export default function ReactHookForm() {
                   { label: 'Jaffer', value: 'jaffer' }
                 ]}
                 register={register}
-              />
+              /> */}
+              <section>
+                <label>MUI Select</label>
+                <Controller
+                  name="Select_MUI"
+                  control={control}
+                  defaultValue="20"
+                  className="default-input input-field"
+                  render={({ field }) => (
+                    <Select {...field}>
+                      <MenuItem value={10}>Ten</MenuItem>
+                      <MenuItem value={20}>Twenty</MenuItem>
+                      <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                  )}
+                />
+              </section>
             </div>
           </div>
           <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-1">
