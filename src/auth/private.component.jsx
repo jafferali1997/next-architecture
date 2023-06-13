@@ -45,10 +45,10 @@ export default function Private({ component }) {
     return (
       <div className="dashboard-main">
         <div className="sidebar tw-basis-1/6">
-          <Sidebar setToggle={setToggle} toggle={toggle}/>
+          <Sidebar setToggle={setToggle} toggle={toggle} />
         </div>
         <div className="content tw-basis-5/6 tw-bg-secondary-gray">
-          <Navbar setToggle={setToggle} value={toggle}/>
+          <Navbar setToggle={setToggle} value={toggle} />
           {component}
         </div>
       </div>

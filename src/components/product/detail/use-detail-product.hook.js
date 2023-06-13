@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function UseProductDetail() {
+export default function useDetailProduct() {
   const [inputValues, setInputValues] = useState(['']);
   const [priceInputValues, setPriceInputValues] = useState(['']);
   const [discountInputValues, setDiscountInputValues] = useState(['']);

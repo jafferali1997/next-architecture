@@ -6,7 +6,7 @@ import Select from '@/common/components/select/select.component';
 import MultiSelect from '@/common/components/multi-select/multi-select.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
-import UseCreateProduct from './use-create-product.hook';
+import useDetailProduct from './use-detail-product.hook';
 
 export default function detailProduct() {
   const {
@@ -25,7 +25,7 @@ export default function detailProduct() {
     selectedTag,
     setSelectedTag,
     data
-  } = UseCreateProduct();
+  } = useDetailProduct();
 
   return (
     <>

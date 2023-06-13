@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { TagsInput } from 'react-tag-input-component';
@@ -48,7 +50,7 @@ export default function EditProduct() {
                   type="text"
                 />
                 <h3 className="tw-mt-[16px]">Description </h3>
-                <TextArea name="Description " placeholder="Description" type="textarea" />
+                <TextArea name="description" placeholder="Description" type="textarea" />
               </div>
             </div>
             <div className="form-box tw-mt-[16px]  tw-w-[759px] ">

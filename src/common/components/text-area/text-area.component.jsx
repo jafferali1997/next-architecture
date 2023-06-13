@@ -4,7 +4,7 @@ import FieldError from '../field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';
 
 export default function TextArea({
-  placeholder,
+  placeholder = '',
   name,
   register = null,
   label = null,
@@ -37,7 +37,7 @@ export default function TextArea({
           maxRows={maxRows}
           placeholder={placeholder}
           className={`input-field default-input tw-min hover:tw-border-text-dark-gray focus:tw-border-[1px] focus:tw-border-text-dark-gray ${
-            errors[name] && 'error-field'
+            errors && errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}

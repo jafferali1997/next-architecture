@@ -71,7 +71,7 @@ export default function CreateProfile() {
               <label className=" tw-mr-1 tw-mr-1 tw-mt-4 tw-flex tw-min-w-fit tw-flex-row ">
                 Address
               </label>
-              <TextArea placeholder="Text Area" />
+              <TextArea name="address" placeholder="Text Area" />
             </div>
           </div>
           <div className="tw-flex tw-items-center tw-justify-between">
