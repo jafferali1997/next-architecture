@@ -327,6 +327,10 @@
   cursor: not-allowed;
 }
 
+.table_filter_radio:checked + label{
+  border-bottom: 2px solid #047857;
+}
+
 /*
   background: #e4e4e4;
   border-radius: 3px !important;
