@@ -35,11 +35,11 @@ export default function VerifyEmail() {
             <span className="tw-p-[24px] tw-text-[12px] tw-font-medium tw-not-italic tw-leading-[18px] tw-text-[#494949]">
               Didn’t receive an email?
             </span>
-            <div className="form-btn-c">
+            <div className="form-btn-c tw-w-full">
               <CustomButton
                 type="submit"
                 text="Resend Verification"
-                className="btn-primary"
+                className="btn-primary tw-w-full"
                 onClick={resendLinkHandler}
               />
             </div>

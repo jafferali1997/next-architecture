@@ -124,7 +124,12 @@ export default function CreateOffer() {
       <div className="create-offer-wrapper">
         <div className="content">
           <div className="body">
-            <FormStepper title="Create Offer" module="Offer" tabs={tabs} />
+            <FormStepper
+              title="Create Offer"
+              gridCol="tw-grid-cols-[auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto]"
+              module="Offer"
+              tabs={tabs}
+            />
           </div>
         </div>
       </div>

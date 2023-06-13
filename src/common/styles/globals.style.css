@@ -113,6 +113,9 @@
   .form-box-grid {
     @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(351px,1fr))] tw-gap-[15px] tw-py-[16px];
   }
+  .form-box-grid-3col {
+    @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(326px,1fr))] tw-gap-[15px] tw-py-[16px];
+  }
   .form-box-grid-4col {
     @apply tw-grid tw-grid-cols-[repeat(auto-fill,minmax(257.75px,1fr))] tw-gap-[15px] tw-py-[16px];
   }
@@ -133,7 +136,7 @@
   }
   /* //tabs */
   .tab-navigation {
-    @apply tw-m-auto tw-mb-6 tw-grid tw-max-w-[853px] tw-grid-cols-[auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto] tw-items-center tw-gap-3 tw-pb-[50px];
+    @apply tw-m-auto tw-mb-6 tw-grid tw-max-w-[853px]  tw-items-center tw-gap-3 tw-pb-[50px];
   }
   .tab-navigation_ext {
     @apply tw-m-auto tw-mb-6 tw-grid tw-max-w-[853px] tw-grid-cols-[auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto] tw-items-center tw-gap-3 tw-pb-[50px];
@@ -426,14 +429,3 @@ body {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 }
-
-
-
-/* input form control design override */
-.react-tel-input .form-control{
-
-  background-color: green;
-  width: 100% !important;
-}
-
-/*  */

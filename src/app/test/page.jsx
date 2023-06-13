@@ -35,46 +35,78 @@ export default function Page() {
     setSelectedRow(null);
   };
 
+  const [values, setValues] = useState([]);
+  const [showInput, setShowInput] = useState(false);
+  const [inputValuee, setInputValuee] = useState('');
+
+  function handleAddClick() {
+    setValues([...values, inputValuee]);
+    setInputValuee('');
+  }
+
+  function handleInputChangee(event) {
+    setInputValuee(event.target.value);
+  }
+
+  function handleShowClick() {
+    setShowInput(true);
+  }
   return (
-    <table>
-      <thead>
-        <tr>
-          {columns.map((column) => (
-            <th key={column}>{column}</th>
-          ))}
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <React.Fragment key={row.id}>
-            <tr>
-              {columns.map((column) => (
-                <td key={`${row.id}-${column}`}>{row[column]}</td>
-              ))}
-              <td>
-                <button onClick={() => handleActionClick(row)}>Action</button>
-              </td>
-            </tr>
-            {selectedRow && selectedRow.id === row.id && (
+    <>
+      <table>
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th key={column}>{column}</th>
+            ))}
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <React.Fragment key={row.id}>
               <tr>
-                <td colSpan={columns.length + 1}>
-                  <div>
-                    <label htmlFor="name-input">Name:</label>
-                    <input
-                      id="name-input"
-                      type="text"
-                      value={inputValue}
-                      onChange={handleInputChange}
-                    />
-                    <button onClick={handleSaveClick}>Save</button>
-                  </div>
+                {columns.map((column) => (
+                  <td key={`${row.id}-${column}`}>{row[column]}</td>
+                ))}
+                <td>
+                  <button onClick={() => handleActionClick(row)}>Action</button>
                 </td>
               </tr>
-            )}
-          </React.Fragment>
-        ))}
-      </tbody>
-    </table>
+              {selectedRow && selectedRow.id === row.id && (
+                <tr>
+                  <td colSpan={columns.length + 1}>
+                    <div>
+                      <label htmlFor="name-input">Name:</label>
+                      <input
+                        id="name-input"
+                        type="text"
+                        value={inputValue}
+                        onChange={handleInputChangee}
+                      />
+                      <button onClick={handleSaveClick}>Save</button>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+      <div>
+        <button onClick={handleShowClick}>Show</button>
+        {showInput && (
+          <div>
+            <input type="text" value={inputValuee} onChange={handleInputChangee} />
+            <button onClick={handleAddClick}>Add</button>
+          </div>
+        )}
+        <div>
+          {values.map((value, index) => (
+            <div>{value}</div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }

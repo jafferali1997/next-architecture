@@ -54,7 +54,12 @@ export default function CreateCustomer() {
         <div className="content">
           <div className="header">{/* <OfferHeader /> */}</div>
           <div className="body">
-            <FormStepper title="Create Customer" module="Customer" tabs={tabs} />
+            <FormStepper
+              title="Create Customer"
+              gridCol="tw-grid-cols-[auto_1fr_auto_1fr_auto_1fr_auto_1fr_auto]"
+              module="Customer"
+              tabs={tabs}
+            />
           </div>
         </div>
       </div>

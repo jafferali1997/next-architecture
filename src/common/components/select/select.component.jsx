@@ -23,7 +23,11 @@ export default function Select({
 }) {
   return (
     <div
-      className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
+      className={`${
+        inlineLabel
+          ? ' tw-grid tw-w-full tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center'
+          : ''
+      }`}
     >
       {label && (
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
