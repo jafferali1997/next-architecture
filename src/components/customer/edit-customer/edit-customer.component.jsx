@@ -2,7 +2,13 @@
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import Link from 'next/link';
-import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  IconButton
+} from '@mui/material';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import FormInput from '@/common/components/form-input-old/form-input.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -14,6 +20,7 @@ import CustomRadio from '@/common/components/custom-radio/custom-radio.component
 import PriceGroup from '../create-customer/personal-details/components/price-group/price-group.component';
 import DiscountGroup from '../create-customer/personal-details/components/discount-group/discount-group.component';
 import useEditCustomer from './use-edit-customer.hook';
+import DeleteIcon from '@/common/icons/delete.icon';
 
 export default function EditCustomer() {
   const {
@@ -311,6 +318,15 @@ export default function EditCustomer() {
                       errors={errors}
                       register={register}
                     />
+                    <IconButton
+                      aria-label="delete"
+                      color="danger"
+                      onClick={() => {
+                        console.log('index', value.id);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
                   </div>
                 ))}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
