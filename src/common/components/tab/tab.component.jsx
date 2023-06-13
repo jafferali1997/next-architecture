@@ -4,21 +4,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useTabHook from './tab.hook';
 
-function Tab({ tabs }) {
-  const [completedTab, setCompletedTab] = useState([]);
+function Tab({ tabs, gridCol }) {
   const {
     syntaticTabs,
     activeTab,
     setActiveTab,
-    // completedTab,
-    // setCompletedTab,
+    completedTab,
+    setCompletedTab,
     handleTabClick,
     resetTabCompleted,
     Component
   } = useTabHook({ tabs });
   return (
     <div className="tabs">
-      <div className="tab-navigation">
+      <div className={`tab-navigation ${gridCol}`}>
         {/* {tabs.map((tab) => (
           <div
             key={tab.id}
@@ -51,6 +50,7 @@ function Tab({ tabs }) {
           </>
         ))}
       </div>
+
       <div className="tab-content">{Component}</div>
     </div>
   );
@@ -60,5 +60,6 @@ export default Tab;
 
 Tab.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  tabs: PropTypes.arrayOf(PropTypes.object)
+  tabs: PropTypes.arrayOf(PropTypes.object),
+  gridCol: PropTypes.string
 };

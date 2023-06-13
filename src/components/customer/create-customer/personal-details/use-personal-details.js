@@ -10,7 +10,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   createCustomerPersonalDetail,
-  getSingleCustomer
+  getSingleCustomer,
+  updateCustomer
 } from '@/provider/features/customer/customer.slice';
 
 const validationSchema = yup.object({
@@ -119,26 +120,50 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   };
 
   const onSubmit = async (value) => {
-    console.log(value);
-    const data = {
-      ...value,
-      postalCode: Number(value.postalCode),
-      ...(searchParams.get('id') && { customerId: Number(searchParams.get('id')) }),
-      priceGroups: [
-        ...selectedPriceGroup.map((item) => {
-          return Number(item.value);
-        })
-      ],
-      discountGroups: [
-        ...selectedDiscountGroup.map((item) => {
-          return Number(item.value);
-        })
-      ]
+    const priceGroups = [
+      ...selectedPriceGroup.map((item) => {
+        return Number(item.value);
+      })
+    ];
+    const discountGroups = [
+      ...selectedDiscountGroup.map((item) => {
+        return Number(item.value);
+      })
+    ];
+    const payloadData = {
+      gender: value.gender,
+      firstName: value.firstName,
+      lastName: value.lastName,
+      designation: value.designation,
+      address: value.address,
+      city: value.city,
+      country: value.country,
+      postalCode: Number(value.postalCode)
     };
-    const res = await dispatch(createCustomerPersonalDetail({ payload: data }));
-    console.log(res, 'Create Customer Personal Detail Response');
-    if (res.payload && res.payload.id) {
-      router.push(`/customer/create?id=${res.payload.id}`);
+    let response = null;
+    if (searchParams.get('id')) {
+      response = await dispatch(
+        updateCustomer({
+          payload: {
+            data: {
+              ...payloadData,
+              priceGroup: priceGroups,
+              discountGroup: discountGroups
+            },
+            id: Number(searchParams.get('id'))
+          }
+        })
+      );
+    } else {
+      response = await dispatch(
+        createCustomerPersonalDetail({
+          payload: { ...payloadData, priceGroups, discountGroups }
+        })
+      );
+    }
+    console.log(response, 'Create Customer Personal Detail Response');
+    if (response.payload && response.payload.id) {
+      router.push(`/customer/create?id=${response.payload.id}`);
       handleTabClick('company_details');
       handleTabCompleted('customer_details');
     }

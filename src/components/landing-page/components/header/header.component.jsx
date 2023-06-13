@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
 
 const menus = [
   { id: 'home', menu: 'Home', link: '/home' },
@@ -64,7 +65,9 @@ export default function Header() {
             src="assets/images/navbar/globe-icon.svg"
             alt="globe icon"
           />
-          <div className="tw-flex tw-items-center tw-gap-6 tw-rounded-[36px] tw-border-2 tw-border-disabled-input tw-px-4 tw-py-2">
+          <CustomButton href="/login" className="btn-primary" text="Login" />
+          <CustomButton href="/sign-up" className="btn-outline" text="Signup" />
+          {/* <div className="tw-flex tw-items-center tw-gap-6 tw-rounded-[36px] tw-border-2 tw-border-disabled-input tw-px-4 tw-py-2">
             <img
               height="15px"
               width="19px"
@@ -79,7 +82,7 @@ export default function Header() {
                 alt=""
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

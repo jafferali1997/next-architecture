@@ -57,9 +57,9 @@ export default function Profile() {
                   placeholder="John"
                   type="text"
                   register={register}
+                  inlineLabel
                   errors={errors}
                   isRequired={true}
-                  inlineLabel
                 />
               </div>
               <div className="input-group">

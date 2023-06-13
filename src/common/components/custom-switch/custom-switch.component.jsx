@@ -30,7 +30,7 @@ export default function CustomSwitch({
           {...(register && register(`${name}`))}
           name={name}
           className={`${className}`}
-          {...(checked && checked)}
+          {...(checked && { checked })}
           {...(onChange && { onChange })}
           readOnly={readOnly}
           defaultChecked={defaultChecked}

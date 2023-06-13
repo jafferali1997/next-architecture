@@ -11,43 +11,54 @@ import {
   updateCustomer
 } from '@/provider/features/customer/customer.slice';
 
+const validationSchema = yup.object({
+  // Define your validation rules here.
+  gender: yup.string().required('Gender is required'),
+  firstName: yup
+    .string()
+    .max(50, 'first name must be at most 50 characters long')
+    .required('First name is required'),
+  lastName: yup
+    .string()
+    .max(50, 'last name must be at most 50 characters long')
+    .required('Last name is required'),
+  designation: yup
+    .string()
+    .max(100, 'designation must be at most 100 characters long')
+    .required('Designation is required'),
+  postalCode: yup
+    .string()
+    .required('Postal Code is required')
+    .matches(/[0-9]/, 'Postal must be in digits')
+    .max(10, 'postal code must be maximum 10 characters'),
+  address: yup
+    .string()
+    .max(95, 'address must be at most 95 characters long')
+    .required('Address is required'),
+  country: yup.string().required('Country is required'),
+  city: yup.string().required('City is required')
+});
+
 export default function UseEditCustomer() {
   const [companyAddresses, setCompanyAddresses] = useState([{ id: 1 }]);
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const validationSchema = yup.object({
-    // Define your validation rules here.
-    gender: yup.string().required('Gender is required'),
-    firstName: yup
-      .string()
-      .max(50, 'first name must be at most 50 characters long')
-      .required('First name is required'),
-    lastName: yup
-      .string()
-      .max(50, 'last name must be at most 50 characters long')
-      .required('Last name is required'),
-    designation: yup
-      .string()
-      .max(100, 'designation must be at most 100 characters long')
-      .required('Designation is required'),
-    postalCode: yup
-      .string()
-      .required('Postal Code is required')
-      .matches(/[0-9]/, 'Postal must be in digits')
-      .max(10, 'postal code must be maximum 10 characters'),
-    address: yup
-      .string()
-      .max(95, 'address must be at most 95 characters long')
-      .required('Address is required'),
-    country: yup.string().required('Country is required'),
-    city: yup.string().required('City is required')
-  });
+  const [allPriceGroup, setAllPriceGroup] = useState([]);
+  const [selectedPriceGroup, setSelectedPriceGroup] = useState([]);
+
+  const [selectedDiscountGroup, setSelectedDiscountGroup] = useState([]);
+  const [allDiscountGroup, setAllDiscountGroup] = useState([]);
+
   const customerId = useRef(searchParams.get('id'));
 
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
+
+  const [paymentType, setPaymentType] = useState('BANK');
+
+  const [defaultValues, setDefaultValues] = useState({});
 
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
@@ -69,7 +80,9 @@ export default function UseEditCustomer() {
   async function fetchAndSetData() {
     if (searchParams.get('id')) {
       // customerId.current = searchParams.get('id');
-      let data = await dispatch(getSingleCustomer({ payload: searchParams.get('id') }));
+      let data = await dispatch(
+        getSingleCustomer({ payload: Number(searchParams.get('id')) })
+      );
       console.log('data', data);
       data = data.payload;
       Object.keys(data).forEach((key) => setValue(key, data[key]));
@@ -84,57 +97,41 @@ export default function UseEditCustomer() {
         const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
           setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
           setValue(`ca_address_${index + 1}`, addressObj.address);
+          setValue(`ca_id_${index + 1}`, addressObj.id);
           return { id: index + 1 };
         });
         setCompanyAddresses(newcompanyAddresses);
       }
+      setPaymentType(data?.payemntDetailType || 'BANK');
+      setSelectedPriceGroup(
+        data.priceGroup.map((item) => {
+          return allPriceGroup.find((price) => Number(price.id) === item.id);
+        })
+      );
+      setSelectedDiscountGroup(
+        data.discountGroup.map((item) => {
+          return allDiscountGroup.find((price) => Number(price.id) === item.id);
+        })
+      );
     }
-    const data = {
-      id: 6,
-      accountOwnerName: null,
-      iban: null,
-      city: 'Lahore',
-      country: 'Pakistan',
-      address: '56yujh',
-      postalCode: 120,
-      firstName: 'ALI',
-      lastName: 'Raza',
-      bic: null,
-      mendateReferance: null,
-      mandateGenerateDate: null,
-      nameOfCreditCard: null,
-      creditCardNumber: null,
-      creditCardExpiry: null,
-      creditCardCVV: null,
-      companyName: null,
-      companyEmail: null,
-      companyPhone: null,
-      companyFax: null,
-      companyMobile: null,
-      companyUrl: null,
-      companySize: null,
-      tin: null,
-      vat: null,
-      vatStatus: false,
-      isDraft: true,
-      discountTerms: 'string',
-      discountAmount: 12,
-      discountValidTill: '2023-06-05T13:25:03.177Z',
-      termOfPayment: 'CASH_DISCOUNT_TARGET_AS_A_DATE',
-      businessDetailId: 3,
-      companyAddress: [],
-      additionalContact: [],
-      termOfDelivery: [],
-      priceGroup: [],
-      discountGroup: []
-    };
   }
 
   useEffect(() => {
     fetchAndSetData();
-  }, [searchParams]);
+  }, [searchParams, allPriceGroup, allDiscountGroup]);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    console.log(data, '=> data');
+    const additionalContactKeys = Object.keys(data).filter((attr) =>
+      attr.startsWith('ac')
+    );
+    const additionalContact = additionalContactKeys.reduce((accumulator, attr) => {
+      const key = attr.replace('ac_', '');
+      if (key === 'gender' && !['MALE', 'FEMALE'].includes(data[attr])) {
+        return { ...accumulator };
+      }
+      return { ...accumulator, [key]: data[attr] };
+    }, {});
     const companyAddressesKeys = Object.keys(data).filter((attr) =>
       attr.startsWith('ca')
     );
@@ -150,31 +147,16 @@ export default function UseEditCustomer() {
     }, []);
     const payloadData = {
       ...data,
-      additionalContact: [
-        {
-          gender: data.ac_gender,
-          designation: data.ac_designation,
-          firstName: data.ac_firstName,
-          lastName: data.ac_lastName,
-          postalCode: data.ac_postalCode,
-          address: data.ac_address,
-          country: data.ac_country,
-          city: data.ac_city,
-          email: data.ac_email,
-          phone: data.ac_phone,
-          department: data.ac_department,
-          mobile: data.ac_mobile
-        }
-      ],
+      additionalContact: [additionalContact],
       companyAddress: newCompanyAddresses
     };
 
     console.log(data);
-    const res = dispatch(
+    const res = await dispatch(
       updateCustomer({ payload: { data: payloadData, id: customerId.current } })
     );
     console.log('res', res);
-    if (res) {
+    if (res.payload) {
       router.push('/customer');
     }
   };
@@ -210,6 +192,14 @@ export default function UseEditCustomer() {
     handleAddInput,
     handleInputChange,
     companyAddresses,
-    setCompanyAddresses
+    setCompanyAddresses,
+    allPriceGroup,
+    setAllPriceGroup,
+    selectedPriceGroup,
+    setSelectedPriceGroup,
+    allDiscountGroup,
+    setAllDiscountGroup,
+    selectedDiscountGroup,
+    setSelectedDiscountGroup
   };
 }

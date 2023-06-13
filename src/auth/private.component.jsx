@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
+// import { getAccessToken } from './../common/utils/access-token.util';
 import Navbar from '@/common/components/dashboard/navbar/navbar.component';
 import Sidebar from '@/common/components/dashboard/sidebar/sidebar.component';
 
@@ -37,7 +38,7 @@ export default function Private({ component }) {
   // }, []);
 
   // const router = useRouter();
-  // if (isAccessTokenVerifed) {
+  // if (getAccessToken()) {
   if (true) {
     return (
       <div className="dashboard-main">

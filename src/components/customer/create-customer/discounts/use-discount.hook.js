@@ -67,7 +67,7 @@ export default function useDiscount({ handleTabClick, handleTabCompleted }) {
         }
       })
     );
-    if (res.payload) {
+    if (res.payload?.id) {
       handleTabClick('manage_terms');
       handleTabCompleted('discount');
     }

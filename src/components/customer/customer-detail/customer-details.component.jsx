@@ -2,6 +2,7 @@
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
+import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
@@ -23,7 +24,12 @@ export default function CustomerDetails() {
     handleSubmit,
     id,
     onSubmit,
-    companyAddresses
+    companyAddresses,
+    allPriceGroup,
+    selectedPriceGroup,
+    allDiscountGroup,
+    selectedDiscountGroup,
+    defaultData
   } = UseCustomerDetails();
 
   return (
@@ -47,12 +53,8 @@ export default function CustomerDetails() {
               <div className="form-box tw-w-[759px] ">
                 <h3 className="form-box-heading ">Personal Details</h3>
                 <div className="form-box-grid">
-                  <Select
+                  <CustomInput
                     label="Gender"
-                    options={[
-                      { id: 'male', value: 'MALE', label: 'Male' },
-                      { id: 'female', value: 'FEMALE', label: 'Female' }
-                    ]}
                     placeholder="Select Gender"
                     name="gender"
                     register={register}
@@ -90,19 +92,17 @@ export default function CustomerDetails() {
                     register={register}
                     readOnly
                   />
-                  <Select
+                  <CustomInput
                     label="Country"
                     name="country"
                     placeholder="Country"
-                    type="select"
                     register={register}
                     readOnly
                   />
-                  <Select
+                  <CustomInput
                     label="City"
                     name="city"
                     placeholder="City"
-                    type="select"
                     register={register}
                     readOnly
                   />
@@ -117,23 +117,19 @@ export default function CustomerDetails() {
                   <div>
                     <label className="group-label">Price Group</label>
                     <MultiSelect
-                      options={[
-                        { id: '1', label: 'Test 1', value: 'test1' },
-                        { id: '2', label: 'Test 2', value: 'test2' },
-                        { id: '3', label: 'Test 3', value: 'test3' }
-                      ]}
+                      options={allPriceGroup}
+                      defaultOptions={selectedPriceGroup}
                       handleChange={() => {}}
+                      readOnly
                     />
                   </div>
                   <div>
                     <label className="group-label">Discount Group</label>
                     <MultiSelect
-                      options={[
-                        { id: '1', label: 'Test 1', value: 'test1' },
-                        { id: '2', label: 'Test 2', value: 'test2' },
-                        { id: '3', label: 'Test 3', value: 'test3' }
-                      ]}
+                      options={allDiscountGroup}
+                      defaultOptions={selectedDiscountGroup}
                       handleChange={() => {}}
+                      readOnly
                     />
                   </div>
                 </div>
@@ -175,16 +171,11 @@ export default function CustomerDetails() {
                     register={register}
                     readOnly
                   />
-                  <Select
+                  <CustomInput
                     label="Company Size"
                     name="companySize"
                     placeholder="Select Company Size"
                     type="select"
-                    options={[
-                      { id: '10-30', value: '10-30', label: '10-30' },
-                      { id: '40-100', value: '40-100', label: '40-100' },
-                      { id: 'above 100', value: 'above 100', label: 'above 100' }
-                    ]}
                     register={register}
                     readOnly
                   />
@@ -229,27 +220,24 @@ export default function CustomerDetails() {
                 <div className="tw-grid tw-grid-cols-[repeat(auto-fill,minmax(175px,1fr))] tw-gap-[15px] tw-py-[16px]">
                   <CustomSwitch
                     label="Current Status"
-                    name="status"
                     type="switch"
-                    register={register}
+                    checked={defaultData.isStatus}
                     readOnly
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
-                    name="isShowInPdf"
                     type="switch"
-                    register={register}
+                    checked={defaultData.isPDF}
                     readOnly
                   />
                   <CustomSwitch
                     label="VAT exempt"
-                    name="vatStatus"
                     type="switch"
-                    register={register}
+                    checked={defaultData.vatStatus}
                     readOnly
                   />
                 </div>
-                <div className="tw-flex tw-items-center  tw-justify-between">
+                <div className="tw-mb-2 tw-flex tw-items-center tw-justify-between">
                   <div className="tw-flex tw-items-center tw-gap-[16px]">
                     <h3 className="form-box-heading">Company Addresses</h3>
                     {isAdress ? (
@@ -266,27 +254,28 @@ export default function CustomerDetails() {
                       />
                     )}
                   </div>
-                  <span className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-blue-700 tw-underline">
-                    Add more address
-                  </span>
                 </div>
-                {companyAddresses.map((value, index) => (
-                  <div className="form-box-grid " key={value}>
-                    <CustomInput
-                      placeholder="Enter label name"
-                      type="text"
-                      name={`ca_addressLabel_${index + 1}`}
-                      register={register}
-                      // onChange={(e) => handleInputChange(index, e.target.value)}
-                    />
-                    <CustomInput
-                      placeholder="Enter company address"
-                      type="text"
-                      name={`ca_address_${index + 1}`}
-                      register={register}
-                    />
-                  </div>
-                ))}
+                {isAdress &&
+                  companyAddresses.map((value, index) => (
+                    <div className="form-box-grid" key={value}>
+                      <CustomInput
+                        placeholder="Enter label name"
+                        type="text"
+                        name={`ca_addressLabel_${index + 1}`}
+                        register={register}
+                        // onChange={(e) => handleInputChange(index, e.target.value)}
+                      />
+                      <CustomInput
+                        placeholder="Enter company address"
+                        type="text"
+                        name={`ca_address_${index + 1}`}
+                        register={register}
+                      />
+                    </div>
+                  ))}
+                {isAdress && companyAddresses?.length === 0 && (
+                  <p className="tw-text-center">No address found.</p>
+                )}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>
                   {isAdditional ? (
@@ -309,11 +298,6 @@ export default function CustomerDetails() {
                       label="Gender"
                       name="ac_gender"
                       placeholder="John"
-                      type="select"
-                      options={[
-                        { id: 'male', value: 'MALE', label: 'Male' },
-                        { id: 'female', value: 'FEMALE', label: 'Female' }
-                      ]}
                       register={register}
                       readOnly
                     />
@@ -350,34 +334,20 @@ export default function CustomerDetails() {
                       readOnly
                     />
 
-                    <Select
+                    <CustomInput
                       label="Country"
                       name="ac_country"
                       placeholder="Country"
                       type="select"
                       register={register}
                       readOnly
-                      // onChange={handleCountryChange}
-                      // value={selectedCountry}
-                      // isRequired={true}
-
-                      // options={countries.map((item) => {
-                      //   return { label: item.name, value: item.isoCode, id: item.isoCode };
-                      // })}
                     />
-                    <Select
+                    <CustomInput
                       label="City"
                       name="ac_city"
                       placeholder="City"
-                      type="select"
                       register={register}
                       readOnly
-                      // value={selectedCity}
-                      // onChange={handleCityChange}
-
-                      // options={cities.map((item) => {
-                      //   return { label: item.name, value: item.isoCode, id: item.isoCode };
-                      // })}
                     />
                     <CustomInput
                       label="Postal Code"
@@ -433,12 +403,7 @@ export default function CustomerDetails() {
                     <CustomRadio
                       label="Bank Details"
                       name="same"
-                      // checked={bankDetail}
-                      // onChange={(e) => {
-                      //   setBankDetail(e.target.checked);
-                      //   setCreditCard(!e.target.checked);
-                      // }}
-                      placeholder="Company Name"
+                      checked={defaultData.paymentType === 'bankDetail'}
                       type="radio"
                       register={register}
                       readOnly
@@ -448,70 +413,104 @@ export default function CustomerDetails() {
                     <CustomRadio
                       label="Credit Card Details"
                       name="same"
-                      // checked={creditCard}
-                      // onChange={(e) => {
-                      //   setCreditCard(e.target.checked);
-                      //   setBankDetail(!e.target.checked);
-                      // }}
-                      placeholder="Company Name"
+                      checked={defaultData.paymentType === 'creditCard'}
                       type="radio"
                       register={register}
-                      error
+                      readOnly
                     />
                   </div>
                 </div>
-                <div className="tw-w-full">
-                  <CustomInput
-                    label="IBAN Number"
-                    name="iban"
-                    placeholder="IBAN Number"
-                    type="text"
-                    register={register}
-                    readOnly
-                  />
-                </div>
-                <div className="form-box-grid">
-                  <CustomInput
-                    label="Account owner name"
-                    name="accountOwnerName"
-                    placeholder="Account owner name"
-                    type="text"
-                    isRequired={true}
-                    register={register}
-                    readOnly
-                  />
-
-                  <CustomInput
-                    label="BIC Number"
-                    name="bic"
-                    placeholder="BIC Number"
-                    type="text"
-                    register={register}
-                    readOnly
-                  />
-                  <CustomInput
-                    label="Mandate Reference"
-                    name="mendateReferance"
-                    placeholder="Mandate Reference"
-                    type="number"
-                    register={register}
-                    readOnly
-                  />
-                  <CustomInput
-                    label="Mandate Date"
-                    name="mandateGenerateDate"
-                    placeholder="03/13/2023"
-                    type="date"
-                    register={register}
-                    readOnly
-                  />
-                </div>
+                {defaultData.paymentType === 'bankDetail' && (
+                  <>
+                    <div className="tw-w-full">
+                      <CustomInput
+                        label="IBAN Number"
+                        name="iban"
+                        placeholder="IBAN Number"
+                        type="text"
+                        register={register}
+                        readOnly
+                      />
+                    </div>
+                    <div className="form-box-grid">
+                      <CustomInput
+                        label="Account owner name"
+                        name="accountOwnerName"
+                        placeholder="Account owner name"
+                        type="text"
+                        isRequired={true}
+                        register={register}
+                        readOnly
+                      />
+                      <CustomInput
+                        label="BIC Number"
+                        name="bic"
+                        placeholder="BIC Number"
+                        type="text"
+                        register={register}
+                        readOnly
+                      />
+                      <CustomInput
+                        label="Mandate Reference"
+                        name="mendateReferance"
+                        placeholder="Mandate Reference"
+                        type="number"
+                        register={register}
+                        readOnly
+                      />
+                      <CustomInput
+                        label="Mandate Date"
+                        name="mandateGenerateDate"
+                        placeholder="03/13/2023"
+                        type="date"
+                        register={register}
+                        readOnly
+                      />
+                    </div>
+                  </>
+                )}
+                {defaultData.paymentType === 'creditCard' && (
+                  <div className="form-box-grid-4col">
+                    <CustomInput
+                      label="Credit Card Name"
+                      name="nameOfCreditCard"
+                      placeholder="Credit Card Name"
+                      type="text"
+                      register={register}
+                      isRequired={true}
+                    />
+                    <CustomInput
+                      label="Credit Card Number"
+                      name="creditCardNumber"
+                      placeholder="Credit Card Number"
+                      type="number"
+                      register={register}
+                      isRequired={true}
+                    />
+                    <CustomInput
+                      label="Expiry Date"
+                      name="creditCardExpiry"
+                      placeholder="03/13/2023"
+                      type="date"
+                      register={register}
+                      isRequired={true}
+                    />
+                    <CustomInput
+                      label="CVV"
+                      name="creditCardCVV"
+                      placeholder="CVV"
+                      type="number"
+                      register={register}
+                      isRequired={true}
+                    />
+                  </div>
+                )}
               </div>
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
                 <h3 className="form-box-heading ">Discount</h3>
                 <div className="form-box-grid">
                   <CustomInput
-                    label="Discount Amount "
+                    label="Discount Amount"
                     name="discountAmount"
                     placeholder="Discount amount"
                     type="text"
@@ -522,7 +521,7 @@ export default function CustomerDetails() {
                   <div>
                     <CustomInput
                       label="Cash Discount"
-                      name="days"
+                      name="discountDays"
                       placeholder="Cash Discount"
                       type="text"
                       isRequired={true}
@@ -533,8 +532,164 @@ export default function CustomerDetails() {
                 </div>
               </div>
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
-                <h3 className="form-box-heading ">Terms Of Payments</h3>
                 <div className="tw-mt-[16px] tw-w-full">
+                  <h3 className="form-box-heading ">Terms Of Payments</h3>
+                  <FormControl>
+                    <RadioGroup
+                      name="termOfPayment"
+                      value={defaultData.termOfPayment}
+                      register={register}
+                      readOnly
+                    >
+                      <FormControlLabel
+                        value="PAYMENT_TERMS_AS_DATE"
+                        control={
+                          <Radio
+                            checked={
+                              defaultData.termOfPayment === 'PAYMENT_TERMS_AS_DATE'
+                            }
+                          />
+                        }
+                        label="Payment Terms as date"
+                      />
+                      {defaultData.termOfPayment === 'PAYMENT_TERMS_AS_DATE' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="PAYMENT_TERMS_AS_DATE_DATA"
+                            placeholder="03/13/2023"
+                            type="date"
+                            isRequired={false}
+                            register={register}
+                            readOnly
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="PAYMENT_TERMS_IN_DAYS"
+                        control={
+                          <Radio
+                            checked={
+                              defaultData.termOfPayment === 'PAYMENT_TERMS_IN_DAYS'
+                            }
+                          />
+                        }
+                        label="Payment terms in days"
+                      />
+                      {defaultData.termOfPayment === 'PAYMENT_TERMS_IN_DAYS' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="PAYMENT_TERMS_IN_DAYS_DATA"
+                            placeholder="Payment terms"
+                            type="days"
+                            isRequired={false}
+                            register={register}
+                            readOnly
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="CASH_DISCOUNT_TARGET_AS_A_DATE"
+                        control={
+                          <Radio
+                            checked={
+                              defaultData.termOfPayment ===
+                              'CASH_DISCOUNT_TARGET_AS_A_DATE'
+                            }
+                          />
+                        }
+                        label="Cash discount target as a date"
+                      />
+                      {defaultData.termOfPayment === 'CASH_DISCOUNT_TARGET_AS_A_DATE' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="CASH_DISCOUNT_TARGET_AS_A_DATE_DATA"
+                            placeholder="13/03/2023"
+                            type="date"
+                            isRequired={false}
+                            register={register}
+                            readOnly
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="DISCOUNT_AND_PERCENTAGE"
+                        control={
+                          <Radio
+                            checked={
+                              defaultData.termOfPayment === 'DISCOUNT_AND_PERCENTAGE'
+                            }
+                          />
+                        }
+                        label="Discount and %"
+                      />
+                      {defaultData.termOfPayment === 'DISCOUNT_AND_PERCENTAGE' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="DISCOUNT_AND_PERCENTAGE_DATA"
+                            placeholder="Discount and %"
+                            type="text"
+                            isRequired={false}
+                            register={register}
+                            readOnly
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="DISCOUNT_AMOUNT"
+                        control={
+                          <Radio
+                            checked={defaultData.termOfPayment === 'DISCOUNT_AMOUNT'}
+                          />
+                        }
+                        label="Discount amount"
+                      />
+                      {defaultData.termOfPayment === 'DISCOUNT_AMOUNT' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="DISCOUNT_AMOUNT_DATA"
+                            placeholder="Discount amount"
+                            type="text"
+                            isRequired={false}
+                            register={register}
+                            readOnly
+                          />
+                        </div>
+                      )}
+                      <FormControlLabel
+                        value="TOTAL_AMOUNT_MINUS_DISCOUNT"
+                        control={
+                          <Radio
+                            checked={
+                              defaultData.termOfPayment === 'TOTAL_AMOUNT_MINUS_DISCOUNT'
+                            }
+                          />
+                        }
+                        label="Total amount minus discount"
+                      />
+                      {defaultData.termOfPayment === 'TOTAL_AMOUNT_MINUS_DISCOUNT' && (
+                        <div className="radio-expanded">
+                          <CustomInput
+                            name="TOTAL_AMOUNT_MINUS_DISCOUNT_DATA"
+                            placeholder="Total amount minus discount"
+                            type="text"
+                            isRequired={false}
+                            register={register}
+                            readOnly
+                          />
+                        </div>
+                      )}
+                    </RadioGroup>
+                  </FormControl>
+                  <h3 className="tw-mt-[16px]">Terms of delivery</h3>
+                  <TextArea
+                    name="termOfDelivery"
+                    placeholder="Delivery Terms"
+                    type="textarea"
+                    register={register}
+                    readOnly
+                  />
+                </div>
+                {/* <div className="tw-mt-[16px] tw-w-full">
                   <CustomInput
                     label="Payment terms as date"
                     name="paymentDate"
@@ -545,13 +700,13 @@ export default function CustomerDetails() {
                   />
                   <h3 className="tw-mt-[16px]">Terms of delivery</h3>
                   <TextArea
-                    name="deliveryTerm"
+                    name="termOfDelivery"
                     placeholder="Delivery Terms"
                     type="textarea"
                     register={register}
                     readOnly
                   />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="right-side">

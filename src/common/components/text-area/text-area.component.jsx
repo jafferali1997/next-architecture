@@ -6,6 +6,7 @@ import FieldLabel from '../field-label/field-label.component';
 export default function TextArea({
   placeholder,
   name,
+  register = null,
   label = null,
   className = '',
   minRows = 4,
@@ -18,8 +19,7 @@ export default function TextArea({
   isRequired = false,
   inlineLabel = false,
   labelClassName = '',
-  readOnly = false,
-  register = null
+  readOnly = false
 }) {
   return (
     <div
@@ -32,13 +32,13 @@ export default function TextArea({
       <div className="tw-w-full">
         <TextareaAutosize
           {...(register && register(`${name}`))}
+          name={name}
           minRows={minRows}
           maxRows={maxRows}
           placeholder={placeholder}
           className={`input-field default-input tw-min hover:tw-border-text-dark-gray focus:tw-border-[1px] focus:tw-border-text-dark-gray ${
             errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
-          name={name}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}
           onChange={onChange}
@@ -70,6 +70,5 @@ TextArea.propTypes = {
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
   labelClassName: PropTypes.string,
-  readOnly: PropTypes.bool,
-  register: PropTypes.func
+  readOnly: PropTypes.bool
 };

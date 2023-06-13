@@ -1,43 +1,70 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { getOrCreateTag } from '@/provider/features/tag/tag.slice';
 import useCreateCategories from '@/components/categories/use-create-categories.hooks';
 
-export default function UseCreateProduct() {
+export default function useCreateProduct() {
   const dispatch = useDispatch();
-  const [inputValues, setInputValues] = useState(['']);
-  const [priceInputValues, setPriceInputValues] = useState(['']);
-  const [discountInputValues, setDiscountInputValues] = useState(['']);
+  const getOrCreateTagData = useSelector((state) => state.tag.getOrCreate);
+  const [priceInputValues, setPriceInputValues] = useState([]);
+  const [discountInputValues, setDiscountInputValues] = useState([]);
   const [selectedTag, setSelectedTag] = useState([]);
 
   const { categories, handleClickCategory } = useCreateCategories();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm();
 
-  const handleAddInput = () => {
-    setInputValues([...inputValues, '']);
-  };
-  const handleAddPriceInput = () => {
-    setPriceInputValues([...priceInputValues, '']);
-  };
-  const handleAddDiscountInput = () => {
-    setDiscountInputValues([...discountInputValues, '']);
-  };
+  useEffect(() => {
+    if (getOrCreateTagData?.isError) {
+      setSelectedTag([...selectedTag]);
+    }
+  }, [getOrCreateTagData]);
 
-  const handleInputChange = (index, value) => {
-    const newInputValues = [...inputValues];
-    newInputValues[index] = value;
-    setInputValues(newInputValues);
+  const handlePriceInput = (data, indexToChange = null, toDelete = false) => {
+    if (indexToChange !== null || indexToChange !== undefined) {
+      if (toDelete) {
+        setPriceInputValues([
+          ...priceInputValues.filter((item, index) => index !== indexToChange)
+        ]);
+      } else {
+        setPriceInputValues([
+          ...priceInputValues.map((item, index) => {
+            if (index === indexToChange) {
+              return data;
+            }
+            return item;
+          })
+        ]);
+      }
+    } else {
+      setPriceInputValues([...priceInputValues, data]);
+    }
   };
-  const handlePriceInputChange = (index, value) => {
-    const newInputValues = [...priceInputValues];
-    newInputValues[index] = value;
-    setPriceInputValues(newInputValues);
-  };
-  const handleDiscountInputChange = (index, value) => {
-    const newInputValues = [...discountInputValues];
-    newInputValues[index] = value;
-    setDiscountInputValues(newInputValues);
+  const handleDiscountInput = (data, indexToChange = null, toDelete = false) => {
+    if (indexToChange !== null || indexToChange !== undefined) {
+      if (toDelete) {
+        setDiscountInputValues([
+          ...discountInputValues.filter((item, index) => index !== indexToChange)
+        ]);
+      } else {
+        setDiscountInputValues([
+          ...discountInputValues.map((item, index) => {
+            if (index === indexToChange) {
+              return data;
+            }
+            return item;
+          })
+        ]);
+      }
+    } else {
+      setDiscountInputValues([...discountInputValues, data]);
+    }
   };
 
   const handleSelectedTags = (data) => {
@@ -45,25 +72,35 @@ export default function UseCreateProduct() {
   };
 
   const handleTags = (data) => {
-    dispatch(
-      getOrCreateTag({ payload: { tagName: data }, successCallback: handleSelectedTags })
-    );
+    if (data.length > selectedTag.length) {
+      dispatch(
+        getOrCreateTag({
+          payload: { tagName: data[data.length - 1] },
+          successCallback: handleSelectedTags
+        })
+      );
+    }
+    if (data.length < selectedTag.length) {
+      setSelectedTag([...selectedTag.filter((item) => data.includes(item.tagName))]);
+    }
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return {
-    handleAddInput,
-    handleInputChange,
-    inputValues,
-    setInputValues,
     priceInputValues,
-    setPriceInputValues,
-    handleAddPriceInput,
-    handlePriceInputChange,
+    handlePriceInput,
     discountInputValues,
-    setDiscountInputValues,
-    handleAddDiscountInput,
-    handleDiscountInputChange,
+    handleDiscountInput,
     selectedTag,
-    handleTags
+    handleTags,
+    onSubmit,
+    handleSubmit,
+    register,
+    categories,
+    errors,
+    handleClickCategory
   };
 }

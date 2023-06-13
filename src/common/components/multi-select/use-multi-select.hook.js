@@ -2,7 +2,13 @@
 
 import { useEffect, useState, useRef } from 'react';
 
-export default function useMultiSelect(options, handleChange, defaultOptions, search) {
+export default function useMultiSelect(
+  options,
+  handleChange,
+  defaultOptions,
+  search,
+  readOnly
+) {
   const [open, setOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -37,7 +43,9 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
   };
 
   const toggleDropDown = () => {
-    setOpen(!open);
+    if (!readOnly) {
+      setOpen(!open);
+    }
   };
 
   const getPlaceholder = (placeholder) => {
@@ -61,7 +69,9 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
   };
 
   const removeOptionHandler = (option) => {
-    selectedOptionsSetter(selectedOptions.filter((o) => o.value !== option.value));
+    if (!readOnly) {
+      selectedOptionsSetter(selectedOptions.filter((o) => o.value !== option.value));
+    }
   };
 
   const clearAllClickHandler = () => {
@@ -69,7 +79,7 @@ export default function useMultiSelect(options, handleChange, defaultOptions, se
   };
 
   const handleInputChangeHandler = (e) => {
-    if (search) {
+    if (search && !readOnly) {
       setIsSearching(e.target.value.trim().length > 0);
       if (!open) setOpen(true);
       let newFilteredOptions = [];

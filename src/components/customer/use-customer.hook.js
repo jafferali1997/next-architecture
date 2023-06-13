@@ -16,9 +16,31 @@ import {
   getAllCustomer
 } from '@/provider/features/customer/customer.slice';
 
-export default function useCustomer() {
-  const FILES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
+const FEATURES_TO_BE_SHOW = {
+  id: 'Customer ID #',
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  email: 'Email',
+  phone: 'Phone',
+  isDraft: 'Status',
+  gender: 'Gender',
+  address: 'Address',
+  state: 'State',
+  country: 'Country',
+  postalCode: 'Postal Code',
+  companyName: 'Company Name',
+  companyAddress: 'Company Address',
+  companyPhone: 'Company Phone Number',
+  companyEmail: 'Company Email Address',
+  companyMobile: 'Company Mobile Number',
+  companyFax: 'Fax Number',
+  tin: 'TIN'
+};
+const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isDraft'];
 
+const FEATURES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
+
+export default function useCustomer() {
   const getActionColumn = () => {
     return {
       field: 'actions',
@@ -73,212 +95,39 @@ export default function useCustomer() {
     Object.keys(dataObject).forEach((key) => {
       let columnObject = {
         field: key,
-        headerName: key,
+        headerName: FEATURES_TO_BE_SHOW[key],
         headerClassName: 'table-heading ',
         cellClassName: 'table-data ',
         width: 200
       };
-      if (!FILES_TO_BE_IGNORE.includes(key)) {
+      if (!FEATURES_TO_BE_IGNORE.includes(key)) {
         if (key === 'isDraft') {
           columnObject = {
             ...columnObject,
             renderCell: (params) => (
-              <span
-                className={params.value == 'active' ? 'status-active' : 'status-error'}
-              >
-                {params.value}
+              <span className={params.value ? 'status-active' : 'status-error'}>
+                {params.value ? 'Active' : 'De-active'}
               </span>
             )
           };
         }
-        columns.push(columnObject);
+        if (FEATURES_TO_BE_SHOW[key]) {
+          columns.push(columnObject);
+        }
       }
     });
     columns.push(getActionColumn());
     return columns;
   };
 
-  // const getRows = (data) => {
-  //   let rows = [];
-  //   data.forEach((item) => {
-  //   }
-  // }
-
-  // const columns = [
-  //   {
-  //     field: 'id',
-  //     headerName: 'Customer ID #',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 180
-  //   },
-  //   {
-  //     field: 'firstName',
-  //     headerName: 'First name',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 150
-  //   },
-  //   {
-  //     field: 'lastName',
-  //     headerName: 'Last name',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 150
-  //   },
-  //   {
-  //     field: 'gender',
-  //     headerName: 'Gender',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 150
-  //   },
-  //   {
-  //     field: 'phone',
-  //     headerName: 'Phone',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 200
-  //   },
-  //   {
-  //     field: 'companyName',
-  //     headerName: 'Company name',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 200
-  //   },
-  //   {
-  //     field: 'companyAddress',
-  //     headerName: 'Company address',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 260
-  //   },
-  //   {
-  //     field: 'Status',
-  //     headerName: 'Status',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 110,
-  //     renderCell: (params) => (
-  //       // eslint-disable-next-line react/jsx-filename-extension
-  //       <span className={params.value == 'active' ? 'status-active' : 'status-error'}>
-  //         {params.value}
-  //       </span>
-  //     )
-  //   },
-  //   {
-  //     field: 'actions',
-  //     headerName: 'Action',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     type: 'actions',
-  //     width: 100,
-  //     getActions: (cell) => [
-  //       <GridActionsCellItem
-  //         icon={<PencilIcon />}
-  //         label="Edit"
-  //         onClick={() => handleEditAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<CircleIcon />}
-  //         label="Active"
-  //         onClick={() => handleStatusAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<EyeIcon />}
-  //         label="View Detail"
-  //         onClick={() => handleViewAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<CommentIcon />}
-  //         label="Add comments"
-  //         onClick={() => handleAddCommentAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<UploadIcon />}
-  //         label="Upload files"
-  //         onClick={() => handleUploadAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<DeleteIcon />}
-  //         label="Delete"
-  //         onClick={() => handleDeleteAction(cell.row)}
-  //         showInMenu
-  //       />
-  //     ]
-  //   }
-  // ];
-
   const initialColumnState = (columns) => {
     return columns.reduce((acc, column, idx) => {
-      if (idx < 5 || column.field === 'actions') acc[column.field] = true;
-      else acc[column.field] = false;
+      if (DEFAULT_COLUMNS.includes(column.field) || column.field === 'actions') {
+        acc[column.field] = true;
+      } else acc[column.field] = false;
       return acc;
     }, {});
   };
-
-  // const rows = [
-  //   {
-  //     id: '23423',
-  //     firstName: 'Jon Jon 2 Jon 1 Jon 3 Jon 4 Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '243434',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '3535',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'in-active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '534345',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '53454',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '5345',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   }
-  // ];
 
   const [columnState, setColumnState] = useState([]);
   const [open, setOpen] = useState(false);
@@ -310,6 +159,7 @@ export default function useCustomer() {
   };
 
   const handleDeleteAction = (row) => {
+    console.log(row.id, typeof row.id);
     const data = dispatch(deleteCustomer({ payload: row.id }));
     if (data) {
       // show toaster

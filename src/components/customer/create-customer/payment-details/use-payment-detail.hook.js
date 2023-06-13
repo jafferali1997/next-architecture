@@ -75,7 +75,11 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
         if (data.payload) {
           data = data.payload;
           Object.keys(data).forEach((key) => setValue(key, data[key]));
-          setPaymentType(data.iban === '' ? 'creditCardDetails' : 'bankDetails');
+          setPaymentType(
+            data?.payemntDetailType === 'CREDIT_CARD'
+              ? 'creditCardDetails'
+              : 'bankDetails'
+          );
         }
       }
       if (id) {
@@ -85,53 +89,54 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   if (!bankDetail) {
-  //     const validationCreditSchema = yup.object({
-  //       // Define your validation rules here.
-  //       creditCardName: yup
-  //         .string()
-  //         .max(50, 'Credit Card Name must be at most 50 characters long')
-  //         .min(1, 'Credit Card Name must be minimum 1 characters')
-  //         .required('Credit Card Name is required'),
-  //       creditCardNo: yup
-  //         .number()
-  //         // .test(
-  //         //   'test-number',
-  //         //   'Credit Card number is invalid',
-  //         //   (value) => cardValidator.number(value).isValid
-  //         // )
-  //         .required('Credit Card Number is required'),
-  //       cvv: yup
-  //         .string()
-  //         .matches(/^[0-9]{3,4}$/, 'CVV must be at most 3 or 4 characters long')
-  //         .required('CVV is required'),
-  //       creditCardExpiry: yup.string().required('Credit Card Expiry is required')
-  //     });
-  //     setValidationSchemaState(validationCreditSchema);
-  //   }
-  //   if (bankDetail) {
-  //     setValidationSchemaState(validationSchema);
-  //   }
-  // }, [bankDetail]);
+  useEffect(() => {
+    if (paymentType !== 'bankDetails') {
+      const validationCreditSchema = yup.object({
+        // Define your validation rules here.
+        nameOfCreditCard: yup
+          .string()
+          .max(50, 'Credit Card Name must be at most 50 characters long')
+          .min(1, 'Credit Card Name must be minimum 1 characters')
+          .required('Credit Card Name is required'),
+        creditCardNumber: yup
+          .number()
+          // .test(
+          //   'test-number',
+          //   'Credit Card number is invalid',
+          //   (value) => cardValidator.number(value).isValid
+          // )
+          .required('Credit Card Number is required'),
+        creditCardCVV: yup
+          .string()
+          .matches(/^[0-9]{3}$/, 'CVV must be at most 3 characters long')
+          .required('CVV is required'),
+        creditCardExpiry: yup.string().required('Credit Card Expiry is required')
+      });
+      setValidationSchemaState(validationCreditSchema);
+    }
+    if (paymentType === 'bankDetails') {
+      setValidationSchemaState(validationSchema);
+    }
+  }, [paymentType]);
 
   const onSubmit = async (value) => {
     console.log(value);
+
     let payload = {
-      ...value,
-      iban: '',
-      accountOwnerName: '',
-      bic: '',
-      mendateReferance: '',
-      mandateGenerateDate: ''
+      payemntDetailType: 'CREDIT_CARD',
+      nameOfCreditCard: value.nameOfCreditCard,
+      creditCardNumber: value.creditCardNumber,
+      creditCardExpiry: value.creditCardExpiry,
+      creditCardCVV: value.creditCardCVV.toString()
     };
     if (paymentType === 'bankDetails') {
       payload = {
-        ...value,
-        nameOfCreditCard: '',
-        creditCardNumber: '',
-        creditCardExpiry: '',
-        creditCardCVV: ''
+        payemntDetailType: 'BANK',
+        iban: value.iban,
+        accountOwnerName: value.accountOwnerName,
+        bic: value.bic,
+        mendateReferance: value.mendateReferance,
+        mandateGenerateDate: value.mandateGenerateDate
       };
     }
     const res = await dispatch(
@@ -139,7 +144,7 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
         payload: { ...payload, customerId: Number(searchParams.get('id')) }
       })
     );
-    if (res.payload) {
+    if (res.payload?.id) {
       handleTabClick('discount');
       handleTabCompleted('payment_details');
     }
