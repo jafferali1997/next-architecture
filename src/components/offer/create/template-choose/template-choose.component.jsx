@@ -1,9 +1,9 @@
+import React from 'react';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import SearchIcon from '@/common/icons/search-icon';
-import React from 'react';
 
-const OfferHeader = () => {
+export default function TemplateChoose() {
   return (
     <div>
       <div className="tw-rounded-[1px] tw-bg-[#fbfbfb] tw-px-5 tw-py-4">
@@ -43,6 +43,4 @@ const OfferHeader = () => {
       </div>
     </div>
   );
-};
-
-export default OfferHeader;
+}
