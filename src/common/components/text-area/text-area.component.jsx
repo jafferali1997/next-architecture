@@ -37,7 +37,7 @@ export default function TextArea({
           maxRows={maxRows}
           placeholder={placeholder}
           className={`input-field default-input tw-min hover:tw-border-text-dark-gray focus:tw-border-[1px] focus:tw-border-text-dark-gray ${
-            errors && 'error-field'
+            errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
           {...(defaultValue && { defaultValue })}
           {...(value && { value })}

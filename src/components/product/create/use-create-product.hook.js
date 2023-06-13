@@ -1,107 +1,106 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { getOrCreateTag } from '@/provider/features/tag/tag.slice';
+import useCreateCategories from '@/components/categories/use-create-categories.hooks';
 
-export default function UseCreateProduct() {
-  const [inputValues, setInputValues] = useState(['']);
-  const [priceInputValues, setPriceInputValues] = useState(['']);
-  const [discountInputValues, setDiscountInputValues] = useState(['']);
-  const [selectedTag, setSelectedTag] = useState(['papaya']);
-  const [openPopup, setOpenPopup] = useState(false);
-  const [priceMenuPopup, setpriceMenuPopup] = useState(false);
-  const [discountMenuPopup, setdiscountMenuPopup] = useState(false);
-  const [threeDot, setThreeDot] = useState(false);
-  const [priceValues, setPriceValues] = useState([]);
-  const [priceInputValue, setPriceInputValue] = useState('');
-  const [discountValues, setDiscountValues] = useState([]);
-  const [discountInputValue, setDiscountInputValue] = useState('');
+export default function useCreateProduct() {
+  const dispatch = useDispatch();
+  const getOrCreateTagData = useSelector((state) => state.tag.getOrCreate);
+  const [priceInputValues, setPriceInputValues] = useState([]);
+  const [discountInputValues, setDiscountInputValues] = useState([]);
+  const [selectedTag, setSelectedTag] = useState([]);
 
-  const ref = useRef(null);
+  const { categories, handleClickCategory } = useCreateCategories();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm();
+
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setThreeDot(false);
-      }
+    if (getOrCreateTagData?.isError) {
+      setSelectedTag([...selectedTag]);
     }
+  }, [getOrCreateTagData]);
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
+  const handlePriceInput = (data, indexToChange = null, toDelete = false) => {
+    if (indexToChange !== null || indexToChange !== undefined) {
+      if (toDelete) {
+        setPriceInputValues([
+          ...priceInputValues.filter((item, index) => index !== indexToChange)
+        ]);
+      } else {
+        setPriceInputValues([
+          ...priceInputValues.map((item, index) => {
+            if (index === indexToChange) {
+              return data;
+            }
+            return item;
+          })
+        ]);
+      }
+    } else {
+      setPriceInputValues([...priceInputValues, data]);
+    }
+  };
+  const handleDiscountInput = (data, indexToChange = null, toDelete = false) => {
+    if (indexToChange !== null || indexToChange !== undefined) {
+      if (toDelete) {
+        setDiscountInputValues([
+          ...discountInputValues.filter((item, index) => index !== indexToChange)
+        ]);
+      } else {
+        setDiscountInputValues([
+          ...discountInputValues.map((item, index) => {
+            if (index === indexToChange) {
+              return data;
+            }
+            return item;
+          })
+        ]);
+      }
+    } else {
+      setDiscountInputValues([...discountInputValues, data]);
+    }
+  };
 
-  const handlePriceMenu = () => {
-    setpriceMenuPopup(!priceMenuPopup);
-  };
-  const handleAddInput = () => {
-    setInputValues([...inputValues, '']);
-  };
-  const handleAddPriceInput = () => {
-    setPriceInputValues([...priceInputValues, '']);
-  };
-  const handleAddDiscountInput = () => {
-    setDiscountInputValues([...discountInputValues, '']);
+  const handleSelectedTags = (data) => {
+    setSelectedTag([...selectedTag, data]);
   };
 
-  const handleInputChange = (index, value) => {
-    const newInputValues = [...inputValues];
-    newInputValues[index] = value;
-    setInputValues(newInputValues);
-  };
-  const handlePriceInputChange = (index, value) => {
-    const newInputValues = [...priceInputValues];
-    newInputValues[index] = value;
-    setPriceInputValues(newInputValues);
-  };
-  const handleDiscountInputChange = (index, value) => {
-    const newInputValues = [...discountInputValues];
-    newInputValues[index] = value;
-    setDiscountInputValues(newInputValues);
+  const handleTags = (data) => {
+    if (data.length > selectedTag.length) {
+      dispatch(
+        getOrCreateTag({
+          payload: { tagName: data[data.length - 1] },
+          successCallback: handleSelectedTags
+        })
+      );
+    }
+    if (data.length < selectedTag.length) {
+      setSelectedTag([...selectedTag.filter((item) => data.includes(item.tagName))]);
+    }
   };
 
-  function handleAddPriceClick() {
-    setPriceValues([...priceValues, priceInputValue]);
-    setPriceInputValues([]);
-    setPriceInputValue('');
-  }
-  function handleAddDiscountClick() {
-    setDiscountValues([...discountValues, discountInputValue]);
-    setDiscountInputValues([]);
-    setDiscountInputValue('');
-  }
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return {
-    handleAddInput,
-    handleInputChange,
-    inputValues,
-    setInputValues,
     priceInputValues,
-    setPriceInputValues,
-    handleAddPriceInput,
-    handlePriceInputChange,
+    handlePriceInput,
     discountInputValues,
-    setDiscountInputValues,
-    handleAddDiscountInput,
-    handleDiscountInputChange,
+    handleDiscountInput,
     selectedTag,
-    setSelectedTag,
-    handlePriceMenu,
-    threeDot,
-    ref,
-    priceInputValue,
-    setPriceInputValue,
-    priceValues,
-    setPriceValues,
-    handleAddPriceClick,
-    openPopup,
-    setOpenPopup,
-    discountValues,
-    setDiscountValues,
-    discountInputValue,
-    setDiscountInputValue,
-    handleAddDiscountClick,
-    priceMenuPopup,
-    setpriceMenuPopup,
-    discountMenuPopup,
-    setdiscountMenuPopup
+    handleTags,
+    onSubmit,
+    handleSubmit,
+    register,
+    categories,
+    errors,
+    handleClickCategory
   };
 }

@@ -18,7 +18,7 @@ export default function useCreateCategories() {
       categories: []
     }
   ]);
-  const [categoryLevelToGet, setCategoryLevelToGet] = useState();
+  const [categoryLevelToGet, setCategoryLevelToGet] = useState(1);
   const [categoryToRender, setCategoryToRender] = useState(0);
   const allProductCategoryRes = useSelector((state) => state.productCategory.getAll);
   const prodctCategoryRef = useRef(true);
@@ -48,33 +48,17 @@ export default function useCreateCategories() {
 
   const getAllCategoryApi = (data, type = null) => {
     const { categoryLevelToGet, parentCategoryId, categoryLevel } = data;
-    if (type === 'delete') {
-      dispatch(
-        getAllProductCategory({
-          payload: {
-            condition: {
-              categoryLevel:
-                categoryLevel === 1
-                  ? categoryLevel
-                  : categoryLevelToGet ?? categoryLevel - 1,
-              ...(parentCategoryId && { parentCategoryId })
-            }
+    dispatch(
+      getAllProductCategory({
+        payload: {
+          condition: {
+            categoryLevel:
+              categoryLevel === 1 ? categoryLevel : categoryLevelToGet ?? categoryLevel,
+            ...(parentCategoryId && { parentCategoryId })
           }
-        })
-      );
-    } else {
-      dispatch(
-        getAllProductCategory({
-          payload: {
-            condition: {
-              categoryLevel:
-                categoryLevel === 1 ? categoryLevel : categoryLevelToGet ?? categoryLevel,
-              ...(parentCategoryId && { parentCategoryId })
-            }
-          }
-        })
-      );
-    }
+        }
+      })
+    );
   };
 
   useEffect(() => {

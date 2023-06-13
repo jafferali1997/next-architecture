@@ -17,7 +17,7 @@ const initialState = {
 
 export const createProduct = createAsyncThunk(
   'product/create',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await productService.createProduct(payload);
       if (response.Succeeded) {
@@ -32,7 +32,7 @@ export const createProduct = createAsyncThunk(
 
 export const getSingleProduct = createAsyncThunk(
   'product/get',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await productService.getSingleProduct(payload);
       if (response.Succeeded) {
@@ -47,9 +47,9 @@ export const getSingleProduct = createAsyncThunk(
 
 export const getAllProduct = createAsyncThunk(
   'product/getAll',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
-      const response = await productService.getAllProduct();
+      const response = await productService.getAllProduct(payload);
       if (response.Succeeded) {
         return response.data;
       }
@@ -62,7 +62,7 @@ export const getAllProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
   'product/update',
-  async ({ payload: { id, data }, callBackMessage }, thunkAPI) => {
+  async ({ payload: { id, data } }, thunkAPI) => {
     try {
       const response = await productService.updateProduct(id, data);
       if (response.Succeeded) {
@@ -77,7 +77,7 @@ export const updateProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   'product/delete',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+  async ({ payload }, thunkAPI) => {
     try {
       const response = await productService.deleteProduct(payload);
       if (response.Succeeded) {
