@@ -1,3 +1,5 @@
+'use client';
+
 import PropTypes from 'prop-types';
 import AUTH from '@/common/constants/auth.constant';
 import OnlyPublic from './only-public.component';
