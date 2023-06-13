@@ -1,11 +1,15 @@
+import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
 import useLineItem from './use-line-item.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 
-export default function LineItem() {
-  const { isSubmit, setIsSubmit } = useLineItem();
+export default function LineItem({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, handleClik } = useLineItem({
+    handleTabClick,
+    handleTabCompleted
+  });
   return (
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
@@ -52,7 +56,17 @@ export default function LineItem() {
           <CustomButton text="Add Product" className="btn-primary" />
         </div>
       </div>
-      <div className="content-body"> </div>
+      <div className="content-body">
+        <StepperFooter
+          handleTabClick={handleClik}
+          back="customer_details"
+          setIsSubmit={setIsSubmit}
+        />
+      </div>
     </div>
   );
 }
+LineItem.propTypes = {
+  handleTabClick: PropTypes.func.isRequired,
+  handleTabCompleted: PropTypes.func.isRequired
+};

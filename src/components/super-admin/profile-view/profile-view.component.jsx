@@ -12,10 +12,10 @@ export default function ProfileView() {
   return (
     <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
       <div className="common-box tw-mt-[24px] ">
-        <div className="tw-relative tw-h-[156px] tw-w-full tw-rounded-[20px_20px_0px_0px] tw-bg-[url('/assets/images/profile-bg.svg')] tw-bg-cover tw-bg-no-repeat">
+        <div className="tw-relative tw-h-[156px] tw-w-full tw-rounded-[20px_20px_0px_0px] tw-bg-[url('/assets/images/super-admin-banner.svg')] tw-bg-cover tw-bg-no-repeat">
           <div className="profile-data tw-absolute tw-bottom-[-110px] tw-left-[25px] tw-flex tw-items-center tw-gap-[24px]">
-            <div className="profile-image tw-relative tw-rounded-[50%] tw-border-[3px] tw-border-solid tw-border-primary tw-p-[3px]">
-              <img src="/assets/images/profile.png" alt="profile" />
+            <div className="profile-image tw-relative tw-rounded-[50%] tw-border-[3px] tw-border-solid tw-border-primary tw-p-[2px]">
+              <img src="/assets/images/man-profile.png" alt="profile" />
               <img
                 className="tw-absolute tw--bottom-2.5  tw-left-[40%] tw-top-[88%]"
                 src="/assets/images/camera-icon.svg"
