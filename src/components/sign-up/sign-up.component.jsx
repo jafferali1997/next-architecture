@@ -156,7 +156,8 @@ function SignUp() {
                 />
                 <label
                   htmlFor="terms"
-                  className="tw-fon tw-text-[12px]
+                  id="terms"
+                  className="tw-cursor-pointer tw-fon tw-text-[12px]
                  tw-font-normal tw-not-italic tw-leading-[18px]"
                 >
                   Term & Condition

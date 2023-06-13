@@ -140,6 +140,7 @@ export default function Profile() {
                 isRequired={true}
                 register={register}
                 errors={errors}
+                className='tw-w-full'
               />
               <CustomButton
                 text={sendOtpButtonText.current}
