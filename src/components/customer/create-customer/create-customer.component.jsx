@@ -42,8 +42,8 @@ export default function CreateCustomer() {
   return (
     <div>
       <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
-      <Link href="/customer">
-        <img src="/assets/images/back-btn.svg" alt="back" />
+        <Link href="/customer">
+          <img src="/assets/images/back-btn.svg" alt="back" />
         </Link>
         <h2 className="admin-top-heading">Create Customer</h2>
         <p className="admin-top-p">Customer #</p>{' '}

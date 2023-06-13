@@ -52,8 +52,8 @@ export default function EditCustomer() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
             <div className="tw-flex tw-items-center tw-gap-[16px]">
-            <Link href="/customer">
-              <img src="/assets/images/back-icon.svg" alt="img" />
+              <Link href="/customer">
+                <img src="/assets/images/back-icon.svg" alt="img" />
               </Link>
               <h1 className="admin-top-heading ">Customer Edit</h1>
               <p className="admin-top-p">Customer # {id}</p>
