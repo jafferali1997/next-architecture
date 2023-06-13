@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
 // import { getAccessToken } from './../common/utils/access-token.util';
 import Navbar from '@/common/components/dashboard/navbar/navbar.component';
@@ -37,16 +37,18 @@ export default function Private({ component }) {
     );
   }, []);
 
+  const [toggle, setToggle] = useState(false);
+
   // const router = useRouter();
   // if (getAccessToken()) {
   if (true) {
     return (
       <div className="dashboard-main">
         <div className="sidebar tw-basis-1/6">
-          <Sidebar />
+          <Sidebar setToggle={setToggle} toggle={toggle}/>
         </div>
         <div className="content tw-basis-5/6 tw-bg-secondary-gray">
-          <Navbar />
+          <Navbar setToggle={setToggle} value={toggle}/>
           {component}
         </div>
       </div>
