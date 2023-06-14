@@ -224,8 +224,7 @@ export default function FormForCompanyDetails({
             name="gender"
             options={[
               { label: 'Male', value: 'MALE' },
-              { label: 'Female', value: 'FEMALE' },
-              { label: 'Other', value: 'OTHER' }
+              { label: 'Female', value: 'FEMALE' }
             ]}
             control={control}
             errors={errors}

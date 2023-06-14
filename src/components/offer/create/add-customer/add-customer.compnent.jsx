@@ -35,8 +35,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               disabled={true}
               options={[
                 { label: 'Male', value: 'MALE' },
-                { label: 'Female', value: 'FEMALE' },
-                { label: 'Other', value: 'OTHER' }
+                { label: 'Female', value: 'FEMALE' }
               ]}
               placeholder="male"
             />

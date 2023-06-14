@@ -81,8 +81,7 @@ export default function ReactHookForm() {
                 name="gender"
                 options={[
                   { label: 'Male', value: 'MALE' },
-                  { label: 'Female', value: 'FEMALE' },
-                  { label: 'Other', value: 'OTHER' }
+                  { label: 'Female', value: 'FEMALE' }
                 ]}
                 control={control}
                 errors={errors}
@@ -96,7 +95,7 @@ export default function ReactHookForm() {
                 options={[
                   { label: 'Male', value: 'MALE' },
                   { label: 'Female', value: 'FEMALE' },
-                  { label: 'Other', value: 'OTHER' }
+                  
                 ]}
                 register={register}
                 errors={errors}
@@ -151,8 +150,7 @@ export default function ReactHookForm() {
                 label="Select Gender"
                 radioOptions={[
                   { label: 'Male', value: 'male' },
-                  { label: 'Female', value: 'female' },
-                  { label: 'Other', value: 'other' }
+                  { label: 'Female', value: 'female' }
                 ]}
                 defaultValue="other"
               />
