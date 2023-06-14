@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import PencilIcon from '@/common/icons/pencil.icon';
 import CircleIcon from '@/common/icons/circle.icon';
 import EyeIcon from '@/common/icons/eye.icon';
@@ -130,15 +131,32 @@ export default function useCustomer() {
     }, {});
   };
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [columnState, setColumnState] = useState([]);
   const [open, setOpen] = useState(false);
   const [showToaster, setShowToaster] = useState(false);
   const [toasterMsg, setToasterMsg] = useState('');
   const [tableColumns, setTableColumns] = useState([]);
   const [tableRows, setTableRows] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors }
+  } = useForm({
+    // resolver: yupResolver(validationSchema),
+    mode: 'onBlur'
+  });
+
+  const modalCloseHandler = () => {
+    setOpenModal(false);
+    reset();
+  };
 
   const handleColShow = () => {
     setOpen(!open);
@@ -185,6 +203,7 @@ export default function useCustomer() {
   };
 
   const handleAddCommentAction = (row) => {
+    setOpenModal(true);
     console.log(row);
   };
 
@@ -194,6 +213,10 @@ export default function useCustomer() {
 
   const handleManageColumns = () => {
     setOpen(true);
+  };
+
+  const onCommentSubmit = (data) => {
+    console.log(data);
   };
 
   const fetchData = async () => {
@@ -280,6 +303,14 @@ export default function useCustomer() {
     handleToggleColumn,
     showToaster,
     toasterMsg,
-    setShowToaster
+    setShowToaster,
+    register,
+    handleSubmit,
+    setValue,
+    errors,
+    openModal,
+    setOpenModal,
+    modalCloseHandler,
+    onCommentSubmit
   };
 }

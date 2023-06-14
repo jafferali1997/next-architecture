@@ -34,8 +34,8 @@ export default function FormForPersonalDetails({
   control
 }) {
   const countries = [
-    { id: 1, name: 'Pakistan', label: 'Pakistan' },
-    { id: 2, name: 'India', label: 'India' }
+    { value: 'PAKISTAN', label: 'Pakistan' },
+    { value: 'INDIA', label: 'India' }
   ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -95,7 +95,7 @@ export default function FormForPersonalDetails({
         <CustomSelect
           label="Country"
           name="country"
-          register={register}
+          control={control}
           errors={errors}
           placeholder="Country"
           type="select"
@@ -110,12 +110,12 @@ export default function FormForPersonalDetails({
         <CustomSelect
           label="City"
           name="city"
-          register={register}
+          control={control}
           placeholder="City"
           type="select"
-          value={selectedCity}
+          // value={selectedCity}
           isRequired={true}
-          onChange={handleCityChange}
+          // onChange={handleCityChange}
           // options={cities.map((item) => {
           //   return { label: item.name, value: item.isoCode, id: item.isoCode };
           // })}

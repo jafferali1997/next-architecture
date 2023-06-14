@@ -6,6 +6,9 @@ import useCustomer from './use-customer.hook';
 import Toaster from '@/common/components/toaster/toaster.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import SearchIcon from '@/common/icons/search-icon';
+import Modal from '@/common/components/modal/modal.component';
+import ModalFooter from '@/common/components/modal/components/modal-footer.component';
+import TextArea from '@/common/components/text-area/text-area.component';
 
 export default function Customer() {
   const {
@@ -17,7 +20,14 @@ export default function Customer() {
     handleToggleColumn,
     showToaster,
     toasterMsg,
-    setShowToaster
+    setShowToaster,
+    register,
+    handleSubmit,
+    setValue,
+    errors,
+    openModal,
+    modalCloseHandler,
+    onCommentSubmit
   } = useCustomer();
 
   return (
@@ -28,6 +38,34 @@ export default function Customer() {
         onClose={() => setShowToaster(false)}
         type="success"
       /> */}
+      <Modal onClose={modalCloseHandler} show={openModal} title="Add Comment">
+        {/* <FormProvider {...methods}> */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleSubmit(onCommentSubmit)(e);
+          }}
+        >
+          <div className="tw-flex tw-flex-col tw-gap-2">
+            <TextArea
+              type="text"
+              name="customerComment"
+              placeholder="Enter Comment"
+              register={register}
+            />
+            {/* <CustomInput
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              isRequired
+              register={register}
+            /> */}
+          </div>
+          <ModalFooter onClose={modalCloseHandler} submitButtonText="Submit" />
+        </form>
+        {/* </FormProvider> */}
+      </Modal>
       <div className="">
         <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">

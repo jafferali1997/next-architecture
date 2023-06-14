@@ -52,7 +52,7 @@ export default function CustomSelect({
           />
         )}
 
-        {!control && (
+        {/* {!control && (
           <Select
             name={name}
             defaultValue={defaultValue}
@@ -64,7 +64,7 @@ export default function CustomSelect({
               </MenuItem>
             ))}
           </Select>
-        )}
+        )} */}
 
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />
