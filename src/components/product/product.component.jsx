@@ -4,6 +4,8 @@ import PlusIcon from '@/common/icons/plus.icon';
 import CustomTable from '@/common/components/custom-table/custom-table.component';
 import Toaster from '@/common/components/toaster/toaster.component';
 import useProduct from './use-product.hook';
+import CustomInput from '@/common/components/custom-input/custom-input.component';
+import SearchIcon from '@/common/icons/search-icon';
 
 export default function ProductEdit() {
   const {
@@ -15,7 +17,8 @@ export default function ProductEdit() {
     handleToggleColumn,
     showToaster,
     toasterMsg,
-    setShowToaster
+    setShowToaster,
+    handleSearch
   } = useProduct();
 
   return (
@@ -34,16 +37,21 @@ export default function ProductEdit() {
               className="btn-primary"
               text="Create customer"
               startIcon={<PlusIcon />}
-              href="/customer/create"
+              href="/product/create"
             />
           </div>
           <div className=" tw-rounded-[10px_10px_0px_0px] tw-border-solid tw-border-[#BBBBBB1A] tw-bg-white">
             <div className="tw-flex tw-h-[66px] tw-w-full tw-items-center tw-justify-between tw-bg-[#BBBBBB1A]">
               <div className="tw-flex tw-items-center tw-gap-[16px]">
                 <div className="tw-h-[42px] tw-min-w-[323px]  tw-bg-white">
-                  input here
+                  <CustomInput
+                    placeholder="Search"
+                    onChange={handleSearch}
+                    type="text"
+                    startIcon={<SearchIcon />}
+                  />
                 </div>
-                <img src="/assets/images/filter-icon.svg" alt="img" />
+                {/* <img src="/assets/images/filter-icon.svg" alt="img" /> */}
               </div>
               <div className="tw-relative">
                 <button

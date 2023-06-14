@@ -9,9 +9,5 @@ import Auth from '@/auth/auth.component';
  * @returns lazy loaded component for home page
  */
 export default function Home() {
-  return (
-    <Suspense fallback={<p>Loading product page...</p>}>
-      <Auth component={<Product />} type={AUTH.PRIVATE} />
-    </Suspense>
-  );
+  return <Auth component={<Product />} type={AUTH.PRIVATE} />;
 }

@@ -1,10 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import HorizentalDotsIcon from '@/common/icons/horizental-dots.icon';
-import GroupIcon from '@/common/icons/group.icon';
-import PencilIcon from '@/common/icons/pencil.icon';
 import DeleteIcon from '@/common/icons/delete.icon';
+import GroupIcon from '@/common/icons/group.icon';
+import HorizentalDotsIcon from '@/common/icons/horizental-dots.icon';
+import PencilIcon from '@/common/icons/pencil.icon';
+import useProductGroup from './use-product-group.hook';
 
 export default function ProductGroup({
   handleModalData,
@@ -14,26 +14,7 @@ export default function ProductGroup({
   disabled = false,
   updateType
 }) {
-  const [threeDot, setThreeDot] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setThreeDot(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
-
-  const handleThreeMenu = () => {
-    setThreeDot(!threeDot);
-  };
-
+  const { threeDot, ref, handleThreeMenu } = useProductGroup();
   return (
     <div className="tw-my-5 tw-flex tw-h-[79px] tw-w-[296px] tw-flex-row tw-items-start tw-justify-between  tw-gap-3 tw-rounded-md tw-px-4 tw-py-[18px] tw-shadow-[0px_0px_10px_rgba(29,78,216,0.07)]">
       <div className="tw-flex tw-items-center  tw-gap-3">

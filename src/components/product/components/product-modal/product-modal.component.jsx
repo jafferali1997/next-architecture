@@ -1,30 +1,16 @@
+/* eslint-disable react/forbid-prop-types */
+
 'use client';
 
-import PropTypes from 'prop-types';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Select } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { KeyboardArrowDown } from '@mui/icons-material';
-import CustomButton from '@/common/components/custom-button/custom-button.component';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Select } from '@mui/material';
+import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import CustomSelect from '@/common/components/custom-select/custom-select.component';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
+import useProductModal from './use-product-modal.hook';
 
 export default function ProductModal({ data, setData, ref, openPopup, setOpenPopup }) {
-  const [value, setValue] = useState();
-
-  useEffect(() => {
-    setValue([...data]);
-  }, [data]);
-
-  const handleSetValue = (indexToChange, valueToSet) => {
-    setValue([
-      ...value.map((item, index) => {
-        if (index === indexToChange) {
-          return { ...item, value: valueToSet };
-        }
-        return item;
-      })
-    ]);
-  };
+  const { value, handleSetValue, setValue } = useProductModal(data);
   return (
     <Dialog open={openPopup}>
       <div ref={ref} className="tw-w-[389px]">
