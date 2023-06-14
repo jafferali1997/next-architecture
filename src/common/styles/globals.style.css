@@ -276,6 +276,7 @@
 
 
   @import url('./component-styles/input.style.css');
+  @import url('./component-styles/switch.style.css');
   
 }
 .payment-details-radios label {

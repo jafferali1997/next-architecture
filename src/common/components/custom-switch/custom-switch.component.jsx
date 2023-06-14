@@ -16,6 +16,7 @@ export default function CustomSwitch({
   name = null,
   isRequired = false,
   inlineLabel = true,
+  labelRight = true,
   labelClassName = '',
   readOnly = false
 }) {
@@ -26,7 +27,23 @@ export default function CustomSwitch({
           inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''
         }`}
       >
-        <Switch
+        {label && !labelRight && (
+          <FieldLabel label={label} isRequired={isRequired} className={` ${labelClassName}`} />
+        )}
+        <div className="custom_switch">
+        <input
+          {...(register && register(`${name}`))}
+          type="checkbox"
+          name={name}
+          className={`switch_input ${className}`}
+          {...(checked && { checked })}
+          {...(onChange && { onChange })}
+          readOnly={readOnly}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+        />
+      </div>
+        {/* <Switch
           {...(register && register(`${name}`))}
           name={name}
           className={`${className}`}
@@ -38,14 +55,17 @@ export default function CustomSwitch({
           sx={{
             '--Switch-trackRadius': '153px',
             '--Switch-trackWidth': '56px',
-            '--Switch-trackHeight': '34px',
+            '--Switch-trackHeight': '24px',
             '--Switch-gap': '8px'
           }}
-        />
-        {label && (
+        /> */}
+        {label && labelRight && (
           <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
         )}
       </div>
+
+      
+
       {errors && errors[name] && (
         <FieldError className="tw-mt-1" error={errors[name].message} />
       )}
@@ -68,5 +88,6 @@ CustomSwitch.propTypes = {
   isRequired: PropTypes.bool,
   inlineLabel: PropTypes.bool,
   labelClassName: PropTypes.string,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  labelRight: PropTypes.bool
 };
