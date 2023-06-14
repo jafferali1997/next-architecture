@@ -52,7 +52,8 @@ export default function OtpInput({
               placeholder={placeholder}
               defaultValue={val}
               maxLength={1}
-              max={1}
+              min={0}
+              max={9}
               disabled={disabled}
               onChange={inputChangeHandler}
               onKeyDown={inputKeyDownHandler}

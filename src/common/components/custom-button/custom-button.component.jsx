@@ -16,6 +16,7 @@ import { Button } from '@mui/material';
  */
 
 export default function CustomButton({
+  id = null,
   text,
   onClick = null,
   className = '',
@@ -28,6 +29,7 @@ export default function CustomButton({
 }) {
   return (
     <Button
+      id={id}
       type={type}
       onClick={onClick}
       variant={variant}
@@ -51,5 +53,6 @@ CustomButton.propTypes = {
   disabled: PropTypes.bool,
   href: PropTypes.string,
   endIcon: PropTypes.element,
-  startIcon: PropTypes.element
+  startIcon: PropTypes.element,
+  id: PropTypes.string
 };

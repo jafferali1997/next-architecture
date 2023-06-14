@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { set, useForm } from 'react-hook-form';
+import { set, useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -144,6 +144,7 @@ export default function useEditCustomer() {
   const [defaultData, setDefaultData] = useState({});
 
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
+  const [isActive, setIsActive] = useState(false);
 
   const countries = [
     { value: 'India', label: 'India' },
@@ -166,10 +167,18 @@ export default function useEditCustomer() {
     register,
     handleSubmit,
     setValue,
+    unregister,
+    resetField,
+    control,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchemaState),
     mode: 'onBlur'
+  });
+
+  const { fields, append, prepend, remove, swap, move, insert, replace } = useFieldArray({
+    control,
+    name: 'companyAddresses'
   });
 
   async function fetchAndSetData() {
@@ -199,13 +208,21 @@ export default function useEditCustomer() {
       }
 
       if (data?.companyAddress?.length > 0) {
-        const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
-          setValue(`ca_id_${index + 1}`, addressObj.id);
-          setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
-          setValue(`ca_address_${index + 1}`, addressObj.address);
-          return { id: index + 1 };
+        // const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
+        //   setValue(`ca_id_${index + 1}`, addressObj.id);
+        //   setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
+        //   setValue(`ca_address_${index + 1}`, addressObj.address);
+        //   return { id: index + 1 };
+        // });
+        // setCompanyAddresses(newcompanyAddresses);
+        data.companyAddress.forEach((addressObj, index) => {
+          append({
+            id: addressObj.id,
+            addressLabel: addressObj.addressLabel,
+            address: addressObj.address
+          });
         });
-        setCompanyAddresses(newcompanyAddresses);
+        // setCompanyAddresses([]);
       }
 
       const defaultValues = { ...data };
@@ -237,6 +254,7 @@ export default function useEditCustomer() {
         setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
       }
       setPaymentTermValue(data?.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
+      setIsActive(data?.isActive);
       setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
     }
   }
@@ -282,7 +300,7 @@ export default function useEditCustomer() {
         acc[suffix] = {};
       }
 
-      acc[suffix][type] = prefix;
+      acc[suffix][type] = data[acc];
 
       return acc;
     }, {});
@@ -291,6 +309,7 @@ export default function useEditCustomer() {
 
     const payloadData = {
       ...data,
+      isActive,
       additionalContact: [additionalContact],
       companyAddress: newCompanyAddresses
     };
@@ -300,19 +319,38 @@ export default function useEditCustomer() {
       updateCustomer({ payload: { data: payloadData, id: customerId.current } })
     );
     console.log('res', res);
-    if (res.payload) {
+    if (res?.payload?.id) {
       router.push('/customer');
     }
   };
 
   const handleAddInput = () => {
-    setCompanyAddresses([...companyAddresses, { id: companyAddresses[-1].id + 1 }]);
+    // console.log(companyAddresses);
+    // const id =
+    //   companyAddresses.length > 0
+    //     ? companyAddresses[companyAddresses.length - 1].id + 1
+    //     : 1;
+    console.log(fields);
+    append({addressLabel: '', address: '' });
+    // setCompanyAddresses([...companyAddresses, { id }]);
   };
 
   const handleRemoveInput = (index) => {
-    const newcompanyAddresses = [...companyAddresses];
-    newcompanyAddresses.splice(index, 1);
-    setCompanyAddresses(newcompanyAddresses);
+    console.log(index);
+    remove(index);
+
+    // unregister([
+    //   `ca_id_${index + 1}`,
+    //   `ca_addressLabel_${index + 1}`,
+    //   `ca_address_${index + 1}`
+    // ]);
+    // resetField(`ca_id_${index + 1}`);
+    // resetField(`ca_addressLabel_${index + 1}`);
+    // resetField(`ca_address_${index + 1}`);
+    // const newCompanyAddresses = companyAddresses.filter((item) => item.id !== id);
+    // // const newcompanyAddresses = [...companyAddresses];
+    // // newcompanyAddresses.splice(index, 1);
+    // setCompanyAddresses(newCompanyAddresses);
   };
 
   const handleInputChange = (index, value) => {
@@ -351,6 +389,10 @@ export default function useEditCustomer() {
     setPaymentTermValue,
     defaultData,
     countries,
-    cities
+    cities,
+    handleRemoveInput,
+    fields,
+    isActive,
+    setIsActive
   };
 }

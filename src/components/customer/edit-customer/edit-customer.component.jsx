@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import Link from 'next/link';
 import {
@@ -52,7 +53,11 @@ export default function EditCustomer() {
     setPaymentTermValue,
     defaultData,
     countries,
-    cities
+    cities,
+    handleRemoveInput,
+    fields,
+    isActive,
+    setIsActive
   } = useEditCustomer();
 
   return (
@@ -72,7 +77,7 @@ export default function EditCustomer() {
           <div className="2bars tw-flex tw-gap-[24px]">
             <div className="main-content">
               <div className="form-box tw-w-[759px] ">
-                <h3 className="form-box-heading ">Personal Details</h3>s
+                <h3 className="form-box-heading ">Personal Details</h3>
                 <div className="form-box-grid">
                   <Select
                     label="Gender"
@@ -255,7 +260,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
-                    checked={defaultData.isStatus}
+                    defaultChecked={defaultData.isStatus}
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
@@ -263,7 +268,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
-                    checked={defaultData.isPDF}
+                    defaultChecked={defaultData.isPDF}
                   />
                   <CustomSwitch
                     label="VAT exempt"
@@ -271,7 +276,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
-                    checked={defaultData.vatStatus}
+                    defaultChecked={defaultData.vatStatus}
                   />
                 </div>
                 <div className="tw-flex tw-items-center  tw-justify-between">
@@ -295,38 +300,36 @@ export default function EditCustomer() {
                     Add more address
                   </span>
                 </div>
-                {companyAddresses.map((value, index) => (
-                  <div className="form-box-grid " key={value}>
-                    <input
-                      name={`ca_id_${index + 1}`}
-                      type="number"
-                      className="tw-hidden"
-                      register={register}
+                {fields.map((value, index) => (
+                  <div className="tw-gflex-row tw-flex">
+                    <div className="form-box-grid " key={value}>
+                      <input
+                        name={`companyAddresses.${index}.id`}
+                        type="number"
+                        className="tw-hidden"
+                        register={register}
+                      />
+                      <CustomInput
+                        placeholder="Enter label name"
+                        type="text"
+                        errors={errors}
+                        name={`companyAddresses.${index}.addressLabel`}
+                        register={register}
+                        // onChange={(e) => handleInputChange(index, e.target.value)}
+                      />
+                      <CustomInput
+                        placeholder="Enter company address"
+                        type="text"
+                        name={`companyAddresses.${index}.address`}
+                        errors={errors}
+                        register={register}
+                      />
+                    </div>
+                    <CustomButton
+                      className="h-50 2-40 tw-text-red-700"
+                      onClick={handleRemoveInput.bind(null, index)}
+                      startIcon={<DeleteIcon />}
                     />
-                    <CustomInput
-                      placeholder="Enter label name"
-                      type="text"
-                      errors={errors}
-                      name={`ca_addressLabel_${index + 1}`}
-                      register={register}
-                      // onChange={(e) => handleInputChange(index, e.target.value)}
-                    />
-                    <CustomInput
-                      placeholder="Enter company address"
-                      type="text"
-                      name={`ca_address_${index + 1}`}
-                      errors={errors}
-                      register={register}
-                    />
-                    <IconButton
-                      aria-label="delete"
-                      color="danger"
-                      onClick={() => {
-                        console.log('index', value.id);
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
                   </div>
                 ))}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
@@ -739,12 +742,20 @@ export default function EditCustomer() {
             <div className="right-side">
               <div className="form-box tw-flex tw-h-[77px] tw-w-[336px] tw-items-center tw-justify-between ">
                 <h3 className="form-box-heading ">Status</h3>
-                <span className="status-active ">Active</span>
+                <span
+                  className={`${
+                    isActive ? 'status-active' : 'status-error'
+                  } hover:tw-cursor-pointer`}
+                  onClick={() => setIsActive(!isActive)}
+                >
+                  {isActive ? 'Active' : 'De-active'}
+                </span>
               </div>
               <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">
                 <div className="tw-flex tw-items-center tw-justify-between">
                   <h3 className="form-box-heading ">Uploaded files</h3>
                   <CustomButton text="Upload" className="btn-secondary  " />
+                  <input type="file" className="tw-hidden" />
                 </div>
                 <div className=" tw-mt-[16px] tw-flex tw-flex-col tw-gap-[12px] ">
                   <div className="tw-flex tw-items-center tw-gap-[20px]">
