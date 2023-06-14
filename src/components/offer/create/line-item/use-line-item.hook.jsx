@@ -8,6 +8,35 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [ids, setIds] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleActionClick = (row) => {
+    if (selectedRow && selectedRow.id === row.id) {
+      setSelectedRow((prevRow) => ({
+        ...prevRow,
+        name: inputValue
+      }));
+      setInputValue('');
+      setSelectedRow(null);
+    } else {
+      setSelectedRow(row);
+      setInputValue(row.name);
+    }
+  };
+  const handleSaveClick = () => {
+    // Save the updated name to the selected row
+    setSelectedRow((prevRow) => ({
+      ...prevRow,
+      name: inputValue
+    }));
+
+    setInputValue('');
+    setSelectedRow(null);
+  };
+  function handleInputChangee(event) {
+    setInputValue(event.target.value);
+  }
 
   const ref = useRef(null);
   useEffect(() => {
@@ -31,7 +60,11 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   console.log(ids);
 
   const columns = [
-    { field: 'pp', headerName: 'Add PP', width: 90 },
+    {
+      field: 'pp',
+      headerName: 'Add PP',
+      width: 90
+    },
     { field: 'action', headerName: 'Action', width: 150 },
     { field: 'product', headerName: 'Product', width: 150 },
     { field: 'description', headerName: 'Description', width: 90 },
@@ -74,6 +107,9 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
       total: '2300'
     }
   ];
+  const handleOnClick = (id) => {
+    console.log(`PP clicked for row with id: ${id}`);
+  };
 
   const isIdAdded = (id) => {
     return ids.includes(JSON.parse(id));
@@ -115,7 +151,12 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     checkBoxHandler,
     openPopup,
     setOpenPopup,
-    ref
+    ref,
+    handleActionClick,
+    handleSaveClick,
+    handleInputChangee,
+    inputValue,
+    selectedRow
   };
 }
 

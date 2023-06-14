@@ -1,3 +1,6 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-undef */
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material/node';
 import PropTypes from 'prop-types';
@@ -25,6 +28,11 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     handleClik,
     openPopup,
     setOpenPopup,
+    handleActionClick,
+    handleSaveClick,
+    handleInputChangee,
+    selectedRow,
+    inputValue,
     ref
   } = useLineItem({ handleTabClick, handleTabCompleted });
   return (
@@ -208,85 +216,76 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
             {rows.map((rowData, ind) => {
               const data_id = isIdAdded(ind);
               return (
-                <tr key={ind}>
-                  <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-                    <input
-                      id="test"
-                      type="checkbox"
-                      checked={data_id}
-                      value={ind}
-                      onChange={checkBoxHandler}
-                      className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                        ids.includes(rowData.id) && 'tw-border-primary tw-bg-checked'
-                      }`}
-                    />
-                    <label htmlFor="test"></label>
-                  </td>
-                  {columns.map((column) => {
-                    return (
-                      <td
-                        className="tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center"
-                        key={ind}
-                      >
-                        {rowData[column.field] === 'pp-icon' ? (
-                          <div className="tw-flex tw-justify-center">
-                            <img src="/assets/icons/add-pp.blue.svg" alt="" />
+                <>
+                  <tr key={ind}>
+                    <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+                      <input
+                        id="test"
+                        type="checkbox"
+                        checked={data_id}
+                        value={ind}
+                        onChange={checkBoxHandler}
+                        className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
+                          ids.includes(rowData.id) && 'tw-border-primary tw-bg-checked'
+                        }`}
+                      />
+                      <label htmlFor="test"></label>
+                    </td>
+                    {columns.map((column) => {
+                      return (
+                        <td
+                          className="tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center"
+                          key={ind}
+                        >
+                          {rowData[column.field] === 'pp-icon' ? (
+                            <div className="tw-flex tw-justify-center hover:tw-cursor-pointer">
+                              <img
+                                src="/assets/icons/add-pp.blue.svg"
+                                alt=""
+                                onClick={() => handleActionClick(rowData)}
+                              />
+                            </div>
+                          ) : rowData[column.field].includes('action') ? (
+                            <div className="tw-flex tw-gap-[27px]">
+                              <img src="/assets/icons/delete.red.svg" alt="" />
+                              <img src="/assets/icons/copy.svg" alt="" />
+                            </div>
+                          ) : (
+                            rowData[column.field]
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                  {selectedRow && selectedRow.id === rowData.id && (
+                    <tr className="tw-h-[88px] tw-w-full  tw-bg-[#E7EAEE]">
+                      <td colSpan={columns.length + 1}>
+                        <div className="tw-grid tw-grid-cols-[316px_1fr] tw-items-center tw-gap-[24px] ">
+                          <div className="tw-flex tw-flex-col tw-border-r tw-border-solid tw-border-r-[#E7EAEE] tw-px-2 tw-py-4">
+                            <CustomInput
+                              id="name-input"
+                              type="text"
+                              placeholder="Enter Purchasing Price"
+                              value={inputValue}
+                              onChange={handleInputChangee}
+                            />
                           </div>
-                        ) : rowData[column.field].includes('action') ? (
-                          <div className="tw-flex tw-gap-[27px]">
-                            <img src="/assets/icons/delete.red.svg" alt="" />
-                            <img src="/assets/icons/copy.svg" alt="" />
+                          <div className="tw-px-2 tw-py-4">
+                            <CustomInput
+                              id="name-input"
+                              type="text"
+                              placeholder="Enter Notes"
+                              value={inputValue}
+                              onChange={handleInputChangee}
+                            />
                           </div>
-                        ) : (
-                          rowData[column.field]
-                        )}
+                        </div>
                       </td>
-                    );
-                  })}
-                </tr>
+                    </tr>
+                  )}
+                </>
               );
             })}
-            <tr>
-              {/* <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              <div className="tw-flex tw-justify-center">
-                {' '}
-                <img src="/assets/icons/add-pp.svg" alt="" />
-              </div>
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              <div className="tw-flex tw-gap-[27px]">
-                <img src="/assets/icons/delete.red.svg" alt="" />
-                <img src="/assets/icons/copy.svg" alt="" />
-              </div>
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              21
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              Food
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              23
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              12
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              pc
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              300
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              19.00
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              10 %
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              2300
-            </td> */}
-            </tr>
           </tbody>
         </table>
       </div>
