@@ -29,7 +29,7 @@ export default function ProductEdit() {
       <div className="">
         <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
-            <h1 className="h1">List of customer</h1>
+            <h1 className="h1">List of Product</h1>
             <CustomButton
               className="btn-primary"
               text="Create customer"

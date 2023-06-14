@@ -23,7 +23,7 @@ export default function CustomSelect({
   isRequired = false,
   inlineLabel = false,
   labelClassName = '',
-  control
+  control = null
 }) {
   return (
     <div
@@ -34,44 +34,79 @@ export default function CustomSelect({
       )}
 
       <div className="tw-w-full">
-        <Controller
-          // {...(register && register(`${name}`))}
-          control={control}
-          name={name}
-          defaultValue=""
-          render={({ field }) => (
-            <Select
-              {...field}
-              // {...(register && register(`${name}`))}
-              // name={name}
-              // {...(value && { value })}
-              // {...(onChange && { onChange })}
-              className={`tw-w-full ${className}`}
-              placeholder={placeholder}
-              indicator={<KeyboardArrowDown />}
-              sx={{
-                width: 240,
-                [`& .${selectClasses.indicator}`]: {
-                  transition: '0.2s',
-                  [`&.${selectClasses.expanded}`]: {
-                    transform: 'rotate(-180deg)'
+        {control && (
+          <Controller
+            // {...(register && register(`${name}`))}
+            control={control}
+            name={name}
+            defaultValue=""
+            render={({ field }) => (
+              <Select
+                {...field}
+                // {...(register && register(`${name}`))}
+                // name={name}
+                // {...(value && { value })}
+                // {...(onChange && { onChange })}
+                className={`tw-w-full ${className}`}
+                placeholder={placeholder}
+                indicator={<KeyboardArrowDown />}
+                sx={{
+                  width: 240,
+                  [`& .${selectClasses.indicator}`]: {
+                    transition: '0.2s',
+                    [`&.${selectClasses.expanded}`]: {
+                      transform: 'rotate(-180deg)'
+                    }
                   }
+                }}
+              >
+                {options?.map((option) => (
+                  <Option
+                    // {...(register && { register })}
+                    // name={name}
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </Option>
+                ))}
+              </Select>
+            )}
+          />
+        )}
+
+        {!control && (
+          <Select
+            // {...(register && register(`${name}`))}
+            // name={name}
+            {...(value && { value })}
+            {...(defaultValue && { defaultValue })}
+            {...(onChange && { onChange })}
+            className={`tw-w-full ${className}`}
+            placeholder={placeholder}
+            indicator={<KeyboardArrowDown />}
+            sx={{
+              width: 240,
+              [`& .${selectClasses.indicator}`]: {
+                transition: '0.2s',
+                [`&.${selectClasses.expanded}`]: {
+                  transform: 'rotate(-180deg)'
                 }
-              }}
-            >
-              {options?.map((option) => (
-                <Option
-                  // {...(register && { register })}
-                  name={name}
-                  key={option.value}
-                  value={option.value}
-                >
-                  {option.label}
-                </Option>
-              ))}
-            </Select>
-          )}
-        />
+              }
+            }}
+          >
+            {options?.map((option) => (
+              <Option
+                // {...(register && { register })}
+                // name={name}
+                key={option.value}
+                value={option.value}
+              >
+                {option.label}
+              </Option>
+            ))}
+          </Select>
+        )}
 
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />

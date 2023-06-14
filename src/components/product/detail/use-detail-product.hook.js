@@ -1,51 +1,53 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useSearchParams } from 'next/navigation';
+import useCreateProduct from '../create/use-create-product.hook';
+import { getSingleProduct } from '@/provider/features/product/product.slice';
 
-export default function UseProductDetail() {
-  const [inputValues, setInputValues] = useState(['']);
-  const [priceInputValues, setPriceInputValues] = useState(['']);
-  const [discountInputValues, setDiscountInputValues] = useState(['']);
-  const [selectedTag, setSelectedTag] = useState(['papaya']);
-  const handleAddInput = () => {
-    setInputValues([...inputValues, '']);
-  };
-  const handleAddPriceInput = () => {
-    setPriceInputValues([...priceInputValues, '']);
-  };
-  const handleAddDiscountInput = () => {
-    setDiscountInputValues([...discountInputValues, '']);
-  };
+export default function useDetailProduct() {
+  const dispatch = useDispatch();
+  const param = useParams();
+  const getSingleProductData = useSelector((state) => state.product.getSingle);
+  const [priceInputValues, setPriceInputValues] = useState([]);
+  const [discountInputValues, setDiscountInputValues] = useState([]);
+  const [selectedTag, setSelectedTag] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
-  const handleInputChange = (index, value) => {
-    const newInputValues = [...inputValues];
-    newInputValues[index] = value;
-    setInputValues(newInputValues);
-  };
-  const handlePriceInputChange = (index, value) => {
-    const newInputValues = [...priceInputValues];
-    newInputValues[index] = value;
-    setPriceInputValues(newInputValues);
-  };
-  const handleDiscountInputChange = (index, value) => {
-    const newInputValues = [...discountInputValues];
-    newInputValues[index] = value;
-    setDiscountInputValues(newInputValues);
-  };
+  useEffect(() => {
+    if (param) {
+      dispatch(getSingleProduct({ payload: param.id }));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (getSingleProductData.isSuccess) {
+      const tempArray = [
+        ...getSingleProductData.data.productCategorys.map((item) => [...item])
+      ];
+      setSelectedCategory([...tempArray.map((item) => item.reverse())]);
+      setDiscountInputValues([
+        ...getSingleProductData.data.discountGroups.map((item) => ({
+          ...item,
+          discount: item.ProductDiscountGroup.discount
+        }))
+      ]);
+      setPriceInputValues([
+        ...getSingleProductData.data.priceGroups.map((item) => ({
+          ...item,
+          price: item.ProductPriceGroup.price
+        }))
+      ]);
+      setSelectedTag([...getSingleProductData.data.tags]);
+    }
+  }, [getSingleProductData]);
+
   return {
-    handleAddInput,
-    handleInputChange,
-    inputValues,
-    setInputValues,
     priceInputValues,
-    setPriceInputValues,
-    handleAddPriceInput,
-    handlePriceInputChange,
     discountInputValues,
-    setDiscountInputValues,
-    handleAddDiscountInput,
-    handleDiscountInputChange,
     selectedTag,
-    setSelectedTag
+    selectedCategory,
+    data: getSingleProductData.data
   };
 }

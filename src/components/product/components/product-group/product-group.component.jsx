@@ -11,6 +11,7 @@ export default function ProductGroup({
   handleUpdateInput,
   index,
   item,
+  disabled = false,
   updateType
 }) {
   const [threeDot, setThreeDot] = useState(false);
@@ -41,17 +42,19 @@ export default function ProductGroup({
         </div>
         <div className="tw-flex-col tw-items-center  tw-gap-3">
           <h4 className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[21px] tw-text-text-medium-gray">
-            Group 1
+            {item.priceGroupName ? item.priceGroupName : item.discountGroupName}
           </h4>
           <p className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
-            32
+            {item.price ? item.price : item.discount}
           </p>
         </div>
       </div>
       <div className="tw-relative" onClick={handleThreeMenu}>
-        <div className="hover:tw-cursor-pointer">
-          <HorizentalDotsIcon />
-        </div>
+        {!disabled && (
+          <div className="hover:tw-cursor-pointer">
+            <HorizentalDotsIcon />
+          </div>
+        )}
         {threeDot ? (
           <div
             ref={ref}
@@ -92,10 +95,10 @@ export default function ProductGroup({
 }
 
 ProductGroup.propTypes = {
-  ref: PropTypes.object.isRequired,
   handleModalData: PropTypes.func.isRequired,
   handleUpdateInput: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.object.isRequired,
+  disabled: PropTypes.bool,
   updateType: PropTypes.string.isRequired
 };

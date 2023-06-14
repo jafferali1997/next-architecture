@@ -299,11 +299,11 @@ export default function useProductEdit() {
   };
 
   const handleEditAction = (row) => {
-    router.push(`/product/edit?id=${row.id}`);
+    router.push(`/product/edit/${row.id}`);
   };
 
   const handleViewAction = (row) => {
-    router.push(`/product/details?id=${row.id}`);
+    router.push(`/product/details/${row.id}`);
   };
 
   const handleDeleteAction = (row) => {
@@ -391,7 +391,6 @@ export default function useProductEdit() {
     //   ],
     //   totalRecords: 1
     // };
-    console.log(data.payload);
 
     if (data?.payload?.TotalRecords > 0) {
       const columns = getColumns(data.payload.data[0]);

@@ -17,7 +17,9 @@ export default function CreateProduct() {
     register,
     categories,
     handleClickCategory,
-    errors
+    errors,
+    selectedCategory,
+    setSelectedCategory
   } = useCreateProduct();
   return (
     <ProductForm
@@ -35,6 +37,8 @@ export default function CreateProduct() {
       handleSubmit={handleSubmit}
       register={register}
       errors={errors}
+      selectedCategory={selectedCategory}
+      setSelectedCategory={setSelectedCategory}
       handleClickCategory={handleClickCategory}
     />
   );
