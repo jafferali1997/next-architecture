@@ -197,7 +197,7 @@ export default function ProductForm({
             </div>
 
             <div className="right-side">
-              <div className="form-box tw-w-[336px]  ">
+              <div className="form-box tw-w-[336px]">
                 <h3 className="form-box-heading ">Product Organization</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                   <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[100%] tw-text-text-black">
@@ -275,7 +275,7 @@ export default function ProductForm({
                   </div>
                 ))}
               </div>
-              <div className="form-box tw-w-[336px]  ">
+              <div className="form-box tw-mt-[16px] tw-w-[336px]">
                 <h3 className="form-box-heading ">Tax</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                   <Select
@@ -292,7 +292,7 @@ export default function ProductForm({
                   />
                 </div>
               </div>
-              <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">
+              <div className="form-box  tw-mt-[16px]  tw-w-[336px]">
                 <h3 className="form-box-heading ">Tags</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                   <TagsInput
