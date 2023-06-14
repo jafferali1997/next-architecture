@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import Link from 'next/link';
 import {
@@ -21,22 +22,19 @@ import PriceGroup from '../create-customer/personal-details/components/price-gro
 import DiscountGroup from '../create-customer/personal-details/components/discount-group/discount-group.component';
 import useEditCustomer from './use-edit-customer.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function EditCustomer() {
   const {
     isAdditional,
-    setIsAdditional,
     additionalhandles,
     isAdress,
-    setIsAdress,
     adressHandles,
     register,
     handleSubmit,
     errors,
     id,
     onSubmit,
-    handleInputChange,
-    companyAddresses,
     handleAddInput,
     allPriceGroup,
     setAllPriceGroup,
@@ -52,7 +50,12 @@ export default function EditCustomer() {
     setPaymentTermValue,
     defaultData,
     countries,
-    cities
+    cities,
+    handleRemoveInput,
+    companyAddressFields,
+    isActive,
+    setIsActive,
+    control
   } = useEditCustomer();
 
   return (
@@ -72,17 +75,17 @@ export default function EditCustomer() {
           <div className="2bars tw-flex tw-gap-[24px]">
             <div className="main-content">
               <div className="form-box tw-w-[759px] ">
-                <h3 className="form-box-heading ">Personal Details</h3>s
+                <h3 className="form-box-heading ">Personal Details</h3>
                 <div className="form-box-grid">
-                  <Select
+                  <CustomSelect
                     label="Gender"
-                    options={[
-                      { id: 'MALE', value: 'MALE', label: 'MALE' },
-                      { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
-                    ]}
                     placeholder="Select Gender"
                     name="gender"
-                    register={register}
+                    options={[
+                      { label: 'Male', value: 'MALE' },
+                      { label: 'Female', value: 'FEMALE' }
+                    ]}
+                    control={control}
                     errors={errors}
                   />
                   <CustomInput
@@ -117,7 +120,7 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-                  <Select
+                  <CustomSelect
                     label="Country"
                     name="country"
                     placeholder="Country"
@@ -125,7 +128,7 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-                  <Select
+                  <CustomSelect
                     label="City"
                     name="city"
                     placeholder="City"
@@ -197,7 +200,7 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-                  <Select
+                  <CustomSelect
                     label="Company Size"
                     name="companySize"
                     placeholder="Select Company Size"
@@ -255,7 +258,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
-                    checked={defaultData.isStatus}
+                    defaultChecked={defaultData.isStatus}
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
@@ -263,7 +266,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
-                    checked={defaultData.isPDF}
+                    defaultChecked={defaultData.isPDF}
                   />
                   <CustomSwitch
                     label="VAT exempt"
@@ -271,7 +274,7 @@ export default function EditCustomer() {
                     type="switch"
                     register={register}
                     errors={errors}
-                    checked={defaultData.vatStatus}
+                    defaultChecked={defaultData.vatStatus}
                   />
                 </div>
                 <div className="tw-flex tw-items-center  tw-justify-between">
@@ -295,40 +298,41 @@ export default function EditCustomer() {
                     Add more address
                   </span>
                 </div>
-                {companyAddresses.map((value, index) => (
-                  <div className="form-box-grid " key={value}>
-                    <input
-                      name={`ca_id_${index + 1}`}
-                      type="number"
-                      className="tw-hidden"
-                      register={register}
+                {companyAddressFields.map((value, index) => (
+                  <div className="tw-gflex-row tw-flex">
+                    <div className="form-box-grid " key={value}>
+                      <input
+                        name={`companyAddresses.${index}.id`}
+                        type="number"
+                        className="tw-hidden"
+                        register={register}
+                      />
+                      <CustomInput
+                        placeholder="Enter label name"
+                        type="text"
+                        errors={errors}
+                        name={`companyAddresses.${index}.addressLabel`}
+                        register={register}
+                        // onChange={(e) => handleInputChange(index, e.target.value)}
+                      />
+                      <CustomInput
+                        placeholder="Enter company address"
+                        type="text"
+                        name={`companyAddresses.${index}.address`}
+                        errors={errors}
+                        register={register}
+                      />
+                    </div>
+                    <CustomButton
+                      className="h-50 2-40 tw-text-red-700"
+                      onClick={handleRemoveInput.bind(null, index)}
+                      startIcon={<DeleteIcon />}
                     />
-                    <CustomInput
-                      placeholder="Enter label name"
-                      type="text"
-                      errors={errors}
-                      name={`ca_addressLabel_${index + 1}`}
-                      register={register}
-                      // onChange={(e) => handleInputChange(index, e.target.value)}
-                    />
-                    <CustomInput
-                      placeholder="Enter company address"
-                      type="text"
-                      name={`ca_address_${index + 1}`}
-                      errors={errors}
-                      register={register}
-                    />
-                    <IconButton
-                      aria-label="delete"
-                      color="danger"
-                      onClick={() => {
-                        console.log('index', value.id);
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
                   </div>
                 ))}
+                {isAdress && companyAddressFields?.length === 0 && (
+                  <p className="tw-text-center">No address found.</p>
+                )}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>
                   {isAdditional ? (
@@ -347,15 +351,15 @@ export default function EditCustomer() {
                 </div>
                 {isAdditional ? (
                   <div className="form-box-grid">
-                    <Select
+                    <CustomSelect
                       label="Gender"
-                      options={[
-                        { id: 'MALE', value: 'MALE', label: 'MALE' },
-                        { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
-                      ]}
                       placeholder="Select Gender"
-                      name="ac_gender"
-                      register={register}
+                      name="gender"
+                      options={[
+                        { label: 'Male', value: 'MALE' },
+                        { label: 'Female', value: 'FEMALE' }
+                      ]}
+                      control={control}
                       errors={errors}
                     />
                     <CustomInput
@@ -391,7 +395,7 @@ export default function EditCustomer() {
                       errors={errors}
                     />
 
-                    <Select
+                    <CustomSelect
                       label="Country"
                       name="ac_country"
                       placeholder="Country"
@@ -406,7 +410,7 @@ export default function EditCustomer() {
                       //   return { label: item.name, value: item.isoCode, id: item.isoCode };
                       // })}
                     />
-                    <Select
+                    <CustomSelect
                       label="City"
                       name="ac_city"
                       placeholder="City"
@@ -739,12 +743,20 @@ export default function EditCustomer() {
             <div className="right-side">
               <div className="form-box tw-flex tw-h-[77px] tw-w-[336px] tw-items-center tw-justify-between ">
                 <h3 className="form-box-heading ">Status</h3>
-                <span className="status-active ">Active</span>
+                <span
+                  className={`${
+                    isActive ? 'status-active' : 'status-error'
+                  } hover:tw-cursor-pointer`}
+                  onClick={() => setIsActive(!isActive)}
+                >
+                  {isActive ? 'Active' : 'De-active'}
+                </span>
               </div>
               <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">
                 <div className="tw-flex tw-items-center tw-justify-between">
                   <h3 className="form-box-heading ">Uploaded files</h3>
                   <CustomButton text="Upload" className="btn-secondary  " />
+                  <input type="file" className="tw-hidden" />
                 </div>
                 <div className=" tw-mt-[16px] tw-flex tw-flex-col tw-gap-[12px] ">
                   <div className="tw-flex tw-items-center tw-gap-[20px]">

@@ -5,6 +5,7 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
 import useAddCustomer from './use-add-customer.hook';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
   const { isSubmit, setIsSubmit, onSubmit } = useAddCustomer(
@@ -17,7 +18,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
         <h3 className="form-inner-heading">Customer Details</h3>
         <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
-          <Select
+          <CustomSelect
             options={[
               { id: 'male', value: 'male', label: 'Male' },
               { id: 'female', value: 'female', label: 'Female' }
@@ -30,13 +31,13 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
         {' '}
         <form onSubmit={onSubmit}>
           <div className="form-box-grid-4col">
-            <Select
+            <CustomSelect
               label="Gender"
               isRequired={true}
               disabled={true}
               options={[
-                { id: 'male', value: 'male', label: 'Male' },
-                { id: 'female', value: 'female', label: 'Female' }
+                { label: 'Male', value: 'MALE' },
+                { label: 'Female', value: 'FEMALE' }
               ]}
               placeholder="male"
             />
@@ -81,7 +82,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               isRequired={true}
             />
 
-            <Select
+            <CustomSelect
               label="Country"
               name="country"
               disabled={true}
@@ -94,7 +95,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               //     return { label: item.name, value: item.isoCode, id: item.isoCode };
               //   })}
             />
-            <Select
+            <CustomSelect
               label="City"
               name="city"
               disabled={true}

@@ -31,9 +31,8 @@ export default function Input() {
               label="Simple Select"
               placeholder="Select Gender"
               options={[
-                { label: 'Male', value: 'male' },
-                { label: 'Female', value: 'female' },
-                { label: 'Other', value: 'other' }
+                { label: 'Male', value: 'MALE' },
+                { label: 'Female', value: 'FEMALE' },
               ]}
             /> */}
           </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-undef */
@@ -8,6 +9,7 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import SearchIcon from '@/common/icons/search-icon';
 import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
@@ -54,10 +56,10 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                 </div>
               )}
               <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
-                <Select
+                <CustomSelect
                   options={[
-                    { id: 'male', value: 'male', label: 'Male' },
-                    { id: 'female', value: 'female', label: 'Female' }
+                    { id: 'male', value: 'MALE', label: 'Male' },
+                    { id: 'female', value: 'FEMALE', label: 'Female' }
                   ]}
                   placeholder="John"
                 />

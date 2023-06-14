@@ -47,11 +47,13 @@ export default function useDiscountGroup(
   const fetchDiscountGroup = async () => {
     const groups = await dispatch(getAllDiscountGroup());
     console.log(groups, 'discount group');
-    setDiscountGroup(
-      groups.payload.map((item) => {
-        return { id: `${item.id}`, value: `${item.id}`, label: item.discountGroupName };
-      })
-    );
+    if (groups.payload) {
+      setDiscountGroup(
+        groups.payload.map((item) => {
+          return { id: `${item.id}`, value: `${item.id}`, label: item.discountGroupName };
+        })
+      );
+    }
   };
 
   const addDiscountGroup = async (data) => {

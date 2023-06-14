@@ -3,7 +3,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import PropTypes from 'prop-types';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DashboardIcon from '@/common/icons/sidebar/dashboard.icon';
 import ArrowIcon from '@/common/icons/sidebar/arrow.icon';
 import OfferIcon from '@/common/icons/sidebar/documents/offer.icon';
@@ -21,14 +22,14 @@ import UserRolesIcon from '@/common/icons/sidebar/administrations/users-roles.ic
 import EmployeesIcon from '@/common/icons/sidebar/employee-management/employees.icon';
 import ExpendituresIcon from '@/common/icons/sidebar/expenses/expenditures.icon';
 import DatabaseIcon from '@/common/icons/sidebar/clouds/database.icon';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+
 const sidebarLinks = [
   { label: 'Dashboard', icon: <DashboardIcon className="" />, href: '/' },
   {
     label: 'Documents',
     icon: null,
     subLinks: [
-      { lablel: 'Offer', icon: <OfferIcon />, href: '/' },
+      { lablel: 'Offer', icon: <OfferIcon />, href: '/offer' },
       { lablel: 'Order', icon: <OrderIcon />, href: '/' },
       { lablel: 'Delivery Notes', icon: <DeliveryNotesIcon />, href: '/' },
       { lablel: 'Invoice', icon: <InvoiceIcon />, href: '/' },
@@ -44,7 +45,8 @@ const sidebarLinks = [
     icon: null,
     subLinks: [
       { lablel: 'Customer', icon: <CustomerIcon />, href: '/customer' },
-      { lablel: 'Products', icon: <ProductIcon />, href: '/' },
+      { lablel: 'Products', icon: <ProductIcon />, href: '/product' },
+      { lablel: 'Categories', icon: <ProductIcon />, href: '/product' },
       { lablel: 'Users & Roles', icon: <UserRolesIcon />, href: '/' }
     ]
   },
@@ -65,12 +67,15 @@ const sidebarLinks = [
   }
 ];
 
-export default function Sidebar({toggle, setToggle}) {
-
+export default function Sidebar({ toggle, setToggle }) {
   return (
-    <div className={`${toggle ? 'open':''} offcanva tw-fixed tw-h-screen tw-w-[273px] tw-bg-primary-blue tw-bg-hero-pattern tw-bg-right-top tw-bg-no-repeat`}>
-      <div className='tw-absolute tw-top-1 tw-right-1 tw-z-[9999] tw-rounded-[4px] tw-border-[1px] tw-border-x-secondary-light-blue semixl:tw-hidden xs:tw-block'>
-        <ChevronLeftIcon className='tw-text-white' onClick={() => setToggle(!toggle)}/>
+    <div
+      className={`${
+        toggle ? 'open' : ''
+      } offcanva tw-fixed tw-h-screen tw-w-[273px] tw-bg-primary-blue tw-bg-hero-pattern tw-bg-right-top tw-bg-no-repeat`}
+    >
+      <div className="tw-absolute tw-right-1 tw-top-1 tw-z-[9999] tw-rounded-[4px] tw-border-[1px] tw-border-x-secondary-light-blue xs:tw-block semixl:tw-hidden">
+        <ChevronLeftIcon className="tw-text-white" onClick={() => setToggle(!toggle)} />
       </div>
       <div className="tw-p-6">
         <Link className="tw-block" href="/">
@@ -106,10 +111,10 @@ export default function Sidebar({toggle, setToggle}) {
                   <ul className="tw-mt-2 tw-flex tw-flex-col tw-gap-2">
                     {navLink.subLinks.map((subLink) => {
                       return (
-                        <li
+                        <Link
                           key={subLink.lablel}
                           href={subLink.href}
-                          className="nav-link tw-rounded-md tw-px-6 tw-py-2 tw-cursor-pointer"
+                          className="nav-link tw-cursor-pointer tw-rounded-md tw-px-6 tw-py-2"
                         >
                           <div className="tw-flex tw-items-center tw-gap-2">
                             {subLink.icon}
@@ -117,7 +122,7 @@ export default function Sidebar({toggle, setToggle}) {
                               {subLink.lablel}
                             </span>
                           </div>
-                        </li>
+                        </Link>
                       );
                     })}
                   </ul>
@@ -143,3 +148,8 @@ export default function Sidebar({toggle, setToggle}) {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  toggle: PropTypes.bool.isRequired,
+  setToggle: PropTypes.func.isRequired
+};

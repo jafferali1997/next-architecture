@@ -6,7 +6,7 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import Select from '@/common/components/select/select.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
-import UseEditProduct from './use-edit-product.hook';
+import useEditProduct from './use-edit-product.hook';
 import ProductForm from '../components/product-form/product-form.component';
 
 export default function EditProduct() {
@@ -29,7 +29,7 @@ export default function EditProduct() {
     selectedCategory,
     setSelectedCategory,
     data
-  } = UseEditProduct();
+  } = useEditProduct();
   return (
     <>
       {!data && <div>loading...</div>}

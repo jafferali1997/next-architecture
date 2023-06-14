@@ -7,6 +7,7 @@ import MultiSelect from '@/common/components/multi-select/multi-select.component
 import Select from '@/common/components/select/select.component';
 import PriceGroup from '../price-group/price-group.component';
 import DiscountGroup from '../discount-group/discount-group.component';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function FormForPersonalDetails({
   register,
@@ -29,25 +30,25 @@ export default function FormForPersonalDetails({
   allDiscountGroup,
   setAllDiscountGroup,
   selectedDiscountGroup,
-  setSelectedDiscountGroup
+  setSelectedDiscountGroup,
+  control
 }) {
   const countries = [
-    { id: 1, name: 'Pakistan', label: 'Pakistan' },
-    { id: 2, name: 'India', label: 'India' }
+    { value: 'PAKISTAN', label: 'Pakistan' },
+    { value: 'INDIA', label: 'India' }
   ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
-        <Select
-          register={register}
+        <CustomSelect
           label="Gender"
-          isRequired={true}
+          placeholder="Select Gender"
           name="gender"
           options={[
-            { id: 'MALE', value: 'MALE', label: 'MALE' },
-            { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
+            { label: 'Male', value: 'MALE' },
+            { label: 'Female', value: 'FEMALE' }
           ]}
-          placeholder="Gender"
+          control={control}
           errors={errors}
         />
         <CustomInput
@@ -91,10 +92,10 @@ export default function FormForPersonalDetails({
           isRequired={true}
         />
 
-        <Select
+        <CustomSelect
           label="Country"
           name="country"
-          register={register}
+          control={control}
           errors={errors}
           placeholder="Country"
           type="select"
@@ -106,15 +107,15 @@ export default function FormForPersonalDetails({
           // })}
           options={countries}
         />
-        <Select
+        <CustomSelect
           label="City"
           name="city"
-          register={register}
+          control={control}
           placeholder="City"
           type="select"
-          value={selectedCity}
+          // value={selectedCity}
           isRequired={true}
-          onChange={handleCityChange}
+          // onChange={handleCityChange}
           // options={cities.map((item) => {
           //   return { label: item.name, value: item.isoCode, id: item.isoCode };
           // })}
@@ -186,5 +187,7 @@ FormForPersonalDetails.propTypes = {
   errors: PropTypes.object,
   handleButtonClickedit: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.object
+  data: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.any
 };

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import PencilIcon from '@/common/icons/pencil.icon';
 import CircleIcon from '@/common/icons/circle.icon';
 import EyeIcon from '@/common/icons/eye.icon';
@@ -13,7 +14,8 @@ import UploadIcon from '@/common/icons/upload.icon';
 import DeleteIcon from '@/common/icons/delete.icon';
 import {
   deleteCustomer,
-  getAllCustomer
+  getAllCustomer,
+  updateCustomer
 } from '@/provider/features/customer/customer.slice';
 
 const FEATURES_TO_BE_SHOW = {
@@ -22,7 +24,7 @@ const FEATURES_TO_BE_SHOW = {
   lastName: 'Last Name',
   email: 'Email',
   phone: 'Phone',
-  isDraft: 'Status',
+  isActive: 'Status',
   gender: 'Gender',
   address: 'Address',
   state: 'State',
@@ -36,7 +38,7 @@ const FEATURES_TO_BE_SHOW = {
   companyFax: 'Fax Number',
   tin: 'TIN'
 };
-const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isDraft'];
+const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isActive'];
 
 const FEATURES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
 
@@ -101,7 +103,7 @@ export default function useCustomer() {
         width: 200
       };
       if (!FEATURES_TO_BE_IGNORE.includes(key)) {
-        if (key === 'isDraft') {
+        if (key === 'isActive') {
           columnObject = {
             ...columnObject,
             renderCell: (params) => (
@@ -129,15 +131,32 @@ export default function useCustomer() {
     }, {});
   };
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [columnState, setColumnState] = useState([]);
   const [open, setOpen] = useState(false);
   const [showToaster, setShowToaster] = useState(false);
   const [toasterMsg, setToasterMsg] = useState('');
   const [tableColumns, setTableColumns] = useState([]);
   const [tableRows, setTableRows] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors }
+  } = useForm({
+    // resolver: yupResolver(validationSchema),
+    mode: 'onBlur'
+  });
+
+  const modalCloseHandler = () => {
+    setOpenModal(false);
+    reset();
+  };
 
   const handleColShow = () => {
     setOpen(!open);
@@ -159,7 +178,6 @@ export default function useCustomer() {
   };
 
   const handleDeleteAction = async (row) => {
-    console.log(row.id, typeof row.id);
     const data = await dispatch(deleteCustomer({ payload: row.id }));
     console.log(data, 'delete data');
     if (data?.payload) {
@@ -167,11 +185,25 @@ export default function useCustomer() {
     }
   };
 
-  const handleStatusAction = (row) => {
-    console.log(row);
+  const handleStatusAction = async (row) => {
+    const data = await dispatch(
+      updateCustomer({
+        payload: {
+          data: {
+            isActive: !row.isActive
+          },
+          id: row.id
+        }
+      })
+    );
+    console.log(data, 'update data');
+    if (data?.payload) {
+      fetchData();
+    }
   };
 
   const handleAddCommentAction = (row) => {
+    setOpenModal(true);
     console.log(row);
   };
 
@@ -181,6 +213,10 @@ export default function useCustomer() {
 
   const handleManageColumns = () => {
     setOpen(true);
+  };
+
+  const onCommentSubmit = (data) => {
+    console.log(data);
   };
 
   const fetchData = async () => {
@@ -267,6 +303,14 @@ export default function useCustomer() {
     handleToggleColumn,
     showToaster,
     toasterMsg,
-    setShowToaster
+    setShowToaster,
+    register,
+    handleSubmit,
+    setValue,
+    errors,
+    openModal,
+    setOpenModal,
+    modalCloseHandler,
+    onCommentSubmit
   };
 }

@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import useCreateProduct from '../create/use-create-product.hook';
 import { getSingleProduct } from '@/provider/features/product/product.slice';
 
-export default function UseEditProduct() {
+export default function useEditProduct() {
   const param = useParams();
   const {
     priceInputValues,

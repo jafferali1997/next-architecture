@@ -27,7 +27,8 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
     errors,
     handleAddInput,
     handleInputChange,
-    inputValues
+    inputValues,
+    control
   } = useCompanyDetails({ handleTabClick, handleTabCompleted });
 
   return (
@@ -60,6 +61,7 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
           handleAddInput={handleAddInput}
           handleInputChange={handleInputChange}
           inputValues={inputValues}
+          control={control}
         />
       </div>
     </div>

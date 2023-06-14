@@ -32,7 +32,8 @@ export default function FormForCompanyDetails({
   handleAddInput,
   handleInputChange,
   inputValues = [''],
-  data = {}
+  data = {},
+  control
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +76,7 @@ export default function FormForCompanyDetails({
           isRequired={true}
           errors={errors}
         />
-        <Select
+        <CustomSelect
           label="Company Size"
           register={register}
           name="companySize"
@@ -217,15 +218,15 @@ export default function FormForCompanyDetails({
       </div>
       {isAdditional ? (
         <div className="form-box-grid-4col">
-          <Select
+          <CustomSelect
             label="Gender"
-            options={[
-              { id: 'MALE', value: 'MALE', label: 'MALE' },
-              { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
-            ]}
             placeholder="Select Gender"
-            name="ac_gender"
-            register={register}
+            name="gender"
+            options={[
+              { label: 'Male', value: 'MALE' },
+              { label: 'Female', value: 'FEMALE' }
+            ]}
+            control={control}
             errors={errors}
           />
           <CustomInput
@@ -261,7 +262,7 @@ export default function FormForCompanyDetails({
             errors={errors}
           />
 
-          <Select
+          <CustomSelect
             label="Country"
             register={register}
             name="ac_country"
@@ -273,7 +274,7 @@ export default function FormForCompanyDetails({
             errors={errors}
             options={countries}
           />
-          <Select
+          <CustomSelect
             label="City"
             register={register}
             name="ac_city"
@@ -361,5 +362,7 @@ FormForCompanyDetails.propTypes = {
   errors: PropTypes.object,
   handleAddInput: PropTypes.func,
   handleInputChange: PropTypes.func,
-  inputValues: PropTypes.arrayOf
+  inputValues: PropTypes.arrayOf,
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.any
 };
