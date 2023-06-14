@@ -1,10 +1,14 @@
+import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
 import useAddCustomer from './use-add-customer.hook';
 
-export default function AddCustomer() {
-  const { isSubmit, setIsSubmit } = useAddCustomer();
+export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useAddCustomer(
+    handleTabClick,
+    handleTabCompleted
+  );
   return (
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
@@ -21,7 +25,7 @@ export default function AddCustomer() {
       </div>
       <div className="content-body">
         {' '}
-        <form onSubmit="">
+        <form onSubmit={onSubmit}>
           <div className="form-box-grid-4col">
             <Select
               label="Gender"
@@ -115,3 +119,8 @@ export default function AddCustomer() {
     </div>
   );
 }
+
+AddCustomer.propTypes = {
+  handleTabClick: PropTypes.func.isRequired,
+  handleTabCompleted: PropTypes.func.isRequired
+};

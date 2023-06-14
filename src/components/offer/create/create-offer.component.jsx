@@ -11,7 +11,7 @@ import TemplateChoose from './template-choose/template-choose.component';
 export default function CreateOffer() {
   const tabs = [
     {
-      id: 'customer_details',
+      id: 'customerDetails',
       label: 'Customer Details',
       icon: ` <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13.8461 14.7162C13.4433 13.5174 11.8379 12.767 10.6933 12.264C10.2449 12.0676 9.00352 11.7344 8.85432 11.1698C8.80092 10.9664 8.80812 10.7746 8.85192 10.5908C8.78227 10.6045 8.71149 10.6116 8.64052 10.6118H7.89472C7.60856 10.6115 7.33421 10.4977 7.13189 10.2953C6.92956 10.093 6.81578 9.81859 6.81552 9.53243C6.81552 8.93783 7.29952 8.45443 7.89472 8.45443H8.64052C8.88692 8.45443 9.12051 8.53783 9.30892 8.68663C9.57699 8.65128 9.8416 8.59335 10.0999 8.51343C10.4261 7.83003 10.6805 7.01283 10.7375 6.30943C10.9809 3.29983 9.13592 1.53903 6.49052 1.84343C4.56712 2.06483 3.41812 3.49903 3.29392 5.34543C3.16832 7.22743 3.86612 8.61743 4.60732 9.63703C4.93192 10.0828 5.27292 10.3694 5.22052 10.9066C5.15972 11.5418 4.48052 11.7188 3.99472 11.914C3.41912 12.1452 2.79912 12.496 2.50632 12.6582C1.49772 13.2152 0.390716 13.886 0.141916 14.8036C-0.409084 16.8372 1.45172 17.4532 2.98792 17.7376C4.30632 17.9808 5.79292 18 7.01572 18C9.22752 18 13.2047 17.9114 13.8461 16.2488C14.0285 15.777 13.9503 15.0252 13.8461 14.7162Z" fill="#FEFEFE"/>
@@ -20,7 +20,7 @@ export default function CreateOffer() {
       content: <LineItem />
     },
     {
-      id: 'HeaderBody',
+      id: 'headerBody',
       label: 'Header & Body',
       icon: `    <svg
       width="16"
@@ -38,7 +38,7 @@ export default function CreateOffer() {
       // content: <AddCustomer />
     },
     {
-      id: 'Line_Items',
+      id: 'lineItems',
       label: 'Line Items',
       icon: ` <svg
       width="19"
@@ -63,7 +63,7 @@ export default function CreateOffer() {
       content: <AddCustomer />
     },
     {
-      id: 'FooterDetails',
+      id: 'footerDetails',
       label: 'Footer Details',
       icon: `    <svg
       width="21"
@@ -80,7 +80,7 @@ export default function CreateOffer() {
       content: <AddCustomer />
     },
     {
-      id: 'ChooseTemplate',
+      id: 'chooseTemplate',
       label: 'Choose Template',
       icon: `    <svg
       width="17"
@@ -97,7 +97,7 @@ export default function CreateOffer() {
       content: <AddCustomer />
     },
     {
-      id: 'Preview',
+      id: 'preview',
       label: 'Preview',
       icon: `   <svg
       width="20"
