@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
-import useLineItem from './use-line-item.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import SearchIcon from '@/common/icons/search-icon';
 import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
+import useLineItem from './use-line-item.hook';
 
 export default function LineItem({ handleTabClick, handleTabCompleted }) {
   const {

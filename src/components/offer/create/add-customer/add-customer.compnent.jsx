@@ -5,10 +5,11 @@ import Select from '@/common/components/select/select.component';
 import useAddCustomer from './use-add-customer.hook';
 
 export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
-  const { isSubmit, setIsSubmit, handleClik } = useAddCustomer({
+  const { isSubmit, setIsSubmit, onSubmit } = useAddCustomer(
     handleTabClick,
     handleTabCompleted
-  });
+  );
+
   return (
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
@@ -25,7 +26,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
       </div>
       <div className="content-body">
         {' '}
-        <form onSubmit="">
+        <form onSubmit={onSubmit}>
           <div className="form-box-grid-4col">
             <Select
               label="Gender"
@@ -138,11 +139,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
             />
           </div>
 
-          <StepperFooter
-            handleTabClick={handleClik}
-            // back="customer_details"
-            setIsSubmit={setIsSubmit}
-          />
+          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
         </form>
       </div>
     </div>

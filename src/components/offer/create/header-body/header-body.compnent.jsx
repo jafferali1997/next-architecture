@@ -4,9 +4,9 @@ import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
-import useHeaderBody from './use-header-body.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import PlusIcon from '@/common/icons/plus.icon';
+import useHeaderBody from './use-header-body.hook';
 
 export default function HeaderBody() {
   const { isSubmit, setIsSubmit } = useHeaderBody();
