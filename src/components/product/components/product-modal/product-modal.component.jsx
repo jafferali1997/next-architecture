@@ -1,24 +1,16 @@
+/* eslint-disable react/forbid-prop-types */
+
 'use client';
 
+import { KeyboardArrowDown } from '@mui/icons-material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Select } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useState } from 'react';
-import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import CustomSelect from '@/common/components/custom-select/custom-select.component';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
+import useProductModal from './use-product-modal.hook';
 
 export default function ProductModal({ data, setData, ref, openPopup, setOpenPopup }) {
-  const [value, setValue] = useState(data);
-  const handleSetValue = (indexToChange, valueToSet) => {
-    setValue([
-      ...value.map((item, index) => {
-        if (index === indexToChange) {
-          return { ...item, value: valueToSet };
-        }
-        return item;
-      })
-    ]);
-  };
+  const { value, handleSetValue, setValue } = useProductModal(data);
   return (
     <Dialog open={openPopup}>
       <div ref={ref} className="tw-w-[389px]">
@@ -28,12 +20,22 @@ export default function ProductModal({ data, setData, ref, openPopup, setOpenPop
         <DialogContent>
           {value?.map((item, index) =>
             item.type === 'select' ? (
-              <CustomSelect
+              <Select
                 label={item.label}
-                options={item.options}
                 value={item.value}
                 onChange={(e) => handleSetValue(index, e.target.value)}
-              />
+                className="tw-w-full"
+                indicator={<KeyboardArrowDown />}
+                sx={{
+                  width: 240
+                }}
+              >
+                {item?.options?.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
             ) : (
               <CustomInput
                 label={item.label}
@@ -52,9 +54,10 @@ export default function ProductModal({ data, setData, ref, openPopup, setOpenPop
           />
           <CustomButton
             className="btn btn-primary "
-            text="Update"
+            text={value?.[0]?.button}
             onClick={() => {
               setData(value);
+              setValue();
               setOpenPopup(false);
               //   handleUpdateCategory(idToUpdateCategory, updateValue);
               //   setUpdateValue('');
@@ -67,10 +70,9 @@ export default function ProductModal({ data, setData, ref, openPopup, setOpenPop
 }
 
 ProductModal.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.object.isRequired,
+  setData: PropTypes.func.isRequired,
   ref: PropTypes.object.isRequired,
   openPopup: PropTypes.bool.isRequired,
-  setOpenPopup: PropTypes.func.isRequired,
-  data: PropTypes.string.isRequired,
-  setData: PropTypes.func.isRequired
+  setOpenPopup: PropTypes.func.isRequired
 };

@@ -51,7 +51,7 @@ export const getAllProduct = createAsyncThunk(
     try {
       const response = await productService.getAllProduct(payload);
       if (response.Succeeded) {
-        return response.data;
+        return response;
       }
       return thunkAPI.rejectWithValue(response);
     } catch (error) {
