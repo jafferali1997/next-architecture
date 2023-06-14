@@ -22,6 +22,7 @@ import PriceGroup from '../create-customer/personal-details/components/price-gro
 import DiscountGroup from '../create-customer/personal-details/components/discount-group/discount-group.component';
 import useEditCustomer from './use-edit-customer.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function EditCustomer() {
   const {
@@ -53,7 +54,8 @@ export default function EditCustomer() {
     handleRemoveInput,
     companyAddressFields,
     isActive,
-    setIsActive
+    setIsActive,
+    control
   } = useEditCustomer();
 
   return (
@@ -75,15 +77,16 @@ export default function EditCustomer() {
               <div className="form-box tw-w-[759px] ">
                 <h3 className="form-box-heading ">Personal Details</h3>
                 <div className="form-box-grid">
-                  <Select
+                  <CustomSelect
                     label="Gender"
-                    options={[
-                      { id: 'MALE', value: 'MALE', label: 'MALE' },
-                      { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
-                    ]}
                     placeholder="Select Gender"
                     name="gender"
-                    register={register}
+                    options={[
+                      { label: 'Male', value: 'MALE' },
+                      { label: 'Female', value: 'FEMALE' },
+                      { label: 'Other', value: 'OTHER' }
+                    ]}
+                    control={control}
                     errors={errors}
                   />
                   <CustomInput
@@ -118,7 +121,7 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-                  <Select
+                  <CustomSelect
                     label="Country"
                     name="country"
                     placeholder="Country"
@@ -126,7 +129,7 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-                  <Select
+                  <CustomSelect
                     label="City"
                     name="city"
                     placeholder="City"
@@ -198,7 +201,7 @@ export default function EditCustomer() {
                     register={register}
                     errors={errors}
                   />
-                  <Select
+                  <CustomSelect
                     label="Company Size"
                     name="companySize"
                     placeholder="Select Company Size"
@@ -349,15 +352,16 @@ export default function EditCustomer() {
                 </div>
                 {isAdditional ? (
                   <div className="form-box-grid">
-                    <Select
+                    <CustomSelect
                       label="Gender"
-                      options={[
-                        { id: 'MALE', value: 'MALE', label: 'MALE' },
-                        { id: 'FEMALE', value: 'FEMALE', label: 'FEMALE' }
-                      ]}
                       placeholder="Select Gender"
-                      name="ac_gender"
-                      register={register}
+                      name="gender"
+                      options={[
+                        { label: 'Male', value: 'MALE' },
+                        { label: 'Female', value: 'FEMALE' },
+                        { label: 'Other', value: 'OTHER' }
+                      ]}
+                      control={control}
                       errors={errors}
                     />
                     <CustomInput
@@ -393,7 +397,7 @@ export default function EditCustomer() {
                       errors={errors}
                     />
 
-                    <Select
+                    <CustomSelect
                       label="Country"
                       name="ac_country"
                       placeholder="Country"
@@ -408,7 +412,7 @@ export default function EditCustomer() {
                       //   return { label: item.name, value: item.isoCode, id: item.isoCode };
                       // })}
                     />
-                    <Select
+                    <CustomSelect
                       label="City"
                       name="ac_city"
                       placeholder="City"

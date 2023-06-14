@@ -47,6 +47,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -195,6 +196,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     setIsSubmit,
     router,
     errors,
-    handleButtonClickedit
+    handleButtonClickedit,
+    control
   };
 }

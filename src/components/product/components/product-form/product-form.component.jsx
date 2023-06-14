@@ -17,6 +17,7 @@ import { getAllDiscountGroup } from '@/provider/features/discount-group/discount
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
 import ProductGroup from '../product-group/product-group.component';
 import ProductModal from '../product-modal/product-modal.component';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function ProductForm({
   priceInputValues,
@@ -278,7 +279,7 @@ export default function ProductForm({
                     type="text"
                   />
 
-                  <Select
+                  <CustomSelect
                     label="Units"
                     name="unit"
                     register={register}
@@ -389,7 +390,7 @@ export default function ProductForm({
               <div className="form-box tw-w-[336px]  ">
                 <h3 className="form-box-heading ">Tax</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
-                  <Select
+                  <CustomSelect
                     label="Tax rate"
                     name="Tax rate "
                     placeholder="Tax rate "

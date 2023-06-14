@@ -1,7 +1,6 @@
 'use client';
 
 import { MenuItem, Select } from '@mui/material';
-import { KeyboardArrowDown } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import FieldError from '../field-error/field-error.component';
@@ -38,7 +37,10 @@ export default function CustomSelect({
           defaultValue={defaultValue}
           className="tw-w-full"
           render={({ field }) => (
-            <Select {...field} className='tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray tw-w-full !tw-py-0 tw-h-[40px]'>
+            <Select
+              {...field}
+              className="tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray"
+            >
               {options.map((item) => (
                 <MenuItem key={item.value} value={item.value}>
                   {item.label}

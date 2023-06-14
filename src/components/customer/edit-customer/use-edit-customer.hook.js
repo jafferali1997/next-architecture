@@ -165,8 +165,6 @@ export default function useEditCustomer() {
     register,
     handleSubmit,
     setValue,
-    unregister,
-    resetField,
     control,
     formState: { errors }
   } = useForm({
@@ -347,6 +345,7 @@ export default function useEditCustomer() {
     cities,
     handleRemoveInput,
     isActive,
-    setIsActive
+    setIsActive,
+    control
   };
 }

@@ -7,6 +7,7 @@ import MultiSelect from '@/common/components/multi-select/multi-select.component
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
 import useDetailProduct from './use-detail-product.hook';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function detailProduct() {
   const {
@@ -123,7 +124,7 @@ export default function detailProduct() {
                       type="text"
                     />
 
-                    <Select
+                    <CustomSelect
                       label="Units"
                       name="unit"
                       disabled
@@ -223,7 +224,7 @@ export default function detailProduct() {
                 <div className="form-box tw-w-[336px]  ">
                   <h3 className="form-box-heading ">Tax</h3>
                   <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
-                    <Select
+                    <CustomSelect
                       label="Tax rate"
                       name="taxRate"
                       disabled

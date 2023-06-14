@@ -9,6 +9,7 @@ import Select from '@/common/components/select/select.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
 import UseEditProduct from './use-edit-product.hook';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function EditProduct() {
   const {
@@ -108,7 +109,7 @@ export default function EditProduct() {
                   type="text"
                 />
 
-                <Select
+                <CustomSelect
                   label="Units"
                   name="Units "
                   placeholder="Units "
@@ -196,7 +197,7 @@ export default function EditProduct() {
             <div className="form-box tw-w-[336px]  ">
               <h3 className="form-box-heading ">Tax</h3>
               <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
-                <Select
+                <CustomSelect
                   label="Tax rate"
                   name="Tax rate "
                   placeholder="Tax rate "

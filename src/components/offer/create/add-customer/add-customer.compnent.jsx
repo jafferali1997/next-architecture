@@ -2,6 +2,7 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
 import useAddCustomer from './use-add-customer.hook';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function AddCustomer() {
   const { isSubmit, setIsSubmit } = useAddCustomer();
@@ -10,7 +11,7 @@ export default function AddCustomer() {
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
         <h3 className="form-inner-heading">Add Customer</h3>
         <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
-          <Select
+          <CustomSelect
             options={[
               { id: 'male', value: 'male', label: 'Male' },
               { id: 'female', value: 'female', label: 'Female' }
@@ -23,14 +24,18 @@ export default function AddCustomer() {
         {' '}
         <form onSubmit="">
           <div className="form-box-grid-4col">
-            <Select
+            <CustomSelect
               label="Gender"
-              isRequired={true}
+              placeholder="Select Gender"
+              name="gender"
               options={[
-                { id: 'male', value: 'male', label: 'Male' },
-                { id: 'female', value: 'female', label: 'Female' }
+                { label: 'Male', value: 'MALE' },
+                { label: 'Female', value: 'FEMALE' },
+                { label: 'Other', value: 'OTHER' }
               ]}
-              placeholder="John"
+              // control={control}
+              // errors={errors}
+              isRequired
             />
             <CustomInput
               label="Designation"
@@ -61,7 +66,7 @@ export default function AddCustomer() {
               isRequired={true}
             />
 
-            <Select
+            <CustomSelect
               label="Country"
               name="country"
               placeholder="Country"
@@ -73,7 +78,7 @@ export default function AddCustomer() {
               //     return { label: item.name, value: item.isoCode, id: item.isoCode };
               //   })}
             />
-            <Select
+            <CustomSelect
               label="City"
               name="city"
               placeholder="City"

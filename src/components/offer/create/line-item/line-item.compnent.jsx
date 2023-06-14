@@ -3,6 +3,7 @@ import StepperFooter from '@/common/components/stepper-footer/stepper-footer.com
 import Select from '@/common/components/select/select.component';
 import useLineItem from './use-line-item.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function LineItem() {
   const { isSubmit, setIsSubmit } = useLineItem();
@@ -12,10 +13,10 @@ export default function LineItem() {
         <h3 className="form-inner-heading">Product Table</h3>
         <div className="tw-flex tw-min-w-[900px] tw-items-center tw-justify-between">
           <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
-            <Select
+            <CustomSelect
               options={[
-                { id: 'male', value: 'male', label: 'Male' },
-                { id: 'female', value: 'female', label: 'Female' }
+                { id: 'male', value: 'MALE', label: 'Male' },
+                { id: 'female', value: 'FEMALE', label: 'Female' }
               ]}
               placeholder="John"
             />
