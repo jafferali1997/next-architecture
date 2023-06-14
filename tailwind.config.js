@@ -57,10 +57,12 @@ module.exports = {
         'dark-gray': '#121D32',
         'text-gray': '#51605C',
         'text-gray2': '#666666',
+        'text-gray3':'#667085',
         'text-dark-gray': '#46474F',
         'text-medium-gray': '#585858',
         'text-light-gray': '#7E7D7D',
         'text-light-gray2': '#A6A6A6',
+        'border-gray':'#D0D5DD',
         'bg-gray': '#FBFDFF',
         'text-ultra-light-gray': '#BBBBBB',
         'danger-light': '#FFDEDE',
@@ -70,7 +72,8 @@ module.exports = {
         'primary-purple': '#6F6AF5'
       },
       boxShadow: {
-        custom: '0px 0px 31px rgba(29, 78, 216, 0.1)'
+        custom: '0px 0px 31px rgba(29, 78, 216, 0.1)',
+        custom2: '0px 1px 0px rgba(18, 32, 59, 0.09)'
       },
       spacing: {
         px: '1px',

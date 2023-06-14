@@ -5,6 +5,7 @@
   --color-secondary: #470a68;
   --color-success: #87d500;
   --color-accent: #e87722;
+  --focus-input:#7e7d7d;
 
   /* Dark themes below */
   --color-dark-primary: rgba(31, 41, 55, 1);
@@ -18,9 +19,17 @@
 @tailwind utilities;
 
 @layer base {
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  
   input[type='number']::-webkit-inner-spin-button,
-  input[type='number']::-webkit-outer-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-moz-inner-spin-button,
+  input[type='number']::-moz-outer-spin-button {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     margin: 0;
   }
 }
@@ -62,15 +71,7 @@
   .pagination-handle {
     @apply tw-flex tw-h-8 tw-w-[44px] tw-items-center tw-justify-center tw-rounded-[3px] tw-bg-text-ultra-light-gray tw-px-2.5 tw-py-1 hover:tw-bg-primary hover:tw-text-white;
   }
-  .default-input {
-    @apply tw-w-full tw-rounded-[5px] !tw-border tw-border-text-ultra-light-gray tw-px-[18px] tw-py-[9px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray before:tw-content-none after:tw-content-none;
-  }
-  .error-field {
-    @apply tw-border-danger;
-  }
-  .disabled-input {
-    @apply tw-cursor-not-allowed tw-border-disabled-input tw-bg-disabled-input;
-  }
+
   /* typography  */
   .h1 {
     @apply tw-font-dm tw-text-2xl tw-font-bold tw-not-italic tw-leading-9 tw-text-text-black;
@@ -275,6 +276,10 @@
   .text-normal {
     @apply tw-font-dm tw-text-xl tw-font-normal tw-leading-8 tw-text-text-light-black2;
   }
+
+
+  @import url('./component-styles/input.style.css');
+  
 }
 .payment-details-radios label {
   @apply tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-[#2c2e3e];
@@ -284,6 +289,11 @@
 .container {
   @apply tw-m-auto tw-w-full tw-max-w-7xl;
 }
+
+
+
+
+
 /* .payment-details-radios label span {
   @apply tw-text-red;
 } */
@@ -308,26 +318,13 @@
   color: #46474f;
 } */
 
-.MuiAutocomplete-root.MuiFormControl-root.MuiInputBase-root:focus {
-  border-color: #7e7d7d !important;
-}
-
-.MuiAutocomplete-root .MuiFormControl-root .MuiInputBase-root .MuiInputBase-input {
-  padding-left: 15px !important;
-}
-
-/*  */
-.input-field.Mui-focused {
-  border-color: #7e7d7d;
-}
-
-.error-field.Mui-focused {
-  border-color: #ef2020;
-}
-
 .btn:disabled {
   pointer-events: all;
   cursor: not-allowed;
+}
+
+.table_filter_radio:checked + label{
+  border-bottom: 2px solid #047857;
 }
 
 /*
