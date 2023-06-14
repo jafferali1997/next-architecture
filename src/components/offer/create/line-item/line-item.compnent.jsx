@@ -36,11 +36,13 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     ref,
     sortDirection,
     setSortDirection,
+    handleDuplicate,
+    handleRemove,
     handleSortClick
   } = useLineItem({ handleTabClick, handleTabCompleted });
   return (
     <div className="personal-details-wrapper">
-      <div className="tw-flex tw-h-[351px]  tw-flex-col tw-items-start tw-gap-4 tw-rounded-[20px] tw-border tw-border-solid tw-border-[#E2E2E2] tw-p-4">
+      <div className="tw-flex tw-min-h-[351px]  tw-flex-col tw-items-start tw-gap-4 tw-rounded-[20px] tw-border tw-border-solid tw-border-[#E2E2E2] tw-p-4">
         <div className="content-header tw-flex tw-w-full tw-items-center tw-justify-between ">
           <h3 className="form-inner-heading">Product Table</h3>
           <div className="tw-flex tw-min-w-[900px] tw-items-center tw-justify-between">
@@ -260,8 +262,18 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                             </div>
                           ) : rowData[column.field].includes('action') ? (
                             <div className="tw-flex tw-gap-[27px]">
-                              <img src="/assets/icons/delete.red.svg" alt="" />
-                              <img src="/assets/icons/copy.svg" alt="" />
+                              <img
+                                onClick={() => handleDuplicate(ind)}
+                                src="/assets/icons/delete.red.svg"
+                                alt=""
+                                className="hover:tw-cursor-pointer"
+                              />
+                              <img
+                                onClick={() => handleRemove(ind)}
+                                src="/assets/icons/copy.svg"
+                                alt=""
+                                className="hover:tw-cursor-pointer"
+                              />
                             </div>
                           ) : (
                             rowData[column.field]
@@ -279,8 +291,8 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                               id="name-input"
                               type="text"
                               placeholder="Enter Purchasing Price"
-                              value={inputValue}
-                              onChange={handleInputChangee}
+                              // value={inputValue}
+                              // onChange={handleInputChangee}
                             />
                           </div>
                           <div className="tw-px-2 tw-py-4">
@@ -288,8 +300,8 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                               id="name-input"
                               type="text"
                               placeholder="Enter Notes"
-                              value={inputValue}
-                              onChange={handleInputChangee}
+                              // value={inputValue}
+                              // onChange={handleInputChangee}
                             />
                           </div>
                         </div>

@@ -44,6 +44,15 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     }
   ]);
 
+  const handleDuplicate = (index) => {
+    const newRow = { ...data[index], id: data.length };
+    setData([...data.slice(0, index + 1), newRow, ...data.slice(index + 1)]);
+  };
+
+  const handleRemove = (index) => {
+    setData(data.filter((row, i) => i !== index));
+  };
+
   const handleActionClick = (row) => {
     if (selectedRow && selectedRow.id === row.id) {
       setSelectedRow((prevRow) => ({
@@ -190,7 +199,9 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     selectedRow,
     sortDirection,
     setSortDirection,
-    handleSortClick
+    handleSortClick,
+    handleDuplicate,
+    handleRemove
   };
 }
 
