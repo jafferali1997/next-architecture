@@ -17,7 +17,7 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     isSubmit,
     setIsSubmit,
     columns,
-    rows,
+    data,
     ids,
     isIdAdded,
     allCheckboxHandler,
@@ -25,7 +25,10 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     handleClik,
     openPopup,
     setOpenPopup,
-    ref
+    ref,
+    sortDirection,
+    setSortDirection,
+    handleSortClick
   } = useLineItem({ handleTabClick, handleTabCompleted });
   return (
     <div className="personal-details-wrapper">
@@ -186,26 +189,38 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                 <input
                   id="test"
                   type="checkbox"
-                  checked={rows.length === ids.length}
+                  checked={data.length === ids.length}
                   onChange={allCheckboxHandler}
                   className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                    rows.length === ids.length && 'tw-border-primary tw-bg-checked'
+                    data.length === ids.length && 'tw-border-primary tw-bg-checked'
                   }`}
                 />
                 <label htmlFor="test"></label>
               </th>
               {columns.map((col, index) => (
                 <th
-                  className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
+                  className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
                   key={index}
                 >
-                  {col.headerName}
+                  <div className="tw-flex tw-items-center tw-gap-2">
+                    {col.headerName}
+                    {col.field === 'pp' || col.field === 'action' ? null : (
+                      <img
+                        src="/assets/icons/sort.svg"
+                        alt=""
+                        className="tw-cursor-pointer"
+                        onClick={() =>
+                          handleSortClick(col.field)
+                        }
+                      />
+                    )}
+                  </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rows.map((rowData, ind) => {
+            {data.map((rowData, ind) => {
               const data_id = isIdAdded(ind);
               return (
                 <tr key={ind}>
@@ -230,7 +245,11 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                       >
                         {rowData[column.field] === 'pp-icon' ? (
                           <div className="tw-flex tw-justify-center">
-                            <img src="/assets/icons/add-pp.blue.svg" alt="" />
+                            <img
+                              src="/assets/icons/add-pp.blue.svg"
+                              alt=""
+                              onClick={() => console.log('hi bro')}
+                            />
                           </div>
                         ) : rowData[column.field].includes('action') ? (
                           <div className="tw-flex tw-gap-[27px]">
@@ -246,57 +265,18 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                 </tr>
               );
             })}
-            <tr>
-              {/* <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              <div className="tw-flex tw-justify-center">
-                {' '}
-                <img src="/assets/icons/add-pp.svg" alt="" />
-              </div>
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              <div className="tw-flex tw-gap-[27px]">
-                <img src="/assets/icons/delete.red.svg" alt="" />
-                <img src="/assets/icons/copy.svg" alt="" />
-              </div>
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              21
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              Food
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              23
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              12
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              pc
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              300
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              19.00
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              10 %
-            </td>
-            <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
-              2300
-            </td> */}
-            </tr>
+            <tr></tr>
           </tbody>
         </table>
       </div>
       <div className="tw-mt-[24px] tw-flex">
-        <div className="tw-w-[312px]">
+        <div className="tw-flex tw-w-[312px] tw-flex-col tw-gap-2">
           <CustomInput
             label="Delivery Date"
             name="Delivery Date "
             placeholder="26.01.2023"
             type="date"
+            className="tw-flex tw-flex-col tw-gap-2"
           />
         </div>
         <CustomSwitch

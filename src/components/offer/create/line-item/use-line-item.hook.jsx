@@ -4,47 +4,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function useLineItem({ handleTabClick, handleTabCompleted }) {
+  const ref = useRef(null);
   const [isChecked, setIsChecked] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
   const [ids, setIds] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
-
-  const ref = useRef(null);
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpenPopup(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
-
-  const handleClik = () => {
-    handleTabClick('HeaderBody');
-    handleTabCompleted('customer_details');
-  };
-
-  console.log(ids);
-
-  const columns = [
-    { field: 'pp', headerName: 'Add PP', width: 90 },
-    { field: 'action', headerName: 'Action', width: 150 },
-    { field: 'product', headerName: 'Product', width: 150 },
-    { field: 'description', headerName: 'Description', width: 90 },
-    { field: 'quantity', headerName: 'Quantity', width: 250 },
-    { field: 'positionNo', headerName: 'Position No', width: 250 },
-    { field: 'unit', headerName: 'Unit', width: 250 },
-    { field: 'price', headerName: 'Price', width: 250 },
-    { field: 'tax', headerName: 'Tax', width: 250 },
-    { field: 'discount', headerName: 'Discount', width: 250 },
-    { field: 'total', headerName: 'Total', width: 250 }
-  ];
-
-  const rows = [
+  const [data, setData] = useState([
     {
       id: 0,
       pp: 'pp-icon',
@@ -71,16 +36,66 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
       price: '2300',
       tax: '19.00',
       discount: '10 %',
-      total: '2300'
+      total: '2400'
     }
+  ]);
+  const [sortDirection, setSortDirection] = useState('');
+
+  const columns = [
+    { field: 'pp', headerName: 'Add PP', width: 90 },
+    { field: 'action', headerName: 'Action', width: 150 },
+    { field: 'product', headerName: 'Product', width: 150 },
+    { field: 'description', headerName: 'Description', width: 90 },
+    { field: 'quantity', headerName: 'Quantity', width: 250 },
+    { field: 'positionNo', headerName: 'Position No', width: 250 },
+    { field: 'unit', headerName: 'Unit', width: 250 },
+    { field: 'price', headerName: 'Price', width: 250 },
+    { field: 'tax', headerName: 'Tax', width: 250 },
+    { field: 'discount', headerName: 'Discount', width: 250 },
+    { field: 'total', headerName: 'Total', width: 250 }
   ];
+
+  const handleSortClick = (field) => {
+    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    sortData(field, sortDirection);
+  };
+
+  const sortData = (field, direction) => {
+    const sortedRows = [...data].sort((a, b) => {
+      if (direction === 'asc') {
+        return a[field].localeCompare(b[field]);
+      } else {
+        return b[field].localeCompare(a[field]);
+      }
+    });
+
+    setData(sortedRows);
+  };
+
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenPopup(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
+
+  const handleClik = () => {
+    handleTabClick('HeaderBody');
+    handleTabCompleted('customer_details');
+  };
 
   const isIdAdded = (id) => {
     return ids.includes(JSON.parse(id));
   };
 
   const checkBoxHandler = (e) => {
-    console.log(e.target.value);
     setIsChecked(e.target.value);
 
     let id = JSON.parse(e.target.value);
@@ -95,7 +110,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   };
   const allCheckboxHandler = (e) => {
     if (e.target.checked) {
-      let ids = rows?.map((data, index) => index);
+      let ids = data?.map((data, index) => index);
       setIds([...ids]);
     } else {
       setIds([]);
@@ -108,14 +123,17 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     setIsSubmit,
     handleClik,
     columns,
-    rows,
+    data,
     ids,
     isIdAdded,
     allCheckboxHandler,
     checkBoxHandler,
     openPopup,
     setOpenPopup,
-    ref
+    ref,
+    sortDirection,
+    setSortDirection,
+    handleSortClick
   };
 }
 
