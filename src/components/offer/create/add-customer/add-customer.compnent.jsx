@@ -9,10 +9,11 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
     handleTabClick,
     handleTabCompleted
   );
+
   return (
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
-        <h3 className="form-inner-heading">Add Customer</h3>
+        <h3 className="form-inner-heading">Customer Details</h3>
         <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
           <Select
             options={[
@@ -30,17 +31,19 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
             <Select
               label="Gender"
               isRequired={true}
+              disabled={true}
               options={[
                 { id: 'male', value: 'male', label: 'Male' },
                 { id: 'female', value: 'female', label: 'Female' }
               ]}
-              placeholder="John"
+              placeholder="male"
             />
             <CustomInput
               label="Designation"
               name="designation"
               placeholder="Designation"
               type="text"
+              disabled={true}
               isRequired={true}
             />
             <CustomInput
@@ -48,6 +51,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               name="firstName"
               placeholder="First Name"
               type="text"
+              disabled={true}
               isRequired={true}
             />
             <CustomInput
@@ -55,6 +59,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               name="lastName"
               placeholder="Last Name"
               type="text"
+              disabled={true}
               isRequired={true}
             />
             <CustomInput
@@ -62,12 +67,22 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               name="Company_Name"
               placeholder="Enter Company Name "
               type="text"
+              disabled={true}
+              isRequired={true}
+            />
+            <CustomInput
+              label="Address Supplement"
+              name="Address_Supplement"
+              placeholder="Enter Address Supplement "
+              type="text"
+              disabled={true}
               isRequired={true}
             />
 
             <Select
               label="Country"
               name="country"
+              disabled={true}
               placeholder="Country"
               type="select"
               //   onChange={handleCountryChange}
@@ -80,6 +95,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
             <Select
               label="City"
               name="city"
+              disabled={true}
               placeholder="City"
               type="select"
               //   value={selectedCity}
@@ -88,38 +104,47 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               //     return { label: item.name, value: item.isoCode, id: item.isoCode };
               //   })}
             />
+          </div>
+          <div className="form-box-grid-2col">
             <CustomInput
               label="Postal Code"
               name="postal"
               placeholder="Postal Code"
               type="text"
+              disabled={true}
               isRequired={true}
-            />
-          </div>
-          <div
-            className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
-            // key={index}
-          >
-            <CustomInput
-              label="Address Label"
-              placeholder="Enter label name"
-              type="text"
             />
             <CustomInput
               label="Address"
               name="Address "
+              disabled={true}
               placeholder="Enter company address"
               type="text"
             />
+            <Select
+              options={[
+                { id: 'male', value: 'male', label: 'Male' },
+                { id: 'female', value: 'female', label: 'Female' }
+              ]}
+              placeholder="Select Address Label"
+              label="Address Label"
+            />
+            <Select
+              options={[
+                { id: 'male', value: 'male', label: 'Male' },
+                { id: 'female', value: 'female', label: 'Female' }
+              ]}
+              placeholder="Select Contact Person"
+              label="Contact Person"
+            />
           </div>
 
-          <StepperFooter setIsSubmit={setIsSubmit} />
+          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
         </form>
       </div>
     </div>
   );
 }
-
 AddCustomer.propTypes = {
   handleTabClick: PropTypes.func.isRequired,
   handleTabCompleted: PropTypes.func.isRequired

@@ -114,7 +114,8 @@ module.exports = {
         'landing-hero-bg': "url('/assets/images/landing/hero-bg.png')",
         'landing-hero-circle': "url('/assets/images/landing/hero-circle.png')",
         'howitworks-bg': "url('/assets/images/landing/howitworks/howitwork-bg.png')",
-        'form-wrapper': "url('/assets/images/bg.png')"
+        'form-wrapper': "url('/assets/images/bg.png')",
+        'checked': "url('/assets/icons/tick.svg')"
       }
     }
   },
