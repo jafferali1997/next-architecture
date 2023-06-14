@@ -5,6 +5,7 @@ import Select from '@/common/components/select/select.component';
 import OtpInput from '@/common/components/otp-input/otp-input.component';
 import CountryPhoneInput from '@/common/components/country-phone-input/country-phone-input.component';
 import useProfile from './use-profile.hook';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
 export default function Profile() {
   const {
@@ -101,7 +102,7 @@ export default function Profile() {
             </div>
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group">
-                <Select
+                <CustomSelect
                   label="Country"
                   name="country"
                   type="select"
@@ -115,7 +116,7 @@ export default function Profile() {
                 />
               </div>
               <div className="input-group">
-                <Select
+                <CustomSelect
                   label="City"
                   name="city"
                   type="select"
@@ -140,7 +141,7 @@ export default function Profile() {
                 isRequired={true}
                 register={register}
                 errors={errors}
-                className='tw-w-full'
+                className="tw-w-full"
               />
               <CustomButton
                 text={sendOtpButtonText.current}
@@ -221,7 +222,7 @@ export default function Profile() {
                 />
               </div>
               <div className="input-group">
-                <Select
+                <CustomSelect
                   inlineLabel
                   label="Population"
                   name="population"

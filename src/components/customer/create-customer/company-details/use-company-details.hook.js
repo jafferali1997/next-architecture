@@ -75,6 +75,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchemaState)
@@ -320,6 +321,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     handleAddInput,
     handleInputChange,
     inputValues,
-    setInputValues
+    setInputValues,
+    control
   };
 }

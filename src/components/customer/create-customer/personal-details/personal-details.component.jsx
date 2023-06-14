@@ -15,7 +15,6 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
     cities,
     data,
     setIsSubmit,
-    router,
     errors,
     allPriceGroup,
     setAllPriceGroup,
@@ -24,7 +23,8 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
     allDiscountGroup,
     setAllDiscountGroup,
     selectedDiscountGroup,
-    setSelectedDiscountGroup
+    setSelectedDiscountGroup,
+    control
   } = usePersonalDetails({ handleTabClick, handleTabCompleted });
 
   return (
@@ -54,6 +54,7 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
           setAllDiscountGroup={setAllDiscountGroup}
           selectedDiscountGroup={selectedDiscountGroup}
           setSelectedDiscountGroup={setSelectedDiscountGroup}
+          control={control}
         />
       </div>
     </div>

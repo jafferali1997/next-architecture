@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable react/jsx-filename-extension */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -12,8 +12,10 @@ import CommentIcon from '@/common/icons/comment.icon';
 import UploadIcon from '@/common/icons/upload.icon';
 import DeleteIcon from '@/common/icons/delete.icon';
 import { deleteProduct, getAllProduct } from '@/provider/features/product/product.slice';
+import useDebounce from '@/common/hooks/useDebounce';
 
-export default function useProductEdit() {
+export default function useProduct() {
+  const [searchText, setSearchText] = useState();
   const FILES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
 
   const getActionColumn = () => {
@@ -299,11 +301,11 @@ export default function useProductEdit() {
   };
 
   const handleEditAction = (row) => {
-    router.push(`/product/edit?id=${row.id}`);
+    router.push(`/product/edit/${row.id}`);
   };
 
   const handleViewAction = (row) => {
-    router.push(`/product/details?id=${row.id}`);
+    router.push(`/product/details/${row.id}`);
   };
 
   const handleDeleteAction = (row) => {
@@ -331,7 +333,7 @@ export default function useProductEdit() {
     setOpen(true);
   };
 
-  const fetchData = async () => {
+  const fetchData = async (condition = {}) => {
     const data = await dispatch(
       getAllProduct({
         payload: {
@@ -339,7 +341,7 @@ export default function useProductEdit() {
           pageSize: 20,
           sortColumn: 'id',
           sortOrder: 'DESC',
-          condition: {}
+          condition
         }
       })
     );
@@ -391,13 +393,14 @@ export default function useProductEdit() {
     //   ],
     //   totalRecords: 1
     // };
-    console.log(data.payload);
 
     if (data?.payload?.TotalRecords > 0) {
       const columns = getColumns(data.payload.data[0]);
       setColumnState(initialColumnState(columns));
       setTableColumns(columns);
       setTableRows(data.payload.data);
+    } else {
+      setTableRows([]);
     }
   };
 
@@ -405,6 +408,23 @@ export default function useProductEdit() {
     // need to send callback message for toaster
     fetchData();
   }, []);
+
+  const debouncedSearchQuery = useDebounce(searchText, 500);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  /**
+   * Search function
+   */
+  useMemo(() => {
+    if (debouncedSearchQuery && debouncedSearchQuery?.length !== 0) {
+      fetchData({ productName: { $iLike: debouncedSearchQuery } });
+    } else {
+      fetchData();
+    }
+  }, [debouncedSearchQuery]);
 
   return {
     handleColShow,
@@ -415,6 +435,7 @@ export default function useProductEdit() {
     handleToggleColumn,
     showToaster,
     toasterMsg,
-    setShowToaster
+    setShowToaster,
+    handleSearch
   };
 }

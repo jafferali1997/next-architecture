@@ -13,7 +13,8 @@ import UploadIcon from '@/common/icons/upload.icon';
 import DeleteIcon from '@/common/icons/delete.icon';
 import {
   deleteCustomer,
-  getAllCustomer
+  getAllCustomer,
+  updateCustomer
 } from '@/provider/features/customer/customer.slice';
 
 const FEATURES_TO_BE_SHOW = {
@@ -22,7 +23,7 @@ const FEATURES_TO_BE_SHOW = {
   lastName: 'Last Name',
   email: 'Email',
   phone: 'Phone',
-  isDraft: 'Status',
+  isActive: 'Status',
   gender: 'Gender',
   address: 'Address',
   state: 'State',
@@ -36,7 +37,7 @@ const FEATURES_TO_BE_SHOW = {
   companyFax: 'Fax Number',
   tin: 'TIN'
 };
-const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isDraft'];
+const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isActive'];
 
 const FEATURES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
 
@@ -101,7 +102,7 @@ export default function useCustomer() {
         width: 200
       };
       if (!FEATURES_TO_BE_IGNORE.includes(key)) {
-        if (key === 'isDraft') {
+        if (key === 'isActive') {
           columnObject = {
             ...columnObject,
             renderCell: (params) => (
@@ -159,7 +160,6 @@ export default function useCustomer() {
   };
 
   const handleDeleteAction = async (row) => {
-    console.log(row.id, typeof row.id);
     const data = await dispatch(deleteCustomer({ payload: row.id }));
     console.log(data, 'delete data');
     if (data?.payload) {
@@ -167,8 +167,21 @@ export default function useCustomer() {
     }
   };
 
-  const handleStatusAction = (row) => {
-    console.log(row);
+  const handleStatusAction = async (row) => {
+    const data = await dispatch(
+      updateCustomer({
+        payload: {
+          data: {
+            isActive: !row.isActive
+          },
+          id: row.id
+        }
+      })
+    );
+    console.log(data, 'update data');
+    if (data?.payload) {
+      fetchData();
+    }
   };
 
   const handleAddCommentAction = (row) => {

@@ -3,22 +3,42 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { getOrCreateTag } from '@/provider/features/tag/tag.slice';
 import useCreateCategories from '@/components/categories/use-create-categories.hooks';
+import { createProduct, updateProduct } from '@/provider/features/product/product.slice';
 
-export default function useCreateProduct() {
+const validationSchema = yup.object({
+  // Define your validation rules here.
+  productName: yup.string().required('Product name is required'),
+  description: yup.string().required('Description is required'),
+  grossPrice: yup.number().required('Gross price is required'),
+  netPrice: yup.number().required('Net price is required'),
+  minSellingPrice: yup.number().required('Min selling price is required'),
+  manufacturer: yup.string().required('Manufacture is required'),
+  unit: yup.string().required('Unit is required'),
+  purchasePrice: yup.number().required('Purchase price is required'),
+  quantity: yup.number().required('Number of pieces is required')
+});
+
+export default function useCreateProduct(id = null) {
   const dispatch = useDispatch();
   const getOrCreateTagData = useSelector((state) => state.tag.getOrCreate);
   const [priceInputValues, setPriceInputValues] = useState([]);
   const [discountInputValues, setDiscountInputValues] = useState([]);
   const [selectedTag, setSelectedTag] = useState([]);
-
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const { categories, handleClickCategory } = useCreateCategories();
   const {
     handleSubmit,
     register,
-    formState: { errors }
-  } = useForm();
+    setError,
+    formState: { errors },
+    clearErrors
+  } = useForm({
+    resolver: yupResolver(validationSchema)
+  });
 
   useEffect(() => {
     if (getOrCreateTagData?.isError) {
@@ -26,8 +46,14 @@ export default function useCreateProduct() {
     }
   }, [getOrCreateTagData]);
 
+  useEffect(() => {
+    if (selectedCategory.length && errors.category) {
+      clearErrors('category');
+    }
+  }, [selectedCategory]);
+
   const handlePriceInput = (data, indexToChange = null, toDelete = false) => {
-    if (indexToChange !== null || indexToChange !== undefined) {
+    if (indexToChange !== null && indexToChange !== undefined) {
       if (toDelete) {
         setPriceInputValues([
           ...priceInputValues.filter((item, index) => index !== indexToChange)
@@ -47,7 +73,7 @@ export default function useCreateProduct() {
     }
   };
   const handleDiscountInput = (data, indexToChange = null, toDelete = false) => {
-    if (indexToChange !== null || indexToChange !== undefined) {
+    if (indexToChange !== null && indexToChange !== undefined) {
       if (toDelete) {
         setDiscountInputValues([
           ...discountInputValues.filter((item, index) => index !== indexToChange)
@@ -86,7 +112,26 @@ export default function useCreateProduct() {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (selectedCategory.length) {
+      const payload = {
+        ...data,
+        productCategorys: selectedCategory.map((item) => item[item.length - 1].id),
+        priceGroups: priceInputValues.map((item) => {
+          return { id: item.id, price: item.price };
+        }),
+        discountGroups: discountInputValues.map((item) => {
+          return { id: item.id, discount: item.discount };
+        }),
+        tags: selectedTag.map((item) => item.id)
+      };
+      if (id) {
+        dispatch(updateProduct({ payload: { data: payload, id } }));
+      } else {
+        dispatch(createProduct({ payload }));
+      }
+    } else {
+      setError('category', { message: 'category is required' });
+    }
   };
 
   return {
@@ -101,6 +146,11 @@ export default function useCreateProduct() {
     register,
     categories,
     errors,
-    handleClickCategory
+    selectedCategory,
+    setSelectedCategory,
+    setPriceInputValues,
+    setDiscountInputValues,
+    handleClickCategory,
+    setSelectedTag
   };
 }
