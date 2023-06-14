@@ -24,7 +24,9 @@ export default function CountryPhoneInput({
 
   return (
     <div
-      className={`${inlineLabel ? 'tw-flex  tw-w-full tw-flex-row tw-items-center' : ''}`}
+      className={`${
+        inlineLabel ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center' : ''
+      }`}
     >
       {label && (
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
@@ -36,9 +38,7 @@ export default function CountryPhoneInput({
           country={defaultValue || 'us'}
           {...(placeholder && { placeholder })}
           {...(value && { value })}
-          className={` tw-w-full ${
-            error ? 'tw-border-danger' : ''
-          } ${className} `}
+          className={` tw-w-full ${error ? 'tw-border-danger' : ''} ${className} `}
           autoFormat={true}
           autocompleteSearch={true}
           onChange={inputChangeHandler}

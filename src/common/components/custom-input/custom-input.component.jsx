@@ -91,8 +91,8 @@ export default function CustomInput({
           className={`input-field default-input hover:tw-border-text-dark-gray ${
             errors && errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
-          {...(defaultValue && { defaultValue })}
-          {...(value && { value })}
+          {...(defaultValue !== null && defaultValue !== undefined && { defaultValue })}
+          {...(value !== null && value !== undefined && { value })}
           {...(ref && { ref })}
           onKeyDown={inputKeyDownHandler}
           disabled={disabled}
