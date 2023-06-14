@@ -20,7 +20,7 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     isSubmit,
     setIsSubmit,
     columns,
-    rows,
+    data,
     ids,
     isIdAdded,
     allCheckboxHandler,
@@ -33,7 +33,10 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     handleInputChangee,
     selectedRow,
     inputValue,
-    ref
+    ref,
+    sortDirection,
+    setSortDirection,
+    handleSortClick
   } = useLineItem({ handleTabClick, handleTabCompleted });
   return (
     <div className="personal-details-wrapper">
@@ -194,26 +197,36 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                 <input
                   id="test"
                   type="checkbox"
-                  checked={rows.length === ids.length}
+                  checked={data.length === ids.length}
                   onChange={allCheckboxHandler}
                   className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                    rows.length === ids.length && 'tw-border-primary tw-bg-checked'
+                    data.length === ids.length && 'tw-border-primary tw-bg-checked'
                   }`}
                 />
                 <label htmlFor="test"></label>
               </th>
               {columns.map((col, index) => (
                 <th
-                  className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
+                  className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
                   key={index}
                 >
-                  {col.headerName}
+                  <div className="tw-flex tw-items-center tw-gap-2">
+                    {col.headerName}
+                    {col.field === 'pp' || col.field === 'action' ? null : (
+                      <img
+                        src="/assets/icons/sort.svg"
+                        alt=""
+                        className="tw-cursor-pointer"
+                        onClick={() => handleSortClick(col.field)}
+                      />
+                    )}
+                  </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rows.map((rowData, ind) => {
+            {data.map((rowData, ind) => {
               const data_id = isIdAdded(ind);
               return (
                 <>
@@ -290,12 +303,13 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
         </table>
       </div>
       <div className="tw-mt-[24px] tw-flex">
-        <div className="tw-w-[312px]">
+        <div className="tw-flex tw-w-[312px] tw-flex-col tw-gap-2">
           <CustomInput
             label="Delivery Date"
             name="Delivery Date "
             placeholder="26.01.2023"
             type="date"
+            className="tw-flex tw-flex-col tw-gap-2"
           />
         </div>
         <CustomSwitch

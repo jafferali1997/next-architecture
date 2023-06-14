@@ -4,12 +4,45 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function useLineItem({ handleTabClick, handleTabCompleted }) {
+  const ref = useRef(null);
   const [isChecked, setIsChecked] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
   const [ids, setIds] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [inputValue, setInputValue] = useState('');
+  const [sortDirection, setSortDirection] = useState('');
+
+  const [data, setData] = useState([
+    {
+      id: 0,
+      pp: 'pp-icon',
+      action: 'action',
+      product: '21',
+      description: 'Food',
+      quantity: '23',
+      positionNo: '22',
+      unit: 'pc',
+      price: '2300',
+      tax: '19.00',
+      discount: '10 %',
+      total: '2300'
+    },
+    {
+      id: 1,
+      pp: 'pp-icon',
+      action: 'action',
+      product: '21',
+      description: 'Glasses',
+      quantity: '23',
+      positionNo: '22',
+      unit: 'pc',
+      price: '2300',
+      tax: '19.00',
+      discount: '10 %',
+      total: '2400'
+    }
+  ]);
 
   const handleActionClick = (row) => {
     if (selectedRow && selectedRow.id === row.id) {
@@ -38,7 +71,6 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     setInputValue(event.target.value);
   }
 
-  const ref = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -77,46 +109,45 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     { field: 'total', headerName: 'Total', width: 250 }
   ];
 
-  const rows = [
-    {
-      id: 0,
-      pp: 'pp-icon',
-      action: 'action',
-      product: '21',
-      description: 'Food',
-      quantity: '23',
-      positionNo: '22',
-      unit: 'pc',
-      price: '2300',
-      tax: '19.00',
-      discount: '10 %',
-      total: '2300'
-    },
-    {
-      id: 1,
-      pp: 'pp-icon',
-      action: 'action',
-      product: '21',
-      description: 'Glasses',
-      quantity: '23',
-      positionNo: '22',
-      unit: 'pc',
-      price: '2300',
-      tax: '19.00',
-      discount: '10 %',
-      total: '2300'
-    }
-  ];
   const handleOnClick = (id) => {
     console.log(`PP clicked for row with id: ${id}`);
   };
+
+  const handleSortClick = (field) => {
+    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    sortData(field, sortDirection);
+  };
+
+  const sortData = (field, direction) => {
+    const sortedRows = [...data].sort((a, b) => {
+      if (direction === 'asc') {
+        return a[field].localeCompare(b[field]);
+      } else {
+        return b[field].localeCompare(a[field]);
+      }
+    });
+
+    setData(sortedRows);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenPopup(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   const isIdAdded = (id) => {
     return ids.includes(JSON.parse(id));
   };
 
   const checkBoxHandler = (e) => {
-    console.log(e.target.value);
     setIsChecked(e.target.value);
 
     let id = JSON.parse(e.target.value);
@@ -131,7 +162,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   };
   const allCheckboxHandler = (e) => {
     if (e.target.checked) {
-      let ids = rows?.map((data, index) => index);
+      let ids = data?.map((data, index) => index);
       setIds([...ids]);
     } else {
       setIds([]);
@@ -144,7 +175,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     setIsSubmit,
     handleClik,
     columns,
-    rows,
+    data,
     ids,
     isIdAdded,
     allCheckboxHandler,
@@ -156,7 +187,10 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     handleSaveClick,
     handleInputChangee,
     inputValue,
-    selectedRow
+    selectedRow,
+    sortDirection,
+    setSortDirection,
+    handleSortClick
   };
 }
 
