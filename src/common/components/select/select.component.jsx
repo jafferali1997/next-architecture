@@ -45,7 +45,7 @@ export default function Select({
               {option?.label}
             </li>
           )}
-          className={`select  ${className} ${disabled ? 'disabled-input' : ''} `}
+          className={`select !tw-p-0 ${className} ${disabled ? 'disabled-input' : ''} `}
           disabled={disabled}
           readOnly={readOnly}
           {...(value && { value })}
@@ -56,7 +56,7 @@ export default function Select({
             <TextField
               {...params}
               {...(register && register(`${name}`))}
-              className="default-input input-field tw-p-0"
+              className="!tw-p-0 default-input input-field"
               placeholder={placeholder}
             />
           )}

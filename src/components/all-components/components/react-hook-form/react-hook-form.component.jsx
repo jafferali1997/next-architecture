@@ -143,6 +143,7 @@ export default function ReactHookForm() {
             <div className="tw-w-1/2">
               <CustomSwitch name="switch" label="Switch" register={register} isRequired />
             </div>
+
             <div className="tw-w-1/2">
               <CustomRadioGroup
                 register={register}
