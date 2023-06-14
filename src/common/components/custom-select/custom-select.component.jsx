@@ -36,9 +36,9 @@ export default function CustomSelect({
           name={name}
           control={control}
           defaultValue={defaultValue}
-          className="default-input input-field"
+          className="tw-w-full"
           render={({ field }) => (
-            <Select {...field}>
+            <Select {...field} className='tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray tw-w-full !tw-py-0 tw-h-[40px]'>
               {options.map((item) => (
                 <MenuItem key={item.value} value={item.value}>
                   {item.label}
