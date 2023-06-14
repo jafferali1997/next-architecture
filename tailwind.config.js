@@ -14,7 +14,8 @@ module.exports = {
       md: '768px',
       lg: '992px',
       xl: '1440px',
-      custom1138: '1138px'
+      custom1138: '1138px',
+      semixl: '1200px'
     },
     // colors: {
     //   primary: '#1D4ED8',

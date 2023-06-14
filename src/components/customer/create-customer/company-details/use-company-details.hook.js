@@ -60,7 +60,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   const [selectedCity, setSelectedCity] = useState(null);
   const [isSubmit, setIsSubmit] = useState(false);
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
-  const [inputValues, setInputValues] = useState(['']);
+  const [inputValues, setInputValues] = useState([{ id: '1' }]);
 
   const countries = [
     { label: 'Pakistan', value: 'pakistan' },

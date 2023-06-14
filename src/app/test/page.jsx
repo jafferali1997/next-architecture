@@ -53,11 +53,16 @@ export default function Page() {
   }
   return (
     <>
-      <table>
-        <thead>
-          <tr>
+      <table className="tw-w-full">
+        <thead className="tw-w-full">
+          <tr className="tw-flex tw-items-center tw-justify-between">
             {columns.map((column) => (
-              <th key={column}>{column}</th>
+              <th
+                className="tw-flex tw-h-[59.33px] tw-w-full tw-flex-row tw-items-center tw-justify-center tw-gap-1 tw-rounded-[10px_0px_0px_0px] tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#fbfbfb] tw-px-0 tw-py-2"
+                key={column}
+              >
+                {column}
+              </th>
             ))}
             <th>Action</th>
           </tr>
@@ -94,7 +99,7 @@ export default function Page() {
         </tbody>
       </table>
       <div>
-        <button onClick={handleShowClick}>Show</button>
+        {/* <button onClick={handleShowClick}>Show</button>
         {showInput && (
           <div>
             <input type="text" value={inputValuee} onChange={handleInputChangee} />
@@ -105,7 +110,7 @@ export default function Page() {
           {values.map((value, index) => (
             <div>{value}</div>
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );

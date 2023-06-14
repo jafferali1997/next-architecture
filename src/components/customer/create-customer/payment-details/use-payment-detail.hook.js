@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import {
   createCustomerAccountDetail,
@@ -74,9 +74,20 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
         let data = await dispatch(getSingleCustomer({ payload: id }));
         if (data.payload) {
           data = data.payload;
-          Object.keys(data).forEach((key) => setValue(key, data[key]));
+          Object.keys(data).forEach((key) => {
+            if (
+              key !== 'updatedBy' &&
+              key.toLowerCase().includes('date') &&
+              data[key] !== '' &&
+              data[key] !== null
+            ) {
+              setValue(key, data[key].split('T')[0]);
+            } else {
+              setValue(key, data[key]);
+            }
+          });
           setPaymentType(
-            data?.payemntDetailType === 'CREDIT_CARD'
+            data?.paymentDetailType === 'CREDIT_CARD'
               ? 'creditCardDetails'
               : 'bankDetails'
           );
@@ -123,15 +134,15 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
     console.log(value);
 
     let payload = {
-      payemntDetailType: 'CREDIT_CARD',
+      paymentDetailType: 'CREDIT_CARD',
       nameOfCreditCard: value.nameOfCreditCard,
       creditCardNumber: value.creditCardNumber,
       creditCardExpiry: value.creditCardExpiry,
-      creditCardCVV: value.creditCardCVV.toString()
+      creditCardCVV: value.creditCardCVV
     };
     if (paymentType === 'bankDetails') {
       payload = {
-        payemntDetailType: 'BANK',
+        paymentDetailType: 'BANK',
         iban: value.iban,
         accountOwnerName: value.accountOwnerName,
         bic: value.bic,

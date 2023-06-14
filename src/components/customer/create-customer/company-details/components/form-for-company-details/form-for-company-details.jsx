@@ -1,12 +1,12 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/button-has-type */
 import PropTypes from 'prop-types';
+import { IconButton } from '@mui/material/node';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import useCompanyDetails from '../../use-company-details.hook';
+import DeleteIcon from '@/common/icons/delete.icon';
 
 export default function FormForCompanyDetails({
   register,
@@ -169,22 +169,31 @@ export default function FormForCompanyDetails({
         {inputValues.map((value, index) => (
           <div
             className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
-            key={index}
+            key={value.id}
           >
             <CustomInput
               placeholder="Enter label name"
               type="text"
-              name={`addressLabel_${index + 1}`}
+              name={`ca_addressLabel_${index + 1}`}
               register={register}
               errors={errors}
             />
             <CustomInput
               placeholder="Enter company address"
               type="text"
-              name={`address_${index + 1}`}
+              name={`ca_address_${index + 1}`}
               register={register}
               errors={errors}
             />
+            <IconButton
+              aria-label="delete"
+              color="danger"
+              onClick={() => {
+                console.log('index', value.id);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
           </div>
         ))}
       </div>

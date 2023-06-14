@@ -1,3 +1,5 @@
+'use client';
+
 import ProductForm from '../components/product-form/product-form.component';
 import useCreateProduct from './use-create-product.hook';
 

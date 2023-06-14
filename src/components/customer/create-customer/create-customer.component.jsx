@@ -1,3 +1,6 @@
+'use client';
+
+import Link from 'next/link';
 import PersonalDetails from './personal-details/personal-details.component';
 import FormStepper from '@/common/components/form-stepper/form-stepper.component';
 import CompanyDetails from './company-details/company-detail.component';
@@ -41,7 +44,9 @@ export default function CreateCustomer() {
   return (
     <div>
       <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
-        <img src="/assets/images/back-btn.svg" alt="back" />
+        <Link href="/customer">
+          <img src="/assets/images/back-btn.svg" alt="back" />
+        </Link>
         <h2 className="admin-top-heading">Create Customer</h2>
         <p className="admin-top-p">Customer #</p>{' '}
         <span className="header-span">10075</span>

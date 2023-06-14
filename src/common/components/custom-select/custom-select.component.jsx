@@ -1,8 +1,6 @@
 'use client';
 
-import { Option } from '@mui/joy';
-import Select, { selectClasses } from '@mui/joy/Select';
-import { FormControl, MenuItem } from '@mui/material';
+import { MenuItem, Select } from '@mui/material';
 import { KeyboardArrowDown } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
@@ -15,9 +13,9 @@ export default function CustomSelect({
   className = '',
   value = null,
   onChange = null,
-  defaultValue = null,
+  defaultValue = '',
   register = null,
-  name = null,
+  name,
   errors = null,
   label = null,
   isRequired = false,
@@ -36,39 +34,16 @@ export default function CustomSelect({
       <div className="tw-w-full">
         {control && (
           <Controller
-            // {...(register && register(`${name}`))}
-            control={control}
             name={name}
-            defaultValue=""
+            control={control}
+            defaultValue={defaultValue}
+            className="default-input input-field"
             render={({ field }) => (
-              <Select
-                {...field}
-                // {...(register && register(`${name}`))}
-                // name={name}
-                // {...(value && { value })}
-                // {...(onChange && { onChange })}
-                className={`tw-w-full ${className}`}
-                placeholder={placeholder}
-                indicator={<KeyboardArrowDown />}
-                sx={{
-                  width: 240,
-                  [`& .${selectClasses.indicator}`]: {
-                    transition: '0.2s',
-                    [`&.${selectClasses.expanded}`]: {
-                      transform: 'rotate(-180deg)'
-                    }
-                  }
-                }}
-              >
-                {options?.map((option) => (
-                  <Option
-                    // {...(register && { register })}
-                    // name={name}
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </Option>
+              <Select {...field}>
+                {options.map((item) => (
+                  <MenuItem key={item.value} value={item.value}>
+                    {item.label}
+                  </MenuItem>
                 ))}
               </Select>
             )}
@@ -77,33 +52,14 @@ export default function CustomSelect({
 
         {!control && (
           <Select
-            // {...(register && register(`${name}`))}
-            // name={name}
-            {...(value && { value })}
-            {...(defaultValue && { defaultValue })}
-            {...(onChange && { onChange })}
-            className={`tw-w-full ${className}`}
-            placeholder={placeholder}
-            indicator={<KeyboardArrowDown />}
-            sx={{
-              width: 240,
-              [`& .${selectClasses.indicator}`]: {
-                transition: '0.2s',
-                [`&.${selectClasses.expanded}`]: {
-                  transform: 'rotate(-180deg)'
-                }
-              }
-            }}
+            name={name}
+            defaultValue={defaultValue}
+            className="default-input input-field"
           >
-            {options?.map((option) => (
-              <Option
-                // {...(register && { register })}
-                // name={name}
-                key={option.value}
-                value={option.value}
-              >
-                {option.label}
-              </Option>
+            {options.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.label}
+              </MenuItem>
             ))}
           </Select>
         )}

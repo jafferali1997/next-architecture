@@ -36,14 +36,97 @@ const validationSchema = yup.object({
     .max(95, 'address must be at most 95 characters long')
     .required('Address is required'),
   country: yup.string().required('Country is required'),
-  city: yup.string().required('City is required')
+  city: yup.string().required('City is required'),
+  companyName: yup
+    .string()
+    .required('Company name is required')
+    .max(160, 'company name must be at most 160 characters long'),
+  companyEmail: yup
+    .string()
+    .email('The Email doesn’t seem to be correct. Please write correct email')
+    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid email address')
+    .required('Email is required'),
+  companyPhone: yup.string().required('Company phone is required'),
+  companyMobile: yup.string().required('Company Mobile is required'),
+  companySize: yup.string().required('Company Size is required'),
+  companyFax: yup.string().required('Company Fax is required'),
+  companyUrl: yup.string().required('Company Url is required'),
+  tin: yup
+    .string()
+    .required('TIN is required')
+    .max(8, 'TIN must be at most 10 characters long'),
+  vat: yup
+    .string()
+    .required('VAT is required')
+    .matches(/^[a-zA-Z]{2}\d{9}$/, 'Is not in correct format'),
+  termOfDelivery: yup.string(),
+  termOfPayment: yup.string(),
+  discountAmount: yup
+    .string()
+    .max(10, 'Discount must be at most 10 characters long')
+    .required('Discount is required'),
+  discountDays: yup.string().required('day is required')
 });
 
-export default function UseEditCustomer() {
-  const [companyAddresses, setCompanyAddresses] = useState([{ id: 1 }]);
+const bankDetailValidationSchema = yup.object({
+  accountOwnerName: yup
+    .string()
+    .max(100, 'Account must be at most 100 characters long')
+    .required('Account is required'),
+  iban: yup
+    .string()
+    .max(34, 'IBAN must be at most 34 characters long')
+    .min(15, 'IBAN must be minimum 15 characters')
+    // .matches(/^[^.]*$/, {
+    //   message: 'No period'
+    // })
+    // .matches(/^[^.]*$/, {
+    //   message: 'Invalid postal'
+    // })
+    // .matches(/^[^!@#$%^&*+=<>:;|~(){}[\s\]]*$/, {
+    //   message: 'Invalid postal'
+    // })
+    .required('IBAN is required'),
+  bic: yup
+    .string()
+    .max(11, 'BIC must be at most 11 characters long')
+    .min(8, 'BIC must be minimum 8 characters')
+    .required('bic is required'),
+  mendateReferance: yup
+    .string()
+    .max(18, 'Mandate Reference must be at most 18 characters long')
+    .min(6, 'Mandate Reference must be minimum 6 characters')
+    .required('Mandate Reference is required'),
+  mandateGenerateDate: yup.string().required('Mandate Date is required')
+});
+
+const creditCardValidationSchema = yup.object({
+  nameOfCreditCard: yup
+    .string()
+    .max(50, 'Credit Card Name must be at most 50 characters long')
+    .min(1, 'Credit Card Name must be minimum 1 characters')
+    .required('Credit Card Name is required'),
+  creditCardNumber: yup
+    .number()
+    // .test(
+    //   'test-number',
+    //   'Credit Card number is invalid',
+    //   (value) => cardValidator.number(value).isValid
+    // )
+    .required('Credit Card Number is required'),
+  creditCardCVV: yup
+    .string()
+    .matches(/^[0-9]{3}$/, 'CVV must be at most 3 characters long')
+    .required('CVV is required'),
+  creditCardExpiry: yup.string().required('Credit Card Expiry is required')
+});
+
+export default function useEditCustomer() {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const [companyAddresses, setCompanyAddresses] = useState([{ id: 1 }]);
 
   const [allPriceGroup, setAllPriceGroup] = useState([]);
   const [selectedPriceGroup, setSelectedPriceGroup] = useState([]);
@@ -56,9 +139,21 @@ export default function UseEditCustomer() {
   const [isAdditional, setIsAdditional] = useState(false);
   const [isAdress, setIsAdress] = useState(true);
 
-  const [paymentType, setPaymentType] = useState('BANK');
+  const [paymentType, setPaymentType] = useState('bankDetails');
+  const [paymentTermValue, setPaymentTermValue] = useState('PAYMENT_TERMS_AS_DATE');
+  const [defaultData, setDefaultData] = useState({});
 
-  const [defaultValues, setDefaultValues] = useState({});
+  const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
+
+  const countries = [
+    { value: 'India', label: 'India' },
+    { value: 'USA', label: 'USA' }
+  ];
+
+  const cities = [
+    { value: 'Delhi', label: 'Delhi' },
+    { value: 'Mumbai', label: 'Mumbai' }
+  ];
 
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
@@ -73,19 +168,29 @@ export default function UseEditCustomer() {
     setValue,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchemaState),
     mode: 'onBlur'
   });
 
   async function fetchAndSetData() {
     if (searchParams.get('id')) {
-      // customerId.current = searchParams.get('id');
       let data = await dispatch(
         getSingleCustomer({ payload: Number(searchParams.get('id')) })
       );
       console.log('data', data);
       data = data.payload;
-      Object.keys(data).forEach((key) => setValue(key, data[key]));
+      Object.keys(data).forEach((key) => {
+        if (
+          key !== 'updatedBy' &&
+          key.toLowerCase().includes('date') &&
+          data[key] !== '' &&
+          data[key] !== null
+        ) {
+          setValue(key, data[key]?.split('T')[0]);
+        } else {
+          setValue(key, data[key]);
+        }
+      });
 
       if (data?.additionalContact?.length > 0) {
         Object.keys(data.additionalContact[0]).forEach((key) =>
@@ -95,30 +200,64 @@ export default function UseEditCustomer() {
 
       if (data?.companyAddress?.length > 0) {
         const newcompanyAddresses = data.companyAddress.map((addressObj, index) => {
+          setValue(`ca_id_${index + 1}`, addressObj.id);
           setValue(`ca_addressLabel_${index + 1}`, addressObj.addressLabel);
           setValue(`ca_address_${index + 1}`, addressObj.address);
-          setValue(`ca_id_${index + 1}`, addressObj.id);
           return { id: index + 1 };
         });
         setCompanyAddresses(newcompanyAddresses);
       }
-      setPaymentType(data?.payemntDetailType || 'BANK');
-      setSelectedPriceGroup(
-        data.priceGroup.map((item) => {
-          return allPriceGroup.find((price) => Number(price.id) === item.id);
-        })
+
+      const defaultValues = { ...data };
+      setPaymentType(
+        data?.paymentDetailType === 'BANK' ? 'bankDetails' : 'creditCardDetails'
       );
-      setSelectedDiscountGroup(
-        data.discountGroup.map((item) => {
-          return allDiscountGroup.find((price) => Number(price.id) === item.id);
-        })
-      );
+      setDefaultData(defaultValues);
+      setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
+
+      if (data?.priceGroup?.length > 0) {
+        setSelectedPriceGroup(
+          data.priceGroup.map((item) => ({
+            id: `${item.id}`,
+            value: `${item.id}`,
+            label: item.priceGroupName
+          }))
+        );
+      }
+      if (data?.discountGroup?.length > 0) {
+        setSelectedDiscountGroup(
+          data.discountGroup.map((item) => ({
+            id: `${item.id}`,
+            value: `${item.id}`,
+            label: item.discountGroupName
+          }))
+        );
+      }
+      if (data?.termOfDelivery?.length > 0) {
+        setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
+      }
+      setPaymentTermValue(data?.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
+      setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
     }
   }
 
   useEffect(() => {
     fetchAndSetData();
   }, [searchParams, allPriceGroup, allDiscountGroup]);
+
+  useEffect(() => {
+    let yupObject = yup.object({
+      ...validationSchema.fields,
+      ...creditCardValidationSchema.fields
+    });
+    if (paymentType === 'bankDetails') {
+      yupObject = yup.object({
+        ...validationSchema.fields,
+        ...bankDetailValidationSchema.fields
+      });
+    }
+    setValidationSchemaState(yupObject);
+  }, [paymentType]);
 
   const onSubmit = async (data) => {
     console.log(data, '=> data');
@@ -135,23 +274,28 @@ export default function UseEditCustomer() {
     const companyAddressesKeys = Object.keys(data).filter((attr) =>
       attr.startsWith('ca')
     );
-    const newCompanyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
-      if (index % 2 === 0) {
-        const obj = {
-          addressLabel: data[curr],
-          address: data[arr[index + 1]]
-        };
-        acc.push(obj);
+
+    let newCompanyAddresses = companyAddressesKeys.reduce((acc, curr) => {
+      const [prefix, type, suffix] = curr.split('_');
+
+      if (!acc[suffix]) {
+        acc[suffix] = {};
       }
+
+      acc[suffix][type] = prefix;
+
       return acc;
-    }, []);
+    }, {});
+
+    newCompanyAddresses = Object.values(newCompanyAddresses);
+
     const payloadData = {
       ...data,
       additionalContact: [additionalContact],
       companyAddress: newCompanyAddresses
     };
 
-    console.log(data);
+    console.log(payloadData);
     const res = await dispatch(
       updateCustomer({ payload: { data: payloadData, id: customerId.current } })
     );
@@ -200,6 +344,13 @@ export default function UseEditCustomer() {
     allDiscountGroup,
     setAllDiscountGroup,
     selectedDiscountGroup,
-    setSelectedDiscountGroup
+    setSelectedDiscountGroup,
+    paymentType,
+    setPaymentType,
+    paymentTermValue,
+    setPaymentTermValue,
+    defaultData,
+    countries,
+    cities
   };
 }

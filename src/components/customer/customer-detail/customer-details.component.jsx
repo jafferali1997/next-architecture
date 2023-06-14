@@ -2,6 +2,7 @@
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -10,7 +11,7 @@ import MultiSelect from '@/common/components/multi-select/multi-select.component
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import CustomRadio from '@/common/components/custom-radio/custom-radio.component';
-import UseCustomerDetails from './use-customer-details.hook';
+import useCustomerDetails from './use-customer-details.hook';
 
 export default function CustomerDetails() {
   const {
@@ -30,7 +31,7 @@ export default function CustomerDetails() {
     allDiscountGroup,
     selectedDiscountGroup,
     defaultData
-  } = UseCustomerDetails();
+  } = useCustomerDetails();
 
   return (
     <div className="content">
@@ -38,7 +39,9 @@ export default function CustomerDetails() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
             <div className="tw-flex tw-items-center tw-gap-[16px]">
-              <img src="/assets/images/back-icon.svg" alt="img" />
+              <Link href="/customer">
+                <img src="/assets/images/back-icon.svg" alt="img" />
+              </Link>
               <h1 className="admin-top-heading ">Customer Details</h1>
               <p className="admin-top-p">Customer # {id}</p>
             </div>
@@ -223,18 +226,21 @@ export default function CustomerDetails() {
                     type="switch"
                     checked={defaultData.isStatus}
                     readOnly
+                    disabled={!defaultData.isStatus}
                   />
                   <CustomSwitch
                     label="Do not show customer on PDF"
                     type="switch"
                     checked={defaultData.isPDF}
                     readOnly
+                    disabled={!defaultData.isPDF}
                   />
                   <CustomSwitch
                     label="VAT exempt"
                     type="switch"
                     checked={defaultData.vatStatus}
                     readOnly
+                    disabled={!defaultData.vatStatus}
                   />
                 </div>
                 <div className="tw-mb-2 tw-flex tw-items-center tw-justify-between">
@@ -491,7 +497,7 @@ export default function CustomerDetails() {
                       label="Expiry Date"
                       name="creditCardExpiry"
                       placeholder="03/13/2023"
-                      type="date"
+                      type="month"
                       register={register}
                       isRequired={true}
                     />
@@ -717,7 +723,6 @@ export default function CustomerDetails() {
               <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">
                 <div className="tw-flex tw-items-center tw-justify-between">
                   <h3 className="form-box-heading ">Uploaded files</h3>
-                  <CustomButton text="Upload" className="btn-secondary  " />
                 </div>
                 <div className=" tw-mt-[16px] tw-flex tw-flex-col tw-gap-[12px] ">
                   <div className="tw-flex tw-items-center tw-gap-[20px]">

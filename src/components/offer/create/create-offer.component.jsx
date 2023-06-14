@@ -1,8 +1,12 @@
+'use client';
+
 import FormStepper from '@/common/components/form-stepper/form-stepper.component';
 import SupportIcon from '@/common/icons/support.icon';
 import AddCustomer from './add-customer/add-customer.compnent';
 import HeaderBody from './header-body/header-body.compnent';
 import LineItem from './line-item/line-item.compnent';
+import OfferPreview from './preview/preview.component';
+import TemplateChoose from './template-choose/template-choose.component';
 
 export default function CreateOffer() {
   const tabs = [

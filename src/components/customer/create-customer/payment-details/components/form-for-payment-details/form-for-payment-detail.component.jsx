@@ -126,7 +126,7 @@ export default function FormForPaymentDetails({
             label="Expiry Date"
             name="creditCardExpiry"
             placeholder="03/13/2023"
-            type="date"
+            type="month"
             register={register}
             errors={errors}
             isRequired={true}
@@ -135,7 +135,7 @@ export default function FormForPaymentDetails({
             label="CVV"
             name="creditCardCVV"
             placeholder="CVV"
-            type="number"
+            type="text"
             register={register}
             errors={errors}
             isRequired={true}

@@ -2,8 +2,8 @@
 
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
+import { useEffect, useState } from 'react';
+import { getAccessToken, isAccessTokenVerifed } from '@/common/utils/access-token.util';
 // import { getAccessToken } from './../common/utils/access-token.util';
 import Navbar from '@/common/components/dashboard/navbar/navbar.component';
 import Sidebar from '@/common/components/dashboard/sidebar/sidebar.component';
@@ -32,27 +32,32 @@ export default function Private({ component }) {
   //       isLoginVerified: true,
   //       currentBusinessId: 1,
   //       token:
-  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtcG15bXZianR0dmRmcmNzcW5AdHB3bGIuY29tIiwiaWF0IjoxNjg2Mzg1Nzg3fQ.SH2g-427_dam6tvxuLPPLSzqHyMW9W_lpMYiP2CNq6Q'
+  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtcG15bXZianR0dmRmcmNzcW5AdHB3bGIuY29tIiwiaWF0IjoxNjg2NjQ5ODQ2fQ.F0TxyFPecN9mWIl8Ru-ucxvVNhqDqMDggIyr8G9n4t8'
   //     })
   //   );
   // }, []);
 
-  // const router = useRouter();
-  // if (getAccessToken()) {
-  if (true) {
+  const [toggle, setToggle] = useState(false);
+
+  const router = useRouter();
+
+  if (getAccessToken()) {
     return (
       <div className="dashboard-main">
         <div className="sidebar tw-basis-1/6">
-          <Sidebar />
+          <Sidebar setToggle={setToggle} toggle={toggle} />
         </div>
         <div className="content tw-basis-5/6 tw-bg-secondary-gray">
-          <Navbar />
+          <Navbar setToggle={setToggle} value={toggle} />
           {component}
         </div>
       </div>
     );
   }
-  // router.push('/');
+
+  if (typeof window === 'object') {
+    router.push('/');
+  }
 }
 
 Private.propTypes = {

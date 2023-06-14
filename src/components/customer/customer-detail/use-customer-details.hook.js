@@ -7,7 +7,7 @@ import { set, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getSingleCustomer } from '@/provider/features/customer/customer.slice';
 
-export default function UseCustomerDetails() {
+export default function useCustomerDetails() {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -41,7 +41,18 @@ export default function UseCustomerDetails() {
       );
       console.log('data', data);
       data = data.payload;
-      Object.keys(data).forEach((key) => setValue(key, data[key]));
+      Object.keys(data).forEach((key) => {
+        if (
+          key !== 'updatedBy' &&
+          key.toLowerCase().includes('date') &&
+          data[key] !== '' &&
+          data[key] !== null
+        ) {
+          setValue(key, data[key]?.split('T')[0]);
+        } else {
+          setValue(key, data[key]);
+        }
+      });
 
       if (data?.additionalContact?.length > 0) {
         Object.keys(data.additionalContact[0]).forEach((key) =>
@@ -57,12 +68,12 @@ export default function UseCustomerDetails() {
         });
         setCompanyAddresses(newcompanyAddresses);
       }
-
-      const defaultValues = { ...data, paymentType: 'creditCard' };
       if (data?.payemntDetailType === 'BANK') {
         defaultValues.paymentType = 'bankDetail';
       }
+      const defaultValues = { ...data, paymentType: 'creditCard' };
       setDefaultData(defaultValues);
+      setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
 
       if (data?.priceGroup?.length > 0) {
         setSelectedPriceGroup(
@@ -82,6 +93,7 @@ export default function UseCustomerDetails() {
           }))
         );
       }
+      setValue('termOfDelivery', data?.termOfDelivery[0].termOfDelivery);
     }
     const data = {
       id: 6,

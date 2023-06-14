@@ -4,7 +4,7 @@ import FieldError from '../field-error/field-error.component';
 import FieldLabel from '../field-label/field-label.component';
 
 export default function TextArea({
-  placeholder,
+  placeholder = '',
   name,
   register = null,
   label = null,
