@@ -1,6 +1,6 @@
 'use client';
 
-import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
+// import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import Button from './components/button/button.component';
 import Input from './components/input/input.component';
@@ -10,6 +10,7 @@ import Switch from './components/switch/switch.component';
 import ReactHookForm from './components/react-hook-form/react-hook-form.component';
 import AllToaster from './components/toaster/toaster.component';
 import FormModal from './components/form-modal/form-modal.component';
+import Radio from './components/radio/radio.component';
 
 export default function AllComponents() {
   const { handleSubmit, control } = useForm();
@@ -46,7 +47,7 @@ export default function AllComponents() {
       <Input />
       <Checkbox />
       <Switch />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {/* <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="radioField"
           control={control}
@@ -60,8 +61,8 @@ export default function AllComponents() {
           )}
         />
         <button type="submit">Submit</button>
-      </form>
-      {/* <Radio /> */}
+      </form> */}
+      <Radio />
       <FormModal />
       <ReactHookForm />
     </>
