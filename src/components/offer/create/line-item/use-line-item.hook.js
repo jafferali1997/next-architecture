@@ -13,6 +13,11 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   const [inputValue, setInputValue] = useState('');
   const [sortDirection, setSortDirection] = useState('');
 
+  const onSubmit = () => {
+    handleTabClick('footerDetails');
+    handleTabCompleted('lineItems');
+  };
+
   const [data, setData] = useState([
     {
       id: 0,
@@ -93,10 +98,10 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     };
   }, [ref]);
 
-  const handleClik = () => {
-    handleTabClick('HeaderBody');
-    handleTabCompleted('customer_details');
-  };
+  // const handleClik = () => {
+  //   handleTabClick('HeaderBody');
+  //   handleTabCompleted('customer_details');
+  // };
 
   console.log(ids);
 
@@ -182,7 +187,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     isChecked,
     isSubmit,
     setIsSubmit,
-    handleClik,
+
     columns,
     data,
     ids,
@@ -201,11 +206,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     setSortDirection,
     handleSortClick,
     handleDuplicate,
-    handleRemove
+    handleRemove,
+    onSubmit
   };
 }
-
-useLineItem.propTypes = {
-  handleTabClick: PropTypes.func.isRequired,
-  handleTabCompleted: PropTypes.func.isRequired
-};

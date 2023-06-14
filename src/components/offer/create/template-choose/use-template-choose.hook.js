@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 
-export default function useHeaderBody({ handleTabClick, handleTabCompleted }) {
+export default function useTemplateChoose(handleTabClick, handleTabCompleted) {
   const [isSubmit, setIsSubmit] = useState(false);
+
   const onSubmit = () => {
-    handleTabClick('lineItems');
-    handleTabCompleted('headerBody');
+    handleTabClick('preview');
+    handleTabCompleted('chooseTemplate');
   };
+
   return {
     isSubmit,
     setIsSubmit,

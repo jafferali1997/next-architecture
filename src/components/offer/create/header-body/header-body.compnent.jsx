@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
@@ -8,8 +9,11 @@ import CustomButton from '@/common/components/custom-button/custom-button.compon
 import PlusIcon from '@/common/icons/plus.icon';
 import useHeaderBody from './use-header-body.hook';
 
-export default function HeaderBody() {
-  const { isSubmit, setIsSubmit } = useHeaderBody();
+export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useHeaderBody({
+    handleTabClick,
+    handleTabCompleted
+  });
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -24,7 +28,7 @@ export default function HeaderBody() {
       </div>
       <div className="content-body">
         {' '}
-        <form onSubmit="">
+        <form onSubmit={onSubmit}>
           <div className="form-box-grid-2col">
             <CustomInput
               label="Company Name "
@@ -108,9 +112,13 @@ export default function HeaderBody() {
             </div>
           </div>
 
-          <StepperFooter setIsSubmit={setIsSubmit} />
+          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
         </form>
       </div>
     </div>
   );
 }
+HeaderBody.propTypes = {
+  handleTabClick: PropTypes.func.isRequired,
+  handleTabCompleted: PropTypes.func.isRequired
+};
