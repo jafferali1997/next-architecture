@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import DeleteIcon from '@/common/icons/delete.icon';

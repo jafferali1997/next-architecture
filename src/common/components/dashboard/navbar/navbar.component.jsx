@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import * as React from 'react';
 
@@ -37,7 +39,7 @@ export default function Navbar({ setToggle, value }) {
   };
 
   return (
-    <div className="tw-flex tw-min-h-[68px] tw-items-center tw-justify-between tw-bg-white tw-px-6 tw-py-3 tw-shadow-custom2 tw-relative tw-z-10">
+    <div className="tw-relative tw-z-10 tw-flex tw-min-h-[68px] tw-items-center tw-justify-between tw-bg-white tw-px-6 tw-py-3 tw-shadow-custom2">
       <div className="tw-flex tw-items-center">
         <MenuIcon
           onClick={() => setToggle(!value)}

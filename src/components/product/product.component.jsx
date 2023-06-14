@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/button-has-type */
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import PlusIcon from '@/common/icons/plus.icon';

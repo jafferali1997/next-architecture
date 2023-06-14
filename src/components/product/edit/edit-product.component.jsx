@@ -28,7 +28,8 @@ export default function EditProduct() {
     errors,
     selectedCategory,
     setSelectedCategory,
-    data
+    data,
+    control
   } = useEditProduct();
   return (
     <>
@@ -49,6 +50,7 @@ export default function EditProduct() {
           handleSubmit={handleSubmit}
           register={register}
           errors={errors}
+          control={control}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
           handleClickCategory={handleClickCategory}
