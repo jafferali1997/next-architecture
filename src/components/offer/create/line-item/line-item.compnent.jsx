@@ -14,6 +14,7 @@ import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
+import DynamicPagination from '@/common/components/pagination/pagination.component';
 
 export default function LineItem({ handleTabClick, handleTabCompleted }) {
   const {
@@ -36,8 +37,10 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     ref,
     sortDirection,
     setSortDirection,
-    handleSortClick
+    handleSortClick,
+    setData
   } = useLineItem({ handleTabClick, handleTabCompleted });
+
   return (
     <div className="personal-details-wrapper">
       <div className="tw-flex tw-h-[351px]  tw-flex-col tw-items-start tw-gap-4 tw-rounded-[20px] tw-border tw-border-solid tw-border-[#E2E2E2] tw-p-4">
@@ -317,6 +320,10 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
           label="Default Switch"
           defaultChecked
         />
+      </div>
+
+      <div>
+        <DynamicPagination itemsPerPage={1} data={data} setData={setData} />
       </div>
     </div>
   );

@@ -71,6 +71,11 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     setInputValue(event.target.value);
   }
 
+  const handlePagination = (pageData, number) => {
+    console.log(pageData)
+    setData(pageData);
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -190,7 +195,9 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
     selectedRow,
     sortDirection,
     setSortDirection,
-    handleSortClick
+    handleSortClick,
+    setData,
+    handlePagination
   };
 }
 
