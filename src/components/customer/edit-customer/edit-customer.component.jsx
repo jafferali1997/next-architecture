@@ -26,18 +26,14 @@ import DeleteIcon from '@/common/icons/delete.icon';
 export default function EditCustomer() {
   const {
     isAdditional,
-    setIsAdditional,
     additionalhandles,
     isAdress,
-    setIsAdress,
     adressHandles,
     register,
     handleSubmit,
     errors,
     id,
     onSubmit,
-    handleInputChange,
-    companyAddresses,
     handleAddInput,
     allPriceGroup,
     setAllPriceGroup,
@@ -55,7 +51,7 @@ export default function EditCustomer() {
     countries,
     cities,
     handleRemoveInput,
-    fields,
+    companyAddressFields,
     isActive,
     setIsActive
   } = useEditCustomer();
@@ -300,7 +296,7 @@ export default function EditCustomer() {
                     Add more address
                   </span>
                 </div>
-                {fields.map((value, index) => (
+                {companyAddressFields.map((value, index) => (
                   <div className="tw-gflex-row tw-flex">
                     <div className="form-box-grid " key={value}>
                       <input
@@ -332,6 +328,9 @@ export default function EditCustomer() {
                     />
                   </div>
                 ))}
+                {isAdress && companyAddressFields?.length === 0 && (
+                  <p className="tw-text-center">No address found.</p>
+                )}
                 <div className="tw-flex tw-items-center tw-gap-[16px]">
                   <h3 className="form-box-heading">Additional Contact Person</h3>
                   {isAdditional ? (
