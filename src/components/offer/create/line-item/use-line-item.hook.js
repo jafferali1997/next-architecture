@@ -159,7 +159,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   const checkBoxHandler = (e) => {
     setIsChecked(e.target.value);
 
-    let id = JSON.parse(e.target.value);
+    const id = JSON.parse(e.target.value);
     let stateIds = ids;
 
     if (isIdAdded(id)) {
@@ -171,7 +171,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   };
   const allCheckboxHandler = (e) => {
     if (e.target.checked) {
-      let ids = data?.map((data, index) => index);
+      const ids = data?.map((data, index) => index);
       setIds([...ids]);
     } else {
       setIds([]);
