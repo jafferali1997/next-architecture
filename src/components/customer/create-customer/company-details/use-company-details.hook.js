@@ -268,7 +268,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       customerId: Number(searchParams.get('id')),
       additionalContact: [additionalContact],
       companyAddress: companyAddresses,
-      tin: Number(value.tin)
+      // tin: Number(value.tin)
     };
     console.log(payload);
     const res = await dispatch(createCustomerCompanyDetail({ payload }));

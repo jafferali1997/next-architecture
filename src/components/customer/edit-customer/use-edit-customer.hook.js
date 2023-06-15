@@ -284,6 +284,11 @@ export default function useEditCustomer() {
     const payloadData = {
       ...data,
       isActive,
+      creditCardCVV: data.creditCardCVV && data.creditCardCVV,
+      creditCardNumber: data.creditCardNumber && data.creditCardNumber,
+      creditCardExpiry: data.creditCardExpiry && data.creditCardExpiry,
+      discountAmount: Number(data.discountAmount),
+      discountDays: Number(data.discountDays),
       additionalContact: [additionalContact],
       companyAddress: data.companyAddresses
     };
