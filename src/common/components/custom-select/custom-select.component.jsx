@@ -20,7 +20,8 @@ export default function CustomSelect({
   isRequired = false,
   inlineLabel = false,
   labelClassName = '',
-  control = null
+  control = null,
+  disabled = false
 }) {
   return (
     <div
@@ -43,6 +44,7 @@ export default function CustomSelect({
             render={({ field }) => (
               <Select
                 {...field}
+                disabled={disabled}
                 {...(onChange && { onChange })}
                 className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
               >
@@ -59,6 +61,7 @@ export default function CustomSelect({
         {!control && (
           <Select
             name={name}
+            disabled={disabled}
             defaultValue={defaultValue}
             {...(onChange && { onChange })}
             {...(value && { value })}
@@ -99,6 +102,7 @@ CustomSelect.propTypes = {
   isRequired: PropTypes.bool,
   register: PropTypes.func,
   inlineLabel: PropTypes.bool,
+  disabled: PropTypes.bool,
   labelClassName: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   control: PropTypes.any

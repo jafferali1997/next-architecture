@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TagsInput } from 'react-tag-input-component';
 import SelectInput from '@mui/material/Select/SelectInput';
 import { MenuItem } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
@@ -62,21 +63,43 @@ export default function ProductForm({
     handleClickCategory
   );
 
+  const router = useRouter();
+
   return (
     <div className="content">
       <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
         <form onSubmit={!disabled ? handleSubmit(onSubmit) : () => {}}>
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
             <div className="tw-flex tw-items-center tw-gap-[16px]">
-              <img src="/assets/images/back-icon.svg" alt="img" />
-              <h1 className="admin-top-heading ">Add Product</h1>
-              <p className="admin-top-p">Item Number #: 10075</p>
+              <img
+                role="presentation"
+                onClick={() => {
+                  router.back();
+                }}
+                src="/assets/images/back-icon.svg"
+                alt="img"
+              />
+              <h1 className="admin-top-heading ">
+                {Object.keys(data).length ? (disabled ? 'View' : 'Edit') : 'Add'} Product
+              </h1>
+              <p className="admin-top-p">
+                {Object.keys(data).length ? `Item Number #: ${data.id}` : ''}
+              </p>
             </div>
             {!disabled && (
               <CustomButton
                 type="submit"
                 className="btn-primary"
                 text={Object.keys(data).length ? 'Update' : 'Save'}
+              />
+            )}
+            {disabled && (
+              <CustomButton
+                onClick={() => {
+                  router.push(`/product/edit/${data.id}`);
+                }}
+                className="btn-primary"
+                text="Edit"
               />
             )}
           </div>

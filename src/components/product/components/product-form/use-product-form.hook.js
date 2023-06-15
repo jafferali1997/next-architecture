@@ -1,10 +1,10 @@
 'use client';
 
+import { enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { enqueueSnackbar } from 'notistack';
-import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
+import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
 
 export default function useProductForm(
   categories,
@@ -76,7 +76,10 @@ export default function useProductForm(
             label: 'Group Name',
             type: 'select',
             value: data.id,
-            options: filteredPriceGroup
+            options: [
+              ...filteredPriceGroup,
+              { label: data.priceGroupName, value: data.id }
+            ]
           },
           { id: index, label: 'price', value: data.price, type: 'number' }
         ]);
@@ -100,7 +103,10 @@ export default function useProductForm(
             id: index,
             label: 'Group Name',
             type: 'select',
-            options: filteredDiscountGroup,
+            options: [
+              ...filteredDiscountGroup,
+              { label: data.discountGroupName, value: data.id }
+            ],
             value: data.id
           },
           { id: index, label: 'discount', value: data.discount }

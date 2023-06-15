@@ -34,27 +34,9 @@ export default function useProduct() {
           showInMenu
         />,
         <GridActionsCellItem
-          icon={<CircleIcon />}
-          label="Active"
-          onClick={() => handleStatusAction(cell.row)}
-          showInMenu
-        />,
-        <GridActionsCellItem
           icon={<EyeIcon />}
           label="View Detail"
           onClick={() => handleViewAction(cell.row)}
-          showInMenu
-        />,
-        <GridActionsCellItem
-          icon={<CommentIcon />}
-          label="Add comments"
-          onClick={() => handleAddCommentAction(cell.row)}
-          showInMenu
-        />,
-        <GridActionsCellItem
-          icon={<UploadIcon />}
-          label="Upload files"
-          onClick={() => handleUploadAction(cell.row)}
           showInMenu
         />,
         <GridActionsCellItem
@@ -305,11 +287,11 @@ export default function useProduct() {
   };
 
   const handleViewAction = (row) => {
-    router.push(`/product/details/${row.id}`);
+    router.push(`/product/detail/${row.id}`);
   };
 
   const handleDeleteAction = async (row) => {
-    const data = await dispatch(deleteProduct({ payload: row.id }));
+    await dispatch(deleteProduct({ payload: row.id }));
     fetchData();
   };
 
@@ -334,7 +316,7 @@ export default function useProduct() {
       getAllProduct({
         payload: {
           page: 1,
-          pageSize: 20,
+          pageSize: 10,
           sortColumn: 'id',
           sortOrder: 'DESC',
           condition
