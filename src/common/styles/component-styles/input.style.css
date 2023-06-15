@@ -24,6 +24,10 @@
     border-color: #ef2020;
   }
 
+  .react-tel-input .form-control {
+    width: 100% !important;
+    height: 40px !important;
+  }
 
 .Mui-focused .MuiOutlinedInput-notchedOutline,
 textarea:focus{

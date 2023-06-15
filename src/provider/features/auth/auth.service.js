@@ -47,6 +47,7 @@ const login = async (userData) => {
 // Logout user
 const logout = async () => {
   const response = await api().get('/users/logout');
+  console.log('logout res', response);
   if (response.data.Succeeded) {
     localStorage.removeItem('user');
   }

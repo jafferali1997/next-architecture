@@ -36,7 +36,9 @@ export default function ControlledRadioGroup({
         </RadioGroup>
         {belowWholeRadioGroup &&
           radioOptions.map((option) => (
-            <div>{selectedValue === option.value && option.element}</div>
+            <div key={option.value}>
+              {selectedValue === option.value && option.element}
+            </div>
           ))}
       </FormControl>
     </div>

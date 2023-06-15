@@ -24,6 +24,7 @@ import useEditCustomer from './use-edit-customer.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 export default function EditCustomer() {
   const {
@@ -50,14 +51,14 @@ export default function EditCustomer() {
     paymentTermValue,
     setPaymentTermValue,
     defaultData,
-    countries,
-    cities,
     handleRemoveInput,
     companyAddressFields,
     isActive,
     setIsActive,
     control
   } = useEditCustomer();
+
+  const { cities, handleCountryChange } = useCountryCity();
 
   return (
     <div className="content">
@@ -127,6 +128,7 @@ export default function EditCustomer() {
                     placeholder="Country"
                     type="select"
                     options={COUNTRIES}
+                    onChange={handleCountryChange}
                     control={control}
                     errors={errors}
                   />
@@ -405,13 +407,8 @@ export default function EditCustomer() {
                       type="select"
                       control={control}
                       errors={errors}
-                      // onChange={handleCountryChange}
-                      // value={selectedCountry}
-                      // isRequired={true}
-                      options={countries}
-                      // options={countries.map((item) => {
-                      //   return { label: item.name, value: item.isoCode, id: item.isoCode };
-                      // })}
+                      onChange={handleCountryChange}
+                      options={COUNTRIES}
                     />
                     <CustomSelect
                       label="City"
@@ -420,12 +417,7 @@ export default function EditCustomer() {
                       type="select"
                       control={control}
                       errors={errors}
-                      // value={selectedCity}
-                      // onChange={handleCityChange}
                       options={cities}
-                      // options={cities.map((item) => {
-                      //   return { label: item.name, value: item.isoCode, id: item.isoCode };
-                      // })}
                     />
                     <CustomInput
                       label="Postal Code"
@@ -599,7 +591,7 @@ export default function EditCustomer() {
                     label="Discount Amount "
                     name="discountAmount"
                     placeholder="Discount amount"
-                    type="text"
+                    type="number"
                     isRequired={true}
                     register={register}
                     errors={errors}
@@ -607,9 +599,9 @@ export default function EditCustomer() {
                   <div>
                     <CustomInput
                       label="Cash Discount"
-                      name="days"
+                      name="discountDays"
                       placeholder="Cash Discount"
-                      type="text"
+                      type="number"
                       isRequired={true}
                       register={register}
                       errors={errors}

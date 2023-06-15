@@ -37,7 +37,7 @@ export default function Product() {
             <h1 className="h1">List of Product</h1>
             <CustomButton
               className="btn-primary"
-              text="Create customer"
+              text="Create product"
               startIcon={<PlusIcon />}
               href="/product/create"
             />

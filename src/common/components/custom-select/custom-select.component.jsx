@@ -24,7 +24,9 @@ export default function CustomSelect({
 }) {
   return (
     <div
-      className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
+      className={`${
+        inlineLabel ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center' : ''
+      }`}
     >
       {label && (
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
@@ -34,13 +36,15 @@ export default function CustomSelect({
         {control && (
           <Controller
             name={name}
-            control={control}
+            {...(control && { control })}
             defaultValue={defaultValue}
+            {...(value && { value })}
             className="tw-w-full"
             render={({ field }) => (
               <Select
                 {...field}
-                className="tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray"
+                {...(onChange && { onChange })}
+                className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
               >
                 {options?.map((item) => (
                   <MenuItem key={item.value} value={item.value}>
@@ -58,7 +62,7 @@ export default function CustomSelect({
             defaultValue={defaultValue}
             {...(onChange && { onChange })}
             {...(value && { value })}
-            className="default-input input-field"
+            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
           >
             {options?.map((item) => (
               <MenuItem key={item.value} value={item.value}>

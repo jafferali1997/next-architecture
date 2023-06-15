@@ -9,17 +9,12 @@ import PriceGroup from '../price-group/price-group.component';
 import DiscountGroup from '../discount-group/discount-group.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 export default function FormForPersonalDetails({
   register,
   handleSubmit,
   onSubmit,
-  handleCountryChange,
-  selectedCity,
-  selectedCountry,
-  handleCityChange,
-  // countries,
-  cities,
   data = {},
   handleButtonClickedit,
   setIsSubmit,
@@ -34,10 +29,8 @@ export default function FormForPersonalDetails({
   setSelectedDiscountGroup,
   control
 }) {
-  const countries = [
-    { value: 'PAKISTAN', label: 'Pakistan' },
-    { value: 'INDIA', label: 'India' }
-  ];
+  const { cities, handleCountryChange } = useCountryCity();
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
@@ -99,6 +92,7 @@ export default function FormForPersonalDetails({
           control={control}
           errors={errors}
           placeholder="Country"
+          onChange={handleCountryChange}
           type="select"
           isRequired={true}
           options={COUNTRIES}
@@ -109,12 +103,7 @@ export default function FormForPersonalDetails({
           control={control}
           placeholder="City"
           type="select"
-          // value={selectedCity}
           isRequired={true}
-          // onChange={handleCityChange}
-          // options={cities.map((item) => {
-          //   return { label: item.name, value: item.isoCode, id: item.isoCode };
-          // })}
           options={cities}
           errors={errors}
         />
@@ -124,7 +113,7 @@ export default function FormForPersonalDetails({
           defaultValue={data.postalCode}
           register={register}
           placeholder="Postal Code"
-          type="number"
+          type="text"
           isRequired={true}
           errors={errors}
         />
@@ -163,13 +152,6 @@ FormForPersonalDetails.propTypes = {
   register: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  handleCountryChange: PropTypes.func,
-  selectedCity: PropTypes.func,
-  selectedCountry: PropTypes.func,
-  handleCityChange: PropTypes.func,
-  // countries: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  cities: PropTypes.arrayOf(PropTypes.any).isRequired,
   allPriceGroup: PropTypes.arrayOf(groupShape).isRequired,
   setAllPriceGroup: PropTypes.func.isRequired,
   selectedPriceGroup: PropTypes.arrayOf(groupShape).isRequired,

@@ -7,6 +7,8 @@ import Select from '@/common/components/select/select.component';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import useCompanyDetails from '../../use-company-details.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
+import COUNTRIES from '@/common/constants/countries.constant';
 
 export default function FormForCompanyDetails({
   register,
@@ -19,12 +21,6 @@ export default function FormForCompanyDetails({
   setIsShowInPdf,
   isVatEnabled,
   setIsVatEnabled,
-  handleCountryChange,
-  selectedCountry,
-  countries,
-  cities,
-  selectedCity,
-  handleCityChange,
   handleTabClick,
   setIsSubmit,
   additionalHandles,
@@ -35,6 +31,8 @@ export default function FormForCompanyDetails({
   data = {},
   control
 }) {
+  const { cities, handleCountryChange } = useCountryCity();
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
@@ -269,10 +267,9 @@ export default function FormForCompanyDetails({
             placeholder="Country"
             type="select"
             onChange={handleCountryChange}
-            value={selectedCountry}
             isRequired={true}
             errors={errors}
-            options={countries}
+            options={COUNTRIES}
           />
           <CustomSelect
             label="City"
@@ -280,8 +277,6 @@ export default function FormForCompanyDetails({
             name="ac_city"
             placeholder="City"
             type="select"
-            value={selectedCity}
-            onChange={handleCityChange}
             errors={errors}
             options={cities}
           />
@@ -347,12 +342,6 @@ FormForCompanyDetails.propTypes = {
   setIsShowInPdf: PropTypes.func.isRequired,
   isVatEnabled: PropTypes.bool.isRequired,
   setIsVatEnabled: PropTypes.func.isRequired,
-  handleCountryChange: PropTypes.func.isRequired,
-  selectedCountry: PropTypes.func.isRequired,
-  countries: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectedCity: PropTypes.func.isRequired,
-  handleCityChange: PropTypes.func.isRequired,
   handleTabClick: PropTypes.func.isRequired,
   setIsSubmit: PropTypes.func.isRequired,
   additionalHandles: PropTypes.func.isRequired,

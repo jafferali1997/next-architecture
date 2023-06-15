@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAccessToken } from '@/common/utils/access-token.util';
 import Navbar from '@/common/components/dashboard/navbar/navbar.component';
 import Sidebar from '@/common/components/dashboard/sidebar/sidebar.component';
