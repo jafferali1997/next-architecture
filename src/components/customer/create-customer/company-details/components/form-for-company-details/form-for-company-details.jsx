@@ -78,7 +78,7 @@ export default function FormForCompanyDetails({
         />
         <CustomSelect
           label="Company Size"
-          register={register}
+          control={control}
           name="companySize"
           placeholder="Select Company Size"
           type="select"
@@ -264,7 +264,7 @@ export default function FormForCompanyDetails({
 
           <CustomSelect
             label="Country"
-            register={register}
+            control={control}
             name="ac_country"
             placeholder="Country"
             type="select"
@@ -276,7 +276,7 @@ export default function FormForCompanyDetails({
           />
           <CustomSelect
             label="City"
-            register={register}
+            control={control}
             name="ac_city"
             placeholder="City"
             type="select"

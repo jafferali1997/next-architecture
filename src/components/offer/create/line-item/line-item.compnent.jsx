@@ -204,7 +204,7 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                   checked={data.length === ids.length}
                   onChange={allCheckboxHandler}
                   className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                    data.length === ids.length && 'tw-border-primary tw-bg-checked'
+                    data.length === ids.length && 'tw-bg-checked tw-border-primary'
                   }`}
                 />
                 <label htmlFor="test"></label>
@@ -243,7 +243,7 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                         value={ind}
                         onChange={checkBoxHandler}
                         className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                          ids.includes(rowData.id) && 'tw-border-primary tw-bg-checked'
+                          ids.includes(rowData.id) && 'tw-bg-checked tw-border-primary'
                         }`}
                       />
                       <label htmlFor="test"></label>
