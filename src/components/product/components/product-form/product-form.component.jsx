@@ -131,9 +131,10 @@ export default function ProductForm({
                     disabled={disabled}
                     placeholder="Units "
                     options={[
-                      { label: 'Test 1', value: 'test1' },
-                      { label: 'Test 2', value: 'test2' },
-                      { label: 'Test 3', value: 'test3' }
+                      { label: 'm2', value: 'm2' },
+                      { label: 'pc', value: 'pc' },
+                      { label: 'm', value: 'm' },
+                      { label: 'Cm', value: 'Cm' }
                     ]}
                   />
                   <CustomInput
@@ -289,9 +290,11 @@ export default function ProductForm({
                     placeholder="Tax rate "
                     disabled={disabled}
                     options={[
-                      { label: 'Test 1', value: 'test1' },
-                      { label: 'Test 2', value: 'test2' },
-                      { label: 'Test 3', value: 'test3' }
+                      { label: '3%', value: '3%' },
+                      { label: '5%', value: '5%' },
+                      { label: '7%', value: '7%' },
+                      { label: '10%', value: '10%' },
+                      { label: '16%', value: '16%' }
                     ]}
                   />
                 </div>
