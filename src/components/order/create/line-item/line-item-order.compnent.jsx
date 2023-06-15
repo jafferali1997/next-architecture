@@ -15,9 +15,9 @@ import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSwitch from '@/common/components/custom-switch/custom-switch.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
-import useLineItem from './use-line-item.hook';
+import useLineItemOrder from './use-line-item-order.hook';
 
-export default function LineItem({ handleTabClick, handleTabCompleted }) {
+export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
   const {
     isSubmit,
     setIsSubmit,
@@ -42,7 +42,7 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     handleRemove,
     onSubmit,
     handleSortClick
-  } = useLineItem({ handleTabClick, handleTabCompleted });
+  } = useLineItemOrder({ handleTabClick, handleTabCompleted });
   return (
     <div className="personal-details-wrapper">
       <form onSubmit={onSubmit}>
@@ -339,7 +339,7 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     </div>
   );
 }
-LineItem.propTypes = {
+LineItemOrder.propTypes = {
   handleTabClick: PropTypes.func.isRequired,
   handleTabCompleted: PropTypes.func.isRequired
 };

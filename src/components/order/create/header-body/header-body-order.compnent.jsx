@@ -7,10 +7,10 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import PlusIcon from '@/common/icons/plus.icon';
-import useHeaderBody from './use-header-body.hook';
+import useHeaderBodyOrder from './use-header-body-order.hook';
 
-export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
-  const { isSubmit, setIsSubmit, onSubmit } = useHeaderBody({
+export default function HeaderBodyOrder({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useHeaderBodyOrder({
     handleTabClick,
     handleTabCompleted
   });
@@ -137,7 +137,7 @@ export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
     </div>
   );
 }
-HeaderBody.propTypes = {
+HeaderBodyOrder.propTypes = {
   handleTabClick: PropTypes.func.isRequired,
   handleTabCompleted: PropTypes.func.isRequired
 };

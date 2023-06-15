@@ -3,7 +3,7 @@ import Link from 'next/link';
 import DownloadDropdownBtn from '@/common/components/download-dropdown-button/download-dropdown-button.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 
-function OfferPreview() {
+function PreviewOrder() {
   const dropdownoptions = [
     { id: 1, name: 'option1', link: '/option1' },
     { id: 2, name: 'option2', link: '/option2' },
@@ -13,7 +13,7 @@ function OfferPreview() {
     <>
       <div className="tw-flex tw-flex-col tw-gap-20">
         <div className="tw-flex tw-justify-end">
-          <DownloadDropdownBtn text="Download Offers" dropdownoptions={dropdownoptions} />
+          <DownloadDropdownBtn text="Download Orders" dropdownoptions={dropdownoptions} />
         </div>
         <div className="tw-flex tw-justify-between">
           <h1 className="tw-text-2xl tw-font-bold tw-leading-[29px]">100020</h1>
@@ -219,4 +219,4 @@ function OfferPreview() {
   );
 }
 
-export default OfferPreview;
+export default PreviewOrder;

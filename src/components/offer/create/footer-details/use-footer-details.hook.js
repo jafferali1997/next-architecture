@@ -1,7 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function useFooterDetails() {
-  return {};
+export default function useFooterDetails(handleTabClick, handleTabCompleted) {
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const onSubmit = () => {
+    handleTabClick('chooseTemplate');
+    handleTabCompleted('footerDetails');
+  };
+
+  return {
+    isSubmit,
+    setIsSubmit,
+    onSubmit
+  };
 }

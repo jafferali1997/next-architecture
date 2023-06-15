@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function useHeaderBody({ handleTabClick, handleTabCompleted }) {
+export default function useHeaderBodyOrder({ handleTabClick, handleTabCompleted }) {
   const [isSubmit, setIsSubmit] = useState(false);
   const onSubmit = () => {
     handleTabClick('lineItems');

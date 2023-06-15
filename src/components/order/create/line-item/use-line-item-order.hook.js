@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function useLineItem({ handleTabClick, handleTabCompleted }) {
+export default function useLineItemOrder({ handleTabClick, handleTabCompleted }) {
   const ref = useRef(null);
   const [isChecked, setIsChecked] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);

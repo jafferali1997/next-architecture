@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import SearchIcon from '@/common/icons/search-icon';
-import useTemplateChoose from './use-template-choose.hook';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import useTemplateChooseOrder from './use-template-choose.hook';
 
-export default function TemplateChoose({ handleTabClick, handleTabCompleted }) {
-  const { isSubmit, setIsSubmit, onSubmit } = useTemplateChoose(
+export default function TemplateChooseOrder({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useTemplateChooseOrder(
     handleTabClick,
     handleTabCompleted
   );
@@ -54,7 +54,7 @@ export default function TemplateChoose({ handleTabClick, handleTabCompleted }) {
     </div>
   );
 }
-TemplateChoose.propTypes = {
+TemplateChooseOrder.propTypes = {
   handleTabClick: PropTypes.func.isRequired,
   handleTabCompleted: PropTypes.func.isRequired
 };

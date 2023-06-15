@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import TextArea from '@/common/components/text-area/text-area.component';
 import PlusIcon from '@/common/icons/plus.icon';
-import useFooterDetails from './use-footer-details.hook';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
+import useFooterDetailsOrder from './use-footer-details-order.hook';
 
-export default function FooterDetails({ handleTabClick, handleTabCompleted }) {
-  const { isSubmit, setIsSubmit, onSubmit } = useFooterDetails(
+export default function FooterDetailsOrder({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useFooterDetailsOrder(
     handleTabClick,
     handleTabCompleted
   );
@@ -66,7 +66,7 @@ export default function FooterDetails({ handleTabClick, handleTabCompleted }) {
     </div>
   );
 }
-FooterDetails.propTypes = {
+FooterDetailsOrder.propTypes = {
   handleTabClick: PropTypes.func.isRequired,
   handleTabCompleted: PropTypes.func.isRequired
 };
