@@ -26,14 +26,8 @@ export default function useTwoFactorAuth() {
     setPhone(searchParams.get('phone'));
   }, [searchParams]);
 
-  const moveRouterGenOtp = () => {
-    enqueueSnackbar('OTP generated', {
-      variant: 'success'
-    });
-  };
-
   const resendOtpHandler = () => {
-    dispatch(generateOtp({ successCallBack: moveRouterGenOtp() }));
+    dispatch(generateOtp({ successCallBack: () => {} }));
   };
   const moveRouter = (data) => {
     setIsOtpVerified(true);
