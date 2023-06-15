@@ -36,6 +36,7 @@ export default function CustomSelect({
             name={name}
             control={control}
             defaultValue={defaultValue}
+            {...(onChange && { onChange })}
             className="tw-w-full"
             render={({ field }) => (
               <Select
@@ -56,6 +57,7 @@ export default function CustomSelect({
           <Select
             name={name}
             defaultValue={defaultValue}
+            {...(onChange && { onChange })}
             className="default-input input-field"
           >
             {options?.map((item) => (

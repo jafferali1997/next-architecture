@@ -7,6 +7,7 @@ import CountryPhoneInput from '@/common/components/country-phone-input/country-p
 import useProfile from './use-profile.hook';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 export default function Profile() {
   const {
@@ -26,10 +27,9 @@ export default function Profile() {
     setIsOtpVerified,
     control
   } = useProfile();
-  const cities = [
-    { id: 1, label: 'Lahore', value: 'Lahore' },
-    { id: 2, label: 'Rawalpindi', value: 'Rawalpindi' }
-  ];
+
+  const { cities, handleCountryChange } = useCountryCity();
+
   return (
     <div className=" tw-min-h-[1090px] ">
       <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
@@ -121,9 +121,8 @@ export default function Profile() {
                   name="city"
                   type="select"
                   inlineLabel
-                  options={cities.map((item) => {
-                    return { label: item.label, value: item.value, id: item.id };
-                  })}
+                  onChange={handleCountryChange}
+                  options={cities}
                   control={control}
                   isRequired={true}
                   errors={errors}

@@ -12,6 +12,7 @@ import AllToaster from './components/toaster/toaster.component';
 import FormModal from './components/form-modal/form-modal.component';
 import Radio from './components/radio/radio.component';
 import CountrySelect from '@/common/components/country-select/country-select.component';
+import CountryCity from './components/country-city/country-city.component';
 
 export default function AllComponents() {
   const { handleSubmit, control } = useForm();
@@ -46,6 +47,7 @@ export default function AllComponents() {
       <Button />
       <AllToaster />
       <Input />
+      <CountryCity />
       <Checkbox />
       <Switch />
       {/* <form onSubmit={handleSubmit(onSubmit)}>
@@ -66,7 +68,7 @@ export default function AllComponents() {
       <Radio />
       <FormModal />
       <ReactHookForm />
-      <CountrySelect />
+      {/* <CountrySelect /> */}
     </>
   );
 }

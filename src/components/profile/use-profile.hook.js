@@ -77,18 +77,30 @@ export default function useProfile() {
   });
 
   useEffect(() => {
+    if (localStorage.getItem('userProfile')) {
+      const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+      if (userProfile.isOtpVerified) {
+        setOtp(userProfile.otp);
+        setPhone(userProfile.phone);
+        setIsOtpVerified(userProfile.isOtpVerified);
+      } else {
+        localStorage.removeItem('userProfile');
+      }
+    }
     setValue('email', searchParams.get('email'));
-    setValue('userName', searchParams.get('userName'));
-  }, [searchParams]);
+    setValue('userName', searchParams.get('username'));
+  }, []);
 
-  const moveRouter = (data) => {
-    router.push('/customer');
-  };
+  const moveRouter = (data) => {};
 
-  const onSubmit = (data) => {
-    dispatch(
+  const onSubmit = async (data) => {
+    const res = await dispatch(
       profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter })
     );
+    console.log(res, 'Profile response');
+    if (res.payload) {
+      router.push('/customer');
+    }
   };
 
   const sendOtp = () => {
@@ -105,8 +117,20 @@ export default function useProfile() {
     }
   };
   const handleOtpVerif = (data) => {
-    setIsOtpVerified(true);
-    localStorage.setItem('isOtpVerified', true);
+    console.log(data);
+    if (data) {
+      setIsOtpVerified(true);
+      localStorage.setItem(
+        'userProfile',
+        JSON.stringify({
+          username: searchParams.get('username'),
+          email: searchParams.get('email'),
+          isOtpVerified: true,
+          phone,
+          otp
+        })
+      );
+    }
   };
 
   const verifyOtpHandler = () => {
