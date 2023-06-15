@@ -276,6 +276,75 @@ export default function ProductForm({
                   </div>
                 ))}
               </div>
+              <div className="form-box tw-w-[336px]">
+                <h3 className="form-box-heading ">Product Organization</h3>
+                <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
+                  <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[100%] tw-text-text-black">
+                    Product Category
+                  </label>
+                  <div className="tw-relative">
+                    <CustomInput placeholder="Product Category" />
+                    <div className="tw-mt-[16px] tw-h-[446px] tw-w-[296px] tw-rounded-md tw-border tw-border-solid tw-border-disabled-input">
+                      <div className="head tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-gap-[23px] tw-border-b tw-border-solid tw-border-b-disabled-input tw-py-[7px] tw-pl-2 tw-pr-0">
+                        <svg
+                          width="6"
+                          height="11"
+                          viewBox="0 0 6 11"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M5.25283 11C5.15408 11.0006 5.05619 10.9807 4.96478 10.9414C4.87336 10.9021 4.79021 10.8443 4.7201 10.7712L0.218187 6.03674C0.0784395 5.8889 0 5.68891 0 5.48045C0 5.27199 0.0784395 5.07199 0.218187 4.92415L4.7201 0.189737C4.86364 0.0604669 5.04827 -0.00708219 5.23711 0.000588473C5.42595 0.00825914 5.60508 0.0905843 5.73871 0.231113C5.87233 0.371642 5.95062 0.560024 5.95791 0.758614C5.9652 0.957204 5.90097 1.15137 5.77805 1.30232L1.80886 5.4765L5.77805 9.65068C5.88341 9.76057 5.95542 9.90086 5.98497 10.0538C6.01452 10.2067 6.00029 10.3654 5.94407 10.5099C5.88785 10.6543 5.79218 10.7779 5.66914 10.8652C5.5461 10.9524 5.40122 10.9993 5.25283 11Z"
+                            fill="#7E7D7D"
+                          />
+                        </svg>
+                        <p className=" tw-w-[296px] tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
+                          Pet Supplies
+                        </p>
+                      </div>
+                      <div className=" tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0">
+                        <p className=" tw-w-[296px] tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
+                          Pet Supplies
+                        </p>
+                        <div className="tw-p-3">
+                          <svg
+                            width="6"
+                            height="11"
+                            viewBox="0 0 6 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.747173 1.33514e-05C0.84592 -0.000587463 0.943808 0.0193167 1.03522 0.0585842C1.12664 0.0978518 1.20979 0.155712 1.2799 0.228844L5.78181 4.96326C5.92156 5.1111 6 5.31109 6 5.51955C6 5.72801 5.92156 5.92801 5.78181 6.07585L1.2799 10.8103C1.13636 10.9395 0.951726 11.0071 0.762889 10.9994C0.574052 10.9917 0.394922 10.9094 0.261294 10.7689C0.127666 10.6284 0.0493832 10.44 0.0420895 10.2414C0.0347953 10.0428 0.0990276 9.84863 0.22195 9.69768L4.19114 5.5235L0.22195 1.34932C0.116589 1.23943 0.04458 1.09914 0.0150285 0.946212C-0.014523 0.79328 -0.000289917 0.634566 0.0559282 0.490141C0.112146 0.345716 0.207824 0.222065 0.330864 0.134823C0.453904 0.0475817 0.59878 0.000667572 0.747173 1.33514e-05Z"
+                              fill="#7E7D7D"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {selectedCategory.map((category, categoryIndex) => (
+                  <div className="tw-m-2 tw-flex tw-rounded-full tw-bg-slate-200">
+                    <div className="tw-basis-11/12 tw-px-3">
+                      {category?.map((higherArchie, higherArchieIndex) => (
+                        <span>
+                          {higherArchie.categoryName}{' '}
+                          {higherArchieIndex !== category.length - 1 && '>'}{' '}
+                        </span>
+                      ))}
+                    </div>
+                    {!disabled && (
+                      <div
+                        className="tw-float-right tw-m-auto tw-basis-1/12 tw-cursor-pointer tw-px-3"
+                        onClick={() => handleRemoveSelectedCategory(categoryIndex)}
+                      >
+                        x
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
               <div className="form-box tw-mt-[16px] tw-w-[336px]">
                 <h3 className="form-box-heading ">Tax</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">

@@ -33,24 +33,24 @@ export default function useProduct() {
           onClick={() => handleEditAction(cell.row)}
           showInMenu
         />,
-        <GridActionsCellItem
-          icon={<CircleIcon />}
-          label="Active"
-          onClick={() => handleStatusAction(cell.row)}
-          showInMenu
-        />,
+        // <GridActionsCellItem
+        //   icon={<CircleIcon />}
+        //   label="Active"
+        //   onClick={() => handleStatusAction(cell.row)}
+        //   showInMenu
+        // />,
         <GridActionsCellItem
           icon={<EyeIcon />}
           label="View Detail"
           onClick={() => handleViewAction(cell.row)}
           showInMenu
         />,
-        <GridActionsCellItem
-          icon={<CommentIcon />}
-          label="Add comments"
-          onClick={() => handleAddCommentAction(cell.row)}
-          showInMenu
-        />,
+        // <GridActionsCellItem
+        //   icon={<CommentIcon />}
+        //   label="Add comments"
+        //   onClick={() => handleAddCommentAction(cell.row)}
+        //   showInMenu
+        // />,
         <GridActionsCellItem
           icon={<UploadIcon />}
           label="Upload files"
