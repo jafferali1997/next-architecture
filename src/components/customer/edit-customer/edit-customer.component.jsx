@@ -592,7 +592,7 @@ export default function EditCustomer() {
                     label="Discount Amount "
                     name="discountAmount"
                     placeholder="Discount amount"
-                    type="text"
+                    type="number"
                     isRequired={true}
                     register={register}
                     errors={errors}
@@ -600,9 +600,9 @@ export default function EditCustomer() {
                   <div>
                     <CustomInput
                       label="Cash Discount"
-                      name="days"
+                      name="discountDays"
                       placeholder="Cash Discount"
-                      type="text"
+                      type="number"
                       isRequired={true}
                       register={register}
                       errors={errors}
