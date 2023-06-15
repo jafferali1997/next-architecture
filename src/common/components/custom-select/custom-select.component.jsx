@@ -24,33 +24,53 @@ export default function CustomSelect({
 }) {
   return (
     <div
-      className={`${inlineLabel ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center' : ''}`}
+      className={`${
+        inlineLabel ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center' : ''
+      }`}
     >
       {label && (
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
       )}
 
       <div className="tw-w-full">
-        <Controller
-          name={name}
-          {...(control && { control })}
-          defaultValue={defaultValue}
-          {...(onChange && { onChange })}
-          {...(value && { value })}
-          className="tw-w-full"
-          render={({ field }) => (
-            <Select
-              {...field}
-              className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
-            >
-              {options?.map((item) => (
-                <MenuItem key={item.value} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              ))}
-            </Select>
-          )}
-        />
+        {control && (
+          <Controller
+            name={name}
+            {...(control && { control })}
+            defaultValue={defaultValue}
+            {...(onChange && { onChange })}
+            {...(value && { value })}
+            className="tw-w-full"
+            render={({ field }) => (
+              <Select
+                {...field}
+                className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
+              >
+                {options?.map((item) => (
+                  <MenuItem key={item.value} value={item.value}>
+                    {item.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
+          />
+        )}
+
+        {!control && (
+          <Select
+            name={name}
+            defaultValue={defaultValue}
+            {...(onChange && { onChange })}
+            {...(value && { value })}
+            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
+          >
+            {options?.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ))}
+          </Select>
+        )}
 
         {errors && errors[name] && (
           <FieldError className="tw-mt-1" error={errors[name].message} />

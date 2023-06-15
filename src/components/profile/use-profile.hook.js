@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -15,6 +16,7 @@ import { createProfile } from '@/provider/features/profile/profile.slice';
 import { createFinancialDetail } from '@/provider/features/financial-detail/financial-detail.slice';
 import { createBusinessDetail } from '@/provider/features/business-detail/business-detail.slice';
 import { profileFinancialBusiness } from '@/provider/features/profile-financial-business/profile-financial-business.slice';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -59,12 +61,6 @@ export default function useProfile() {
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const sendOtpButtonText = useRef('Send OTP');
 
-  useEffect(() => {
-    if (localStorage.getItem('isOtpVerified')) {
-      setIsOtpVerified(true);
-    }
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -75,6 +71,8 @@ export default function useProfile() {
     resolver: yupResolver(validationSchema),
     mode: 'onBlur'
   });
+
+  const { handleCountryChange, cities } = useCountryCity();
 
   useEffect(() => {
     if (localStorage.getItem('userProfile')) {
@@ -89,6 +87,18 @@ export default function useProfile() {
     }
     setValue('email', searchParams.get('email'));
     setValue('userName', searchParams.get('username'));
+    axios.get('http://ip-api.com/json').then((res) => {
+      console.log(res);
+      const country = `${res.data.country.toLowerCase()}-${res.data.countryCode}`;
+      setValue('country', country);
+      const event = {
+        target: {
+          value: country
+        }
+      };
+      handleCountryChange(event);
+      setValue('city', res.data.city.toLowerCase());
+    });
   }, []);
 
   const moveRouter = (data) => {};
@@ -158,6 +168,8 @@ export default function useProfile() {
     sendOtp,
     verifyOtpHandler,
     isOtpVerified,
-    setIsOtpVerified
+    setIsOtpVerified,
+    handleCountryChange,
+    cities
   };
 }

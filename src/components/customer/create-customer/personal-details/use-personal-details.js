@@ -68,15 +68,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const [isSubmit, setIsSubmit] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
-  // const countries = Country.getAllCountries();
-  const countries = [
-    { label: 'Pakistan', value: 'pakistan' },
-    { label: 'Turkey', value: 'turkey' }
-  ];
-  const cities = [
-    { label: 'Lahore', value: 'lahore' },
-    { label: 'Gujranwala', value: 'gujranwala' }
-  ];
+
   const dispatch = useDispatch();
 
   const fetchData = useCallback(
@@ -182,9 +174,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     selectedCity,
     selectedCountry,
     handleCityChange,
-    countries,
     data,
-    cities,
     allPriceGroup,
     setAllPriceGroup,
     selectedPriceGroup,

@@ -144,16 +144,6 @@ export default function useEditCustomer() {
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
   const [isActive, setIsActive] = useState(false);
 
-  const countries = [
-    { value: 'India', label: 'India' },
-    { value: 'USA', label: 'USA' }
-  ];
-
-  const cities = [
-    { value: 'Delhi', label: 'Delhi' },
-    { value: 'Mumbai', label: 'Mumbai' }
-  ];
-
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
   };
@@ -346,8 +336,6 @@ export default function useEditCustomer() {
     paymentTermValue,
     setPaymentTermValue,
     defaultData,
-    countries,
-    cities,
     handleRemoveInput,
     isActive,
     setIsActive,

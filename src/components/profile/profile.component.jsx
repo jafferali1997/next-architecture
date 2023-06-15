@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import Select from '@/common/components/select/select.component';
 import OtpInput from '@/common/components/otp-input/otp-input.component';
 import CountryPhoneInput from '@/common/components/country-phone-input/country-phone-input.component';
 import useProfile from './use-profile.hook';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
-import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 export default function Profile() {
   const {
@@ -16,7 +14,6 @@ export default function Profile() {
     register,
     handleSubmit,
     onSubmit,
-    setValue,
     errors,
     phone,
     setPhone,
@@ -24,11 +21,10 @@ export default function Profile() {
     verifyOtpHandler,
     sendOtpButtonText,
     isOtpVerified,
-    setIsOtpVerified,
-    control
+    control,
+    handleCountryChange,
+    cities
   } = useProfile();
-
-  const { cities, handleCountryChange } = useCountryCity();
 
   return (
     <div className=" tw-min-h-[1090px] ">
@@ -110,6 +106,7 @@ export default function Profile() {
                   type="select"
                   inlineLabel
                   options={COUNTRIES}
+                  onChange={handleCountryChange}
                   control={control}
                   isRequired={true}
                   errors={errors}
@@ -121,7 +118,6 @@ export default function Profile() {
                   name="city"
                   type="select"
                   inlineLabel
-                  onChange={handleCountryChange}
                   options={cities}
                   control={control}
                   isRequired={true}

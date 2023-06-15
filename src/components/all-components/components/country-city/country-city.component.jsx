@@ -1,5 +1,3 @@
-import { Country, City } from 'country-state-city';
-import { useState } from 'react';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import useCountryCity from '@/common/hooks/use-country-city.hook';
 import COUNTRIES from '@/common/constants/countries.constant';

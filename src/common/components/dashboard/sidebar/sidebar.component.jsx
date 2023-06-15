@@ -48,7 +48,7 @@ const sidebarLinks = [
     subLinks: [
       { lablel: 'Customer', icon: <CustomerIcon />, href: '/customer' },
       { lablel: 'Products', icon: <ProductIcon />, href: '/product' },
-      { lablel: 'Categories', icon: <ProductIcon />, href: '/product' },
+      { lablel: 'Categories', icon: <ProductIcon />, href: '/category/create' },
       { lablel: 'Users & Roles', icon: <UserRolesIcon />, href: '/' }
     ]
   },
