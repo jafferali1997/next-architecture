@@ -51,7 +51,8 @@ export default function ProductForm({
     modalData,
     openPopup,
     setOpenPopup,
-    handleModalSubmit
+    handleModalSubmit,
+    handleDeleteGroup
   } = useProductForm(
     categories,
     handleDiscountInput,
@@ -322,7 +323,7 @@ export default function ProductForm({
                   <ProductGroup
                     item={item}
                     handleModalData={handleModalData}
-                    handleUpdateInput={handlePriceInput}
+                    handleDeleteGroup={handleDeleteGroup}
                     index={index}
                     disabled={disabled}
                     updateType="updatePrice"
@@ -346,7 +347,7 @@ export default function ProductForm({
                   <ProductGroup
                     item={item}
                     handleModalData={handleModalData}
-                    handleUpdateInput={handleDiscountInput}
+                    handleDeleteGroup={handleDeleteGroup}
                     disabled={disabled}
                     index={index}
                     updateType="updateDiscount"

@@ -33,7 +33,6 @@ export default function Private({ component }) {
       </div>
     </div>
   );
-  // }
 }
 
 Private.propTypes = {

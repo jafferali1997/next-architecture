@@ -6,6 +6,7 @@ import OtpInput from '@/common/components/otp-input/otp-input.component';
 import CountryPhoneInput from '@/common/components/country-phone-input/country-phone-input.component';
 import useProfile from './use-profile.hook';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
+import COUNTRIES from '@/common/constants/countries.constant';
 
 export default function Profile() {
   const {
@@ -22,7 +23,8 @@ export default function Profile() {
     verifyOtpHandler,
     sendOtpButtonText,
     isOtpVerified,
-    setIsOtpVerified
+    setIsOtpVerified,
+    control
   } = useProfile();
   const cities = [
     { id: 1, label: 'Lahore', value: 'Lahore' },
@@ -107,10 +109,8 @@ export default function Profile() {
                   name="country"
                   type="select"
                   inlineLabel
-                  options={cities.map((item) => {
-                    return { label: item.label, value: item.value, id: item.id };
-                  })}
-                  register={register}
+                  options={COUNTRIES}
+                  control={control}
                   isRequired={true}
                   errors={errors}
                 />
@@ -124,7 +124,7 @@ export default function Profile() {
                   options={cities.map((item) => {
                     return { label: item.label, value: item.value, id: item.id };
                   })}
-                  register={register}
+                  control={control}
                   isRequired={true}
                   errors={errors}
                 />
@@ -230,9 +230,9 @@ export default function Profile() {
                   options={[
                     { value: '10-20', label: '10 - 20' },
                     { value: '30-50', label: '30 - 50' },
-                    { value: '5-100', label: '50 - 100' }
+                    { value: '50-100', label: '50 - 100' }
                   ]}
-                  register={register}
+                  control={control}
                   errors={errors}
                   isRequired={true}
                 />
