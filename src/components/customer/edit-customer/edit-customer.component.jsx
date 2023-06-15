@@ -23,6 +23,7 @@ import DiscountGroup from '../create-customer/personal-details/components/discou
 import useEditCustomer from './use-edit-customer.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
+import COUNTRIES from '@/common/constants/countries.constant';
 
 export default function EditCustomer() {
   const {
@@ -125,7 +126,8 @@ export default function EditCustomer() {
                     name="country"
                     placeholder="Country"
                     type="select"
-                    register={register}
+                    options={COUNTRIES}
+                    control={control}
                     errors={errors}
                   />
                   <CustomSelect
@@ -133,7 +135,8 @@ export default function EditCustomer() {
                     name="city"
                     placeholder="City"
                     type="select"
-                    register={register}
+                    control={control}
+                    options={cities}
                     errors={errors}
                   />
                   <CustomInput
@@ -210,7 +213,7 @@ export default function EditCustomer() {
                       { id: '40-100', value: '40-100', label: '40-100' },
                       { id: 'above 100', value: 'above 100', label: 'above 100' }
                     ]}
-                    register={register}
+                    control={control}
                     errors={errors}
                   />
                   <CustomInput
@@ -400,7 +403,7 @@ export default function EditCustomer() {
                       name="ac_country"
                       placeholder="Country"
                       type="select"
-                      register={register}
+                      control={control}
                       errors={errors}
                       // onChange={handleCountryChange}
                       // value={selectedCountry}
@@ -415,7 +418,7 @@ export default function EditCustomer() {
                       name="ac_city"
                       placeholder="City"
                       type="select"
-                      register={register}
+                      control={control}
                       errors={errors}
                       // value={selectedCity}
                       // onChange={handleCityChange}

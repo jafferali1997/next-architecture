@@ -42,7 +42,7 @@ export default function CustomSelect({
                 {...field}
                 className="tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray"
               >
-                {options.map((item) => (
+                {options?.map((item) => (
                   <MenuItem key={item.value} value={item.value}>
                     {item.label}
                   </MenuItem>
