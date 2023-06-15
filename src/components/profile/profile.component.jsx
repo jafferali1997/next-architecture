@@ -22,7 +22,7 @@ export default function Profile() {
     sendOtpButtonText,
     isOtpVerified,
     control,
-    handleCountryChange,
+    onCountryChange,
     cities,
     logoutClickHandler
   } = useProfile();
@@ -106,7 +106,7 @@ export default function Profile() {
                   name="country"
                   inlineLabel
                   options={COUNTRIES}
-                  onChange={handleCountryChange}
+                  onChange={onCountryChange}
                   control={control}
                   isRequired={true}
                   errors={errors}

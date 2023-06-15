@@ -118,7 +118,10 @@ export default function useProfile() {
   }, []);
 
   const moveRouter = (data) => {};
-
+  const onCountryChange = (e) => {
+    setValue('city', '');
+    handleCountryChange(e);
+  };
   const onSubmit = async (data) => {
     const res = await dispatch(
       profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter })
@@ -193,8 +196,8 @@ export default function useProfile() {
     verifyOtpHandler,
     isOtpVerified,
     setIsOtpVerified,
-    handleCountryChange,
     cities,
-    logoutClickHandler
+    logoutClickHandler,
+    onCountryChange
   };
 }
