@@ -1,9 +1,9 @@
 'use client';
 
-import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
-import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
+import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
 
 export default function useProductForm(
   categories,
