@@ -56,8 +56,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedCity, setSelectedCity] = useState(null);
   const [data, setData] = useState();
 
   const [allPriceGroup, setAllPriceGroup] = useState([]);
@@ -99,18 +97,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
       fetchData(id);
     }
   }, [searchParams, allPriceGroup, allDiscountGroup, fetchData]);
-
-  const handleCountryChange = (event) => {
-    // const countryCode = event.target.value;
-    // setSelectedCountry(countryCode);
-    // const cities = City.getCitiesOfCountry(countryCode);
-    // setCities(cities);
-  };
-
-  const handleCityChange = (event) => {
-    // const cityName = event.target.value;
-    // setSelectedCity(cityName);
-  };
 
   const onSubmit = async (value) => {
     const priceGroups = [
@@ -170,10 +156,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     register,
     handleSubmit,
     onSubmit,
-    handleCountryChange,
-    selectedCity,
-    selectedCountry,
-    handleCityChange,
     data,
     allPriceGroup,
     setAllPriceGroup,

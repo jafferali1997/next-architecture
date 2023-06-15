@@ -1,4 +1,4 @@
-import { Country } from 'country-state-city';
+// import { Country } from 'country-state-city';
 
 const COUNTRIES = [
   {
@@ -1497,15 +1497,15 @@ const COUNTRIES = [
   }
 ];
 
-function getCountries() {
-  const countries = Country.getAllCountries();
-  const count = countries.map((country) => ({
-    value: country.isoCode,
-    label: country.name
-  }));
-  console.log(count);
-  return count;
-}
+// function getCountries() {
+//   const countries = Country.getAllCountries();
+//   const count = countries.map((country) => ({
+//     value: country.isoCode,
+//     label: country.name
+//   }));
+//   console.log(count);
+//   return count;
+// }
 
 // const COUNTRIES = [
 //   {

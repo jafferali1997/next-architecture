@@ -113,7 +113,7 @@ export default function FormForPersonalDetails({
           defaultValue={data.postalCode}
           register={register}
           placeholder="Postal Code"
-          type="number"
+          type="text"
           isRequired={true}
           errors={errors}
         />

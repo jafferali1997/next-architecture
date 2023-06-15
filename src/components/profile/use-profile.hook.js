@@ -17,6 +17,7 @@ import { createFinancialDetail } from '@/provider/features/financial-detail/fina
 import { createBusinessDetail } from '@/provider/features/business-detail/business-detail.slice';
 import { profileFinancialBusiness } from '@/provider/features/profile-financial-business/profile-financial-business.slice';
 import useCountryCity from '@/common/hooks/use-country-city.hook';
+import { logout } from '@/provider/features/auth/auth.slice';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -87,18 +88,33 @@ export default function useProfile() {
     }
     setValue('email', searchParams.get('email'));
     setValue('userName', searchParams.get('username'));
-    axios.get('http://ip-api.com/json').then((res) => {
-      console.log(res);
-      const country = `${res.data.country.toLowerCase()}-${res.data.countryCode}`;
-      setValue('country', country);
-      const event = {
-        target: {
-          value: country
-        }
-      };
-      handleCountryChange(event);
-      setValue('city', res.data.city.toLowerCase());
-    });
+    if (typeof window !== 'undefined' && !window.location.origin.includes('localhost')) {
+      axios.get('https://ipapi.co/json/').then((res) => {
+        console.log(res);
+        const country = `${res.data.country_name.toLowerCase()}-${res.data.country_code}`;
+        setValue('country', country);
+        const event = {
+          target: {
+            value: country
+          }
+        };
+        handleCountryChange(event);
+        setValue('city', res.data.city.toLowerCase());
+      });
+    } else {
+      axios.get('http://ip-api.com/json').then((res) => {
+        console.log(res);
+        const country = `${res.data.country.toLowerCase()}-${res.data.countryCode}`;
+        setValue('country', country);
+        const event = {
+          target: {
+            value: country
+          }
+        };
+        handleCountryChange(event);
+        setValue('city', res.data.city.toLowerCase());
+      });
+    }
   }, []);
 
   const moveRouter = (data) => {};
@@ -143,6 +159,14 @@ export default function useProfile() {
     }
   };
 
+  const logoutClickHandler = async () => {
+    const response = await dispatch(logout());
+    console.log(response, 'response');
+    if (response?.payload) {
+      window.location.href = '/';
+    }
+  };
+
   const verifyOtpHandler = () => {
     // console.log(otp)
     if (otp > 0) {
@@ -170,6 +194,7 @@ export default function useProfile() {
     isOtpVerified,
     setIsOtpVerified,
     handleCountryChange,
-    cities
+    cities,
+    logoutClickHandler
   };
 }

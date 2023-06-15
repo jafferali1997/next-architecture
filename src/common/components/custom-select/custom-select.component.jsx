@@ -38,12 +38,12 @@ export default function CustomSelect({
             name={name}
             {...(control && { control })}
             defaultValue={defaultValue}
-            {...(onChange && { onChange })}
             {...(value && { value })}
             className="tw-w-full"
             render={({ field }) => (
               <Select
                 {...field}
+                {...(onChange && { onChange })}
                 className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
               >
                 {options?.map((item) => (

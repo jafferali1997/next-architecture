@@ -23,7 +23,8 @@ export default function Profile() {
     isOtpVerified,
     control,
     handleCountryChange,
-    cities
+    cities,
+    logoutClickHandler
   } = useProfile();
 
   return (
@@ -103,7 +104,6 @@ export default function Profile() {
                 <CustomSelect
                   label="Country"
                   name="country"
-                  type="select"
                   inlineLabel
                   options={COUNTRIES}
                   onChange={handleCountryChange}
@@ -188,7 +188,7 @@ export default function Profile() {
               </div>
               <div className="input-group">
                 <CustomInput
-                  type="number"
+                  type="text"
                   label="VAT Number"
                   name="vat"
                   placeholder="12"
@@ -252,6 +252,7 @@ export default function Profile() {
                   // type="Submit"
                   className="btn-cancel"
                   text="Logout"
+                  onClick={logoutClickHandler}
                 />
               </div>
               <div className="submit-button">
