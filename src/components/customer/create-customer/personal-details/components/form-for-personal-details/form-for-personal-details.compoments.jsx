@@ -8,6 +8,7 @@ import Select from '@/common/components/select/select.component';
 import PriceGroup from '../price-group/price-group.component';
 import DiscountGroup from '../discount-group/discount-group.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
+import COUNTRIES from '@/common/constants/countries.constant';
 
 export default function FormForPersonalDetails({
   register,
@@ -99,13 +100,8 @@ export default function FormForPersonalDetails({
           errors={errors}
           placeholder="Country"
           type="select"
-          // onChange={handleCountryChange}
-          // value={selectedCountry}
           isRequired={true}
-          // options={countries.map((item) => {
-          //   return { label: item.name, value: item.isoCode, id: item.isoCode };
-          // })}
-          options={countries}
+          options={COUNTRIES}
         />
         <CustomSelect
           label="City"

@@ -11,6 +11,7 @@ import ReactHookForm from './components/react-hook-form/react-hook-form.componen
 import AllToaster from './components/toaster/toaster.component';
 import FormModal from './components/form-modal/form-modal.component';
 import Radio from './components/radio/radio.component';
+import CountrySelect from '@/common/components/country-select/country-select.component';
 
 export default function AllComponents() {
   const { handleSubmit, control } = useForm();
@@ -65,6 +66,7 @@ export default function AllComponents() {
       <Radio />
       <FormModal />
       <ReactHookForm />
+      <CountrySelect />
     </>
   );
 }

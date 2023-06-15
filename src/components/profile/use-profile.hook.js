@@ -69,6 +69,7 @@ export default function useProfile() {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -123,6 +124,7 @@ export default function useProfile() {
     setOtp,
     register,
     handleSubmit,
+    control,
     setValue,
     errors,
     onSubmit,

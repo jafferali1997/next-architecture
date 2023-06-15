@@ -4,6 +4,7 @@ import StepperFooter from '@/common/components/stepper-footer/stepper-footer.com
 import Select from '@/common/components/select/select.component';
 import useAddCustomer from './use-add-customer.hook';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
+import COUNTRIES from '@/common/constants/countries.constant';
 
 export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
   const { isSubmit, setIsSubmit, onSubmit } = useAddCustomer(
@@ -86,12 +87,10 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               disabled={true}
               placeholder="Country"
               type="select"
+              options={COUNTRIES}
               //   onChange={handleCountryChange}
               //   value={selectedCountry}
               //   isRequired={true}
-              //   options={countries.map((item) => {
-              //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-              //   })}
             />
             <CustomSelect
               label="City"
