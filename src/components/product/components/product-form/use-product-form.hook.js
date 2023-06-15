@@ -149,7 +149,6 @@ export default function useProductForm(
   };
 
   const handleModalSubmit = (data) => {
-    console.log(data);
     if (data[0].id >= 0 && data[1].label === 'discount') {
       handleDiscountInput(
         {

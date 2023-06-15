@@ -9,7 +9,7 @@ import useProduct from './use-product.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import SearchIcon from '@/common/icons/search-icon';
 
-export default function ProductEdit() {
+export default function Product() {
   const {
     handleColShow,
     open,
