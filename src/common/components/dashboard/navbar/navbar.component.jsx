@@ -88,7 +88,7 @@ export default function Navbar({ setToggle, value }) {
               />
               <div className="tw-flex tw-items-center">
                 <span className="tw-font-dm tw-text-base tw-font-normal tw-leading-6 tw-text-text-dark-gray">
-                  {`${user?.firstName} ${user?.lastName}`}
+                  {`${user?.username}`}
                 </span>
                 <ExpandMoreIcon />
               </div>
