@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function useProductForm(
   categories,
@@ -18,7 +18,6 @@ export default function useProductForm(
   const [categoryId, setCategoryId] = useState(0);
   const [categoryToMap, setCategoryToMap] = useState([]);
   const [parentCategory, setParentCategory] = useState([]);
-  const ref = useRef(null);
   const dispatch = useDispatch();
   const priceGroupList = useSelector((state) => state.priceGroup.getAll);
   const discountGroupList = useSelector((state) => state.discountGroup.getAll);
@@ -43,19 +42,6 @@ export default function useProductForm(
       }
     }
   }, [categories, categoryId]);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpenPopup(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
 
   const handleModalData = (type, index = null, data = null) => {
     switch (type) {
@@ -199,7 +185,6 @@ export default function useProductForm(
     handleRemoveSelectedCategory,
     handleModalData,
     modalData,
-    ref,
     openPopup,
     setOpenPopup,
     handleModalSubmit

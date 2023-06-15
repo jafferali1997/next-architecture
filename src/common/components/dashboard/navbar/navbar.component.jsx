@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import * as React from 'react';
 

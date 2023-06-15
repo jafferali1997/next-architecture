@@ -5,38 +5,46 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Select } from '@mui/material';
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import useProductModal from './use-product-modal.hook';
+import CustomSelect from '@/common/components/custom-select/custom-select.component';
 
-export default function ProductModal({ data, setData, ref, openPopup, setOpenPopup }) {
+export default function ProductModal({ data, setData, openPopup, setOpenPopup }) {
   const { value, handleSetValue, setValue } = useProductModal(data);
   return (
-    <Dialog open={openPopup}>
-      <div ref={ref} className="tw-w-[389px]">
+    <Dialog open={openPopup ?? false} onClose={() => setOpenPopup(false)}>
+      <div className="tw-w-[389px]">
         <div>
           <DialogTitle>Group</DialogTitle>
         </div>
         <DialogContent>
           {value?.map((item, index) =>
             item.type === 'select' ? (
-              <Select
+              <CustomSelect
                 label={item.label}
                 value={item.value}
                 onChange={(e) => handleSetValue(index, e.target.value)}
-                className="tw-w-full"
-                indicator={<KeyboardArrowDown />}
-                sx={{
-                  width: 240
-                }}
-              >
-                {item?.options?.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Select>
+                options={item.options}
+              />
             ) : (
+              // <Select
+              //   label={item.label}
+              //   value={item.value}
+              //   onChange={(e) => handleSetValue(index, e.target.value)}
+              //   className="tw-w-full"
+              //   indicator={<KeyboardArrowDown />}
+              //   sx={{
+              //     width: 240
+              //   }}
+              // >
+              //   {item?.options?.map((option) => (
+              //     <option key={option.value} value={option.value}>
+              //       {option.label}
+              //     </option>
+              //   ))}
+              // </Select>
               <CustomInput
                 label={item.label}
                 type={item.type ?? 'text'}
@@ -72,7 +80,6 @@ export default function ProductModal({ data, setData, ref, openPopup, setOpenPop
 ProductModal.propTypes = {
   data: PropTypes.object.isRequired,
   setData: PropTypes.func.isRequired,
-  ref: PropTypes.object.isRequired,
   openPopup: PropTypes.bool.isRequired,
   setOpenPopup: PropTypes.func.isRequired
 };

@@ -34,6 +34,7 @@ export default function useCreateProduct(id = null) {
     handleSubmit,
     register,
     setError,
+    control,
     formState: { errors },
     clearErrors
   } = useForm({
@@ -151,6 +152,7 @@ export default function useCreateProduct(id = null) {
     setPriceInputValues,
     setDiscountInputValues,
     handleClickCategory,
-    setSelectedTag
+    setSelectedTag,
+    control
   };
 }
