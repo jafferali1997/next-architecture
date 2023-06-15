@@ -302,11 +302,106 @@ export default function ProductForm({
                           Pet Supplies
                         </p>
                       </div>
-                      <div className=" tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0">
-                        <p className=" tw-w-[296px] tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
+                      <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0 hover:tw-cursor-pointer">
+                        <p className="tw-w-[296px] tw-p-2 tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black hover:tw-bg-[#E4E4E4]">
                           Pet Supplies
                         </p>
-                        <div className="tw-p-3">
+                        <div className="tw-p-3 hover:tw-bg-[#E4E4E4]">
+                          <svg
+                            width="6"
+                            height="11"
+                            viewBox="0 0 6 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.747173 1.33514e-05C0.84592 -0.000587463 0.943808 0.0193167 1.03522 0.0585842C1.12664 0.0978518 1.20979 0.155712 1.2799 0.228844L5.78181 4.96326C5.92156 5.1111 6 5.31109 6 5.51955C6 5.72801 5.92156 5.92801 5.78181 6.07585L1.2799 10.8103C1.13636 10.9395 0.951726 11.0071 0.762889 10.9994C0.574052 10.9917 0.394922 10.9094 0.261294 10.7689C0.127666 10.6284 0.0493832 10.44 0.0420895 10.2414C0.0347953 10.0428 0.0990276 9.84863 0.22195 9.69768L4.19114 5.5235L0.22195 1.34932C0.116589 1.23943 0.04458 1.09914 0.0150285 0.946212C-0.014523 0.79328 -0.000289917 0.634566 0.0559282 0.490141C0.112146 0.345716 0.207824 0.222065 0.330864 0.134823C0.453904 0.0475817 0.59878 0.000667572 0.747173 1.33514e-05Z"
+                              fill="#7E7D7D"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0 hover:tw-cursor-pointer">
+                        <p className="tw-w-[296px] tw-p-2 tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black hover:tw-bg-[#E4E4E4]">
+                          Pet Supplies
+                        </p>
+                        <div className="tw-p-3 hover:tw-bg-[#E4E4E4]">
+                          <svg
+                            width="6"
+                            height="11"
+                            viewBox="0 0 6 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.747173 1.33514e-05C0.84592 -0.000587463 0.943808 0.0193167 1.03522 0.0585842C1.12664 0.0978518 1.20979 0.155712 1.2799 0.228844L5.78181 4.96326C5.92156 5.1111 6 5.31109 6 5.51955C6 5.72801 5.92156 5.92801 5.78181 6.07585L1.2799 10.8103C1.13636 10.9395 0.951726 11.0071 0.762889 10.9994C0.574052 10.9917 0.394922 10.9094 0.261294 10.7689C0.127666 10.6284 0.0493832 10.44 0.0420895 10.2414C0.0347953 10.0428 0.0990276 9.84863 0.22195 9.69768L4.19114 5.5235L0.22195 1.34932C0.116589 1.23943 0.04458 1.09914 0.0150285 0.946212C-0.014523 0.79328 -0.000289917 0.634566 0.0559282 0.490141C0.112146 0.345716 0.207824 0.222065 0.330864 0.134823C0.453904 0.0475817 0.59878 0.000667572 0.747173 1.33514e-05Z"
+                              fill="#7E7D7D"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0 hover:tw-cursor-pointer">
+                        <p className="tw-w-[296px] tw-p-2 tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black hover:tw-bg-[#E4E4E4]">
+                          Pet Supplies
+                        </p>
+                        <div className="tw-p-3 hover:tw-bg-[#E4E4E4]">
+                          <svg
+                            width="6"
+                            height="11"
+                            viewBox="0 0 6 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.747173 1.33514e-05C0.84592 -0.000587463 0.943808 0.0193167 1.03522 0.0585842C1.12664 0.0978518 1.20979 0.155712 1.2799 0.228844L5.78181 4.96326C5.92156 5.1111 6 5.31109 6 5.51955C6 5.72801 5.92156 5.92801 5.78181 6.07585L1.2799 10.8103C1.13636 10.9395 0.951726 11.0071 0.762889 10.9994C0.574052 10.9917 0.394922 10.9094 0.261294 10.7689C0.127666 10.6284 0.0493832 10.44 0.0420895 10.2414C0.0347953 10.0428 0.0990276 9.84863 0.22195 9.69768L4.19114 5.5235L0.22195 1.34932C0.116589 1.23943 0.04458 1.09914 0.0150285 0.946212C-0.014523 0.79328 -0.000289917 0.634566 0.0559282 0.490141C0.112146 0.345716 0.207824 0.222065 0.330864 0.134823C0.453904 0.0475817 0.59878 0.000667572 0.747173 1.33514e-05Z"
+                              fill="#7E7D7D"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0 hover:tw-cursor-pointer">
+                        <p className="tw-w-[296px] tw-p-2 tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black hover:tw-bg-[#E4E4E4]">
+                          Pet Supplies
+                        </p>
+                        <div className="tw-p-3 hover:tw-bg-[#E4E4E4]">
+                          <svg
+                            width="6"
+                            height="11"
+                            viewBox="0 0 6 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.747173 1.33514e-05C0.84592 -0.000587463 0.943808 0.0193167 1.03522 0.0585842C1.12664 0.0978518 1.20979 0.155712 1.2799 0.228844L5.78181 4.96326C5.92156 5.1111 6 5.31109 6 5.51955C6 5.72801 5.92156 5.92801 5.78181 6.07585L1.2799 10.8103C1.13636 10.9395 0.951726 11.0071 0.762889 10.9994C0.574052 10.9917 0.394922 10.9094 0.261294 10.7689C0.127666 10.6284 0.0493832 10.44 0.0420895 10.2414C0.0347953 10.0428 0.0990276 9.84863 0.22195 9.69768L4.19114 5.5235L0.22195 1.34932C0.116589 1.23943 0.04458 1.09914 0.0150285 0.946212C-0.014523 0.79328 -0.000289917 0.634566 0.0559282 0.490141C0.112146 0.345716 0.207824 0.222065 0.330864 0.134823C0.453904 0.0475817 0.59878 0.000667572 0.747173 1.33514e-05Z"
+                              fill="#7E7D7D"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0 hover:tw-cursor-pointer">
+                        <p className="tw-w-[296px] tw-p-2 tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black hover:tw-bg-[#E4E4E4]">
+                          Pet Supplies
+                        </p>
+                        <div className="tw-p-3 hover:tw-bg-[#E4E4E4]">
+                          <svg
+                            width="6"
+                            height="11"
+                            viewBox="0 0 6 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.747173 1.33514e-05C0.84592 -0.000587463 0.943808 0.0193167 1.03522 0.0585842C1.12664 0.0978518 1.20979 0.155712 1.2799 0.228844L5.78181 4.96326C5.92156 5.1111 6 5.31109 6 5.51955C6 5.72801 5.92156 5.92801 5.78181 6.07585L1.2799 10.8103C1.13636 10.9395 0.951726 11.0071 0.762889 10.9994C0.574052 10.9917 0.394922 10.9094 0.261294 10.7689C0.127666 10.6284 0.0493832 10.44 0.0420895 10.2414C0.0347953 10.0428 0.0990276 9.84863 0.22195 9.69768L4.19114 5.5235L0.22195 1.34932C0.116589 1.23943 0.04458 1.09914 0.0150285 0.946212C-0.014523 0.79328 -0.000289917 0.634566 0.0559282 0.490141C0.112146 0.345716 0.207824 0.222065 0.330864 0.134823C0.453904 0.0475817 0.59878 0.000667572 0.747173 1.33514e-05Z"
+                              fill="#7E7D7D"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pl-2 tw-pr-0 hover:tw-cursor-pointer">
+                        <p className="tw-w-[296px] tw-p-2 tw-text-xs tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black hover:tw-bg-[#E4E4E4]">
+                          Pet Supplies
+                        </p>
+                        <div className="tw-p-3 hover:tw-bg-[#E4E4E4]">
                           <svg
                             width="6"
                             height="11"
