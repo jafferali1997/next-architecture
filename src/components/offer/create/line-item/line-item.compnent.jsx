@@ -204,10 +204,14 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
                 <input
                   id="test"
                   type="checkbox"
-                  checked={data.length === ids.length}
+                  checked={
+                    data.length === ids.length && data.length !== 0 && ids.length !== 0
+                  }
                   onChange={allCheckboxHandler}
                   className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                    data.length === ids.length && 'tw-border-primary tw-bg-checked'
+                    data.length === ids.length && data.length !== 0 && ids.length !== 0
+                      ? 'tw-border-primary tw-bg-checked'
+                      : null
                   }`}
                 />
                 <label htmlFor="test"></label>

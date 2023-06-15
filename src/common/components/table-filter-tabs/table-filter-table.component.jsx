@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TableFilterTabs({ filteropions }) {
+export default function TableFilterTabs({ filteropions, action }) {
   return (
     <div className="tw-mx-5 tw-flex tw-items-center tw-gap-6 tw-border-b-2 tw-border-solid tw-border-disabled-input">
       {filteropions.map((item) => {
@@ -12,6 +12,7 @@ export default function TableFilterTabs({ filteropions }) {
               name={item.name}
               id={item.label}
               value={item.label}
+              onClick={() => action(item)}
             />
             <label
               className="tw-inline-block tw-translate-y-[2px] tw-border-green-600 tw-border-b-[1] tw-p-2 tw-font-dm tw-text-sm tw-font-normal tw-leading-5 tw-text-text-medium-gray"

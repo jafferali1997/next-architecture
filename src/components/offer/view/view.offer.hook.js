@@ -66,6 +66,16 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
     setAnchorEl(null);
   };
 
+  const handleTabsFilter = ({ label }) => {
+    console.log(label);
+    const selectedFilter = data.filter((rowData) => rowData.status);
+    const filteredTabData = selectedFilter.filter((data) => {
+      data.label = label;
+    });
+
+    console.log(filteredTabData);
+  };
+
   const [data, setData] = useState([
     {
       id: 0,
@@ -76,7 +86,7 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
       address: 'USA',
       country: 'America',
       created: '2/19/21',
-      status: 'status',
+      status: dropDownOptions,
       data: 'dataIcon',
       action: 'action'
     },
@@ -89,7 +99,7 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
       address: 'USA',
       country: 'America',
       created: '2/19/21',
-      status: 'status',
+      status: dropDownOptions,
       data: 'dataIcon',
       action: 'action'
     },
@@ -102,7 +112,7 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
       address: 'USA',
       country: 'America',
       created: '2/19/21',
-      status: 'status',
+      status: dropDownOptions,
       data: 'dataIcon',
       action: 'action'
     },
@@ -116,7 +126,7 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
       address: 'USA',
       country: 'America',
       created: '2/19/21',
-      status: 'status',
+      status: dropDownOptions,
       data: 'dataIcon',
       action: 'action'
     },
@@ -129,7 +139,7 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
       address: 'USA',
       country: 'America',
       created: '2/19/21',
-      status: 'status',
+      status: dropDownOptions,
       data: 'dataIcon',
       action: 'action'
     }
@@ -299,7 +309,8 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
     handleSelectChange,
     selectedValue,
     dropDownOptions,
-    selectedId
+    selectedId,
+    handleTabsFilter
   };
 }
 

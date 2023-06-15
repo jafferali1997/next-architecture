@@ -10,10 +10,6 @@ import CustomInput from '@/common/components/custom-input/custom-input.component
 import { IconButton, Menu, MenuItem } from '@mui/material/node';
 import Select from '@/common/components/select/select.component';
 
-// import IconButton from "@material-ui/core/IconButton";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import Menu from "@material-ui/core/Menu";
-
 const breadscrumbs = [
   { id: 1, name: 'Documents', link: '/documents' },
   { id: 2, name: 'Offers', link: '/offer' }
@@ -81,7 +77,8 @@ export default function ViewOffer() {
     handleSelectChange,
     selectedValue,
     dropDownOptions,
-    selectedId
+    selectedId,
+    handleTabsFilter
   } = useViewOffer({});
 
   return (
@@ -130,7 +127,7 @@ export default function ViewOffer() {
       </div>
 
       <div className="tw-mt-4 tw-rounded-[10px] tw-border-[1px] tw-border-border-gray tw-bg-white tw-py-5">
-        <TableFilterTabs filteropions={filteropions} />
+        <TableFilterTabs filteropions={filteropions} action={handleTabsFilter} />
 
         <table class="... tw-mt-[18px] tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
           <thead>
@@ -139,10 +136,15 @@ export default function ViewOffer() {
                 <input
                   id="test"
                   type="checkbox"
-                  checked={data.length === ids.length}
+                  checked={
+                    data.length === ids.length && data.length !== 0 && ids.length !== 0
+                  }
                   onChange={allCheckboxHandler}
                   className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                    data.length === ids.length && 'tw-border-primary tw-bg-checked'
+                    data.length === ids.length &&
+                    data.length !== 0 &&
+                    ids.length !== 0 ?
+                    'tw-border-primary tw-bg-checked' : null
                   }`}
                 />
                 <label htmlFor="test"></label>
@@ -192,7 +194,7 @@ export default function ViewOffer() {
                       return (
                         <td
                           className="tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center"
-                          key={ind}
+                          key={columnIndex}
                         >
                           {rowData[column.field] === 'dataIcon' ? (
                             <div className="tw-flex tw-justify-center hover:tw-cursor-pointer">
@@ -225,8 +227,8 @@ export default function ViewOffer() {
                                 onClose={handleClose}
                                 open={open}
                               >
-                                {MyOptions.map((option) => (
-                                  <MenuItem key={option} onClick={handleClose}>
+                                {MyOptions.map((option, i) => (
+                                  <MenuItem key={i} onClick={handleClose}>
                                     <div className="tw-flex tw-items-center tw-gap-2">
                                       {option.icon}
                                       {option.label}
@@ -235,13 +237,17 @@ export default function ViewOffer() {
                                 ))}
                               </Menu>
                             </>
-                          ) : rowData[column.field] === 'status' ? (
+                          ) : typeof rowData[column.field] === 'object' ? (
                             <Select
-                              onChange={(event, value) => handleSelectChange(event, value, ind)}
+                              onChange={(event, value) =>
+                                handleSelectChange(event, value, ind)
+                              }
                               // onChange={(e, id) => console.log(ind, id)}
-                              options={dropDownOptions}
+                              options={rowData.status}
                               placeholder="Open"
-                              className={`tw-w-[72px] tw-h-[29px] ${selectedId === ind && selectedValue}`}
+                              className={`tw-h-[29px] tw-w-[72px] ${
+                                selectedId === ind && selectedValue
+                              }`}
                             />
                           ) : (
                             rowData[column.field]
