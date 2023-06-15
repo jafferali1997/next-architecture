@@ -81,7 +81,26 @@ export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
           <div>
             <h3 className="form-inner-heading">Body</h3>
             <div className="tw-flex tw-items-center tw-justify-between">
-              <div className="tw-min-w-[250px] tw-bg-slate-400">select</div>
+              <div className="tw-min-w-[250px]">
+                {' '}
+                <div className="tw-flex tw-h-9 tw-w-[257px] tw-flex-row tw-items-center tw-justify-between tw-gap-[46px] tw-rounded tw-bg-[#bbbbbb26] tw-py-2  tw-pl-2 tw-pr-2 ">
+                  <p className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-black">
+                    Disclaimer Text
+                  </p>
+                  <svg
+                    width="6"
+                    height="10"
+                    viewBox="0 0 6 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1.51302 0.833306C1.18763 0.507919 0.660076 0.50792 0.334689 0.833307C0.00930119 1.15869 0.00930119 1.68625 0.334688 2.01164L2.61591 4.29287C3.00644 4.68339 3.00644 5.31656 2.61592 5.70708L0.33469 7.98831C0.00930166 8.31369 0.00930071 8.84125 0.334688 9.16664C0.660076 9.49203 1.18763 9.49203 1.51302 9.16664L4.97258 5.70708C5.36311 5.31656 5.36311 4.68339 4.97258 4.29287L1.51302 0.833306Z"
+                      fill="#46474F"
+                    />
+                  </svg>
+                </div>
+              </div>
               <CustomButton
                 className="btn-secondary "
                 text="Add Body Text"
