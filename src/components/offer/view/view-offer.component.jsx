@@ -5,6 +5,14 @@ import DownloadDropdownBtn from '@/common/components/download-dropdown-button/do
 import Grid from '@mui/material/node/Grid';
 
 import TableFilterTabs from '@/common/components/table-filter-tabs/table-filter-table.component';
+import useViewOffer from './view.offer.hook';
+import CustomInput from '@/common/components/custom-input/custom-input.component';
+import { IconButton, Menu, MenuItem } from '@mui/material/node';
+import Select from '@/common/components/select/select.component';
+
+// import IconButton from "@material-ui/core/IconButton";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import Menu from "@material-ui/core/Menu";
 
 const breadscrumbs = [
   { id: 1, name: 'Documents', link: '/documents' },
@@ -34,13 +42,48 @@ const offers = [
 ];
 
 const filteropions = [
-    {id:1, name:'filter', label:'Overview'},
-    {id:1, name:'filter', label:'Draft'},
-    {id:1, name:'filter', label:'Rejected'},
-    {id:1, name:'filter', label:'Template'}
-]
+  { id: 1, name: 'filter', label: 'Overview' },
+  { id: 1, name: 'filter', label: 'Draft' },
+  { id: 1, name: 'filter', label: 'Rejected' },
+  { id: 1, name: 'filter', label: 'Template' }
+];
 
 export default function ViewOffer() {
+  const {
+    isSubmit,
+    setIsSubmit,
+    columns,
+    data,
+    ids,
+    isIdAdded,
+    allCheckboxHandler,
+    checkBoxHandler,
+    handleClik,
+    openPopup,
+    setOpenPopup,
+    handleActionClick,
+    handleSaveClick,
+    handleInputChangee,
+    selectedRow,
+    inputValue,
+    ref,
+    sortDirection,
+    setSortDirection,
+    handleDuplicate,
+    handleRemove,
+    handleSortClick,
+    setData,
+    MyOptions,
+    anchorEl,
+    handleClick,
+    open,
+    handleClose,
+    handleSelectChange,
+    selectedValue,
+    dropDownOptions,
+    selectedId
+  } = useViewOffer({});
+
   return (
     <div className="tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3">
       <Breadscrumb breadscrumbs={breadscrumbs} current={'Overview'} />
@@ -86,8 +129,158 @@ export default function ViewOffer() {
         })}
       </div>
 
-      <div className="tw-bg-white tw-border-border-gray tw-border-[1px] tw-rounded-[10px] tw-py-5 tw-mt-4">
-        <TableFilterTabs filteropions={filteropions}/>
+      <div className="tw-mt-4 tw-rounded-[10px] tw-border-[1px] tw-border-border-gray tw-bg-white tw-py-5">
+        <TableFilterTabs filteropions={filteropions} />
+
+        <table class="... tw-mt-[18px] tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
+          <thead>
+            <tr>
+              <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                <input
+                  id="test"
+                  type="checkbox"
+                  checked={data.length === ids.length}
+                  onChange={allCheckboxHandler}
+                  className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
+                    data.length === ids.length && 'tw-border-primary tw-bg-checked'
+                  }`}
+                />
+                <label htmlFor="test"></label>
+              </th>
+              {columns.map((col, index) => (
+                <th
+                  className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
+                  key={index}
+                >
+                  <div className="tw-flex tw-items-center tw-gap-2">
+                    {col.headerName}
+                    {col.field === 'status' ||
+                    col.field === 'action' ||
+                    col.field === 'data' ? null : (
+                      <img
+                        src="/assets/icons/sort.svg"
+                        alt=""
+                        className="tw-cursor-pointer"
+                        onClick={() => handleSortClick(col.field)}
+                      />
+                    )}
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((rowData, ind) => {
+              const data_id = isIdAdded(ind);
+              return (
+                <>
+                  <tr key={ind}>
+                    <td className="... tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center">
+                      <input
+                        id="test"
+                        type="checkbox"
+                        checked={data_id}
+                        value={ind}
+                        onChange={checkBoxHandler}
+                        className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
+                          ids.includes(rowData.id) && 'tw-border-primary tw-bg-checked'
+                        }`}
+                      />
+                      <label htmlFor="test"></label>
+                    </td>
+                    {columns.map((column, columnIndex) => {
+                      return (
+                        <td
+                          className="tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-px-2 tw-py-4 tw-text-center"
+                          key={ind}
+                        >
+                          {rowData[column.field] === 'dataIcon' ? (
+                            <div className="tw-flex tw-justify-center hover:tw-cursor-pointer">
+                              <img
+                                src="/assets/icons/add_button.svg"
+                                alt=""
+                                onClick={() => handleActionClick(rowData)}
+                                className="tw-2-[26px] tw-h-[26px]"
+                              />
+                            </div>
+                          ) : rowData[column.field] === 'action' ? (
+                            <>
+                              <IconButton
+                                aria-label="more"
+                                onClick={handleClick}
+                                aria-haspopup="true"
+                                aria-controls="long-menu"
+                              >
+                                <div className="tw-flex tw-justify-center hover:tw-cursor-pointer">
+                                  <img
+                                    src="/assets/icons/more_vert.svg"
+                                    alt=""
+                                    className="tw-2-[4.5px] tw-h-[19.5px]"
+                                  />
+                                </div>
+                              </IconButton>
+                              <Menu
+                                anchorEl={anchorEl}
+                                keepMounted
+                                onClose={handleClose}
+                                open={open}
+                              >
+                                {MyOptions.map((option) => (
+                                  <MenuItem key={option} onClick={handleClose}>
+                                    <div className="tw-flex tw-items-center tw-gap-2">
+                                      {option.icon}
+                                      {option.label}
+                                    </div>
+                                  </MenuItem>
+                                ))}
+                              </Menu>
+                            </>
+                          ) : rowData[column.field] === 'status' ? (
+                            <Select
+                              onChange={(event, value) => handleSelectChange(event, value, ind)}
+                              // onChange={(e, id) => console.log(ind, id)}
+                              options={dropDownOptions}
+                              placeholder="Open"
+                              className={`tw-w-[72px] tw-h-[29px] ${selectedId === ind && selectedValue}`}
+                            />
+                          ) : (
+                            rowData[column.field]
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                  {selectedRow && selectedRow.id === rowData.id && (
+                    <tr className="tw-h-[88px] tw-w-full  tw-bg-[#E7EAEE]">
+                      <td colSpan={columns.length + 1}>
+                        <div className="tw-grid tw-grid-cols-[316px_1fr] tw-items-center tw-gap-[24px] ">
+                          <div className="tw-flex tw-flex-col tw-border-r tw-border-solid tw-border-r-[#E7EAEE] tw-px-2 tw-py-4">
+                            <CustomInput
+                              id="name-input"
+                              type="text"
+                              placeholder="Enter Purchasing Price"
+                              // value={inputValue}
+                              // onChange={handleInputChangee}
+                            />
+                          </div>
+                          <div className="tw-px-2 tw-py-4">
+                            <CustomInput
+                              id="name-input"
+                              type="text"
+                              placeholder="Enter Notes"
+                              // value={inputValue}
+                              // onChange={handleInputChangee}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
