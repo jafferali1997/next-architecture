@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
 import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
 
@@ -218,7 +219,13 @@ export default function useProductForm(
   };
 
   const handleSelectCategory = (data) => {
-    setSelectedCategory([...selectedCategory, [...parentCategory, data]]);
+    if (!selectedCategory.find((item) => item[item.length - 1].id === data.id)) {
+      setSelectedCategory([...selectedCategory, [...parentCategory, data]]);
+    } else {
+      enqueueSnackbar('Category already selected', {
+        variant: 'error'
+      });
+    }
   };
 
   const handleClickParentCategory = (item) => {
