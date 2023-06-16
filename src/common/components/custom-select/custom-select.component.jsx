@@ -38,15 +38,17 @@ export default function CustomSelect({
           <Controller
             name={name}
             {...(control && { control })}
+            disabled={disabled}
             defaultValue={defaultValue}
             {...(value && { value })}
             className="tw-w-full"
             render={({ field }) => (
               <Select
                 {...field}
-                disabled={disabled}
                 {...(onChange && { onChange })}
-                className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
+                className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${
+                  errors && errors[name] && 'error-field'
+                } ${className} ${!disabled || 'disabled-input'} `}
               >
                 {options?.map((item) => (
                   <MenuItem key={item.value} value={item.value}>
@@ -61,11 +63,13 @@ export default function CustomSelect({
         {!control && (
           <Select
             name={name}
-            disabled={disabled}
             defaultValue={defaultValue}
             {...(onChange && { onChange })}
             {...(value && { value })}
-            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
+            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${
+              errors && errors[name] && 'error-field'
+            } ${className} ${!disabled || 'disabled-input'} `}
+            disabled={disabled}
           >
             {options?.map((item) => (
               <MenuItem key={item.value} value={item.value}>

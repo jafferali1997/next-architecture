@@ -173,7 +173,7 @@ export default function useProductForm(
           id: data[0].value,
           priceGroupName: data[0].options.find((item) => item.value === data[0].value)
             .label,
-          price: data[1].value
+          price: Number(data[1].value)
         },
         data[0].id
       );
@@ -197,19 +197,19 @@ export default function useProductForm(
         id: data[0].value,
         priceGroupName: data[0].options.find((item) => item.value === data[0].value)
           .label,
-        price: data[1].value
+        price: Number(data[1].value)
       });
     }
   };
 
   const handleDeleteGroup = (index, data) => {
-    if (data[1].label === 'price') {
+    if (data.price !== undefined) {
+      handleFilteredPriceGroup('Delete', data.id);
       handlePriceInput(null, index, true);
-      handleFilteredPriceGroup('Delete', data[0].value);
     }
-    if (data[1].label === 'discount') {
+    if (data.discount !== undefined) {
+      handleFilteredDiscountGroup('Delete', data.id);
       handleDiscountInput(null, index, true);
-      handleFilteredDiscountGroup('Delete', data[0].value);
     }
   };
 

@@ -14,9 +14,34 @@ import DeleteIcon from '@/common/icons/delete.icon';
 import { deleteProduct, getAllProduct } from '@/provider/features/product/product.slice';
 import useDebounce from '@/common/hooks/useDebounce';
 
+const FEATURES_TO_BE_SHOW = {
+  id: 'Product ID #',
+  productName: 'Product Name',
+  description: 'Description',
+  netPrice: 'Net Price',
+  grossPrice: 'Gross Price',
+  purchasePrice: 'Purchase Price',
+  manufacturer: 'Manufacturer',
+  unit: 'Unit',
+  minSellingPrice: 'Min Selling Price',
+  location: 'Location',
+  quantity: 'No. of Pieces',
+  taxRate: 'Tax Rate',
+  productCategorys: 'Product Categorys',
+  priceGroups: 'Price Groups',
+  discountGroups: 'Discount Groups',
+  tags: 'Tags'
+};
+
 export default function useProduct() {
   const [searchText, setSearchText] = useState();
-  const FILES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
+  const FILES_TO_BE_IGNORE = [
+    'createdBy',
+    'updatedBy',
+    'createdAt',
+    'updatedAt',
+    'businessDetailId'
+  ];
 
   const getActionColumn = () => {
     return {
@@ -54,7 +79,7 @@ export default function useProduct() {
     Object.keys(dataObject).forEach((key) => {
       let columnObject = {
         field: key,
-        headerName: key,
+        headerName: FEATURES_TO_BE_SHOW[key],
         headerClassName: 'table-heading ',
         cellClassName: 'table-data ',
         width: 200
