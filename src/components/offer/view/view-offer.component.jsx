@@ -8,7 +8,10 @@ import TableFilterTabs from '@/common/components/table-filter-tabs/table-filter-
 import useViewOffer from './view.offer.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import { IconButton, Menu, MenuItem } from '@mui/material/node';
-import Select from '@/common/components/select/select.component';
+// import Select from '@/common/components/select/select.component';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const breadscrumbs = [
   { id: 1, name: 'Documents', link: '/documents' },
@@ -45,6 +48,12 @@ const filteropions = [
 ];
 
 export default function ViewOffer() {
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
   const {
     isSubmit,
     setIsSubmit,
@@ -141,10 +150,9 @@ export default function ViewOffer() {
                   }
                   onChange={allCheckboxHandler}
                   className={` tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border tw-border-solid tw-border-[1px_solid_lightgray] tw-bg-center tw-bg-no-repeat ${
-                    data.length === ids.length &&
-                    data.length !== 0 &&
-                    ids.length !== 0 ?
-                    'tw-border-primary tw-bg-checked' : null
+                    data.length === ids.length && data.length !== 0 && ids.length !== 0
+                      ? 'tw-border-primary tw-bg-checked'
+                      : null
                   }`}
                 />
                 <label htmlFor="test"></label>
@@ -238,18 +246,38 @@ export default function ViewOffer() {
                               </Menu>
                             </>
                           ) : typeof rowData[column.field] === 'object' ? (
-                            <Select
-                              onChange={(event, value) =>
-                                handleSelectChange(event, value, ind)
-                              }
-                              // onChange={(e, id) => console.log(ind, id)}
-                              options={rowData.status}
-                              placeholder="Open"
-                              className={`tw-h-[29px] tw-w-[72px] ${
-                                selectedId === ind && selectedValue
-                              }`}
-                            />
+                              <>
+                              
+                              <Select
+                                labelId="demo-simple-select-autowidth-label"
+                                id="demo-simple-select-autowidth"
+                                value={age}
+                                onChange={handleChange}
+                                autoWidth
+                                label="Age"
+                                className={` ${selectedId === ind && selectedValue}`}
+                              >
+                                
+                                {rowData.status?.map((option) => (
+                                  <MenuItem value={option.label}>{option.label}</MenuItem>
+                                ))}
+                                {/* <MenuItem selected value={10}>Twenty</MenuItem>
+                              <MenuItem value={21}>Twenty one</MenuItem>
+                              <MenuItem value={22}>Twenty one and a half</MenuItem> */}
+                              </Select>
+                              </>
                           ) : (
+                            // <Select
+                            //   onChange={(event, value) =>
+                            //     handleSelectChange(event, value, ind)
+                            //   }
+                            //   // onChange={(e, id) => console.log(ind, id)}
+                            //   options={rowData.status}
+                            //   placeholder="Open"
+                            //   className={`tw-h-[29px] tw-w-[72px] ${
+                            //     selectedId === ind && selectedValue
+                            //   }`}
+                            // />
                             rowData[column.field]
                           )}
                         </td>
