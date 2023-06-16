@@ -14,8 +14,8 @@ import { getAccessToken } from '@/common/utils/access-token.util';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .max(30, 'Username must be at most 30 characters long')
-    .min(5, 'Username must be minimum 5 characters')
+    // .max(30, 'Username must be at most 30 characters long')
+    // .min(5, 'Username must be minimum 5 characters')
     .required('Username or Email is required'),
   password: Yup.string().required('Password is required')
 });
