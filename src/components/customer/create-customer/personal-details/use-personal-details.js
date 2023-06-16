@@ -35,7 +35,7 @@ const validationSchema = yup.object({
     .matches(/[0-9]/, 'Postal must be in digits')
     .max(10, 'postal code must be maximum 10 characters'),
   address: yup
-    .string()
+    .number()
     .max(95, 'address must be at most 95 characters long')
     .required('Address is required'),
   country: yup.string().required('Country is required'),

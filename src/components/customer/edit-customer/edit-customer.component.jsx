@@ -302,7 +302,7 @@ export default function EditCustomer() {
                   </span>
                 </div>
                 {companyAddressFields.map((value, index) => (
-                  <div className="tw-gflex-row tw-flex">
+                  <div className="">
                     <div className="form-box-grid " key={value}>
                       <input
                         name={`companyAddresses.${index}.id`}
@@ -318,19 +318,24 @@ export default function EditCustomer() {
                         register={register}
                         // onChange={(e) => handleInputChange(index, e.target.value)}
                       />
-                      <CustomInput
-                        placeholder="Enter company address"
-                        type="text"
-                        name={`companyAddresses.${index}.address`}
-                        errors={errors}
-                        register={register}
-                      />
+                      <div className="tw-flex tw-items-center tw-gap-2">
+                        <div className="tw-w-[330px]">
+                          <CustomInput
+                            placeholder="Enter company address"
+                            type="text"
+                            name={`companyAddresses.${index}.address`}
+                            errors={errors}
+                            register={register}
+                          />
+                        </div>
+                        <div
+                          className="h-50 tw-text-red-700 hover:tw-cursor-pointer"
+                          onClick={handleRemoveInput.bind(null, index)}
+                        >
+                          <DeleteIcon />
+                        </div>
+                      </div>
                     </div>
-                    <CustomButton
-                      className="h-50 2-40 tw-text-red-700"
-                      onClick={handleRemoveInput.bind(null, index)}
-                      startIcon={<DeleteIcon />}
-                    />
                   </div>
                 ))}
                 {isAdress && companyAddressFields?.length === 0 && (

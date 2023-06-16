@@ -145,7 +145,7 @@ function SignUp() {
                 </div>
               </div>
 
-              <div className="form-checkbox">
+              <div className="form-checkbox tw-mt-[-28px] ">
                 <Checkbox
                   name="terms"
                   id="terms"
@@ -157,7 +157,7 @@ function SignUp() {
                 <label
                   htmlFor="terms"
                   id="terms"
-                  className="tw-cursor-pointer tw-fon tw-text-[12px]
+                  className="tw-fon tw-cursor-pointer tw-text-[12px]
                  tw-font-normal tw-not-italic tw-leading-[18px]"
                 >
                   Term & Condition

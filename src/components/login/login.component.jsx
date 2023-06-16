@@ -125,8 +125,8 @@ export default function Login() {
                   </div>
                 </div>
               </div>
-              <div className="tw-flex tw-justify-between tw-pb-6">
-                <div className="tw-flex tw-items-center tw-gap-2 tw-pb-6">
+              <div className="tw-mt-[-18px] tw-flex tw-items-center tw-justify-between tw-pb-6">
+                <div className=" tw-flex tw-items-center tw-gap-2 ">
                   <Checkbox
                     {...register('rememberMe')}
                     name="terms"
