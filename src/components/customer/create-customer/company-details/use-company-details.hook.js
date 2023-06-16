@@ -62,15 +62,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
   const [inputValues, setInputValues] = useState([{ id: '1' }]);
 
-  const countries = [
-    { label: 'Pakistan', value: 'pakistan' },
-    { label: 'Turkey', value: 'turkey' }
-  ];
-  const cities = [
-    { label: 'Lahore', value: 'lahore' },
-    { label: 'Gujranwala', value: 'gujranwala' }
-  ];
-
   const {
     register,
     handleSubmit,
@@ -268,7 +259,7 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       customerId: Number(searchParams.get('id')),
       additionalContact: [additionalContact],
       companyAddress: companyAddresses,
-      tin: Number(value.tin)
+      tin: value.tin
     };
     console.log(payload);
     const res = await dispatch(createCustomerCompanyDetail({ payload }));
@@ -308,11 +299,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     isVatEnabled,
     setIsVatEnabled,
     handleCountryChange,
-    selectedCountry,
-    countries,
-    cities,
-    selectedCity,
-    handleCityChange,
     setIsSubmit,
     additionalHandles,
     router,

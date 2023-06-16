@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import DeleteIcon from '@/common/icons/delete.icon';
@@ -8,7 +10,7 @@ import useProductGroup from './use-product-group.hook';
 
 export default function ProductGroup({
   handleModalData,
-  handleUpdateInput,
+  handleDeleteGroup,
   index,
   item,
   disabled = false,
@@ -26,7 +28,7 @@ export default function ProductGroup({
             {item.priceGroupName ? item.priceGroupName : item.discountGroupName}
           </h4>
           <p className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
-            {item.price ? item.price : item.discount}
+            {item.price !== null && item.price !== undefined ? item.price : item.discount}
           </p>
         </div>
       </div>
@@ -58,7 +60,7 @@ export default function ProductGroup({
             <div
               id="three-dot-div-5"
               className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-p-0 hover:tw-cursor-pointer"
-              onClick={() => handleUpdateInput(null, index, true)}
+              onClick={() => handleDeleteGroup(index, item)}
             >
               <DeleteIcon id="three-dot-delete" />
               <p
@@ -77,7 +79,7 @@ export default function ProductGroup({
 
 ProductGroup.propTypes = {
   handleModalData: PropTypes.func.isRequired,
-  handleUpdateInput: PropTypes.func.isRequired,
+  handleDeleteGroup: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.object.isRequired,
   disabled: PropTypes.bool,

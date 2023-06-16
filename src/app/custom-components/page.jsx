@@ -240,7 +240,7 @@ export default function Page() {
         <CustomButton text="Submit" className="btn-secondary" />
 
         <Snackbar
-          open={open}
+          open={open ?? false}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           onClose={handleClose}
         >

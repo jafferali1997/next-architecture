@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import * as React from 'react';
 
@@ -13,6 +15,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
+import { useEffect } from 'react';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
@@ -22,6 +25,7 @@ import { logout } from '@/provider/features/auth/auth.slice';
 
 export default function Navbar({ setToggle, value }) {
   const dispatch = useDispatch();
+  const [user, setUser] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -31,13 +35,23 @@ export default function Navbar({ setToggle, value }) {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      const _user = JSON.parse(localStorage.getItem('user'));
+      setUser(_user);
+    }
+  }, []);
+
   const handleLogout = async () => {
     const response = await dispatch(logout());
     console.log(response, 'response');
+    if (response?.payload) {
+      window.location.href = '/';
+    }
   };
 
   return (
-    <div className="tw-flex tw-min-h-[68px] tw-items-center tw-justify-between tw-bg-white tw-px-6 tw-py-3 tw-shadow-custom2 tw-relative tw-z-10">
+    <div className="tw-relative tw-z-10 tw-flex tw-min-h-[68px] tw-items-center tw-justify-between tw-bg-white tw-px-6 tw-py-3 tw-shadow-custom2">
       <div className="tw-flex tw-items-center">
         <MenuIcon
           onClick={() => setToggle(!value)}
@@ -74,7 +88,7 @@ export default function Navbar({ setToggle, value }) {
               />
               <div className="tw-flex tw-items-center">
                 <span className="tw-font-dm tw-text-base tw-font-normal tw-leading-6 tw-text-text-dark-gray">
-                  John Doe
+                  {`${user?.username}`}
                 </span>
                 <ExpandMoreIcon />
               </div>

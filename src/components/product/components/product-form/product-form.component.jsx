@@ -37,7 +37,8 @@ export default function ProductForm({
   setSelectedCategory = null,
   errors = null,
   data = {},
-  disabled = false
+  disabled = false,
+  control
 }) {
   const {
     parentCategory,
@@ -48,10 +49,10 @@ export default function ProductForm({
     handleRemoveSelectedCategory,
     handleModalData,
     modalData,
-    ref,
     openPopup,
     setOpenPopup,
-    handleModalSubmit
+    handleModalSubmit,
+    handleDeleteGroup
   } = useProductForm(
     categories,
     handleDiscountInput,
@@ -124,6 +125,7 @@ export default function ProductForm({
                     label="Units"
                     name="unit"
                     defaultValue={data.unit}
+                    control={control}
                     register={register}
                     errors={errors}
                     disabled={disabled}
@@ -282,6 +284,7 @@ export default function ProductForm({
                   <CustomSelect
                     label="Tax rate"
                     name="taxRate"
+                    control={control}
                     defaultValue={data.taxRate}
                     placeholder="Tax rate "
                     disabled={disabled}
@@ -320,7 +323,7 @@ export default function ProductForm({
                   <ProductGroup
                     item={item}
                     handleModalData={handleModalData}
-                    handleUpdateInput={handlePriceInput}
+                    handleDeleteGroup={handleDeleteGroup}
                     index={index}
                     disabled={disabled}
                     updateType="updatePrice"
@@ -344,7 +347,7 @@ export default function ProductForm({
                   <ProductGroup
                     item={item}
                     handleModalData={handleModalData}
-                    handleUpdateInput={handleDiscountInput}
+                    handleDeleteGroup={handleDeleteGroup}
                     disabled={disabled}
                     index={index}
                     updateType="updateDiscount"
@@ -357,7 +360,6 @@ export default function ProductForm({
         <ProductModal
           data={modalData}
           setData={handleModalSubmit}
-          ref={ref}
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
         />
@@ -380,6 +382,7 @@ ProductForm.propTypes = {
   handleSubmit: PropTypes.func,
   handleClickCategory: PropTypes.func,
   register: PropTypes.func,
+  control: PropTypes.any,
   errors: PropTypes.object,
   data: PropTypes.object,
   disabled: PropTypes.bool

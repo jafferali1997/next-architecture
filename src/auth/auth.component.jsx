@@ -10,7 +10,7 @@ import Private from './private.component';
  * @param {component, type} props commponet and type of the component
  * @returns component
  */
-export default function Auth({ component, type }) {
+export default function Auth({ component, type = AUTH.PUBLIC }) {
   switch (type) {
     case AUTH.PUBLIC:
       return component;
@@ -20,10 +20,6 @@ export default function Auth({ component, type }) {
       return <OnlyPublic component={component} />;
   }
 }
-
-Auth.defaultProps = {
-  type: AUTH.PUBLIC
-};
 
 Auth.propTypes = {
   component: PropTypes.element.isRequired,

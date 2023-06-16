@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/button-has-type */
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import PlusIcon from '@/common/icons/plus.icon';
@@ -7,7 +9,7 @@ import useProduct from './use-product.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import SearchIcon from '@/common/icons/search-icon';
 
-export default function ProductEdit() {
+export default function Product() {
   const {
     handleColShow,
     open,
@@ -35,7 +37,7 @@ export default function ProductEdit() {
             <h1 className="h1">List of Product</h1>
             <CustomButton
               className="btn-primary"
-              text="Create customer"
+              text="Create product"
               startIcon={<PlusIcon />}
               href="/product/create"
             />

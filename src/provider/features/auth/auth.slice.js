@@ -89,7 +89,7 @@ export const logout = createAsyncThunk('auth/logout', async (payload, thunkAPI) 
   try {
     const response = await authService.logout();
     if (response.Succeeded) {
-      return response.data;
+      return response;
     }
     return thunkAPI.rejectWithValue(response);
   } catch (error) {

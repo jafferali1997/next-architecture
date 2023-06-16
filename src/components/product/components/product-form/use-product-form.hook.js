@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
 import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
 
@@ -18,10 +19,31 @@ export default function useProductForm(
   const [categoryId, setCategoryId] = useState(0);
   const [categoryToMap, setCategoryToMap] = useState([]);
   const [parentCategory, setParentCategory] = useState([]);
-  const ref = useRef(null);
+  const [filteredPriceGroup, setFilteredPriceGroup] = useState([]);
+  const [filteredDiscountGroup, setFilteredDiscountGroup] = useState([]);
   const dispatch = useDispatch();
   const priceGroupList = useSelector((state) => state.priceGroup.getAll);
   const discountGroupList = useSelector((state) => state.discountGroup.getAll);
+
+  useEffect(() => {
+    if (priceGroupList.isSuccess) {
+      setFilteredPriceGroup([
+        ...priceGroupList.data.map((item) => {
+          return { label: item.priceGroupName, value: item.id };
+        })
+      ]);
+    }
+  }, [priceGroupList]);
+
+  useEffect(() => {
+    if (discountGroupList.isSuccess) {
+      setFilteredDiscountGroup([
+        ...discountGroupList.data.map((item) => {
+          return { label: item.discountGroupName, value: item.id };
+        })
+      ]);
+    }
+  }, [discountGroupList]);
 
   useEffect(() => {
     dispatch(getAllPriceGroup());
@@ -44,19 +66,6 @@ export default function useProductForm(
     }
   }, [categories, categoryId]);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpenPopup(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
-
   const handleModalData = (type, index = null, data = null) => {
     switch (type) {
       case 'updatePrice':
@@ -67,9 +76,7 @@ export default function useProductForm(
             label: 'Group Name',
             type: 'select',
             value: data.id,
-            options: priceGroupList?.data?.map((item) => {
-              return { label: item.priceGroupName, value: item.id };
-            })
+            options: filteredPriceGroup
           },
           { id: index, label: 'price', value: data.price, type: 'number' }
         ]);
@@ -80,9 +87,7 @@ export default function useProductForm(
             button: 'Create',
             label: 'Group Name',
             type: 'select',
-            options: priceGroupList?.data?.map((item) => {
-              return { label: item.priceGroupName, value: item.id };
-            }),
+            options: filteredPriceGroup,
             value: ''
           },
           { label: 'price', value: 0, type: 'number' }
@@ -95,9 +100,7 @@ export default function useProductForm(
             id: index,
             label: 'Group Name',
             type: 'select',
-            options: discountGroupList?.data?.map((item) => {
-              return { label: item.discountGroupName, value: item.id };
-            }),
+            options: filteredDiscountGroup,
             value: data.id
           },
           { id: index, label: 'discount', value: data.discount }
@@ -110,9 +113,7 @@ export default function useProductForm(
             label: 'Group Name',
             type: 'select',
             value: '',
-            options: discountGroupList?.data?.map((item) => {
-              return { label: item.discountGroupName, value: item.id };
-            })
+            options: filteredDiscountGroup
           },
           { label: 'discount', value: '' }
         ]);
@@ -121,9 +122,34 @@ export default function useProductForm(
     setOpenPopup(true);
   };
 
+  const handleFilteredPriceGroup = (type, id) => {
+    if (type === 'Create') {
+      setFilteredPriceGroup([...filteredPriceGroup.filter((item) => item.value !== id)]);
+    }
+    if (type === 'Delete') {
+      setFilteredPriceGroup([
+        ...filteredPriceGroup,
+        ...priceGroupList.data.filter((item) => item.value === id)
+      ]);
+    }
+  };
+
+  const handleFilteredDiscountGroup = (type, id) => {
+    if (type === 'Create') {
+      setFilteredDiscountGroup([
+        ...filteredDiscountGroup.filter((item) => item.value !== id)
+      ]);
+    }
+    if (type === 'Delete') {
+      setFilteredDiscountGroup([
+        ...filteredDiscountGroup,
+        ...discountGroupList.data.filter((item) => item.value === id)
+      ]);
+    }
+  };
+
   const handleModalSubmit = (data) => {
-    console.log(data);
-    if (data[0].id && data[1].label === 'discount') {
+    if (data[0].id >= 0 && data[1].label === 'discount') {
       handleDiscountInput(
         {
           id: data[0].value,
@@ -135,7 +161,7 @@ export default function useProductForm(
       );
     }
 
-    if (data[0].id && data[1].label === 'price') {
+    if (data[0].id >= 0 && data[1].label === 'price') {
       handlePriceInput(
         {
           id: data[0].value,
@@ -146,7 +172,11 @@ export default function useProductForm(
         data[0].id
       );
     }
-    if (!data[0].id && data[1].label === 'discount') {
+    if (
+      (data[0].id === null || data[0].id === undefined) &&
+      data[1].label === 'discount'
+    ) {
+      handleFilteredDiscountGroup('Create', data[0].value);
       handleDiscountInput({
         id: data[0].value,
         discountGroupName: data[0].options.find((item) => item.value === data[0].value)
@@ -155,13 +185,25 @@ export default function useProductForm(
       });
     }
 
-    if (!data[0].id && data[1].label === 'price') {
+    if ((data[0].id === null || data[0].id === undefined) && data[1].label === 'price') {
+      handleFilteredPriceGroup('Create', data[0].value);
       handlePriceInput({
         id: data[0].value,
         priceGroupName: data[0].options.find((item) => item.value === data[0].value)
           .label,
         price: data[1].value
       });
+    }
+  };
+
+  const handleDeleteGroup = (index, data) => {
+    if (data[1].label === 'price') {
+      handlePriceInput(null, index, true);
+      handleFilteredPriceGroup('Delete', data[0].value);
+    }
+    if (data[1].label === 'discount') {
+      handleDiscountInput(null, index, true);
+      handleFilteredDiscountGroup('Delete', data[0].value);
     }
   };
 
@@ -176,7 +218,13 @@ export default function useProductForm(
   };
 
   const handleSelectCategory = (data) => {
-    setSelectedCategory([...selectedCategory, [...parentCategory, data]]);
+    if (!selectedCategory.find((item) => item[item.length - 1].id === data.id)) {
+      setSelectedCategory([...selectedCategory, [...parentCategory, data]]);
+    } else {
+      enqueueSnackbar('Category already selected', {
+        variant: 'error'
+      });
+    }
   };
 
   const handleClickParentCategory = (item) => {
@@ -199,9 +247,9 @@ export default function useProductForm(
     handleRemoveSelectedCategory,
     handleModalData,
     modalData,
-    ref,
     openPopup,
     setOpenPopup,
-    handleModalSubmit
+    handleModalSubmit,
+    handleDeleteGroup
   };
 }

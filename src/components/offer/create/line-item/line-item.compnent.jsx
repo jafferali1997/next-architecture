@@ -16,6 +16,7 @@ import CustomSwitch from '@/common/components/custom-switch/custom-switch.compon
 import TextArea from '@/common/components/text-area/text-area.component';
 import EuroIcon from '@/common/icons/euro.icon';
 import useLineItem from './use-line-item.hook';
+import DynamicPagination from '@/common/components/pagination/pagination.component';
 
 export default function LineItem({ handleTabClick, handleTabCompleted }) {
   const {
@@ -41,8 +42,10 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
     handleDuplicate,
     handleRemove,
     onSubmit,
-    handleSortClick
+    handleSortClick,
+    setData
   } = useLineItem({ handleTabClick, handleTabCompleted });
+
   return (
     <div className="personal-details-wrapper">
       <form onSubmit={onSubmit}>

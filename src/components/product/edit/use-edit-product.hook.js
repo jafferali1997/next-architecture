@@ -25,7 +25,8 @@ export default function useEditProduct() {
     selectedCategory,
     setSelectedCategory,
     handleClickCategory,
-    setSelectedTag
+    setSelectedTag,
+    control
   } = useCreateProduct(param.id);
 
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ export default function useEditProduct() {
     selectedCategory,
     setSelectedCategory,
     handleClickCategory,
+    control,
     data: getSingleProductData.data
   };
 }

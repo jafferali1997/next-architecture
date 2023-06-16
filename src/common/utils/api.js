@@ -22,7 +22,22 @@ const api = (headers = null) => {
 
   apiSet.interceptors.response.use(
     async (response) => {
-      if (response.config.method === 'post' || response.config.method === 'patch') {
+      if (
+        response.config.method === 'get' &&
+        response.config.url.split('/')[response.config.url.split('/').length - 1] ===
+          'generate-otp'
+      ) {
+        enqueueSnackbar(response.data.message, {
+          variant: 'success'
+        });
+        await delay(700);
+        return response;
+      }
+      if (
+        response.config.method === 'post' ||
+        response.config.method === 'patch' ||
+        response.config.method === 'delete'
+      ) {
         if (
           response.config.url.split('/')[response.config.url.split('/').length - 1] !==
           'get-all'

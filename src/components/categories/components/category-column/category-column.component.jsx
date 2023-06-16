@@ -104,7 +104,7 @@ export default function CategoryColumn({
               />
             </div>
           ))}
-      <Dialog open={openPopup}>
+      <Dialog open={openPopup ?? false}>
         <div ref={ref} className="tw-w-[389px]">
           <div>
             <DialogTitle>Category</DialogTitle>

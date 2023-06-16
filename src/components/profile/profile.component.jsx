@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import Select from '@/common/components/select/select.component';
 import OtpInput from '@/common/components/otp-input/otp-input.component';
 import CountryPhoneInput from '@/common/components/country-phone-input/country-phone-input.component';
 import useProfile from './use-profile.hook';
@@ -15,7 +14,6 @@ export default function Profile() {
     register,
     handleSubmit,
     onSubmit,
-    setValue,
     errors,
     phone,
     setPhone,
@@ -23,13 +21,12 @@ export default function Profile() {
     verifyOtpHandler,
     sendOtpButtonText,
     isOtpVerified,
-    setIsOtpVerified,
-    control
+    control,
+    onCountryChange,
+    cities,
+    logoutClickHandler
   } = useProfile();
-  const cities = [
-    { id: 1, label: 'Lahore', value: 'Lahore' },
-    { id: 2, label: 'Rawalpindi', value: 'Rawalpindi' }
-  ];
+
   return (
     <div className=" tw-min-h-[1090px] ">
       <div className="tw-m-auto tw-max-w-[1311px] tw-px-[7.5px] tw-py-0">
@@ -107,9 +104,9 @@ export default function Profile() {
                 <CustomSelect
                   label="Country"
                   name="country"
-                  type="select"
                   inlineLabel
                   options={COUNTRIES}
+                  onChange={onCountryChange}
                   control={control}
                   isRequired={true}
                   errors={errors}
@@ -121,9 +118,7 @@ export default function Profile() {
                   name="city"
                   type="select"
                   inlineLabel
-                  options={cities.map((item) => {
-                    return { label: item.label, value: item.value, id: item.id };
-                  })}
+                  options={cities}
                   control={control}
                   isRequired={true}
                   errors={errors}
@@ -193,7 +188,7 @@ export default function Profile() {
               </div>
               <div className="input-group">
                 <CustomInput
-                  type="number"
+                  type="text"
                   label="VAT Number"
                   name="vat"
                   placeholder="12"
@@ -257,6 +252,7 @@ export default function Profile() {
                   // type="Submit"
                   className="btn-cancel"
                   text="Logout"
+                  onClick={logoutClickHandler}
                 />
               </div>
               <div className="submit-button">
