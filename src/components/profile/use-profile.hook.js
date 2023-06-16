@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -15,6 +16,8 @@ import { createProfile } from '@/provider/features/profile/profile.slice';
 import { createFinancialDetail } from '@/provider/features/financial-detail/financial-detail.slice';
 import { createBusinessDetail } from '@/provider/features/business-detail/business-detail.slice';
 import { profileFinancialBusiness } from '@/provider/features/profile-financial-business/profile-financial-business.slice';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
+import { logout } from '@/provider/features/auth/auth.slice';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -59,12 +62,6 @@ export default function useProfile() {
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const sendOtpButtonText = useRef('Send OTP');
 
-  useEffect(() => {
-    if (localStorage.getItem('isOtpVerified')) {
-      setIsOtpVerified(true);
-    }
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -76,19 +73,63 @@ export default function useProfile() {
     mode: 'onBlur'
   });
 
+  const { handleCountryChange, cities } = useCountryCity();
+
   useEffect(() => {
+    if (localStorage.getItem('userProfile')) {
+      const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+      if (userProfile.isOtpVerified) {
+        setOtp(userProfile.otp);
+        setPhone(userProfile.phone);
+        setIsOtpVerified(userProfile.isOtpVerified);
+      } else {
+        localStorage.removeItem('userProfile');
+      }
+    }
     setValue('email', searchParams.get('email'));
-    setValue('userName', searchParams.get('userName'));
-  }, [searchParams]);
+    setValue('userName', searchParams.get('username'));
+    if (typeof window !== 'undefined' && !window.location.origin.includes('localhost')) {
+      axios.get('https://ipapi.co/json/').then((res) => {
+        console.log(res);
+        const country = `${res.data.country_name.toLowerCase()}-${res.data.country_code}`;
+        setValue('country', country);
+        const event = {
+          target: {
+            value: country
+          }
+        };
+        handleCountryChange(event);
+        setValue('city', res.data.city.toLowerCase());
+      });
+    } else {
+      axios.get('http://ip-api.com/json').then((res) => {
+        console.log(res);
+        const country = `${res.data.country.toLowerCase()}-${res.data.countryCode}`;
+        setValue('country', country);
+        const event = {
+          target: {
+            value: country
+          }
+        };
+        handleCountryChange(event);
+        setValue('city', res.data.city.toLowerCase());
+      });
+    }
+  }, []);
 
-  const moveRouter = (data) => {
-    router.push('/customer');
+  const moveRouter = (data) => {};
+  const onCountryChange = (e) => {
+    setValue('city', '');
+    handleCountryChange(e);
   };
-
-  const onSubmit = (data) => {
-    dispatch(
+  const onSubmit = async (data) => {
+    const res = await dispatch(
       profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter })
     );
+    console.log(res, 'Profile response');
+    if (res.payload) {
+      router.push('/customer');
+    }
   };
 
   const sendOtp = () => {
@@ -105,8 +146,28 @@ export default function useProfile() {
     }
   };
   const handleOtpVerif = (data) => {
-    setIsOtpVerified(true);
-    localStorage.setItem('isOtpVerified', true);
+    console.log(data);
+    if (data) {
+      setIsOtpVerified(true);
+      localStorage.setItem(
+        'userProfile',
+        JSON.stringify({
+          username: searchParams.get('username'),
+          email: searchParams.get('email'),
+          isOtpVerified: true,
+          phone,
+          otp
+        })
+      );
+    }
+  };
+
+  const logoutClickHandler = async () => {
+    const response = await dispatch(logout());
+    console.log(response, 'response');
+    if (response?.payload) {
+      window.location.href = '/';
+    }
   };
 
   const verifyOtpHandler = () => {
@@ -134,6 +195,9 @@ export default function useProfile() {
     sendOtp,
     verifyOtpHandler,
     isOtpVerified,
-    setIsOtpVerified
+    setIsOtpVerified,
+    cities,
+    logoutClickHandler,
+    onCountryChange
   };
 }

@@ -5,7 +5,7 @@
   --color-secondary: #470a68;
   --color-success: #87d500;
   --color-accent: #e87722;
-  --focus-input:#7e7d7d;
+  --focus-input: #7e7d7d;
 
   /* Dark themes below */
   --color-dark-primary: rgba(31, 41, 55, 1);
@@ -22,7 +22,7 @@
   input[type='number'] {
     -moz-appearance: textfield;
   }
-  
+
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button,
   input[type='number']::-moz-inner-spin-button,
@@ -277,10 +277,8 @@
     @apply tw-font-dm tw-text-xl tw-font-normal tw-leading-8 tw-text-text-light-black2;
   }
 
-
   @import url('./component-styles/input.style.css');
   @import url('./component-styles/switch.style.css');
-  
 }
 .payment-details-radios label {
   @apply tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-[#2c2e3e];
@@ -290,10 +288,6 @@
 .container {
   @apply tw-m-auto tw-w-full tw-max-w-7xl;
 }
-
-
-
-
 
 /* .payment-details-radios label span {
   @apply tw-text-red;
@@ -324,7 +318,7 @@
   cursor: not-allowed;
 }
 
-.table_filter_radio:checked + label{
+.table_filter_radio:checked + label {
   border-bottom: 2px solid #047857;
 }
 
@@ -431,10 +425,6 @@ body {
   }
 }
 
-.react-tel-input .form-control {
-  width: 100% !important;
-}
-
 /* style scroll */
 
 .scrol-bar {
@@ -456,4 +446,7 @@ body {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #555;
+}
+.numArrowNotShow {
+  -webkit-appearance: none !important;
 }

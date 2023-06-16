@@ -35,7 +35,7 @@ const validationSchema = yup.object({
     .matches(/[0-9]/, 'Postal must be in digits')
     .max(10, 'postal code must be maximum 10 characters'),
   address: yup
-    .number()
+    .string()
     .max(95, 'address must be at most 95 characters long')
     .required('Address is required'),
   country: yup.string().required('Country is required'),
@@ -56,8 +56,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedCity, setSelectedCity] = useState(null);
   const [data, setData] = useState();
 
   const [allPriceGroup, setAllPriceGroup] = useState([]);
@@ -68,15 +66,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
 
   const [isSubmit, setIsSubmit] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
-  // const countries = Country.getAllCountries();
-  const countries = [
-    { label: 'Pakistan', value: 'pakistan' },
-    { label: 'Turkey', value: 'turkey' }
-  ];
-  const cities = [
-    { label: 'Lahore', value: 'lahore' },
-    { label: 'Gujranwala', value: 'gujranwala' }
-  ];
+
   const dispatch = useDispatch();
 
   const fetchData = useCallback(
@@ -107,18 +97,6 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
       fetchData(id);
     }
   }, [searchParams, allPriceGroup, allDiscountGroup, fetchData]);
-
-  const handleCountryChange = (event) => {
-    // const countryCode = event.target.value;
-    // setSelectedCountry(countryCode);
-    // const cities = City.getCitiesOfCountry(countryCode);
-    // setCities(cities);
-  };
-
-  const handleCityChange = (event) => {
-    // const cityName = event.target.value;
-    // setSelectedCity(cityName);
-  };
 
   const onSubmit = async (value) => {
     const priceGroups = [
@@ -178,13 +156,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     register,
     handleSubmit,
     onSubmit,
-    handleCountryChange,
-    selectedCity,
-    selectedCountry,
-    handleCityChange,
-    countries,
     data,
-    cities,
     allPriceGroup,
     setAllPriceGroup,
     selectedPriceGroup,

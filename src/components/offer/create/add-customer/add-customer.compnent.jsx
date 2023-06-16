@@ -7,12 +7,14 @@ import Select from '@/common/components/select/select.component';
 import useAddCustomer from './use-add-customer.hook';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
   const { isSubmit, setIsSubmit, onSubmit } = useAddCustomer(
     handleTabClick,
     handleTabCompleted
   );
+  const { cities, handleCountryChange } = useCountryCity();
 
   return (
     <div className="personal-details-wrapper">
@@ -108,7 +110,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               placeholder="Country"
               type="select"
               options={COUNTRIES}
-              //   onChange={handleCountryChange}
+              onChange={handleCountryChange}
               //   value={selectedCountry}
               //   isRequired={true}
             />
@@ -118,6 +120,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               disabled={true}
               placeholder="City"
               type="select"
+              options={cities}
               //   value={selectedCity}
               //   onChange={handleCityChange}
               //   options={cities.map((item) => {

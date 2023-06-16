@@ -19,27 +19,31 @@ export default function CreateNewPassword() {
   } = useCreateNewPassword();
 
   return (
-    <div className="create-new-pass-wrapper">
-      <div className="create-new-pass-container ">
-        <div className="header">
+    <div className="form-wrapper">
+      <div className="form-container">
+        <div className="form-container-header">
           <Link href="/">
             <img alt="img" src="/assets/images/logo.png" />
           </Link>
         </div>
 
-        <div className="create-new-pass-form-card ">
+        <div className="form-card  ">
           <div className="form-header">
             <img src="/assets/images/lockImg.png" alt="img" />
-            <h1>Create new Password</h1>
-            <p>That’s it. Setup your new password</p>
+            <h1 className="tw-pt-2 tw-text-[24px] tw-font-bold tw-capitalize tw-not-italic tw-leading-[52px] tw-text-[#131516]">
+              Create new Password
+            </h1>
+            <p className="tw--mt-1 tw-text-[16px] tw-font-medium tw-not-italic tw-leading-[24px] tw-text-[#494949]">
+              That’s it. Setup your new password
+            </p>
           </div>
           <div className="form-body">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="tw-w-full" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group-c">
                 <label>
                   New Password <span>*</span>
                 </label>
-                <div className="pass_input_div">
+                <div className="form-password_wrapper">
                   <CustomInput
                     name="password"
                     placeholder="Enter New password"
@@ -65,7 +69,7 @@ export default function CreateNewPassword() {
                       {/* )} */}
                     </div>
                   </div>
-                  <img
+                  {/* <img
                     role="presentation"
                     alt="img"
                     onClick={toggleShowPassword}
@@ -75,14 +79,14 @@ export default function CreateNewPassword() {
                         ? '/assets/images/pass_icon.png'
                         : '/assets/images/eye.svg'
                     }
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="form-group-c">
                 <label>
                   Confirm Password <span>*</span>
                 </label>
-                <div className="pass_input_div">
+                <div className="form-password_wrapper">
                   <CustomInput
                     placeholder="Enter confirm password"
                     name="confirm"
@@ -121,7 +125,7 @@ export default function CreateNewPassword() {
               <div className="form-btn-c">
                 <CustomButton
                   type="submit"
-                  className="submit-btn"
+                  className="btn-primary tw-w-full"
                   loading={loader}
                   disabled={loader}
                   text="Change Password"

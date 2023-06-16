@@ -308,13 +308,9 @@ export default function useProduct() {
     router.push(`/product/details/${row.id}`);
   };
 
-  const handleDeleteAction = (row) => {
-    const data = dispatch(deleteProduct({ payload: row.id }));
-    if (data) {
-      // show toaster
-      // showToaster(true);
-      // setToasterMsg('Product deleted successfully');
-    }
+  const handleDeleteAction = async (row) => {
+    const data = await dispatch(deleteProduct({ payload: row.id }));
+    fetchData();
   };
 
   const handleStatusAction = (row) => {
@@ -409,7 +405,7 @@ export default function useProduct() {
     fetchData();
   }, []);
 
-  const debouncedSearchQuery = useDebounce(searchText, 500);
+  const debouncedSearchQuery = useDebounce(searchText, 1000);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -420,7 +416,7 @@ export default function useProduct() {
    */
   useMemo(() => {
     if (debouncedSearchQuery && debouncedSearchQuery?.length !== 0) {
-      fetchData({ productName: { $iLike: debouncedSearchQuery } });
+      fetchData({ productName: { $iLike: `%${debouncedSearchQuery}%` } });
     } else {
       fetchData();
     }

@@ -88,7 +88,9 @@ export default function CustomInput({
           name={name}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
-          className={`input-field default-input hover:tw-border-text-dark-gray ${
+          className={`${
+            type === 'number' ? 'numArrowNotShow' : ' '
+          } input-field default-input hover:tw-border-text-dark-gray ${
             errors && errors[name] && 'error-field'
           } ${className} ${!disabled || 'disabled-input'} `}
           {...(defaultValue !== null && defaultValue !== undefined && { defaultValue })}

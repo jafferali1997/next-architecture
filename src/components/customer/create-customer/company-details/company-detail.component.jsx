@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import useCompanyDetails from './use-company-details.hook';
 import FormForCompanyDetails from './components/form-for-company-details/form-for-company-details';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
+import COUNTRIES from '@/common/constants/countries.constant';
 
 export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
   const {
@@ -14,22 +16,19 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
     setIsShowInPdf,
     isVatEnabled,
     setIsVatEnabled,
-    handleCountryChange,
     selectedCountry,
-    countries,
-    cities,
     selectedCity,
     handleCityChange,
     setIsSubmit,
     additionalHandles,
-    router,
-    data,
     errors,
     handleAddInput,
     handleInputChange,
     inputValues,
     control
   } = useCompanyDetails({ handleTabClick, handleTabCompleted });
+
+  const { handleCountryChange, cities } = useCountryCity();
 
   return (
     <div className="company-details-wrapper">
@@ -49,10 +48,8 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
           isVatEnabled={isVatEnabled}
           setIsVatEnabled={setIsVatEnabled}
           handleCountryChange={handleCountryChange}
-          selectedCountry={selectedCountry}
-          countries={countries}
+          countries={COUNTRIES}
           cities={cities}
-          selectedCity={selectedCity}
           handleCityChange={handleCityChange}
           handleTabClick={handleTabClick}
           setIsSubmit={setIsSubmit}

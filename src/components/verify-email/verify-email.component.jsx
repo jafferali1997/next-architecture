@@ -44,11 +44,11 @@ export default function VerifyEmail() {
               />
             </div>
             <div className="tw-mt-10 tw-flex tw-items-center">
-              <img
+              {/* <img
                 alt="img"
                 className="tw-pr-[8.6px]"
                 src="/assets/images/open_link.svg"
-              />
+              /> */}
               {/* <span className="tw-text-[12px] tw-font-medium tw-not-italic tw-leading-[18px] tw-text-[#494949]">
                 Open E-mail
               </span> */}
