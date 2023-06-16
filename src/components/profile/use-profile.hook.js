@@ -61,19 +61,22 @@ export default function useProfile() {
   const [otp, setOtp] = useState('');
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const sendOtpButtonText = useRef('Send OTP');
+  const [defaultCountry, setDefaultCountry] = useState('');
 
   const {
     register,
     handleSubmit,
     setValue,
     control,
+    resetField,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onBlur'
   });
 
-  const { handleCountryChange, cities } = useCountryCity();
+  const { handleCountryChange, cities, error, setError, setCountry, country } =
+    useCountryCity();
 
   useEffect(() => {
     if (localStorage.getItem('userProfile')) {
@@ -86,16 +89,22 @@ export default function useProfile() {
         localStorage.removeItem('userProfile');
       }
     }
+    localStorage.setItem('isCountryChange', false);
+
     setValue('email', searchParams.get('email'));
-    setValue('userName', searchParams.get('username'));
+    setValue('userName', searchParams.get('userName'));
     if (typeof window !== 'undefined' && !window.location.origin.includes('localhost')) {
       axios.get('https://ipapi.co/json/').then((res) => {
         console.log(res);
-        const country = `${res.data.country_name.toLowerCase()}-${res.data.country_code}`;
-        setValue('country', country);
+        const _country = `${res.data.country_name.toLowerCase()}-${
+          res.data.country_code
+        }`;
+        setCountry(_country);
+        // setValue('country', country);
+        // setDefaultCountry(country);
         const event = {
           target: {
-            value: country
+            value: _country
           }
         };
         handleCountryChange(event);
@@ -104,11 +113,12 @@ export default function useProfile() {
     } else {
       axios.get('http://ip-api.com/json').then((res) => {
         console.log(res);
-        const country = `${res.data.country.toLowerCase()}-${res.data.countryCode}`;
-        setValue('country', country);
+        const _country = `${res.data.country.toLowerCase()}-${res.data.countryCode}`;
+        // setValue('country', country);
+        setCountry(_country);
         const event = {
           target: {
-            value: country
+            value: _country
           }
         };
         handleCountryChange(event);
@@ -119,12 +129,22 @@ export default function useProfile() {
 
   const moveRouter = (data) => {};
   const onCountryChange = (e) => {
+    console.log(e);
+    // resetField('country');
+    // setCountry('country', e.target.value);
     setValue('city', '');
     handleCountryChange(e);
   };
   const onSubmit = async (data) => {
+    if (!country) {
+      setError('Country is required');
+      return;
+    }
     const res = await dispatch(
-      profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter })
+      profileFinancialBusiness({
+        payload: { ...data, country },
+        callBackMessage: moveRouter
+      })
     );
     console.log(res, 'Profile response');
     if (res.payload) {
@@ -152,7 +172,7 @@ export default function useProfile() {
       localStorage.setItem(
         'userProfile',
         JSON.stringify({
-          username: searchParams.get('username'),
+          userName: searchParams.get('userName'),
           email: searchParams.get('email'),
           isOtpVerified: true,
           phone,
@@ -198,6 +218,8 @@ export default function useProfile() {
     setIsOtpVerified,
     cities,
     logoutClickHandler,
-    onCountryChange
+    onCountryChange,
+    country,
+    error
   };
 }

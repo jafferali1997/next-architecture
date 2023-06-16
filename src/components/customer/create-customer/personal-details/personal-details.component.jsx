@@ -7,12 +7,6 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
     register,
     handleSubmit,
     onSubmit,
-    handleCountryChange,
-    selectedCity,
-    selectedCountry,
-    handleCityChange,
-    countries,
-    cities,
     data,
     setIsSubmit,
     errors,
@@ -24,7 +18,11 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
     setAllDiscountGroup,
     selectedDiscountGroup,
     setSelectedDiscountGroup,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error
   } = usePersonalDetails({ handleTabClick, handleTabCompleted });
 
   return (
@@ -37,12 +35,6 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
           register={register}
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
-          handleCountryChange={handleCountryChange}
-          selectedCity={selectedCity}
-          selectedCountry={selectedCountry}
-          handleCityChange={handleCityChange}
-          countries={countries}
-          cities={cities}
           data={data}
           setIsSubmit={setIsSubmit}
           errors={errors}
@@ -55,6 +47,10 @@ export default function PersonalDetails({ handleTabClick, handleTabCompleted }) 
           selectedDiscountGroup={selectedDiscountGroup}
           setSelectedDiscountGroup={setSelectedDiscountGroup}
           control={control}
+          cities={cities}
+          country={country}
+          onCountryChange={onCountryChange}
+          error={error}
         />
       </div>
     </div>

@@ -3,7 +3,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useForm, appendErrors, transformToNestObject } from 'react-hook-form';
+import {
+  useForm,
+  appendErrors,
+  transformToNestObject,
+  useFieldArray
+} from 'react-hook-form';
 import * as yup from 'yup';
 import { Country, City } from 'country-state-city';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,6 +18,7 @@ import {
   createCustomerCompanyDetail,
   getSingleCustomer
 } from '@/provider/features/customer/customer.slice';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -72,6 +78,25 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     resolver: yupResolver(validationSchemaState)
   });
 
+  const {
+    fields: companyAddressFields,
+    append: appendCompanyAddress,
+    remove: removeCompanyAddress
+  } = useFieldArray({
+    control,
+    name: 'companyAddresses'
+  });
+
+  const { handleCountryChange, cities, error, setError, setCountry, country } =
+    useCountryCity();
+
+  const onCountryChange = (e) => {
+    console.log(e.target.value);
+    setValue('ac_country', e.target.value);
+    setValue('ac_city', '');
+    handleCountryChange(e);
+  };
+
   useEffect(() => {
     if (searchParams.get('id')) {
       const id = Number(searchParams.get('id'));
@@ -85,15 +110,22 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
             Object.keys(data.additionalContact[0]).forEach((key) =>
               setValue(`ac_${key}`, data.additionalContact[0][key])
             );
+            handleCountryChange({ target: { value: data.additionalContact[0].country } });
           }
           if (data?.companyAddress?.length > 0) {
-            const newInputValues = data.companyAddress.map((addressObj, idx) => {
-              setValue(`ca_addressLabel_${idx + 1}`, addressObj.addressLabel);
-              setValue(`ca_address_${idx + 1}`, addressObj.address);
-              return '';
+            const ids = companyAddressFields.map((item) => item.id);
+            console.log(ids, 'ids');
+            data.companyAddress.forEach((addressObj, index) => {
+              if (!ids.includes(addressObj.id)) {
+                appendCompanyAddress({
+                  id: addressObj.id,
+                  addressLabel: addressObj.addressLabel,
+                  address: addressObj.address
+                });
+              }
             });
-            setInputValues(newInputValues);
           }
+          setCountry(data.country);
           setIsShowInPdf(data.isPDF);
           setStatus(data.isStatus);
           setIsVatEnabled(data.vatStatus);
@@ -217,19 +249,16 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     setIsAdditional(!isAdditional);
   };
 
-  const handleCountryChange = (event) => {
-    // const countryCode = event.target.value;
-    // setSelectedCountry(countryCode);
-    // const cities = City.getCitiesOfCountry(countryCode);
-    // setCities(cities);
-  };
-
   const handleCityChange = (event) => {
     // const cityName = event.target.value;
     // setSelectedCity(cityName);
   };
 
   const onSubmit = async (value) => {
+    if (!country) {
+      setError('Country is required');
+      return;
+    }
     console.log(value);
     const additionalContactKeys = Object.keys(value).filter((attr) =>
       attr.startsWith('ac')
@@ -241,24 +270,24 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       }
       return { ...accumulator, [key]: value[attr] };
     }, {});
-    const companyAddressesKeys = Object.keys(value).filter((attr) =>
-      attr.startsWith('ca')
-    );
-    const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
-      if (index % 2 === 0) {
-        const obj = {
-          addressLabel: value[curr],
-          address: value[arr[index + 1]]
-        };
-        acc.push(obj);
-      }
-      return acc;
-    }, []);
+    // const companyAddressesKeys = Object.keys(value).filter((attr) =>
+    //   attr.startsWith('ca')
+    // );
+    // const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
+    //   if (index % 2 === 0) {
+    //     const obj = {
+    //       addressLabel: value[curr],
+    //       address: value[arr[index + 1]]
+    //     };
+    //     acc.push(obj);
+    //   }
+    //   return acc;
+    // }, []);
     const payload = {
       ...value,
       customerId: Number(searchParams.get('id')),
       additionalContact: [additionalContact],
-      companyAddress: companyAddresses,
+      companyAddress: value.companyAddresses,
       tin: value.tin
     };
     console.log(payload);
@@ -271,20 +300,19 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   };
 
   const handleAddInput = () => {
-    setInputValues([...inputValues, '']);
+    // console.log(companyAddresses);
+    // const id =
+    //   companyAddresses.length > 0
+    //     ? companyAddresses[companyAddresses.length - 1].id + 1
+    //     : 1;
+    console.log(companyAddressFields);
+    appendCompanyAddress({ addressLabel: '', address: '' });
+    // setCompanyAddresses([...companyAddresses, { id }]);
   };
 
   const handleRemoveInput = (index) => {
-    const newInputValues = [...inputValues];
-    newInputValues.splice(index, 1);
-    setInputValues(newInputValues);
-  };
-
-  const handleInputChange = (index, value) => {
-    const newInputValues = [...inputValues];
-    newInputValues[index] = value;
-    setInputValues(newInputValues);
-    console.log(newInputValues);
+    console.log(index);
+    removeCompanyAddress(index);
   };
 
   return {
@@ -305,9 +333,14 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
     data,
     errors,
     handleAddInput,
-    handleInputChange,
     inputValues,
     setInputValues,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error,
+    companyAddressFields,
+    handleRemoveInput
   };
 }

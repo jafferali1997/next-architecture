@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import PropTypes from 'prop-types';
 import { IconButton } from '@mui/material/node';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
@@ -9,6 +10,7 @@ import useCompanyDetails from '../../use-company-details.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
 import useCountryCity from '@/common/hooks/use-country-city.hook';
 import COUNTRIES from '@/common/constants/countries.constant';
+import CustomButton from '@/common/components/custom-button/custom-button.component';
 
 export default function FormForCompanyDetails({
   register,
@@ -29,10 +31,14 @@ export default function FormForCompanyDetails({
   handleInputChange,
   inputValues = [''],
   data = {},
-  control
+  control,
+  cities,
+  country,
+  onCountryChange,
+  error,
+  companyAddressFields,
+  handleRemoveInput
 }) {
-  const { cities, handleCountryChange } = useCountryCity();
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
@@ -165,34 +171,36 @@ export default function FormForCompanyDetails({
         </span>
       </div>
       <div>
-        {inputValues.map((value, index) => (
-          <div
-            className="tw-grid tw-grid-cols-[338px_1fr] tw-gap-[15px] tw-py-[16px]"
-            key={value.id}
-          >
-            <CustomInput
-              placeholder="Enter label name"
-              type="text"
-              name={`ca_addressLabel_${index + 1}`}
-              register={register}
-              errors={errors}
+        {companyAddressFields.map((value, index) => (
+          <div className="tw-gflex-row tw-flex">
+            <div className="form-box-grid " key={value}>
+              <input
+                name={`companyAddresses.${index}.id`}
+                type="number"
+                className="tw-hidden"
+                register={register}
+              />
+              <CustomInput
+                placeholder="Enter label name"
+                type="text"
+                errors={errors}
+                name={`companyAddresses.${index}.addressLabel`}
+                register={register}
+                // onChange={(e) => handleInputChange(index, e.target.value)}
+              />
+              <CustomInput
+                placeholder="Enter company address"
+                type="text"
+                name={`companyAddresses.${index}.address`}
+                errors={errors}
+                register={register}
+              />
+            </div>
+            <CustomButton
+              className="h-50 2-40 tw-text-red-700"
+              onClick={handleRemoveInput.bind(null, index)}
+              startIcon={<DeleteIcon />}
             />
-            <CustomInput
-              placeholder="Enter company address"
-              type="text"
-              name={`ca_address_${index + 1}`}
-              register={register}
-              errors={errors}
-            />
-            <IconButton
-              aria-label="delete"
-              color="danger"
-              onClick={() => {
-                console.log('index', value.id);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
           </div>
         ))}
       </div>
@@ -266,9 +274,9 @@ export default function FormForCompanyDetails({
             name="ac_country"
             placeholder="Country"
             type="select"
-            onChange={handleCountryChange}
+            onChange={onCountryChange}
             isRequired={true}
-            errors={errors}
+            errors={error}
             options={COUNTRIES}
           />
           <CustomSelect
@@ -353,5 +361,14 @@ FormForCompanyDetails.propTypes = {
   handleInputChange: PropTypes.func,
   inputValues: PropTypes.arrayOf,
   // eslint-disable-next-line react/forbid-prop-types
-  control: PropTypes.any
+  control: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  cities: PropTypes.any,
+  country: PropTypes.string,
+  onCountryChange: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  error: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  companyAddressFields: PropTypes.any,
+  handleRemoveInput: PropTypes.func
 };

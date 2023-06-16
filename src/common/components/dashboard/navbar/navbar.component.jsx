@@ -88,7 +88,7 @@ export default function Navbar({ setToggle, value }) {
               />
               <div className="tw-flex tw-items-center">
                 <span className="tw-font-dm tw-text-base tw-font-normal tw-leading-6 tw-text-text-dark-gray">
-                  {`${user?.username}`}
+                  {`${user?.userName}`}
                 </span>
                 <ExpandMoreIcon />
               </div>
@@ -130,19 +130,19 @@ export default function Navbar({ setToggle, value }) {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={profileMenu}>
+          {/* <MenuItem onClick={profileMenu}>
             <Avatar /> Profile
-          </MenuItem>
-          <MenuItem onClick={profileMenu}>
+          </MenuItem> */}
+          {/* <MenuItem onClick={profileMenu}>
             <Avatar /> My account
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={profileMenu}>
+          </MenuItem> */}
+          {/* <Divider /> */}
+          {/* <MenuItem onClick={profileMenu}>
             <ListItemIcon>
               <PersonAdd fontSize="small" />
             </ListItemIcon>
             Add another account
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={profileMenu}>
             <ListItemIcon>
               <Settings fontSize="small" />
