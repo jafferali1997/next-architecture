@@ -6,9 +6,9 @@ export default function Modal({ show = false, title, children, onClose }) {
   const { open, register, handleSubmit, setValue, errors, handleClose } = useModal(show);
 
   return (
-    <Dialog open={show} onClose={onClose}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>{children}</DialogContent>
+    <Dialog open={show} onClose={onClose} className='custom_modal_design'>
+      <DialogTitle className='tw-bg-skyblue tw-py-[14px] tw-px-4 tw-rounded-tl-[20px] tw-rounded-tr-[20px] tw-font-dm tw-font-bold tw-text-xl tw-leading-8 tw-text-text-dark-gray'>{title}</DialogTitle>
+      <DialogContent className='tw-px-4 !tw-pt-7 tw-pb-6'>{children}</DialogContent>
     </Dialog>
   );
 }
