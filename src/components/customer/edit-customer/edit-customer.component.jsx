@@ -130,7 +130,7 @@ export default function EditCustomer() {
                     placeholder="Country"
                     type="select"
                     options={COUNTRIES}
-                    onChange={handleCountryChange}
+                    onChange={onCountryChange}
                     control={control}
                     errors={errors}
                   />
