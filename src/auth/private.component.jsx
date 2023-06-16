@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { getAccessToken } from '@/common/utils/access-token.util';
+import { getAccessToken, isLoginVerified } from '@/common/utils/access-token.util';
 import Navbar from '@/common/components/dashboard/navbar/navbar.component';
 import Sidebar from '@/common/components/dashboard/sidebar/sidebar.component';
+import { getUser, isEmailVerified, isPhoneVerified } from '@/common/utils/users.util';
 
 /**
  * Return the component if access token is verified and return to home page if its not
@@ -16,12 +17,34 @@ export default function Private({ component }) {
   const [toggle, setToggle] = useState(false);
 
   const router = useRouter();
+  const user = getUser();
 
-  if (!getAccessToken()) {
+  if (!getAccessToken() && user) {
     if (typeof window === 'object') {
       router.push('/');
     }
   }
+
+  if (!isPhoneVerified() && user) {
+    if (typeof window === 'object') {
+      router.push(
+        `/profile?userName=${user.userName}&email=${user.email}&userId=${user.id}`
+      );
+    }
+  }
+
+  if (!isEmailVerified() && user) {
+    if (typeof window === 'object') {
+      router.push(`/verify-email?type=email-verification&email=${user.email}`);
+    }
+  }
+
+  if (!isLoginVerified() && user) {
+    if (typeof window === 'object') {
+      router.push(`/two-factor-auth?userId=${user.id}&phone=${user.phone}`);
+    }
+  }
+
   return (
     <div className="dashboard-main">
       <div className="sidebar tw-basis-1/6">

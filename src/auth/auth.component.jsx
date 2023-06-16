@@ -7,7 +7,7 @@ import Private from './private.component';
 
 /**
  * Return the component according to it's type
- * @param {component, type} props commponet and type of the component
+ * @param {component, type} props component and type of the component
  * @returns component
  */
 export default function Auth({ component, type = AUTH.PUBLIC }) {

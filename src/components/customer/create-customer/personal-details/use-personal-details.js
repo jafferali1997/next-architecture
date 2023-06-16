@@ -13,6 +13,7 @@ import {
   getSingleCustomer,
   updateCustomer
 } from '@/provider/features/customer/customer.slice';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -53,6 +54,8 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     resolver: yupResolver(validationSchema),
     mode: 'onBlur'
   });
+  const { handleCountryChange, cities, error, setError, setCountry, country } =
+    useCountryCity();
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -75,7 +78,9 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
       if (data.payload) {
         data = data.payload;
         Object.keys(data).forEach((key) => setValue(key, data[key]));
-
+        handleCountryChange({ target: { value: data.country } });
+        setCountry(data.country);
+        setValue('city', data.city);
         setSelectedPriceGroup(
           data.priceGroup.map((item) => {
             return allPriceGroup.find((price) => Number(price.id) === item.id);
@@ -91,6 +96,13 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     [allPriceGroup, allDiscountGroup]
   );
 
+  const onCountryChange = (e) => {
+    console.log(e.target.value);
+    setValue('country', e.target.value);
+    setValue('city', '');
+    handleCountryChange(e);
+  };
+
   useEffect(() => {
     const id = Number(searchParams.get('id'));
     if (id) {
@@ -99,6 +111,10 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
   }, [searchParams, allPriceGroup, allDiscountGroup, fetchData]);
 
   const onSubmit = async (value) => {
+    if (!country) {
+      setError('Country is required');
+      return;
+    }
     const priceGroups = [
       ...selectedPriceGroup.map((item) => {
         return Number(item.value);
@@ -117,7 +133,7 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
       address: value.address,
       city: value.city,
       country: value.country,
-      postalCode: Number(value.postalCode)
+      postalCode: value.postalCode
     };
     let response = null;
     if (searchParams.get('id')) {
@@ -169,6 +185,10 @@ export default function usePersonalDetails({ handleTabClick, handleTabCompleted 
     router,
     errors,
     handleButtonClickedit,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error
   };
 }

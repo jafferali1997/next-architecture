@@ -1,0 +1,30 @@
+.status_dropdown .MuiOutlinedInput-notchedOutline{
+    border: none;
+}
+.status_dropdown.open{
+    background: #F2F2F2;
+}
+
+.status_dropdown.accepted{
+    background: #F1FFB9;
+    color: #A58825;
+}
+.status_dropdown.accepted svg path{
+    fill: #A58825;
+}
+
+.status_dropdown.rejected{
+    background: #FFE8E8;
+    color: #A60A0A;
+}
+.status_dropdown.rejected svg path{
+    fill: #A60A0A;
+}
+
+.status_dropdown.invoiced{
+    background: #DCFFDE;
+    color: #0DA60A;
+}
+.status_dropdown.invoiced svg path{
+    fill: #0DA60A;
+}

@@ -20,7 +20,8 @@ export default function CustomSelect({
   isRequired = false,
   inlineLabel = false,
   labelClassName = '',
-  control = null
+  control = null,
+  disabled = false
 }) {
   return (
     <div
@@ -37,14 +38,17 @@ export default function CustomSelect({
           <Controller
             name={name}
             {...(control && { control })}
+            disabled={disabled}
             defaultValue={defaultValue}
-            {...(value && { value })}
             className="tw-w-full"
             render={({ field }) => (
               <Select
                 {...field}
                 {...(onChange && { onChange })}
-                className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
+                {...(value && { value })}
+                className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${
+                  errors && errors[name] && 'error-field'
+                } ${className} ${!disabled || 'disabled-input'} `}
               >
                 {options?.map((item) => (
                   <MenuItem key={item.value} value={item.value}>
@@ -62,7 +66,10 @@ export default function CustomSelect({
             defaultValue={defaultValue}
             {...(onChange && { onChange })}
             {...(value && { value })}
-            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
+            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${
+              errors && errors[name] && 'error-field'
+            } ${className} ${!disabled || 'disabled-input'} `}
+            disabled={disabled}
           >
             {options?.map((item) => (
               <MenuItem key={item.value} value={item.value}>
@@ -99,6 +106,7 @@ CustomSelect.propTypes = {
   isRequired: PropTypes.bool,
   register: PropTypes.func,
   inlineLabel: PropTypes.bool,
+  disabled: PropTypes.bool,
   labelClassName: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   control: PropTypes.any

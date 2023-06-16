@@ -12,15 +12,18 @@ const initialState = {
     message: ''
   },
   getAll: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' },
-  detlete: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' }
+  delete: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' }
 };
 
 export const createProduct = createAsyncThunk(
   'product/create',
-  async ({ payload }, thunkAPI) => {
+  async ({ payload, successCallback }, thunkAPI) => {
     try {
       const response = await productService.createProduct(payload);
       if (response.Succeeded) {
+        if (successCallback) {
+          successCallback();
+        }
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
@@ -62,10 +65,13 @@ export const getAllProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
   'product/update',
-  async ({ payload: { id, data } }, thunkAPI) => {
+  async ({ payload: { id, data }, successCallback }, thunkAPI) => {
     try {
       const response = await productService.updateProduct(id, data);
       if (response.Succeeded) {
+        if (successCallback) {
+          successCallback();
+        }
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);

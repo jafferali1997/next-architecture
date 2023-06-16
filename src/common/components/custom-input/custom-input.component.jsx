@@ -45,6 +45,7 @@ export default function CustomInput({
   inlineLabel = false,
   labelClassName = '',
   readOnly = false,
+  onClick = null,
   ref = null
 }) {
   const {
@@ -85,6 +86,7 @@ export default function CustomInput({
       <div className="tw-w-full">
         <Input
           {...(register && register(`${name}`))}
+          {...(onClick && { onClick })}
           name={name}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
@@ -125,6 +127,7 @@ CustomInput.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
   value: PropTypes.string,
   className: PropTypes.string,
   endIcon: PropTypes.element,

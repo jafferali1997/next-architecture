@@ -24,7 +24,9 @@ export default function Profile() {
     control,
     onCountryChange,
     cities,
-    logoutClickHandler
+    logoutClickHandler,
+    country,
+    error
   } = useProfile();
 
   return (
@@ -100,13 +102,14 @@ export default function Profile() {
               <div className="input-group">
                 <CustomSelect
                   label="Country"
-                  name="country"
                   inlineLabel
+                  value={country}
                   options={COUNTRIES}
                   onChange={onCountryChange}
                   control={control}
+                  name="country"
                   isRequired={true}
-                  errors={errors}
+                  errors={error}
                 />
               </div>
               <div className="input-group">

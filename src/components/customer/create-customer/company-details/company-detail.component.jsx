@@ -25,10 +25,14 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
     handleAddInput,
     handleInputChange,
     inputValues,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error,
+    companyAddressFields,
+    handleRemoveInput
   } = useCompanyDetails({ handleTabClick, handleTabCompleted });
-
-  const { handleCountryChange, cities } = useCountryCity();
 
   return (
     <div className="company-details-wrapper">
@@ -47,9 +51,10 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
           setIsShowInPdf={setIsShowInPdf}
           isVatEnabled={isVatEnabled}
           setIsVatEnabled={setIsVatEnabled}
-          handleCountryChange={handleCountryChange}
-          countries={COUNTRIES}
           cities={cities}
+          country={country}
+          onCountryChange={onCountryChange}
+          error={error}
           handleCityChange={handleCityChange}
           handleTabClick={handleTabClick}
           setIsSubmit={setIsSubmit}
@@ -59,6 +64,8 @@ export default function CompanyDetails({ handleTabClick, handleTabCompleted }) {
           handleInputChange={handleInputChange}
           inputValues={inputValues}
           control={control}
+          companyAddressFields={companyAddressFields}
+          handleRemoveInput={handleRemoveInput}
         />
       </div>
     </div>

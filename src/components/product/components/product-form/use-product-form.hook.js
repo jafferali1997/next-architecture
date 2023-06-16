@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
-import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
+import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
 
 export default function useProductForm(
   categories,
@@ -16,12 +16,15 @@ export default function useProductForm(
 ) {
   const [modalData, setModalData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [search, setSearch] = useState('');
   const [categoryId, setCategoryId] = useState(0);
   const [categoryToMap, setCategoryToMap] = useState([]);
   const [parentCategory, setParentCategory] = useState([]);
   const [filteredPriceGroup, setFilteredPriceGroup] = useState([]);
   const [filteredDiscountGroup, setFilteredDiscountGroup] = useState([]);
   const dispatch = useDispatch();
+  const ref = useRef();
   const priceGroupList = useSelector((state) => state.priceGroup.getAll);
   const discountGroupList = useSelector((state) => state.discountGroup.getAll);
 
@@ -51,6 +54,19 @@ export default function useProductForm(
   }, []);
 
   useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenDropdown(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
+
+  useEffect(() => {
     if (categories?.length >= 1) {
       if (
         categoryId &&
@@ -76,7 +92,10 @@ export default function useProductForm(
             label: 'Group Name',
             type: 'select',
             value: data.id,
-            options: filteredPriceGroup
+            options: [
+              ...filteredPriceGroup,
+              { label: data.priceGroupName, value: data.id }
+            ]
           },
           { id: index, label: 'price', value: data.price, type: 'number' }
         ]);
@@ -100,7 +119,10 @@ export default function useProductForm(
             id: index,
             label: 'Group Name',
             type: 'select',
-            options: filteredDiscountGroup,
+            options: [
+              ...filteredDiscountGroup,
+              { label: data.discountGroupName, value: data.id }
+            ],
             value: data.id
           },
           { id: index, label: 'discount', value: data.discount }
@@ -167,7 +189,7 @@ export default function useProductForm(
           id: data[0].value,
           priceGroupName: data[0].options.find((item) => item.value === data[0].value)
             .label,
-          price: data[1].value
+          price: Number(data[1].value)
         },
         data[0].id
       );
@@ -191,19 +213,19 @@ export default function useProductForm(
         id: data[0].value,
         priceGroupName: data[0].options.find((item) => item.value === data[0].value)
           .label,
-        price: data[1].value
+        price: Number(data[1].value)
       });
     }
   };
 
   const handleDeleteGroup = (index, data) => {
-    if (data[1].label === 'price') {
+    if (data.price !== undefined) {
+      handleFilteredPriceGroup('Delete', data.id);
       handlePriceInput(null, index, true);
-      handleFilteredPriceGroup('Delete', data[0].value);
     }
-    if (data[1].label === 'discount') {
+    if (data.discount !== undefined) {
+      handleFilteredDiscountGroup('Delete', data.id);
       handleDiscountInput(null, index, true);
-      handleFilteredDiscountGroup('Delete', data[0].value);
     }
   };
 
@@ -250,6 +272,11 @@ export default function useProductForm(
     openPopup,
     setOpenPopup,
     handleModalSubmit,
-    handleDeleteGroup
+    handleDeleteGroup,
+    ref,
+    openDropdown,
+    setOpenDropdown,
+    setSearch,
+    search
   };
 }

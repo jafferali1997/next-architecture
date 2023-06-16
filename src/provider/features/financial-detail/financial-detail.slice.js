@@ -13,7 +13,7 @@ const initialState = {
     message: ''
   },
   getAll: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' },
-  detlete: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' }
+  delete: { data: null, isError: false, isSuccess: false, isLoading: false, message: '' }
 };
 
 export const createFinancialDetail = createAsyncThunk(

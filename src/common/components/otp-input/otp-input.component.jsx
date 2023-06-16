@@ -24,11 +24,11 @@ export default function OtpInput({
 
   const getInputBorderClass = (index) => {
     if (index === 0) {
-      return 'tw-rounded-r-none';
+      return '!tw-rounded-r-none';
     } else if (index === maxInput - 1) {
-      return 'tw-rounded-l-none';
+      return '!tw-rounded-l-none';
     } else {
-      return 'tw-rounded-none';
+      return '!tw-rounded-none';
     }
   };
 
@@ -48,7 +48,7 @@ export default function OtpInput({
               id={index}
               type="text"
               className={`input-field default-input tw-flex tw-max-w-[51px] tw-items-center tw-justify-center tw-px-3 tw-text-center hover:tw-border-text-dark-gray
-          ${getInputBorderClass(index)}`}
+              ${getInputBorderClass(index)}`}
               placeholder={placeholder}
               defaultValue={val}
               maxLength={1}

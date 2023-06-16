@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/navigation';
 import { getOrCreateTag } from '@/provider/features/tag/tag.slice';
 import useCreateCategories from '@/components/categories/use-create-categories.hooks';
 import { createProduct, updateProduct } from '@/provider/features/product/product.slice';
@@ -40,6 +41,8 @@ export default function useCreateProduct(id = null) {
   } = useForm({
     resolver: yupResolver(validationSchema)
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     if (getOrCreateTagData?.isError) {
@@ -126,9 +129,16 @@ export default function useCreateProduct(id = null) {
         tags: selectedTag.map((item) => item.id)
       };
       if (id) {
-        dispatch(updateProduct({ payload: { data: payload, id } }));
+        dispatch(
+          updateProduct({
+            payload: { data: payload, id },
+            successCallback: () => router.push('/product')
+          })
+        );
       } else {
-        dispatch(createProduct({ payload }));
+        dispatch(
+          createProduct({ payload, successCallback: () => router.push('/product') })
+        );
       }
     } else {
       setError('category', { message: 'category is required' });

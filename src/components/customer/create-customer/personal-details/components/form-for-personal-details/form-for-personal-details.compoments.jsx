@@ -27,10 +27,12 @@ export default function FormForPersonalDetails({
   setAllDiscountGroup,
   selectedDiscountGroup,
   setSelectedDiscountGroup,
-  control
+  control,
+  cities,
+  country,
+  onCountryChange,
+  error
 }) {
-  const { cities, handleCountryChange } = useCountryCity();
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-box-grid-4col">
@@ -88,14 +90,13 @@ export default function FormForPersonalDetails({
 
         <CustomSelect
           label="Country"
-          name="country"
-          control={control}
-          errors={errors}
-          placeholder="Country"
-          onChange={handleCountryChange}
-          type="select"
-          isRequired={true}
+          value={country}
           options={COUNTRIES}
+          onChange={onCountryChange}
+          control={control}
+          name="country"
+          isRequired={true}
+          errors={error}
         />
         <CustomSelect
           label="City"
@@ -167,5 +168,11 @@ FormForPersonalDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  control: PropTypes.any
+  control: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  cities: PropTypes.any,
+  country: PropTypes.string,
+  onCountryChange: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  error: PropTypes.any
 };

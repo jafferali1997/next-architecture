@@ -88,11 +88,13 @@ export const loginAndSignUpWithGoogle = createAsyncThunk(
 export const logout = createAsyncThunk('auth/logout', async (payload, thunkAPI) => {
   try {
     const response = await authService.logout();
+    localStorage.removeItem('user');
     if (response.Succeeded) {
       return response;
     }
     return thunkAPI.rejectWithValue(response);
   } catch (error) {
+    localStorage.removeItem('user');
     return thunkAPI.rejectWithValue({ payload: error });
   }
 });

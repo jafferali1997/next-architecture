@@ -58,15 +58,10 @@ export default function useLogin() {
   const borderSuc = {
     border: '1px solid #10FF61'
   };
-  const moveRouterGenOtp = (data) => {
-    router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
-  };
 
   const moveRouter = (data) => {
     if (data.isPhoneVerified) {
-      dispatch(
-        generateOtp({ payload: { ...data }, successCallBack: moveRouterGenOtp(data) })
-      );
+      router.push(`/two-factor-auth?userId=${data.id}&phone=${data.phone}`);
     } else {
       if (data.isEmailVerified) {
         router.push(
