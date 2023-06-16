@@ -40,12 +40,12 @@ export default function useLogin() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const accessToken = getAccessToken();
-    if (accessToken) {
-      router.push('/customer');
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const accessToken = getAccessToken();
+  //   if (accessToken) {
+  //     router.push('/customer');
+  //   }
+  // }, [router]);
 
   // functions
   const toggleShowPassword = () => {
