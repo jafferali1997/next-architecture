@@ -69,7 +69,9 @@ module.exports = {
         'disabled-input': '#E4E4E4',
         danger: '#EF2020',
         success: '#10FF61',
-        'primary-purple': '#6F6AF5'
+        'primary-purple': '#6F6AF5',
+        skyblue:'#E3ECF4',
+        'lightest-gray':'#CDCDCD'
       },
       boxShadow: {
         custom: '0px 0px 31px rgba(29, 78, 216, 0.1)',

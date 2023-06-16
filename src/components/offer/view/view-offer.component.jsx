@@ -255,7 +255,7 @@ export default function ViewOffer() {
                               </Menu>
                             </>
                           ) : typeof rowData[column.field] === 'object' ? (
-                            <CustomSelect options={customoptions} onChange={handleChange} className={`!tw-w-fit !tw-px-0 status_dropdown ${selectvalue? selectvalue : customoptions && customoptions[0].value} ${selectedId === ind && selectedValue}`}/>
+                            <CustomSelect options={customoptions} defaultValue={customoptions && customoptions[0].value} onChange={handleChange} className={`!tw-w-fit !tw-px-0 status_dropdown ${selectvalue? selectvalue : customoptions && customoptions[0].value} ${selectedId === ind && selectedValue}`}/>
                           ) : (
                             rowData[column.field]
                           )}

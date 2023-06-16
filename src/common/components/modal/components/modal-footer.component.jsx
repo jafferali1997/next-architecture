@@ -8,10 +8,10 @@ export default function ModalFooter({
   onClose
 }) {
   return (
-    <DialogActions>
-      <CustomButton className="btn-cancel" onClick={onClose} text={cancelButtonText} />
+    <DialogActions className="tw-pt-4 tw-gap-4">
+      <CustomButton className="tw-px-4 tw-opacity-100 !tw-h-fit tw-py-[10px] tw-rounded-md tw-bg-lightest-gray tw-text-white tw-font-dm tw-font-semibold tw-text-sm tw-leading-4" onClick={onClose} text={cancelButtonText} />
       {submitButtonText && (
-        <CustomButton type="submit" className="btn-primary" text={submitButtonText} />
+        <CustomButton type="submit" className="tw-px-4 tw-opacity-100 !tw-h-fit tw-py-[10px] tw-rounded-md tw-bg-primary tw-text-white tw-font-dm tw-font-semibold tw-text-sm tw-leading-4" text={submitButtonText} />
       )}
     </DialogActions>
   );
