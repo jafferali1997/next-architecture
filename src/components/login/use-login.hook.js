@@ -56,7 +56,7 @@ export default function useLogin() {
     border: '1px solid red'
   };
   const borderSuc = {
-    border: '1px solid #10FF61'
+    border: '1px solid #E5E6EB'
   };
 
   const moveRouter = (data) => {

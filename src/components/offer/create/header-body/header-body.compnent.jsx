@@ -131,7 +131,11 @@ export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
             </div>
           </div>
 
-          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+          <StepperFooter
+            back="customerDetails"
+            handleTabClick={handleTabClick}
+            setIsSubmit={setIsSubmit}
+          />
         </form>
       </div>
     </div>

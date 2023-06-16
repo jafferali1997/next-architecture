@@ -46,7 +46,7 @@ export default function OtpInput({
             <input
               key={`${val} - ${index}`}
               id={index}
-              type="number"
+              type="text"
               className={`input-field default-input tw-flex tw-max-w-[51px] tw-items-center tw-justify-center tw-px-3 tw-text-center hover:tw-border-text-dark-gray
               ${getInputBorderClass(index)}`}
               placeholder={placeholder}

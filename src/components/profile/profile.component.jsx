@@ -228,7 +228,8 @@ export default function Profile() {
                   options={[
                     { value: '10-20', label: '10 - 20' },
                     { value: '30-50', label: '30 - 50' },
-                    { value: '50-100', label: '50 - 100' }
+                    { value: '50-100', label: '50 - 100' },
+                    { value: '100-above', label: '100 - Above' }
                   ]}
                   control={control}
                   errors={errors}
@@ -259,7 +260,7 @@ export default function Profile() {
                 />
               </div>
               <div className="submit-button">
-                <CustomButton type="Submit" className="btn-primary" text="Submit" />
+                <CustomButton type="submit" className="btn-primary" text="Submit" />
               </div>
             </div>
           </form>
