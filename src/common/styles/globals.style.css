@@ -280,6 +280,7 @@
 
   @import url('./component-styles/input.style.css');
   @import url('./component-styles/switch.style.css');
+  @import url('./component-styles/dropdown.style.css');
   
 }
 .payment-details-radios label {

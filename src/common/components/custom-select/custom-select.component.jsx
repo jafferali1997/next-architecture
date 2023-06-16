@@ -37,7 +37,7 @@ export default function CustomSelect({
           <Controller
             name={name}
             {...(control && { control })}
-            defaultValue={defaultValue}
+            defaultValue={options && options[0].value}
             {...(value && { value })}
             className="tw-w-full"
             render={({ field }) => (
@@ -59,7 +59,7 @@ export default function CustomSelect({
         {!control && (
           <Select
             name={name}
-            defaultValue={defaultValue}
+            defaultValue={options && options[0].value}
             {...(onChange && { onChange })}
             {...(value && { value })}
             className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${className}`}
