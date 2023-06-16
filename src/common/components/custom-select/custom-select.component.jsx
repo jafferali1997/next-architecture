@@ -30,7 +30,7 @@ export default function CustomSelect({
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
       )}
 
-      <div className="tw-w-full">
+      <div className="tw-w-full tw-mt-2">
         <Controller
           name={name}
           {...(control && { control })}

@@ -82,7 +82,7 @@ export default function CustomInput({
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
       )}
 
-      <div className="tw-w-full">
+      <div className="tw-w-full tw-mt-2">
         <Input
           {...(register && register(`${name}`))}
           name={name}

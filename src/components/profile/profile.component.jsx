@@ -42,7 +42,7 @@ export default function Profile() {
           Profile Details
         </h1>
         <div className="profile-form-section tw-mb-5 tw-mt-[34px]">
-          <div className="profile-form-heading tw-flex tw-gap-3 tw-pt-[34px]">
+          <div className="profile-form-heading tw-flex tw-gap-3">
             <div className="color-width tw-min-h-[28px] tw-min-w-[6px] tw-rounded tw-bg-primary" />
             <h3 className="tw-font-dm tw-text-[18px] tw-font-medium tw-not-italic tw-leading-[24px] tw-text-[#050707]">
               Personal Details

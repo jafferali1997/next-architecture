@@ -9,6 +9,7 @@ import useViewOffer from './view.offer.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import { IconButton, Menu, MenuItem } from '@mui/material/node';
 import Select from '@mui/material/Select';
+import FilterBar from '@/common/components/filter-bar/filter-bar';
 // import Select from '@/common/components/select/select.component';
 
 const breadscrumbs = [
@@ -20,6 +21,14 @@ const dropdownoptions = [
   { id: 1, name: 'option1', link: '/option1' },
   { id: 2, name: 'option2', link: '/option2' },
   { id: 3, name: 'option3', link: '/option3' }
+];
+
+const options = [
+  { id: 1, name: 'conertTo', link: 'Convert To' },
+];
+
+const option = [
+  { id: 1, name: 'all', link: 'All' },
 ];
 
 const offers = [
@@ -135,6 +144,8 @@ export default function ViewOffer() {
 
       <div className="tw-mt-4 tw-rounded-[10px] tw-border-[1px] tw-border-border-gray tw-bg-white tw-py-5">
         <TableFilterTabs filteropions={filteropions} action={handleTabsFilter} />
+
+        {/* <FilterBar dropdownoptions={dropdownoptions} options={options} option ={option} /> */}
 
         <table class="... tw-mt-[18px] tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
           <thead>
