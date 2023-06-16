@@ -4,6 +4,13 @@ import Breadscrumb from '@/common/components/breadscrumb/breadscrumb.component';
 import PlusIcon from '@/common/icons/plus.icon';
 import DownloadDropdownBtn from '@/common/components/download-dropdown-button/download-dropdown-button.component';
 import TableFilterTabs from '@/common/components/table-filter-tabs/table-filter-table.component';
+import useViewOffer from './view.offer.hook';
+import CustomInput from '@/common/components/custom-input/custom-input.component';
+import { IconButton, Menu, MenuItem } from '@mui/material/node';
+// import Select from '@/common/components/select/select.component';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
@@ -49,6 +56,12 @@ const filteropions = [
 ];
 
 export default function ViewOffer() {
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
   const {
     isSubmit,
     setIsSubmit,
@@ -83,7 +96,7 @@ export default function ViewOffer() {
     dropDownOptions,
     selectedId,
     handleTabsFilter
-  } = useViewOffer();
+  } = useViewOffer({});
 
   return (
     <div className="tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3">
@@ -241,18 +254,38 @@ export default function ViewOffer() {
                               </Menu>
                             </>
                           ) : typeof rowData[column.field] === 'object' ? (
-                            <Select
-                              onChange={(event, value) =>
-                                handleSelectChange(event, value, ind)
-                              }
-                              // onChange={(e, id) => console.log(ind, id)}
-                              options={rowData.status}
-                              placeholder="Open"
-                              className={`tw-h-[29px] tw-w-[72px] ${
-                                selectedId === ind && selectedValue
-                              }`}
-                            />
+                              <>
+                              
+                              <Select
+                                labelId="demo-simple-select-autowidth-label"
+                                id="demo-simple-select-autowidth"
+                                value={age}
+                                onChange={handleChange}
+                                autoWidth
+                                label="Age"
+                                className={` ${selectedId === ind && selectedValue}`}
+                              >
+                                
+                                {rowData.status?.map((option) => (
+                                  <MenuItem value={option.label}>{option.label}</MenuItem>
+                                ))}
+                                {/* <MenuItem selected value={10}>Twenty</MenuItem>
+                              <MenuItem value={21}>Twenty one</MenuItem>
+                              <MenuItem value={22}>Twenty one and a half</MenuItem> */}
+                              </Select>
+                              </>
                           ) : (
+                            // <Select
+                            //   onChange={(event, value) =>
+                            //     handleSelectChange(event, value, ind)
+                            //   }
+                            //   // onChange={(e, id) => console.log(ind, id)}
+                            //   options={rowData.status}
+                            //   placeholder="Open"
+                            //   className={`tw-h-[29px] tw-w-[72px] ${
+                            //     selectedId === ind && selectedValue
+                            //   }`}
+                            // />
                             rowData[column.field]
                           )}
                         </td>
