@@ -61,7 +61,7 @@ export default function CreateOffer() {
         fill="#7E7D7D"
       />
     </svg>`,
-      content: <AddCustomer />
+      content: <LineItem />
     },
     {
       id: 'footerDetails',
@@ -78,7 +78,7 @@ export default function CreateOffer() {
         fill="#7E7D7D"
       />
     </svg>`,
-      content: <AddCustomer />
+      content: <FooterDetails />
     },
     {
       id: 'chooseTemplate',
@@ -95,7 +95,7 @@ export default function CreateOffer() {
         fill="#7E7D7D"
       />
     </svg>`,
-      content: <AddCustomer />
+      content: <TemplateChoose />
     },
     {
       id: 'preview',
@@ -112,7 +112,7 @@ export default function CreateOffer() {
         fill="#7E7D7D"
       />
     </svg>`,
-      content: <AddCustomer />
+      content: <OfferPreview />
     }
   ];
   return (

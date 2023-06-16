@@ -1,10 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import DownloadDropdownBtn from '@/common/components/download-dropdown-button/download-dropdown-button.component';
+import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 
 function OfferPreview() {
+  const dropdownoptions = [
+    { id: 1, name: 'option1', link: '/option1' },
+    { id: 2, name: 'option2', link: '/option2' },
+    { id: 3, name: 'option3', link: '/option3' }
+  ];
   return (
     <>
       <div className="tw-flex tw-flex-col tw-gap-20">
+        <div className="tw-flex tw-justify-end">
+          <DownloadDropdownBtn text="Download Offers" dropdownoptions={dropdownoptions} />
+        </div>
         <div className="tw-flex tw-justify-between">
           <h1 className="tw-text-2xl tw-font-bold tw-leading-[29px]">100020</h1>
           <Link href="/">
@@ -71,7 +81,7 @@ function OfferPreview() {
           </div>
         </div>
 
-        <section className=" tw-bg-[#FFFFFF tw-h-[378px] tw-w-[1072px] tw-gap-4 tw-rounded-[20px] tw-border tw-border-solid tw-border-[#E2E2E2] tw-p-6">
+        <section className=" tw-bg-[#FFFFFF tw-h-[378px] tw-w-full tw-gap-4 tw-rounded-[20px] tw-border tw-border-solid tw-border-[#E2E2E2] tw-p-6">
           <div>
             <table class="... tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
               <thead>
@@ -204,6 +214,7 @@ function OfferPreview() {
         </div>
         <div>QR Code</div>
       </div>
+      <StepperFooter submitText="save" back="customerDetails" />
     </>
   );
 }

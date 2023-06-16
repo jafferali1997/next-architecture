@@ -14,9 +14,34 @@ import DeleteIcon from '@/common/icons/delete.icon';
 import { deleteProduct, getAllProduct } from '@/provider/features/product/product.slice';
 import useDebounce from '@/common/hooks/useDebounce';
 
+const FEATURES_TO_BE_SHOW = {
+  id: 'Product ID #',
+  productName: 'Product Name',
+  description: 'Description',
+  netPrice: 'Net Price',
+  grossPrice: 'Gross Price',
+  purchasePrice: 'Purchase Price',
+  manufacturer: 'Manufacturer',
+  unit: 'Unit',
+  minSellingPrice: 'Min Selling Price',
+  location: 'Location',
+  quantity: 'No. of Pieces',
+  taxRate: 'Tax Rate',
+  productCategorys: 'Product Categorys',
+  priceGroups: 'Price Groups',
+  discountGroups: 'Discount Groups',
+  tags: 'Tags'
+};
+
 export default function useProduct() {
   const [searchText, setSearchText] = useState();
-  const FILES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
+  const FILES_TO_BE_IGNORE = [
+    'createdBy',
+    'updatedBy',
+    'createdAt',
+    'updatedAt',
+    'businessDetailId'
+  ];
 
   const getActionColumn = () => {
     return {
@@ -34,21 +59,9 @@ export default function useProduct() {
           showInMenu
         />,
         <GridActionsCellItem
-          icon={<CircleIcon />}
-          label="Active"
-          onClick={() => handleStatusAction(cell.row)}
-          showInMenu
-        />,
-        <GridActionsCellItem
           icon={<EyeIcon />}
           label="View Detail"
           onClick={() => handleViewAction(cell.row)}
-          showInMenu
-        />,
-        <GridActionsCellItem
-          icon={<CommentIcon />}
-          label="Add comments"
-          onClick={() => handleAddCommentAction(cell.row)}
           showInMenu
         />,
         <GridActionsCellItem
@@ -72,7 +85,7 @@ export default function useProduct() {
     Object.keys(dataObject).forEach((key) => {
       let columnObject = {
         field: key,
-        headerName: key,
+        headerName: FEATURES_TO_BE_SHOW[key],
         headerClassName: 'table-heading ',
         cellClassName: 'table-data ',
         width: 200
@@ -305,11 +318,11 @@ export default function useProduct() {
   };
 
   const handleViewAction = (row) => {
-    router.push(`/product/details/${row.id}`);
+    router.push(`/product/detail/${row.id}`);
   };
 
   const handleDeleteAction = async (row) => {
-    const data = await dispatch(deleteProduct({ payload: row.id }));
+    await dispatch(deleteProduct({ payload: row.id }));
     fetchData();
   };
 
@@ -334,7 +347,7 @@ export default function useProduct() {
       getAllProduct({
         payload: {
           page: 1,
-          pageSize: 20,
+          pageSize: 10,
           sortColumn: 'id',
           sortOrder: 'DESC',
           condition

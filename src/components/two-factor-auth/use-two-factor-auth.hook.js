@@ -4,7 +4,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux';
-import { generateOtp, verifyOtp } from '@/provider/features/user/user.slice';
+import {
+  generateOtp,
+  getCurrentUser,
+  verifyOtp
+} from '@/provider/features/user/user.slice';
 
 export default function useTwoFactorAuth() {
   const searchParams = useSearchParams();
@@ -26,12 +30,16 @@ export default function useTwoFactorAuth() {
     setPhone(searchParams.get('phone'));
   }, [searchParams]);
 
+  useEffect(() => {
+    dispatch(generateOtp({ payload: null, successCallBack: () => {} }));
+  }, []);
+
   const resendOtpHandler = () => {
     dispatch(generateOtp({ successCallBack: () => {} }));
   };
   const moveRouter = (data) => {
     setIsOtpVerified(true);
-    router.push('/customer');
+    dispatch(getCurrentUser({ successCallBack: () => router.push('/customer') }));
   };
 
   const verifyOtpHandler = () => {

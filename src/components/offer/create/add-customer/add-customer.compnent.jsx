@@ -1,3 +1,5 @@
+'use client';
+
 import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
@@ -21,8 +23,26 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
         <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
           <CustomSelect
             options={[
-              { id: 'male', value: 'male', label: 'Male' },
-              { id: 'female', value: 'female', label: 'Female' }
+              {
+                id: 'Sweets (Zack Night)',
+                value: 'Sweets (Zack Night)',
+                label: 'Sweets (Zack Night)'
+              },
+              {
+                id: 'Michel (Justin Din)',
+                value: 'Michel (Justin Din)',
+                label: 'Michel (Justin Din)'
+              },
+              {
+                id: 'Alfonso Bator (Umit Usla)',
+                value: 'Alfonso Bator (Umit Usla)',
+                label: 'Alfonso Bator (Umit Usla)'
+              },
+              {
+                id: 'Coca-cola (John David)',
+                value: 'Coca-cola (John David)',
+                label: 'Coca-cola (John David)'
+              }
             ]}
             placeholder="John"
           />
@@ -126,16 +146,36 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
             />
             <Select
               options={[
-                { id: 'male', value: 'male', label: 'Male' },
-                { id: 'female', value: 'female', label: 'Female' }
+                { id: 'DHA', value: 'DHA', label: 'DHA' },
+                { id: 'Johar Town', value: 'Johar Town', label: 'Johar Town' },
+                { id: 'Gulberg III', value: 'Gulberg III', label: 'Gulberg III' },
+                { id: 'Model Town', value: 'Model Town', label: 'Model Town' }
               ]}
               placeholder="Select Address Label"
               label="Address Label"
             />
             <Select
               options={[
-                { id: 'male', value: 'male', label: 'Male' },
-                { id: 'female', value: 'female', label: 'Female' }
+                {
+                  id: 'Steel and Copper (Jack, 4140 Parker Rd. Allentown.....)',
+                  value: 'Steel and Copper (Jack, 4140 Parker Rd. Allentown.....)',
+                  label: 'Steel and Copper (Jack, 4140 Parker Rd. Allentown.....)'
+                },
+                {
+                  id: 'Fork N Knife (John, 4140 Parker Rd. Allentown.....)',
+                  value: 'Fork N Knife (John, 4140 Parker Rd. Allentown.....)',
+                  label: 'Fork N Knife (John, 4140 Parker Rd. Allentown.....)'
+                },
+                {
+                  id: 'Zapta Technology (Jack, 4140 Parker Rd. Allentown.....)',
+                  value: 'Zapta Technology (Jack, 4140 Parker Rd. Allentown.....)',
+                  label: 'Zapta Technology (Jack, 4140 Parker Rd. Allentown.....)'
+                },
+                {
+                  id: 'Steel and Copper (Jack, 4140 Parker Rd. Allentown.....)',
+                  value: 'Steel and Copper (Jack, 4140 Parker Rd. Allentown.....)',
+                  label: 'Steel and Copper (Jack, 4140 Parker Rd. Allentown.....)'
+                }
               ]}
               placeholder="Select Contact Person"
               label="Contact Person"

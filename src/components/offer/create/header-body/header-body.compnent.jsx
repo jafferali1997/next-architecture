@@ -1,15 +1,19 @@
 'use client';
 
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
-import useHeaderBody from './use-header-body.hook';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
 import PlusIcon from '@/common/icons/plus.icon';
+import useHeaderBody from './use-header-body.hook';
 
-export default function HeaderBody() {
-  const { isSubmit, setIsSubmit } = useHeaderBody();
+export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useHeaderBody({
+    handleTabClick,
+    handleTabCompleted
+  });
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -24,7 +28,7 @@ export default function HeaderBody() {
       </div>
       <div className="content-body">
         {' '}
-        <form onSubmit="">
+        <form onSubmit={onSubmit}>
           <div className="form-box-grid-2col">
             <CustomInput
               label="Company Name "
@@ -77,7 +81,26 @@ export default function HeaderBody() {
           <div>
             <h3 className="form-inner-heading">Body</h3>
             <div className="tw-flex tw-items-center tw-justify-between">
-              <div className="tw-min-w-[250px] tw-bg-slate-400">select</div>
+              <div className="tw-min-w-[250px]">
+                {' '}
+                <div className="tw-flex tw-h-9 tw-w-[257px] tw-flex-row tw-items-center tw-justify-between tw-gap-[46px] tw-rounded tw-bg-[#bbbbbb26] tw-py-2  tw-pl-2 tw-pr-2 ">
+                  <p className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-black">
+                    Disclaimer Text
+                  </p>
+                  <svg
+                    width="6"
+                    height="10"
+                    viewBox="0 0 6 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1.51302 0.833306C1.18763 0.507919 0.660076 0.50792 0.334689 0.833307C0.00930119 1.15869 0.00930119 1.68625 0.334688 2.01164L2.61591 4.29287C3.00644 4.68339 3.00644 5.31656 2.61592 5.70708L0.33469 7.98831C0.00930166 8.31369 0.00930071 8.84125 0.334688 9.16664C0.660076 9.49203 1.18763 9.49203 1.51302 9.16664L4.97258 5.70708C5.36311 5.31656 5.36311 4.68339 4.97258 4.29287L1.51302 0.833306Z"
+                      fill="#46474F"
+                    />
+                  </svg>
+                </div>
+              </div>
               <CustomButton
                 className="btn-secondary "
                 text="Add Body Text"
@@ -108,9 +131,13 @@ export default function HeaderBody() {
             </div>
           </div>
 
-          <StepperFooter setIsSubmit={setIsSubmit} />
+          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
         </form>
       </div>
     </div>
   );
 }
+HeaderBody.propTypes = {
+  handleTabClick: PropTypes.func.isRequired,
+  handleTabCompleted: PropTypes.func.isRequired
+};

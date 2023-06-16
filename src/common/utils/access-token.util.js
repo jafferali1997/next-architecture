@@ -12,6 +12,17 @@ export const getAccessToken = () => {
 };
 
 /**
+ * Retrive isLoginVerified Status
+ * @returns bool
+ */
+export const isLoginVerified = () => {
+  if (typeof window === 'object' && window?.localStorage?.getItem('user')) {
+    return JSON.parse(localStorage.getItem('user')).isLoginVerified;
+  }
+  return false;
+};
+
+/**
  * Retrive access token expiry date from local storage
  * @returns date | undefined
  */

@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
-import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
+import PropTypes from 'prop-types';
+import { isLoginVerified } from '@/common/utils/access-token.util';
 
 /**
  * Return a component or return to home page if access token is verified
@@ -9,10 +9,12 @@ import { isAccessTokenVerifed } from '@/common/utils/access-token.util';
  */
 export default function OnlyPublic({ component }) {
   const router = useRouter();
-  // if (!isAccessTokenVerifed) {
+  if (!isLoginVerified()) {
+    if (typeof window === 'object') {
+      router.push('/');
+    }
+  }
   return component;
-  // }
-  // router.push('/');
 }
 
 OnlyPublic.propTypes = {

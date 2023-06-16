@@ -19,6 +19,7 @@ const initialState = {
   },
   generateOtp: { ...generalState },
   verifyOtp: { ...generalState },
+  user: { ...generalState },
   generateForgetPasswordLink: { ...generalState },
   regenerateEmailLink: { ...generalState },
   changePasswordFromLink: { ...generalState },
@@ -73,12 +74,13 @@ export const verifyOtp = createAsyncThunk(
   }
 );
 
-export const generateForgetPasswordLink = createAsyncThunk(
-  'user/generateForgetPasswordLink',
-  async ({ payload, callBackMessage }, thunkAPI) => {
+export const getCurrentUser = createAsyncThunk(
+  'user/getCurrentUser',
+  async ({ successCallBack }, thunkAPI) => {
     try {
-      const response = await userService.generateForgetPasswordLink(payload);
+      const response = await userService.getCurrentUser();
       if (response.Succeeded) {
+        successCallBack(response.data);
         return response.data;
       }
       return thunkAPI.rejectWithValue(response);
@@ -125,6 +127,21 @@ export const changePassword = createAsyncThunk(
   async ({ payload, callBackMessage }, thunkAPI) => {
     try {
       const response = await userService.changePassword(payload);
+      if (response.Succeeded) {
+        return response.data;
+      }
+      return thunkAPI.rejectWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ payload: error });
+    }
+  }
+);
+
+export const generateForgetPasswordLink = createAsyncThunk(
+  'user/generateForgetPasswordLink',
+  async ({ payload, callBackMessage }, thunkAPI) => {
+    try {
+      const response = await userService.generateForgetPasswordLink(payload);
       if (response.Succeeded) {
         return response.data;
       }
@@ -212,23 +229,41 @@ const userSlice = createSlice({
         state.create.isError = true;
         state.create.data = null;
       })
+      .addCase(getCurrentUser.pending, (state) => {
+        state.user.isLoading = true;
+        state.user.message = '';
+        state.user.isError = false;
+        state.user.isSuccess = false;
+        state.user.data = null;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.user.isLoading = false;
+        state.user.isSuccess = true;
+        state.user.data = action.payload;
+      })
+      .addCase(getCurrentUser.rejected, (state, action) => {
+        state.user.message = action.payload.message;
+        state.user.isLoading = false;
+        state.user.isError = true;
+        state.user.data = null;
+      })
       .addCase(generateForgetPasswordLink.pending, (state) => {
-        state.create.isLoading = true;
-        state.create.message = '';
-        state.create.isError = false;
-        state.create.isSuccess = false;
-        state.create.data = null;
+        state.generateForgetPasswordLink.isLoading = true;
+        state.generateForgetPasswordLink.message = '';
+        state.generateForgetPasswordLink.isError = false;
+        state.generateForgetPasswordLink.isSuccess = false;
+        state.generateForgetPasswordLink.data = null;
       })
       .addCase(generateForgetPasswordLink.fulfilled, (state, action) => {
-        state.create.isLoading = false;
-        state.create.isSuccess = true;
-        state.create.data = action.payload;
+        state.generateForgetPasswordLink.isLoading = false;
+        state.generateForgetPasswordLink.isSuccess = true;
+        state.generateForgetPasswordLink.data = action.payload;
       })
       .addCase(generateForgetPasswordLink.rejected, (state, action) => {
-        state.create.message = action.payload.message;
-        state.create.isLoading = false;
-        state.create.isError = true;
-        state.create.data = null;
+        state.generateForgetPasswordLink.message = action.payload.message;
+        state.generateForgetPasswordLink.isLoading = false;
+        state.generateForgetPasswordLink.isError = true;
+        state.generateForgetPasswordLink.data = null;
       })
       .addCase(regenerateEmailLink.pending, (state) => {
         state.create.isLoading = true;
