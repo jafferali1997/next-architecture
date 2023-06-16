@@ -8,10 +8,8 @@ import TableFilterTabs from '@/common/components/table-filter-tabs/table-filter-
 import useViewOffer from './view.offer.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import { IconButton, Menu, MenuItem } from '@mui/material/node';
+import Select from '@mui/material/Select';
 // import Select from '@/common/components/select/select.component';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const breadscrumbs = [
   { id: 1, name: 'Documents', link: '/documents' },
