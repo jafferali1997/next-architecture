@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import {
   addPhoneAndGenerateOtp,
   generateOtp,
+  getCurrentUser,
   verifyOtp
 } from '@/provider/features/user/user.slice';
 import { createProfile } from '@/provider/features/profile/profile.slice';
@@ -117,19 +118,19 @@ export default function useProfile() {
     }
   }, []);
 
-  const moveRouter = (data) => {};
+  const moveRouter = (data) => {
+    dispatch(getCurrentUser({ successCallBack: () => router.push('/customer') }));
+  };
+
   const onCountryChange = (e) => {
     setValue('city', '');
     handleCountryChange(e);
   };
+
   const onSubmit = async (data) => {
-    const res = await dispatch(
+    dispatch(
       profileFinancialBusiness({ payload: { ...data }, callBackMessage: moveRouter })
     );
-    console.log(res, 'Profile response');
-    if (res.payload) {
-      router.push('/customer');
-    }
   };
 
   const sendOtp = () => {
@@ -146,7 +147,6 @@ export default function useProfile() {
     }
   };
   const handleOtpVerif = (data) => {
-    console.log(data);
     if (data) {
       setIsOtpVerified(true);
       localStorage.setItem(
@@ -163,15 +163,10 @@ export default function useProfile() {
   };
 
   const logoutClickHandler = async () => {
-    const response = await dispatch(logout());
-    console.log(response, 'response');
-    if (response?.payload) {
-      window.location.href = '/';
-    }
+    dispatch(logout());
   };
 
   const verifyOtpHandler = () => {
-    // console.log(otp)
     if (otp > 0) {
       const otpData = {
         otp: Number(otp)

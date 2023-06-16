@@ -49,6 +49,9 @@ const changePassword = async (data) => {
 
 const verifyEmail = async (data) => {
   const response = await api().post('/users/verify-email', data);
+  if (response.data.Succeeded) {
+    localStorage.setItem('user', JSON.stringify({ ...response.data.data }));
+  }
   return response.data;
 };
 
