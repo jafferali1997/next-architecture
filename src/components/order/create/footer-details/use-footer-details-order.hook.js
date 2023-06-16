@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 
-export default function useHeaderBody({ handleTabClick, handleTabCompleted }) {
+export default function useFooterDetailsOrder(handleTabClick, handleTabCompleted) {
   const [isSubmit, setIsSubmit] = useState(false);
+
   const onSubmit = () => {
-    handleTabClick('lineItems');
-    handleTabCompleted('headerBody');
+    handleTabClick('chooseTemplate');
+    handleTabCompleted('footerDetails');
   };
+
   return {
     isSubmit,
     setIsSubmit,

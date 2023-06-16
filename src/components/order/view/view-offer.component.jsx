@@ -4,10 +4,9 @@ import Breadscrumb from '@/common/components/breadscrumb/breadscrumb.component';
 import PlusIcon from '@/common/icons/plus.icon';
 import DownloadDropdownBtn from '@/common/components/download-dropdown-button/download-dropdown-button.component';
 import TableFilterTabs from '@/common/components/table-filter-tabs/table-filter-table.component';
-
+import useViewOffer from './view.offer.hook';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import Select from '@/common/components/select/select.component';
-import useViewOffer from './use-view-offer.hook';
 
 const breadscrumbs = [
   { id: 1, name: 'Documents', link: '/documents' },
@@ -87,7 +86,7 @@ export default function ViewOffer() {
 
   return (
     <div className="tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3">
-      <Breadscrumb breadscrumbs={breadscrumbs} current="Overview" />
+      <Breadscrumb breadscrumbs={breadscrumbs} current={'Overview'} />
 
       <div className="tw-mt-2 tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-2">
         <h2 className="tw-font-dm tw-text-[22px] tw-font-medium tw-capitalize tw-leading-8 tw-text-text-dark-gray">

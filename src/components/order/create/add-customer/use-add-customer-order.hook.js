@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 
-export default function useHeaderBody({ handleTabClick, handleTabCompleted }) {
+export default function useAddCustomerOrder(handleTabClick, handleTabCompleted) {
   const [isSubmit, setIsSubmit] = useState(false);
+
   const onSubmit = () => {
-    handleTabClick('lineItems');
-    handleTabCompleted('headerBody');
+    handleTabClick('headerBody');
+    handleTabCompleted('customerDetails');
   };
+
   return {
     isSubmit,
     setIsSubmit,

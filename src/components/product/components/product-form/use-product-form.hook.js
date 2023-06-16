@@ -1,7 +1,7 @@
 'use client';
 
 import { enqueueSnackbar } from 'notistack';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPriceGroup } from '@/provider/features/price-group/price-group.slice';
 import { getAllDiscountGroup } from '@/provider/features/discount-group/discount-group.slice';
@@ -16,12 +16,15 @@ export default function useProductForm(
 ) {
   const [modalData, setModalData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [search, setSearch] = useState('');
   const [categoryId, setCategoryId] = useState(0);
   const [categoryToMap, setCategoryToMap] = useState([]);
   const [parentCategory, setParentCategory] = useState([]);
   const [filteredPriceGroup, setFilteredPriceGroup] = useState([]);
   const [filteredDiscountGroup, setFilteredDiscountGroup] = useState([]);
   const dispatch = useDispatch();
+  const ref = useRef();
   const priceGroupList = useSelector((state) => state.priceGroup.getAll);
   const discountGroupList = useSelector((state) => state.discountGroup.getAll);
 
@@ -49,6 +52,19 @@ export default function useProductForm(
     dispatch(getAllPriceGroup());
     dispatch(getAllDiscountGroup());
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenDropdown(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   useEffect(() => {
     if (categories?.length >= 1) {
@@ -256,6 +272,11 @@ export default function useProductForm(
     openPopup,
     setOpenPopup,
     handleModalSubmit,
-    handleDeleteGroup
+    handleDeleteGroup,
+    ref,
+    openDropdown,
+    setOpenDropdown,
+    setSearch,
+    search
   };
 }

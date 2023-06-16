@@ -65,6 +65,12 @@ export default function useProduct() {
           showInMenu
         />,
         <GridActionsCellItem
+          icon={<UploadIcon />}
+          label="Upload files"
+          onClick={() => handleUploadAction(cell.row)}
+          showInMenu
+        />,
+        <GridActionsCellItem
           icon={<DeleteIcon />}
           label="Delete"
           onClick={() => handleDeleteAction(cell.row)}

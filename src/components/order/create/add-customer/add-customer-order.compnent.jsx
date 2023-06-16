@@ -4,17 +4,15 @@ import PropTypes from 'prop-types';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 import Select from '@/common/components/select/select.component';
-import useAddCustomer from './use-add-customer.hook';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
-import useCountryCity from '@/common/hooks/use-country-city.hook';
+import useAddCustomerOrder from './use-add-customer-order.hook';
 
-export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
-  const { isSubmit, setIsSubmit, onSubmit } = useAddCustomer(
+export default function AddCustomerOrder({ handleTabClick, handleTabCompleted }) {
+  const { isSubmit, setIsSubmit, onSubmit } = useAddCustomerOrder(
     handleTabClick,
     handleTabCompleted
   );
-  const { cities, handleCountryChange } = useCountryCity();
 
   return (
     <div className="personal-details-wrapper">
@@ -110,7 +108,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               placeholder="Country"
               type="select"
               options={COUNTRIES}
-              onChange={handleCountryChange}
+              //   onChange={handleCountryChange}
               //   value={selectedCountry}
               //   isRequired={true}
             />
@@ -120,7 +118,6 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               disabled={true}
               placeholder="City"
               type="select"
-              options={cities}
               //   value={selectedCity}
               //   onChange={handleCityChange}
               //   options={cities.map((item) => {
@@ -182,13 +179,13 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
             />
           </div>
 
-          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+          <StepperFooter setIsSubmit={setIsSubmit} />
         </form>
       </div>
     </div>
   );
 }
-AddCustomer.propTypes = {
+AddCustomerOrder.propTypes = {
   handleTabClick: PropTypes.func.isRequired,
   handleTabCompleted: PropTypes.func.isRequired
 };

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function useLineItem({ handleTabClick, handleTabCompleted }) {
+export default function useLineItemOrder({ handleTabClick, handleTabCompleted }) {
   const ref = useRef(null);
   const [isChecked, setIsChecked] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
@@ -164,7 +164,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   const checkBoxHandler = (e) => {
     setIsChecked(e.target.value);
 
-    const id = JSON.parse(e.target.value);
+    let id = JSON.parse(e.target.value);
     let stateIds = ids;
 
     if (isIdAdded(id)) {
@@ -176,7 +176,7 @@ export default function useLineItem({ handleTabClick, handleTabCompleted }) {
   };
   const allCheckboxHandler = (e) => {
     if (e.target.checked) {
-      const ids = data?.map((data, index) => index);
+      let ids = data?.map((data, index) => index);
       setIds([...ids]);
     } else {
       setIds([]);
