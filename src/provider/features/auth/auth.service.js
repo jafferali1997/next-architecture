@@ -46,7 +46,7 @@ const login = async (userData) => {
 
 // Logout user
 const logout = async () => {
-  const response = await api().get('/users/logout');
+  const response = await api().get('/user/logout');
   console.log('logout res', response);
   if (response.data.Succeeded) {
     localStorage.removeItem('user');
@@ -54,7 +54,7 @@ const logout = async () => {
 };
 
 const signUp = async (userData) => {
-  const response = await api().post('/users/register', userData);
+  const response = await api().post('/user/register', userData);
   return response.data;
 };
 
