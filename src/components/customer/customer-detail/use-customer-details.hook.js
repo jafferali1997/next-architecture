@@ -68,7 +68,7 @@ export default function useCustomerDetails() {
         });
         setCompanyAddresses(newcompanyAddresses);
       }
-      if (data?.payemntDetailType === 'BANK') {
+      if (data?.paymentDetailType === 'BANK') {
         defaultValues.paymentType = 'bankDetail';
       }
       const defaultValues = { ...data, paymentType: 'creditCard' };
@@ -95,61 +95,6 @@ export default function useCustomerDetails() {
       }
       setValue('termOfDelivery', data?.termOfDelivery[0].termOfDelivery);
     }
-    const data = {
-      id: 6,
-      accountOwnerName: null,
-      iban: null,
-      gender: 'MALE',
-      city: 'Lahore',
-      country: 'Pakistan',
-      address: '56yujh',
-      postalCode: 120,
-      firstName: 'ALI',
-      lastName: 'Raza',
-      bic: null,
-      mendateReferance: null,
-      mandateGenerateDate: null,
-      nameOfCreditCard: null,
-      creditCardNumber: null,
-      creditCardExpiry: null,
-      creditCardCVV: null,
-      companyName: null,
-      companyEmail: null,
-      companyPhone: null,
-      companyFax: null,
-      companyMobile: null,
-      companyUrl: null,
-      companySize: null,
-      tin: null,
-      vat: null,
-      vatStatus: true,
-      isDraft: true,
-      discountTerms: 'string',
-      discountAmount: 12,
-      discountValidTill: '2023-06-05T13:25:03.177Z',
-      termOfPayment: 'CASH_DISCOUNT_TARGET_AS_A_DATE',
-      businessDetailId: 3,
-      companyAddress: [],
-      additionalContact: [
-        {
-          ac_gender: 'FEMALE',
-          ac_designation: 'SE',
-          ac_firstName: 'Ayesha',
-          ac_lastName: 'Ali',
-          ac_postalCode: 12122,
-          ac_address: 'Somewher in the earth',
-          ac_country: 'Pakistan',
-          ac_city: 'Lahore',
-          ac_email: 'example@gmail.com',
-          ac_phone: '12312312312',
-          ac_department: 'IT',
-          ac_mobile: null
-        }
-      ],
-      termOfDelivery: [],
-      priceGroup: [],
-      discountGroup: []
-    };
   }
 
   useEffect(() => {

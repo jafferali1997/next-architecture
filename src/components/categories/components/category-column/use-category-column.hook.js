@@ -31,7 +31,7 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
   }, [categoryToRender]);
 
   const handleButtonClick = () => {
-    setShowInput(true);
+    setShowInput(!showInput);
   };
 
   const handleAddButtonChange = (e) => {

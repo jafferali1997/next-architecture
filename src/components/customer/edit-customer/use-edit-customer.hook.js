@@ -10,6 +10,7 @@ import {
   getSingleCustomer,
   updateCustomer
 } from '@/provider/features/customer/customer.slice';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 const validationSchema = yup.object({
   // Define your validation rules here.
@@ -171,6 +172,16 @@ export default function useEditCustomer() {
     name: 'companyAddresses'
   });
 
+  const { handleCountryChange, cities, error, setError, setCountry, country } =
+    useCountryCity();
+
+  const onCountryChange = (e) => {
+    console.log(e.target.value);
+    setValue('ac_country', e.target.value);
+    setValue('ac_city', '');
+    handleCountryChange(e);
+  };
+
   async function fetchAndSetData() {
     if (searchParams.get('id')) {
       let data = await dispatch(
@@ -196,6 +207,7 @@ export default function useEditCustomer() {
           setValue(`ac_${key}`, data.additionalContact[0][key])
         );
       }
+      handleCountryChange({ target: { value: data.additionalContact[0].country } });
       if (data?.companyAddress?.length > 0) {
         const ids = companyAddressFields.map((item) => item.id);
         console.log(ids, 'ids');
@@ -339,6 +351,10 @@ export default function useEditCustomer() {
     handleRemoveInput,
     isActive,
     setIsActive,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error
   };
 }

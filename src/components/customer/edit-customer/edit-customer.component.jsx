@@ -55,10 +55,12 @@ export default function EditCustomer() {
     companyAddressFields,
     isActive,
     setIsActive,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error
   } = useEditCustomer();
-
-  const { cities, handleCountryChange } = useCountryCity();
 
   return (
     <div className="content">
