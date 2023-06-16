@@ -15,6 +15,18 @@ const verifyOtp = async (otp) => {
   return response.data;
 };
 
+const getCurrentUser = async () => {
+  const response = await api().get('/users');
+  if (response.data.Succeeded) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ ...response.data.data, token: user.token })
+    );
+  }
+  return response.data;
+};
+
 const generateForgetPasswordLink = async (email) => {
   const response = await api().post('/users/generate-forget-password-link', email);
   return response.data;
@@ -48,7 +60,8 @@ const userService = {
   regenerateEmailLink,
   changePasswordFromLink,
   changePassword,
-  verifyEmail
+  verifyEmail,
+  getCurrentUser
 };
 
 export default userService;
