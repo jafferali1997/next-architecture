@@ -414,7 +414,7 @@ export default function EditCustomer() {
                       type="select"
                       control={control}
                       errors={errors}
-                      onChange={handleCountryChange}
+                      onChange={onCountryChange}
                       options={COUNTRIES}
                     />
                     <CustomSelect
