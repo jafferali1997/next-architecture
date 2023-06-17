@@ -311,10 +311,21 @@ export default function useEditCustomer() {
       }
       return { ...accumulator, [key]: data[attr] };
     }, {});
-
+    const priceGroups = [
+      ...selectedPriceGroup.map((item) => {
+        return Number(item.value);
+      })
+    ];
+    const discountGroups = [
+      ...selectedDiscountGroup.map((item) => {
+        return Number(item.value);
+      })
+    ];
     const payloadData = {
       ...data,
       isActive,
+      priceGroups,
+      discountGroups,
       discountAmount: Number(data.discountAmount),
       discountDays: Number(data.discountDays),
       additionalContact: [additionalContact],
