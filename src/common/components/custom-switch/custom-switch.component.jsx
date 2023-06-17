@@ -24,17 +24,21 @@ export default function CustomSwitch({
     <div className="">
       <div
         className={`${
-          inlineLabel ? 'tw-flex tw-w-full tw-items-center tw-flex-wrap tw-gap-3' : ''
+          inlineLabel ? 'tw-flex tw-w-full tw-flex-wrap tw-items-center tw-gap-3' : ''
         }`}
       >
         {label && !labelRight && (
-          <FieldLabel label={label} isRequired={isRequired} className={` ${labelClassName}`} />
+          <FieldLabel
+            label={label}
+            isRequired={isRequired}
+            className={` ${labelClassName}`}
+          />
         )}
-        
+
         <input
           {...(register && register(`${name}`))}
-          type="checkbox"
           name={name}
+          type="checkbox"
           className={`custom_switch_input ${className}`}
           {...(checked && { checked })}
           {...(onChange && { onChange })}
@@ -42,7 +46,7 @@ export default function CustomSwitch({
           defaultChecked={defaultChecked}
           disabled={disabled}
         />
-      
+
         {/* <Switch
           {...(register && register(`${name}`))}
           name={name}
@@ -63,8 +67,6 @@ export default function CustomSwitch({
           <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
         )}
       </div>
-
-      
 
       {errors && errors[name] && (
         <FieldError className="tw-mt-1" error={errors[name].message} />

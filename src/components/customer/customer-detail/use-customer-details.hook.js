@@ -68,10 +68,10 @@ export default function useCustomerDetails() {
         });
         setCompanyAddresses(newcompanyAddresses);
       }
+      const defaultValues = { ...data, paymentType: 'creditCard' };
       if (data?.paymentDetailType === 'BANK') {
         defaultValues.paymentType = 'bankDetail';
       }
-      const defaultValues = { ...data, paymentType: 'creditCard' };
       setDefaultData(defaultValues);
       setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
 
