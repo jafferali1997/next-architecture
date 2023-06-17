@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import DownloadDropdownBtn from '@/common/components/download-dropdown-button/download-dropdown-button.component';
 import StepperFooter from '@/common/components/stepper-footer/stepper-footer.component';
 
-function OfferPreview() {
+function OfferPreview({ handleTabClick, handleTabCompleted }) {
   const dropdownoptions = [
     { id: 1, name: 'option1', link: '/option1' },
     { id: 2, name: 'option2', link: '/option2' },
@@ -214,9 +215,17 @@ function OfferPreview() {
         </div>
         <div>QR Code</div>
       </div>
-      <StepperFooter submitText="save" back="customerDetails" />
+      <StepperFooter
+        submitText="save"
+        handleTabClick={handleTabClick}
+        back="chooseTemplate"
+      />
     </>
   );
 }
 
 export default OfferPreview;
+OfferPreview.propTypes = {
+  handleTabClick: PropTypes.func.isRequired,
+  handleTabCompleted: PropTypes.func.isRequired
+};

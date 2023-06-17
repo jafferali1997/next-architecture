@@ -61,7 +61,11 @@ export default function FooterDetails({ handleTabClick, handleTabCompleted }) {
             Max: 575
           </p>
         </div>
-        <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+        <StepperFooter
+          back="lineItems"
+          handleTabClick={handleTabClick}
+          setIsSubmit={setIsSubmit}
+        />
       </form>
     </div>
   );

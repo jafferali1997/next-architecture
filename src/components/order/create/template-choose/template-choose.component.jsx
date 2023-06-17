@@ -49,7 +49,11 @@ export default function TemplateChooseOrder({ handleTabClick, handleTabCompleted
             Standard Template
           </div>
         </div>
-        <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+        <StepperFooter
+          back="footerDetails"
+          handleTabClick={handleTabClick}
+          setIsSubmit={setIsSubmit}
+        />
       </form>
     </div>
   );

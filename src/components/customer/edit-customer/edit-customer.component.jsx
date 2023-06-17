@@ -745,7 +745,7 @@ export default function EditCustomer() {
               </div>
             </div>
             <div className="right-side">
-              <div className="form-box tw-flex tw-h-[77px] tw-w-[336px] tw-items-center tw-justify-between ">
+              <div className="form-box tw-flex tw-h-[77px] tw-max-w-[336px] tw-items-center tw-justify-between ">
                 <h3 className="form-box-heading ">Status</h3>
                 <span
                   className={`${

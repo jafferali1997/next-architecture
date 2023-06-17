@@ -47,10 +47,10 @@ export default function Private({ component }) {
 
   return (
     <div className="dashboard-main">
-      <div className="sidebar tw-basis-1/6">
+      <div className="sidebar tw-relative tw-basis-1/6">
         <Sidebar setToggle={setToggle} toggle={toggle} />
       </div>
-      <div className="content tw-basis-5/6 tw-bg-secondary-gray">
+      <div className="content tw-basis-5/6 tw-overflow-hidden tw-bg-secondary-gray">
         <Navbar setToggle={setToggle} value={toggle} />
         {component}
       </div>

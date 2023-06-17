@@ -334,7 +334,11 @@ export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
             defaultChecked
           />
         </div>
-        <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+        <StepperFooter
+          back="headerBody"
+          handleTabClick={handleTabClick}
+          setIsSubmit={setIsSubmit}
+        />
       </form>
     </div>
   );
