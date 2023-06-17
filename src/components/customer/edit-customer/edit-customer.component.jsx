@@ -24,7 +24,6 @@ import useEditCustomer from './use-edit-customer.hook';
 import DeleteIcon from '@/common/icons/delete.icon';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import COUNTRIES from '@/common/constants/countries.constant';
-import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 export default function EditCustomer() {
   const {
@@ -59,7 +58,10 @@ export default function EditCustomer() {
     cities,
     country,
     onCountryChange,
-    error
+    error,
+    country2,
+    onCountry2Change,
+    cities2
   } = useEditCustomer();
 
   return (
@@ -129,10 +131,11 @@ export default function EditCustomer() {
                     name="country"
                     placeholder="Country"
                     type="select"
+                    value={country}
                     options={COUNTRIES}
                     onChange={onCountryChange}
                     control={control}
-                    errors={errors}
+                    errors={error}
                   />
                   <CustomSelect
                     label="City"
@@ -413,8 +416,8 @@ export default function EditCustomer() {
                       placeholder="Country"
                       type="select"
                       control={control}
-                      errors={errors}
-                      onChange={onCountryChange}
+                      value={country2}
+                      onChange={onCountry2Change}
                       options={COUNTRIES}
                     />
                     <CustomSelect
@@ -423,8 +426,7 @@ export default function EditCustomer() {
                       placeholder="City"
                       type="select"
                       control={control}
-                      errors={errors}
-                      options={cities}
+                      options={cities2}
                     />
                     <CustomInput
                       label="Postal Code"
@@ -751,7 +753,7 @@ export default function EditCustomer() {
                   } hover:tw-cursor-pointer`}
                   onClick={() => setIsActive(!isActive)}
                 >
-                  {isActive ? 'Active' : 'De-active'}
+                  {isActive ? 'Active' : 'In-active'}
                 </span>
               </div>
               <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">

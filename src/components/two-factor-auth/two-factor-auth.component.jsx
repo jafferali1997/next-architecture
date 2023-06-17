@@ -16,6 +16,7 @@ export default function TwoFactorAuthComponent() {
     resendOtpHandler,
     isTimerStop
   } = useTwoFactorAuth();
+
   return (
     <div className="form-wrapper">
       <div className="form-container">
@@ -124,19 +125,17 @@ export default function TwoFactorAuthComponent() {
             </div>
             <div className="otp-form-footer tw-mt-[24px]">
               <p className="tw-text-xs tw-font-bold tw-not-italic tw-leading-[18px] tw-text-text-dark-gray">
-                Don’t receive code?
+                Don’t receive code?{' '}
                 <button
                   type="button"
                   onClick={resendOtpHandler}
-                  className="tw-text-red-500"
-                  // className={`${
-                  //   !isTimerStop ? '!tw-cursor-not-allowed !tw-text-gray-400' : ''
-                  // } `}
-                  // disabled={!isTimerStop}
+                  className={`tw-text-red-500 ${
+                    !isTimerStop ? '!tw-cursor-not-allowed !tw-text-gray-400' : ''
+                  } `}
+                  disabled={!isTimerStop}
                 >
-                  {' '}
-                  Resend SMS{' '}
-                </button>{' '}
+                  Resend SMS
+                </button>
               </p>
             </div>
           </div>

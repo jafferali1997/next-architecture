@@ -14,7 +14,7 @@ export default function CustomTable({ columns, rows }) {
       initialState={{
         pagination: {
           paginationModel: {
-            pageSize: 5
+            pageSize: 10
           }
         }
       }}
