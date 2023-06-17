@@ -123,6 +123,11 @@ export default function CustomerDetails() {
                       options={allPriceGroup}
                       defaultOptions={selectedPriceGroup}
                       handleChange={() => {}}
+                      placeholder={`${
+                        selectedPriceGroup.length === 0
+                          ? 'No option selected'
+                          : 'Select price group(s)'
+                      }`}
                       readOnly
                     />
                   </div>
@@ -132,6 +137,11 @@ export default function CustomerDetails() {
                       options={allDiscountGroup}
                       defaultOptions={selectedDiscountGroup}
                       handleChange={() => {}}
+                      placeholder={`${
+                        selectedPriceGroup.length === 0
+                          ? 'No option selected'
+                          : 'Select discount group(s)'
+                      }`}
                       readOnly
                     />
                   </div>
@@ -212,7 +222,7 @@ export default function CustomerDetails() {
                 <div>
                   <CustomInput
                     label="Company URL"
-                    name="conpanyUrl"
+                    name="companyUrl"
                     placeholder="URL"
                     type="text"
                     isRequired={false}

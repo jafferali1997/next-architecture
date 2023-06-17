@@ -261,10 +261,10 @@ export default function useEditCustomer() {
       }
       if (data?.termOfDelivery?.length > 0) {
         setValue('termOfDelivery', data.termOfDelivery[0].termOfDelivery);
+        setValue('termOfDeliveryId', data.termOfDelivery[0].id);
       }
       setPaymentTermValue(data?.termOfPayment || 'PAYMENT_TERMS_AS_DATE');
       setIsActive(data?.isActive);
-      setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
       setValue(`${data?.termOfPayment}_DATA`, data?.termOfPaymentData);
     }
   }
@@ -315,18 +315,48 @@ export default function useEditCustomer() {
     const payloadData = {
       ...data,
       isActive,
-      creditCardCVV: data.creditCardCVV && data.creditCardCVV,
-      creditCardNumber: data.creditCardNumber && data.creditCardNumber,
-      creditCardExpiry: data.creditCardExpiry && data.creditCardExpiry,
       discountAmount: Number(data.discountAmount),
       discountDays: Number(data.discountDays),
       additionalContact: [additionalContact],
-      companyAddress: data.companyAddresses
+      companyAddress: data.companyAddresses,
+      termOfPayment: paymentTermValue,
+      termOfPaymentData: data[`${paymentTermValue}_DATA`],
+      termOfDeliveries: [
+        {
+          termOfDelivery: data.termOfDelivery
+        }
+      ]
     };
-
+    let payload = {
+      ...payloadData,
+      paymentDetailType: 'CREDIT_CARD',
+      nameOfCreditCard: data.nameOfCreditCard,
+      creditCardNumber: data.creditCardNumber,
+      creditCardExpiry: data.creditCardExpiry,
+      creditCardCVV: data.creditCardCVV,
+      iban: undefined,
+      accountOwnerName: undefined,
+      bic: undefined,
+      mendateReferance: undefined,
+      mandateGenerateDate: undefined
+    };
+    if (paymentType === 'bankDetails') {
+      payload = {
+        ...payloadData,
+        paymentDetailType: 'BANK',
+        iban: data.iban,
+        accountOwnerName: data.accountOwnerName,
+        bic: data.bic,
+        mendateReferance: data.mendateReferance,
+        mandateGenerateDate: data.mandateGenerateDate,
+        creditCardCVV: undefined,
+        creditCardNumber: undefined,
+        creditCardExpiry: undefined
+      };
+    }
     console.log(payloadData);
     const res = await dispatch(
-      updateCustomer({ payload: { data: payloadData, id: customerId.current } })
+      updateCustomer({ payload: { data: payload, id: customerId.current } })
     );
     console.log('res', res);
     if (res?.payload?.id) {

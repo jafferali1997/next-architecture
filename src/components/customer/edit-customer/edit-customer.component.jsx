@@ -481,7 +481,7 @@ export default function EditCustomer() {
 
                   <FormControl>
                     <RadioGroup
-                      name="paymentType"
+                      name="paymentDetailType"
                       value={paymentType}
                       onChange={(e) => setPaymentType(e.target.value)}
                     >
@@ -567,7 +567,7 @@ export default function EditCustomer() {
                       label="Credit Card Number"
                       name="creditCardNumber"
                       placeholder="Credit Card Number"
-                      type="number"
+                      type="text"
                       register={register}
                       errors={errors}
                       isRequired={true}
