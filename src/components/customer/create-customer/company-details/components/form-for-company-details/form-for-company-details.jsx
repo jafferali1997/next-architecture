@@ -172,35 +172,45 @@ export default function FormForCompanyDetails({
       </div>
       <div>
         {companyAddressFields.map((value, index) => (
-          <div className="tw-gflex-row tw-flex">
-            <div className="form-box-grid " key={value}>
+          <div className="">
+            <div
+              className="tw-grid tw-grid-cols-[320px_1fr] tw-gap-[15px] tw-py-[16px] "
+              key={value}
+            >
               <input
                 name={`companyAddresses.${index}.id`}
                 type="number"
                 className="tw-hidden"
                 register={register}
               />
-              <CustomInput
-                placeholder="Enter label name"
-                type="text"
-                errors={errors}
-                name={`companyAddresses.${index}.addressLabel`}
-                register={register}
-                // onChange={(e) => handleInputChange(index, e.target.value)}
-              />
-              <CustomInput
-                placeholder="Enter company address"
-                type="text"
-                name={`companyAddresses.${index}.address`}
-                errors={errors}
-                register={register}
-              />
+              <div className="">
+                <CustomInput
+                  placeholder="Enter label name"
+                  type="text"
+                  errors={errors}
+                  name={`companyAddresses.${index}.addressLabel`}
+                  register={register}
+                  // onChange={(e) => handleInputChange(index, e.target.value)}
+                />
+              </div>
+              <div className="tw-flex tw-items-center tw-gap-2">
+                <div className="tw-w-full">
+                  <CustomInput
+                    placeholder="Enter company address"
+                    type="text"
+                    name={`companyAddresses.${index}.address`}
+                    errors={errors}
+                    register={register}
+                  />
+                </div>
+                <div
+                  className="h-50 tw-text-red-700 hover:tw-cursor-pointer"
+                  onClick={handleRemoveInput.bind(null, index)}
+                >
+                  <DeleteIcon />
+                </div>
+              </div>
             </div>
-            <CustomButton
-              className="h-50 2-40 tw-text-red-700"
-              onClick={handleRemoveInput.bind(null, index)}
-              startIcon={<DeleteIcon />}
-            />
           </div>
         ))}
       </div>

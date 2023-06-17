@@ -30,10 +30,10 @@ export default function useForgetPassword() {
   });
 
   const borderStyle = {
-    border: '1px solid red'
+    border: '1px solid #7E7D7D'
   };
   const borderSuc = {
-    border: '1px solid #10FF61'
+    border: '1px solid #7E7D7D'
   };
 
   const onSubmit = (email) => {
