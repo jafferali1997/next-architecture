@@ -47,7 +47,10 @@ export default function Profile() {
               Personal Details
             </h3>
           </div>
-          <form onSubmit={onSubmit} className="tw-flex tw-flex-col tw-gap-[24px]">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="tw-flex tw-flex-col tw-gap-[24px]"
+          >
             <div className="tw-grid tw-w-full tw-grid-cols-[repeat(auto-fill,minmax(616px,1fr))] tw-gap-16">
               <div className="input-group tw-gap-5.5">
                 <CustomInput
@@ -257,7 +260,7 @@ export default function Profile() {
                 />
               </div>
               <div className="submit-button">
-                <CustomButton type="Submit" className="btn-primary" text="Submit" />
+                <CustomButton type="submit" className="btn-primary" text="Submit" />
               </div>
             </div>
           </form>

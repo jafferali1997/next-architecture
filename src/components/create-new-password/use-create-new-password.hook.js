@@ -50,7 +50,7 @@ export default function useCreateNewPassword() {
     border: '1px solid red'
   };
   const borderSuc = {
-    border: '1px solid #10FF61'
+    border: '1px solid #E5E6EB'
   };
 
   const onSubmit = (values) => {

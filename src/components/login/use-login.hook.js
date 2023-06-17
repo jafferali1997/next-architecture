@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { generateOtp } from '@/provider/features/user/user.slice';
 import { login } from '@/provider/features/auth/auth.slice';
-import { getAccessToken } from '@/common/utils/access-token.util';
+import { getAccessToken, isLoginVerified } from '@/common/utils/access-token.util';
+import { isPhoneVerified } from '@/common/utils/users.util';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,8 +42,7 @@ export default function useLogin() {
   const router = useRouter();
 
   useEffect(() => {
-    const accessToken = getAccessToken();
-    if (accessToken) {
+    if (isLoginVerified() && isPhoneVerified()) {
       router.push('/customer');
     }
   }, [router]);
@@ -56,7 +56,7 @@ export default function useLogin() {
     border: '1px solid red'
   };
   const borderSuc = {
-    border: '1px solid #10FF61'
+    border: '1px solid #E5E6EB'
   };
 
   const moveRouter = (data) => {

@@ -55,10 +55,12 @@ export default function EditCustomer() {
     companyAddressFields,
     isActive,
     setIsActive,
-    control
+    control,
+    cities,
+    country,
+    onCountryChange,
+    error
   } = useEditCustomer();
-
-  const { cities, handleCountryChange } = useCountryCity();
 
   return (
     <div className="content">
@@ -128,7 +130,7 @@ export default function EditCustomer() {
                     placeholder="Country"
                     type="select"
                     options={COUNTRIES}
-                    onChange={handleCountryChange}
+                    onChange={onCountryChange}
                     control={control}
                     errors={errors}
                   />
@@ -412,7 +414,7 @@ export default function EditCustomer() {
                       type="select"
                       control={control}
                       errors={errors}
-                      onChange={handleCountryChange}
+                      onChange={onCountryChange}
                       options={COUNTRIES}
                     />
                     <CustomSelect

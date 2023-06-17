@@ -156,10 +156,10 @@ export default function useProfile() {
   const sendOtp = () => {
     if (
       sendOtpButtonText.current === 'Send OTP' ||
-      sendOtpButtonText.current === 'Resend OTP'
+      sendOtpButtonText.current === 'Resend'
     ) {
       if (phone) {
-        sendOtpButtonText.current = 'Resend OTP';
+        sendOtpButtonText.current = 'Resend';
         dispatch(addPhoneAndGenerateOtp({ payload: { phone } }));
       }
     } else {

@@ -108,7 +108,7 @@ export default function useCustomer() {
             ...columnObject,
             renderCell: (params) => (
               <span className={params.value ? 'status-active' : 'status-error'}>
-                {params.value ? 'Active' : 'De-active'}
+                {params.value ? 'Active' : 'In-active'}
               </span>
             )
           };

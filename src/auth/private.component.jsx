@@ -25,7 +25,7 @@ export default function Private({ component }) {
     }
   }
 
-  if (!isPhoneVerified() && user) {
+  if (!isPhoneVerified() && isEmailVerified() && user) {
     if (typeof window === 'object') {
       router.push(
         `/profile?userName=${user.userName}&email=${user.email}&userId=${user.id}`
@@ -39,7 +39,7 @@ export default function Private({ component }) {
     }
   }
 
-  if (!isLoginVerified() && user) {
+  if (!isLoginVerified() && isPhoneVerified() && isEmailVerified() && user) {
     if (typeof window === 'object') {
       router.push(`/two-factor-auth?userId=${user.id}&phone=${user.phone}`);
     }
