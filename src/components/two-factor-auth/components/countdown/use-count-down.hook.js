@@ -16,7 +16,7 @@ export default function useCountDown({ minutes, stopTimerHandler, isRunTimer }) 
     if (runTimer) {
       setCountDown(60 * minutes);
       timerId = setInterval(() => {
-        setCountDown((countDown) => countDown - 1);
+        setCountDown((_countDown) => _countDown - 1);
       }, 1000);
     } else {
       clearInterval(timerId);

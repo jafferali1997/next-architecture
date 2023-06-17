@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { set, useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { City } from 'country-state-city';
 import {
   getSingleCustomer,
   updateCustomer
@@ -144,6 +145,8 @@ export default function useEditCustomer() {
 
   const [validationSchemaState, setValidationSchemaState] = useState(validationSchema);
   const [isActive, setIsActive] = useState(false);
+  const [country2, setCountry2] = useState('');
+  const [cities2, setCities2] = useState([]);
 
   const additionalhandles = () => {
     setIsAdditional(!isAdditional);
@@ -177,11 +180,32 @@ export default function useEditCustomer() {
 
   const onCountryChange = (e) => {
     console.log(e.target.value);
-    setValue('ac_country', e.target.value);
-    setValue('ac_city', '');
+    setValue('country', e.target.value);
+    setValue('city', '');
     handleCountryChange(e);
   };
 
+  const onCountry2Change = (e) => {
+    console.log(e.target.value);
+    setValue('ac_city', '');
+    handleCountry2Change(e);
+  };
+
+  const handleCountry2Change = (e) => {
+    setCountry2(e.target.value);
+    setValue('ac_country', e.target.value);
+    const [name, code] = e.target.value.split('-');
+    console.log(name, code, e.target.value);
+    // console.log(City.getAllCities('BD'));
+    // console.log(City.getCitiesOfCountry('BM'));
+    const _cities = City.getCitiesOfCountry(code);
+    console.log(_cities);
+    const cityOptions = _cities.map((cit) => ({
+      label: cit.name,
+      value: cit.name.toLowerCase()
+    }));
+    setCities2(cityOptions);
+  };
   async function fetchAndSetData() {
     if (searchParams.get('id')) {
       let data = await dispatch(
@@ -202,12 +226,13 @@ export default function useEditCustomer() {
         }
       });
 
+      handleCountryChange({ target: { value: data.country } });
       if (data?.additionalContact?.length > 0) {
         Object.keys(data.additionalContact[0]).forEach((key) =>
           setValue(`ac_${key}`, data.additionalContact[0][key])
         );
+        handleCountry2Change({ target: { value: data.additionalContact[0].country } });
       }
-      handleCountryChange({ target: { value: data.additionalContact[0].country } });
       if (data?.companyAddress?.length > 0) {
         const ids = companyAddressFields.map((item) => item.id);
         console.log(ids, 'ids');
@@ -271,6 +296,10 @@ export default function useEditCustomer() {
   }, [paymentType]);
 
   const onSubmit = async (data) => {
+    if (!country) {
+      setError('Country is required');
+      return;
+    }
     console.log(data, '=> data');
     const additionalContactKeys = Object.keys(data).filter((attr) =>
       attr.startsWith('ac')
@@ -355,6 +384,9 @@ export default function useEditCustomer() {
     cities,
     country,
     onCountryChange,
-    error
+    error,
+    country2,
+    onCountry2Change,
+    cities2
   };
 }

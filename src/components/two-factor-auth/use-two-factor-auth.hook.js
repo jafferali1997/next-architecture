@@ -35,7 +35,14 @@ export default function useTwoFactorAuth() {
   }, []);
 
   const resendOtpHandler = () => {
-    dispatch(generateOtp({ successCallBack: () => {} }));
+    if (isTimerStop) {
+      dispatch(
+        generateOtp({
+          successCallBack: () => {}
+        })
+      );
+      setIsTimerStop(false);
+    }
   };
   const moveRouter = (data) => {
     setIsOtpVerified(true);

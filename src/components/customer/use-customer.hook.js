@@ -43,7 +43,7 @@ const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isActive
 const FEATURES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
 
 export default function useCustomer() {
-  const getActionColumn = () => {
+  const getActionColumn = (statusText) => {
     return {
       field: 'actions',
       headerName: 'Action',
@@ -60,7 +60,7 @@ export default function useCustomer() {
         />,
         <GridActionsCellItem
           icon={<CircleIcon />}
-          label="Active"
+          label={statusText}
           onClick={() => handleStatusAction(cell.row)}
           showInMenu
         />,
@@ -100,7 +100,7 @@ export default function useCustomer() {
         headerName: FEATURES_TO_BE_SHOW[key],
         headerClassName: 'table-heading ',
         cellClassName: 'table-data ',
-        width: 200
+        width: 150
       };
       if (!FEATURES_TO_BE_IGNORE.includes(key)) {
         if (key === 'isActive') {
@@ -118,7 +118,7 @@ export default function useCustomer() {
         }
       }
     });
-    columns.push(getActionColumn());
+    columns.push(getActionColumn('Active'));
     return columns;
   };
 
@@ -224,7 +224,7 @@ export default function useCustomer() {
       getAllCustomer({
         payload: {
           page: 1,
-          pageSize: 20,
+          pageSize: 30,
           sortColumn: 'id',
           sortOrder: 'DESC',
           condition: {}

@@ -135,7 +135,8 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
         fetchMyAPI();
       }
     }
-  }, [searchParams]);
+    appendCompanyAddress({ addressLabel: '', address: '' });
+  }, []);
 
   // useEffect(() => {
   //   if (isAdditional) {
@@ -255,10 +256,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
   };
 
   const onSubmit = async (value) => {
-    if (!country) {
-      setError('Country is required');
-      return;
-    }
     console.log(value);
     const additionalContactKeys = Object.keys(value).filter((attr) =>
       attr.startsWith('ac')
