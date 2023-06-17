@@ -118,7 +118,7 @@ export default function CreateOrder() {
     <>
       <div className="tw-flex tw-items-center tw-justify-between tw-bg-secondary-gray">
         <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
-          <img src="/assets/images/back-btn.svg" alt="back" />
+          {/* <img src="/assets/images/back-btn.svg" alt="back" /> */}
           <h2 className="admin-top-heading">Create Order</h2>
           <p className="admin-top-p">Order #</p>{' '}
           <span className="header-span">10075</span>

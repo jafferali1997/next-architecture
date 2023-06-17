@@ -61,8 +61,9 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
               <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
                 <CustomSelect
                   options={[
-                    { id: 'male', value: 'MALE', label: 'Male' },
-                    { id: 'female', value: 'FEMALE', label: 'Female' }
+                    { label: 'Test 1', value: 'test1' },
+                    { label: 'Test 2', value: 'test2' },
+                    { label: 'Test 3', value: 'test3' }
                   ]}
                   placeholder="John"
                 />
@@ -337,7 +338,11 @@ export default function LineItem({ handleTabClick, handleTabCompleted }) {
             defaultChecked
           />
         </div>
-        <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+        <StepperFooter
+          back="headerBody"
+          handleTabClick={handleTabClick}
+          setIsSubmit={setIsSubmit}
+        />
       </form>
     </div>
   );
