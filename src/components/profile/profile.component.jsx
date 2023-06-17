@@ -254,7 +254,7 @@ export default function Profile() {
               <div className="submit-button">
                 <CustomButton
                   // type="Submit"
-                  className="btn-cancel !hover:tw-bg-danger !hover:tw-text-white"
+                  className="btn-cancel hover:!tw-bg-danger hover:!tw-text-white"
                   text="Logout"
                   onClick={logoutClickHandler}
                 />
