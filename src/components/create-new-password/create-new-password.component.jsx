@@ -57,16 +57,17 @@ export default function CreateNewPassword() {
 
                   <div className="create-new-pass-validation">
                     <div className="innerValidation">
-                      {/* {errors.password ? (
+                      {errors.password ? (
                         <>
-                          <img src="/assets/images/s_error.svg" alt="img" />
-                          {errors.password.message}
+                          {/* <img src="/assets/images/s_error.svg" alt="img" />
+                          {errors.password.message} */}
                         </>
-                      ) : ( */}
-                      <p className="passText color_bbb">
-                        Use 8 or more characters with a mix of letters, numbers & symbols
-                      </p>
-                      {/* )} */}
+                      ) : (
+                        <p className="passText color_bbb">
+                          Use 8 or more characters with a mix of letters, numbers &
+                          symbols
+                        </p>
+                      )}
                     </div>
                   </div>
                   {/* <img
@@ -108,7 +109,7 @@ export default function CreateNewPassword() {
                       ) : null}
                     </div>
                   </div> */}
-                  <img
+                  {/* <img
                     role="presentation"
                     alt="im"
                     onClick={toggleShowConfirmPassword}
@@ -118,7 +119,7 @@ export default function CreateNewPassword() {
                         ? '/assets/images/pass_icon.png'
                         : '/assets/images/eye.svg'
                     }
-                  />
+                  /> */}
                 </div>
               </div>
 

@@ -42,7 +42,7 @@
 
 @layer components {
   .btn {
-    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-white;
+    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-4 tw-text-white;
   }
   .btn-outline {
     @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-border-[1.5px] tw-border-solid tw-border-primary  tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-primary hover:tw-bg-secondary-light-blue disabled:tw-cursor-not-allowed disabled:tw-border-text-ultra-light-gray  disabled:tw-text-text-light-gray;

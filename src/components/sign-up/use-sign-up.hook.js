@@ -73,7 +73,7 @@ export default function useSignUp() {
     border: '1px solid red'
   };
   const borderSuc = {
-    border: '1px solid #E5E6EB'
+    border: '1px solid #7E7D7D'
   };
   const moveRouter = (data) => {
     router.push(`/verify-email?type=email-verification&email=${data.email}`);
