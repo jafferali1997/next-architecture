@@ -52,7 +52,6 @@ const validationSchema = Yup.object().shape({
   address: Yup.string()
     .required('Address is required')
     .max(255, 'Address can contain maximum 255 characters')
-    .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters')
 });
 
 export default function useProfile() {
@@ -151,7 +150,8 @@ export default function useProfile() {
       profileFinancialBusiness({ payload: { ...data, country } })
     );
     if (res.payload === 'Profile created successfully') {
-      const user = await dispatch(getCurrentUser());
+      const user = await dispatch(getCurrentUser(() => {}));
+      console.log(user);
       if (user?.payload?.id) {
         router.push('/customer');
       }
@@ -189,6 +189,7 @@ export default function useProfile() {
 
   const logoutClickHandler = async () => {
     dispatch(logout());
+    router.push('/');
   };
 
   const verifyOtpHandler = () => {

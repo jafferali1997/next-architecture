@@ -728,7 +728,11 @@ export default function CustomerDetails() {
             <div className="right-side">
               <div className="form-box tw-flex tw-h-[77px] tw-w-[336px] tw-items-center tw-justify-between ">
                 <h3 className="form-box-heading ">Status</h3>
-                <span className="status-active ">Active</span>
+                <span
+                  className={`${defaultData.isActive ? 'status-active' : 'status-error'}`}
+                >
+                  {defaultData.isActive ? 'Active' : 'In-active'}
+                </span>
               </div>
               <div className="form-box  tw-mt-[16px]  tw-w-[336px]  ">
                 <div className="tw-flex tw-items-center tw-justify-between">
