@@ -264,6 +264,8 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       const key = attr.replace('ac_', '');
       if (key === 'gender' && !['MALE', 'FEMALE'].includes(value[attr])) {
         return { ...accumulator };
+      } else if (key === 'gender' && value[attr] === '') {
+        return { ...accumulator };
       }
       return { ...accumulator, [key]: value[attr] };
     }, {});
