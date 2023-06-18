@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-filename-extension */
+
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -9,7 +11,14 @@ import CommentIcon from '@/common/icons/comment.icon';
 import UploadIcon from '@/common/icons/upload.icon';
 import DeleteIcon from '@/common/icons/delete.icon';
 
-export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
+const customoptions = [
+  { value: 'open', label: 'Open' },
+  { value: 'accepted', label: 'Accepted' },
+  { value: 'rejected', label: 'Rejected' },
+  { value: 'invoiced', label: 'Invoiced' }
+];
+
+export default function useViewOrder(handleTabClick, handleTabCompleted) {
   const ref = useRef(null);
   const [isChecked, setIsChecked] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
@@ -20,6 +29,9 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
   const [sortDirection, setSortDirection] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedValue, setSelectedValue] = useState('');
+  const [selectValue, setSelectValue] = useState(customoptions[0].value);
+  const [selectedValues, setSelectedValues] = useState({});
+
   const [selectedId, setSelectedId] = useState('');
 
   const MyOptions = [
@@ -39,7 +51,8 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
   const dropDownOptions = [
     { value: 'accepted', label: 'Accepted' },
     { value: 'rejected', label: 'Rejected' },
-    { value: 'invoice', label: 'Invoice' }
+    { value: 'invoice', label: 'Invoice' },
+    { value: 'open', label: 'open' }
   ];
 
   const handleSelectChange = (e, { value }, id) => {
@@ -55,7 +68,26 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
       setSelectedId(id);
     }
   };
+  const handleChange = (id, value) => {
+    setSelectedValues({ ...selectedValues, [id]: value });
+  };
 
+  const getOptionClassName = (id, optionValue) => {
+    let className = 'status_dropdown !tw-w-fit !tw-px-0';
+    if (optionValue === 'accepted') {
+      className += ' tw-bg-[#F1FFB9] tw-text-[#A58825]';
+    } else if (optionValue === 'rejected') {
+      className += ' tw-bg-[#FFE8E8] tw-text-[#A60A0A]';
+    } else if (optionValue === 'invoiced') {
+      className += ' tw-bg-[#DCFFDE] tw-text-[#0DA60A]';
+    } else {
+      className += ' tw-bg-gray-200';
+    }
+    if (selectedValues[id] === optionValue) {
+      className += ` ${selectedValue}`;
+    }
+    return className;
+  };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -204,7 +236,7 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
   const columns = [
     {
       field: 'offer',
-      headerName: 'Offer #'
+      headerName: 'Order #'
     },
     { field: 'company', headerName: 'Company' },
     { field: 'firstName', headerName: 'First Name' },
@@ -305,16 +337,15 @@ export default function useViewOffer({ handleTabClick, handleTabCompleted }) {
     anchorEl,
     handleClick,
     open,
+    handleChange,
     handleClose,
     handleSelectChange,
-    selectedValue,
     dropDownOptions,
     selectedId,
-    handleTabsFilter
+    handleTabsFilter,
+    selectedValue,
+    getOptionClassName,
+    selectValue,
+    selectedValues
   };
 }
-
-useViewOffer.propTypes = {
-  handleTabClick: PropTypes.func.isRequired,
-  handleTabCompleted: PropTypes.func.isRequired
-};

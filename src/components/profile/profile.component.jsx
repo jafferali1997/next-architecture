@@ -143,7 +143,7 @@ export default function Profile() {
               />
               <CustomButton
                 text={sendOtpButtonText.current}
-                className="btn-outline"
+                className="btn-outline disabled:hover:tw-bg-transparent"
                 onClick={sendOtp}
                 disabled={isOtpVerified}
               />

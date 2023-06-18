@@ -27,7 +27,8 @@ export default function Customer() {
     errors,
     openModal,
     modalCloseHandler,
-    onCommentSubmit
+    onCommentSubmit,
+    ref
   } = useCustomer();
 
   return (
@@ -97,7 +98,10 @@ export default function Customer() {
                   Show columns
                 </button>
                 {open && (
-                  <div className="tw-absolute tw-left-[-200px] tw-top-10 tw-z-[100] tw-flex  tw-w-[257px] tw-flex-col tw-items-start tw-gap-[11px]  tw-rounded-md tw-bg-white tw-p-3">
+                  <div
+                    ref={ref}
+                    className="tw-absolute tw-left-[-200px] tw-top-10 tw-z-[100] tw-flex  tw-w-[257px] tw-flex-col tw-items-start tw-gap-[11px]  tw-rounded-md tw-border-[2px] tw-border-solid tw-border-[#BBBBBB1A] tw-bg-white tw-p-3 tw-shadow-2xl"
+                  >
                     {columns.map((col) => (
                       <div key={col.field} className="tw-flex tw-gap-2">
                         <input

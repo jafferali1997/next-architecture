@@ -8,14 +8,15 @@ import PlusIcon from '@/common/icons/plus.icon';
 import DownloadDropdownBtn from '@/common/components/download-dropdown-button/download-dropdown-button.component';
 import TableFilterTabs from '@/common/components/table-filter-tabs/table-filter-table.component';
 import CustomInput from '@/common/components/custom-input/custom-input.component';
-import useViewOffer from './use-view-offer.hook';
+import useViewOffer from './use-view-order.hook';
 
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import CustomButton from '@/common/components/custom-button/custom-button.component';
+import useViewOrder from './use-view-order.hook';
 
 const breadscrumbs = [
   { id: 1, name: 'Documents', link: '/documents' },
-  { id: 2, name: 'Offers', link: '/offer' }
+  { id: 2, name: 'Orders', link: '/Order' }
 ];
 
 const dropdownoptions = [
@@ -59,7 +60,7 @@ const filteropions = [
   { id: 4, name: 'filter', label: 'Template' }
 ];
 
-export default function ViewOffer() {
+export default function ViewOrder() {
   const [selectvalue, setSelectValue] = React.useState('');
 
   // const handleChange = (event) => {
@@ -104,7 +105,7 @@ export default function ViewOffer() {
     getOptionClassName,
     selectValue,
     selectedValues
-  } = useViewOffer({});
+  } = useViewOrder();
 
   return (
     <div className="tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3">
@@ -112,11 +113,11 @@ export default function ViewOffer() {
 
       <div className="tw-mt-2 tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-2">
         <h2 className="tw-font-dm tw-text-[22px] tw-font-medium tw-capitalize tw-leading-8 tw-text-text-dark-gray">
-          Offers
+          Orders
         </h2>
 
         <div className="tw-flex tw-flex-wrap tw-items-center tw-gap-4">
-          <DownloadDropdownBtn text="Download Offers" dropdownoptions={dropdownoptions} />
+          <DownloadDropdownBtn text="Download Orders" dropdownoptions={dropdownoptions} />
           <a
             href="/"
             className="btn-primary-blue tw-flex tw-items-center tw-gap-1 tw-rounded-md tw-border-none tw-p-3 tw-text-sm tw-font-medium"
@@ -178,7 +179,7 @@ export default function ViewOffer() {
                   className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
                   key={index}
                 >
-                  <div className="tw-flex tw-items-center tw-gap-2">
+                  <div className="tw-flex tw-items-center tw-justify-center tw-gap-2">
                     {col.headerName}
                     {col.field === 'status' ||
                     col.field === 'action' ||
@@ -309,7 +310,7 @@ export default function ViewOffer() {
                                 David{' '}
                                 <span className="tw-text-text-black">
                                   {' '}
-                                  offer Created at{' '}
+                                  Order Created at{' '}
                                 </span>{' '}
                                 13 Feb 2023, 12:05:14
                               </p>
@@ -317,7 +318,7 @@ export default function ViewOffer() {
                                 David{' '}
                                 <span className="tw-text-text-black">
                                   {' '}
-                                  offer Created at{' '}
+                                  Order Created at{' '}
                                 </span>{' '}
                                 13 Feb 2023, 12:05:14
                               </p>
@@ -325,7 +326,7 @@ export default function ViewOffer() {
                                 David{' '}
                                 <span className="tw-text-text-black">
                                   {' '}
-                                  offer Created at{' '}
+                                  Order Created at{' '}
                                 </span>{' '}
                                 13 Feb 2023, 12:05:14
                               </p>

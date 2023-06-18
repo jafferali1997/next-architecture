@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable react/jsx-filename-extension */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -141,6 +141,19 @@ export default function useCustomer() {
   const [tableColumns, setTableColumns] = useState([]);
   const [tableRows, setTableRows] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   const {
     register,
@@ -159,7 +172,7 @@ export default function useCustomer() {
   };
 
   const handleColShow = () => {
-    setOpen(!open);
+    setOpen(true);
   };
 
   const handleToggleColumn = (columnName) => {
@@ -311,6 +324,7 @@ export default function useCustomer() {
     openModal,
     setOpenModal,
     modalCloseHandler,
-    onCommentSubmit
+    onCommentSubmit,
+    ref
   };
 }
