@@ -773,8 +773,7 @@ export default function CustomerDetails() {
               <div className="form-box tw-mt-[16px] tw-flex tw-w-[336px] tw-flex-col tw-gap-[16px]  ">
                 <h3 className="form-box-heading ">Comments</h3>
                 <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[21px] tw-text-text-light-gray ">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industry.
+                  In next change request.
                 </p>
               </div>
             </div>
