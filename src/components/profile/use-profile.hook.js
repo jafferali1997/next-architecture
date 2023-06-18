@@ -28,20 +28,22 @@ const validationSchema = Yup.object().shape({
     .required('User name is required')
     .max(30, 'Username must be at most 30 characters long')
     .matches(/^[a-zA-Z0-9]+$/, 'Username can only contain alphanumeric characters'),
-  country: Yup.string().required('Country name is required'),
+  country: Yup.string(),
   city: Yup.string().required('City name is required'),
   iban: Yup.string()
     .nullable()
     .transform((value) => (value === '' ? null : value))
     .matches(/^[a-zA-Z0-9]+$/, 'IBAN can only contain alphanumeric')
     .min(15, 'IBAN number can contain minimum 15 alphanumeric')
-    .max(34, 'IBAN number can contain maximum 34 alphanumeric'),
+    .max(34, 'IBAN number can contain maximum 34 alphanumeric')
+    .required('IBAN is required'),
   vat: Yup.string()
     .nullable()
     .transform((value) => (value === '' ? null : value))
     .matches(/[0-9]/, 'VAT number must be in digits')
     .min(5, 'VAT number can contain minimum 5 digits')
-    .max(15, 'VAT number can contain maximum 15 digits'),
+    .max(15, 'VAT number can contain maximum 15 digits')
+    .required('VAT number is required'),
   businessName: Yup.string()
     .required('Company Name is required')
     .max(150, 'Company name must be 150 characters long')
@@ -50,7 +52,6 @@ const validationSchema = Yup.object().shape({
   address: Yup.string()
     .required('Address is required')
     .max(255, 'Address can contain maximum 255 characters')
-    .matches(/^[a-zA-Z0-9\s]*$/, 'Address can only contain alphanumeric characters')
 });
 
 export default function useProfile() {
@@ -129,7 +130,7 @@ export default function useProfile() {
   }, []);
 
   const moveRouter = (data) => {
-    dispatch(getCurrentUser({ successCallBack: () => router.push('/customer') }));
+    console.log('move router');
   };
 
   const onCountryChange = (e) => {
@@ -146,11 +147,15 @@ export default function useProfile() {
       return;
     }
     const res = await dispatch(
-      profileFinancialBusiness({
-        payload: { ...data, country },
-        callBackMessage: moveRouter
-      })
+      profileFinancialBusiness({ payload: { ...data, country } })
     );
+    if (res.payload === 'Profile created successfully') {
+      const user = await dispatch(getCurrentUser(() => {}));
+      console.log(user);
+      if (user?.payload?.id) {
+        router.push('/customer');
+      }
+    }
   };
 
   const sendOtp = () => {
@@ -184,6 +189,7 @@ export default function useProfile() {
 
   const logoutClickHandler = async () => {
     dispatch(logout());
+    router.push('/');
   };
 
   const verifyOtpHandler = () => {

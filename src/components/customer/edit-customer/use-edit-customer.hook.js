@@ -231,7 +231,9 @@ export default function useEditCustomer() {
         Object.keys(data.additionalContact[0]).forEach((key) =>
           setValue(`ac_${key}`, data.additionalContact[0][key])
         );
-        handleCountry2Change({ target: { value: data.additionalContact[0].country } });
+        if (data.additionalContact[0].country) {
+          handleCountry2Change({ target: { value: data.additionalContact[0].country } });
+        }
       }
       if (data?.companyAddress?.length > 0) {
         const ids = companyAddressFields.map((item) => item.id);
@@ -311,10 +313,40 @@ export default function useEditCustomer() {
       }
       return { ...accumulator, [key]: data[attr] };
     }, {});
-
+    const priceGroups = [
+      ...selectedPriceGroup.map((item) => {
+        return Number(item.value);
+      })
+    ];
+    const discountGroups = [
+      ...selectedDiscountGroup.map((item) => {
+        return Number(item.value);
+      })
+    ];
     const payloadData = {
-      ...data,
+      gender: data.gender,
+      designation: data.designation,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      postalCode: data.postalCode,
+      address: data.address,
+      country,
+      city: data.city,
+      companyName: data.companyName,
+      companyEmail: data.companyEmail,
+      companyPhone: data.companyPhone,
+      companyFax: data.companyFax,
+      companyMobile: data.companyMobile,
+      companyUrl: data.companyUrl,
+      companySize: data.companySize,
+      tin: data.tin,
+      vat: data.vat,
+      vatStatus: data.vatStatus,
+      isPDF: data.isPDF,
+      isStatus: data.isStatus,
       isActive,
+      priceGroups,
+      discountGroups,
       discountAmount: Number(data.discountAmount),
       discountDays: Number(data.discountDays),
       additionalContact: [additionalContact],
@@ -331,14 +363,9 @@ export default function useEditCustomer() {
       ...payloadData,
       paymentDetailType: 'CREDIT_CARD',
       nameOfCreditCard: data.nameOfCreditCard,
-      creditCardNumber: data.creditCardNumber,
+      creditCardNumber: `${data.creditCardNumber}`,
       creditCardExpiry: data.creditCardExpiry,
-      creditCardCVV: data.creditCardCVV,
-      iban: undefined,
-      accountOwnerName: undefined,
-      bic: undefined,
-      mendateReferance: undefined,
-      mandateGenerateDate: undefined
+      creditCardCVV: data.creditCardCVV
     };
     if (paymentType === 'bankDetails') {
       payload = {
@@ -348,10 +375,7 @@ export default function useEditCustomer() {
         accountOwnerName: data.accountOwnerName,
         bic: data.bic,
         mendateReferance: data.mendateReferance,
-        mandateGenerateDate: data.mandateGenerateDate,
-        creditCardCVV: undefined,
-        creditCardNumber: undefined,
-        creditCardExpiry: undefined
+        mandateGenerateDate: data.mandateGenerateDate
       };
     }
     console.log(payloadData);

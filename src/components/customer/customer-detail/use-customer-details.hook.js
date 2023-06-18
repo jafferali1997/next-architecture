@@ -93,7 +93,7 @@ export default function useCustomerDetails() {
           }))
         );
       }
-      setValue('termOfDelivery', data?.termOfDelivery[0].termOfDelivery);
+      setValue('termOfDelivery', data?.termOfDelivery[0]?.termOfDelivery);
     }
   }
 
