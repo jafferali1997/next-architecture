@@ -194,7 +194,7 @@ export default function Profile() {
                   type="text"
                   label="VAT Number"
                   name="vat"
-                  placeholder="12"
+                  placeholder="Enter VAT number"
                   register={register}
                   errors={errors}
                   inlineLabel
@@ -211,7 +211,7 @@ export default function Profile() {
               <div className="input-group">
                 <CustomInput
                   type="text"
-                  label="Name"
+                  label="Company Name"
                   name="businessName"
                   placeholder="Zapta Technology"
                   register={register}
@@ -222,7 +222,7 @@ export default function Profile() {
               <div className="input-group">
                 <CustomSelect
                   inlineLabel
-                  label="Population"
+                  label="Employes"
                   name="population"
                   placeholder="Select Population"
                   options={[

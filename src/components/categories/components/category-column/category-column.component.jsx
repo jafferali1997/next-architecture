@@ -16,7 +16,8 @@ export default function CategoryColumn({
   categoryToRender,
   handleAddCategory,
   handleUpdateCategory,
-  handleDeleteCategory
+  handleDeleteCategory,
+  borderClass
 }) {
   const {
     handleButtonClick,
@@ -38,15 +39,66 @@ export default function CategoryColumn({
   } = useCategoryColumn({ handleAddCategory, categoryToRender });
 
   return (
-    <div className="tw-flex tw-h-[600px] tw-w-[300px] tw-flex-col tw-gap-[16px] tw-overflow-y-auto tw-px-[20px] tw-py-[30px]">
+    <div
+      className={`${borderClass} tw-flex tw-h-[600px] tw-w-[300px] tw-flex-col tw-gap-[16px] tw-overflow-y-auto tw-px-[20px] tw-py-[30px]`}
+    >
       <div className="tw-flex tw-items-center tw-justify-between">
-        <h3 className="h3 tw-whitespace-nowrap">Category Lvl {categoryLevel}</h3>
-        <CustomButton
-          text="Add"
-          startIcon={<PlusIcon />}
-          onClick={handleButtonClick}
-          className="btn-secondary tw-w-[72px]"
-        />
+        <div className="tw-flex tw-items-center tw-gap-2">
+          {borderClass && (
+            <img
+              className="hover:tw-cursor-pointer"
+              src="/assets/images/back-btn.svg"
+              alt="back"
+            />
+          )}
+
+          <h3 className="h3 tw-whitespace-nowrap">Category Lvl {categoryLevel}</h3>
+        </div>
+        {showInput ? (
+          <div className="hover:tw-cursor-pointer" onClick={handleButtonClick}>
+            <svg
+              width="27"
+              height="26"
+              viewBox="0 0 27 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_3751_91735)">
+                <path
+                  d="M17.5323 12.0322H9.46774C8.93548 12.0322 8.5 12.4677 8.5 13C8.5 13.5322 8.93548 13.9677 9.46774 13.9677H17.5323C18.0645 13.9677 18.5 13.5322 18.5 13C18.5 12.4677 18.0645 12.0322 17.5323 12.0322Z"
+                  fill="#047857"
+                />
+              </g>
+              <rect
+                x="0.952148"
+                y="0.75"
+                width="25.0953"
+                height="24.5"
+                rx="3.25"
+                stroke="#047857"
+                stroke-width="1.5"
+              />
+              <defs>
+                <clipPath id="clip0_3751_91735">
+                  <rect
+                    width="10"
+                    height="10"
+                    fill="white"
+                    transform="translate(8.5 8)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+        ) : (
+          <div onClick={handleButtonClick}>
+            <img
+              src="/assets/icons/add_button.svg"
+              alt=""
+              className="tw-2-[26px] tw-h-[26px] hover:tw-cursor-pointer"
+            />
+          </div>
+        )}
       </div>
       {showInput && (
         <>
@@ -57,7 +109,7 @@ export default function CategoryColumn({
             placeholder="Enter Category"
           />
           <CustomButton
-            text="Add"
+            text="Add Category"
             startIcon={<PlusIcon />}
             onClick={handleSubmit}
             className="btn-primary"
@@ -148,5 +200,6 @@ CategoryColumn.propTypes = {
   categoryToRender: PropTypes.number.isRequired,
   handleAddCategory: PropTypes.func.isRequired,
   handleDeleteCategory: PropTypes.func.isRequired,
-  handleUpdateCategory: PropTypes.func.isRequired
+  handleUpdateCategory: PropTypes.func.isRequired,
+  borderClass: PropTypes.string
 };
