@@ -78,9 +78,11 @@ const api = (headers = null) => {
           });
         });
       } else {
-        enqueueSnackbar(message, {
-          variant: 'error'
-        });
+        if (message !== 'Record Not Found') {
+          enqueueSnackbar(message, {
+            variant: 'error'
+          });
+        }
       }
       return error.response;
     }

@@ -46,6 +46,7 @@ export default function CustomInput({
   labelClassName = '',
   readOnly = false,
   onClick = null,
+  onKeyDown = null,
   ref = null
 }) {
   const {
@@ -87,6 +88,7 @@ export default function CustomInput({
         <Input
           {...(register && register(`${name}`))}
           {...(onClick && { onClick })}
+          {...(onKeyDown && { onKeyDown })}
           name={name}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
@@ -98,7 +100,6 @@ export default function CustomInput({
           {...(defaultValue !== null && defaultValue !== undefined && { defaultValue })}
           {...(value !== null && value !== undefined && { value })}
           {...(ref && { ref })}
-          onKeyDown={inputKeyDownHandler}
           disabled={disabled}
           variant="outlined"
           startAdornment={
@@ -128,6 +129,7 @@ CustomInput.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
   value: PropTypes.string,
   className: PropTypes.string,
   endIcon: PropTypes.element,

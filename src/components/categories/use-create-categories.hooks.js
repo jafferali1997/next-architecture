@@ -32,7 +32,9 @@ export default function useCreateCategories() {
 
     const newArray = [
       ...categories
-        .filter((item) => item.categoryToRender < categoryToDelete?.categoryToRender)
+        .filter((item) =>
+          categoryToDelete ? item.categoryLevel < categoryToDelete?.categoryLevel : true
+        )
         .map((item) => {
           if (item.categoryLevel === data.categoryLevel) {
             return {
@@ -168,11 +170,17 @@ export default function useCreateCategories() {
     ]);
   };
 
+  const handleRemoveColumn = (categoryLevel) => {
+    const newArray = [...categories.filter((item) => item.categoryLevel < categoryLevel)];
+    handleCategories(newArray);
+  };
+
   return {
     categories,
     handleClickCategory,
     handleAddCategory,
     handleDeleteCategory,
-    handleUpdateCategory
+    handleUpdateCategory,
+    handleRemoveColumn
   };
 }

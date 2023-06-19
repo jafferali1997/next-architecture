@@ -17,6 +17,7 @@ export default function CategoryColumn({
   handleAddCategory,
   handleUpdateCategory,
   handleDeleteCategory,
+  handleRemoveColumn,
   borderClass
 }) {
   const {
@@ -49,6 +50,8 @@ export default function CategoryColumn({
               className="hover:tw-cursor-pointer"
               src="/assets/images/back-btn.svg"
               alt="back"
+              role="presentation"
+              onClick={() => handleRemoveColumn(categoryLevel)}
             />
           )}
 
@@ -105,6 +108,11 @@ export default function CategoryColumn({
           <CustomInput
             value={value}
             onChange={handleAddButtonChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSubmit();
+              }
+            }}
             type="text"
             placeholder="Enter Category"
           />
@@ -201,5 +209,6 @@ CategoryColumn.propTypes = {
   handleAddCategory: PropTypes.func.isRequired,
   handleDeleteCategory: PropTypes.func.isRequired,
   handleUpdateCategory: PropTypes.func.isRequired,
+  handleRemoveColumn: PropTypes.func.isRequired,
   borderClass: PropTypes.string
 };
