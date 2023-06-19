@@ -40,7 +40,6 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
 
   const handleSubmit = () => {
     handleAddCategory(categoryToRender, value);
-    setShowInput(false);
     setValue();
   };
 

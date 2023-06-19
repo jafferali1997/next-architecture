@@ -25,8 +25,8 @@ export default function Select({
     <div
       className={`${
         inlineLabel
-          ? ' tw-grid tw-w-full tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center'
-          : ''
+          ? ' tw-grid tw-w-full tw-grid-cols-[130px_1fr] tw-items-center'
+          : 'tw-flex tw-flex-col tw-gap-[8px]'
       }`}
     >
       {label && (
@@ -56,7 +56,7 @@ export default function Select({
             <TextField
               {...params}
               {...(register && register(`${name}`))}
-              className="!tw-p-0 default-input input-field"
+              className="default-input input-field !tw-p-0"
               placeholder={placeholder}
             />
           )}
