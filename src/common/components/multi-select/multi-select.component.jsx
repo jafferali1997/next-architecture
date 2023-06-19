@@ -41,12 +41,12 @@ export default function MultiSelect({
     return options?.map((option, index) => (
       <div
         key={option?.id}
-        className={`noCloseOptions tw-w-full tw-cursor-pointer tw-border-gray-100 hover:tw-bg-teal-100 ${isSelectedClass(
+        className={`noCloseOptions tw-w-full tw-cursor-pointer tw-border-stroke-color hover:tw-bg-stroke-color hover:tw-bg-opacity-50 ${isSelectedClass(
           option
         )} ${index !== 0 ? 'tw-border-t' : ''}`}
         onClick={() => optionClickHandler(option)}
       >
-        <div className="noCloseOptions tw-relative tw-flex tw-w-full tw-items-center tw-border-l-2 tw-border-transparent tw-p-2 tw-pl-2 hover:tw-border-teal-100">
+        <div className="noCloseOptions tw-relative tw-flex tw-w-full tw-items-center tw-border-l-2 tw-border-transparent tw-p-2 tw-pl-2 hover:tw-border-stroke-color">
           <div className="noCloseOptions tw-flex tw-w-full tw-items-center">
             <div className="noCloseOptions tw-mx-2 tw-leading-6">{option?.label}</div>
           </div>
@@ -56,20 +56,20 @@ export default function MultiSelect({
   };
 
   return (
-    <div className="tw-mt-5 tw-flex tw-w-11 tw-w-full">
+    <div className="tw-flex tw-w-full">
       <div className="tw-w-full">
         <div className="tw-relative tw-flex tw-flex-col tw-items-center">
           <div className="tw-w-full">
-            <div className="tw-my-2 tw-flex tw-rounded tw-border tw-border-gray-200 tw-bg-white tw-p-1">
+            <div className="tw-mb-2 tw-flex tw-h-[40px] tw-rounded tw-border tw-border-text-ultra-light-gray tw-bg-white tw-pr-1 hover:tw-border-[#7e7d7d]">
               <div className="tw-flex tw-flex-auto tw-flex-wrap">
                 {selectedOptions?.map((option, index) => {
                   if (index < maxDisplayOptions) {
                     return (
                       <div
                         key={option?.id}
-                        className="tw-m-1 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-teal-300 tw-bg-teal-100 tw-px-2 tw-py-1 tw-font-medium tw-text-teal-700 "
+                        className="tw-m-1 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-stroke-color tw-px-[11px] tw-font-medium tw-text-[#46474F]"
                       >
-                        <div className="tw-max-w-full tw-flex-initial tw-text-xs tw-font-normal tw-leading-none">
+                        <div className="tw-mr-[8px] tw-max-w-full tw-flex-initial tw-text-[14px] tw-font-normal tw-leading-none">
                           {option?.label}
                         </div>
                         {!readOnly && (
@@ -77,7 +77,7 @@ export default function MultiSelect({
                             className="tw-flex tw-flex-auto tw-flex-row-reverse"
                             onClick={() => removeOptionHandler(option)}
                           >
-                            <ClearIcon className="-tw-mr-1 tw-h-5 tw-w-5 tw-text-gray-400 hover:tw-cursor-pointer hover:tw-text-gray-700" />
+                            <ClearIcon className="-tw-mr-1 tw-h-5 tw-w-5 tw-text-[#46474F] hover:tw-cursor-pointer hover:tw-text-gray-700" />
                           </div>
                         )}
                       </div>
@@ -86,7 +86,7 @@ export default function MultiSelect({
                   return '';
                 })}
                 {selectedOptions?.length > maxDisplayOptions && (
-                  <div className="flex tw-m-1 tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-teal-300 tw-bg-teal-100 tw-px-2 tw-py-1 tw-font-medium tw-text-teal-700">
+                  <div className="flex tw-m-1 tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-stroke-color tw-px-2 tw-py-1 tw-font-medium tw-text-[#46474F]">
                     <div className="tw-flex tw-max-w-full tw-items-center tw-justify-center tw-text-xs tw-font-normal tw-leading-none">
                       <AddIcon className="tw-h-3 tw-w-3" />
                       {selectedOptions.length - maxDisplayOptions} more
@@ -97,7 +97,7 @@ export default function MultiSelect({
                   <input
                     ref={ref}
                     placeholder={getPlaceholder(placeholder)}
-                    className="click-text tw-h-full tw-w-full tw-appearance-none tw-bg-transparent tw-p-1 tw-px-2 tw-text-gray-800 tw-outline-none"
+                    className="click-text tw-h-full tw-w-full tw-appearance-none tw-bg-transparent tw-px-[16px] tw-py-[8px] tw-text-[#46474F] tw-outline-none placeholder:tw-text-text-ultra-light-gray"
                     onClick={toggleDropDown}
                     onChange={handleInputChangeHandler}
                     readOnly={readOnly}
@@ -131,15 +131,15 @@ export default function MultiSelect({
             </div>
           </div>
           {open && (
-            <div className="tw-lef-0 tw-absolute tw-top-[100%] tw-z-[999] tw-w-full  tw-rounded tw-bg-white tw-text-black  tw-shadow">
+            <div className="tw-lef-0 tw-absolute tw-top-[100%] tw-z-[999] tw-w-full  tw-rounded tw-bg-white tw-text-[#46474F] tw-shadow">
               <div className="tw-flex tw-max-h-[200px] tw-w-full tw-flex-col tw-overflow-y-auto">
                 {addClickHandler && (
                   <div
-                    className="tw-flex tw-max-w-full tw-items-center"
+                    className="tw-flex tw-max-w-full tw-items-center tw-bg-primary tw-bg-opacity-10 tw-p-2 hover:tw-cursor-pointer"
                     onClick={addClickHandler}
                   >
-                    <AddIcon className="tw-h-3 tw-w-3" />
-                    <p>create new group</p>
+                    <AddIcon className="tw-mr-[8px] tw-h-5 tw-w-5 tw-text-[#46474F]" />
+                    <div className="">Create New Group</div>
                   </div>
                 )}
                 {filteredOptions && isSearching

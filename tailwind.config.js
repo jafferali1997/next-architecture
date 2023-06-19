@@ -57,21 +57,22 @@ module.exports = {
         'dark-gray': '#121D32',
         'text-gray': '#51605C',
         'text-gray2': '#666666',
-        'text-gray3':'#667085',
+        'text-gray3': '#667085',
         'text-dark-gray': '#46474F',
         'text-medium-gray': '#585858',
         'text-light-gray': '#7E7D7D',
         'text-light-gray2': '#A6A6A6',
-        'border-gray':'#D0D5DD',
+        'border-gray': '#D0D5DD',
         'bg-gray': '#FBFDFF',
         'text-ultra-light-gray': '#BBBBBB',
         'danger-light': '#FFDEDE',
         'disabled-input': '#E4E4E4',
+        'stroke-color': '#D9D9D9',
         danger: '#EF2020',
         success: '#10FF61',
         'primary-purple': '#6F6AF5',
-        skyblue:'#E3ECF4',
-        'lightest-gray':'#CDCDCD'
+        skyblue: '#E3ECF4',
+        'lightest-gray': '#CDCDCD'
       },
       boxShadow: {
         custom: '0px 0px 31px rgba(29, 78, 216, 0.1)',
@@ -120,7 +121,7 @@ module.exports = {
         'landing-hero-circle': "url('/assets/images/landing/hero-circle.png')",
         'howitworks-bg': "url('/assets/images/landing/howitworks/howitwork-bg.png')",
         'form-wrapper': "url('/assets/images/bg.png')",
-        'checked': "url('/assets/icons/tick.svg')"
+        checked: "url('/assets/icons/tick.svg')"
       }
     }
   },

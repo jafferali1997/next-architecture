@@ -68,7 +68,7 @@ export default function Login() {
                   {...register('email')}
                   type="text"
                   id="email"
-                  className="form-group-c-input"
+                  className="form-group-c-input tw-bg-transparent"
                   placeholder="Email/Username"
                   required
                   style={errors.email ? borderStyle : borderSuc}
