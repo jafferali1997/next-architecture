@@ -34,10 +34,10 @@
   }
 
   input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active{
-      -webkit-box-shadow: 0 0 0 30px white inset !important;
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
 
   input::-webkit-outer-spin-button,
@@ -290,12 +290,12 @@
     @apply tw-font-dm tw-text-xl tw-font-normal tw-leading-8 tw-text-text-light-black2;
   }
 
-  .dashboard-content-container{
+  .dashboard-content-container {
     @apply tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3;
   }
 
-  .panel{
-    @apply tw-bg-white tw-rounded-[20px] tw-border-[1px] tw-border-border-gray2 tw-p-4;
+  .panel {
+    @apply tw-rounded-[20px] tw-border-[1px] tw-border-[#F5F5F5] tw-bg-white tw-p-4;
   }
 
   @import url('./component-styles/input.style.css');
@@ -303,6 +303,7 @@
   @import url('./component-styles/dropdown.style.css');
   @import url('./component-styles/modals.style.css');
 }
+
 .payment-details-radios label {
   @apply tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-[#2c2e3e];
   font-family: 'DM Sans';
