@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable react/jsx-filename-extension */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -14,23 +14,30 @@ import DeleteIcon from '@/common/icons/delete.icon';
 import { deleteProduct, getAllProduct } from '@/provider/features/product/product.slice';
 import useDebounce from '@/common/hooks/useDebounce';
 
+const FEATURES_WIDTH = {
+  id: 90,
+  productName: 200,
+  netPrice: 90,
+  grossPrice: 90,
+  purchasePrice: 90,
+  unit: 70,
+  manufacturer: 120,
+  minSellingPrice: 100,
+  quantity: 90,
+  taxRate: 90
+};
+
 const FEATURES_TO_BE_SHOW = {
-  id: 'Product ID #',
+  id: 'ID #',
   productName: 'Product Name',
-  description: 'Description',
   netPrice: 'Net Price',
   grossPrice: 'Gross Price',
   purchasePrice: 'Purchase Price',
-  manufacturer: 'Manufacturer',
   unit: 'Unit',
+  manufacturer: 'Manufacturer',
   minSellingPrice: 'Min Selling Price',
-  location: 'Location',
   quantity: 'No. of Pieces',
-  taxRate: 'Tax Rate',
-  productCategorys: 'Product Categorys',
-  priceGroups: 'Price Groups',
-  discountGroups: 'Discount Groups',
-  tags: 'Tags'
+  taxRate: 'Tax Rate'
 };
 
 export default function useProduct() {
@@ -88,7 +95,7 @@ export default function useProduct() {
         headerName: FEATURES_TO_BE_SHOW[key],
         headerClassName: 'table-heading ',
         cellClassName: 'table-data ',
-        width: 200
+        width: FEATURES_WIDTH[key]
       };
       if (!FILES_TO_BE_IGNORE.includes(key)) {
         if (key === 'isDraft') {
@@ -124,6 +131,20 @@ export default function useProduct() {
   const [toasterMsg, setToasterMsg] = useState('');
   const [tableColumns, setTableColumns] = useState([]);
   const [tableRows, setTableRows] = useState([]);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   const dispatch = useDispatch();
   const router = useRouter();

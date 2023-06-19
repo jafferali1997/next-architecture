@@ -20,7 +20,7 @@ import {
 import useDebounce from '@/common/hooks/useDebounce';
 
 const FEATURES_TO_BE_SHOW = {
-  id: 'Customer ID #',
+  id: 'ID #',
   firstName: 'First Name',
   lastName: 'Last Name',
   email: 'Email',
@@ -28,7 +28,7 @@ const FEATURES_TO_BE_SHOW = {
   isActive: 'Status',
   gender: 'Gender',
   address: 'Address',
-  state: 'State',
+  state: 'State', // TODO: Need to be removed (Should it be added?)
   country: 'Country',
   postalCode: 'Postal Code',
   companyName: 'Company Name',
@@ -39,6 +39,28 @@ const FEATURES_TO_BE_SHOW = {
   companyFax: 'Fax Number',
   tin: 'TIN'
 };
+
+const FEATURES_WIDTH = {
+  id: 90,
+  firstName: 200,
+  lastName: 200,
+  email: 150,
+  phone: 150,
+  isActive: 200,
+  gender: 90,
+  address: 200,
+  state: 100,
+  country: 100,
+  postalCode: 100,
+  companyName: 200,
+  companyAddress: 200,
+  companyPhone: 200,
+  companyEmail: 200,
+  companyMobile: 200,
+  companyFax: 150,
+  tin: 100
+};
+
 const DEFAULT_COLUMNS = ['id', 'firstName', 'lastName', 'companyName', 'isActive'];
 
 const FEATURES_TO_BE_IGNORE = ['createdBy', 'updatedBy', 'createdAt', 'updatedAt'];
@@ -101,7 +123,7 @@ export default function useCustomer() {
         headerName: FEATURES_TO_BE_SHOW[key],
         headerClassName: 'table-heading ',
         cellClassName: 'table-data ',
-        width: 150
+        width: FEATURES_WIDTH[key]
       };
       if (!FEATURES_TO_BE_IGNORE.includes(key)) {
         if (key === 'isActive') {
