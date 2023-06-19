@@ -41,12 +41,12 @@ export default function MultiSelect({
     return options?.map((option, index) => (
       <div
         key={option?.id}
-        className={`noCloseOptions tw-w-full tw-cursor-pointer tw-border-stroke-color hover:tw-bg-stroke-color hover:tw-bg-opacity-50 ${isSelectedClass(
+        className={`noCloseOptions tw-w-full tw-cursor-pointer tw-border-[#D9D9D9] hover:tw-bg-[#D9D9D9] hover:tw-bg-opacity-50 ${isSelectedClass(
           option
         )} ${index !== 0 ? 'tw-border-t' : ''}`}
         onClick={() => optionClickHandler(option)}
       >
-        <div className="noCloseOptions tw-relative tw-flex tw-w-full tw-items-center tw-border-l-2 tw-border-transparent tw-p-2 tw-pl-2 hover:tw-border-stroke-color">
+        <div className="noCloseOptions tw-relative tw-flex tw-w-full tw-items-center tw-border-l-2 tw-border-transparent tw-p-2 tw-pl-2 hover:tw-border-[#D9D9D9]">
           <div className="noCloseOptions tw-flex tw-w-full tw-items-center">
             <div className="noCloseOptions tw-mx-2 tw-leading-6">{option?.label}</div>
           </div>
@@ -67,7 +67,7 @@ export default function MultiSelect({
                     return (
                       <div
                         key={option?.id}
-                        className="tw-m-1 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-stroke-color tw-px-[11px] tw-font-medium tw-text-[#46474F]"
+                        className="tw-m-1 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-[#D9D9D9] tw-px-[11px] tw-font-medium tw-text-[#46474F]"
                       >
                         <div className="tw-mr-[8px] tw-max-w-full tw-flex-initial tw-text-[14px] tw-font-normal tw-leading-none">
                           {option?.label}
@@ -86,7 +86,7 @@ export default function MultiSelect({
                   return '';
                 })}
                 {selectedOptions?.length > maxDisplayOptions && (
-                  <div className="flex tw-m-1 tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-stroke-color tw-px-2 tw-py-1 tw-font-medium tw-text-[#46474F]">
+                  <div className="flex tw-m-1 tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-[#D9D9D9] tw-px-2 tw-py-1 tw-font-medium tw-text-[#46474F]">
                     <div className="tw-flex tw-max-w-full tw-items-center tw-justify-center tw-text-xs tw-font-normal tw-leading-none">
                       <AddIcon className="tw-h-3 tw-w-3" />
                       {selectedOptions.length - maxDisplayOptions} more

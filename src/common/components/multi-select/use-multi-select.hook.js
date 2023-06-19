@@ -54,7 +54,7 @@ export default function useMultiSelect(
 
   const isSelectedClass = (option) => {
     if (selectedOptions.find((o) => o.value === option.value)) {
-      return 'tw-border-l-[3px] tw-border-l-[#BBBBBB] tw-bg-stroke-color';
+      return 'tw-border-l-[3px] tw-border-l-[#BBBBBB] tw-bg-[#D9D9D9]';
     }
     return '';
   };
