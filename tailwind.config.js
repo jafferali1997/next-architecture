@@ -64,6 +64,7 @@ module.exports = {
         'text-light-gray2': '#A6A6A6',
         'border-gray':'#D0D5DD',
         'border-gray2':'#F5F5F5',
+        'border-gray3':'#DDE2EC',
         'bg-gray': '#FBFDFF',
         'text-ultra-light-gray': '#BBBBBB',
         'danger-light': '#FFDEDE',

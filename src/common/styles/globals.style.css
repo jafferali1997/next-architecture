@@ -287,6 +287,10 @@
     @apply tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3;
   }
 
+  .panel{
+    @apply tw-bg-white tw-rounded-[20px] tw-border-[1px] tw-border-border-gray2 tw-p-4;
+  }
+
   @import url('./component-styles/input.style.css');
   @import url('./component-styles/switch.style.css');
   @import url('./component-styles/dropdown.style.css');
