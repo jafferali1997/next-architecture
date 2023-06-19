@@ -32,7 +32,7 @@ export default function useCreateCategories() {
 
     const newArray = [
       ...categories
-        .filter((item) => item.categoryToRender !== categoryToDelete?.categoryToRender)
+        .filter((item) => item.categoryToRender < categoryToDelete?.categoryToRender)
         .map((item) => {
           if (item.categoryLevel === data.categoryLevel) {
             return {
