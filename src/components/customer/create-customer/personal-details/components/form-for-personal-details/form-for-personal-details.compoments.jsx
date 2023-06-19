@@ -38,7 +38,7 @@ export default function FormForPersonalDetails({
       <div className="form-box-grid-4col">
         <CustomSelect
           label="Gender"
-          placeholder="Select Gender"
+          defaultValue="Select Gender"
           name="gender"
           options={[
             { label: 'Male', value: 'MALE' },
@@ -97,12 +97,13 @@ export default function FormForPersonalDetails({
           name="country"
           isRequired={true}
           errors={error}
+          defaultValue="Country"
         />
         <CustomSelect
           label="City"
           name="city"
           control={control}
-          placeholder="City"
+          defaultValue="City"
           type="select"
           isRequired={true}
           options={cities}
