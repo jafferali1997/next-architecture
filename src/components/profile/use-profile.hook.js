@@ -148,7 +148,7 @@ export default function useProfile() {
       const user = await dispatch(getCurrentUser({ successCallBack: () => {} }));
       console.log(user);
       if (user?.payload?.id) {
-        router.push('/customer');
+        router.push('/dashboard');
       }
     }
   };

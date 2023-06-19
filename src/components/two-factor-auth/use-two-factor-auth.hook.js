@@ -46,7 +46,7 @@ export default function useTwoFactorAuth() {
   };
   const moveRouter = (data) => {
     setIsOtpVerified(true);
-    dispatch(getCurrentUser({ successCallBack: () => router.push('/customer') }));
+    dispatch(getCurrentUser({ successCallBack: () => router.push('/dashboard') }));
   };
 
   const verifyOtpHandler = () => {

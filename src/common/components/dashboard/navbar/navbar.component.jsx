@@ -89,14 +89,14 @@ export default function Navbar({ setToggle, value }) {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M2.37501 3.5C2.37501 2.05025 3.55026 0.875 5.00001 0.875C6.44976 0.875 7.62501 2.05025 7.62501 3.5C7.62501 4.94975 6.44976 6.125 5.00001 6.125C3.55026 6.125 2.37501 4.94975 2.37501 3.5Z"
                   fill="#BBBBBB"
                 />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M0.188237 11.7281C0.233352 9.10908 2.37033 7 5.00001 7C7.62975 7 9.76677 9.10918 9.81179 11.7283C9.81477 11.902 9.7147 12.061 9.55681 12.1335C8.16909 12.7702 6.62548 13.125 5.0002 13.125C3.37476 13.125 1.83101 12.7701 0.443198 12.1333C0.285307 12.0608 0.185245 11.9018 0.188237 11.7281Z"
                   fill="#BBBBBB"
                 />
