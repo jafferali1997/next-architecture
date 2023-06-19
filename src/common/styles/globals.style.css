@@ -42,19 +42,19 @@
 
 @layer components {
   .btn {
-    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-4 tw-text-white;
+    @apply tw-flex tw-h-[36px]  tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-4 tw-text-white;
   }
   .btn-outline {
-    @apply tw-flex tw-h-[36px] tw-min-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-border-[1.5px] tw-border-solid tw-border-primary  tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-primary hover:tw-bg-secondary-light-blue disabled:tw-cursor-not-allowed disabled:tw-border-text-ultra-light-gray  disabled:tw-text-text-light-gray;
+    @apply tw-flex tw-h-[36px] tw-w-[106px] tw-flex-row tw-items-center tw-justify-center tw-rounded-md tw-border-[1.5px] tw-border-solid tw-border-primary  tw-text-xs tw-font-medium tw-not-italic tw-leading-4 tw-text-primary hover:tw-bg-secondary-light-blue disabled:tw-cursor-not-allowed disabled:tw-border-text-ultra-light-gray  disabled:tw-text-text-light-gray;
   }
   .btn-primary {
-    @apply tw-bg-primary hover:tw-bg-secondary-blue focus:tw-bg-secondary-dark-blue disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
+    @apply tw-min-w-[106px] tw-bg-primary hover:tw-bg-secondary-blue focus:tw-bg-secondary-dark-blue disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
   }
   .btn-primary-blue {
     @apply tw-inline-block tw-w-fit tw-rounded-[10px] tw-border-2 tw-border-primary-purple tw-bg-primary-blue tw-py-4 tw-font-dm tw-text-lg tw-font-semibold tw-leading-6 tw-text-white xs:tw-px-5 lg:tw-px-12;
   }
   .btn-cancel {
-    @apply tw-bg-[#DBE1E7] tw-text-text-dark-gray;
+    @apply tw-min-w-[106px] tw-bg-[#DBE1E7] tw-text-text-dark-gray;
   }
   .btn-secondary {
     @apply tw-bg-secondary-green hover:tw-bg-secondary-medium-green focus:tw-bg-secondary-dark-green disabled:tw-cursor-not-allowed disabled:tw-bg-text-ultra-light-gray disabled:tw-text-white;
@@ -463,4 +463,10 @@ body {
 }
 .MuiSelect-select {
   padding-left: 8px !important;
+}
+.MuiInputBase-root {
+  padding-left: 8px !important;
+}
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  padding: 5px 0 5px !important;
 }

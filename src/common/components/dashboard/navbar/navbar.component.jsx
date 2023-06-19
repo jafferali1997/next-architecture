@@ -57,7 +57,7 @@ export default function Navbar({ setToggle, value }) {
           onClick={() => setToggle(!value)}
           className="tw-mr-1 tw-text-2xl tw-font-bold tw-text-text-light-gray xs:tw-inline-block semixl:tw-hidden"
         />
-        <h1 className="tw-font-dm tw-font-bold tw-leading-9 tw-text-text-light-gray xs:tw-text-lg lg:tw-text-2xl">
+        <h1 className="tw-flex tw-items-center tw-text-2xl tw-font-bold tw-capitalize tw-not-italic tw-leading-9 tw-text-text-dark-gray xs:tw-text-lg lg:tw-text-2xl">
           Documents
         </h1>
       </div>

@@ -53,6 +53,9 @@ export default function CategoryColumn({
                 viewBox="0 0 7 12"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                onClick={() => {
+                  handleRemoveColumn(categoryLevel);
+                }}
               >
                 <path
                   d="M6.00283 11.2293C5.90408 11.2299 5.80619 11.211 5.71478 11.1736C5.62336 11.1363 5.54021 11.0813 5.4701 11.0117L0.968187 6.50981C0.828439 6.36923 0.75 6.17906 0.75 5.98084C0.75 5.78262 0.828439 5.59245 0.968187 5.45186L5.4701 0.949951C5.61364 0.827029 5.79827 0.762797 5.98711 0.770091C6.17595 0.777385 6.35508 0.855667 6.48871 0.989295C6.62233 1.12292 6.70062 1.30205 6.70791 1.49089C6.7152 1.67973 6.65097 1.86436 6.52805 2.0079L2.55886 5.97709L6.52805 9.94627C6.63341 10.0508 6.70542 10.1842 6.73497 10.3296C6.76452 10.475 6.75029 10.6259 6.69407 10.7633C6.63785 10.9006 6.54218 11.0182 6.41914 11.1011C6.2961 11.1841 6.15122 11.2287 6.00283 11.2293Z"
@@ -62,79 +65,64 @@ export default function CategoryColumn({
             </div>
           )}
 
-          <h3 className="h3 tw-whitespace-nowrap">Category Lvl {categoryLevel}</h3>
+          <h3 className="h3 tw-whitespace-nowrap">
+            {categoryLevel === 1 ? 'Category' : `Sub Category ${categoryLevel - 1}`}
+          </h3>
         </div>
         {showInput ? (
           <div className="hover:tw-cursor-pointer" onClick={handleButtonClick}>
             <svg
-              width="27"
-              height="26"
-              viewBox="0 0 27 26"
+              width="14"
+              height="15"
+              viewBox="0 0 24 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_3751_91735)">
+              <g clip-path="url(#clip0_7137_131510)">
                 <path
-                  d="M17.5323 12.0322H9.46774C8.93548 12.0322 8.5 12.4677 8.5 13C8.5 13.5322 8.93548 13.9677 9.46774 13.9677H17.5323C18.0645 13.9677 18.5 13.5322 18.5 13C18.5 12.4677 18.0645 12.0322 17.5323 12.0322Z"
-                  fill="#047857"
+                  d="M14.1987 12.5195L23.544 3.17407C24.1521 2.56617 24.1521 1.58327 23.544 0.97545C22.9361 0.367558 21.9532 0.367558 21.3454 0.97545L11.9999 10.3208L2.65475 0.97545C2.04657 0.367558 1.06403 0.367558 0.456138 0.97545C-0.152046 1.58334 -0.152046 2.56617 0.456138 3.17407L9.8012 12.5195L0.456211 21.8649C-0.151973 22.4727 -0.151973 23.4557 0.456211 24.0635C0.600405 24.2081 0.771753 24.3228 0.960408 24.4009C1.14906 24.4791 1.35131 24.5192 1.55552 24.519C1.95349 24.519 2.35161 24.3667 2.65483 24.0635L11.9999 14.7181L21.3454 24.0635C21.4896 24.2081 21.661 24.3227 21.8496 24.4009C22.0383 24.4791 22.2405 24.5192 22.4447 24.519C22.8427 24.519 23.2408 24.3667 23.544 24.0635C24.1521 23.4556 24.1521 22.4727 23.544 21.8649L14.1987 12.5195Z"
+                  fill="#585858"
                 />
               </g>
-              <rect
-                x="0.952148"
-                y="0.75"
-                width="25.0953"
-                height="24.5"
-                rx="3.25"
-                stroke="#047857"
-                stroke-width="1.5"
-              />
               <defs>
-                <clipPath id="clip0_3751_91735">
+                <clipPath id="clip0_7137_131510">
                   <rect
-                    width="10"
-                    height="10"
+                    width="24"
+                    height="24"
                     fill="white"
-                    transform="translate(8.5 8)"
+                    transform="translate(0 0.5)"
                   />
                 </clipPath>
               </defs>
             </svg>
           </div>
         ) : (
-          <div onClick={handleButtonClick}>
-            <img
-              src="/assets/icons/add_button.svg"
-              alt=""
-              className="tw-2-[26px] tw-h-[26px] hover:tw-cursor-pointer"
+          <div className="hover:tw-cursor-pointer" onClick={handleButtonClick}>
+            <CustomButton
+              text="Add"
+              className="btn-secondary tw-h-[33px] tw-w-[72px] tw-p-0"
+              startIcon={<PlusIcon />}
             />
           </div>
         )}
       </div>
       {showInput && (
-        <>
-          <CustomInput
-            value={value}
-            onChange={handleAddButtonChange}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSubmit();
-              }
-            }}
-            type="text"
-            placeholder="Enter Category"
-          />
-          <CustomButton
-            text="Add Category"
-            startIcon={<PlusIcon />}
-            onClick={handleSubmit}
-            className="btn-primary"
-          />
-        </>
+        <CustomInput
+          value={value}
+          onChange={handleAddButtonChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit();
+            }
+          }}
+          type="text"
+          placeholder="Enter Category"
+        />
       )}
       <div>
         <CustomInput
           startIcon={<SearchIcon />}
-          className="tw-bg-secondary-light-blue"
+          className="tw-bg-[#F2F6FD]"
           placeholder="Search"
           onChange={handleSearchButton}
           type="text"
