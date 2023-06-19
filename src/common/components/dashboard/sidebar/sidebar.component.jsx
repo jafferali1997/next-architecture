@@ -26,20 +26,24 @@ import ExpendituresIcon from '@/common/icons/sidebar/expenses/expenditures.icon'
 import DatabaseIcon from '@/common/icons/sidebar/clouds/database.icon';
 
 const sidebarLinks = [
-  { label: 'Dashboard', icon: <DashboardIcon className="" />, href: '/' },
+  { label: 'Dashboard', icon: <DashboardIcon className="" />, href: '/dashboard' },
   {
     label: 'Documents',
     icon: null,
     subLinks: [
       { lablel: 'Offer', icon: <OfferIcon />, href: '/offer' },
-      { lablel: 'Order', icon: <OrderIcon />, href: '/' },
-      { lablel: 'Delivery Notes', icon: <DeliveryNotesIcon />, href: '/' },
-      { lablel: 'Invoice', icon: <InvoiceIcon />, href: '/' },
-      { lablel: 'Credits Notes', icon: <CreditNotesIcon />, href: '/' },
-      { lablel: 'Recurring Invoices', icon: <RecurringInvoiceIcon />, href: '/' },
-      { lablel: 'Purchase Order', icon: <PurchaseOrderIcon />, href: '/' },
-      { lablel: 'Inquiries', icon: <InquiriesIcon />, href: '/' },
-      { lablel: 'Correspondence', icon: <CorrespondenceIcon />, href: '/' }
+      { lablel: 'Order', icon: <OrderIcon />, href: '/dashboard' },
+      { lablel: 'Delivery Notes', icon: <DeliveryNotesIcon />, href: '/dashboard' },
+      { lablel: 'Invoice', icon: <InvoiceIcon />, href: '/dashboard' },
+      { lablel: 'Credits Notes', icon: <CreditNotesIcon />, href: '/dashboard' },
+      {
+        lablel: 'Recurring Invoices',
+        icon: <RecurringInvoiceIcon />,
+        href: '/dashboard'
+      },
+      { lablel: 'Purchase Order', icon: <PurchaseOrderIcon />, href: '/dashboard' },
+      { lablel: 'Inquiries', icon: <InquiriesIcon />, href: '/dashboard' },
+      { lablel: 'Correspondence', icon: <CorrespondenceIcon />, href: '/dashboard' }
     ]
   },
   {
@@ -49,23 +53,23 @@ const sidebarLinks = [
       { lablel: 'Customer', icon: <CustomerIcon />, href: '/customer' },
       { lablel: 'Products', icon: <ProductIcon />, href: '/product' },
       { lablel: 'Categories', icon: <ProductIcon />, href: '/category/create' },
-      { lablel: 'Users & Roles', icon: <UserRolesIcon />, href: '/' }
+      { lablel: 'Users & Roles', icon: <UserRolesIcon />, href: '/dashboard' }
     ]
   },
   {
     label: 'Employee Management',
     icon: null,
-    subLinks: [{ lablel: 'Employees', icon: <EmployeesIcon />, href: '/' }]
+    subLinks: [{ lablel: 'Employees', icon: <EmployeesIcon />, href: '/dashboard' }]
   },
   {
     label: 'Expenses',
     icon: null,
-    subLinks: [{ lablel: 'Expenditures', icon: <ExpendituresIcon />, href: '/' }]
+    subLinks: [{ lablel: 'Expenditures', icon: <ExpendituresIcon />, href: '/dashboard' }]
   },
   {
     label: 'Cloud',
     icon: null,
-    subLinks: [{ lablel: 'Database', icon: <DatabaseIcon />, href: '/' }]
+    subLinks: [{ lablel: 'Database', icon: <DatabaseIcon />, href: '/dashboard' }]
   }
 ];
 

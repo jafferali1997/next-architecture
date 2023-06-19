@@ -97,13 +97,13 @@ export default function FormForPersonalDetails({
           name="country"
           isRequired={true}
           errors={error}
-          defaultValue="Country"
+          defaultValue="Select Country"
         />
         <CustomSelect
           label="City"
           name="city"
           control={control}
-          defaultValue="City"
+          defaultValue="Select City"
           type="select"
           isRequired={true}
           options={cities}
