@@ -148,7 +148,7 @@ export default function useProfile() {
       profileFinancialBusiness({ payload: { ...data, country } })
     );
     if (res.payload === 'Profile created successfully') {
-      const user = await dispatch(getCurrentUser(() => {}));
+      const user = await dispatch({ successCallBack: getCurrentUser(() => {}) });
       console.log(user);
       if (user?.payload?.id) {
         router.push('/customer');
