@@ -110,123 +110,6 @@ export default function useProduct() {
     return columns;
   };
 
-  // const getRows = (data) => {
-  //   let rows = [];
-  //   data.forEach((item) => {
-  //   }
-  // }
-
-  // const columns = [
-  //   {
-  //     field: 'id',
-  //     headerName: 'Product ID #',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 180
-  //   },
-  //   {
-  //     field: 'firstName',
-  //     headerName: 'First name',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 150
-  //   },
-  //   {
-  //     field: 'lastName',
-  //     headerName: 'Last name',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 150
-  //   },
-  //   {
-  //     field: 'gender',
-  //     headerName: 'Gender',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 150
-  //   },
-  //   {
-  //     field: 'phone',
-  //     headerName: 'Phone',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 200
-  //   },
-  //   {
-  //     field: 'companyName',
-  //     headerName: 'Company name',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 200
-  //   },
-  //   {
-  //     field: 'companyAddress',
-  //     headerName: 'Company address',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 260
-  //   },
-  //   {
-  //     field: 'Status',
-  //     headerName: 'Status',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     width: 110,
-  //     renderCell: (params) => (
-  //       // eslint-disable-next-line react/jsx-filename-extension
-  //       <span className={params.value == 'active' ? 'status-active' : 'status-error'}>
-  //         {params.value}
-  //       </span>
-  //     )
-  //   },
-  //   {
-  //     field: 'actions',
-  //     headerName: 'Action',
-  //     headerClassName: 'table-heading ',
-  //     cellClassName: 'table-data ',
-  //     type: 'actions',
-  //     width: 100,
-  //     getActions: (cell) => [
-  //       <GridActionsCellItem
-  //         icon={<PencilIcon />}
-  //         label="Edit"
-  //         onClick={() => handleEditAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<CircleIcon />}
-  //         label="Active"
-  //         onClick={() => handleStatusAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<EyeIcon />}
-  //         label="View Detail"
-  //         onClick={() => handleViewAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<CommentIcon />}
-  //         label="Add comments"
-  //         onClick={() => handleAddCommentAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<UploadIcon />}
-  //         label="Upload files"
-  //         onClick={() => handleUploadAction(cell.row)}
-  //         showInMenu
-  //       />,
-  //       <GridActionsCellItem
-  //         icon={<DeleteIcon />}
-  //         label="Delete"
-  //         onClick={() => handleDeleteAction(cell.row)}
-  //         showInMenu
-  //       />
-  //     ]
-  //   }
-  // ];
-
   const initialColumnState = (columns) => {
     return columns.reduce((acc, column, idx) => {
       if (idx < 5 || column.field === 'actions') acc[column.field] = true;
@@ -234,63 +117,6 @@ export default function useProduct() {
       return acc;
     }, {});
   };
-
-  // const rows = [
-  //   {
-  //     id: '23423',
-  //     firstName: 'Jon Jon 2 Jon 1 Jon 3 Jon 4 Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '243434',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '3535',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'in-active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '534345',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '53454',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   },
-  //   {
-  //     id: '5345',
-  //     firstName: 'Jon',
-  //     lastName: 'Snow',
-  //     companyName: 'Companyname',
-  //     companyAddress: 'Companyaddress',
-  //     Status: 'active',
-  //     Action: 'Action'
-  //   }
-  // ];
 
   const [columnState, setColumnState] = useState([]);
   const [open, setOpen] = useState(false);
@@ -354,63 +180,17 @@ export default function useProduct() {
         }
       })
     );
-    // const data = {
-    //   records: [
-    //     {
-    //       id: 6,
-    //       createdBy: 2,
-    //       updatedBy: null,
-    //       createdAt: '2023-06-05T11:04:35.555Z',
-    //       updatedAt: '2023-06-05T13:25:24.008Z',
-    //       accountOwnerName: null,
-    //       iban: null,
-    //       city: 'Lahore',
-    //       country: 'Pakistan',
-    //       address: '56yujh',
-    //       postalCode: 120,
-    //       firstName: 'ALI',
-    //       lastName: 'Raza',
-    //       bic: null,
-    //       mendateReferance: null,
-    //       mandateGenerateDate: null,
-    //       nameOfCreditCard: null,
-    //       creditCardNumber: null,
-    //       creditCardExpiry: null,
-    //       creditCardCVV: null,
-    //       companyName: null,
-    //       companyEmail: null,
-    //       companyPhone: null,
-    //       companyFax: null,
-    //       companyMobile: null,
-    //       companyUrl: null,
-    //       companySize: null,
-    //       tin: null,
-    //       vat: null,
-    //       vatStatus: false,
-    //       isDraft: true,
-    //       discountTerms: 'string',
-    //       discountAmount: 12,
-    //       discountValidTill: '2023-06-05T13:25:03.177Z',
-    //       termOfPayment: 'CASH_DISCOUNT_TARGET_AS_A_DATE',
-    //       businessDetailId: 3,
-    //       companyAddress: [],
-    //       additionalContact: [],
-    //       termOfDelivery: [],
-    //       priceGroup: [],
-    //       discountGroup: []
-    //     }
-    //   ],
-    //   totalRecords: 1
-    // };
-
+    let columnData = FEATURES_TO_BE_SHOW;
+    let rows = [];
     if (data?.payload?.TotalRecords > 0) {
-      const columns = getColumns(data.payload.data[0]);
-      setColumnState(initialColumnState(columns));
-      setTableColumns(columns);
-      setTableRows(data.payload.data);
-    } else {
-      setTableRows([]);
+      // eslint-disable-next-line prefer-destructuring
+      columnData = data.payload.data[0];
+      rows = data.payload.data;
     }
+    const columns = getColumns(columnData);
+    setColumnState(initialColumnState(columns));
+    setTableColumns(columns);
+    setTableRows(rows);
   };
 
   useEffect(() => {

@@ -136,7 +136,7 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
     let payload = {
       paymentDetailType: 'CREDIT_CARD',
       nameOfCreditCard: value.nameOfCreditCard,
-      creditCardNumber: value.creditCardNumber,
+      creditCardNumber: `${value.creditCardNumber}`,
       creditCardExpiry: value.creditCardExpiry,
       creditCardCVV: value.creditCardCVV
     };

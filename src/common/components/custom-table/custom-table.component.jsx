@@ -1,11 +1,22 @@
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
+import { Stack } from '@mui/material';
 import UseCustomTableHook from './use-custom-table.hook';
 import CustomPagination from '../paginations/pagination.component';
 
 export default function CustomTable({ columns, rows }) {
   const { open, setOpen, handleToggleColumn, handleManageColumns, handlePageChange } =
     UseCustomTableHook();
+
+  function noResultsOverlay() {
+    return (
+      <Stack height="100%" alignItems="center" justifyContent="center">
+        No results in DataGrid
+        <pre>(rows=&#123;rowData&#125;)</pre>
+        But local filter returns no result
+      </Stack>
+    );
+  }
 
   return (
     <DataGrid
@@ -18,6 +29,7 @@ export default function CustomTable({ columns, rows }) {
           }
         }
       }}
+      slots={{ NoRowsOverlay: noResultsOverlay }}
       onPageChange={handlePageChange}
       checkboxSelection
       disableColumnMenu
