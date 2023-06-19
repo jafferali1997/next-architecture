@@ -80,7 +80,7 @@ export default function Sidebar({ toggle, setToggle }) {
         <ChevronLeftIcon className="tw-text-white" onClick={() => setToggle(!toggle)} />
       </div>
       <div className="tw-p-6">
-        <Link className="tw-block" href="/">
+        <Link className="tw-block" href="/dashboard">
           <img
             className="tw-mx-auto tw-block"
             src="/assets/images/sidebar/quickStepLogo.svg"

@@ -118,7 +118,7 @@ export default function ViewOffer() {
         <div className="tw-flex tw-flex-wrap tw-items-center tw-gap-4">
           <DownloadDropdownBtn text="Download Offers" dropdownoptions={dropdownoptions} />
           <a
-            href="/"
+            href="/offer/view"
             className="btn-primary-blue tw-flex tw-items-center tw-gap-1 tw-rounded-md tw-border-none tw-p-3 tw-text-sm tw-font-medium"
           >
             <PlusIcon /> Create

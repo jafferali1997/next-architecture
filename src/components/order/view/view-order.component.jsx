@@ -119,7 +119,7 @@ export default function ViewOrder() {
         <div className="tw-flex tw-flex-wrap tw-items-center tw-gap-4">
           <DownloadDropdownBtn text="Download Orders" dropdownoptions={dropdownoptions} />
           <a
-            href="/"
+            href="/order/view"
             className="btn-primary-blue tw-flex tw-items-center tw-gap-1 tw-rounded-md tw-border-none tw-p-3 tw-text-sm tw-font-medium"
           >
             <PlusIcon /> Create
