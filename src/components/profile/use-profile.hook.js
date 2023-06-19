@@ -1,24 +1,21 @@
 'use client';
 
-import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import { useSearchParams, useRouter } from 'next/navigation';
+import axios from 'axios';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
 import {
   addPhoneAndGenerateOtp,
   generateOtp,
   getCurrentUser,
   verifyOtp
 } from '@/provider/features/user/user.slice';
-import { createProfile } from '@/provider/features/profile/profile.slice';
-import { createFinancialDetail } from '@/provider/features/financial-detail/financial-detail.slice';
-import { createBusinessDetail } from '@/provider/features/business-detail/business-detail.slice';
 import { profileFinancialBusiness } from '@/provider/features/profile-financial-business/profile-financial-business.slice';
-import useCountryCity from '@/common/hooks/use-country-city.hook';
 import { logout } from '@/provider/features/auth/auth.slice';
+import useCountryCity from '@/common/hooks/use-country-city.hook';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
@@ -148,7 +145,7 @@ export default function useProfile() {
       profileFinancialBusiness({ payload: { ...data, country } })
     );
     if (res.payload === 'Profile created successfully') {
-      const user = await dispatch({ successCallBack: getCurrentUser(() => {}) });
+      const user = await dispatch(getCurrentUser({ successCallBack: () => {} }));
       console.log(user);
       if (user?.payload?.id) {
         router.push('/customer');
