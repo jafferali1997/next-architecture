@@ -270,7 +270,9 @@ export default function ProductForm({
                           </div>
                         )}
                         {categoryToMap
-                          .filter((item) => item.categoryName.includes(search))
+                          .filter((item) =>
+                            item.categoryName.toLowerCase().includes(search.toLowerCase())
+                          )
                           .map((category) => (
                             <div className="tw-flex tw-h-[35px] tw-w-[296px] tw-items-center tw-justify-between tw-py-[7px] tw-pr-0 hover:tw-cursor-pointer">
                               <p

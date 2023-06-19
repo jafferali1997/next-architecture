@@ -247,6 +247,8 @@ export default function useProductForm(
         variant: 'error'
       });
     }
+    setCategoryId(0);
+    setParentCategory([]);
   };
 
   const handleClickParentCategory = (item) => {
