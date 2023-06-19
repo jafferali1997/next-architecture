@@ -107,7 +107,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               label="Country"
               name="country"
               disabled={true}
-              placeholder="Country"
+              defaultValue="Country"
               type="select"
               options={COUNTRIES}
               onChange={handleCountryChange}
@@ -118,7 +118,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               label="City"
               name="city"
               disabled={true}
-              placeholder="City"
+              defaultValue="City"
               type="select"
               options={cities}
               //   value={selectedCity}

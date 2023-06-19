@@ -50,6 +50,14 @@ export default function CustomSelect({
                   errors && errors[name] && 'error-field'
                 } ${className} ${!disabled || 'disabled-input'} `}
               >
+                <MenuItem
+                  className="tw-text-disabled-input"
+                  value={defaultValue}
+                  selected
+                  disabled
+                >
+                  {defaultValue}
+                </MenuItem>
                 {options?.map((item) => (
                   <MenuItem key={item.value} value={item.value}>
                     {item.label}
@@ -71,6 +79,14 @@ export default function CustomSelect({
             } ${className} ${!disabled || 'disabled-input'} `}
             disabled={disabled}
           >
+            <MenuItem
+              className="tw-text-disabled-input"
+              value={defaultValue}
+              selected
+              disabled
+            >
+              {defaultValue}
+            </MenuItem>
             {options?.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.label}

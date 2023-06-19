@@ -43,13 +43,22 @@ export default function CategoryColumn({
       className={`${borderClass} tw-flex tw-h-[600px] tw-w-[300px] tw-flex-col tw-gap-[16px] tw-overflow-y-auto tw-px-[20px] tw-py-[30px]`}
     >
       <div className="tw-flex tw-items-center tw-justify-between">
-        <div className="tw-flex tw-items-center tw-gap-2">
+        <div className="tw-flex tw-items-center tw-gap-3">
           {borderClass && (
-            <img
-              className="hover:tw-cursor-pointer"
-              src="/assets/images/back-btn.svg"
-              alt="back"
-            />
+            <div className="tw-p-1 hover:tw-cursor-pointer hover:tw-border hover:tw-border-solid hover:tw-border-disabled-input">
+              <svg
+                width="7"
+                height="12"
+                viewBox="0 0 7 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.00283 11.2293C5.90408 11.2299 5.80619 11.211 5.71478 11.1736C5.62336 11.1363 5.54021 11.0813 5.4701 11.0117L0.968187 6.50981C0.828439 6.36923 0.75 6.17906 0.75 5.98084C0.75 5.78262 0.828439 5.59245 0.968187 5.45186L5.4701 0.949951C5.61364 0.827029 5.79827 0.762797 5.98711 0.770091C6.17595 0.777385 6.35508 0.855667 6.48871 0.989295C6.62233 1.12292 6.70062 1.30205 6.70791 1.49089C6.7152 1.67973 6.65097 1.86436 6.52805 2.0079L2.55886 5.97709L6.52805 9.94627C6.63341 10.0508 6.70542 10.1842 6.73497 10.3296C6.76452 10.475 6.75029 10.6259 6.69407 10.7633C6.63785 10.9006 6.54218 11.0182 6.41914 11.1011C6.2961 11.1841 6.15122 11.2287 6.00283 11.2293Z"
+                  fill="#7E7D7D"
+                />
+              </svg>
+            </div>
           )}
 
           <h3 className="h3 tw-whitespace-nowrap">Category Lvl {categoryLevel}</h3>
