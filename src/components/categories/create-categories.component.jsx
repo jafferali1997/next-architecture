@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import CategoryColumn from './components/category-column/category-column.component';
 import useCreateCategories from './use-create-categories.hooks';
 
@@ -15,7 +16,9 @@ export default function CreateCategories() {
   return (
     <>
       <div className="tw-flex tw-items-center tw-gap-[16px] tw-p-[24px]">
-        <img src="/assets/images/back-btn.svg" alt="back" />
+        <Link href="/dashboard">
+          <img src="/assets/images/back-btn.svg" alt="back" />
+        </Link>
         <h2 className="admin-top-heading">Create Category</h2>
       </div>
       <div className="common-box tw-m-4 tw-max-h-[650px] tw-max-w-[95%] tw-p-4">
