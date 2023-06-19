@@ -39,6 +39,7 @@ const validationSchema = yup.object({
   tin: yup
     .string()
     .required('TIN is required')
+    .min(10, 'TIN must be at least 10 characters long')
     .max(10, 'TIN must be at must 10 characters long'),
   vat: yup
     .string()
