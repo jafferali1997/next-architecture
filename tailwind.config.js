@@ -63,6 +63,7 @@ module.exports = {
         'text-light-gray': '#7E7D7D',
         'text-light-gray2': '#A6A6A6',
         'border-gray':'#D0D5DD',
+        'border-gray2':'#F5F5F5',
         'bg-gray': '#FBFDFF',
         'text-ultra-light-gray': '#BBBBBB',
         'danger-light': '#FFDEDE',

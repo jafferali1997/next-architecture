@@ -283,6 +283,10 @@
     @apply tw-font-dm tw-text-xl tw-font-normal tw-leading-8 tw-text-text-light-black2;
   }
 
+  .dashboard-content-container{
+    @apply tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] tw-pb-8 tw-pt-3;
+  }
+
   @import url('./component-styles/input.style.css');
   @import url('./component-styles/switch.style.css');
   @import url('./component-styles/dropdown.style.css');
