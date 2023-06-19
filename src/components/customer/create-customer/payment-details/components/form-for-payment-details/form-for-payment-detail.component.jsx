@@ -117,7 +117,7 @@ export default function FormForPaymentDetails({
             label="Credit Card Number"
             name="creditCardNumber"
             placeholder="Credit Card Number"
-            type="number"
+            type="text"
             register={register}
             errors={errors}
             isRequired={true}

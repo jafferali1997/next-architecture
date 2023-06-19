@@ -28,7 +28,8 @@ export default function Customer() {
     openModal,
     modalCloseHandler,
     onCommentSubmit,
-    ref
+    ref,
+    handleSearch
   } = useCustomer();
 
   return (
@@ -85,6 +86,7 @@ export default function Customer() {
                   <CustomInput
                     placeholder="Search"
                     type="text"
+                    onChange={handleSearch}
                     startIcon={<SearchIcon />}
                   />
                 </div>

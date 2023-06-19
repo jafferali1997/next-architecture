@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable react/jsx-filename-extension */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -17,6 +17,7 @@ import {
   getAllCustomer,
   updateCustomer
 } from '@/provider/features/customer/customer.slice';
+import useDebounce from '@/common/hooks/useDebounce';
 
 const FEATURES_TO_BE_SHOW = {
   id: 'Customer ID #',
@@ -60,7 +61,7 @@ export default function useCustomer() {
         />,
         <GridActionsCellItem
           icon={<CircleIcon />}
-          label={statusText}
+          label="Active/In-active"
           onClick={() => handleStatusAction(cell.row)}
           showInMenu
         />,
@@ -142,6 +143,7 @@ export default function useCustomer() {
   const [tableRows, setTableRows] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const ref = useRef(null);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -154,6 +156,14 @@ export default function useCustomer() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
+
+  const [searchText, setSearchText] = useState();
+
+  const debouncedSearchQuery = useDebounce(searchText, 1000);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
 
   const {
     register,
@@ -169,6 +179,78 @@ export default function useCustomer() {
   const modalCloseHandler = () => {
     setOpenModal(false);
     reset();
+  };
+
+  const fetchData = async (condition = {}) => {
+    const data = await dispatch(
+      getAllCustomer({
+        payload: {
+          page: 1,
+          pageSize: 30,
+          sortColumn: 'id',
+          sortOrder: 'DESC',
+          condition
+        }
+      })
+    );
+
+    //       id: 6,
+    //       createdBy: 2,
+    //       updatedBy: null,
+    //       createdAt: '2023-06-05T11:04:35.555Z',
+    //       updatedAt: '2023-06-05T13:25:24.008Z',
+    //       accountOwnerName: null,
+    //       iban: null,
+    //       city: 'Lahore',
+    //       country: 'Pakistan',
+    //       address: '56yujh',
+    //       postalCode: 120,
+    //       firstName: 'ALI',
+    //       lastName: 'Raza',
+    //       bic: null,
+    //       mendateReferance: null,
+    //       mandateGenerateDate: null,
+    //       nameOfCreditCard: null,
+    //       creditCardNumber: null,
+    //       creditCardExpiry: null,
+    //       creditCardCVV: null,
+    //       companyName: null,
+    //       companyEmail: null,
+    //       companyPhone: null,
+    //       companyFax: null,
+    //       companyMobile: null,
+    //       companyUrl: null,
+    //       companySize: null,
+    //       tin: null,
+    //       vat: null,
+    //       vatStatus: false,
+    //       isDraft: true,
+    //       discountTerms: 'string',
+    //       discountAmount: 12,
+    //       discountValidTill: '2023-06-05T13:25:03.177Z',
+    //       termOfPayment: 'CASH_DISCOUNT_TARGET_AS_A_DATE',
+    //       businessDetailId: 3,
+    //       companyAddress: [],
+    //       additionalContact: [],
+    //       termOfDelivery: [],
+    //       priceGroup: [],
+    //       discountGroup: []
+    //     }
+    //   ],
+    //   totalRecords: 1
+    // };
+    console.log(data.payload);
+    let columnData = FEATURES_TO_BE_SHOW;
+    let rows = [];
+    if (data?.payload?.TotalRecords > 0) {
+      // eslint-disable-next-line prefer-destructuring
+      columnData = data.payload.data[0];
+      rows = data.payload.data;
+    }
+    const columns = getColumns(columnData);
+    setColumnState(initialColumnState(columns));
+    setTableColumns(columns);
+    setTableRows(rows);
   };
 
   const handleColShow = () => {
@@ -232,75 +314,16 @@ export default function useCustomer() {
     console.log(data);
   };
 
-  const fetchData = async () => {
-    const data = await dispatch(
-      getAllCustomer({
-        payload: {
-          page: 1,
-          pageSize: 30,
-          sortColumn: 'id',
-          sortOrder: 'DESC',
-          condition: {}
-        }
-      })
-    );
-
-    //   records: [
-    //     {
-    //       id: 6,
-    //       createdBy: 2,
-    //       updatedBy: null,
-    //       createdAt: '2023-06-05T11:04:35.555Z',
-    //       updatedAt: '2023-06-05T13:25:24.008Z',
-    //       accountOwnerName: null,
-    //       iban: null,
-    //       city: 'Lahore',
-    //       country: 'Pakistan',
-    //       address: '56yujh',
-    //       postalCode: 120,
-    //       firstName: 'ALI',
-    //       lastName: 'Raza',
-    //       bic: null,
-    //       mendateReferance: null,
-    //       mandateGenerateDate: null,
-    //       nameOfCreditCard: null,
-    //       creditCardNumber: null,
-    //       creditCardExpiry: null,
-    //       creditCardCVV: null,
-    //       companyName: null,
-    //       companyEmail: null,
-    //       companyPhone: null,
-    //       companyFax: null,
-    //       companyMobile: null,
-    //       companyUrl: null,
-    //       companySize: null,
-    //       tin: null,
-    //       vat: null,
-    //       vatStatus: false,
-    //       isDraft: true,
-    //       discountTerms: 'string',
-    //       discountAmount: 12,
-    //       discountValidTill: '2023-06-05T13:25:03.177Z',
-    //       termOfPayment: 'CASH_DISCOUNT_TARGET_AS_A_DATE',
-    //       businessDetailId: 3,
-    //       companyAddress: [],
-    //       additionalContact: [],
-    //       termOfDelivery: [],
-    //       priceGroup: [],
-    //       discountGroup: []
-    //     }
-    //   ],
-    //   totalRecords: 1
-    // };
-    console.log(data.payload);
-
-    if (data?.payload?.TotalRecords > 0) {
-      const columns = getColumns(data.payload.data[0]);
-      setColumnState(initialColumnState(columns));
-      setTableColumns(columns);
-      setTableRows(data.payload.data);
+  /**
+   * Search function
+   */
+  useMemo(() => {
+    if (debouncedSearchQuery && debouncedSearchQuery?.length !== 0) {
+      fetchData({ firstName: { $iLike: `%${debouncedSearchQuery}%` } });
+    } else {
+      fetchData();
     }
-  };
+  }, [debouncedSearchQuery]);
 
   useEffect(() => {
     // need to send callback message for toaster
@@ -325,6 +348,7 @@ export default function useCustomer() {
     setOpenModal,
     modalCloseHandler,
     onCommentSubmit,
-    ref
+    ref,
+    handleSearch
   };
 }

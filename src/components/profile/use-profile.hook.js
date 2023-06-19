@@ -102,8 +102,6 @@ export default function useProfile() {
           res.data.country_code
         }`;
         setCountry(_country);
-        // setValue('country', country);
-        // setDefaultCountry(country);
         const event = {
           target: {
             value: _country
