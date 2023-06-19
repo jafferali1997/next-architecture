@@ -56,7 +56,7 @@ export default function MultiSelect({
   };
 
   return (
-    <div className="tw-mt-5 tw-flex tw-w-11 tw-w-full">
+    <div className=" tw-flex tw-w-11 tw-w-full">
       <div className="tw-w-full">
         <div className="tw-relative tw-flex tw-flex-col tw-items-center">
           <div className="tw-w-full">

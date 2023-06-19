@@ -77,7 +77,9 @@ export default function CustomInput({
   return (
     <div
       className={`${
-        inlineLabel ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center' : ''
+        inlineLabel
+          ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center'
+          : 'tw-flex tw-flex-col tw-gap-[8px]'
       }`}
     >
       {label && (
@@ -96,7 +98,7 @@ export default function CustomInput({
             type === 'number' ? 'numArrowNotShow' : ' '
           } input-field default-input hover:tw-border-text-dark-gray ${
             errors && errors[name] && 'error-field'
-          } ${className} ${!disabled || 'disabled-input'} `}
+          } ${className} ${!disabled || 'disabled-input'} tw-px-[16px]`}
           {...(defaultValue !== null && defaultValue !== undefined && { defaultValue })}
           {...(value !== null && value !== undefined && { value })}
           {...(ref && { ref })}

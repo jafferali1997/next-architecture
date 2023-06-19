@@ -26,7 +26,9 @@ export default function CustomSelect({
   return (
     <div
       className={`${
-        inlineLabel ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center' : ''
+        inlineLabel
+          ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center'
+          : 'tw-flex tw-flex-col tw-gap-[8px]'
       }`}
     >
       {label && (
@@ -51,7 +53,7 @@ export default function CustomSelect({
                 } ${className} ${!disabled || 'disabled-input'} `}
               >
                 <MenuItem
-                  className="tw-text-disabled-input"
+                  className="tw-text-secondary-black"
                   value={defaultValue}
                   selected
                   disabled
@@ -74,7 +76,7 @@ export default function CustomSelect({
             defaultValue={defaultValue}
             {...(onChange && { onChange })}
             {...(value && { value })}
-            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray ${
+            className={`tw-h-[40px] tw-w-full !tw-py-0 tw-px-[18px] tw-font-dm tw-text-text-dark-gray placeholder:tw-text-text-ultra-light-gray disabled:selection:tw-text-text-ultra-light-gray ${
               errors && errors[name] && 'error-field'
             } ${className} ${!disabled || 'disabled-input'} `}
             disabled={disabled}
