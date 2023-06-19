@@ -44,7 +44,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
                 label: 'Coca-cola (John David)'
               }
             ]}
-            placeholder="John"
+            defaultValue="Select Customer"
           />
         </div>
       </div>
