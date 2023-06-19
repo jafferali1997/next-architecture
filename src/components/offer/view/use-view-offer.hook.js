@@ -75,13 +75,13 @@ export default function useViewOffer(handleTabClick, handleTabCompleted) {
   const getOptionClassName = (id, optionValue) => {
     let className = 'status_dropdown !tw-w-fit !tw-px-0';
     if (optionValue === 'accepted') {
-      className += ' tw-bg-[#F1FFB9] tw-text-[#A58825]';
+      className += ' accepted';
     } else if (optionValue === 'rejected') {
-      className += ' tw-bg-[#FFE8E8] tw-text-[#A60A0A]';
+      className += ' rejected';
     } else if (optionValue === 'invoiced') {
-      className += ' tw-bg-[#DCFFDE] tw-text-[#0DA60A]';
+      className += ' invoiced';
     } else {
-      className += ' tw-bg-gray-200';
+      className += ' open';
     }
     if (selectedValues[id] === optionValue) {
       className += ` ${selectedValue}`;

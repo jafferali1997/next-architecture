@@ -2,9 +2,10 @@
 
 import Auth from '@/auth/auth.component';
 import AUTH from '@/common/constants/auth.constant';
+import Dashboard from '@/components/dashboard/dashboard.component';
 
 export default function Page() {
   return (
-    <Auth component={<div className="tw-p-6">Content Here</div>} type={AUTH.PRIVATE} />
+    <Auth component={<Dashboard />} type={AUTH.PRIVATE} />
   );
 }
