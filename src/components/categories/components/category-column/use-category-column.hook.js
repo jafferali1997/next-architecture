@@ -40,7 +40,7 @@ export default function useCategoryColumn({ handleAddCategory, categoryToRender 
 
   const handleSubmit = () => {
     handleAddCategory(categoryToRender, value);
-    setValue();
+    setValue('');
   };
 
   const handleSearchButton = (e) => {

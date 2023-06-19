@@ -133,7 +133,9 @@ export default function CategoryColumn({
       </div>
       {columnData.length !== 0 &&
         columnData
-          .filter((item) => item.categoryName.includes(search))
+          .filter((item) =>
+            item.categoryName.toLowerCase().includes(search.toLowerCase())
+          )
           .map((item, index) => (
             <div
               key={item.id}
