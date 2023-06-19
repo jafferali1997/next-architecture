@@ -37,9 +37,9 @@ const validationSchema = yup.object({
   companyFax: yup.string().required('Company Fax is required'),
   companyUrl: yup.string().required('Company Url is required'),
   tin: yup
-    .number()
+    .string()
     .required('TIN is required')
-    .max(10, 'TIN must be at most 10 characters long'),
+    .max(10, 'TIN must be at must 10 characters long'),
   vat: yup
     .string()
     .required('VAT is required')
