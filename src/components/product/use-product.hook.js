@@ -17,9 +17,9 @@ import useDebounce from '@/common/hooks/useDebounce';
 const FEATURES_WIDTH = {
   id: 90,
   productName: 200,
-  netPrice: 90,
-  grossPrice: 90,
-  purchasePrice: 90,
+  netPrice: 120,
+  grossPrice: 120,
+  purchasePrice: 130,
   unit: 70,
   manufacturer: 120,
   minSellingPrice: 100,
@@ -97,7 +97,7 @@ export default function useProduct() {
         cellClassName: 'table-data ',
         width: FEATURES_WIDTH[key]
       };
-      if (!FILES_TO_BE_IGNORE.includes(key)) {
+      if (Object.keys(FEATURES_TO_BE_SHOW).includes(key)) {
         if (key === 'isDraft') {
           columnObject = {
             ...columnObject,
@@ -119,7 +119,7 @@ export default function useProduct() {
 
   const initialColumnState = (columns) => {
     return columns.reduce((acc, column, idx) => {
-      if (idx < 5 || column.field === 'actions') acc[column.field] = true;
+      if (idx < 6 || column.field === 'actions') acc[column.field] = true;
       else acc[column.field] = false;
       return acc;
     }, {});
