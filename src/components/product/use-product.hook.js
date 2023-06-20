@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable react/jsx-filename-extension */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -127,9 +127,23 @@ export default function useProduct() {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   const handleColShow = () => {
-    setOpen(!open);
+    setOpen(true);
   };
 
   const handleToggleColumn = (columnName) => {
@@ -225,6 +239,7 @@ export default function useProduct() {
     showToaster,
     toasterMsg,
     setShowToaster,
-    handleSearch
+    handleSearch,
+    ref
   };
 }

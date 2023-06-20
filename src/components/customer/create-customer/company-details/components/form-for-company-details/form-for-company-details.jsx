@@ -84,7 +84,7 @@ export default function FormForCompanyDetails({
           label="Company Size"
           control={control}
           name="companySize"
-          placeholder="Select Company Size"
+          defaultValue="Select Company Size"
           type="select"
           isRequired={true}
           options={[
@@ -130,7 +130,7 @@ export default function FormForCompanyDetails({
           name="companyUrl"
           placeholder="URL"
           type="text"
-          isRequired={false}
+          isRequired={true}
           errors={errors}
         />
         <CustomSwitch
@@ -221,6 +221,7 @@ export default function FormForCompanyDetails({
             src="/assets/images/close_add.svg"
             alt="img"
             role="presentation"
+            className="hover:tw-cursor-pointer"
             onClick={additionalHandles}
           />
         ) : (
@@ -228,6 +229,7 @@ export default function FormForCompanyDetails({
             src="/assets/images/plus_btn.svg"
             alt="img"
             role="presentation"
+            className="hover:tw-cursor-pointer"
             onClick={additionalHandles}
           />
         )}
@@ -282,7 +284,7 @@ export default function FormForCompanyDetails({
             label="Country"
             control={control}
             name="ac_country"
-            placeholder="Country"
+            defaultValue="Select Country"
             type="select"
             onChange={onCountryChange}
             isRequired={true}
@@ -293,7 +295,7 @@ export default function FormForCompanyDetails({
             label="City"
             control={control}
             name="ac_city"
-            placeholder="City"
+            defaultValue="Select City"
             type="select"
             errors={errors}
             options={cities}

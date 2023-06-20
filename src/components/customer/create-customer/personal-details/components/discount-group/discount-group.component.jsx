@@ -33,18 +33,22 @@ export default function DiscountGroup({
 
   return (
     <>
-      <label className="group-label">Discount Group</label>
+      <div className="tw-flex tw-flex-col tw-gap-[8px]">
+        <label className=" tw-flex tw-flex-col tw-gap-[8px] tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-6 tw-text-text-black">
+          Discount Group
+        </label>
 
-      <MultiSelect
-        placeholder="Select Discount Group(s)"
-        options={options}
-        defaultOptions={selectedOptions}
-        addClickHandler={() => setOpen(true)}
-        handleChange={(value) => {
-          // console.log('value', value);
-          setSelectedOptions(value);
-        }}
-      />
+        <MultiSelect
+          placeholder="Select Discount Group(s)"
+          options={options}
+          defaultOptions={selectedOptions}
+          addClickHandler={() => setOpen(true)}
+          handleChange={(value) => {
+            // console.log('value', value);
+            setSelectedOptions(value);
+          }}
+        />
+      </div>
       <Modal onClose={modalCloseHandler} show={open} title="Add Discount Group">
         {/* <FormProvider {...methods}> */}
         <form

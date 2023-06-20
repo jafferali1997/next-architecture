@@ -24,7 +24,9 @@ export default function CustomSwitch({
     <div className="">
       <div
         className={`${
-          inlineLabel ? 'tw-flex tw-w-full tw-flex-wrap tw-items-center tw-gap-3' : ''
+          inlineLabel
+            ? 'tw-flex tw-w-full tw-flex-row-reverse tw-flex-wrap tw-items-center tw-justify-end tw-gap-3 tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-leading-[18px] tw-text-text-dark-gray'
+            : 'tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black'
         }`}
       >
         {label && !labelRight && (

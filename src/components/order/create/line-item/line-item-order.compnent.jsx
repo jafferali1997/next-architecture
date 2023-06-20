@@ -58,10 +58,11 @@ export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
               <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
                 <CustomSelect
                   options={[
-                    { id: 'male', value: 'MALE', label: 'Male' },
-                    { id: 'female', value: 'FEMALE', label: 'Female' }
+                    { label: 'Test 1', value: 'test1' },
+                    { label: 'Test 2', value: 'test2' },
+                    { label: 'Test 3', value: 'test3' }
                   ]}
-                  placeholder="John"
+                  defaultValue="Select Product"
                 />
               </div>
               <div className="tw-flex tw-h-10 tw-w-[191px] tw-flex-row tw-items-center tw-justify-center tw-gap-2 tw-rounded-md tw-border tw-border-solid tw-border-text-ultra-light-gray tw-px-4 tw-py-2">
@@ -130,12 +131,14 @@ export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
                         placeholder="Enter Product Name"
                         type="tex"
                       />
-                      <TextArea
-                        label="Description"
-                        name="Description "
-                        placeholder="Enter Description"
-                        type="tex"
-                      />
+                      <div className="tw-mt-4">
+                        <TextArea
+                          label="Description"
+                          name="Description "
+                          placeholder="Enter Description"
+                          type="tex"
+                        />
+                      </div>
                       <div className="model-box-grid-4col">
                         <CustomInput
                           label="Net price "
@@ -199,7 +202,7 @@ export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
           <table class="... tw-mt-[18px] tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
             <thead>
               <tr>
-                <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                   <input
                     id="test"
                     type="checkbox"
@@ -213,7 +216,7 @@ export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
                 </th>
                 {columns.map((col, index) => (
                   <th
-                    className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
+                    className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black"
                     key={index}
                   >
                     <div className="tw-flex tw-items-center tw-gap-2">
@@ -318,21 +321,23 @@ export default function LineItemOrder({ handleTabClick, handleTabCompleted }) {
             </tbody>
           </table>
         </div>
-        <div className="tw-mt-[24px] tw-flex">
-          <div className="tw-flex tw-w-[312px] tw-flex-col tw-gap-2">
-            <CustomInput
-              label="Delivery Date"
-              name="Delivery Date "
-              placeholder="26.01.2023"
-              type="date"
-              className="tw-flex tw-flex-col tw-gap-2"
-            />
+        <div className="tw-mt-[24px] tw-flex tw-gap-4">
+          <div className="tw-flex tw-w-[312px]">
+            <div className="tw-w-[312px]">
+              <CustomInput
+                label="Delivery Date"
+                name="Delivery Date "
+                placeholder="26.01.2023"
+                type="date"
+              />
+            </div>
           </div>
-          <CustomSwitch
-            className="tw-flex tw-flex-row"
-            label="Default Switch"
-            defaultChecked
-          />
+          <div className="tw-flex tw-flex-col tw-gap-4">
+            <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+              With VAT
+            </label>
+            <CustomSwitch name="isStatus" type="switch" className="tw-flex-col-reverse" />
+          </div>
         </div>
         <StepperFooter
           back="headerBody"

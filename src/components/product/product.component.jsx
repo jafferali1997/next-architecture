@@ -20,7 +20,8 @@ export default function Product() {
     showToaster,
     toasterMsg,
     setShowToaster,
-    handleSearch
+    handleSearch,
+    ref
   } = useProduct();
 
   return (
@@ -34,7 +35,7 @@ export default function Product() {
       <div className="">
         <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
-            <h1 className="h1">List of Product</h1>
+            <h1 className="h2 tw-font-medium">List of Product</h1>
             <CustomButton
               className="btn-primary"
               text="Create product"
@@ -42,8 +43,8 @@ export default function Product() {
               href="/product/create"
             />
           </div>
-          <div className=" tw-rounded-[10px_10px_0px_0px] tw-border-solid tw-border-[#BBBBBB1A] tw-bg-white">
-            <div className="tw-flex tw-h-[66px] tw-w-full tw-items-center tw-justify-between tw-bg-[#BBBBBB1A]">
+          <div className=" tw-rounded-[10px] tw-rounded-[10px_10px_0px_0px] tw-border tw-border-solid tw-border-solid tw-border-[#BBBBBB1A] tw-border-disabled-input tw-bg-white ">
+            <div className="tw-flex tw-h-[66px] tw-w-full tw-items-center tw-justify-between tw-bg-[#BBBBBB1A] tw-px-5 tw-py-3">
               <div className="tw-flex tw-items-center tw-gap-[16px]">
                 <div className="tw-h-[42px] tw-min-w-[323px]  tw-bg-white">
                   <CustomInput
@@ -63,7 +64,10 @@ export default function Product() {
                   Show columns
                 </button>
                 {open && (
-                  <div className="tw-absolute tw-left-[-200px] tw-top-10 tw-z-[100] tw-flex  tw-w-[257px] tw-flex-col tw-items-start tw-gap-[11px]  tw-rounded-md tw-bg-white tw-p-3">
+                  <div
+                    ref={ref}
+                    className="tw-absolute tw-left-[-200px] tw-top-10 tw-z-[100] tw-flex  tw-w-[257px] tw-flex-col tw-items-start tw-gap-[11px]  tw-rounded-md tw-bg-white tw-p-3 tw-shadow-2xl"
+                  >
                     {columns.map((col) => (
                       <div key={col.field} className="tw-flex tw-gap-2">
                         <input
@@ -85,10 +89,12 @@ export default function Product() {
                 )}
               </div>
             </div>
-            <CustomTable
-              columns={columns.filter((col) => columnState[col.field])}
-              rows={rows}
-            />
+            <div className='className="tw-mt-[16px]"'>
+              <CustomTable
+                columns={columns.filter((col) => columnState[col.field])}
+                rows={rows}
+              />
+            </div>
           </div>
         </div>
       </div>

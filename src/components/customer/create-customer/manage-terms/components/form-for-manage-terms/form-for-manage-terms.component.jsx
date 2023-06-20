@@ -22,7 +22,7 @@ export default function FormForManageTerms({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="tw-mb-5 tw-flex tw-flex-col tw-gap-[18px]">
+      <div className="tw-mb-5 tw-mt-[22px] tw-flex tw-flex-col tw-gap-[18px]">
         <div className="payment-details-bank">
           <FormControl>
             <RadioGroup
@@ -36,6 +36,7 @@ export default function FormForManageTerms({
                 value="PAYMENT_TERMS_AS_DATE"
                 control={<Radio />}
                 label="Payment Terms as date"
+                className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
               />
               {selectedValue === 'PAYMENT_TERMS_AS_DATE' && (
                 <div className="radio-expanded">
@@ -53,6 +54,7 @@ export default function FormForManageTerms({
                 value="PAYMENT_TERMS_IN_DAYS"
                 control={<Radio />}
                 label="Payment terms in days"
+                className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
               />
               {selectedValue === 'PAYMENT_TERMS_IN_DAYS' && (
                 <div className="radio-expanded">
@@ -70,6 +72,7 @@ export default function FormForManageTerms({
                 value="CASH_DISCOUNT_TARGET_AS_A_DATE"
                 control={<Radio />}
                 label="Cash discount target as a date"
+                className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
               />
               {selectedValue === 'CASH_DISCOUNT_TARGET_AS_A_DATE' && (
                 <div className="radio-expanded">
@@ -87,6 +90,7 @@ export default function FormForManageTerms({
                 value="DISCOUNT_AND_PERCENTAGE"
                 control={<Radio />}
                 label="Discount and %"
+                className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
               />
               {selectedValue === 'DISCOUNT_AND_PERCENTAGE' && (
                 <div className="radio-expanded">
@@ -104,6 +108,7 @@ export default function FormForManageTerms({
                 value="DISCOUNT_AMOUNT"
                 control={<Radio />}
                 label="Discount amount"
+                className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
               />
               {selectedValue === 'DISCOUNT_AMOUNT' && (
                 <div className="radio-expanded">
@@ -121,6 +126,7 @@ export default function FormForManageTerms({
                 value="TOTAL_AMOUNT_MINUS_DISCOUNT"
                 control={<Radio />}
                 label="Total amount minus discount"
+                className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
               />
               {selectedValue === 'TOTAL_AMOUNT_MINUS_DISCOUNT' && (
                 <div className="radio-expanded">
@@ -138,8 +144,10 @@ export default function FormForManageTerms({
           </FormControl>
         </div>
       </div>
-      <h3>Terms of delivery</h3>
-      <div className="form-row-two-col">
+      <h3 className="tw-text-lg tw-font-medium tw-not-italic tw-leading-[27px] tw-text-text-black">
+        Terms of delivery
+      </h3>
+      <div className="form-row-two-col tw-mt-[30px]">
         <TextArea
           name="termOfDelivery"
           placeholder="Delivery Terms"

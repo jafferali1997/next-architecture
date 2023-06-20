@@ -23,7 +23,11 @@ export default function TextArea({
 }) {
   return (
     <div
-      className={`${inlineLabel ? 'tw-flex tw-w-full tw-flex-row tw-items-center' : ''}`}
+      className={`${
+        inlineLabel
+          ? 'tw-flex tw-w-full tw-flex-row tw-items-center'
+          : 'tw-flex tw-flex-col tw-gap-[8px] tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-6 tw-text-text-black'
+      }`}
     >
       {label && (
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />

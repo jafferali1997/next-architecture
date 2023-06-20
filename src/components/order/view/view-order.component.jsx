@@ -176,7 +176,7 @@ export default function ViewOrder() {
               </th>
               {columns.map((col, index) => (
                 <th
-                  className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4"
+                  className="...  rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black"
                   key={index}
                 >
                   <div className="tw-flex tw-items-center tw-justify-center tw-gap-2">

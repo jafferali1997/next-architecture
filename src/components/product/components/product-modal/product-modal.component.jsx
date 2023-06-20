@@ -17,9 +17,9 @@ export default function ProductModal({ data, setData, openPopup, setOpenPopup })
     <Dialog open={openPopup ?? false} onClose={() => setOpenPopup(false)}>
       <div className="tw-w-[389px]">
         <div>
-          <DialogTitle>Group</DialogTitle>
+          <DialogTitle className="tw-pb-0">Group</DialogTitle>
         </div>
-        <DialogContent>
+        <DialogContent className="tw-p-3">
           {value?.map((item, index) =>
             item.type === 'select' ? (
               <CustomSelect
@@ -45,12 +45,14 @@ export default function ProductModal({ data, setData, openPopup, setOpenPopup })
               //     </option>
               //   ))}
               // </Select>
-              <CustomInput
-                label={item.label}
-                type={item.type ?? 'text'}
-                value={item.value}
-                onChange={(e) => handleSetValue(index, e.target.value)}
-              />
+              <div className="tw-mt-4">
+                <CustomInput
+                  label={item.label}
+                  type={item.type ?? 'text'}
+                  value={item.value}
+                  onChange={(e) => handleSetValue(index, e.target.value)}
+                />
+              </div>
             )
           )}
         </DialogContent>

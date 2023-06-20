@@ -26,7 +26,7 @@ export default function Select({
       className={`${
         inlineLabel
           ? ' tw-grid tw-w-full tw-grid-cols-[130px_1fr] tw-items-center'
-          : 'tw-flex tw-flex-col tw-gap-[8px]'
+          : 'tw-flex tw-flex-col tw-gap-[8px] tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-6 tw-text-text-black'
       }`}
     >
       {label && (

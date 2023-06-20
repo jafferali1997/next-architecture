@@ -18,7 +18,7 @@ export default function AddCustomerOrder({ handleTabClick, handleTabCompleted })
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
         <h3 className="form-inner-heading">Customer Details</h3>
-        <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
+        <div className="tw-w-full tw-max-w-[523px] tw-bg-[#BBBBBB26]">
           <CustomSelect
             options={[
               {
@@ -42,7 +42,7 @@ export default function AddCustomerOrder({ handleTabClick, handleTabCompleted })
                 label: 'Coca-cola (John David)'
               }
             ]}
-            placeholder="John"
+            defaultValue="Select Customer"
           />
         </div>
       </div>
@@ -50,14 +50,10 @@ export default function AddCustomerOrder({ handleTabClick, handleTabCompleted })
         {' '}
         <form onSubmit={onSubmit}>
           <div className="form-box-grid-4col">
-            <CustomSelect
+            <CustomInput
               label="Gender"
               isRequired={true}
               disabled={true}
-              options={[
-                { label: 'Male', value: 'MALE' },
-                { label: 'Female', value: 'FEMALE' }
-              ]}
               placeholder="male"
             />
             <CustomInput
@@ -101,29 +97,13 @@ export default function AddCustomerOrder({ handleTabClick, handleTabCompleted })
               isRequired={true}
             />
 
-            <CustomSelect
+            <CustomInput
               label="Country"
               name="country"
               disabled={true}
               placeholder="Country"
-              type="select"
-              options={COUNTRIES}
-              //   onChange={handleCountryChange}
-              //   value={selectedCountry}
-              //   isRequired={true}
             />
-            <CustomSelect
-              label="City"
-              name="city"
-              disabled={true}
-              placeholder="City"
-              type="select"
-              //   value={selectedCity}
-              //   onChange={handleCityChange}
-              //   options={cities.map((item) => {
-              //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-              //   })}
-            />
+            <CustomInput label="City" name="city" disabled={true} placeholder="City" />
           </div>
           <div className="form-box-grid-2col">
             <CustomInput

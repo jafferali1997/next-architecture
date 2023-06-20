@@ -71,7 +71,7 @@ export default function Customer() {
       <div className="">
         <div className="tw-min-h-[100vh] tw-w-full tw-bg-[#FBFBFB] tw-px-[23px] ">
           <div className="tw-flex tw-items-center tw-justify-between tw-py-[24px]">
-            <h1 className="h1">List of customer</h1>
+            <h1 className="h2 tw-font-medium">List of customer</h1>
             <CustomButton
               className="btn-primary"
               text="Create customer"
@@ -79,8 +79,8 @@ export default function Customer() {
               href="/customer/create"
             />
           </div>
-          <div className=" tw-rounded-[10px_10px_0px_0px] tw-border-solid tw-border-[#BBBBBB1A] tw-bg-white">
-            <div className="tw-flex tw-h-[66px] tw-w-full tw-items-center tw-justify-between tw-bg-[#BBBBBB1A]">
+          <div className=" tw-rounded-[10px] tw-rounded-[10px_10px_0px_0px] tw-border tw-border-solid tw-border-solid tw-border-[#BBBBBB1A] tw-border-disabled-input tw-bg-white ">
+            <div className="tw-flex tw-h-[66px] tw-w-full tw-items-center tw-justify-between tw-bg-[#BBBBBB1A] tw-px-5 tw-py-3">
               <div className="tw-flex tw-items-center tw-gap-[16px]">
                 <div className="tw-h-[42px] tw-min-w-[323px]  tw-bg-white">
                   <CustomInput
@@ -125,10 +125,12 @@ export default function Customer() {
                 )}
               </div>
             </div>
-            <CustomTable
-              columns={columns.filter((col) => columnState[col.field])}
-              rows={rows}
-            />
+            <div className="tw-mt-[16px]">
+              <CustomTable
+                columns={columns.filter((col) => columnState[col.field])}
+                rows={rows}
+              />
+            </div>
           </div>
         </div>
       </div>

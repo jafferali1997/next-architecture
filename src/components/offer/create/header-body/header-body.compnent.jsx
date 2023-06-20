@@ -29,7 +29,7 @@ export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
       <div className="content-body">
         {' '}
         <form onSubmit={onSubmit}>
-          <div className="form-box-grid-2col">
+          <div className="form-box-grid-2col tw-mt-4">
             <CustomInput
               label="Company Name "
               name="Company Name "
@@ -79,7 +79,7 @@ export default function HeaderBody({ handleTabClick, handleTabCompleted }) {
             </div>
           </div>
           <div>
-            <h3 className="form-inner-heading">Body</h3>
+            <h3 className="form-inner-heading tw-my-4">Body</h3>
             <div className="tw-flex tw-items-center tw-justify-between">
               <div className="tw-min-w-[250px]">
                 {' '}

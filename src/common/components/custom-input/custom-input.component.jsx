@@ -78,15 +78,15 @@ export default function CustomInput({
     <div
       className={`${
         inlineLabel
-          ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center'
-          : 'tw-flex tw-flex-col tw-gap-[8px]'
+          ? 'tw-grid tw-w-full  tw-grid-cols-[130px_1fr] tw-items-center tw-capitalize'
+          : 'tw-flex tw-flex-col tw-gap-[8px] tw-text-xs tw-font-medium tw-capitalize tw-not-italic tw-leading-6 tw-text-text-black'
       }`}
     >
       {label && (
         <FieldLabel label={label} isRequired={isRequired} className={labelClassName} />
       )}
 
-      <div className="tw-w-full">
+      <div className={`tw-w-full ${disabled ? 'tw-bg-[#BBBBBB26]' : ''}`}>
         <Input
           {...(register && register(`${name}`))}
           {...(onClick && { onClick })}
@@ -94,7 +94,7 @@ export default function CustomInput({
           name={name}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
-          className={`${
+          className={` tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-ultra-light-gray ${
             type === 'number' ? 'numArrowNotShow' : ' '
           } input-field default-input hover:tw-border-text-dark-gray ${
             errors && errors[name] && 'error-field'

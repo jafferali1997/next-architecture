@@ -12,12 +12,12 @@ function OfferPreview({ handleTabClick, handleTabCompleted }) {
   ];
   return (
     <>
-      <div className="tw-flex tw-flex-col tw-gap-20">
+      <div className="tw-flex tw-flex-col tw-gap-8 tw-pr-5">
         <div className="tw-flex tw-justify-end">
           <DownloadDropdownBtn text="Download Offers" dropdownoptions={dropdownoptions} />
         </div>
-        <div className="tw-flex tw-justify-between">
-          <h1 className="tw-text-2xl tw-font-bold tw-leading-[29px]">100020</h1>
+        <div className="tw-flex tw-items-center tw-justify-between">
+          <h1 className="tw-text-2xl tw-font-bold tw-leading-[29px]">2023-200002</h1>
           <Link href="/">
             <img
               alt="null"
@@ -26,49 +26,70 @@ function OfferPreview({ handleTabClick, handleTabCompleted }) {
             />
           </Link>
         </div>
+        <div className="tw-flex tw-items-center tw-justify-between">
+          <h3 className="tw-text-lg tw-font-medium tw-not-italic tw-leading-[27px] tw-text-text-black">
+            Offer To
+          </h3>
+          <h3 className="tw-text-lg tw-font-medium tw-not-italic tw-leading-[27px] tw-text-text-black">
+            Offer From
+          </h3>
+        </div>
 
-        <div className="tw-flex tw-justify-between">
-          <div className="tw-flex tw-flex-col tw-gap-4">
-            <div>
-              <div className="tw-text-lg tw-font-semibold tw-leading-6 tw-text-black">
-                A. No
-              </div>
-              <div className="tw-text-base tw-font-normal tw-font-semibold tw-leading-[22px] tw-text-[#646464]">
-                2021-200002
-              </div>
+        <div className="tw-flex tw-items-center tw-justify-between">
+          <div className="tw-flex tw-flex-col tw-items-start tw-gap-4">
+            <div className="tw-flex tw-gap-2">
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                Company Name:
+              </p>
+              <p className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-dark-gray">
+                Zapta Technology
+              </p>
             </div>
-            <div>
-              <div className="tw-text-lg tw-font-semibold tw-leading-6 tw-text-black">
-                Delivery Date
-              </div>
-              <div className="tw-text-base tw-font-normal tw-font-semibold tw-leading-[22px] tw-text-[#646464]">
-                01/22/2023
-              </div>
+            <div className="tw-flex tw-gap-2">
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                Contact Person:
+              </p>
+              <p className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-dark-gray">
+                MR. Nasir Joiya
+              </p>
             </div>
-            <div>
-              <div className="tw-text-lg tw-font-semibold tw-leading-6 tw-text-black">
-                Contact Person
-              </div>
-              <div className="tw-text-base tw-font-normal tw-font-semibold tw-leading-[22px] tw-text-[#646464]">
-                Ali
-              </div>
+            <div className="tw-flex tw-gap-2">
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                Customer No:
+              </p>
+              <p className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-dark-gray">
+                10002
+              </p>
+            </div>
+            <div className="tw-flex tw-gap-2">
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                Delivery Date:
+              </p>
+              <p className="tw-text-sm tw-font-medium tw-not-italic tw-leading-[18px] tw-text-text-dark-gray">
+                26.01.2023
+              </p>
             </div>
           </div>
-          <div className="tw-flex tw-flex-col tw-gap-4">
-            <div className="tw-text-base tw-font-medium tw-leading-[22px] tw-text-text-black">
-              RS consulting & sales GmbH
+          <div className="tw-flex tw-flex-col tw-items-end tw-gap-4">
+            <div>
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                Quicksteps
+              </p>
             </div>
-            <div className="tw-text-base tw-font-medium tw-leading-[22px] tw-text-text-black">
-              RomanSchellenberg
+            <div>
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                quicksteps12@gmail.com
+              </p>
             </div>
-            <div className="tw-text-base tw-font-medium tw-leading-[22px] tw-text-text-black">
-              Schlegelstr. 33
+            <div>
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                12.03.2023
+              </p>
             </div>
-            <div className="tw-text-base tw-font-medium tw-leading-[22px] tw-text-text-black">
-              95447 Bayreuth
-            </div>
-            <div className="tw-text-base tw-font-medium tw-leading-[22px] tw-text-text-black">
-              Germany
+            <div>
+              <p className="tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-light-gray">
+                Street 21 Berlin, Germany
+              </p>
             </div>
           </div>
         </div>
@@ -87,28 +108,28 @@ function OfferPreview({ handleTabClick, handleTabCompleted }) {
             <table class="... tw-w-full tw-border-collapse tw-rounded-[20px_0px_0px_0px] ">
               <thead>
                 <tr>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Position
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Designation
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Quantity
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Unit
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Price
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Tax
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Discount
                   </th>
-                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4">
+                  <th className="... rounded-t-lg tw-border-b tw-border-solid tw-border-b-[#E7EAEE] tw-bg-[#FAFAFA] tw-px-2 tw-py-4 tw-text-center tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-black">
                     Total
                   </th>
                 </tr>

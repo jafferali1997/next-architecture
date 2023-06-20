@@ -74,7 +74,8 @@ module.exports = {
         success: '#10FF61',
         'primary-purple': '#6F6AF5',
         skyblue: '#E3ECF4',
-        'lightest-gray': '#CDCDCD'
+        'lightest-gray': '#CDCDCD',
+        'bg-gray-rgb': 'rgba(228, 228, 228, 0.3)'
       },
       boxShadow: {
         custom: '0px 0px 31px rgba(29, 78, 216, 0.1)',
