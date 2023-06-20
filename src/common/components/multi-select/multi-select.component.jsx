@@ -69,7 +69,7 @@ export default function MultiSelect({
                         key={option?.id}
                         className={`tw-m-1 ${
                           index <= 0 ? 'tw-mx-[16px]' : ' '
-                        }  tw-my-[9px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-stroke-color tw-px-[11px] tw-font-medium tw-text-[#46474F]`}
+                        }  tw-my-[9px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-[#D9D9D9] tw-px-[11px] tw-font-medium tw-text-[#46474F]`}
                       >
                         <div className="tw-mr-[8px] tw-max-w-full tw-flex-initial tw-text-[14px] tw-font-normal tw-leading-none">
                           {option?.label}

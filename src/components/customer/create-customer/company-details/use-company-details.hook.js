@@ -16,7 +16,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import {
   createCustomerCompanyDetail,
-  getSingleCustomer
+  getSingleCustomer,
+  updateCustomer
 } from '@/provider/features/customer/customer.slice';
 import useCountryCity from '@/common/hooks/use-country-city.hook';
 
@@ -119,7 +120,6 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
             data.companyAddress.forEach((addressObj, index) => {
               // if (!ids.includes(addressObj.id)) {
               appendCompanyAddress({
-                id: addressObj.id,
                 addressLabel: addressObj.addressLabel,
                 address: addressObj.address
               });
@@ -130,13 +130,16 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
           setIsShowInPdf(data.isPDF);
           setStatus(data.isStatus);
           setIsVatEnabled(data.vatStatus);
+        } else {
+          appendCompanyAddress({ addressLabel: '', address: '' });
         }
       }
       if (id) {
         fetchMyAPI();
+      } else {
+        appendCompanyAddress({ addressLabel: '', address: '' });
       }
     }
-    appendCompanyAddress({ addressLabel: '', address: '' });
   }, []);
 
   // useEffect(() => {
@@ -270,28 +273,34 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       }
       return { ...accumulator, [key]: value[attr] };
     }, {});
-    // const companyAddressesKeys = Object.keys(value).filter((attr) =>
-    //   attr.startsWith('ca')
-    // );
-    // const companyAddresses = companyAddressesKeys.reduce((acc, curr, index, arr) => {
-    //   if (index % 2 === 0) {
-    //     const obj = {
-    //       addressLabel: value[curr],
-    //       address: value[arr[index + 1]]
-    //     };
-    //     acc.push(obj);
-    //   }
-    //   return acc;
-    // }, []);
+
     const payload = {
-      ...value,
       customerId: Number(searchParams.get('id')),
+      companyName: value.companyName,
+      companyEmail: value.companyEmail,
+      companyPhone: value.companyPhone,
+      companyFax: value.companyFax,
+      companyMobile: value.companyMobile,
+      companyUrl: value.companyUrl,
+      companySize: value.companySize,
+      vat: value.vat,
+      vatStatus: value.vatStatus,
+      isPDF: value.isPDF,
+      isStatus: value.isStatus,
       additionalContact: [additionalContact],
       companyAddress: value.companyAddresses,
       tin: value.tin
     };
+
     console.log(payload);
-    const res = await dispatch(createCustomerCompanyDetail({ payload }));
+    let res = null;
+    if (searchParams.get('id')) {
+      res = await dispatch(
+        updateCustomer({ payload: { data: payload, id: Number(searchParams.get('id')) } })
+      );
+    } else {
+      res = await dispatch(createCustomerCompanyDetail({ payload }));
+    }
     console.log(res, 'Create Customer Company Detail Response');
     if (res.payload?.id) {
       handleTabClick('payment_details');

@@ -10,18 +10,20 @@ export default function useCountryCity() {
   const handleCountryChange = (e) => {
     setCountry(e.target.value);
     setError('');
-    const [name, code] = e.target.value.split('-');
-    console.log(name, code, e.target.value);
-    // console.log(City.getAllCities('BD'));
-    // console.log(City.getCitiesOfCountry('BM'));
-    const _cities = City.getCitiesOfCountry(code);
-    console.log(_cities);
-    const cityOptions = _cities.map((cit) => ({
-      label: cit.name,
-      value: cit.name.toLowerCase()
-    }));
-    console.log(cityOptions);
-    setCities(cityOptions);
+    if (e.target.value) {
+      const [name, code] = e.target.value.split('-');
+      console.log(name, code, e.target.value);
+      // console.log(City.getAllCities('BD'));
+      // console.log(City.getCitiesOfCountry('BM'));
+      const _cities = City.getCitiesOfCountry(code);
+      console.log(_cities);
+      const cityOptions = _cities.map((cit) => ({
+        label: cit.name,
+        value: cit.name.toLowerCase()
+      }));
+      console.log(cityOptions);
+      setCities(cityOptions);
+    }
   };
 
   // useEffect(() => {
