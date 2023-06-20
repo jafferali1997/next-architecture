@@ -20,7 +20,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
     <div className="personal-details-wrapper">
       <div className="content-header tw-flex tw-items-center tw-justify-between ">
         <h3 className="form-inner-heading">Customer Details</h3>
-        <div className="tw-w-full tw-max-w-[523px] tw-bg-secondary-gray">
+        <div className="tw-w-full tw-max-w-[523px] tw-bg-[#BBBBBB26]">
           <CustomSelect
             options={[
               {
@@ -52,14 +52,10 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
         {' '}
         <form onSubmit={onSubmit}>
           <div className="form-box-grid-4col">
-            <CustomSelect
+            <CustomInput
               label="Gender"
               isRequired={true}
               disabled={true}
-              options={[
-                { label: 'Male', value: 'MALE' },
-                { label: 'Female', value: 'FEMALE' }
-              ]}
               placeholder="male"
             />
             <CustomInput
@@ -103,30 +99,13 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
               isRequired={true}
             />
 
-            <CustomSelect
+            <CustomInput
               label="Country"
               name="country"
               disabled={true}
-              defaultValue="Country"
-              type="select"
-              options={COUNTRIES}
-              onChange={handleCountryChange}
-              //   value={selectedCountry}
-              //   isRequired={true}
+              placeholder="Country"
             />
-            <CustomSelect
-              label="City"
-              name="city"
-              disabled={true}
-              defaultValue="City"
-              type="select"
-              options={cities}
-              //   value={selectedCity}
-              //   onChange={handleCityChange}
-              //   options={cities.map((item) => {
-              //     return { label: item.name, value: item.isoCode, id: item.isoCode };
-              //   })}
-            />
+            <CustomInput label="City" name="city" disabled={true} placeholder="City" />
           </div>
           <div className="form-box-grid-2col">
             <CustomInput
@@ -182,7 +161,7 @@ export default function AddCustomer({ handleTabClick, handleTabCompleted }) {
             />
           </div>
 
-          <StepperFooter back="customerDetails" setIsSubmit={setIsSubmit} />
+          <StepperFooter setIsSubmit={setIsSubmit} />
         </form>
       </div>
     </div>

@@ -81,7 +81,7 @@ export default function usePaymentDetails({ handleTabClick, handleTabCompleted }
               data[key] !== '' &&
               data[key] !== null
             ) {
-              setValue(key, data[key].split('T')[0]);
+              setValue(key, data[key]?.split('T')[0]);
             } else {
               setValue(key, data[key]);
             }

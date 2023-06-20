@@ -117,13 +117,13 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
             const ids = companyAddressFields.map((item) => item.id);
             console.log(ids, 'ids');
             data.companyAddress.forEach((addressObj, index) => {
-              if (!ids.includes(addressObj.id)) {
-                appendCompanyAddress({
-                  id: addressObj.id,
-                  addressLabel: addressObj.addressLabel,
-                  address: addressObj.address
-                });
-              }
+              // if (!ids.includes(addressObj.id)) {
+              appendCompanyAddress({
+                id: addressObj.id,
+                addressLabel: addressObj.addressLabel,
+                address: addressObj.address
+              });
+              // }
             });
           }
           setCountry(data.country);

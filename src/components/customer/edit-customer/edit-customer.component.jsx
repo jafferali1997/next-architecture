@@ -85,7 +85,7 @@ export default function EditCustomer() {
                 <div className="form-box-grid">
                   <CustomSelect
                     label="Gender"
-                    placeholder="Select Gender"
+                    defaultValue="Select Gender"
                     name="gender"
                     options={[
                       { label: 'Male', value: 'MALE' },
@@ -129,7 +129,7 @@ export default function EditCustomer() {
                   <CustomSelect
                     label="Country"
                     name="country"
-                    placeholder="Country"
+                    defaultValue="Select Country"
                     type="select"
                     value={country}
                     options={COUNTRIES}
@@ -140,7 +140,7 @@ export default function EditCustomer() {
                   <CustomSelect
                     label="City"
                     name="city"
-                    placeholder="City"
+                    defaultValue="Select City"
                     type="select"
                     control={control}
                     options={cities}
@@ -163,7 +163,6 @@ export default function EditCustomer() {
                     />
                   </div>
                   <div>
-                    <label className="group-label">Discount Group</label>
                     <DiscountGroup
                       options={allDiscountGroup}
                       setOptions={setAllDiscountGroup}
@@ -213,7 +212,7 @@ export default function EditCustomer() {
                   <CustomSelect
                     label="Company Size"
                     name="companySize"
-                    placeholder="Select Company Size"
+                    defaultValue="Select Company Size"
                     type="select"
                     options={[
                       { id: '10-30', value: '10-30', label: '10-30' },
@@ -262,32 +261,48 @@ export default function EditCustomer() {
                   />
                 </div>
                 <div className="tw-grid tw-grid-cols-[repeat(auto-fill,minmax(175px,1fr))] tw-gap-[15px] tw-py-[16px]">
-                  <CustomSwitch
-                    label="Current Status"
-                    name="isStatus"
-                    type="switch"
-                    register={register}
-                    errors={errors}
-                    defaultChecked={defaultData.isStatus}
-                  />
-                  <CustomSwitch
-                    label="Do not show customer on PDF"
-                    name="isPDF"
-                    type="switch"
-                    register={register}
-                    errors={errors}
-                    defaultChecked={defaultData.isPDF}
-                  />
-                  <CustomSwitch
-                    label="VAT exempt"
-                    name="vatStatus"
-                    type="switch"
-                    register={register}
-                    errors={errors}
-                    defaultChecked={defaultData.vatStatus}
-                  />
+                  <div className="tw-flex tw-flex-col tw-gap-2">
+                    <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                      Current Status
+                    </label>
+                    <CustomSwitch
+                      label="Enable"
+                      name="isStatus"
+                      type="switch"
+                      className="tw-flex-col-reverse"
+                      register={register}
+                      errors={errors}
+                      defaultChecked={defaultData.isStatus}
+                    />
+                  </div>
+                  <div className="tw-flex tw-flex-col tw-gap-2">
+                    <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                      VAT exempt
+                    </label>
+                    <CustomSwitch
+                      label="Enable"
+                      name="isPDF"
+                      type="switch"
+                      register={register}
+                      errors={errors}
+                      defaultChecked={defaultData.isPDF}
+                    />
+                  </div>
+                  <div className="tw-flex tw-flex-col tw-gap-2">
+                    <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                      Do not show customer on PDF
+                    </label>
+                    <CustomSwitch
+                      label="Enable"
+                      name="vatStatus"
+                      type="switch"
+                      register={register}
+                      errors={errors}
+                      defaultChecked={defaultData.vatStatus}
+                    />
+                  </div>
                 </div>
-                <div className="tw-flex tw-items-center  tw-justify-between">
+                <div className="tw-mt-[24px] tw-flex  tw-items-center tw-justify-between">
                   <div className="tw-flex tw-items-center tw-gap-[16px]">
                     <h3 className="form-box-heading">Company Addresses</h3>
                     {isAdress ? (
@@ -368,7 +383,7 @@ export default function EditCustomer() {
                   <div className="form-box-grid">
                     <CustomSelect
                       label="Gender"
-                      placeholder="Select Gender"
+                      defaultValue="Select Gender"
                       name="gender"
                       options={[
                         { label: 'Male', value: 'MALE' },
@@ -413,7 +428,7 @@ export default function EditCustomer() {
                     <CustomSelect
                       label="Country"
                       name="ac_country"
-                      placeholder="Country"
+                      defaultValue="Select Country"
                       type="select"
                       control={control}
                       value={country2}
@@ -423,7 +438,7 @@ export default function EditCustomer() {
                     <CustomSelect
                       label="City"
                       name="ac_city"
-                      placeholder="City"
+                      placeholder="Select City"
                       type="select"
                       control={control}
                       options={cities2}
@@ -473,8 +488,8 @@ export default function EditCustomer() {
               </div>
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
                 <h3 className="form-box-heading ">Payment Details (Bank details)</h3>
-                <div className="tw-mb-6 tw-flex tw-flex-col tw-gap-[18px]">
-                  <label className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-secondary-black">
+                <div className="tw-mt-[16px] tw-flex tw-flex-col ">
+                  <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
                     Payment By
                     <span className="tw-text-[red]">*</span>
                   </label>
@@ -489,11 +504,13 @@ export default function EditCustomer() {
                         value="bankDetails"
                         control={<Radio />}
                         label="Bank Details"
+                        className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
                       />
                       <FormControlLabel
                         value="creditCardDetails"
                         control={<Radio />}
                         label="Credit Card Details"
+                        className="tw-text-xs tw-font-normal tw-not-italic tw-leading-[100%] tw-text-text-medium-gray"
                       />
                     </RadioGroup>
                   </FormControl>
@@ -733,7 +750,7 @@ export default function EditCustomer() {
                       )}
                     </RadioGroup>
                   </FormControl>
-                  <h3 className="tw-mt-[16px]">Terms of delivery</h3>
+                  <h3 className="tw-mb-2 tw-mt-[16px]">Terms of delivery</h3>
                   <TextArea
                     name="termOfDelivery"
                     placeholder="Delivery Terms"

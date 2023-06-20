@@ -149,8 +149,21 @@ export default function useProduct() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
+
   const handleColShow = () => {
-    setOpen(!open);
+    setOpen(true);
   };
 
   const handleToggleColumn = (columnName) => {
@@ -246,6 +259,7 @@ export default function useProduct() {
     showToaster,
     toasterMsg,
     setShowToaster,
-    handleSearch
+    handleSearch,
+    ref
   };
 }

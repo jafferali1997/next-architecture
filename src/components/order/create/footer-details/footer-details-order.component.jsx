@@ -41,7 +41,7 @@ export default function FooterDetailsOrder({ handleTabClick, handleTabCompleted 
           />
         </div>
         <div className="tw-mt-[18px]">
-          <TextArea placeholder="This offer is valid for 30 days from the date of issue and is subject to change without prior notice." />
+          <TextArea placeholder="This order is valid for 30 days from the date of issue and is subject to change without prior notice." />
           <p className="tw-text-right tw-text-[10px] tw-font-normal tw-not-italic tw-leading-[15px] tw-text-text-medium-gray">
             Max: 575
           </p>
@@ -49,13 +49,13 @@ export default function FooterDetailsOrder({ handleTabClick, handleTabCompleted 
         <div className="tw-mt-[18px]">
           <TextArea
             label="Terms and Conditions"
-            placeholder="This offer is valid for 30 days from the date of issue and is subject to change without prior notice."
+            placeholder="This order is valid for 30 days from the date of issue and is subject to change without prior notice."
           />
         </div>
         <div className="tw-mt-[18px]">
           <TextArea
             label="Copy Right"
-            placeholder="This offer is valid for 30 days from the date of issue and is subject to change without prior notice."
+            placeholder="This order is valid for 30 days from the date of issue and is subject to change without prior notice."
           />
           <p className="tw-text-right tw-text-[10px] tw-font-normal tw-not-italic tw-leading-[15px] tw-text-text-medium-gray">
             Max: 575

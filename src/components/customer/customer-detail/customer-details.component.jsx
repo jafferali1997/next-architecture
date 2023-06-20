@@ -231,27 +231,42 @@ export default function CustomerDetails() {
                   />
                 </div>
                 <div className="tw-grid tw-grid-cols-[repeat(auto-fill,minmax(175px,1fr))] tw-gap-[15px] tw-py-[16px]">
-                  <CustomSwitch
-                    label="Current Status"
-                    type="switch"
-                    checked={defaultData.isStatus}
-                    readOnly
-                    disabled={!defaultData.isStatus}
-                  />
-                  <CustomSwitch
-                    label="Do not show customer on PDF"
-                    type="switch"
-                    checked={defaultData.isPDF}
-                    readOnly
-                    disabled={!defaultData.isPDF}
-                  />
-                  <CustomSwitch
-                    label="VAT exempt"
-                    type="switch"
-                    checked={defaultData.vatStatus}
-                    readOnly
-                    disabled={!defaultData.vatStatus}
-                  />
+                  <div className="tw-flex tw-flex-col tw-gap-2">
+                    <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                      Current Status
+                    </label>
+                    <CustomSwitch
+                      label="Enable"
+                      type="switch"
+                      checked={defaultData.isStatus}
+                      readOnly
+                      disabled={!defaultData.isStatus}
+                    />
+                  </div>
+                  <div className="tw-flex tw-flex-col tw-gap-2">
+                    <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                      Do not show customer on PD
+                    </label>
+                    <CustomSwitch
+                      label="Enable"
+                      type="switch"
+                      checked={defaultData.isPDF}
+                      readOnly
+                      disabled={!defaultData.isPDF}
+                    />
+                  </div>
+                  <div className="tw-flex tw-flex-col tw-gap-2">
+                    <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                      VAT exempt
+                    </label>
+                    <CustomSwitch
+                      label="Enable"
+                      type="switch"
+                      checked={defaultData.vatStatus}
+                      readOnly
+                      disabled={!defaultData.vatStatus}
+                    />
+                  </div>
                 </div>
                 <div className="tw-mb-2 tw-flex tw-items-center tw-justify-between">
                   <div className="tw-flex tw-items-center tw-gap-[16px]">
@@ -410,35 +425,10 @@ export default function CustomerDetails() {
               </div>
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
                 <h3 className="form-box-heading ">Payment Details (Bank details)</h3>
-                <div className="tw-mb-6 tw-flex tw-flex-col tw-gap-[18px]">
-                  <label className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-secondary-black">
-                    Payment By
-                    <span className="tw-text-[red]">*</span>
-                  </label>
-                  <div className="payment-details-bank">
-                    <CustomRadio
-                      label="Bank Details"
-                      name="same"
-                      checked={defaultData.paymentType === 'bankDetail'}
-                      type="radio"
-                      register={register}
-                      readOnly
-                    />
-                  </div>
-                  <div className="payment-details-card">
-                    <CustomRadio
-                      label="Credit Card Details"
-                      name="same"
-                      checked={defaultData.paymentType === 'creditCard'}
-                      type="radio"
-                      register={register}
-                      readOnly
-                    />
-                  </div>
-                </div>
+
                 {defaultData.paymentType === 'bankDetail' && (
                   <>
-                    <div className="tw-w-full">
+                    <div className="tw-mt-4 tw-w-full">
                       <CustomInput
                         label="IBAN Number"
                         name="iban"
@@ -548,9 +538,9 @@ export default function CustomerDetails() {
                 </div>
               </div>
               <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
-                <div className="tw-mt-[16px] tw-w-full">
-                  <h3 className="form-box-heading ">Terms Of Payments</h3>
-                  <FormControl>
+                <div className=" tw-w-full">
+                  <h3 className="form-box-heading  ">Terms Of Payments</h3>
+                  <FormControl className="tw-mt-[16px]">
                     <RadioGroup
                       name="termOfPayment"
                       value={defaultData.termOfPayment}
@@ -696,7 +686,7 @@ export default function CustomerDetails() {
                       )}
                     </RadioGroup>
                   </FormControl>
-                  <h3 className="tw-mt-[16px]">Terms of delivery</h3>
+                  <h3 className="tw-mb-2 tw-mt-[16px]">Terms of delivery</h3>
                   <TextArea
                     name="termOfDelivery"
                     placeholder="Delivery Terms"

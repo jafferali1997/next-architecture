@@ -23,11 +23,11 @@ export default function FormForPaymentDetails({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="tw-mb-6 tw-flex tw-flex-col tw-gap-[18px]">
-        <label className="tw-font-dm tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-secondary-black">
+      <div className=" tw-flex tw-flex-col tw-gap-[8px]">
+        <h3 className="tw-mt-[16px] tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
           Payment By
           <span className="tw-text-[red]">*</span>
-        </label>
+        </h3>
         <FormControl>
           <RadioGroup
             name="paymentType"
@@ -50,7 +50,7 @@ export default function FormForPaymentDetails({
 
       {paymentType === 'bankDetails' && (
         <>
-          <div className="tw-w-full">
+          <div className="tw-mt-[16px] tw-w-full">
             <CustomInput
               label="IBAN Number"
               name="iban"

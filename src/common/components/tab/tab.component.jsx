@@ -39,10 +39,13 @@ function Tab({ tabs, gridCol }) {
                   : ''
               } tab-item tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-3 tw-text-center`}
             >
-              <div className="icon tw-inline-block tw-flex tw-h-[40px] tw-w-[40px] tw-items-center tw-justify-center tw-rounded-[50%] tw-border-[2px] tw-border-[#7E7D7D]">
+              <div className="icon tw-border-[ #BBBBBB] tw-inline-block tw-flex tw-h-[40px] tw-w-[40px] tw-items-center tw-justify-center tw-rounded-[50%] tw-border-[1px]">
                 <span dangerouslySetInnerHTML={{ __html: tab.icon }} />
               </div>
-              <div className="title tw-font-DM tw-text-lightgray tw-absolute tw-top-[100%] tw-mt-3 tw-whitespace-nowrap tw-text-[12px] tw-leading-[18px]">
+              <div
+                className="title tw-font-DM tw-text-lightgray tw-absolute  tw-top-[100%] tw-mt-3 tw-whitespace-nowrap  tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-ultra-light-gray
+              "
+              >
                 {tab.label}
               </div>
             </div>

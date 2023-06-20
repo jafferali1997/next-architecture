@@ -67,7 +67,9 @@ export default function MultiSelect({
                     return (
                       <div
                         key={option?.id}
-                        className="tw-m-1 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-[#D9D9D9] tw-px-[11px] tw-font-medium tw-text-[#46474F]"
+                        className={`tw-m-1 ${
+                          index <= 0 ? 'tw-mx-[16px]' : ' '
+                        }  tw-my-[9px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-border tw-border-[#BBBBBB] tw-border-opacity-20 tw-bg-stroke-color tw-px-[11px] tw-font-medium tw-text-[#46474F]`}
                       >
                         <div className="tw-mr-[8px] tw-max-w-full tw-flex-initial tw-text-[14px] tw-font-normal tw-leading-none">
                           {option?.label}
@@ -131,7 +133,7 @@ export default function MultiSelect({
             </div>
           </div>
           {open && (
-            <div className="tw-lef-0 tw-absolute tw-top-[100%] tw-z-[999] tw-w-full  tw-rounded tw-bg-white tw-text-[#46474F] tw-shadow">
+            <div className=" tw-w-full  tw-rounded tw-bg-white tw-text-[#46474F] tw-shadow">
               <div className="tw-flex tw-max-h-[200px] tw-w-full tw-flex-col tw-overflow-y-auto">
                 {addClickHandler && (
                   <div

@@ -75,6 +75,7 @@ export default function ProductForm({
                 }}
                 src="/assets/images/back-icon.svg"
                 alt="img"
+                className="hover:tw-cursor-pointer"
               />
               <h1 className="admin-top-heading ">
                 {Object.keys(data).length ? (disabled ? 'View' : 'Edit') : 'Add'} Product
@@ -114,8 +115,11 @@ export default function ProductForm({
                     disabled={disabled}
                     register={register}
                     errors={errors}
+                    isRequired={true}
                   />
-                  <h3 className="tw-mt-[16px]">Description </h3>
+                  <h3 className="tw-mb-2 tw-mt-[16px] tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
+                    Description{' '}
+                  </h3>
                   <TextArea
                     name="description"
                     placeholder="Description"
@@ -124,6 +128,7 @@ export default function ProductForm({
                     disabled={disabled}
                     register={register}
                     errors={errors}
+                    isRequired={true}
                   />
                 </div>
               </div>
@@ -139,17 +144,18 @@ export default function ProductForm({
                     disabled={disabled}
                     placeholder="Number Of Piece "
                     type="number"
+                    isRequired={true}
                   />
 
                   <CustomSelect
                     label="Units"
                     name="unit"
-                    defaultValue={data.unit}
+                    // defaultValue={data.unit}
                     control={control}
                     register={register}
                     errors={errors}
                     disabled={disabled}
-                    placeholder="Units "
+                    defaultValue="Select Units "
                     options={[
                       { label: 'm2', value: 'm2' },
                       { label: 'pc', value: 'pc' },
@@ -166,10 +172,11 @@ export default function ProductForm({
                     register={register}
                     disabled={disabled}
                     errors={errors}
+                    isRequired={true}
                   />
                 </div>
               </div>
-              <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
+              <div className="form-box tw-mb-[32px] tw-mt-[16px]  tw-w-[759px] ">
                 <h3 className="form-box-heading ">Pricing</h3>
                 <div className="form-box-grid">
                   <CustomInput
@@ -182,6 +189,7 @@ export default function ProductForm({
                     disabled={disabled}
                     errors={errors}
                     endIcon={<EuroIcon />}
+                    isRequired={true}
                   />
                   <CustomInput
                     label="Gross price "
@@ -193,6 +201,7 @@ export default function ProductForm({
                     disabled={disabled}
                     errors={errors}
                     endIcon={<EuroIcon />}
+                    isRequired={true}
                   />
                   <CustomInput
                     label="Purchase price "
@@ -204,6 +213,7 @@ export default function ProductForm({
                     disabled={disabled}
                     errors={errors}
                     endIcon={<EuroIcon />}
+                    isRequired={true}
                   />
                   <CustomInput
                     label="Minimum selling price"
@@ -215,13 +225,14 @@ export default function ProductForm({
                     disabled={disabled}
                     errors={errors}
                     endIcon={<EuroIcon />}
+                    isRequired={true}
                   />
                 </div>
               </div>
             </div>
 
             <div className="right-side">
-              <div className="form-box tw-w-[336px]">
+              <div className="form-box tw-w-[336px] tw-p-[20px]">
                 <h3 className="form-box-heading ">Product Organization</h3>
                 <div className="tw-mt-[16px] tw-flex tw-w-full tw-flex-col tw-gap-[16px]">
                   <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-[100%] tw-text-text-black">
@@ -309,10 +320,10 @@ export default function ProductForm({
                       </div>
                     )}
                     {selectedCategory.map((category, categoryIndex) => (
-                      <div className="tw-m-2 tw-flex tw-rounded-full tw-bg-slate-200">
+                      <div className="tw-m-2 tw-flex tw-rounded-full tw-bg-[#E4E4E44D]">
                         <div className="tw-basis-11/12 tw-px-3">
                           {category?.map((higherArchie, higherArchieIndex) => (
-                            <span>
+                            <span className=" tw-text-sm tw-font-normal tw-not-italic tw-leading-[18px] tw-text-text-medium-gray">
                               {higherArchie.categoryName}{' '}
                               {higherArchieIndex !== category.length - 1 && '>'}{' '}
                             </span>
@@ -331,15 +342,15 @@ export default function ProductForm({
                   </div>
                 </div>
               </div>
-              <div className="form-box tw-mt-[16px] tw-w-[336px]">
+              <div className="form-box tw-mt-[16px] tw-w-[336px]  tw-p-[20px]">
                 <h3 className="form-box-heading ">Tax</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                   <CustomSelect
                     label="Tax rate"
                     name="taxRate"
                     control={control}
-                    defaultValue={data.taxRate}
-                    placeholder="Tax rate "
+                    // defaultValue={data.taxRate}
+                    defaultValue="Select Tax rate "
                     disabled={disabled}
                     options={[
                       { label: '3%', value: '3%' },
@@ -351,7 +362,7 @@ export default function ProductForm({
                   />
                 </div>
               </div>
-              <div className="form-box  tw-mt-[16px]  tw-w-[336px]">
+              <div className="form-box  tw-mt-[16px]  tw-w-[336px]  tw-p-[20px]">
                 <h3 className="form-box-heading ">Tags</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                   <TagsInput
@@ -362,7 +373,7 @@ export default function ProductForm({
                   />
                 </div>
               </div>
-              <div className="form-box tw-mt-[16px]  tw-w-[336px]">
+              <div className="form-box tw-mt-[16px]  tw-w-[336px]  tw-p-[20px]">
                 <div className="tw-flex tw-items-center tw-justify-between">
                   <h3 className="form-box-heading ">Add price group</h3>
                   {!disabled && (
@@ -385,7 +396,7 @@ export default function ProductForm({
                   />
                 ))}
               </div>
-              <div className="form-box tw-mt-[16px]  tw-w-[336px]">
+              <div className="form-box tw-mt-[16px]  tw-w-[336px]  tw-p-[20px]">
                 <div className="tw-flex tw-items-center tw-justify-between">
                   <h3 className="form-box-heading ">Add discount group</h3>
 

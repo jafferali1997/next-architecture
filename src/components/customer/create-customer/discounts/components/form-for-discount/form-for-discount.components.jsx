@@ -13,7 +13,7 @@ export default function FormForDiscount({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-box-grid-2col">
+      <div className="form-box-grid-2col tw-pt-[16px]">
         <CustomInput
           label="Discount Amount "
           errors={errors}
