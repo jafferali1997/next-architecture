@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
+
+
 import { Grid } from '@mui/material';
 import DashboardCards from './components/cards/cards.component';
 import CustomSelect from '@/common/components/custom-select/custom-select.component';
 import DeleteIconRed from '@/common/icons/deletered.icon';
 import ReadMore from '@/common/components/readmore/readmore.component';
+import BarGraph from '@/common/components/dashboard/bargraph/bargraph.component';
 
 const options = [
   { value: 'today', label: 'Today' },
   { value: 'yesterday', label: 'Yesterday' },
   { value: 'tomorrow', label: 'Tomorrow' }
 ];
+
+const years = [
+  { value: '2023', label: '2023' },
+  { value: '2022', label: '2022' },
+  { value: '2021', label: '2021' }
+]
 
 const documentstimeline = [
   {
@@ -187,6 +196,32 @@ export default function Dashboard() {
                 })}
               </ul>
             </div>
+          </div>
+        </Grid>
+      </Grid>
+
+
+      <Grid container spacing={0} className="tw-ml-0 tw-mt-4 tw-w-full tw-gap-y-5">
+        <Grid item xs={12} lg={7}>
+          <div className="panel xs:tw-mr-[0px] semixl:tw-mr-[10px]">
+            <div className="tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3 tw-mb-[40px]">
+              <h2 className="tw-font-dm tw-text-base tw-font-bold tw-capitalize tw-leading-8 tw-text-text-dark-gray">
+                Statics
+              </h2>
+              <CustomSelect
+                options={years}
+                defaultValue={years[0].value}
+                className="!tw-px-0"
+              />
+            </div>
+
+            <BarGraph/>
+
+          </div>
+        </Grid>
+        <Grid item xs={12} lg={5}>
+          <div className="panel xs:tw-mr-[0px] semixl:tw-mr-[10px]">
+            
           </div>
         </Grid>
       </Grid>
