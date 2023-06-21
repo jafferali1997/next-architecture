@@ -19,7 +19,7 @@ export default function ProductModal({ data, setData, openPopup, setOpenPopup })
         <div>
           <DialogTitle className="tw-pb-0">Group</DialogTitle>
         </div>
-        <DialogContent className="tw-p-3">
+        <DialogContent className="tw-p-5">
           {value?.map((item, index) =>
             item.type === 'select' ? (
               <CustomSelect
@@ -63,7 +63,7 @@ export default function ProductModal({ data, setData, openPopup, setOpenPopup })
             text="Cancel"
           />
           <CustomButton
-            className="btn btn-primary "
+            className="btn btn-primary tw-h-[30px] tw-w-[90px] tw-min-w-[90px]"
             text={value?.[0]?.button}
             onClick={() => {
               setData(value);

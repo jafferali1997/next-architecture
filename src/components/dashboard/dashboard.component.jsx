@@ -28,18 +28,18 @@ export default function Dashboard() {
               />
             </div>
 
-            <div className="timeline_wrapper tw-mt-4 tw-max-h-[272px] tw-overflow-y-auto">
+            {/* <div className="timeline_wrapper tw-mt-4 tw-max-h-[272px] tw-overflow-y-auto">
               <ul className="tw-flex tw-flex-col">
                 <li className="tw-border-b-[1px] tw-border-border-gray3 tw-py-4">
                   hello
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </Grid>
-        <Grid item xs={12} lg={7}>
+        {/* <Grid item xs={12} lg={7}>
           <div className="panel xs:tw-mr-[0px] semixl:tw-ml-[10px]">B</div>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

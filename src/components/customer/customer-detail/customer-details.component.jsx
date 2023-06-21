@@ -328,7 +328,7 @@ export default function CustomerDetails() {
                     <CustomInput
                       label="Gender"
                       name="ac_gender"
-                      placeholder="John"
+                      placeholder=""
                       register={register}
                       readOnly
                     />

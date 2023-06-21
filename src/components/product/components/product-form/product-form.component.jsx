@@ -240,7 +240,7 @@ export default function ProductForm({
                   </label>
                   <div className="tw-relative" ref={ref}>
                     <CustomInput
-                      placeholder="Product Category"
+                      placeholder="Select product category"
                       name="category"
                       disabled={disabled}
                       onChange={(e) => setSearch(e.target.value)}
@@ -346,7 +346,6 @@ export default function ProductForm({
                 <h3 className="form-box-heading ">Tax</h3>
                 <div className="tw-mt-[16px] tw-flex  tw-w-full tw-flex-col tw-gap-[16px]">
                   <CustomSelect
-                    label="Tax rate"
                     name="taxRate"
                     control={control}
                     // defaultValue={data.taxRate}
@@ -369,7 +368,9 @@ export default function ProductForm({
                     value={selectedTag.map((item) => item.tagName)}
                     onChange={handleTags}
                     disabled={disabled}
-                    placeHolder="Enter Tags"
+                    placeHolder={`${
+                      selectedTag.length === 0 ? 'Enter Tags' : 'No Tags Selected'
+                    }`}
                   />
                 </div>
               </div>

@@ -125,6 +125,8 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
               });
               // }
             });
+          } else {
+            appendCompanyAddress({ addressLabel: '', address: '' });
           }
           setCountry(data.country);
           setIsShowInPdf(data.isPDF);
@@ -136,9 +138,9 @@ export default function useCompanyDetails({ handleTabClick, handleTabCompleted }
       }
       if (id) {
         fetchMyAPI();
-      } else {
-        appendCompanyAddress({ addressLabel: '', address: '' });
       }
+    } else {
+      appendCompanyAddress({ addressLabel: '', address: '' });
     }
   }, []);
 
