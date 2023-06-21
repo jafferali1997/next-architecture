@@ -78,9 +78,9 @@ export default function EditCustomer() {
             </div>
             <CustomButton className="btn-primary" text="Update" type="Submit" />
           </div>
-          <div className="2bars tw-flex tw-gap-[24px]">
-            <div className="main-content">
-              <div className="form-box tw-w-[759px] ">
+          <div className="2bars tw-flex tw-gap-[24px] xs:tw-flex-col-reverse xs:tw-flex-wrap lg:tw-flex-row lg:tw-flex-nowrap">
+            <div className="main-content tw-w-full">
+              <div className="form-box tw-w-full ">
                 <h3 className="form-box-heading ">Personal Details</h3>
                 <div className="form-box-grid">
                   <CustomSelect
@@ -172,7 +172,7 @@ export default function EditCustomer() {
                   </div>
                 </div>
               </div>
-              <div className="form-box  tw-mt-[16px] tw-w-[759px]">
+              <div className="form-box  tw-mt-[16px] tw-w-full">
                 <h3 className="form-box-heading ">Company Details</h3>
 
                 <div className="form-box-grid">
@@ -486,7 +486,7 @@ export default function EditCustomer() {
                   </div>
                 ) : null}
               </div>
-              <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
+              <div className="form-box tw-mt-[16px]  tw-w-full ">
                 <h3 className="form-box-heading ">Payment Details (Bank details)</h3>
                 <div className="tw-mt-[16px] tw-flex tw-flex-col ">
                   <label className="tw-text-xs tw-font-medium tw-not-italic tw-leading-6 tw-text-text-black">
@@ -610,7 +610,7 @@ export default function EditCustomer() {
                   </div>
                 )}
               </div>
-              <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
+              <div className="form-box tw-mt-[16px]  tw-w-full ">
                 <h3 className="form-box-heading ">Discount</h3>
                 <div className="form-box-grid">
                   <CustomInput
@@ -635,7 +635,7 @@ export default function EditCustomer() {
                   </div>
                 </div>
               </div>
-              <div className="form-box tw-mt-[16px]  tw-w-[759px] ">
+              <div className="form-box tw-mt-[16px]  tw-w-full ">
                 <h3 className="form-box-heading ">Terms Of Payments</h3>
                 <div className="tw-mt-[16px] tw-w-full">
                   <FormControl>
