@@ -78,7 +78,7 @@ export default function Sidebar({ toggle, setToggle }) {
     <div
       className={`${
         toggle ? 'open' : ''
-      } offcanva tw-fixed tw-h-screen tw-w-[273px] tw-bg-primary-blue tw-bg-hero-pattern tw-bg-right-top tw-bg-no-repeat`}
+      } offcanva tw-fixed tw-z-[9999] tw-h-screen tw-w-[273px] tw-bg-primary-blue tw-bg-hero-pattern tw-bg-right-top tw-bg-no-repeat`}
     >
       <div className="tw-absolute tw-right-1 tw-top-1 tw-z-[9999] tw-rounded-[4px] tw-border-[1px] tw-border-x-secondary-light-blue xs:tw-block semixl:tw-hidden">
         <ChevronLeftIcon className="tw-text-white" onClick={() => setToggle(!toggle)} />
