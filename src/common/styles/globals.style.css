@@ -313,6 +313,26 @@
   @apply tw-m-auto tw-w-full tw-max-w-7xl;
 }
 
+.scroll_enable{
+  scrollbar-color:#EF9F28 #FDF5E9 ;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+.scroll_enable::-webkit-scrollbar{
+  width: 6px;
+  border-radius: 60px;
+}
+
+.scroll_enable::-webkit-scrollbar-thumb{
+  background-color: #EF9F28;
+  border-radius: 60px;
+}
+
+.scroll_enable::-webkit-scrollbar-track{
+  background-color: #FDF5E9;
+}
+
 /* .payment-details-radios label span {
   @apply tw-text-red;
 } */
